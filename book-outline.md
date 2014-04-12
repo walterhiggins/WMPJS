@@ -1,4 +1,7 @@
 # Part I A modding workbench
+
+![Crafting Table](/Crafting_Table.png "A Modding Workbench")
+
 ## Overview
 Welcome to the exciting world of Minecraft Modding. In this first section of the book I'll introduce you to the tools you'll need to start modding. Just as in the Minecraft game you need to first create a Workbench (also sometimes called a Crafting Table) before you can craft more sophisticated tools, so too in real life we'll need to first gather some resources and setup a work area where we can create sophisticated minecraft plugins. This first section describes the resources you'll need, how to get them and how to setup your 'modding workbench'. All of the resource you'll need are freely available online.
 
@@ -281,6 +284,7 @@ Readers learn how to create a simple number-guessing
 mini-game. The computer generates a random number (using the same
 function created in Recipe 1). Players try to guess the number
 and are told if the number they guessed is too high or too low.
+
 
     var number = Math.ceil(Math.random() * 10);
     var guess = prompt( sender, 'Pick a number between 1 and 10');

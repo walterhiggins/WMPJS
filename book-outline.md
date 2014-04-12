@@ -92,6 +92,105 @@ When you play Minecraft in Multi-Player mode and chat, build and mine with other
 # Part II Basic Modding 
 
 ## Rolling Dice
+
+Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this first recipe we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll use this module in later recipes to give random greetings to players who join the game.
+
+In this recipe, I'll walk you through creating your very first Javascript module using the SublimeText programming editor.
+
+### Randomness
+When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time what the number will be. The number which is thrown is said to be 'Random'. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this recipe we'll use this method to get a random number. 
+
+### Think of a number between 0 and 1
+Before we begin writing the module, let's do some command-prompt exploration. At the in-game prompt type the following and hit ENTER...
+
+/js Math.random()
+
+... you should see something like the following returned ...
+
+0.7184312066528946
+
+The number you see will be different but it will be a number between 0 and 1. Try it again: type the same command at the in-game prompt and hit ENTER. This time you'll see a different number than the previous number but it too will be between 0 and 1. You can do this as many times as you like and the number will be different each time. 
+
+Tip: You can quickly perform the previous command at the in-game prompt by pressing the / key and then pressing the UP Arrow key.
+
+The numbers which Math.random() returns are called floating point numbers. You might not think there are any numbers between 0 and 1 but there are many, many, numbers between them. It's this range of numbers which Javascript uses. The actual range of numbers is 0. 0000000000000000 to 0. 9999999999999999. That's 9 Quadrillion, 999 Trillion, 999 billion, 999 million, 999 thousand and 999 possible numbers. 
+
+### A special 6-sided dice.
+A regular 6-sided dice has numbers from 1 through 6 printed or etched on each of the 6 sides. That's because we typically count up from 1. The number 1 is usually the starting point when we want to count up to something. Javascript (like many programming languages) is different. In Javascript counting begins at the number 0. So if you want to count 10 numbers, where normally you'd count from 1 to 10 ...
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+In Javascript the count would look like this...
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+This can be confusing for beginning and experienced programmers and takes some getting used to. I'll explain why counting from 0 is important in the following recipes. Our virtual 6-sided dice will have the numbers 0, 1, 2, 3, 4, 5 rather than the usual 1, 2, 3, 4, 5, 6.
+
+### Playing with Numbers
+We have a problem to solve. Math.random() will give us a number between 0.0 and 0. 9999999999999999 which isn't useful for most everyday uses. We're only interested in 6 possible numbers so we need to do some Math to get the result we need. We'll explore some basic Math you can do in Javascript and some operations you can perform on floating point numbers but first let's think about what we want to be able to do once our first recipe is complete. 
+
+Ideally we'd like to be able to issue the following command at the in-game prompt and have a useful number returned...
+
+/js dice.roll()
+
+That is; calling dice.roll() should return a random number between 0 and 5 behaving much like a real world dice. If you try to run the above command now, it will fail because we haven't yet created this function. That's what we're going to do in the following steps.
+
+Step 1: Launch SublimeText  
+Step 2: Open ScriptCraft Directory
+Step 3: Create a new Javascript file 
+Step 4: The Code
+Type the following code into the newly created file...
+
+exports.roll = function( ) { 
+  var result = Math.random();
+  result = result * 6;
+  result = Math.floor(result);
+  return result;
+};
+Listing 1 dice.js
+
+We'll talk about this code later. For now, type the code as you see it above.
+
+Step 5: Save your work.
+Step 6: Try it out
+
+Once you've saved your work go back to Minecraft and at the in-game command prompt (remember, you can bring up the prompt by pressing the / key on your computer's keyboard) type the following...
+
+/js refresh()
+
+The refresh() function is a ScriptCraft function which reloads all of the javascript code. Bukkit has a /reload command which will reload all of the server plugins but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
+
+The refresh() function is important, you should execute it every time you change your Javascript code because changes to your code won't be activated in the game until you do so.
+
+Tip: While working on a Minecraft plugin, if the plugin isn't working as you expect, make sure you've run the /js refresh() function first.
+
+Once you've executed the /js refresh() function, you can try out your new Javascript module. Type the following at the in-game prompt then hit ENTER...
+
+/js var dice = require('dice')
+
+The above statement loads your newly created dice.js module into the computer's memory. The require() function is how ScriptCraft loads Javascript modules. The resulting module is assigned to a variable called dice which can be used as follows...
+
+/js dice.roll()
+
+A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
+
+Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in Listing 1 dice.js
+
+
+### Code Breakdown
+Let's look at the code we've just added to Minecraft. The code is reprinted below, this time with line numbers...
+
+1.	exports.roll = function( ) { 
+2.	  var result = Math.random();
+3.	  result = result * 6;
+4.	  result = Math.floor(result);
+5.	  return result;
+6.	};
+
+A Javascript module is a file with one or more related functions. In the above file is one single function called roll. We let others use functions by exporting them. We'll take a closer look at the exports object and modules in later recipes, for now let's look at the function body (lines 2 through 5). 
+
+
+
 ### Goal
 The goal of this chapter is to gently introduce some basic
 javascript concepts by way of creating a simple minecraft mod which

@@ -135,8 +135,52 @@ The large Download button will download the CraftBukkit Recommended Build. The R
 
 ![Craftbukkit download](img/bukkit-download1.png)
 
-Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete - that is - the developers have added all of the features they're going to add but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two software "Bugs". "Bugs" in software are errors or mistakes in the software code which can cause problems. 
+Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete - that is - the developers have added all of the features they're going to add but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two software "Bugs". If the "Beta Build" version does not match the current version of Minecraft then click on the "Alternate Versions" link beneath the "Beta Build" link. This will take you to the CraftBukkit Builds page where you will see a list of "Builds" or versions. The following screenshot shows what the download page looks like at the time of writing.
 
+![CraftBukkit download 2](img/bukkit-download2.png)
+
+Along the right-hand side of the page are three big color-coded download buttons. The Green button is for the most recent stable release. Note that though this is the most stable version, it may not be the most up-to-date version or a version which is compatible with the current Client. The Amber button is for the most recent Beta build. This is a version which is not as stable as the released version but will have undergone some testing and will most likely be in use already on some servers. The Red button is for the most recent development build. It's colored red because it is the least stable version. Development builds will not have undergone the same rigorous testing as Beta or Release software. On the other hand, development builds will be the most up-to-date and chances are, there will be a development build of the Server Software for the latest version of the Client software.
+
+Choosing which version of the Server Software to use - Recommended, Beta or Development - is a big decision and one I unfortunately can't make for you. That decision is entirely up to you. However, If you feel safer using only the Recommended build of CraftBukkit, and that build version is not for the most up-to-date Client, then there's a way you can safely and temporarily (for the short-term) "Downgrade" your Minecraft Client Software so that it will be compatible with your Server software. 
+
+Since version 1.6, the Minecraft Launcher (the software you run on your computer to start Minecraft Client and to upgrade to new versions when they become available) lets you choose which verison of the Client software to run. By default the Launcher is configured to always download and run the Latest Version but you can easily change this using the new "Profiles" feature. The following are step-by-step instructions for changing your Launcher profile to use a different version of Minecraft Client...
+
+![](img/mc-launcher2.png)
+
+1. Launch Minecraft 
+2. Click on the 'New Profile' button in the bottom right of the Launch Screen.
+3. Fill in the Profile Name field. For example you should call it something like 'Version 1.7.8' (replacing 1.7.8 with the version you've chosen). I find it helpful to include the version name in a new Profile so I can see at-a-glance which Client version the profile will use.
+4. Choose the appropriate version from the 'Use Version' drop-down list.
+5. Click the Save Profile button.
+
+![](img/mc-profile-editor.png)
+
+The newly created profile should now be automatically selected in the Profile drop-down list on the main launcher page. Click the Play button to begin playing using the chosen version of Minecraft Client software.
+
+![](img/mc-launcher3.png)
+
+By using the profile editor to "Downgrade" your Minecraft Client Software, you can ensure that your Client and Server are compatible and that you can play Multi-Player minecraft even when the Server Software is not as up-to-date as the current latest version of Minecraft Client. This means you can always use the most stable Recommended build of CraftBukkit, you just (temporarily) sacrifice some of the latest features in the Client. 
+
+Once you've chosen between the Recommended, Beta and Development versions of CraftBukkit (If you're unsure, choose the Recommended Version), click on the appropriate color-coded button to begin downloading the software. Depending on which Browser software you use (Chrome, Safari, Internet Explorer or Firefox) the instructions for downloading will differ. Please read the instructions for the Browser you use.
+
+#### Download Instructions: Chrome
+
+1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
+2. A warning prompt will appear at the bottom of the Chrome window with the following text: "This type of file can harm your computer. Do you want to keep craftbukkit.jar anyway?"
+3. Alongside the above message there will be two buttons "Discard" and "Keep". Make sure to click the "Keep" button to start downloading.
+4. Press the CTRL key (on the bottom left side of your keyboard) and the 'J' key together to open the Downloads view in Chrome.
+![](img/download-bukkit-chrome1.png)
+5. You will see a list of recently downloaded files. Underneath the craftbukkit jar file you just downloaded, you'll see a 'Show in Folder' link. Click this link to open the folder containing the recently downloaded file.
+
+
+#### Download Instructions: Safari
+
+#### Download Instructions: Internet Explorer
+
+#### Download Instructions: Firefox
+
+#### Term: Bug
+"Bugs" in software are errors or mistakes in the software code which can cause problems. Nobody quite knows for sure why errors in software are called bugs but one story goes that a problem with an early mechanical computer in the 1940s was caused by a Moth which somehow found its way inside. The term "Bug" had been used to describe errors long before computers came along, so when the engineers captured the Moth they kept it with a note that said "First actual case of bug being found." 
 
 
 http://dl.bukkit.org/
@@ -366,20 +410,22 @@ mini-game. The computer generates a random number (using the same
 function created in Recipe 1). Players try to guess the number
 and are told if the number they guessed is too high or too low.
 
-
-    var number = Math.ceil(Math.random() * 10);
-    var guess = prompt( sender, 'Pick a number between 1 and 10');
-    guess.input( function( value, sender ) {
-      if (value == 'quit'){
-         return;
+	var input = require('input');
+	function onGuess( guess, repeat ) {
+      if (guess == 'quit'){
+        return;
       }
-      value = parseInt(value);
-      if (value === number){
-         sender.sendMessage('Correct!');
-         return;
+      guess = parseInt(guess);
+      if (guess === number){
+        sender.sendMessage('Correct!');
+      } else { 
+	    repeat()
       }
-      guess.repeat();    
-    });
+    };
+	exports.numberGuess = function( sender ) { 
+      var number = Math.ceil(Math.random() * 10);
+      input( sender, 'Pick a number between 1 and 10', onGuess);
+	};
     
 
 ### Javascript Concepts introduced:

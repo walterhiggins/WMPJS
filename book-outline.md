@@ -14,7 +14,7 @@ Before we begin I better explain some of the words I'll use throughout this book
  * Mod - Mod is short for Modification. In this book, Plugin and Mod are used interchangebly (they mean the same thing).
  * Modding - The practice of writing modifications or plugins for Minecraft. Modding requires some programming knowledge which we will learn about in this book.
  * Mojang - Mojang is the name of the company which makes Minecraft.
- * API - API is short for Application Programming Interface - an official way to write Minecraft Plugins using a guide provided by Mojang.
+ * API - API is short for Application Programming Interface - an official way to write Minecraft Plugins using a guide. Players and regular users of software don't need to care about APIs but they are essential for programmers, because they make it easier to change the software. An API is like a list of Recipes - you probably crafted your first pick-axe by refering to an online guide - how much more difficult would it be to have tried creating one without knowing where all the materials show go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API we will use in this book is the Bukkit API. We'll learn more about this later.
  * Multiplayer - The mode of playing minecraft with other players all connected to the same server.
  * Server - A computer which is running the minecraft server software. In this book I will show you how to setup and run your own minecraft server.
  * Client Mod - A modification for Minecraft which only works with the Minecraft Client. TODO: Example
@@ -43,7 +43,7 @@ In this book I will teach you how to program using the Javascript programming la
  * Javascript is an easy language to learn. 
  * I like Javascript. I enjoy writing code in Javascript and hope you will too.
  * Javascript is expressive. You can do more with less. A little bit of Javascript code can do quite a lot compared to other programming languages such as Java. The shorter your programs are, the easier they are to understand. 
- * Javascript is bundled with Java. The latest versions of Java include Javascript. This means you won't need to install any additional software just to use ScriptCraft. 
+ * Javascript is bundled with Java. The latest versions of Java include Javascript. This means you won't need to install any additional software to use ScriptCraft. 
  * Anything you can do using Java, you can do using Javascript. In this book we'll learn about the Bukkit API - a set of guidelines for creating Minecraft Plugins. The Bukkit API is Java-based but we can use Javascript too!
  * Javascript isn't a toy. Javascript is a proper programming language used professionally by thousands of programmers around the world. Although originally only used for adding simple extensions to web pages, it's now used for developing all kinds of software and has become one of the most popular programming languages. 
  * Javascript is cross-platform. What this means is Javascript is available on Macintosh, Windows and Linux.
@@ -172,18 +172,115 @@ Once you've chosen between the Recommended, Beta and Development versions of Cra
 ![](img/download-bukkit-chrome1.png)
 5. You will see a list of recently downloaded files. Underneath the craftbukkit jar file you just downloaded, you'll see a 'Show in Folder' link. Click this link to open the folder containing the recently downloaded file.
 
+6. Select the craftbukkit jar file you just downloaded, right-click and choose 'Copy' from the popup menu. 
+7. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
+8. Paste the file from step 6. into the newly created Folder. 
 
 #### Download Instructions: Safari
 
+1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
+2. Once the download is complete click the Download button (A button with a Down arrow) in the top right corner of the Safari screen. 
+![](img/download-bukkit-safari1.png)
+3. Next to the file you will see a 'Show in Finder' link. Click this link to open the folder containing the recently downloaded file.
+4. Select the craftbukkit jar file you just downloaded, ctrl-click (hold down the Ctrl key while clicking) and choose 'Copy' from the popup menu. 
+5. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
+6. Paste the file from step 4. into the newly created Folder. 
+
 #### Download Instructions: Internet Explorer
 
+1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
+2. When prompted, you should click the 'Save' button to save the file.
+3. When the download has completed, you can view the downloads by pressing Ctrl+J
+![](img/download-bukkit-ie1.png)
+4. Next to the file you will see a 'Downloads' link. Click this link to open the folder containing the recently downloaded file.
+5. Select the craftbukkit jar file you just downloaded, right-click and choose 'Copy' from the popup menu. 
+6. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
+7. Paste the file from step 5. into the newly created Folder. 
+
 #### Download Instructions: Firefox
+
+1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
+2. When prompted, you should click the 'Save' button to save the file.
+3. Once the download is complete click the Download button (A button with a Down arrow) in the top right corner of the Firefox screen. 
+![](img/download-bukkit-firefox1.png)
+4. Next to the file you will see a 'Open Containing Folder' link. Click this link to open the folder containing the recently downloaded file.
+5. Select the craftbukkit jar file you just downloaded, right-click and choose 'Copy' from the popup menu. 
+6. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
+7. Paste the file from step 5. into the newly created Folder. 
+
+Once downloaded, the next step is to install CraftBukkit on your computer. The instructions are slightly different for each operating system so skip directly to the instructions for your operating system ...
+
+#### Installing Bukkit on Windows
+
+1. Open Notepad (You can find it by clicking the 'Start' or Windows button in the bottom left of the screen then typing 'Notepad' in the search box.
+2. Type the following into Notepad...
+
+         java -Xmx1024M -jar craftbukkit.jar -o true
+         PAUSE
+
+   ... depending on the name of the file you downloaded earlier, you may need to change `craftbukkit.jar` to match the exact name of the file.
+   
+3. Save the document as run.bat in the Folder you created earlier (the same Folder where you copied the craftbukkit jar file). It's important that you change the 'Save as type:' option from `Text Documents` to `All Files` otherwise Notepad will try to save the document as run.bat.txt. 
+
+4. Double click the run.bat file you saved in the previous step and CraftBukkit should start running. If you see an error message along the lines of "Java is not recognized as an internal or external command, operable program or batch file" then you need to reinstall Java. Java is the programming language Minecraft is written in. It's also the programming language the CraftBukkit Minecraft Server is written in. You can download Java by visiting `http://www.java.com/` and following the instructions. If after installing Java you still get the same error then follow the instructions at `http://www.java.com/en/download/help/path.xml`.
+
+5. Assuming the server has started up (you didn't see any errors), you can shut down the server by issuing the `stop` command at the server console (type `stop` then hit ENTER).
+
+#### Installing Bukkit on Mac OS
+
+1. The first thing you'll need to do is install Java. Since OS X 10.7 Java no longer comes bundled with OS X so you will need to install Java from Apple's Java Install page `http://support.apple.com/kb/DL1421` .
+
+2. Open TextEdit (you can find it by typing `TextEdit` in the Spotlight field in the top right of the screen. Click the Magnifying Glass Icon to bring up Spotlight)
+
+3. Under the `Format` menu, choose `Make Plain Text` then type the following...
+
+        #!/bin/bash
+        cd "$( dirname "$0" )"
+        java -Xmx1024M -jar craftbukkit.jar -o true    
+
+   ... depending on the name of the file you downloaded earlier, you may need to change `craftbukkit.jar` to match the exact name of the file.
+
+4. Save the file in your CraftBukkit folder as start_server.command
+
+5. You will need to be able to run this newly created file so...
+
+    1. Open the Terminal Application (to find it, click the Magnifying Glass icon and type `Terminal` in the Spotlight field)
+    2. Type `chmod a+x` (don't hit enter yet)
+	3. Find the file you just created in the Finder and drag and drop it into the Terminal window.
+	4. The name of the file you just dropped into the terminal window will be appended to the `chmod a+x` command so you can now hit ENTER.
+	
+6. Start the server by double clicking the start_server.command file. 
+
+7. To stop the server issue the `stop` command in the terminal window (type `stop` then hit ENTER).
+
+If you run into trouble installing CraftBukkit you can find plenty of useful tips and troubleshooting on the CraftBukkit Wiki website `http://wiki.bukkit.org/Setting_up_a_server`. 
+	
+#### Installing Bukkit on Linux (Ubuntu)
+
+1. Open `Text Editor` by clicking the `Dash Home` button in the top left corner of the screen, then type `Edit` to see a list of editors (you can choose `Text Editor` or another editor of your choice)
+
+2. Type the following into the editor...
+
+        #!/bin/sh
+        BINDIR=$(dirname "$(readlink -fn "$0")")
+        cd "$BINDIR"
+        java -Xmx1024M -jar craftbukkit.jar -o true
+
+   ... depending on the name of the file you downloaded earlier, you may need to change `craftbukkit.jar` to match the exact name of the file.
+
+3. Save the file as `craftbukkit.sh` in the folder you created earlier (the same Folder where you copied the craftbukkit jar file).
+
+4. You will need to make this new file executable. In Nautilus (Linux's File browser) right-click on the file and select properties. In the properties dialog, click the 'Permissions' tab then ensure that the 'Execute' checkbox is ticked. (You can also make the file executable by issuing the unix command `chmod +x craftbukkit.sh` from the folder where you saved the file.
+
+5. Launch the Terminal Application and type `~/craftbukkit/craftbukkit.sh` (assuming you created a folder called `craftbukkit` in your home folder).
+
+6. Once the Craftbukkit server console has launched, you can stop it by issuing the Craftbukkit `stop` command (type `stop` then hit ENTER).
+
 
 #### Term: Bug
 "Bugs" in software are errors or mistakes in the software code which can cause problems. Nobody quite knows for sure why errors in software are called bugs but one story goes that a problem with an early mechanical computer in the 1940s was caused by a Moth which somehow found its way inside. The term "Bug" had been used to describe errors long before computers came along, so when the engineers captured the Moth they kept it with a note that said "First actual case of bug being found." 
 
 
-http://dl.bukkit.org/
 ### Configuring your server
 #### Permissions
 #### Operators
@@ -206,6 +303,9 @@ http://dl.bukkit.org/
 ## A Javascript command prompt
 ### First steps with Javascript
 ### Variables
+#### Variables as Chests - containers for stuff
+### Functions
+#### 
 ### Printing results
 
 
@@ -416,7 +516,7 @@ and are told if the number they guessed is too high or too low.
         return;
       }
       guess = parseInt(guess);
-      if (guess === number){
+      if (+guess === number){
         sender.sendMessage('Correct!');
       } else { 
 	    repeat()

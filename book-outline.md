@@ -375,30 +375,161 @@ ScriptCraft is a plugin for Minecraft which lets you create plugins using Javasc
 2. To make it easier for my kids (and others) to create Minecraft mods.
 3. To make it easier to teach programming to kids using Javascript and Minecraft as tools.
 
-Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to program in. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes - that's what we programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself and Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
+Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes - that's what we programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself and Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
 
 Java is a fine language and is widely used. However, it can be a little difficult to learn - especially if you are completely new to programming. Java can be verbose - meaning you need to write a lot of Java code to do even simple things. Java code can't be executed right away either. You need to first "compile" it. Compiling is the process of converting Java source code into a form the computer can understand. 
 
-Javascript came along shortly after Java. It was invented in the mid 1990s just when the Internet was becoming really popular. Although their names sound alike 
+Javascript came along shortly after Java. It was invented in the mid 1990s just when the Internet was becoming really popular. Although their names sound alike they are very different languages. JavaScript is simpler than Java in many ways. In recent years it has become popular as a language not just for web programming but for all kinds of uses. 
 
-### Downloading ScriptCraft
+ScriptCraft is a Minecraft Server plugin which makes it possible to write your own plugins using Javascript. As well as writing your own plugins, you can also use ScriptCraft to build large-scale structures (Skyscrapers, Temples, Roads, Castles and Forts) in the game.
+
 ### Installing ScriptCraft
+
+To download and install ScriptCraft follow these steps...
+
+1. Visit http://scriptcraftjs.org/download/latest/
+2. Right-click on the scriptcraft.jar file and select 'Save Link As...' from the popup menu. 
+3. Save the file to the CraftBukkit plugins folder. If there is no `plugins` folder in your craftbukkit folder it's probably because you haven't yet launched CraftBukkit. The first time CraftBukkit is launched it creates a couple of configuration files and a plugins folder so make sure you've launched CraftBukkit at least once before attempting to download ScriptCraft. 
+
+If there is already a scriptcraft.jar file in your CraftBukkit plugins folder (if this isn't the first time you've installed ScriptCraft) , make sure to remove it first before saving the new file.
+
+If CraftBukkit is running, stop it by issuing the `stop` command in the server console. 
+
+Launch Craftbukkit by double clicking the launch script you created earlier. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
+
+    Enabling scriptcraft v2.0.6-2014-04-20
+    Directory /home/walter/cb179/plugins/scriptcraft does not exist.
+    Initializing /home/walter/cb179/plugins/scriptcraft directory with contents from plugin archive.
+    Unzipping /home/walter/cb179/plugins/scriptcraft/lib/command.js (NE)
+    Unzipping /home/walter/cb179/plugins/scriptcraft/lib/console.js (NE)
+    Unzipping /home/walter/cb179/plugins/scriptcraft/lib/events.js (NE)
+
+... There will be many more entries as there are many files bundled with ScriptCraft. 
+
 ### Verifying ScriptCraft is installed.
 
+You can verify that ScriptCraft has been successfully installed by issuing the following command at the server console:
+
+    js 2 + 3
+
+Make sure to type the above text exactly as you see it and then hit the ENTER key. The response you get from the server console should of course be `5` . Congratulations! You've just installed ScriptCraft and executed your first line of Javascript code. ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute javascript code right away. More on this in the next chapter...
 
 ## A Javascript command prompt
+
+Once you've installed ScriptCraft, you can use the `js` command to evaluate Javascript. The `js` command will try to evaluate any of the text which follows it, as Javascript. You must type a `SPACE` between the `js` and the javascript you want to evaluate. The `js` command will evaluate the javascript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, try to evaluate it, and if it can, will print the result. Let's practice with a few simple Javascript expressions.
+
+### Basic Math operations
+
+The expressions we've used so far are simple addition operations. Javascript has a number of mathematical operations. 
+
+There's addition which uses the `+` operator. 
+
+    js 2 + 2
+	
+There's division which uses the `/` symbol (there's no &divide; key on your keyboard so `/` is used instead)
+
+	js 2 / 3
+	
+There's subtraction;
+
+    js 2 - 3
+	
+And there's multiplication which uses the `*` symbol (this is called the asterisk symbol - it's usually typed by holding down the SHIFT key and 8)
+
+    js 2 * 3
+	
+Javascript can also be used to compare numbers so you can ask 'Is 3 greater than 5?` like this...
+
+    js 3 > 5 
+
+The answer to the above is `false` (3 is not greater than 5). I can ask 'Is 3 less than 5?' like this...
+
+    js 3 < 5
+	
+... and the answer of course is `true`. I can also ask 'Is 3 equal to 5?' like this...
+
+    js 3 == 5 
+	
+... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is code which asks 'Does the player have any health points left?' and if the answer to that question is `true` then the player can continue playing.
+
+### Variables
+
+![](img/hearts.png)
+
+You can't type just anything after the `js` command and expect an answer. You have to use expressions that Javascript understands. For example if I type:
+
+    js hearts
+	
+The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined` which is Javascript's way of saying "I don't understand what you mean by 'hearts' ".
+
+Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is you do so like this...
+
+    js hearts = 8;
+	
+... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
+
+![](img/chest.png)
+
+Now when you type `js hearts`, Javascript understands what `hearts` and remembers its value and prints it out. Try it:
+
+    js hearts
+	
+It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an 'assignment'. I've 'assigned' the value 8 to the variable 'hearts' which I've done using a *single* `=` sign. I can reassign the variable 'hearts' a different value like this:
+
+    js hearts = 9
+	
+That's why variables are called 'variables' - they can vary (or change) . Now when I issue the command:
+
+    js hearts
+	
+It prints out `9`. Just as you can do math with numbers in Javascript, you can also do math with variables. Try this command:
+
+    js hearts + 1
+	
+... should print out `10` as the result. That's because the computer now knows that 'hearts' is equal to 9 and that 9 + 1 is 10. Try each of the following commands yourself:
+
+	js hearts + 5
+
+    js hearts - 2
+
+    js hearts * 2
+
+    js hearts / 3
+
+After executing all of the above commands issue the command:
+
+    js hearts
+	
+You'll notice that the value of the 'hearts' variable is unchanged. It's still `9`. If you want to change the value of `hearts` by some amount you need to reassign it the new value. You can do so like this:
+
+    js hearts = hearts + 1
+	
+What we've done here is combine a math operation and an assignment in a single statement. Now issue the command `js hearts` and you'll see that hearts is now `10`.
+
+Let's create another variable called 'healthMessage' and assign it a value:
+
+    js message = 'You have ' + hearts + ' health remaining'
+	
+What I've done here is create a new variable, and assigned it a value. The value is some text plus the value of the 'hearts' variable, plus some more text. Everything between `' '` (single quote symbols) or `" "` (double quote symbols) in javascript is treated as text. In javascript, text is also called 'Strings'. A String is the word Programmers use when talking about text. Here are some examples of Strings (text) in javascript:
+
+    js "Hello"
+	
+	js 'Goodbye'
+	
+	js "Minecraft 1.7.9"
+	
+	js "123"
+
+That last one might surprise you. Javascript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in javascript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming minecraft plugins when you want to display information to players. 
+
+You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable name cannot have space characters. There are a few other rules about what javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
+
+Javascript programmers - as a habit - generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among javascript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
+
+You can read more about CamelCase on WikiPedia http://en.wikipedia.org/wiki/CamelCase
+
+
 ### First steps with Javascript
-
-#### A Minecraft Calculator
-##### Addition, Subtraction, Multiplication and Division
-
-1 + 1
-3 + 2
-3 - 2
-1 + 3 * 2
-= 7 not 8
-1 + 3 / 2
-= 2.5 not 2
 
 3 * 4 * 4
 3000000 * 4000000 * 2000000 * 5000000
@@ -406,11 +537,8 @@ Javascript came along shortly after Java. It was invented in the mid 1990s just 
 10 / 2
 10 / 3
 
-##### Operator Precedence
-### Variables
-#### Variables as Chests - containers for stuff
 ### Functions
-#### 
+
 ### Printing results
 
 
@@ -584,6 +712,15 @@ Re-use. (using functions/modules we've already written)
 
 1. Events
 
+## Farts in Minecraft
+
+### Minecraft Concepts Introduced:
+
+1. Sounds
+2. Effects
+3. Events (more)
+
+## Building a Skyscraper
 ## Create a Fireworks Show
 
 ### Goal
@@ -641,31 +778,24 @@ and are told if the number they guessed is too high or too low.
 4. Prompting for input.
 
 
+### for loop
+### while loop
+
 # Part III Advanced Modding
 
-The latter half of the book will focus on Event-Driven Programming and
-using Bukkit's API - in particular, how Bukkit's Java-based API maps
-to Javascript.
+The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
 
 ## Arrows that Teleport you.
 
 ### Goal
 
-In this recipe, event-driven programming is explained in more
-detail. At the end of the chapter the reader will have created a
-simple mod which teleports players when they fire arrows. Players are
-teleported to wherever the arrow lands.
-
+In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
 ## A TNT-Free Zone
 
 ### Goal 
 
-In this recipe, readers learn about more events and will explore
-Bukkit's event package. They'll learn how to browse JavaDoc
-documentation and how to map Bukkit event classes to
-Javascript. This recipe provides a mod which will prevent players
-from placing TNT, Lava and other destructive blocks in the game.
+In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game.
 
 ## Protecting areas against griefing.
 
@@ -676,9 +806,7 @@ In this recipe, players will learn how to listen for and cancel block-breaking e
 ## It's a small world
 
 ### Goal
-Readers learn how to limit the size of the game world and thus
-make more memory-efficient game worlds. This is an event-driven
-refinement of recipe 5.
+Readers learn how to limit the size of the game world and so make more memory-efficient game worlds. This is an event-driven refinement of recipe 5.
 
 ### Concepts introduced
 
@@ -687,18 +815,14 @@ Computer Memory.
 ## Horse-Clicker, A simple mini-game
 
 ### Goal
-This is the first recipe in a series of recipes which will
-introduce mini-games. In this recipe, basic game mechanics are
-introduced.  Keeping score.
+This is the first recipe in a series of recipes which will introduce mini-games. In this recipe, basic game mechanics are introduced.  Keeping score.
     
 ## Snowball Fight, A player-vs-player mini-game
 
 ### Goal
-This recipe and the followin recipe will go into much greater
-detail in developing and presenting a javascript mini-game within
-Minecraft. Each part of the mini-game source code will be
-explained. The goal of these two recipes will be to reinforce
-what the reader has learnt in the preceding recipes/chapters.
+This recipe and the followin recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
+
+## Using ScriptCraft with other Plugins
 
 ## Piggie Pandemonium, A pig-herding mini-game
  

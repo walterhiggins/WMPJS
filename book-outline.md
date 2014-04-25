@@ -253,15 +253,15 @@ Once downloaded, the next step is to install CraftBukkit on your computer. The i
 
     1. Open the Terminal Application (to find it, click the Magnifying Glass icon and type `Terminal` in the Spotlight field)
     2. Type `chmod a+x` (don't hit enter yet)
-	3. Find the file you just created in the Finder and drag and drop it into the Terminal window.
+    3. Find the file you just created in the Finder and drag and drop it into the Terminal window.
 	4. The name of the file you just dropped into the terminal window will be appended to the `chmod a+x` command so you can now hit ENTER.
-	
+    
 6. Start the server by double clicking the start_server.command file. 
 
 7. To stop the server issue the `stop` command in the terminal window (type `stop` then hit ENTER).
 
 If you run into trouble installing CraftBukkit you can find plenty of useful tips and troubleshooting on the CraftBukkit Wiki website `http://wiki.bukkit.org/Setting_up_a_server`. 
-	
+    
 #### Installing Bukkit on Linux (Ubuntu)
 
 1. Open `Text Editor` by clicking the `Dash Home` button in the top left corner of the screen, then type `Edit` to see a list of editors (you can choose `Text Editor` or another editor of your choice)
@@ -420,24 +420,24 @@ Once you've installed ScriptCraft, you can use the `js` command to evaluate Java
 
 ### Basic Math operations
 
-The expressions we've used so far are simple addition operations. Javascript has a number of mathematical operations. 
+The expressions we've used so far are simple addition operations. Javascript has a number of mathematical operations. I want you to type each of the following expressions into the server console as you read them. It will be good practice for you. As a general rule you should try executing the code yourself. The best way to learn programming is to try stuff out rather than just reading. Try executing each of the following mathematical operations:
 
 There's addition which uses the `+` operator. 
 
     js 2 + 2
-	
+    
 There's division which uses the `/` symbol (there's no &divide; key on your keyboard so `/` is used instead)
 
-	js 2 / 3
+    js 2 / 3
 	
 There's subtraction;
 
     js 2 - 3
-	
+    
 And there's multiplication which uses the `*` symbol (this is called the asterisk symbol - it's usually typed by holding down the SHIFT key and 8)
 
     js 2 * 3
-	
+    
 Javascript can also be used to compare numbers so you can ask 'Is 3 greater than 5?` like this...
 
     js 3 > 5 
@@ -445,11 +445,11 @@ Javascript can also be used to compare numbers so you can ask 'Is 3 greater than
 The answer to the above is `false` (3 is not greater than 5). I can ask 'Is 3 less than 5?' like this...
 
     js 3 < 5
-	
+    
 ... and the answer of course is `true`. I can also ask 'Is 3 equal to 5?' like this...
 
     js 3 == 5 
-	
+    
 ... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is code which asks 'Does the player have any health points left?' and if the answer to that question is `true` then the player can continue playing.
 
 ### Variables
@@ -459,13 +459,13 @@ The answer to the above is `false` (3 is not greater than 5). I can ask 'Is 3 le
 You can't type just anything after the `js` command and expect an answer. You have to use expressions that Javascript understands. For example if I type:
 
     js hearts
-	
+    
 The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined` which is Javascript's way of saying "I don't understand what you mean by 'hearts' ".
 
 Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is you do so like this...
 
     js hearts = 8;
-	
+    
 ... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
 ![](img/chest.png)
@@ -473,52 +473,55 @@ Right now Javascript does not know what you mean by `hearts`. If you want to tel
 Now when you type `js hearts`, Javascript understands what `hearts` and remembers its value and prints it out. Try it:
 
     js hearts
-	
+    
 It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an 'assignment'. I've 'assigned' the value 8 to the variable 'hearts' which I've done using a *single* `=` sign. I can reassign the variable 'hearts' a different value like this:
 
     js hearts = 9
-	
+    
 That's why variables are called 'variables' - they can vary (or change) . Now when I issue the command:
 
     js hearts
-	
+    
 It prints out `9`. Just as you can do math with numbers in Javascript, you can also do math with variables. Try this command:
 
     js hearts + 1
-	
+    
 ... should print out `10` as the result. That's because the computer now knows that 'hearts' is equal to 9 and that 9 + 1 is 10. Try each of the following commands yourself:
 
-	js hearts + 5
-
-    js hearts - 2
-
-    js hearts * 2
-
-    js hearts / 3
+* `js hearts + 5`
+* `js hearts - 2`
+* `js hearts * 2`
+* `js hearts / 3`
 
 After executing all of the above commands issue the command:
 
     js hearts
-	
+    
 You'll notice that the value of the 'hearts' variable is unchanged. It's still `9`. If you want to change the value of `hearts` by some amount you need to reassign it the new value. You can do so like this:
 
     js hearts = hearts + 1
-	
+    
 What we've done here is combine a math operation and an assignment in a single statement. Now issue the command `js hearts` and you'll see that hearts is now `10`.
 
 Let's create another variable called 'healthMessage' and assign it a value:
 
-    js message = 'You have ' + hearts + ' health remaining'
-	
-What I've done here is create a new variable, and assigned it a value. The value is some text plus the value of the 'hearts' variable, plus some more text. Everything between `' '` (single quote symbols) or `" "` (double quote symbols) in javascript is treated as text. In javascript, text is also called 'Strings'. A String is the word Programmers use when talking about text. Here are some examples of Strings (text) in javascript:
+    js healthMessage = 'You have ' + hearts + ' health remaining'
+    
+What I've done here is create a new variable, and assigned it a value. The value is some text plus the value of the 'hearts' variable, plus some more text. Everything between `' '` (single quote symbols) or `" "` (double quote symbols) in javascript is treated as text. The result of this expression is:
 
-    js "Hello"
+    You have 10 health remaining
 	
-	js 'Goodbye'
-	
-	js "Minecraft 1.7.9"
-	
-	js "123"
+Javascript creates a new variable called `healthMessage`, then joins together the 3 values `'You have '` (which is text) , `hearts` (which is a number) and `' health remaining'` (more text) and constructs a new value `'You have 10 health remaining'` and assigns it to the `healthMessage` variable.
+
+In javascript, text is also called 'Strings'. A String is the word Programmers use when talking about text. Here are some examples of Strings (text) in javascript:
+
+* `js "Hello"`
+    
+* `js 'Goodbye'`
+    
+* `js "Minecraft 1.7.9"`
+    
+* `js "123"`
 
 That last one might surprise you. Javascript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in javascript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming minecraft plugins when you want to display information to players. 
 
@@ -528,26 +531,40 @@ Javascript programmers - as a habit - generally use lowercase letters for variab
 
 You can read more about CamelCase on WikiPedia http://en.wikipedia.org/wiki/CamelCase
 
+Feel free to experiment at this point. Create your own variables using your own numbers, strings and operators. If you make a mistake you'll see a long-winded error message in your console window. These error messages are called stack traces and they're the computers way of telling you something went wrong. Stack traces can be very useful for Java programmers but not so useful for Javascript. Remember - the Minecraft Server software is written in Java not Javascript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the Javascript code you type into Java code so that the server can understand it. If the javascript code doesn't make sense then the translation won't work. 
 
-### First steps with Javascript
+Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even if we are talking and there's background noise. Computers on the other hand are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake you learn something new. Each of the following statements will cause an error:
 
-3 * 4 * 4
-3000000 * 4000000 * 2000000 * 5000000
+ * `js help`
 
-10 / 2
-10 / 3
+   `ReferenceError: "help" is not defined`
+   
+   This is javascript's way of saying I don't know what 'help' is.
+   
+ * `js 'steve`
+ 
+   `EvaluatorException: unterminated string literal`
+   
+   This means javascript encountered a string `'steve` which didn't have a closing quote symbol. Strings must begin and end with either a single-quote (') or a double-quote (") character. What's more, you can't mix them - that is - you can't start a string with a single quote and end it with a double quote. The Strings `'this is good'` and `"so is this"` are both valid but the Strings `'this is bad"` and `"another bad one'` are not.  
 
-### Functions
+ * `js :-)` 
+ 
+   `EvaluatorException: syntax error` 
+   
+   Javascript will respond with a `syntax error` if it simply doesn't understand what your code. It's clear from this example Javascript doesn't know what a smiley is :-)
+   
+As you learn to program, you will encounter errors. One misplaced comma, quote or full-stop and the Computer will give up. *You* shouldn't. Just remember to be patient, Computers aren't as smart as us so we have to be extra careful when typing code. 
 
-### Printing results
-
-
+### Summary
+In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
+ 
 ## Your Modding Workbench.
 ### Choosing an editor
 #### SublimeText
 #### Notepad++
 #### TextWrangler
 #### Other options
+
 
 
 # Part II Basic Modding 
@@ -641,12 +658,12 @@ Troubleshooting: If you don't see a number or if the /js var dice = require('dic
 ### Code Breakdown
 Let's look at the code we've just added to Minecraft. The code is reprinted below, this time with line numbers...
 
-1.	exports.roll = function( ) { 
-2.	  var result = Math.random();
-3.	  result = result * 6;
-4.	  result = Math.floor(result);
-5.	  return result;
-6.	};
+1.    exports.roll = function( ) { 
+2.      var result = Math.random();
+3.      result = result * 6;
+4.      result = Math.floor(result);
+5.      return result;
+6.    };
 
 A Javascript module is a file with one or more related functions. In the above file is one single function called roll. We let others use functions by exporting them. We'll take a closer look at the exports object and modules in later recipes, for now let's look at the function body (lines 2 through 5). 
 
@@ -752,8 +769,8 @@ mini-game. The computer generates a random number (using the same
 function created in Recipe 1). Players try to guess the number
 and are told if the number they guessed is too high or too low.
 
-	var input = require('input');
-	function onGuess( guess, repeat ) {
+    var input = require('input');
+    function onGuess( guess, repeat ) {
       if (guess == 'quit'){
         return;
       }
@@ -761,13 +778,13 @@ and are told if the number they guessed is too high or too low.
       if (+guess === number){
         sender.sendMessage('Correct!');
       } else { 
-	    repeat()
+        repeat()
       }
     };
-	exports.numberGuess = function( sender ) { 
+    exports.numberGuess = function( sender ) { 
       var number = Math.ceil(Math.random() * 10);
       input( sender, 'Pick a number between 1 and 10', onGuess);
-	};
+    };
     
 
 ### Javascript Concepts introduced:

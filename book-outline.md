@@ -553,19 +553,210 @@ Don't worry about making mistakes. Making mistakes is an essential part of learn
    
    Javascript will respond with a `syntax error` if it simply doesn't understand what your code. It's clear from this example Javascript doesn't know what a smiley is :-)
    
-As you learn to program, you will encounter errors. One misplaced comma, quote or full-stop and the Computer will give up. *You* shouldn't. Just remember to be patient, Computers aren't as smart as us so we have to be extra careful when typing code. 
+As you learn to program, you will encounter errors. One misplaced comma, quote or full-stop and the Computer will complain by 'throwing an Exception'. Just remember to be patient, Computers aren't as smart as us so we have to be extra careful when typing code. 
+
+#### Term: Exception
+An Exception is something the computer did not expect - that's what makes it 'exceptional'. In Javascript, 'throwing an exception' is Javascript's way of saying something unexpected happened. An exception will often include a 'Stack Trace'. The 'Stack Trace' is a map of where the computer was when the exception occurred.
+
+#### The 'var' keyword
+
+I said earlier that we can create a new variable by typing a name and assigning it a value. In the earlier example...
+
+    js hearts = 8
+
+... two things happen with this statement. 
+
+1. A new variable called 'hearts' is created. In programming we call this 'declared'. To declare a variable is to create a variable.
+2. The variable is also 'assigned' a new value (8). 'Assigning' a value to a variable means storing the value in the variable. 
+
+So in the above statement we both 'declare' and 'assign' a new variable. It's considered good practice to declare variables using the `var` keyword. `var` as you can probably guess is short for 'variable'. So a btter way to declare the variable is like this:
+
+    js var hearts = 8
+
+We should always declare variables using the `var` keyword. If variables aren't declared using the `var` keyword, they become what are called 'global' variables. That is; variables which can be seen everywhere in the program. Global variables can lead to confusion because different parts of your program can access and change the variable which can lead to unexpected results. Global variables often end up becoming a source of bugs in the program. Using the `var` keyword to create a new variable is another good habit you should adopt when programming. 
+
+Another thing to note is that we don't always have to both declare and assign a variable in the same statement. We can create a variable just by issuing this command:
+
+    js var hungerBar
+
+Notice that hungerBar doesn't yet have a value. We haven't assigned it one, we've just created the variable. Right now the 'hungerBar' variable has a special value called `undefined`. 'undefined' is another keyword in Javascript - it means there's nothing there. We can test this using the following code:
+
+    js hungerBar == undefined
+
+The result of this expression will be `true` . Note that I used two equals symbols which means I'm comparing. I want to see if hungerBar is equal to the special value 'undefined'. Now that I know that I know 'hungerBar' is undefined, I can assign it a value:
+
+    js hungerBar = 10
+
+Note that I didn't need to use the `var` keyword here because the 'hungerBar' variable has *already* been declared. All I'm doing is assigning the variable a new value. You should only use the `var` keyword once for any new variables you create. 
+
+#### Declaring multiple variables 
+
+You can use the `var` keyword to declare just one variable or you can use it to declare any number of variables in a single statement. For example, to declare 2 variables 'gameMode' and 'allowFlight', we could use two separate statements like this...
+
+    js var gameMode = 1
+
+    js var allowFlight = true
+
+... or we could declare both in a single statement like this:
+
+    js var gameMode = 1, allowFlight = true
+
+It has become commonplace to declare many variables using a single statement. 
+
+#### Play with your 'food'
+
+Has anyone ever told you not to play with your food? Well we're going to play with the 'hungerBar' variable while exploring some more javascript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In javascript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
+
+    js hungerBar = hungerBar + 1
+
+This increases the hungerBar variable by 1. The result (assuming the hungerBar's previous value was 10) will be 11. In most programming languages, this kind of operation is so common that the language designers provide shorthand ways to do it...
+
+    js hungerBar += 1
+
+Which does the same thing using fewer characters. This statement can be made shorter again and can be written as:
+
+    js ++hungerBar
+
+The `++` (2 '+' signs next to each other) is a convention used in many programming languages - including Javascript - to 'increment' values. Similarly, the same rules apply for subtracting values from a variable. All 3 of the following statements do the same thing - they each subtract 1.
+
+    js hungerBar = hungerBar - 1
+
+    js hungerBar -= 1
+
+    js --hungerBar
+
+Which statement you use is a matter of personal taste and style. While `--hungerBar` is easier to type, I personally prefer `hungerBar = hungerBar - 1` because I think it reads better.
+
+#### Data types
+
+Variables are used to store values. Those values can be numbers, text or one of the many other data types available in Javascript. You can ask Javascript what 'type of' data a variable has using the `typeof` operator. For example to find out what type of data the hungerBar variable holds:
+
+    js typeof hungerBar
+
+The result is 'number'. The typeof operator doesn't tell us what the value is, only its type. These are the different data types in Javascript:
+
+* number
+* string
+* boolean
+* object
+* undefined
+* function
+
+To get some practice using the `typeof` operator, try each of the following examples in your server console window:
+
+    js typeof false
+    
+    js typeof true
+   
+    js typeof 5
+  
+    js typeof 9.99
+
+    js typeof 'Hello'
+  
+    js typeof "Goodbye"
+
+    js typeof "5"
+
+    js typeof console
+
+    js typeof Herobrine
+
+    js typeof parseInt
+
+The values `true` and `false` are both 'boolean' values. A boolean type can only ever have the values `true` or `false`. Boolean values are really important in programming because as we'll learn later, they are the values the computer uses when making decisions. When deciding what to do, the computer uses only these two values - there's no gray area or 'maybe' when it comes to programming computers. 
+
+The result of the expression `typeof "5"` might surprise you. Even though 5 is a number, because it is inside quote characters, Javascript thinks of it as a string. Everything inside of quote characters is considered a string in javascript - even if there is a number inside the quotes.
+
+The 'console' variable is one of the built-in variables in ScriptCraft and its type is 'object' - We'll talk about objects later. The `typeof Herobrine` returns `undefined` because there is no variable or value called 'Herobrine' in the system. We can safely use the `typeof` operator to test for the existence of variables in the system. If the variable doesn't exist then `typeof` will return `false`. If we were to try to access the undefined 'Herobrine' variable we'd get ReferenceError exception. Try it to see for yourself:
+
+    js Herobrine
+
+The type of a variable is very important because it determines what you can do with it and how it behaves. 
+Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
+
+#### Functions
+Functions in javascript are very powerful because they contain code which can be called any number of times. Let's look at one of the built-in functions in Javascript - the `parseInt()` function.
+
+##### Term: Built-in 
+Javascript comes with many 'built-in' functions. These are useful bits of code which can be used by programmers. A 'built-in' function is simply a function which comes bundled with Javascript. 
+
+##### Using functions
+
+The 'parseInt()' function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the parseInt() function, it will try to figure out what number is in the text. Let's try it out:
+
+    js parseInt('4 hours until sunset')
+
+The result should be 4. What we did here was 'pass' the '4 hours until sunset' text to the parseInt function which processed the text and returned a value: 4.
+
+We are effectively saying to parseInt "here's some text - give me the number (and only the number) from it". We pass the text to the parseInt() function by putting it between the round brackets - that is - the ( and ) characters. Any values between the `(` and `)` symbols are passed into the function and are called 'parameters'. Parameters are values which are passed into functions. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+
+    js parseInt('5 hearts left');
+    js parseInt('This is not a number');
+    js parseInt('3 blind mice');
+
+##### Writing your own functions
+One of the really cool things about programming is that you're not limited to using only the built-in functions provided by the language. You can create your own functions. In this book we're going to create a lot of functions to do cool things you wouldn't normally be able to do in Minecraft. For now let's create a simple new function that adds two numbers together. 
+
+    js var add = function( firstNumber, secondNumber ) { return firstNumber + secondNumber }
+
+When you enter this command nothing happens. That's because what we've just done is declared a new function. The function won't do anything until we call it. Let's do that:
+
+    js add( 1, 2 )
+
+The result is 3. Try calling it with different values to test that the function works. 
+
+    js add( 5, 6 )
+    js add( 9, 1 )
+
+Now let's look at the earlier function declaration in more detail. First we declare a new variable called 'add' but instead of assigning it a number or a string, we assign it a function. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what parameters the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function definition `function( firstNumber, secondNumber )` says what the function should expect. The next step in definining the function is to say what the function should actually do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
+
+    js var add = function( firstNumber, secondNumber ) { return firstNumber + secondNumber }
+       ^   ^     ^       ^ ^            ^            ^ ^                                   ^
+       |   |     |       | |            |            | |                                   |
+       +-> The var keyword can be used to create variables of type 'function'              |
+           |     |       | |            |            | |                                   |
+           +-> Assign the function to a variable - this function can be invoked using the `add` name
+                 |       | |            |            | |                                   |
+                 +-> The function keyword starts the definition                            |
+                         | |            |            | |                                   |
+                         +-> Start of parameters section                                   |
+                           |            |            | |                                   |
+                           +-> name of first parameter                                     |
+                                        |            | |                                   |
+                                        +-> name of second parameter                       |
+                                                     | |                                   |
+                                                     +-> End of parameters section         |
+                                                       |                                   |
+                                                       +-> start of function proper        |
+                                                                                           +-> end of function definition
+
+You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber. You should give your parameters names which are memorable so you don't forget what the parameters are for. The same is true of the variable name you create for your function. Give it a name which is meaningful and memorable. 
+
+In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every single time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
+
+We've only scratched the surface of functions in javascript. We'll explore functions more in later chapters.
 
 ### Summary
-In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
+In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. We also touched on functions - how to call them and how to create them. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
  
 ## Your Modding Workbench.
+
+Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
+
+ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor (SublimeText). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
+
+![Javascript in a plain text editor ](img/screenshot-gedit-1.png)
+Javascript in a plain text editor.
+
+![Javascript in a programming editor ](img/screenshot-sublime-1.png)
+Javascript in a programming editor.
+
 ### Choosing an editor
 #### SublimeText
 #### Notepad++
 #### TextWrangler
 #### Other options
-
-
 
 # Part II Basic Modding 
 
@@ -666,8 +857,6 @@ Let's look at the code we've just added to Minecraft. The code is reprinted belo
 6.    };
 
 A Javascript module is a file with one or more related functions. In the above file is one single function called roll. We let others use functions by exporting them. We'll take a closer look at the exports object and modules in later recipes, for now let's look at the function body (lines 2 through 5). 
-
-
 
 ### Goal
 The goal of this chapter is to gently introduce some basic

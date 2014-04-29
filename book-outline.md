@@ -53,6 +53,7 @@ In this book I will teach you how to program using the Javascript programming la
 
 When I created ScriptCraft (this was late 2012) there was no one true way to write Minecraft Plugins because there was no official way provided by Mojang. At the time of writing (April 2014) Mojang announced an upcoming official way to write Minecraft Plugins using the Plugin API. The Plugin API will provide a standard way for Plugin Developers to extend the Minecraft game. There is still no official release date for the Plugin API but I'll be watching closely and will make any necessary changes to ScriptCraft when the API is released.
  
+
 # Part I A modding workbench
 
 ![Crafting Table](img/Crafting_Table.png "A Modding Workbench")
@@ -62,7 +63,7 @@ Welcome to the exciting world of Minecraft Modding. In this first section of the
 
  * CraftBukkit - A freely-available open-source Minecraft Server.
  * ScriptCraft - A Plugin for CraftBukkit.
- * SublimeText - Or any other text editor suitable for programming.
+ * Sublime Text - Or any other text editor suitable for programming.
 
 ... The following chapters will show you how to install and setup each of the above.
 
@@ -744,7 +745,7 @@ In this chapter we learned about how to execute javascript at the server console
 
 Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
 
-ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor (SublimeText). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
+ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor (Sublime Text). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
 
 ![Javascript in a plain text editor ](img/screenshot-gedit-1.png)
 Javascript in a plain text editor.
@@ -753,10 +754,31 @@ Javascript in a plain text editor.
 Javascript in a programming editor.
 
 ### Choosing an editor
-#### SublimeText
+
+There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs - an Open Source editor - for many years but I don't recommend it to beginning programmers because although it is very powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. 
+
+#### Sublime Text
+
+The editor I use for screenshots in this book is called Sublime Text. It's not a free editor but you can try it out for free for as long as you like. I chose Sublime Text for use in this book because:
+
+* It is cross-platform - that is - it runs on Mac OS, Windows and Linux.
+* It is easy to use.
+* It has a Sidebar (the area on the left in the earlier screenshot) which shows the folders with which you'll be working. This can be really handy when you want to quickly browse the folders for files to edit.
+* It is free for evaluation. After a certain number of days, the software will occasionally ask you if you'd like to upgrade to a paid version. You can either choose to upgrade, continue to use the evaluation version or switch to a different editor. 
+
+You don't have to use Sublime Text. Any programming editor will do. All Programming Editors have similar features, they let you create new files, open files and save files. Some of them - like Sublime Text - will even automatically type certain characters for you to make typing easier and save time. 
+
+
+##### Automatch
+##### Side Bar
+###### open directory
+###### browse to a file and open it. Close the file.
+
 #### Notepad++
+
 #### TextWrangler
 #### Other options
+
 
 # Part II Basic Modding 
 

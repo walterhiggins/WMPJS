@@ -63,7 +63,7 @@ Welcome to the exciting world of Minecraft Modding. In this first section of the
 
  * CraftBukkit - A freely-available open-source Minecraft Server.
  * ScriptCraft - A Plugin for CraftBukkit.
- * Sublime Text - Or any other text editor suitable for programming.
+ * Gedit, TextWrangler, or any other text editor suitable for programming.
 
 ... The following chapters will show you how to install and setup each of the above.
 
@@ -322,15 +322,11 @@ The next setting you'll probably want to change is the `spawn-monsters` setting.
 ##### Game Mode
 For the same reason I suggest making your server a monster-free zone, I also suggest changing your server's `gamemode` property from 0 (Survival) to 1 (Creative). In Survival mode, you will need to constantly seek food and be careful not to fall. In Creative mode you can give your full attention to learning to program and master your surroundings through the power of Javascript.
 
-#### The ops.txt file
+#### The ops.json file
 
-The ops.txt file is a file listing all of the 'Operators' for the server. Operators are players who have special privileges on the server. Operators (also sometimes called 'Administrators' or 'Admins') are responsible for keeping the server running and ensuring that players play nice and don't grief. If players don't play nice, Operators have to power to ban or kick players off the server using special commands only available to them. 
+The ops.json file is a configuration file listing all of the 'Operators' for the server. Operators are players who have special privileges on the server. Operators (also sometimes called 'Administrators' or 'Admins') are responsible for keeping the server running and ensuring that players play nice and don't grief. If players don't play nice, Operators have to power to ban or kick players off the server using special commands only available to them. 
 
-There may already be an ops.txt file present in your CraftBukkit folder. If there isn't, you can create one using the Text Editor you used to create the startup script. In your Text Editor, create a new document and type in your own minecraft username. For example, my own ops.txt file looks like this:
-
-    walterh
-
-Type your own minecraft username and save the file as `ops.txt` in the CraftBukkit folder. The next time you play minecraft and join your server, you will have `Operator` privileges. This means you can perform many administration commands. You will need to be an Operator to issue Javascript commands in the game. 
+There may already be an ops.json file present in your CraftBukkit folder. If there isn't, then one will be created automatically when you run the `op` command from the server console. You will need to be an Operator to issue Javascript commands in the game so one of the first things you should do once you've installed the Minecraft Server is 'op' yourself - that is - make yourself an operator by issuing the `op username` command replacing `username` with your own Minecraft user name. For example, I would issue the command `op walterh` because `walterh` is my minecraft user name. ScriptCraft - the plugin we'll install later - only allows operators to issue javascript commands.
 
 We're done with all of the server configuration we'll need for now. If you want to delve deeper into server configuration, a good place to start is by reading the http://minecraft.gamepedia.com/Server.properties page.
 
@@ -729,8 +725,8 @@ Now let's look at the earlier function declaration in more detail. First we decl
                                                      | |                                   |
                                                      +-> End of parameters section         |
                                                        |                                   |
-                                                       +-> start of function proper        |
-                                                                                           +-> end of function definition
+                                                       +-> start of function body          |
+                                                                    end of function body <-+->
 
 You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber. You should give your parameters names which are memorable so you don't forget what the parameters are for. The same is true of the variable name you create for your function. Give it a name which is meaningful and memorable. 
 
@@ -745,29 +741,87 @@ In this chapter we learned about how to execute javascript at the server console
 
 Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
 
-ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor (Sublime Text). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
+ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
 
-![Javascript in a plain text editor ](img/screenshot-gedit-1.png)
-Javascript in a plain text editor.
+![Javascript in a plain text editor ](img/screenshot-textedit-1.png)
+Javascript code in an editor with no Syntax Highlighting.
 
-![Javascript in a programming editor ](img/screenshot-sublime-1.png)
-Javascript in a programming editor.
+![Javascript in a programming editor ](img/screenshot-gedit-2.png)
+Javascript code in an editor with Syntax Highlighting turned on.
 
 ### Choosing an editor
 
-There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs - an Open Source editor - for many years but I don't recommend it to beginning programmers because although it is very powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. 
+There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs - an Open Source editor - for many years but I don't recommend it to beginning programmers because although it is very powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. In this chapter I'll talk about gedit but you can use any of the following Programming Editors to get started programming.
 
-#### Sublime Text
+* Notepad++ is a free editor for Windows you can download at http://notepad-plus-plus.org/ 
+* TextWrangler from BareBones Software is a free editor for Mac OS X you can download at http://www.barebones.com/products/textwrangler/ 
+* Sublime Text is a cross-platform ( it runs on Mac OS, Windows and Linux ) editor which you can evaluate for free for as long as you like.
 
-The editor I use for screenshots in this book is called Sublime Text. It's not a free editor but you can try it out for free for as long as you like. I chose Sublime Text for use in this book because:
+Mac OS users can skip this section and go straight to 'Installing TextWrangler on Mac OS'.
 
-* It is cross-platform - that is - it runs on Mac OS, Windows and Linux.
-* It is easy to use.
+### gedit
+
+The editor I use for screenshots in this book is called gedit. I chose GEdit for use in this book because:
+
+* It is cross-platform - that is - it runs on Windows and Linux. gedit also runs on older versions of Mac OS (up to version 10.5) but I recommend using TextWrangler for Mac OS.
+* It is light-weight and easy to use. It installs quickly, doesn't take up much disk space and doesn't have a whole lot of features you'll need to learn. It's got just enough features to get started in programming.
 * It has a Sidebar (the area on the left in the earlier screenshot) which shows the folders with which you'll be working. This can be really handy when you want to quickly browse the folders for files to edit.
-* It is free for evaluation. After a certain number of days, the software will occasionally ask you if you'd like to upgrade to a paid version. You can either choose to upgrade, continue to use the evaluation version or switch to a different editor. 
+* It is free to use. It won't cost you to download and it won't nag you to upgrade to a paid version. 
 
-You don't have to use Sublime Text. Any programming editor will do. All Programming Editors have similar features, they let you create new files, open files and save files. Some of them - like Sublime Text - will even automatically type certain characters for you to make typing easier and save time. 
+You don't have to use gedit. Any programming editor will do. All Programming Editors have similar features, they let you create new files, open files and save files. 
 
+You can download gedit at https://wiki.gnome.org/Apps/Gedit/ . Follow the download instructions for your platform. 
+
+#### Installing gedit on Linux
+If you use Linux then gedit is probably already installed on your computer (Click the Dash Home button in the top left of your linux screen and type `GEdit` to find it). If not already installed you can install it by opening the Ubuntu Software Center application and searching for 'gedit' or by issuing the following command in a terminal window...
+
+    sudo apt-get install gedit
+
+Once installed, you can launch gedit by typing gedit into the Dash Home search window (Click the Dash Home button).
+
+#### Installing gedit on Windows
+Follow these steps to install gedit on Windows.
+
+1. Open your browser and go to https://wiki.gnome.rog/Apps/Gedit
+2. Go to the Download section of the page and click the 'Windows Binaries' link.
+3. Click on the link for the latest version ( at the time of writing this was 2.30 ).
+4. Click the gedit-setup.exe link (it might be called a slightly different name).
+5. Once it's downloaded, open the gedit-setup.exe file to begin the install.
+6. Follow all of the install wizard steps. You can use the default values.
+
+Once installed, gedit should appear in your Start Menu. If it doesn't appear in your Start Menu, you can search for it by typing 'gedit' in the Start Menu's Search field.
+
+#### gedit Preferences
+
+The first thing you should do once you've installed gedit is set some preferences. Most modern programming editors provide a file Browsing view where you can see at a glance all of your folders and files. The disk browser is super useful when you want to quickly navigate around your javascript folders and files. To enable the File browsing view in Gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will always be displayed the next time you launch because GEdit remembers your view settings.
+
+![File Browser in Gedit](img/screenshot-gedit-file-browser.png)
+
+The next step is to set some preferences for how the editor should behave. You do this by choosing Edit => Preferences to open the Preferences dialog. Let's look at each of the preferences sections in turn.
+
+#### View preferences
+![View Preferences](img/screenshot-gedit-prefs-1.png)
+
+#### Editor preferences
+![View Preferences](img/screenshot-gedit-prefs-2.png)
+
+#### Fonts & Colors
+![View Preferences](img/screenshot-gedit-prefs-3.png)
+
+#### Plugins
+![View Preferences](img/screenshot-gedit-prefs-4.png)
+
+### Installing TextWrangler on Mac OS
+Follow these steps to install TextWrangler on Mac OS.
+
+1. Open the App Store application and search for 'TextWrangler' in the search box in the top right.
+2. Click the Free/Install App button to begin installing.
+
+Once installed, you can launch TextWrangler by typing 'textw' in the Spotlight search field in the top right of the screen and clicking the TextWrangler result.
+
+Whenever you Launch TextWrangler you should open a 'Disk Browser' window by choosing File => New => Disk Browser. The Disk Browser in TextWrangler lets you quickly navigate around different files in the ScriptCraft folder and sub-folders. 
+
+![TextWrangler Disk Browser](img/textwrangler-disk-browser.png)
 
 ##### Automatch
 ##### Side Bar
@@ -781,12 +835,73 @@ You don't have to use Sublime Text. Any programming editor will do. All Programm
 
 
 # Part II Basic Modding 
+## Your first minecraft plugin
+1. create a file called hello.js in plugins/scriptcraft/plugins folder
+   *plugins/scriptcraft/plugins* not plugins.
 
+    console.log('Hello World');
+   
+   Restart your server.
+   Now you see 'Hello World' in your server console every time the server starts.
+   This is a essentially what a plugin is - some code which is 'embedded' in the program and is loaded every time the host program loads.
+   The plugin code never runs on its own - it can only be run as part of some bigger 'host' program.
+   
+   Notes: 
+   * We don't put a `js ` in front of every javascript line of code - that's only needed when executing javascript at the server console or in-game prompt.
+   * I put a semi-colon character ( `;` ) at the end of the line 
+   
+2. Making a reusable function.
+
+   the previous example, the code only runs once - at startup. Sometimes that's all you might want or need but what if you want to be able to execute the code later on?
+   We put the code in a function. 
+   
+    var helloWorld = function( ) { 
+	  console.log('Hello World');
+    }
+   
+   Now restart the server. 
+   
+   What just happened? The message no longer displays at startup. 
+   That's because we've put the code inside a function but we haven't called the function yet!
+   
+    var helloWorld = function( ) { 
+	  console.log('Hello World');
+    }
+    helloWorld();
+
+   Now restart the server again.
+   
+   once again, the message will appear every time the server starts up. The helloWorld() function you wrote will be loaded and executed by the Minecraft Server every time it starts.
+   
+3. Running helloWorld() at the in-game or server console prompt.
+
+   What we have now is a perfectly working example of a Minecraft plugin. It may be boring but we'll get to the fun stuff real soon. Sometimes you'll want to write functions to use at the in-game or server console prompt. Try running helloWorld() 
+   
+    js helloWorld()
+	
+This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The hello.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the hello.js file one more time...
+
+    var helloWorld = function( ) { 
+	  console.log('Hello World');
+    }
+    helloWorld();
+    exports.helloWorld = helloWorld;
+
+Restart the server again. Now the message appears in the server console. 
+
+    exports.helloWorld = helloWorld;
+	
+What we are doing here is 'exporting' the helloWorld variable/function for use outside of the plugin. 
+
+The 'exports' variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module loading convention called 'CommonJS'. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt so have become very popular lately, especially with the rising popularity of a Javascript-based system called Node.js which is used by professional programmers for all sorts of things. 
+
+### Summary
+You've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.
 ## Rolling Dice
 
 Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this first recipe we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll use this module in later recipes to give random greetings to players who join the game.
 
-In this recipe, I'll walk you through creating your very first Javascript module using the SublimeText programming editor.
+In this recipe, I'll walk you through creating your very first Javascript module using the gedit programming editor.
 
 ### Randomness
 When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time what the number will be. The number which is thrown is said to be 'Random'. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this recipe we'll use this method to get a random number. 
@@ -826,7 +941,7 @@ Ideally we'd like to be able to issue the following command at the in-game promp
 
 That is; calling dice.roll() should return a random number between 0 and 5 behaving much like a real world dice. If you try to run the above command now, it will fail because we haven't yet created this function. That's what we're going to do in the following steps.
 
-Step 1: Launch SublimeText  
+Step 1: Launch gedit  
 Step 2: Open ScriptCraft Directory
 Step 3: Create a new Javascript file 
 Step 4: The Code
@@ -896,7 +1011,7 @@ numbers. This plugin will be used in the recipe #3.
 ### Programming Concepts Introduced:
 
 Creating, Editing and Saving Files.
-A few illustrative screenshots of SublimeText will be required.
+A few illustrative screenshots of gedit will be required.
 
 ### Javascript Concepts Introduced:
     
@@ -964,8 +1079,7 @@ A recipe for creating spectacular fireworks shows.
 ## Don't stray too far
 
 ### Goal
-A recipe which periodically checks each player's location and automatically moves them
-back into an area close to the spawn location. 
+A recipe which periodically checks each player's location and automatically moves them back into an area close to the spawn location. 
 
 ### Javascript Concepts introduced:
 1. for loops 
@@ -975,10 +1089,7 @@ back into an area close to the spawn location.
 
 ### Goal
 
-Readers learn how to create a simple number-guessing
-mini-game. The computer generates a random number (using the same
-function created in Recipe 1). Players try to guess the number
-and are told if the number they guessed is too high or too low.
+Readers learn how to create a simple number-guessing mini-game. The computer generates a random number (using the same function created in Recipe 1). Players try to guess the number and are told if the number they guessed is too high or too low.
 
     var input = require('input');
     function onGuess( guess, repeat ) {

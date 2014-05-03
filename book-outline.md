@@ -56,7 +56,7 @@ When I created ScriptCraft (this was late 2012) there was no one true way to wri
 
 # Part I A modding workbench
 
-![Crafting Table](img/Crafting_Table.png "A Modding Workbench")
+![](img/Crafting_Table.png "")
 
 ## Overview
 Welcome to the exciting world of Minecraft Modding. In this first section of the book I'll introduce you to the tools you'll need to start modding. Just as in the Minecraft game you need to first create a Workbench (also sometimes called a Crafting Table) before you can craft more sophisticated tools, so too in real life we'll need to first gather some resources and setup a work area where we can create sophisticated minecraft plugins. This first section describes the resources you'll need, how to get them and how to setup your 'modding workbench'. All of the resource you'll need are freely available online. The ingredients you'll need to construct your modding workbench are...
@@ -71,17 +71,17 @@ Welcome to the exciting world of Minecraft Modding. In this first section of the
 
 I began playing Minecraft in 2010 in Single Player mode. It was fun and a relaxing way to pass the time. One year later, one afternoon I installed the Minecraft Server software and ran it on one of the computers on our kitchen table. My youngest son Sean had just finished his homework so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter Kate joined in and we began some serious building together. Building in Minecraft is much more fun with others. 
 
-![Client Server Kids](img/Client_Server_Kids.png "The Kids on Minecraft Server")
+![](img/Client_Server_Kids.png "Multi-Player Minecraft")
 
 When you play Minecraft in Multi-Player mode and chat, build and mine with other players, you do so on a Minecraft "Server". The Minecraft Server is just a computer program (like Minecraft Client, Microsoft Word or Internet Explorer) which when running provides a shared virtual place for minecraft players to connect, build and chat. You don't need to buy any special type of computer to run a Minecraft Server. You can run a Minecraft Server on your laptop computer (assuming it's not too old). Minecraft server software won't run on an iPad or Android Tablet or phone. It only runs on Windows, Macintosh or Linux computers. 
 
 Minecraft Multi-Player is "Client-Server". That means that one or more "client" computers - computers running the minecraft game - can connect to a central "server" - a computer which is responsible for storing all of the Minecraft World information so that players can play together in the same world. The following diagram is shows a simple Client/Server network with just one client (Player) connected to a Server.
 
-![Client Server 1](img/Client_Server1.png "A simple client server network")
+![A simple client server network](img/Client_Server1.png "A simple client server network")
 
 The Client must be connected to the Server over some kind of Network. The line between the Client and the Server in the above diagram represents the network. The client and the server chat with each other using a language which would be gobbledigook to you and I. A Server with just one Client computer isn't much fun though. Servers really become fun when many players are connected to the same server like in the following diagram.
 
-![Client Server 2](img/Client_Server2.png "A client server network with many clients (players)")
+![A client server network with many clients (players)](img/Client_Server2.png "A client server network with many clients (players)")
 
 In the above diagram, the server must chat with all of the connected clients. For example, if it starts raining in the game, the server must send a message to each client that it's begun raining. In Minecraft Multiplayer, the server is responsible for an awful lot. The server decides what the weather will be like in the in-game world, what time of day it is and so on. This is so that the time of day and weather will be the same for all connected players. 
 
@@ -133,7 +133,7 @@ Usually, a compatible version of the Minecraft Server software is released short
 
 At the time of writing the Minecraft Client Version 1.7.8 is the most current version. This is what the CraftBukkit website's Home page looks like at that time.
 
-![CraftBukkit Home Page](img/bukkit-homepage.png)
+![CraftBukkit Home Page](img/bukkit-homepage.png "CraftBukkit Home Page")
 
 The large Download button will download the CraftBukkit Recommended Build. The Recommended Build is the version of the Craftbukkit server software which is considered to be the most reliable version because it has undergone the most testing. However, the Recommended Build is not always the most current or up-to-date version of the software. Fortunately the developers of CraftBukkit also let you download up-to-date versions of the software with the warning that the most up-to-date version may not always be the most reliable version. 
 
@@ -149,7 +149,7 @@ Choosing which version of the Server Software to use - Recommended, Beta or Deve
 
 Since version 1.6, the Minecraft Launcher (the software you run on your computer to start Minecraft Client and to upgrade to new versions when they become available) lets you choose which verison of the Client software to run. By default the Launcher is configured to always download and run the Latest Version but you can easily change this using the new "Profiles" feature. The following are step-by-step instructions for changing your Launcher profile to use a different version of Minecraft Client...
 
-![](img/mc-launcher2.png)
+![](img/mc-launcher2.png "Minecraft Launcher")
 
 1. Launch Minecraft 
 2. Click on the 'New Profile' button in the bottom right of the Launch Screen.
@@ -157,7 +157,7 @@ Since version 1.6, the Minecraft Launcher (the software you run on your computer
 4. Choose the appropriate version from the 'Use Version' drop-down list.
 5. Click the Save Profile button.
 
-![](img/mc-profile-editor.png)
+![](img/mc-profile-editor.png "Minecraft Profile Editor")
 
 The newly created profile should now be automatically selected in the Profile drop-down list on the main launcher page. Click the Play button to begin playing using the chosen version of Minecraft Client software.
 
@@ -336,7 +336,7 @@ CraftBukkit's usefulness as a minecraft server comes from its extensibility - th
 #### Starting and stopping your server
 To start your minecraft server, double click on the startup script you created earlier in this chapter. This launches the minecraft server in a terminal window. The terminal window will look something like this:
 
-![](img/server-console.png)
+![](img/server-console.png "The Minecraft Server Console Window")
 
 Don't worry if your terminal window doesn't look exactly like this or has slightly different content. The important thing is that after starting up, your server should display a server console prompt - `>` (right arrow symbol) in the bottom left of the screen along with a blinking cursor. This is called the server console and you can issue administration commands here even if you aren't an operator. Try it: issue the `help` command to see the full list of commands you can use as the Server Console user.
 
@@ -467,7 +467,7 @@ Right now Javascript does not know what you mean by `hearts`. If you want to tel
     
 ... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
-![](img/chest.png)
+![](img/chest.png "Variables are like Chests. You can store stuff in them.")
 
 Now when you type `js hearts`, Javascript understands what `hearts` and remembers its value and prints it out. Try it:
 
@@ -710,25 +710,7 @@ The result is 3. Try calling it with different values to test that the function 
 
 Now let's look at the earlier function declaration in more detail. First we declare a new variable called 'add' but instead of assigning it a number or a string, we assign it a function. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what parameters the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function definition `function( firstNumber, secondNumber )` says what the function should expect. The next step in definining the function is to say what the function should actually do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
 
-    js var add = function( firstNumber, secondNumber ) { return firstNumber + secondNumber }
-       ^   ^     ^       ^ ^            ^            ^ ^                                   ^
-       |   |     |       | |            |            | |                                   |
-       +-> The var keyword can be used to create variables of type 'function'              |
-           |     |       | |            |            | |                                   |
-           +-> Assign the function to a variable - this function can be invoked using the `add` name
-                 |       | |            |            | |                                   |
-                 +-> The function keyword starts the definition                            |
-                         | |            |            | |                                   |
-                         +-> Start of parameters section                                   |
-                           |            |            | |                                   |
-                           +-> name of first parameter                                     |
-                                        |            | |                                   |
-                                        +-> name of second parameter                       |
-                                                     | |                                   |
-                                                     +-> End of parameters section         |
-                                                       |                                   |
-                                                       +-> start of function body          |
-                                                                    end of function body <-+->
+![Function Outline](img/function-outline.png)
 
 You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber. You should give your parameters names which are memorable so you don't forget what the parameters are for. The same is true of the variable name you create for your function. Give it a name which is meaningful and memorable. 
 
@@ -739,17 +721,16 @@ We've only scratched the surface of functions in javascript. We'll explore funct
 ### Summary
 In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. We also touched on functions - how to call them and how to create them. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
  
-## Your Modding Workbench.
+## Choosing and Using a Text Editor
 
 Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
 
 ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
 
-![Javascript in a plain text editor ](img/screenshot-textedit-1.png)
-Javascript code in an editor with no Syntax Highlighting.
+![Javascript in a plain text editor ](img/screenshot-textedit-1.png "Javascript code in an editor with no Syntax Highlighting.")
 
-![Javascript in a programming editor ](img/screenshot-gedit-2.png)
-Javascript code in an editor with Syntax Highlighting turned on.
+![Javascript in a programming editor ](img/screenshot-gedit-2.png "Javascript code in an editor with Syntax Highlighting turned on.")
+
 
 ### Choosing an editor
 
@@ -798,7 +779,7 @@ Once installed, gedit should appear in your Start Menu. If it doesn't appear in 
 
 The first thing you should do once you've installed gedit is set some preferences. Most modern programming editors provide a file Browsing view where you can see at a glance all of your folders and files. The disk browser is super useful when you want to quickly navigate around your javascript folders and files. To enable the File browsing view in Gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will always be displayed the next time you launch because GEdit remembers your view settings.
 
-![File Browser in Gedit](img/screenshot-gedit-file-browser.png)
+![File Browser in Gedit](img/screenshot-gedit-file-browser.png "gedit's File Browser")
 
 The next step is to set some preferences for how the editor should behave. You do this by choosing Edit => Preferences to open the Preferences dialog. Let's look at each of the preferences sections in turn.
 
@@ -851,7 +832,7 @@ Once installed, you can launch TextWrangler by typing 'textw' in the Spotlight s
 
 Whenever you Launch TextWrangler you should open a 'Disk Browser' window by choosing File => New => Disk Browser. The Disk Browser in TextWrangler lets you quickly navigate around different files in the ScriptCraft folder and sub-folders. 
 
-![TextWrangler Disk Browser](img/textwrangler-disk-browser.png)
+![TextWrangler Disk Browser](img/textwrangler-disk-browser.png "TextWrangler's Disk Browser")
 
 ### First steps with your editor
 
@@ -892,22 +873,32 @@ When using scriptcraft, the folder where you save your work is important. You ca
 We've installed a programming editor and have taken our first steps creating and editing a new javascript file. In the next section of the book we'll dive into creating working javascript plugins for Minecraft. 
 
 This is where the fun begins.
-
+	
 # Part II Basic Modding 
+
+In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about Javascript. This section is presented as a list of Recipes because crafting a plugin is similar to crafting any new item in Minecraft. You need to know what parts are required and how to put them together. Programming isn't too different. 
+
 ## Your first minecraft plugin
-1. create a file called hello.js in plugins/scriptcraft/plugins folder
-   *plugins/scriptcraft/plugins* not plugins.
+So let's dive in and create our first Minecraft plugin. A plugin is a program which is a small program which is loaded and executed by a larger program. The larger program we'll be using is of course Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first recipe and try to understand the code and the notes. We'll build on the knowledge learned here in later Recipes.
+
+Launch your Editor and open the helloWorld.js file you created in the previous section. Once opened, you can now remove the comment entered previously and type the following text:
 
     console.log('Hello World');
+
+We haven't used the console.log() function before. It's a built-in function which will print out a message for display in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result. We'll use console.log() quite a lot in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
+
+You may be wondering what the `;` (semi-colon) is doing at the end of the line. 
+
+Another thing you might notice is there is no `js ` command in the helloWorld.js file. The `js ` prefix (text which is placed in front of other text) is only needed when executing javascript at the server console or in-game prompt. It's never used or needed inside javascript files.
+
+After you've changed the helloWorld.js file, make sure to save it (choose Save from the File menu).
+
+If your server isn't already started, then start it by running the script you created earlier. If the server is already started then restart your server by issuing the `reload` command in the server console window. After starting or restarting your server you should see the text 'Hello World' appear in your server console window. In fact you will see it every time the server starts. 
+    
+Believe it or not, you've just written your first Minecraft Plugin!
+
+Well that was easy wasn't it? This might be a trivially simple plugin but it demonstrates essentially what a plugin is - some code which is 'embedded' in a larger program and is loaded every time the host program loads. The plugin code never runs on its own - it can only be run as part of some bigger 'host' program (Minecraft Server). You've just added new code to Minecraft Server! Now is a good time to do a happy dance or phone your pals to let them know you've joined the ranks of Minecraft Modders. :-)
    
-   Restart your server.
-   Now you see 'Hello World' in your server console every time the server starts.
-   This is a essentially what a plugin is - some code which is 'embedded' in the program and is loaded every time the host program loads.
-   The plugin code never runs on its own - it can only be run as part of some bigger 'host' program.
-   
-   Notes: 
-   * We don't put a `js ` in front of every javascript line of code - that's only needed when executing javascript at the server console or in-game prompt.
-   * I put a semi-colon character ( `;` ) at the end of the line 
    
 2. Making a reusable function.
 
@@ -953,6 +944,13 @@ Restart the server again. Now the message appears in the server console.
 What we are doing here is 'exporting' the helloWorld variable/function for use outside of the plugin. 
 
 The 'exports' variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module loading convention called 'CommonJS'. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt so have become very popular lately, especially with the rising popularity of a Javascript-based system called Node.js which is used by professional programmers for all sorts of things. 
+
+The exports variable is a special type of variable - it is an 'object'. An object in javascript is something that can hold or contain other variables. So we can create a new variable that belongs to the exports object much like we'd normally create a new variable ...
+
+    exports.favoriteGame = 'Minecraft';
+
+... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a 'time' property which dictates what time it is in the game. Primed TNT blocks have an 'yield' property which says how wide the explosion will be. Players have dozens of properties. For example to give yourself the ability to fly, issue `js self.allowFlight = true` at the in-game command prompt. To give yourself super-human speed issue `js self.walkSpeed = 1`. To reset your walkspeed to normal issue `js self.walkSpeed = 0` . The point is - everything in the game is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters. 
+
 
 ### Summary
 You've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.

@@ -403,6 +403,8 @@ Launch Craftbukkit by double clicking the launch script you created earlier. Whe
 
 ... There will be many more entries as there are many files bundled with ScriptCraft. 
 
+The 'plugins' sub-folder in CraftBukkit is important. It's where all Minecraft Server plugins should be stored. This is true not just for ScriptCraft.jar but for all server plugins. If you save a Server plugin jar file to any other location except the plugins folder, then it will not be loaded when the minecraft server starts up. The minecraft server only looks in the plugins sub-folder for plugins to load at startup.
+
 ### Verifying ScriptCraft is installed.
 
 You can verify that ScriptCraft has been successfully installed by issuing the following command at the server console:
@@ -751,13 +753,14 @@ Javascript code in an editor with Syntax Highlighting turned on.
 
 ### Choosing an editor
 
-There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs - an Open Source editor - for many years but I don't recommend it to beginning programmers because although it is very powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. In this chapter I'll talk about gedit but you can use any of the following Programming Editors to get started programming.
+There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs - an Open Source editor - for many years but I don't recommend it to beginning programmers because while very powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. In this chapter I'll talk about gedit but you can use any of the following Programming Editors to get started programming.
 
 * Notepad++ is a free editor for Windows you can download at http://notepad-plus-plus.org/ 
 * TextWrangler from BareBones Software is a free editor for Mac OS X you can download at http://www.barebones.com/products/textwrangler/ 
 * Sublime Text is a cross-platform ( it runs on Mac OS, Windows and Linux ) editor which you can evaluate for free for as long as you like.
+* Brackets is a cross-platorm Free, Open Source code editor for the web. You can download it at http://brackets.io/ .
 
-Mac OS users can skip this section and go straight to 'Installing TextWrangler on Mac OS'.
+Let's get started installing gedit. You can skip this section if you've already installed and use a programing editor on your computer. Mac OS users can skip the following section and go straight to 'Installing TextWrangler on Mac OS'.
 
 ### gedit
 
@@ -802,14 +805,41 @@ The next step is to set some preferences for how the editor should behave. You d
 #### View preferences
 ![View Preferences](img/screenshot-gedit-prefs-1.png)
 
+It's useful to have gedit display line numbers alongside your code. The line numbers appear in the left margin of the window and are not part of your actual code. 
+gedit will display a feint margin along the right side of the window in column 80. This margin is just a guide to indicate that perhaps your line of code is too long. It's only a guide though and can be safely ignored. It's generally considered good practice to keep lines of code shorter than 80 characters long to help readability, but there will always be exceptions to this rule.
+
+The 'Enable text wrapping' setting should be turned off for programming. It's useful if you're writing a letter, essay or other non-programming text but it can be confusing if turned on while programming. 
+
+'Highlight current line' makes it easier to see where you currently are in the code. If looking at a large javascript file, it can be difficult to see the cursor (the blinking block that appears next to letters as you type).
+
+'Highlight matching brackets' is a super useful programming feature. As you move the cursor around your javascript source, when the cursor is next to any of the following characters it will match the opening or closing character.
+
+* Round brackets : (  )
+* Curly brackets : {  }
+* Square brackets : [  ]
+
+This can really help when writing or editing code. In the screenshot below, you can see the cursor on line 1 next to the `{` character with both the opening and closing curly brackets highlighted in gray. 
+
+![bracket matching](img/screenshot-gedit-matching-brackets.png)
+
 #### Editor preferences
 ![View Preferences](img/screenshot-gedit-prefs-2.png)
+
+I recommend using either 2 or 4 spaces for tabs to make your code more readable. This is largely a matter of style and personal taste. When starting out, you should probably use 4 spaces. 
+
+Automatic Indentation is a handy feature which saves you having to type TAB and SPACE characters when you start a new line of code.
+
+gedit can create a backup of your your files before you save them. This is usually a good idea.
 
 #### Fonts & Colors
 ![View Preferences](img/screenshot-gedit-prefs-3.png)
 
+You can change the font and color scheme to suit your own tastes. Some people prefer dark text on a light background, some prefer light text on a dark background. Pick the color scheme you like. You can always change it later.
+
 #### Plugins
 ![View Preferences](img/screenshot-gedit-prefs-4.png)
+
+gedit comes with a couple of editing plugins. You should make sure that the 'File Browser Panel' plugin is selected.
 
 ### Installing TextWrangler on Mac OS
 Follow these steps to install TextWrangler on Mac OS.
@@ -823,16 +853,45 @@ Whenever you Launch TextWrangler you should open a 'Disk Browser' window by choo
 
 ![TextWrangler Disk Browser](img/textwrangler-disk-browser.png)
 
-##### Automatch
-##### Side Bar
-###### open directory
-###### browse to a file and open it. Close the file.
+### First steps with your editor
 
-#### Notepad++
+To get used to working with a programming editor, we're going to create a new folder and file in the ScriptCraft plugins folder and save the new file. You can skip this section if you've used a programming editor before.
 
-#### TextWrangler
-#### Other options
+#### Create a new Folder
 
+In the File Browser Pane ( the Disk Browser in TextWrangler on Mac OS ) locate and select the folder where you installed CraftBukkit earlier. Then navigate to the plugins/scriptcraft/plugins sub-folder. Once selected, right-click on the folder and choose 'New Folder' from the menu. Call your new folder 'learning' for now. You can call it something else as long as it's memorable - we'll come back to this folder later.
+
+![create a new folder](img/screenshot-edit-new-folder.png)
+
+Your new folder will now appear in the File/Disk Browser Pane. 
+
+#### Create a new javascript file
+
+The next step is to create a new javascript file in the sub-folder we just created. The file won't do much just yet but we'll work some more on it soon. Right-click on the Folder you just created and choose 'New File' from the menu. Call the new file 'helloWorld.js'.
+
+![create a new file](img/screenshot-edit-new-file.png)
+
+The file has just been created but hasn't been opened. Double-click the file to open it. The file contents now appear in the editing pane on the right. The file is - as you'd expect - empty. Type in the following code exactly as you see it.
+
+    // TO DO : Add some code later
+
+The above code isn't actually real code. It's just a note we've added to remind ourselves that we must add some proper code later. This 'note' isn't actually understandable to the computer so we can write whatever we like here, the computer will not try to interpret and execute it. Notes like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing - you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
+
+These notes are called 'comments' and most programming languages provide a way to add comments. In javascript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
+
+#### Saving your work.
+
+Save the file by choosing 'Save' from the File menu or by pressing CTRL + S ( CMD + S on Mac OS ). The file is now saved. You can verify this by closing the file and opening it once more. To close the file choose 'Close' from the File menu or press the close icon next to the file name at the top of the editor pane.
+
+Reopen the file by double-clicking it in the File/Disk Browser pane. The text you entered previously should still be present. Saving your work is really important because code you edit will not take effect unless you first save it. You'd be surprised how often even experienced programmers forget this simple rule and are left wondering why their code isn't working as expected.
+
+When using scriptcraft, the folder where you save your work is important. You can't just save your files anywhere and hope they'll be executed by scriptcraft. For now we've saved the newly created 'helloWorld.js' file in the plugins/scriptcraft/plugins sub-folder. Just as the Minecraft Server looks for .jar files in its plugins sub-folder to load Java-based plugins, ScriptCraft too looks for .js files in its own scriptcraft/plugins folder to load Javascript-based plugins.
+
+### Summary
+
+We've installed a programming editor and have taken our first steps creating and editing a new javascript file. In the next section of the book we'll dive into creating working javascript plugins for Minecraft. 
+
+This is where the fun begins.
 
 # Part II Basic Modding 
 ## Your first minecraft plugin
@@ -1031,7 +1090,10 @@ Plugins
 The ScriptCraft directory tree.
 
 ## Multi-sided dice
-
+### more on comments
+    /* */ 
+	// 
+	
 ## Greeting Players
 
 ### Goal
@@ -1163,5 +1225,4 @@ This recipe and the followin recipe will go into much greater detail in developi
 
 ## Using ScriptCraft with other Plugins
 
-## Piggie Pandemonium, A pig-herding mini-game
  

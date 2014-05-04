@@ -1,0 +1,25 @@
+<project name="sc-book" default="package" basedir=".">
+  <property name="src" location="src/java"/>
+  <property name="build" location="target/classes"/>
+  <property name="dist" location="target/" />
+
+  <target name="init">
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac includeantruntime="false" srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="build-readme.md" depends="compile">
+    <java classname="jscript" failonerror="true" fork="true" output="README.md">
+      <classpath>
+	<pathelement path="${build}"/>
+      </classpath>
+      <arg value="src/js/build-readme.js"/>
+      <arg value="book-outline.md"/>
+    </java>
+  </target>
+  <target name="package" depends="build-readme.md">
+  </target>
+</project>

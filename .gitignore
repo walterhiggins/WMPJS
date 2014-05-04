@@ -215,3 +215,4 @@ pip-log.txt
 .mr.developer.cfg
 /.#book-outline.md
 /#book-outline.md#
+/target/classes/jscript.class

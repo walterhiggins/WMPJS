@@ -350,9 +350,13 @@ To stop the server, you should issue the `stop` command at the server console. I
 
 Another useful command you should know about is the `reload` command. This command will unload all of the server's plugins and then load them up again. This is a faster and more convenient way of reloading plugins than shutting down the server and restarting it. If you manage a server with many players connected and want to install a new version of a plugin then the `reload` command lets you load the plugin without shutting down your server and disconnecting players.
 
-### Other Server Options
+### Achievement Unlocked!
+![](@@nextAchievement)
 
-By now you should have your very own Minecraft server installed and running. **Congratulations, you're well on your way to becoming a Minecraft Modder!** There are other Minecraft Server options available but installing and running your own server is the only sensible option if you want to start modding. 
+By now you should have your very own Minecraft server installed and running. **Congratulations, you're well on your way to becoming a Minecraft Modder!**
+
+### Other Server Options
+There are other Minecraft Server options available but installing and running your own server is the only sensible option if you want to start modding. 
 
 #### Commercial Minecraft Hosting
 Once you've mastered Server Administration and Modding you might eventually decide to use one of the many commercial minecraft hosting plans available online. These Minecraft hosting providers usually charge a monthly fee, so they are not free. For your money, they provide you with a Minecraft server you and your friends can connect to and play. They usually offer managed install of plugins through a web-based Administration portal (A web page where you can choose which plugins your server should use). Commercial Minecraft Hosting isn't cheap and it's not as flexible as running your own server. You certainly don't need to sign up to commercial minecraft hosting to get the most from this book. You can find a list of minecraft hosting providers by searching 'Minecraft Hosting' on Google.
@@ -411,7 +415,14 @@ You can verify that ScriptCraft has been successfully installed by issuing the f
 
     js 2 + 3
 
-Make sure to type the above text exactly as you see it and then hit the ENTER key. The response you get from the server console should of course be `5` . Congratulations! You've just installed ScriptCraft and executed your first line of Javascript code. ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute javascript code right away. More on this in the next chapter...
+Make sure to type the above text exactly as you see it and then hit the ENTER key. The response you get from the server console should of course be `5` . 
+
+#### Achievement Unlocked!
+![](@@nextAchievement)
+
+Congratulations! You've just installed ScriptCraft and executed your first line of Javascript code. 
+
+ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute javascript code right away. More on this in the next chapter...
 
 ## A Javascript command prompt
 
@@ -716,6 +727,11 @@ You can name the function parameters however you like. They don't have to be cal
 
 In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every single time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
 
+### Achievement Unlocked!
+![](@@nextAchievement)
+
+You've created and invoked your very first Javascript function. Functions are an important part of Javascript and you'll create many more functions in the course of this book.
+
 We've only scratched the surface of functions in javascript. We'll explore functions more in later chapters.
 
 ### Summary
@@ -852,7 +868,7 @@ The next step is to create a new javascript file in the sub-folder we just creat
 
 ![create a new file](img/screenshot-edit-new-file.png)
 
-The file has just been created but hasn't been opened. Double-click the file to open it. The file contents now appear in the editing pane on the right. The file is - as you'd expect - empty. Type in the following code exactly as you see it.
+The file has just been created but hasn't been opened. If using TextWrangler click the file to open it. If using gedit double-click the file to open it. The file contents now appear in the editing pane on the right. The file is - as you'd expect - empty. Type in the following code exactly as you see it.
 
     // TO DO : Add some code later
 
@@ -875,7 +891,7 @@ We've installed a programming editor and have taken our first steps creating and
 This is where the fun begins.
 	
 # Part II Basic Modding 
-
+## Overview
 In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about Javascript. This section is presented as a list of Recipes because crafting a plugin is similar to crafting any new item in Minecraft. You need to know what parts are required and how to put them together. Programming isn't too different. 
 
 ## Your first minecraft plugin
@@ -887,18 +903,22 @@ Launch your Editor and open the helloWorld.js file you created in the previous s
 
 We haven't used the console.log() function before. It's a built-in function which will print out a message for display in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result. We'll use console.log() quite a lot in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
 
-You may be wondering what the `;` (semi-colon) is doing at the end of the line. 
+You may be wondering what the `;` (semi-colon) is doing at the end of the line. The semi-colon is used to end each statement in javascript. It's not strictly needed but you should use it anyway. 
 
 Another thing you might notice is there is no `js ` command in the helloWorld.js file. The `js ` prefix (text which is placed in front of other text) is only needed when executing javascript at the server console or in-game prompt. It's never used or needed inside javascript files.
 
 After you've changed the helloWorld.js file, make sure to save it (choose Save from the File menu).
 
 If your server isn't already started, then start it by running the script you created earlier. If the server is already started then restart your server by issuing the `reload` command in the server console window. After starting or restarting your server you should see the text 'Hello World' appear in your server console window. In fact you will see it every time the server starts. 
-    
+
+### Achievement Unlocked!
+![](@@nextAchievement)
+
 Believe it or not, you've just written your first Minecraft Plugin!
 
 Well that was easy wasn't it? This might be a trivially simple plugin but it demonstrates essentially what a plugin is - some code which is 'embedded' in a larger program and is loaded every time the host program loads. The plugin code never runs on its own - it can only be run as part of some bigger 'host' program (Minecraft Server). You've just added new code to Minecraft Server! Now is a good time to do a happy dance or phone your pals to let them know you've joined the ranks of Minecraft Modders. :-)
-   
+
+
    
 2. Making a reusable function.
 
@@ -1151,23 +1171,7 @@ A recipe which periodically checks each player's location and automatically move
 
 Readers learn how to create a simple number-guessing mini-game. The computer generates a random number (using the same function created in Recipe 1). Players try to guess the number and are told if the number they guessed is too high or too low.
 
-    var input = require('input');
-    function onGuess( guess, repeat ) {
-      if (guess == 'quit'){
-        return;
-      }
-      guess = parseInt(guess);
-      if (+guess === number){
-        sender.sendMessage('Correct!');
-      } else { 
-        repeat()
-      }
-    };
-    exports.numberGuess = function( sender ) { 
-      var number = Math.ceil(Math.random() * 10);
-      input( sender, 'Pick a number between 1 and 10', onGuess);
-    };
-    
+@@listing number_guess.js
 
 ### Javascript Concepts introduced:
      

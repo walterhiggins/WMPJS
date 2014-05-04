@@ -12,7 +12,7 @@
   </target>
 
   <target name="build-readme.md" depends="compile">
-    <java classname="jscript" failonerror="true" fork="true" output="README.md">
+    <java classname="jscript" failonerror="true" fork="true" error="error.log" output="README.md">
       <classpath>
 	<pathelement path="${build}"/>
       </classpath>

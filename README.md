@@ -894,7 +894,7 @@ This is where the fun begins.
 ## Overview
 In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about Javascript. This section is presented as a list of Recipes because crafting a plugin is similar to crafting any new item in Minecraft. You need to know what parts are required and how to put them together. Programming isn't too different. 
 
-## Your first minecraft plugin
+## Recipe 0: Your first minecraft plugin
 So let's dive in and create our first Minecraft plugin. A plugin is a program which is a small program which is loaded and executed by a larger program. The larger program we'll be using is of course Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first recipe and try to understand the code and the notes. We'll build on the knowledge learned here in later Recipes.
 
 Launch your Editor and open the helloWorld.js file you created in the previous section. Once opened, you can now remove the comment entered previously and type the following text:
@@ -918,46 +918,38 @@ Believe it or not, you've just written your first Minecraft Plugin!
 
 Well that was easy wasn't it? This might be a trivially simple plugin but it demonstrates essentially what a plugin is - some code which is 'embedded' in a larger program and is loaded every time the host program loads. The plugin code never runs on its own - it can only be run as part of some bigger 'host' program (Minecraft Server). You've just added new code to Minecraft Server! Now is a good time to do a happy dance or phone your pals to let them know you've joined the ranks of Minecraft Modders. :-)
 
+### Making your function reusable
 
-   
-2. Making a reusable function.
-
-   the previous example, the code only runs once - at startup. Sometimes that's all you might want or need but what if you want to be able to execute the code later on?
-   We put the code in a function. 
+So far the plugin we've written works fine in that it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
    
     var helloWorld = function( ) { 
-	  console.log('Hello World');
-    }
+      console.log('Hello World');
+    };
    
-   Now restart the server. 
+Now restart the server. 
    
-   What just happened? The message no longer displays at startup. 
-   That's because we've put the code inside a function but we haven't called the function yet!
-   
+What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function but we haven't called the function yet! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
+
     var helloWorld = function( ) { 
-	  console.log('Hello World');
-    }
+      console.log('Hello World');
+    };
     helloWorld();
 
-   Now restart the server again.
+Now restart the server again. Once again, the message will appear every time the server starts up. The helloWorld() function you wrote will be loaded and executed by the Minecraft Server every time it starts.
    
-   once again, the message will appear every time the server starts up. The helloWorld() function you wrote will be loaded and executed by the Minecraft Server every time it starts.
-   
-3. Running helloWorld() at the in-game or server console prompt.
-
-   What we have now is a perfectly working example of a Minecraft plugin. It may be boring but we'll get to the fun stuff real soon. Sometimes you'll want to write functions to use at the in-game or server console prompt. Try running helloWorld() 
+OK. So we've wrapped the original code inside a function of our own and we call that function. So far so good. Sometimes you'll want to write functions to use at the in-game or server console prompt. Try running the helloWorld function at the in-game or server console prompt.
    
     js helloWorld()
 	
-This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The hello.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the hello.js file one more time...
+This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
     var helloWorld = function( ) { 
-	  console.log('Hello World');
-    }
+      console.log('Hello World');
+    };
     helloWorld();
     exports.helloWorld = helloWorld;
 
-Restart the server again. Now the message appears in the server console. 
+Restart the server again. Now the message appears in the server console. Let's look at the last statement in the code:
 
     exports.helloWorld = helloWorld;
 	
@@ -965,16 +957,24 @@ What we are doing here is 'exporting' the helloWorld variable/function for use o
 
 The 'exports' variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module loading convention called 'CommonJS'. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt so have become very popular lately, especially with the rising popularity of a Javascript-based system called Node.js which is used by professional programmers for all sorts of things. 
 
+### Private and Public Variables
+When you create a new variable in a javascript file, it is 'private'. That means that no other parts of the system can see it. Only code within the file itself can see variables declared in a file. That's why - earlier - we couldn't execute the helloWorld() function even though it was defined and used within the file itself. Having variables be private by default is a good thing. If every variable you created was visible everywhere in the system it would lead to confusion. Imagine you created a file called 'MySuperDooperPlugin.js' and another called 'MyExplodingZombiesPlugin.js' and in both these files you have a variable called 'livesRemaining' . If the livesRemaining variable wasn't private then both MySuperDooperPlugin and MyExplodingZombiesPlugin would end up using the same variable which may not be what was intended at all. 
+
+Making variables private by default means that 2 or more plugins don't have to worry about stepping on each others toes when updating or reading variables. In short - private variables are good. 
+
+There are times when you want to make a variable public so it can be used by other parts of the system. To do this, you attach the variable to the special `exports` variable as we did earlier. As a general rule you should not make all of your variables public unless you really think they'll be needed elsewhere. We'll talk more about public and private variables later.
+
+### A short note about Objects
 The exports variable is a special type of variable - it is an 'object'. An object in javascript is something that can hold or contain other variables. So we can create a new variable that belongs to the exports object much like we'd normally create a new variable ...
 
     exports.favoriteGame = 'Minecraft';
 
 ... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a 'time' property which dictates what time it is in the game. Primed TNT blocks have an 'yield' property which says how wide the explosion will be. Players have dozens of properties. For example to give yourself the ability to fly, issue `js self.allowFlight = true` at the in-game command prompt. To give yourself super-human speed issue `js self.walkSpeed = 1`. To reset your walkspeed to normal issue `js self.walkSpeed = 0` . The point is - everything in the game is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters. 
 
-
 ### Summary
-You've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.
-## Rolling Dice
+In this recipe you've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.
+
+## Recipe 1: Rolling Dice
 
 Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this first recipe we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll use this module in later recipes to give random greetings to players who join the game.
 
@@ -1107,12 +1107,12 @@ Math,
 Plugins
 The ScriptCraft directory tree.
 
-## Multi-sided dice
+## Recipe 2: Multi-sided dice
 ### more on comments
     /* */ 
 	// 
 	
-## Greeting Players
+## Recipe 3: Greeting Players
 
 ### Goal
 Each player who joins the server will be greeted using a random
@@ -1135,7 +1135,7 @@ Re-use. (using functions/modules we've already written)
 
 1. Events
 
-## Farts in Minecraft
+## Recipe 4: Farts in Minecraft
 
 ### Minecraft Concepts Introduced:
 
@@ -1143,8 +1143,8 @@ Re-use. (using functions/modules we've already written)
 2. Effects
 3. Events (more)
 
-## Building a Skyscraper
-## Create a Fireworks Show
+## Recipe 5: Building a Skyscraper
+## Recipe 6: Create a Fireworks Show
 
 ### Goal
 A recipe for creating spectacular fireworks shows.
@@ -1156,7 +1156,7 @@ A recipe for creating spectacular fireworks shows.
 1. This recipe introduces the setTimeout() function.
 2. The 'if' statement is introduced.
 
-## Don't stray too far
+## Recipe 7: Don't stray too far
 
 ### Goal
 A recipe which periodically checks each player's location and automatically moves them back into an area close to the spawn location. 
@@ -1165,7 +1165,7 @@ A recipe which periodically checks each player's location and automatically move
 1. for loops 
 2. Conditionals are examined in more detail.
 
-## A number-guessing game
+## Recipe 8: A number-guessing game
 
 ### Goal
 

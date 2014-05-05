@@ -1,4 +1,4 @@
-exports.roll = function( sides ) {
+var roll = function( sides ) {
   if ( typeof sides === 'undefined' ) { 
     sides = 6;
   }
@@ -7,3 +7,4 @@ exports.roll = function( sides ) {
   result = parseInt(result);
   return result;
 };
+exports.roll = roll;

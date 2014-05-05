@@ -725,6 +725,9 @@ Now let's look at the earlier function declaration in more detail. First we decl
 
 You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber. You should give your parameters names which are memorable so you don't forget what the parameters are for. The same is true of the variable name you create for your function. Give it a name which is meaningful and memorable. 
 
+### Term: Reuse
+Reuse is important in programming. While programming you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There's two ways to do this: You can copy and paste the code you've already written but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code - functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
+
 In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every single time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
 
 ### Achievement Unlocked!
@@ -976,9 +979,9 @@ In this recipe you've written your very first plugin and have used the special `
 
 ## Recipe 1: Rolling Dice
 
-Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this first recipe we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll use this module in later recipes to give random greetings to players who join the game.
+Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this recipe we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll reuse this module in later recipes to give random greetings to players who join the game.
 
-In this recipe, I'll walk you through creating your very first Javascript module using the gedit programming editor.
+In this recipe, I'll walk you through creating your very first *reusable* Javascript module.
 
 ### Randomness
 When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time what the number will be. The number which is thrown is said to be 'Random'. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this recipe we'll use this method to get a random number. 
@@ -986,17 +989,17 @@ When you throw a 6-sided dice, there's no way of knowing what the throw will be,
 ### Think of a number between 0 and 1
 Before we begin writing the module, let's do some command-prompt exploration. At the in-game prompt type the following and hit ENTER...
 
-/js Math.random()
+    /js Math.random()
 
 ... you should see something like the following returned ...
 
-0.7184312066528946
+    0.7184312066528946
 
 The number you see will be different but it will be a number between 0 and 1. Try it again: type the same command at the in-game prompt and hit ENTER. This time you'll see a different number than the previous number but it too will be between 0 and 1. You can do this as many times as you like and the number will be different each time. 
 
 Tip: You can quickly perform the previous command at the in-game prompt by pressing the / key and then pressing the UP Arrow key.
 
-The numbers which Math.random() returns are called floating point numbers. You might not think there are any numbers between 0 and 1 but there are many, many, numbers between them. It's this range of numbers which Javascript uses. The actual range of numbers is 0. 0000000000000000 to 0. 9999999999999999. That's 9 Quadrillion, 999 Trillion, 999 billion, 999 million, 999 thousand and 999 possible numbers. 
+The numbers which Math.random() returns are called floating point numbers. You might not think there are any numbers between 0 and 1 but there are in fact many, many, numbers. It's this range of numbers which Javascript uses. The actual range of numbers is 0. 0000000000000000 to 0. 9999999999999999. That's 9 Quadrillion, 999 Trillion, 999 billion, 999 million, 999 thousand and 999 possible numbers. 
 
 ### A special 6-sided dice.
 A regular 6-sided dice has numbers from 1 through 6 printed or etched on each of the 6 sides. That's because we typically count up from 1. The number 1 is usually the starting point when we want to count up to something. Javascript (like many programming languages) is different. In Javascript counting begins at the number 0. So if you want to count 10 numbers, where normally you'd count from 1 to 10 ...
@@ -1014,76 +1017,107 @@ We have a problem to solve. Math.random() will give us a number between 0.0 and 
 
 Ideally we'd like to be able to issue the following command at the in-game prompt and have a useful number returned...
 
-/js dice.roll()
+    /js dice.roll()
 
-That is; calling dice.roll() should return a random number between 0 and 5 behaving much like a real world dice. If you try to run the above command now, it will fail because we haven't yet created this function. That's what we're going to do in the following steps.
+That is; calling dice.roll() should return a random number between 0 and 5 behaving much like a real world dice. If you try to run the above command now, it will fail because we haven't yet created this function. That's what we're going to do ...
 
-Step 1: Launch gedit  
-Step 2: Open ScriptCraft Directory
-Step 3: Create a new Javascript file 
-Step 4: The Code
+Launch your editor and in the File/Disk Browser, select the **scriptcraft/modules** folder.
+
+![](img/screenshot-gedit-file-new-modules.png)
+
+Important: You must select the scriptcraft/modules folder not the scriptcraft/plugins folder!
+
+Right-click and choose 'New File' from the menu. Call your new file 'dice.js' then double-click it to open it (a single click will do for TextWrangler).
+
+![](img/screenshot-gedit-file-dice.png)
+
 Type the following code into the newly created file...
 
-exports.roll = function( ) { 
-  var result = Math.random();
-  result = result * 6;
-  result = Math.floor(result);
-  return result;
-};
-Listing 1 dice.js
+    var roll = function(){
+      var result = Math.random();
+      result = result * 6;
+      result = parseInt(result);
+      return result;
+    };
+    exports.roll = roll;
 
-We'll talk about this code later. For now, type the code as you see it above.
-
-Step 5: Save your work.
-Step 6: Try it out
+We'll talk about this code later. For now, type the code as you see it above. Once you've typed the code, save your work (go to the File menu and choose 'Save').
 
 Once you've saved your work go back to Minecraft and at the in-game command prompt (remember, you can bring up the prompt by pressing the / key on your computer's keyboard) type the following...
 
-/js refresh()
+    /js refresh()
 
-The refresh() function is a ScriptCraft function which reloads all of the javascript code. Bukkit has a /reload command which will reload all of the server plugins but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
+The refresh() function is a ScriptCraft function which reloads all of the javascript code. The server has a built-in /reload command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
 
 The refresh() function is important, you should execute it every time you change your Javascript code because changes to your code won't be activated in the game until you do so.
 
 Tip: While working on a Minecraft plugin, if the plugin isn't working as you expect, make sure you've run the /js refresh() function first.
 
-Once you've executed the /js refresh() function, you can try out your new Javascript module. Type the following at the in-game prompt then hit ENTER...
+Once you've executed the /js refresh() function, you're ready to try out your new function. Try issuing the following command:
 
-/js var dice = require('dice')
+    /js dice.roll()
+	
+You should see an error message like this: ReferenceError: "dice" is not defined. OK. Let's try calling roll() on it's own so:
 
-The above statement loads your newly created dice.js module into the computer's memory. The require() function is how ScriptCraft loads Javascript modules. The resulting module is assigned to a variable called dice which can be used as follows...
+    /js roll()
+	
+You'll see another error message: ReferenceError: "roll" is not defined. Why doesn't this work?
+If you remember, the new file we just created, dice.js, was saved in the scriptcraft/modules folder not the scriptcraft/plugins folder. The scriptcraft/plugins folder is special for a couple of reasons:
 
-/js dice.roll()
+1. All javascript files in the scriptcraft/plugins folder are automatically loaded and executed when the server starts.
+2. All variables 'exported' from files within the scriptcraft/plugins folder become what are called 'global' variables. That means they are public for all the rest of the sytem to see. 
+
+There are other folders in scriptcraft. The 'modules' folder is much like the plugins folder. It's a folder where you can create new javascript files. It's similar to scriptcraft/plugins except:
+
+1. Javascript files inside the scriptcraft/modules folder are *not* automatically loaded or executed when the server starts.
+2. Variables exported from files in the scriptcraft/modules folder are not automatically available everywhere - they are not 'global' variables.
+
+So this leaves us in a bit of a pickle. We've written some useful code, how do we actually get to use it?
+
+### Modules
+What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used javascriptcript module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well modules provide a way to package up functions. So far we've only written one function in our file but in later recipese we'll create modules which have many functions.
+
+![](img/nasa-apollo-modules.jpg)
+
+Modular systems are good when programming. They're good because modules (much like the command, lander and service module in the above diagram) can be combined together to form larger systems. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
+
+Getting back to our earlier problem - how do we use the new dice.js module we just created? Remember earlier we learned about the special 'exports' variable which is used to expose private variables for use by others? Well you may be wondering how we get at variables exposed in this way. Fortunately there's a special function called 'require()' which lets us do just that. The 'require()' function is the counterpart to the 'exports' variable. We use 'exports' to say "here's some of my code you can use" and we use require() to say "Hey I'd like to use the code in such-and-such module". 
+
+So to use the code we just wrote inside the dice.js module we first need to 'require()' it. We do so using a statement like this:
+
+    /js var dice = require('dice')
+
+The above statement loads your newly created dice.js module into the computer's memory. The require() function is how ScriptCraft loads Javascript modules. You'll notice I didn't need to include the '.js' suffix (the last part of the filename). This is because the require() function is smart enough to know that it should only look for '.js' files anyway. It's also smart enough to know it should look in the modules folder so we didn't need to write `require('/modules/dice.js')`. After you load your module using the require() function you should almost always assign it to a variable. In this case the variable has the same name as the module but it doesn't have to be. I could have written `var steve = require('dice')` and it would work just as well. 
+
+You'll notice that the above statement doesn't appear to have called `roll()` yet. Loading a module will execute any code in the module but remeber, our module just defines a function. **Defining a function and calling a function are not the same thing.** To call the roll function on the module we just loaded, issue the following command:
+
+    /js dice.roll()
 
 A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
 
 Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in Listing 1 dice.js
 
+![](img/achievement-plugin-dev-5.png)
+
+Major Kudos! You've create created your first Javascript module, loaded it and used it! You've taken your second giant step to creating reusable code. 
 
 ### Code Breakdown
-Let's look at the code we've just added to Minecraft. The code is reprinted below, this time with line numbers...
+Let's look at the code we've just added to Minecraft. The code is reprinted below...
 
-1.    exports.roll = function( ) { 
-2.      var result = Math.random();
-3.      result = result * 6;
-4.      result = Math.floor(result);
-5.      return result;
-6.    };
+    var roll = function(){
+      var result = Math.random();
+      result = result * 6;
+      result = parseInt(result);
+      return result;
+    };
+    exports.roll = roll;
 
-A Javascript module is a file with one or more related functions. In the above file is one single function called roll. We let others use functions by exporting them. We'll take a closer look at the exports object and modules in later recipes, for now let's look at the function body (lines 2 through 5). 
+A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later recipes, for now let's look at the function body itself (lines 2 through 5). 
 
 ### Goal
-The goal of this chapter is to gently introduce some basic
-javascript concepts by way of creating a simple minecraft mod which
-simulates the roll of a dice. The goal of this recipe/chapter (as
-with all recipes/chapters) is to engage young readers in
-programming by way of useful examples which they can incorporate in
-their minecraft servers. Getting young readers up to speed on
-modding is the primary goal, learning javascript is a side-effect.
+The goal of this chapter is to gently introduce some basic javascript concepts by way of creating a simple minecraft mod which simulates the roll of a dice. The goal of this recipe/chapter (as with all recipes/chapters) is to engage young readers in programming by way of useful examples which they can incorporate in their minecraft servers. Getting young readers up to speed on modding is the primary goal, learning javascript is a side-effect.
      
-At the end of this recipe, readers will have a working minecraft
-mod which they can use at the in-game prompt to generate random
-numbers. This plugin will be used in the recipe #3.
+At the end of this recipe, readers will have a working minecraft mod which they can use at the in-game prompt to generate random numbers. This plugin will be used in the recipe #3.
 
 ### Programming Concepts Introduced:
 
@@ -1108,6 +1142,7 @@ Plugins
 The ScriptCraft directory tree.
 
 ## Recipe 2: Multi-sided dice
+### Parameters deep-dive
 ### more on comments
     /* */ 
 	// 

@@ -4,6 +4,6 @@ exports.roll = function( sides ) {
   }
   var result = Math.random();
   result = result * sides;
-  result = parseInt(result);
+  result = Math.floor(result);
   return result;
 };

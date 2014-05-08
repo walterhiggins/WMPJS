@@ -1,5 +1,6 @@
 ## Missing
 1. Connecting to the server. Step by step guide to connect to the server. Needs to be b4 scriptcraft install section.
+2. What about the last line of the dice.js file in rolling dice recipe? need to explain assignment to exports and how this is an assignment not an invocation.
 2. multi-sided dice
    - more on require() - loaded only once then cached.
    - exports.roll = function(){} - roll is only used to assign to exports so just assign directly as shorthand. 

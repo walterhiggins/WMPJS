@@ -1115,7 +1115,7 @@ A Javascript module is a file with one or more related functions. In the above f
 3. Next we convert the number to a integer by passing it to the `Math.floor()` function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
 4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the roll() function to return the `result` variable.
 
-As in the previous recipe, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function expression which begins on line 1 of the file).
+As in the previous recipe, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function expression which begins on line 1 of the file).
 
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
@@ -1158,6 +1158,47 @@ In this recipe we created our first truly reusable module. We learned about Modu
 ![](img/BluePlatonicDice.png)
 
 In this recipe we'll build on the code written in the previous recipe to let us roll a dice of any number of sides. Sometimes we want a random number that doesn't fit in the range 1 to 6. Ideally we'd like our virtual dice module to return a random number for any range we give it. We're going to take our 6-sided dice from the earlier recipe and enhance it so it can change shape to any number of sides like the multi-sided dice used in some table-top and role-playing games.
+
+If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each dice...
+
+    var rollSixSided = function(){ 
+	  ...
+	};
+	var rollFourSided = function(){
+	  ...
+	};
+	var rollEightSided = function(){
+	  ...
+	};
+	exports.rollSixSided = rollSixSided;
+	exports.rollFourSided = rollFourSided;
+	exports.rollEightSided = rollEightSided;
+    ...
+	
+... and so on. That would be time-consuming, repetitive and laborious, and the whole point of programming is to **make the computer do the work!**. The problem with this approach (apart from being time-consuming to type) is that every time we want to support a new type of dice - say 10, 12 and 20 sided dice - we have to write a new function. If we wanted to simulate the roll of a 24 sided dice, we'd have to write *yet another* function. Fortunately there's a better way. 
+
+What if, when we call the *roll()* function, we could tell the function how many sides the dice has and the *roll()* function behaved accordingly? If we could say 'Hey throw a 6-sided dice' or 'Hey throw a 20-sided dice' and *roll* would do the right thing (return a random number between 0 and 5 for the first call and return a random number between 0 and 19 for the second call). This is where *Parameters* come in. 
+
+*Parameters* provide a way to give some instructions to functions. We've already been using parameters in earlier code examples. In an earlier recipe we used the *console.log* function and passed it a parameter. Try issuing the following statements at the server console window:
+
+    js console.log('Hello world');
+
+You should see the message 'Hello world' appear in your server window. 'Hello world' is the instruction (or *parameter* to use the formal term) you gave to the *console.log* function when you ran it. Try again with the following command:
+
+    js console.log( 5 + 9 );
+	
+You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to *console.log* and the *console.log* function just printed the resulting value. An important point: console.log did not do the math, that was done just before the function was called so the parameter which *console.log* received was 14. It had no knowledge of the math that was done before it was called - console.log only saw 14, it did not see `5 + 9`. The *console.log* function is commonly used for *logging*. Logging is the practice of printing output to screen usually for the purpose of debugging or better understanding your code's behaviour.
+
+Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous recipe. You don't have to type this code, I just want to highlight some changes:
+
+@@listing dice_v2.js
+
+The above code is similar to code from the previous recipe except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous recipe. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous recipe. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
+
+@@listing dice_v3.js
+
+Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parmeter we can say what it should be each time we call the *roll* function. The following diagram illustrates the changes the function has just undergone.
+
 
 ### Parameters deep-dive
 ### more on comments

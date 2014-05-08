@@ -1217,6 +1217,25 @@ Re-use. (using functions/modules we've already written)
 3. Events (more)
 
 ## Recipe 5: Building a Skyscraper
+### while loops
+### for loops
+### Drone
+#### targeting
+How to create a new drone in the game. (player must target a block and issue one of the drone functions)	
+#### fluency
+What is a fluent API?
+JQuery
+Demonstration fwd(3).right(2).up(4).box(blocks.gold)
+Why is drone fluent? Limitations of the in-game prompt and command length. Not a limiting factor in modules so you can write
+
+    this
+	.fwd(3)
+	.right(2)
+	.up(4)
+	.box(blocks.gold);
+#### Digging Deeper
+##### Extending Drone
+
 ## Recipe 6: Create a Fireworks Show
 
 ### Goal
@@ -1316,3 +1335,10 @@ This recipe and the followin recipe will go into much greater detail in developi
 ## Using ScriptCraft with other Plugins
 
  
+
+# Appendices
+## Appendix A Drone API 
+## Appendix B Java and Javascript Notes
+A collection of gotchas
+1. Java Strings - converting from Java string to Javascript String
+2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.

@@ -941,13 +941,13 @@ Well that was easy wasn't it? This might be a trivially simple plugin but it dem
 
 So far the plugin we've written works fine in that it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
    
-@@listing helloWorld_v1.js 
+@@listing recipe0/helloWorld_v1.js 
    
 Now restart the server. 
    
 What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function but we haven't called the function yet! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
 
-@@listing helloWorld_v2.js
+@@listing recipe0/helloWorld_v2.js
 
 Now restart the server again. Once again, the message will appear every time the server starts up. The helloWorld() function you wrote will be loaded and executed by the Minecraft Server every time it starts.
    
@@ -957,7 +957,7 @@ OK. So we've wrapped the original code inside a function of our own and we call 
 	
 This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
-@@listing helloWorld_v3.js 
+@@listing recipe0/helloWorld_v3.js 
 
 Restart the server again. Now the message appears in the server console. Let's look at the last statement in the code:
 
@@ -1040,7 +1040,7 @@ Right-click and choose 'New File' from the menu. Call your new file 'dice.js' th
 
 Type the following code into the newly created file...
 
-@@listing dice_v1.js
+@@listing recipe1/dice_v1.js
 
 We'll talk about this code later. For now, type the code as you see it above. Once you've typed the code, save your work (go to the File menu and choose 'Save').
 
@@ -1097,7 +1097,9 @@ You'll notice that the above statement doesn't appear to have called `roll()` ye
 
 A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
 
-Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in Listing 1 dice.js
+Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in Listing 1 dice.js.
+
+You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we actually get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
 ![](@@nextAchievement)
 
@@ -1106,7 +1108,7 @@ Major Kudos! You've create created your first Javascript module, loaded it and u
 ### Digging Deeper
 Let's look at the code we've just added to Minecraft. The code is reprinted below...
 
-@@listing dice_v1.js
+@@listing recipe1/dice_v1.js
 
 A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later recipes, for now let's look at the function body itself (lines 2 through 5). 
 
@@ -1191,20 +1193,59 @@ You should see '14' appear in your server window. The expression `5 + 9` is the 
 
 Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous recipe. You don't have to type this code, I just want to highlight some changes:
 
-@@listing dice_v2.js
+@@listing recipe2/dice_v2.js
 
 The above code is similar to code from the previous recipe except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous recipe. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous recipe. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
 
-@@listing dice_v3.js
+@@listing recipe2/dice_v3.js
 
 Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parmeter we can say what it should be each time we call the *roll* function. The following diagram illustrates the changes the function has just undergone.
 
+![](img/recipe2/magicnumber-to-parameter.png)
 
-### Parameters deep-dive
+The first change was to make the number 6 used in the computation a variable. The next change was to make the variable a parameter. Parameters are like variables. In the first version of this program (on the left hand side) the number 6 is 'hard-coded'. 'Hard-coding' is when you have a specific number or text or other data in your function which at the time seemed like it might never need to change (this would be true if we assumed we'd only ever need a number between 0 and 5). It's usually a good idea to instead turn these values into parameters so you don't have to change your code every time the data changes. Once you've edited your dice.js file to match the version on the right, save it and then ttype `/js refresh()` at the in-game prompt and try each of the following commands in turn:
+
+    /js var dice = require('dice');
+
+    /js dice.roll(6);
+	/js dice.roll(20);
+
+Try calling `dice.roll(20)` a couple of times to confirm that it does in fact choose random numbers between 0 and 19. 
+
+Our updated roll() function now takes a parameter which says how many sides the dice should have. The type of parameter this function takes is of type 'Number'. Functions can take parameters of any type, Numbers, Strings (text), Booleans (true or false), even other functions! We'll see an example in the next recipe of a function which takes another function as a parameter. Remember - functions are just values like anything else in Javascript so they too can be assigned to variables (as we've already seen) or passed as parameters (as we'll soon see). 
+
+### Default parameter values
+
+### Assiging to the exports variable
+Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
+
+@@listing recipe2/dice_v5.js
+
+The above listing is one line shorter than the previous listing. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
+
+    var cow = 'Cow';
+	var sheep = 'Sheep';
+	var pig = 'Pig';
+    exports.cow = cow;
+	exports.sheep = sheep;
+	exports.pig = pig;
+	
+But since the first 3 parameters aren't really used except to assign to exports, we could simply write:
+
+    exports.cow = 'Cow';
+	exports.sheep = 'Sheep';
+	exports.pig = 'Pig';
+	
+and save ourselves some typing. There may be times when this isn't suitable. If the *cow* variable is used inside the module then it makes sense to declare it and assign to the exports variable. If not then it's simpler to just assign the value directly to the exports variable rather than creating an extra variable which won't be used for any other purpose.
+	
+Before we move on to the next recipe, I want to talk more about Comments. 
+
 ### more on comments
     /* */ 
 	// 
-	
+### Summary
+You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
+
 ## @@nextRecipe{greet}: Greeting Players
 
 ### Goal

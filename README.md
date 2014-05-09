@@ -1112,7 +1112,9 @@ You'll notice that the above statement doesn't appear to have called `roll()` ye
 
 A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
 
-Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in Listing 1 dice.js
+Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in Listing 1 dice.js.
+
+You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we actually get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
 ![](img/achievement-plugin-dev-5.png)
 
@@ -1233,12 +1235,59 @@ The above code is similar to code from the previous recipe except I declare a ne
 
 Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parmeter we can say what it should be each time we call the *roll* function. The following diagram illustrates the changes the function has just undergone.
 
+![](img/recipe2/magicnumber-to-parameter.png)
 
-### Parameters deep-dive
+The first change was to make the number 6 used in the computation a variable. The next change was to make the variable a parameter. Parameters are like variables. In the first version of this program (on the left hand side) the number 6 is 'hard-coded'. 'Hard-coding' is when you have a specific number or text or other data in your function which at the time seemed like it might never need to change (this would be true if we assumed we'd only ever need a number between 0 and 5). It's usually a good idea to instead turn these values into parameters so you don't have to change your code every time the data changes. Once you've edited your dice.js file to match the version on the right, save it and then ttype `/js refresh()` at the in-game prompt and try each of the following commands in turn:
+
+    /js var dice = require('dice');
+
+    /js dice.roll(6);
+	/js dice.roll(20);
+
+Try calling `dice.roll(20)` a couple of times to confirm that it does in fact choose random numbers between 0 and 19. 
+
+Our updated roll() function now takes a parameter which says how many sides the dice should have. The type of parameter this function takes is of type 'Number'. Functions can take parameters of any type, Numbers, Strings (text), Booleans (true or false), even other functions! We'll see an example in the next recipe of a function which takes another function as a parameter. Remember - functions are just values like anything else in Javascript so they too can be assigned to variables (as we've already seen) or passed as parameters (as we'll soon see). 
+
+### Default parameter values
+
+### Assiging to the exports variable
+Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
+
+    exports.roll = function( sides ) {
+      if ( typeof sides === 'undefined' ) { 
+        sides = 6;
+      }
+      var result = Math.random();
+      result = result * sides;
+      result = Math.floor(result);
+      return result;
+    };
+
+The above listing is one line shorter than the previous listing. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
+
+    var cow = 'Cow';
+	var sheep = 'Sheep';
+	var pig = 'Pig';
+    exports.cow = cow;
+	exports.sheep = sheep;
+	exports.pig = pig;
+	
+But since the first 3 parameters aren't really used except to assign to exports, we could simply write:
+
+    exports.cow = 'Cow';
+	exports.sheep = 'Sheep';
+	exports.pig = 'Pig';
+	
+and save ourselves some typing. There may be times when this isn't suitable. If the *cow* variable is used inside the module then it makes sense to declare it and assign to the exports variable. If not then it's simpler to just assign the value directly to the exports variable rather than creating an extra variable which won't be used for any other purpose.
+	
+Before we move on to the next recipe, I want to talk more about Comments. 
+
 ### more on comments
     /* */ 
 	// 
-	
+### Summary
+You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
+
 ## Recipe 3: Greeting Players
 
 ### Goal

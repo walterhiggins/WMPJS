@@ -216,3 +216,5 @@ pip-log.txt
 /.#book-outline.md
 /#book-outline.md#
 /target/classes/jscript.class
+/listings/.#dice_v5.js
+/listings/#dice_v5.js#

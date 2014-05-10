@@ -7,3 +7,4 @@ exports.roll = function( sides ) {
   result = Math.floor(result);
   return result;
 };
+

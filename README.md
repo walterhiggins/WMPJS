@@ -1202,7 +1202,10 @@ If we wanted to expand on what we've already done to support dices of 4, 6 and 8
 
 What if, when we call the *roll()* function, we could tell the function how many sides the dice has and the *roll()* function behaved accordingly? If we could say 'Hey throw a 6-sided dice' or 'Hey throw a 20-sided dice' and *roll* would do the right thing (return a random number between 0 and 5 for the first call and return a random number between 0 and 19 for the second call). This is where *Parameters* come in. 
 
-*Parameters* provide a way to give some instructions to functions. We've already been using parameters in earlier code examples. In an earlier recipe we used the *console.log* function and passed it a parameter. Try issuing the following statements at the server console window:
+### Term: Parameter
+*Parameters* provide a way to give some instructions to functions. We can pass values to a function and the function will treat them like variables. There's another word often used in programming which can mean the same thing: Arguments. We say that we pass arguments to functions and the function receives them as paramaters. The distinction isn't very important. You can use the words *arguments* or *parameters* when talking about passing values to functions.
+
+We've already been using parameters in earlier code examples. In an earlier recipe we used the *console.log* function and passed it a parameter. Try issuing the following statements at the server console window:
 
     js console.log('Hello world');
 
@@ -1248,7 +1251,45 @@ Try calling `dice.roll(20)` a couple of times to confirm that it does in fact ch
 
 Our updated roll() function now takes a parameter which says how many sides the dice should have. The type of parameter this function takes is of type 'Number'. Functions can take parameters of any type, Numbers, Strings (text), Booleans (true or false), even other functions! We'll see an example in the next recipe of a function which takes another function as a parameter. Remember - functions are just values like anything else in Javascript so they too can be assigned to variables (as we've already seen) or passed as parameters (as we'll soon see). 
 
+
 ### Default parameter values
+What happens if you call dice.roll() *without* passing a parameter? You can see for yourself by issuing this command at the in-game prompt:
+
+    /js dice.roll()
+
+You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascript and it means the computed value - the result of the math operations that is - was not a number. Do you know why? Our function always expects a number (how many sides the dice has) and if we don't give it one then the math won't work as expected. Wouldn't it be nice if, when no number is passed to `dice.roll()` it just assumes that we want the roll of a six-sided dice? Six-sided dice are after all the most common type of dice. Let's make another minor change to the *roll* function:
+
+    var roll = function( sides ) {
+      if ( typeof sides === 'undefined' ) { 
+        sides = 6;
+      }
+      var result = Math.random();
+      result = result * sides;
+      result = Math.floor(result);
+      return result;
+    };
+    exports.roll = roll;
+
+What I've done here is add 3 new lines of code near the top of the *roll* function. The rest of the function remains unchanged.
+
+    if ( typeof sides === 'undefined' ) {
+	  sides = 6;
+	}
+
+The *if* statement is how decisions are made in Javascript. It's used to test something (a condition) and if the test is true then the code inside the `{` and `}` curly braces (called the 'if block') is executed. In english, we'd write the above code like this.
+
+    if there is no 'sides' parameter then
+	   let sides be equal to 6
+	   
+We'll look at the `if` statement in more detail in later recipes. All you need to know for now is that it can be useful for controlling how our programs behave under different conditions. The code inside the round brackets `typeof sides === 'undefined'` returns the type of the sides parameter. If no parameter was supplied then it will be of type *undefined* in which case we set the sides parameter to a default value of 6. Once you've edited and saved your dice.js file, make sure to issue the `/js refresh()` command at the in-game prompt and then issue the following statements:
+
+    /js var dice = require('dice');
+	/js dice.roll(20);
+	/js dice.roll();
+	/js dice.roll(4);
+	/js dice.roll();
+
+You should see a random number output for each of the above calls. The *roll* function is now robust enough to handle parameters and use a sensible default value of 6 if no parameters are given when it's called.
 
 ### Assiging to the exports variable
 Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
@@ -1262,6 +1303,7 @@ Since the only purpose of the roll variable inside of our modules is to be attac
       result = Math.floor(result);
       return result;
     };
+    
 
 The above listing is one line shorter than the previous listing. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
 
@@ -1283,8 +1325,106 @@ and save ourselves some typing. There may be times when this isn't suitable. If 
 Before we move on to the next recipe, I want to talk more about Comments. 
 
 ### more on comments
-    /* */ 
-	// 
+In the very first javascript file we created, we started with a single line:
+
+    // TO DO : Add some code later
+
+This is called a comment. Comments are notes we write in our code to help us remember things. Source code can be difficult to understand even when you yourself have written it. In the heat of tackling a tricky problem or coding up a cool new plugin you might end up writing some very clever code but you'll often find that after you come back to it a couple of days or weeks later, you no longer understand what you've written. This is where comments come in. It's a good habit to write comments alongside your code, particularly if your code is particularly tricky. 
+
+Comments aren't read by the computer so you can write whatever you like in a comment. Comments should be helpful and provide sign-posts to yourself and others about what the code does. You can comment as much or as little as you like. When working with others on the same source code it's considered good practice to comment your code but again, how much you comment your code seems to be a matter of personal taste. 
+Commenting can be really useful for *documenting* your code. For example, the ScriptCraft API reference documentation available at https://github.com/walterhiggins/ScriptCraft/blob/master/docs/API-Reference.md is actually created automatically from comments in the scriptcraft source code. 
+
+#### Single-line comments
+You can make any line into a comment by starting it with two `/` (forward-slash) characters:
+
+    // this is a javascript comment
+	console.log('... while this is not a comment');
+	
+If you were to run the above listing you'd get the following output:
+
+    ...while this is not a comment
+	
+The first line is ignored and is only readable by programmers.
+
+#### End-of-line comments
+You can also add comments to the end of lines like this:
+
+    console.log('The rain in spain'); // falls mainly in the plain
+	
+If you run the above code you see:
+
+    The rain in spain
+	
+Everything before the `//` is regular code, everything after the `//` is a comment.
+
+#### Multiline comments
+Sometimes you will want to write a lot of comments in your code. You might have a section of code which requires some explaining. You can do so using multiple `//` comments like this:
+
+    // ---------------------------
+    // Drone Plugin
+    // The Drone is a convenience class for building. It can be used for...
+    // 1. Building
+    // 2. Copying and Pasting
+
+or if your comments span more than one line (like above) you can use opening and closing comments which must begin with `/*` and end with `*/` like this:
+
+    /* ---------------------------
+       Drone Plugin
+       The Drone is a convenience class for building. It can be used for...
+       1. Building
+       2. Copying and Pasting
+    */
+
+Most programming editors will display comments in a different color so that they stand out from the rest of the code. Comments can be really helpful in reading and understanding code (both your own and others).
+
+#### Commenting out code
+You can also use comments to *turn off* the execution of code. This can be useful if you want to temporarily change your code or if you have sections of code which you no longer need but do not want to remove just yet.
+ 
+     console.log('Pig says: Oink');
+	 // console.log('Cow says: Moo');
+	 console.log('Sheep says: Baa');
+	 
+The output from the above code would be:
+
+    Pig says: Oink
+	Sheep says: Moo
+
+The second statement is ignored because it has a `//` in front of it. Remember, everything after `//` on a line is treated as a comment.
+  
+#### Comments in this book
+Most of the source listings in this book will not include comments because the code is explained throughout. If you look at the ScriptCraft source code you will see that the code is commented.
+
+#### Commenting dice.js
+Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
+
+    /*
+     this module provides a roll() function which returns a random number.
+     the range of numbers is set using the sides parameter.
+     if no sides parameter is provided, the default is 6.
+     Usage: 
+       var dice = require('dice');
+       var randomNumber1 = dice.roll();
+       var randomNumber2 = dice.roll();
+    */
+    exports.roll = function( sides ) {
+      if ( typeof sides === 'undefined' ) { 
+        sides = 6;
+      }
+      var result = Math.random();
+      result = result * sides;
+      result = Math.floor(result);
+      return result;
+    };
+
+Make sure to save the file after you've changed it, run `/js refresh()` at the in-game prompt then run the following commands to ensure your code still works:
+
+    /js var dice = require('dice');
+	/js dice.roll();
+	/js dice.roll(20);
+	
+![](img/achievement-plugin-dev-6.png)
+Congratulations. You've taken another step towards becoming a responsible plugin developer. Your code is robust and well commented. Commenting code is really important if you want to share your work with others.
+
 ### Summary
 You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
 

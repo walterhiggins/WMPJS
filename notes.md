@@ -4,7 +4,9 @@
 #### data types
 #### comments
 #### conditionals
-##### if 
+##### if
+intro'd in recipe2 
+needs more detail in later recipes
 ###### else if
 ##### switch
 #### loops

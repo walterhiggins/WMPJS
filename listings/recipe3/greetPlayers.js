@@ -1,7 +1,5 @@
 var greeting = require('greeting');
-events.on( 'player.PlayerJoinEvent', function( listener, event ) {
-  var player = event.player;
-  var name = player.name;
-  var message = greeting.random() + name;
+events.playerJoin( function( event ) {
+  var message = greeting.random() + event.player.name;
   player.sendMessage( message );
-});
+} );

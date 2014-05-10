@@ -1429,6 +1429,125 @@ Congratulations. You've taken another step towards becoming a responsible plugin
 You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
 
 ## Recipe 3: Greeting Players
+### Introduction
+In this recipe we'll actually change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
+
+### Term: Event Driven Programming
+Back in the early days of programming there was no such thing as Event Driven Programming. Programs were started and ran to completion, then exited. If your program needed to ask the user a question, it did so using a command prompt and did not resume until the user had typed a response and hit enter. With the advent of Graphical User Interfaces in the 80s and 90s, the possibilities for what users could do exploded. Programs and user-interaction became more sophisticated. Programs had to be written differently to accomodate the new ways users could interact with programs (Menus, Buttons, Windows and so on). When you click a link or a button on a web page or other application, that click is an *event*. In Minecraft, when you fire an arrow, break a block, open a door, join the server or do pretty much anything, that's an *event*. Event driven programming lets programmers write functions which listen for and react to such events.
+
+In the first part of this recipe we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in recipe 2 to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
+
+    var dice = require('dice');
+    var greetings = [ 'Hello ', 'Hola ', 'Bonjour ', 'Konnichiwa ' ];
+    var len = greetings.length;
+    
+    exports.random = function( ) {
+      var index = dice.roll(len);
+      var greeting = greetings[ index ];
+      return greeting;
+    };
+
+We're already getting the benefit of modules and reuse in that we can reuse the *dice* module we created earlier. This is the first statement in our new module. If your module depends on other modules, it's usually a good idea to load those modules at the top of your code. It's another of those good habits you should adopt as a Javascript programmer because in the long run it will make programming easier. 
+
+The next statement declares a new variable called *greetings* and assigns a list of greetings in different languages to it. We haven't seen arrays before so they need some explanation. 
+
+So far we've used variables to store single items in memory. Those items have been numbers and strings (text). It's useful to be able to store lists of items in memory too. For example, in Minecraft, the server stores a list of players who are currently playing, a list of worlds on the server and many other lists. Lists are useful in that they let us keep track of groups of things. In Javascript, lists are called *Arrays*. An *Array* is a collection of items. For example, if you wanted to create a list (or Array) of farm animals in Minecraft, you'd do so like this:
+
+    var farmAnimals = [ 'Sheep', 'Cow', 'Pig', 'Chicken' ];
+
+An array starts with `[` (open square bracket) and ends with `]` (close square bracket) and each item in the list is separated with a `,` (comma). The last item in the list should not have a comma after it. Let's do some server console experimentation with arrays. Issue the following commands at the server console prompt:
+
+    js var farmAnimals = [ 'Sheep', 'Cow', 'Pig', 'Chicken' ];
+	js console.log(farmAnimals);
+	
+The output should be:
+
+    Sheep,Cow,Pig,Chicken
+	
+Arrays have a special property which tells us how many items are in the array. Issue the following command at the server console:
+
+    js farmAnimals.length
+	
+The output should be:
+
+    4
+	
+The `length` property tells us how many items are in the array and is very useful as we'll see later. Okay, now for the tricky part. We use the `[]` characters when constructing a new array but it's also possible to get a particular item from the array using those same `[]` characters if we put a number between them. Let's try it out. If we wanted to get the 1st item from the array (Sheep) a non-programmer would naturally write something like this:
+
+    js farmAnimals[1]
+	
+Go ahead and issue that command now before reading any further. 
+
+Were you surprised by the result? If you're new to programming you should be. The result is `Cow` and not `Sheep` as most of us expect. That's because in Javascript (and many other programming languages too), indexes start at 0 not 1 so if I want to get the *first* item in the farmAnimals array I say `farmAnimals[0]`. If I want to get the second item I say `farmAnimals[1]` , for the third item I say `farmAnimals[2]` and so on. This can be a constant source of confusion for even experienced programmers. The reason why arrays start at 0 and not 1 harks back to the old days of computing when computer memory was not as abundant and cheap as it is today. Having arrays start at 0 rather than 1 was slightly more efficient. 
+
+Here's another question: How might I get the *last* item in an array? If we know the length of the array we could try this:
+
+    js farmAnimals[ farmAnimals.length ]
+
+But that won't work. Remember, arrays begin at 0 not 1 so if we have 4 items in the array then the *index* of the last item will be 3 so we need to write:
+
+    js farmAnimals[ farmAnimals.length - 1 ]
+
+I told you arrays were tricky! Just remembe the golden rule of arrays: *Arrays begin at 0 not 1*. This is what the list of farm animals might look like with the indexes listed beside each animal:
+
+* [0] 'Sheep'
+* [1] 'Cow'
+* [2] 'Pig'
+* [3] 'Chicken'
+
+Okay. Having explained the basics of how arrays work, the *greetings.js* listing should be a little easier to understand now. The *random* function rolls a dice (whose sides are the length of the array : 4) and then assigns the random number returned to a variable called *index*. We then use that index to get an item from the *greetings* array. We are effectively plucking a random item from the list of greetings. Try it out for yourself by issuing the following commands at the in-game prompt.
+
+    /js refresh(); // reloads plugins
+	/js var greetings = require('greetings');
+	/js greetings.random();
+	/js greetings.random();
+    /js greetings.random();
+
+You should definitely call `greetings.random()` a couple of times to verify it returns a random greeting each time. Remember, you can call up the previous command at the in-game prompt by pressing `/` then pressing the UP arrow key. 
+
+So far we've only looked at constructing arrays and getting individual items from arrays. Arrays are very powerful and there are many things you can do with them. 
+
+Once you've constructed an array you can add new items to the end of the array using a function called *push*. The *push* function is used like this to add a new item:
+
+    /js farmAnimals.push('Horse');
+
+'Horse' is added to the end of the array. After the above command is executed, the *farmAnimals* array would look like this:
+
+* [0] 'Sheep'
+* [1] 'Cow'
+* [2] 'Pig'
+* [3] 'Chicken'
+* [4] 'Horse'
+
+The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that only belongs to a particular object (in this case the *farmAnimals* array). 
+
+### TODO
+* arrays
+  What they are (collections/lists)
+  How to construct one
+  How to find out how many items are in an array?
+  How to get a particular item from an array.
+  
+* example code 1
+* testing code in-game
+* digging deeper - arrays
+
+  How to add items to the end of an array.
+  How to insert items in the middle of an array.
+  How to remove items from an array.
+  Processing all the items in an array - we'll look at this in an upcoming recipe.
+
+* events
+* example code 2
+* testing code by exiting and joining game
+* digging deeper - reuse / modules
+  Diagram of run-time dependencies
+  greetPlayer loads greetings loads dice
+  piecing together many modules to make something awesome. It's like a popular toy building brick but *you* get to design the bricks. Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
+* events intro.
+  In a later recipe look at events in more detail.
+* achievment
+* summary
 
 ### Goal
 Each player who joins the server will be greeted using a random
@@ -1525,7 +1644,7 @@ Readers learn how to create a simple number-guessing mini-game. The computer gen
 
 ### Javascript Concepts introduced:
      
-1. while loops
+1. while loops - No. Alternative control structures.
 2. conditionals (reinforced)
 3. comparisons and operators
 4. Prompting for input.
@@ -1533,7 +1652,7 @@ Readers learn how to create a simple number-guessing mini-game. The computer gen
 
 ### for loop
 ### while loop
-
+	
 # Part III Advanced Modding
 
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.

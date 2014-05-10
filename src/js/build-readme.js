@@ -28,7 +28,7 @@ var readFile = function(filename){
 
 var nextAchieve = 1;
 var nextRecipe = 0;
-var recipeKeys = [];
+var recipeKeys = {};
 var xforms = {
   '@@nextAchievement': function(match,matchIndex,line){
     return 'img/achievement-plugin-dev-' + (nextAchieve++) + '.png';
@@ -42,9 +42,12 @@ var xforms = {
     }
     return result.join('\n');
   },
-  '@@nextRecipe\{[a-zA-Z0-9]+\}': function(match, matchIndex, line){
-    
-    return 'Recipe ' + (nextRecipe++);
+  '@@nextRecipe\{([a-zA-Z0-9]+)\}': function(match, key, matchIndex, line){
+    recipeKeys[key] = nextRecipe++;
+    return 'Recipe ' + recipeKeys[key];
+  },
+  '@@recipe\{([a-zA-Z0-9]+)\}': function(match, key){
+    return 'recipe ' + recipeKeys[key];
   }
 };
 

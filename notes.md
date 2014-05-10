@@ -22,6 +22,8 @@ needs more detail in later recipes
 ##### setInterval
 #### arrays
 #### objects
+##### Date object
+##### Methods in detail 
 #### exceptions
 ##### try catch finally
 ##### throwing exceptions

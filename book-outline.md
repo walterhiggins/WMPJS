@@ -1374,6 +1374,7 @@ We're already getting the benefit of modules and reuse in that we can reuse the 
 
 The next statement declares a new variable called *greetings* and assigns a list of greetings in different languages to it. We haven't seen arrays before so they need some explanation. 
 
+### Arrays
 So far we've used variables to store single items in memory. Those items have been numbers and strings (text). It's useful to be able to store lists of items in memory too. For example, in Minecraft, the server stores a list of players who are currently playing, a list of worlds on the server and many other lists. Lists are useful in that they let us keep track of groups of things. In Javascript, lists are called *Arrays*. An *Array* is a collection of items. For example, if you wanted to create a list (or Array) of farm animals in Minecraft, you'd do so like this:
 
     var farmAnimals = [ 'Sheep', 'Cow', 'Pig', 'Chicken' ];
@@ -1510,51 +1511,42 @@ There are a couple of other useful Array insertion and removal functions:
 
 You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
 
+### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
 
-@@listing recipe3/greetPlayers_v1.js
+@@listing recipe3/greetPlayers_v2.js
 
 Make sure to save your file then run the javascript `refresh()` function to reload ScriptCraft (`/js refresh()` from the in-game prompt or `js refresh()` from the server prompt). Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
 
-    Hola walterh
+    Konnichiwa walterh
 
 The message will of course be different for you. The screenshot below shows where you should expect the greeting to appear when you join the server:
 
+![](img/recipe3/screenshot-greeting.png)
 
+ScriptCraft comes bundled with a built-in variable called *events*. The *events* variable is used to listen for and react to events in the game. There are approximately 200 different types of events that you can register for in Minecraft. When you *register* for an *event* in your code you are telling the server that you want to be notified when a particular type of activity occurs in the game. You register by giving the server a function which won't be called immediately but will only be called when the activity occurs. In the code above we are basically saying to Minecraft "Hey, whenever someone joins the game, I want you (the server) to call this 'greetPlayer' function" . 
 
-### TODO
-* events
-* example code 2
-* testing code by exiting and joining game
-* digging deeper - reuse / modules
-  Diagram of run-time dependencies
-  greetPlayer loads greetings loads dice
-  piecing together many modules to make something awesome. It's like a popular toy building brick but *you* get to design the bricks. Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
-* events intro.
-  In a later recipe look at events in more detail.
-* achievment
-* summary
+This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding - passing functions as parameters to other functions - is called functional programming. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because it's purpose is to handle - that is: react - to events, specifically the event which is fired by the server whenever a player joins the game. 
 
-### Goal
-Each player who joins the server will be greeted using a random
-international greeting, Hola, Hello, Dia Dhuit, Bonjour,
-Konnichiwa.  The greeting will be different each time the player
-joins. This is a fun twist on the standard 'Hello World' example
-used by most programming tutorials. It builds upon the 'Dice Roll'
-recipe.
+We'll look more closely at events and event-handling functions in a later recipe.
 
-### Programming Concepts Introduced:
+### More on Modules
 
-Re-use. (using functions/modules we've already written)
+From looking at the *greetPlayers* module you can see the first thing it does is load another module: *greetings* which we created earlier in this recipe. If you remember, the *greetings* module in turn loads yet another module - the *dice* module we worked on in the previous recipes. This is a classic example of how programming is typically done. We start with small dedicated modules and then work on bigger and bigger modules piecing them together to solve a problem. In programming, a big part of problem-solving is breaking problems down into smaller and smaller problems and solving each of these smaller problems then piecing together the solutions. Programming can often feel like playing with toy building bricks except *you* get to design the bricks and put them together. When a program module relies on another module we say it *depends* on the module. A module which loads another module *depends* on that module and that module in turn will *depend* on other modules. All of the modules which are required - either directly or indirectly - by a program are called *dependencies*. You can see in the diagram below the relationship between the *greetPlayers*, *greetings* and *dice* modules. 
 
-### Javascript Concepts Introduced:
+![](img/recipe3/encapsulation.png)
 
-1. Arrays
-2. Accessing Arrays
+The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for - what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a javascript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
 
-### Minecraft Concepts Introduced:
+Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
 
-1. Events
+### Achievement Unlocked!
+![](@@nextAchievement)
+
+Major Kudos! You've created your first custom event handler and have had your first encounter with event-driven programming. Soon you'll be putting event-handling to use to protect your server and add fun effects.
+
+### Summary
+In this recipe you learned about how to create and manipulate lists of items using Javascript Arrays. You also learned about Event programming and wrote your first event-handling function to greet players when they join your server. In the next recipe we'll explore events further and play with Sounds in Minecraft.
 
 ## @@nextRecipe{fart}: Farts in Minecraft
 

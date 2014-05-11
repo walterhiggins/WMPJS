@@ -1488,12 +1488,12 @@ But that won't work. Remember, arrays begin at 0 not 1 so if we have 4 items in 
 
     js farmAnimals[ farmAnimals.length - 1 ]
 
-I told you arrays were tricky! Just remembe the golden rule of arrays: *Arrays begin at 0 not 1*. This is what the list of farm animals might look like with the indexes listed beside each animal:
+I told you arrays were tricky! Just remember the golden rule of arrays: *Arrays begin at 0 not 1*. This is what the list of farm animals might look like with the indexes listed beside each animal:
 
-* [0] 'Sheep'
-* [1] 'Cow'
-* [2] 'Pig'
-* [3] 'Chicken'
+    [0] 'Sheep'
+    [1] 'Cow'
+    [2] 'Pig'
+    [3] 'Chicken'
 
 Okay. Having explained the basics of how arrays work, the *greetings.js* listing should be a little easier to understand now. The *random* function rolls a dice (whose sides are the length of the array : 4) and then assigns the random number returned to a variable called *index*. We then use that index to get an item from the *greetings* array. We are effectively plucking a random item from the list of greetings. Try it out for yourself by issuing the following commands at the in-game prompt.
 
@@ -1513,30 +1513,97 @@ Once you've constructed an array you can add new items to the end of the array u
 
 'Horse' is added to the end of the array. After the above command is executed, the *farmAnimals* array would look like this:
 
-* [0] 'Sheep'
-* [1] 'Cow'
-* [2] 'Pig'
-* [3] 'Chicken'
-* [4] 'Horse'
+    [0] 'Sheep'
+    [1] 'Cow'
+    [2] 'Pig'
+    [3] 'Chicken'
+    [4] 'Horse'   <=== New item appended
 
-The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that only belongs to a particular object (in this case the *farmAnimals* array). 
+The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push()* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that belongs to a particular object so it can only be called using the form *object.method()*, 'object' in this case being 'farmAnimals' and 'method()' being 'push()'. We'll explore Objects more in later recipes.
+
+The *push()* function always *appends* items to the end of the array. If you want to insert an item into the array at a position other than the end, you'll need to use the *splice()* function instead. Here's how you insert a new animal into the farmAnimals array at position 2:
+
+    /js farmAnimals.splice( 2, 0, "Cat" );
+	
+This is what the array will look like after you run the above command:
+
+    [0] 'Sheep'
+    [1] 'Cow'
+	[2] 'Cat'     <=== New item inserted
+    [3] 'Pig'
+    [4] 'Chicken'
+    [5] 'Horse'
+
+You can see that the new item is inserted at position 2 and that the indexes for all of the items after position 2 have changed. 'Pig' is bumped from index 2 to index 3, 'Chicken' from index 3 to index 4 and so on. The *splice()* function lets you insert items anywhere in an array. The first parameter is the position you want to insert the items, the second parameter is how many items you want to remove - if you're only inserting items then leave this as 0, and the third and subsequent parameters are the items you want to insert. You can insert one or more items at a time:
+
+    /js farmAnimals.splice( 1, 0, "Ocelot", "Wolf" );
+	
+This is what the array would look like after running the above command: 
+
+    [0] 'Sheep'
+	[1] 'Ocelot'  <=== New items inserted
+	[2] 'Wolf'    <=== New items inserted
+    [3] 'Cow'
+	[4] 'Cat'     
+    [5] 'Pig'
+    [6] 'Chicken'
+    [7] 'Horse'
+
+Now let's say we want to remove some items from an array. The list of farm animals we've constructed so far is starting to look crowded and there are definitely some animals in that list which shouldn't be there (Wolves and farm animals don't mix). As hinted at previously, the *splice()* function can also be used to *remove* items from the array. Let's start by removing the 'Cat' item from the array:
+
+    /js farmAnimals.splice( 4, 1 );
+
+The output from the above command will be an array of items removed so in your display you'll see something like this: 
+
+    [ "Cat" ]
+
+That's because the *splice()* function does not return the array it spliced, instead it returns the items it removed from the array. Remember, the first parameter you pass to *splice()* is the index of the item, and the second parameter is always the number of items you want to remove. If no additional parameters are provided, then splice will only remove items and not insert new items. To see what your farmAnimals array looks like now run the `/js farmAnimals` statement. Your array will look something like this in memory:
+
+    [0] 'Sheep'
+	[1] 'Ocelot'  
+	[2] 'Wolf'    
+    [3] 'Cow'
+    [4] 'Pig'
+    [5] 'Chicken'
+    [6] 'Horse'
+
+Now let's tidy up the array some more by removing the pesky Ocelot and Wolf :
+
+    /js farmAnimals.splice( 1, 2 );
+	
+The above statement says 'starting at index 1, remove 2 items'. The array will now look like this:
+
+    [0] 'Sheep'
+    [3] 'Cow'
+    [4] 'Pig'
+    [5] 'Chicken'
+    [6] 'Horse'
+
+There are a couple of other useful Array insertion and removal functions:
+
+* unshift() Is like the push() function except it is used to **add** items at the *start* of the array.
+* shift() Is used to **remove** the *first* item from the array.
+* pop() Is used to **remove** the *last* item from the array.
+
+You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
+
+So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
+
+    var greeting = require('greeting');
+    events.playerJoin( function( event ) {
+      var message = greeting.random() + event.player.name;
+      player.sendMessage( message );
+    } );
+
+Make sure to save your file then run the javascript `refresh()` function to reload ScriptCraft (`/js refresh()` from the in-game prompt or `js refresh()` from the server prompt). Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
+
+    Hola walterh
+
+The message will of course be different for you. The screenshot below shows where you should expect the greeting to appear when you join the server:
+
+
 
 ### TODO
-* arrays
-  What they are (collections/lists)
-  How to construct one
-  How to find out how many items are in an array?
-  How to get a particular item from an array.
-  
-* example code 1
-* testing code in-game
-* digging deeper - arrays
-
-  How to add items to the end of an array.
-  How to insert items in the middle of an array.
-  How to remove items from an array.
-  Processing all the items in an array - we'll look at this in an upcoming recipe.
-
 * events
 * example code 2
 * testing code by exiting and joining game

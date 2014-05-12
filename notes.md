@@ -1,8 +1,8 @@
 ## outline
 ### javascript
-#### variables (command prompt)
-#### data types
-#### comments
+#### variables (command prompt) DONE
+#### data types DONE
+#### comments DONE
 #### conditionals
 ##### if
 intro'd in recipe2 
@@ -17,19 +17,33 @@ needs more detail in later recipes
 ##### break
 ##### continue
 #### functions
-##### functions as parameters / callbacks
+##### functions as parameters / callbacks 
+INTRO'D in recipe3
 ##### setTimeout
 ##### setInterval
 #### arrays
+##### construction DONE
+recipe3
+##### accessing DONE
+recipe3
+##### mixed data TODO
+##### nested arrays TODO
+##### methods DONE
+recipe3
 #### objects
 ##### Date object
 ##### Methods in detail 
+#### JSON
+##### format
+##### nested objects
 #### exceptions
 ##### try catch finally
 ##### throwing exceptions
 #### regular expressions
 #### Java objects
+##### Java Collection and Arrays
 ##### Java Strings and Javascript Strings
+##### Persistence and Java objects (no JSON)
 ##### Looking up the Bukkit API
 
 

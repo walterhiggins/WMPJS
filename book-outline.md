@@ -920,7 +920,11 @@ Launch your Editor and open the helloWorld.js file you created in the previous s
 
     console.log('Hello World');
 
-We haven't used the console.log() function before. It's a built-in function which will print out a message for display in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result. We'll use console.log() quite a lot in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
+We haven't used the console.log() function before. It's a built-in function which will print out a message for display in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result:
+
+    [scriptcraft] 11
+
+Whenever you use the *console.log()* function, the output will start with `[scriptcraft]` because *console.log()* writes to the server's log file which is used by the core server and all plugins. The server software prepends the plugin name to make it easy for server administrators to tell which plugin is responsible for messages in the log file. We'll use console.log() quite a lot in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
 
 You may be wondering what the `;` (semicolon) is doing at the end of the line. The semicolon is used to end each statement in javascript. If you think of a statement as a sentence, then the semicolon ';' is to statements what the full stop '.' is to sentences. In javascript the semicolon isn't strictly needed but you should use it anyway. 
 
@@ -1335,7 +1339,7 @@ You can also use comments to *turn off* the execution of code. This can be usefu
 The output from the above code would be:
 
     Pig says: Oink
-	Sheep says: Moo
+	Sheep says: Baa
 
 The second statement is ignored because it has a `//` in front of it. Remember, everything after `//` on a line is treated as a comment.
   
@@ -1548,16 +1552,58 @@ Major Kudos! You've created your first custom event handler and have had your fi
 ### Summary
 In this recipe you learned about how to create and manipulate lists of items using Javascript Arrays. You also learned about Event programming and wrote your first event-handling function to greet players when they join your server. In the next recipe we'll explore events further and play with Sounds in Minecraft.
 
-## @@nextRecipe{fart}: Farts in Minecraft
+## @@nextRecipe{guess1}: A Guessing Game
+### Introduction
+One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including Java and Javascript.
 
-### Minecraft Concepts Introduced:
+@@listing recipe4/guess_v1.js
 
-1. Sounds
-2. Effects
-3. Events (more)
+### Summary
+In this recipe you learned how to use if statements to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players.
 
 ## @@nextRecipe{sky}: Building a Skyscraper
+### Introducion
+In this recipe we'll build a 10-story Skyscraper using just a couple of lines of code and some useful Javascript *repeating loop* statements. Computers are ideal for doing repetitive tasks. In this recipe you'll learn about Javascript's *while* and *for* statements and explore ScriptCraft's *Drone* functions which are used for building stuff in Minecraft. 
+
+### Taking the Elevator.
+#### while loops
+If you've ever used an elevator, you'll have noticed an array of buttons on the inside near the door. The buttons usually light up as you journey up or down so you know which floor the elevator is currently at. We're going to take an elevator trip in Javscript. Issue the following statement at the server console:
+
+    js var floor = 1; while ( floor < 10 ) { console.log( floor ); floor = floor + 1; }
+
+The above statements do the following:
+
+1. Create a new variable called *floor* and set it to 1.
+2. A *while* loop is setup. The first part of the loop block `while ( floor < 10 )` says that the block should be executed 
+
+You should see output like this in your server console window:
+
+    [scriptcraft] 1
+    [scriptcraft] 2
+    [scriptcraft] 3
+    [scriptcraft] 4
+    [scriptcraft] 5
+    [scriptcraft] 6
+    [scriptcraft] 7
+    [scriptcraft] 8
+    [scriptcraft] 9
+
+
+#### for loops
+
+
+### Summary
 ### while loops
+#### Taking the elevator
+
+    exports.elevator = function(){
+        var floor = 1;
+	    while ( floor < 10 ) {
+		    console.log(floor);
+			floor = floor + 1;
+		}
+	  }
+	}
 ### for loops
 ### Drone
 #### targeting
@@ -1575,6 +1621,14 @@ Why is drone fluent? Limitations of the in-game prompt and command length. Not a
 	.box(blocks.gold);
 #### Digging Deeper
 ##### Extending Drone
+
+## @@nextRecipe{fart}: Farts in Minecraft
+
+### Minecraft Concepts Introduced:
+
+1. Sounds
+2. Effects
+3. Events (more)
 
 ## @@nextRecipe{fworks}: Create a Fireworks Show
 
@@ -1597,7 +1651,7 @@ A recipe which periodically checks each player's location and automatically move
 1. for loops 
 2. Conditionals are examined in more detail.
 
-## @@nextRecipe{guess}: A number-guessing game
+## @@nextRecipe{guessb}: A number-guessing game revisited (repeating)
 
 ### Goal
 
@@ -1617,9 +1671,7 @@ Readers learn how to create a simple number-guessing mini-game. The computer gen
 ### while loop
 	
 # Part III Advanced Modding
-
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
-
 ## Arrows that Teleport you.
 
 ### Goal

@@ -1659,8 +1659,40 @@ One of the great things about computers is that they can make decisions and take
       input( player, 'Pick a number between 0 and 5', checkAnswer);
     };
 
+### The if statement
+
+### else
+
+    var input = require('input');
+    var dice = require('dice');
+    
+    exports.guessTheNumber = function( player ){
+    
+      var randomNumber = dice.roll(6);
+    
+      var checkAnswer = function( guess ){
+    
+        if ( guess == randomNumber ) {
+    
+          player.sendMessage('You guessed correct!');
+    
+        } else {
+    
+          player.sendMessage('Better luck next time.');
+    
+        }
+    
+        player.sendMessage('Thanks for playing');
+    
+      };
+    
+      input( player, 'Pick a number between 0 and 5', checkAnswer);
+    };
+
+### The switch statement
+
 ### Summary
-In this recipe you learned how to use if statements to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players.
+In this recipe you learned how to use *if* and *switch* statements to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players.
 
 ## Recipe 5: Building a Skyscraper
 ### Introducion

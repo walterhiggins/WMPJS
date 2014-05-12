@@ -1558,8 +1558,16 @@ One of the great things about computers is that they can make decisions and take
 
 @@listing recipe4/guess_v1.js
 
+### The if statement
+
+### else
+
+@@listing recipe4/guess_v2.js
+
+### The switch statement
+
 ### Summary
-In this recipe you learned how to use if statements to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players.
+In this recipe you learned how to use *if* and *switch* statements to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players.
 
 ## @@nextRecipe{sky}: Building a Skyscraper
 ### Introducion

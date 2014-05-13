@@ -1345,7 +1345,7 @@ The second statement is ignored because it has a `//` in front of it. Remember, 
   
 #### Comments in this book
 Most of the source listings in this book will not include comments because the code is explained throughout. If you look at the ScriptCraft source code you will see that the code is commented.
-
+	
 #### Commenting dice.js
 Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
 
@@ -1362,7 +1362,7 @@ Congratulations. You've taken another step towards becoming a responsible plugin
 
 ### Summary
 You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
-
+	
 ## @@nextRecipe{greet}: Greeting Players
 ### Introduction
 In this recipe we'll actually change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
@@ -1556,18 +1556,36 @@ In this recipe you learned about how to create and manipulate lists of items usi
 ### Introduction
 One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including Java and Javascript.
 
+In this recipe we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly.
+
 @@listing recipe4/guess_v1.js
 
 ### The if statement
 
-### else
+### The if-else construct
 
 @@listing recipe4/guess_v2.js
 
-### The switch statement
+### Combining conditions
+
+### Logical AND
+
+### Logical OR
+
+### Complex logic
+TODO: An example that Combines one or more ANDs with ORs
 
 ### Summary
-In this recipe you learned how to use *if* and *switch* statements to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players.
+In this recipe you learned how to use *if* statement to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players. 
+
+## @@nextRecipe{sounds1}: Animal Sounds
+
+### The switch statement
+TODO: a module which asks players a question: What is their favorite animal? The switch statement will play that animal's sound!
+TODO: Later when talking about objects and lookup tables, implement this same logic using a lookup table.
+
+### Summary
+In this recipe you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module.
 
 ## @@nextRecipe{sky}: Building a Skyscraper
 ### Introducion
@@ -1596,9 +1614,7 @@ You should see output like this in your server console window:
     [scriptcraft] 8
     [scriptcraft] 9
 
-
 #### for loops
-
 
 ### Summary
 ### while loops
@@ -1612,6 +1628,7 @@ You should see output like this in your server console window:
 		}
 	  }
 	}
+
 ### for loops
 ### Drone
 #### targeting
@@ -1627,6 +1644,7 @@ Why is drone fluent? Limitations of the in-game prompt and command length. Not a
 	.right(2)
 	.up(4)
 	.box(blocks.gold);
+
 #### Digging Deeper
 ##### Extending Drone
 
@@ -1648,7 +1666,15 @@ A recipe for creating spectacular fireworks shows.
 
 ### Javascript Concepts introduced:
 1. This recipe introduces the setTimeout() function.
-2. The 'if' statement is introduced.
+2. This might be a good place to talk about recursion?
+
+## @@nextRecipe{sounds2}: Animal Sounds Revisited
+This recipe will use object lookup instead of a switch statement to play animal sounds. 
+### objects
+### properties
+#### accessing properties
+##### by name
+##### by index
 
 ## @@nextRecipe{stray}: Don't stray too far
 
@@ -1656,11 +1682,11 @@ A recipe for creating spectacular fireworks shows.
 A recipe which periodically checks each player's location and automatically moves them back into an area close to the spawn location. 
 
 ### Javascript Concepts introduced:
-1. for loops 
-2. Conditionals are examined in more detail.
+1. for loops  ( looping over the array of online players)
+2. Conditionals are examined in more detail. (not sure this still applies - see earlier recipe - this might be just reinforcement)
 
 ## @@nextRecipe{guessb}: A number-guessing game revisited (repeating)
-
+Not sure if this really needs to be included in the book as it may be too high-level for beginners.
 ### Goal
 
 Readers learn how to create a simple number-guessing mini-game. The computer generates a random number (using the same function created in Recipe 1). Players try to guess the number and are told if the number they guessed is too high or too low.
@@ -1680,25 +1706,25 @@ Readers learn how to create a simple number-guessing mini-game. The computer gen
 	
 # Part III Advanced Modding
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
-## Arrows that Teleport you.
+## @@nextRecipe{arrows}: Arrows that Teleport you.
 
 ### Goal
 
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
-## A TNT-Free Zone
+## @@nextRecipe{tntfree}: A TNT-Free Zone
 
 ### Goal 
 
 In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game.
 
-## Protecting areas against griefing.
+## @@nextRecipe{antigrief}: Protecting areas against griefing.
 
 ### Goal
 
 In this recipe, players will learn how to listen for and cancel block-breaking events.
 
-## It's a small world
+## @@nextRecipe{smallworld}: It's a small world
 
 ### Goal
 Readers learn how to limit the size of the game world and so make more memory-efficient game worlds. This is an event-driven refinement of recipe 5.
@@ -1707,23 +1733,24 @@ Readers learn how to limit the size of the game world and so make more memory-ef
 
 Computer Memory.
 
-## Horse-Clicker, A simple mini-game
+## @@nextRecipe{horseclick}: Horse-Clicker, A simple mini-game
 
 ### Goal
 This is the first recipe in a series of recipes which will introduce mini-games. In this recipe, basic game mechanics are introduced.  Keeping score.
     
-## Snowball Fight, A player-vs-player mini-game
-
+## @@nextRecipe{snowball}: Snowball Fight, A player-vs-player mini-game
 ### Goal
-This recipe and the followin recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
-
-## Using ScriptCraft with other Plugins
-
- 
+This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
 
 # Appendices
-## Appendix A Drone API 
-## Appendix B Java and Javascript Notes
+## Using ScriptCraft with other Plugins
+### Calling sendCommand() to programmtically use othe plugin commands
+### accessing the plugin API from javascript (get plugin by name - see example code on plugin.bukkit scriptcraft page)
+## Events reference
+A set of tables of events, one table for each set of events, Player Events, Server Events etc.
+## Drone API 
+## Java and Javascript Notes
 A collection of gotchas
 1. Java Strings - converting from Java string to Javascript String
 2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
+3. Saving and restoring Location objects using utils module

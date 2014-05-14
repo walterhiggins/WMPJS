@@ -5,13 +5,13 @@ exports.guessTheNumber = function( player ){
 
   var randomNumber = dice.roll(6);
 
-  var checkAnswer = function( guess ){
+  var checkAnswer = function( answer, guesser ){
 
-    if ( guess == randomNumber ) {
-      player.sendMessage('You guessed correct!');
+    if ( answer == randomNumber ) {
+      guesser.sendMessage('You guessed correct!');
     }
 
-    player.sendMessage('Thanks for playing');
+    guesser.sendMessage('Thanks for playing');
 
   };
 

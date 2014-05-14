@@ -1,5 +1,6 @@
 var input = require('input');
 var dice = require('dice');
+var fireworks = require('fireworks');
 
 exports.guessTheNumber = function( player ){
 
@@ -11,13 +12,19 @@ exports.guessTheNumber = function( player ){
 
       guesser.sendMessage('You guessed correct!');
 
+      if ( guesser.player ) {
+	
+	fireworks.firework( guesser.location );
+
+      }
+
     } else {
 
       guesser.sendMessage('Better luck next time.');
 
     }
 
-    guesser.sendMessage('Thanks for playing');
+    player.sendMessage('Thanks for playing');
 
   };
 

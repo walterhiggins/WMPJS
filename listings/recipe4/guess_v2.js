@@ -8,15 +8,12 @@ exports.guessTheNumber = function( player ){
   var checkAnswer = function( guess, guesser ){
 
     if ( guess == randomNumber ) {
-
       guesser.sendMessage('You guessed correct!');
 
     } else {
-
       guesser.sendMessage('Better luck next time.');
 
     }
-
     guesser.sendMessage('Thanks for playing');
 
   };

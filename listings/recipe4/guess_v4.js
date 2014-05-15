@@ -11,6 +11,9 @@ exports.guessTheNumber = function( player ){
     if ( guess == randomNumber ) {
       guesser.sendMessage('You guessed correct!');
 
+      if ( guesser.player ) {
+        fireworks.firework( guesser.location );
+      }
     } else if ( guess == 'quit') {
       guesser.sendMessage('Thanks for playing');
 

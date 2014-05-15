@@ -1643,10 +1643,15 @@ Change your existing numberGuess.js file to match the code above, save it then i
 	
 Now when you guess incorrectly you should see a message `Better luck next time.` appear.
 
+### The if-else-if construct
+So far the guessing games gives players just one shot at guessing the number. In the following listing the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the if - else - if form which is quite common in Javascript:
+
+@@listing recipe4/guess_v3.js
+
 ### Nested blocks
 The `if` statement is one of several *block* statements in javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
 
-@@listing recipe4/guess_v3.js
+@@listing recipe4/guess_v4.js
 
 Now jump into the game and at the in-game prompt issue the following commands:
 
@@ -1679,12 +1684,44 @@ rather than just:
 The `&&` (two ampersand symbols side-by-side) operator combines the expressions on the left and right of it and if both are true then it evaluates to true. If either the left hand side or right hand side expressions evaluate to false then the whole test is false. When you combine tests using the `&&` (*AND*) operator, the test only passes when *all* of the expressions evaluate to true.
 
 ### Logical OR
+There's more than one way to combine tests. You can use the `||` (*or* operator) to test if *any one* of 2 or more conditions are true. Let's say we want to add a new rule to the game. The rule is this:
+
+    if a player breaks a block while either sneaking OR flying then 
+	    the block yields 2 cookies.
+	
+How would we write such a rule in Javascript? Well let's refine the statement above. Remember, Minecraft is event-driven so we want our rule to be enforced whenever any block is broken. The statement might be better written in English as:
+
+    when a block is broken
+	    if the player is flying or the player is sneaking then 
+		   the block yields 2 cookies. 
+
+In javascript you write it like this:
+
+@@listing recipe4/stealthCookies_v1.js
+
+If you like you can save the above code into a file called stealthCookies.js in your *scriptcraft/plugins* folder, reload your plugins (using `/js refresh()`) and try breaking some blocks while flying or sneaking to see the code in action.
+
+The test `breaker.sneaking || breaker.flying` checks to see if the player who broke the block is either sneaking *or* flying and if so, the broken block will give up a cookie. We use the *items* module here which includes functions for all of the possible items you might keep in your inventory in the game. You can see a list of all of the items functions in the appendices at the back of the book.
 
 ### Complex logic
-TODO: An example that Combines one or more ANDs with ORs
+So we've seen the use of the `&&` (logical AND) operator and the `||` (logical OR) operator. These two operators can be combined to form even more complex logic. Let's say for example we want to refine the earlier rule so that cookies will only be given up when the player breaks a block of sand. In English we might write such a rule like this:
+
+    when a block is broken
+	    if the block is sand AND the player is flying or the player is sneaking then 
+		   the block yields 2 cookies. 
+
+To you and I that rule might look clear enough but the computer would be confused. There are actually two possible ways to interpret the above rule:
+
+![](img/recipe4/cookie-drop-rule.png)
+
+We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following javascript code:
+
+@@listing recipe4/stealthCookies_v2.js
+
+Notice the additional `( )` round brackets around the test `breaker.sneaking || breaker.flying`. These are needed so that we can phrase the rule in a way which the computer will read it the same way we do.
 
 ### Summary
-In this recipe you learned how to use *if* statement to make decisions and make your program do different things based on tests. You also learned about ScriptCraft's *input* function which is used for asking for input from players. 
+In this recipe you learned how to use *if* statement to make decisions and make your program do different things based on tests. You also learned about combining different tests for true and false and about ScriptCraft's *input* function which is used for asking for input from players. 
 
 ## @@nextRecipe{sounds1}: Animal Sounds
 
@@ -1856,6 +1893,9 @@ This recipe and the following recipe will go into much greater detail in develop
 ### accessing the plugin API from javascript (get plugin by name - see example code on plugin.bukkit scriptcraft page)
 ## Events reference
 A set of tables of events, one table for each set of events, Player Events, Server Events etc.
+## Items reference
+A table of all the items in the items module and how to use them (API calls which require an ItemStack)
+
 ## Drone API 
 ## Java and Javascript Notes
 A collection of gotchas

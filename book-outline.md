@@ -1802,16 +1802,74 @@ Why is drone fluent? Limitations of the in-game prompt and command length. Not a
 3. Events (more)
 
 ## @@nextRecipe{fworks}: Create a Fireworks Show
+### Introduction
+In this recipe we're going to write code to create a spectacular fireworks show in Minecraft. We'll learn about ScriptCraft's built-in *fireworks* module, the *setTimeout()* function and use a powerful programming technique called *recursion*. We'll begin by writing code to launch a single firework after a delay of 2 seconds, then build on that code to launch many fireworks.
 
-### Goal
-A recipe for creating spectacular fireworks shows.
+### The fireworks module
+ScriptCraft includes a *fireworks* module which can be used to launch a single firework at a given location. You can use the fireworks module directly at the in-game commmand prompt like this:
+    
+	/js var fireworks = require('fireworks')
+	/js fireworks.firework( self.location )
+	
+The fireworks module's *firework()* function takes a single parameter - a Location - and launches a firework at that location. A Location in Minecraft is any place in the game. Most objects - players, animals, blocks etc - have a location. When I pass the parameter `self.location` I am passing my own location meaning the firework will launch from where I am in the game. I urge you to run the above commands and then look directly up to see the firework explode. 
 
-### Programming Concepts Introduced:
-1. Deferred Execution
+### Deferred Execution
+In the commands you just executed at the in-game prompt, the firework launches immediately. What we'd like to do is delay the launch by a couple of seconds so that we can move to a safe position with a better view. Fortunately there's a way to delay the execution of a function. Create a new file called scriptcraft/plugins/fireworkshow.js and type in the following code:
 
-### Javascript Concepts introduced:
-1. This recipe introduces the setTimeout() function.
-2. This might be a good place to talk about recursion?
+@@listing fireworks/fwkshow_v1.js
+
+Save the file then issue the `js refresh()` command to reload your javascript plugins. Now issue this command to launch a firework:
+
+    /js fireworkshow( self.location )
+	
+Move back a couple of steps so you can better see the firework. Did you notice the firework did not launch immediately? There was a delay of 2 seconds. 	
+
+#### The setTimeout() function
+The setTimeout() function lets you delay calling of a function. It takes two parameters:
+
+1. A function which it should eventually call.
+2. A delay. The delay is measured in milliseconds - that's 1/1000th of a second to you and I. There are 1,000 milliseconds in a second so a delay of 2,000 is equal to 2 seconds.
+
+Although setTimeout() is not part of the Javascript Language, it is provided with web browsers and Node.js and it's implemented in ScriptCraft too. A common mistake when using *setTimeout()* is to assume that the delay is in seconds rather than milliseconds.
+
+### A fireworks show
+I promised you a fireworks show at the start of this recipe. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
+
+@@listing fireworks/fwkshow_v2.js
+
+Then issue the `/js refresh()` command and at the in-game command prompt issue the following command:
+
+    /js fireworkshow( self.location, 5 )
+
+Move back a couple of steps and watch the show as 5 fireworks are launched one after another. The show should end after the 5th firewok has launched. You can change the number of fireworks launched by changing the second parameter. 
+
+### Naming Functions
+You might have noticed something unusual about the *launch()* function in the listing above. In the earlier listing we created the launch function like this:
+
+    var launch = function() { 
+	    ... 
+    };
+
+... This style of creating functions is what we've been using so far in this book. We declare a variable then assign a *function expression* to the variable. But in listing XXX we create the function like this:
+
+    function launch(){
+	   ...
+	}
+
+... This style of creating functions is called a *function declaration* . It's called a function declaration because the *function* keyword is the first word on the line. When you create a function this way you *must* give the function a name. The name is written between the `function` keyword and the parameters section. What's the difference between a function expression assigned to a variable (what we've seen so far) and a function declaration? When we say `var launch = function(){}` we aren't giving the function itself a name, we're just assigning it to a variable, but when we say `function launch(){}` then the function itself is given a name which it knows about and can use.
+
+One of the ways in which a function can use it's name is to call itself. A function which calls itself is called a *recursive* function.
+
+### Recursion
+
+> To Iterate is Human, to Recurse, Divine
+> 
+> -- James O. Coplien, Bell Labs
+
+Recursion is an important idea in computer programming. TODO: Explanation with a diagram explaining the runtime flow of the listing.
+
+### Summary
+In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself. You learned about recursion which is a very powerful technique in programming. 
 
 ## @@nextRecipe{sounds2}: Animal Sounds Revisited
 This recipe will use object lookup instead of a switch statement to play animal sounds. 
@@ -1888,6 +1946,11 @@ This is the first recipe in a series of recipes which will introduce mini-games.
 This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
 
 # Appendices
+## On the use of the `self` variable
+Don't use it in your modules. It's only a convenience function for use at the in-game prompt.
+it should not be used in any function which is deferred as it does not exist outside the scope of the in-game or server prompts.
+Don't use it in modules especially in multi-player mode!
+
 ## Using ScriptCraft with other Plugins
 ### Calling sendCommand() to programmtically use othe plugin commands
 ### accessing the plugin API from javascript (get plugin by name - see example code on plugin.bukkit scriptcraft page)

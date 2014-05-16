@@ -1,0 +1,15 @@
+var fireworks = require('fireworks');
+
+exports.start(location, count){
+  
+  var i = 0;
+
+  setTimeout(function launch(){
+    if (i < count){
+      fireworks.firework(location);
+      setTimeout(launch,2000); // recursion
+      i++;
+    }
+  }, 2000);
+
+};

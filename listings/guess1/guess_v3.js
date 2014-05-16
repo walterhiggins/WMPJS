@@ -18,7 +18,7 @@ exports.guessTheNumber = function( player ){
       guesser.sendMessage('Too low. Guess again');
       repeat();
 
-    } else if ( guess > randomNumber ) {
+    } else {
       guesser.sendMessage('Too high. Guess again');
       repeat();
     } 

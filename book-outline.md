@@ -985,7 +985,10 @@ The exports variable is a special type of variable - it is an 'object'. An objec
 
     exports.favoriteGame = 'Minecraft';
 
-... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a 'time' property which dictates what time it is in the game. Primed TNT blocks have an 'yield' property which says how wide the explosion will be. Players have dozens of properties. For example to give yourself the ability to fly, issue `js self.allowFlight = true` at the in-game command prompt. To give yourself super-human speed issue `js self.walkSpeed = 1`. To reset your walkspeed to normal issue `js self.walkSpeed = 0` . The point is - everything in the game is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters. 
+... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have an *yield* property which says how wide the explosion will be. Players have dozens of properties. For example to give yourself the ability to fly, issue `js self.allowFlight = true` at the in-game command prompt. To give yourself super-human speed issue `js self.walkSpeed = 1`. To reset your walkspeed to normal issue `js self.walkSpeed = 0` . The point is - everything in the game is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters. 
+
+#### Term: Property
+A *property* is an attribute of an Object - for example in real life we (humans that is) all have properties: eye-color, date-of-birth, name and so on. Objects in Javascript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables (called objects).
 
 ### Summary
 In this recipe you've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.
@@ -1624,21 +1627,38 @@ So in the number guessing game the code...
 The test is always placed between the `(` and `)` round brackets. There are many other kinds of tests you can use other than comparisons. If you use just a single number it can be tested. Any single number except 0 will resolve to `true` when used inside an `if` test, while any non-empty text will resolve to true. Try issuing the following commands at the sever console prompt:
 
     js var gems = 5;
-	js if ( gems ) { console.log('you have gems'); }
+	js if ( gems ) { console.log("you have gems"); }
 	js gems = 0;
-	js if ( gems ) { console.log('you have gems'); }
+	js if ( gems ) { console.log("you have gems"); }
 
 If `gems` is 0 then the if statement does not execute the code inside the *if block* (the code which appears between the `{ }` curly brackets). Now try the following statements to see how String variables are resolved to true or false:
 
-    js var name = 'steve'
-	js if ( name ) { console.log('you have a name and it is ' + name ) }
-	js name = ''
-	js if ( name ) { console.log('you have a name and it is ' + name ) }
+    js var name = "steve"
+	js if ( name ) { console.log("you have a name and it is " + name ); }
+	js name = "" 
+	js if ( name ) { console.log("you have a name and it is " + name ); }
 	
-The last command will not output anything because a variable which is '' (empty string) or 0 will resolve to `false` if used as a condition in an `if` statement.
+The last command will not output anything because a variable which is "" (empty string) or 0 will resolve to `false` if used as a condition in an `if` statement. We can test to see if name is equal to steve like this:
+
+    js if (name == "steve'){ console.log("Hey steve!"); }
+	
+What if we want to test that something is *not* true? To test that something *isn"t* true you *enclose* the test in `()` round brackets and put a `!` (exclamation mark) in front ...
+
+    js if (! (name == "steve') ) { console.log("Hey, you're not steve!"); }
+	
+The `!` operator *negates* (that is - makes the opposite of) any boolean expression which appears after it so all of the following expressions would return false...
+
+    js ! (5 > 2)
+	> false
+	js ! (5 < 8)
+	> false
+	js ! (8 < 5)
+	> true
+	js ! (name == "steve")
+	> false
 
 ### The if-else construct
-Let's say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
+Let"s say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
 
 @@listing guess_v2.js
 
@@ -1738,13 +1758,147 @@ Notice the additional `( )` round brackets around the test `breaker.sneaking || 
 In this recipe you learned how to use *if* statement to make decisions and make your program do different things based on tests. You also learned about combining different tests for true and false and about ScriptCraft's *input* function which is used for asking for input from players. 
 
 ## @@nextRecipe{sounds1}: Animal Sounds
+### Introduction
+In this recipe we'll create a simple program to ask players a question and play back sounds based on the answer given. You'll learn about Javascript's *switch* statement and ScriptCraft's *sounds* module. The new program will ask players what their favorite animal is and play back that animal's sound.
 
 ### The switch statement
-TODO: a module which asks players a question: What is their favorite animal? The switch statement will play that animal's sound!
-TODO: Later when talking about objects and lookup tables, implement this same logic using a lookup table.
+In @@recipe{guess1} you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
+
+@@listing animalSounds_v1.js
+
+Save your file then issue the `js refresh()` or `reload` command to reload all javascript code. Then at the in-game prompt issue the following command:
+
+    /js animalSounds( self );
+
+You will be prompted to type the name of your favorite animal. Press the *T* key to enter text then type in any of the following: cat, chicken, cow, horse, pig, sheep, wolf. When you hit enter you should hear an appropriate sound - a wolf bar, cow moo and so on. If you don't enter any of the above animals, then the program responds with a message saying it never heard of whatever it was you typed.
+
+The switch statement works much like the *if-else-if* construct we used in @@recipe{guess1} . We could have written the *animalSounds.js* module using an if-else-if form:
+
+    if (animal == 'cat') { 
+		sounds.catMeow(player.location);
+	} else if (animal == 'chicken') { 
+		sounds.chickenIdle(player.location);
+	} else if (animal == 'cow') { 
+	    sounds.cowIdle(player.location);
+	...
+
+But since every test is on the same *animal* variable it makes more sense to use a *switch* statement instead. Some things to note about the switch statement:
+
+* The switch statement is used for testing a single expression against many possible values. 
+* It has one or more *case* labels each of which must be followed by a value and the `:` (colon) .
+* The block of code after the `:` is only executed if the value matches. All code up to the special `break` statement will be executed.
+* If none of the cases match then the `default` case is executed.
+
+The `default` case is executed when you enter an animal that isn't one of cat, chicken, cow, horse, pig, sheep or wolf.
+
+A common pitfall when using the switch statement is forgetting to include the `break` statement at the end of each case. As an exercise try commenting out the `break` statement inside of the block for 'sheep'. Remember: to *comment out* a line of code, just put `//` at the start of the line. Save and reload then run the program again `/js animalSounds( self );` and this time enter 'sheep' as your favorite animal. What happens? The following output will appear in your screen:
+
+    A sheep says 'baa'
+	A wolf says 'woof'
+
+And you will hear both a sheep bleat *and* a wolf bark! That's because in a case block, the code will keep executing until it hits a `break` statement and if it doesn't hit one it carries right on through to the next case statement. 
+
+### The sounds module 
+There are many sounds in Minecraft and the list of sounds available in the game changes with each new release. ScriptCraft provides a *sounds* module which makes it easy to play any of the in-game sounds. At the time of writing there are approximately 200 different sounds in Minecraft and the *sounds* module provides a function for each one. Each of the functions in the *sounds* module takes up to 3 parameters:
+
+1. The location where you want to play the sound. This parameter is optional - if left out then the sound will be played for all online players to hear.
+2. The volume at which you want to play the sound. This parameter is optional, if left out then it defaults to 1.0 (full volume). Volume is in the range 0 to 1 with 0 being no sound at all and 1 being maximum volume. For example, if you wanted to play a Cat's Meow at half volume you would write `sounds.catMeow( location, 0.5 );`
+3. The Pitch at which you want to play the sound. The parameter is also optional and if left out will default to 1.0 (moderate pitch). Pitch can vary between 0 and 4.
+
+These are just some of the functions in the sounds module, for a full reference see the Appendices at the back of the book:
+
+* catMeow()
+* burp()
+* eat()
+* drink()
+* fizz()
+* villagerNo()
+* villagerYes()
+* lavaPop()
+* pigWalk()
+
+The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds:
+
+    /js var sounds = require('sounds');
+	/js sounds.catMeow( self.location );
+	/js sounds.burp( self.location );
+    /js sounds.villagerNo( self.location );	
+
+In Minecraft Players, Blocks, Monsters, Animals and Villagers all have a location property which can be passed to any of the sounds module functions.
+
+### Improving the code
+When running the *animalSounds()* function what happens if you enter 'Cow' instead of 'cow'? Try it and see.
+
+If you enter 'Cow', or 'COW', the function says it hasn't heard of a 'Cow' or 'COW'. To you and I, a Cow is a COW is a cow ,but to a computer they are 3 different strings. That's because computers are *case-sensitive* - they don't see the word 'Cow' and know that whether it's spelt with capital letters or lowercase letters, it means the same thing. The computer only sees a sequence (or list) of letters and as far as the computer is concerned, `C` and `c` are completely different. You can see this for yourself by issuing these commands at the in-game prompt:
+
+    /js 'COW' == 'cow'
+	> false
+	/js 'Cow' == 'cow'
+	> false
+
+How do we make the *animalSounds()* function understand that when a player types 'COW' it should be treated the same as 'cow'? Fortunately there's a String function that helps solve this problem. Issue the following command at the in-game prompt:
+
+    /js 'COW'.toLowerCase() == 'cow'
+	> true
+
+The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
+
+@@listing animalSounds_v2.js
+
+The only change to this module is a new statement just before the switch statement:
+
+    animal = animal.toLowerCase();
+
+This statement ensures that the *animal* parameter is converted to lowercase first so the program won't report silly messages about not knowing what a 'Cow' or 'HORSE' is. 
+
+### More on Strings
+All Strings in Javascript also have a *toUpperCase()* function which returns an UPPERCASE version of the string. Note that neither the *toLowerCase()* nor *toUpperCase()* functions change the original string, they just return a new string which is why I need to assign the *animal* variable to the returned value. If I simply used:
+
+    animal.toLowerCase();
+	
+The switch cases would still fail for 'COW'	because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In @@recipe{greet} we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
+
+    /js var animals = ['cow','pig'];
+	/js animals.push('sheep');
+	/js animals[2]
+	> sheep
+    
+The above `animals.push('sheep');` statement actually *changes* the animals value. With Strings, this never happens. None of the String methods (and there are quite a few) change the value for which they are called. For example there is a *String.concat()* function which adds another string:
+
+    /js var name = "steve ";
+	/js name.concat("crafter");
+	> steve crafter
+	/js name
+	> steve
+
+You can see that while `name.concat("crafter");` returns a value `steve crafter`, the original *name* variable remains unchanged. If we wanted to change the name variable we'd have to do it like this:
+
+    /js var name = "steve ";
+	/js name = name.concat("crafter");
+	> steve crafter
+	/js name
+	> steve crafter
+
+A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String .
 
 ### Summary
-In this recipe you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module.
+In this recipe you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module. In an upcoming recipe we'll learn how to simplify this module even further using Objects.
+
+## @@nextRecipe{leaderboard}: Leaderboards - More fun with Arrays
+### Introduction
+### sort
+#### default sort
+#### sorting by name
+#### sorting by experience
+
+### reverse
+### display leaderboard
+### while loop
+### for loop
+
+### creating new commands for players
+#### jsp 
+##### jsp leaderboard example
 
 ## @@nextRecipe{sky}: Building a Skyscraper
 ### Introducion
@@ -1886,6 +2040,7 @@ Recursion is an important idea in computer programming. TODO: Explanation with a
 In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself. You learned about recursion which is a very powerful technique in programming. 
 
 ## @@nextRecipe{sounds2}: Animal Sounds Revisited
+when talking about objects and lookup tables, implement the same logic as was used in sounds1 using a lookup table.
 This recipe will use object lookup instead of a switch statement to play animal sounds. 
 ### objects
 ### properties
@@ -1899,7 +2054,7 @@ This recipe will use object lookup instead of a switch statement to play animal 
 A recipe which periodically checks each player's location and automatically moves them back into an area close to the spawn location. 
 
 ### Javascript Concepts introduced:
-1. for loops  ( looping over the array of online players)
+1. for loops  ( looping over the array of online players ) 20140517 - introd' in leaderboard recipe - still applicable??
 2. Conditionals are examined in more detail. (not sure this still applies - see earlier recipe - this might be just reinforcement)
 
 	
@@ -1911,11 +2066,17 @@ The latter half of the book will focus on Event-Driven Programming and using Buk
 
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
+## @@nextRecipe{leaderboard2}: Leaderboard revisited
+In this recipe readers learn about the scoreboard api and how to display a leaderboard on screen.
+jsp leaderboard hide
+listen for player experience changes and update leaderboard on screen?
+(need to figure out how to do this myself)
+
 ## @@nextRecipe{tntfree}: A TNT-Free Zone
 
 ### Goal 
 
-In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game.
+In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
 
 ## @@nextRecipe{antigrief}: Protecting areas against griefing.
 
@@ -1954,10 +2115,14 @@ Don't use it in modules especially in multi-player mode!
 A set of tables of events, one table for each set of events, Player Events, Server Events etc.
 ## Items reference
 A table of all the items in the items module and how to use them (API calls which require an ItemStack)
-
+## Sounds reference
+A table of all the possible sounds in the sounds module (with caveat)
 ## Drone API 
 ## Java and Javascript Notes
 A collection of gotchas
 1. Java Strings - converting from Java string to Javascript String
 2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
 3. Saving and restoring Location objects using utils module
+
+<!--  LocalWords:  png img
+ -->

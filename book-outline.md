@@ -1891,31 +1891,31 @@ One of the really cool things about Arrays in Javascript is that they can be sor
 ### Array.sort() 
 The Array.sort() method is used to sort items in a array. Let's see it in action. Issue the following commands at the server console prompt:
 
-    /js var animals = ['pig','wolf','cow','cat','sheep'];
-    /js console.log( animals );
+    js var animals = ['pig','wolf','cow','cat','sheep'];
+    js console.log( animals );
     > pig,wolf,cat,cow,sheep
-    /js animals.sort();
-    /js console.log( animals );
+    js animals.sort();
+    js console.log( animals );
     > cat,cow,pig,sheep,wolf
     
 You can see from the output that Array.sort() will sort a list of Strings alphabetically - that is in the order that the letters appear in the alphabet. So 'cat' is moved to the 1st position in the array while 'wolf' is moved to the last position in the array and all of the animals in between are sorted alphabetically too. What happens if you try to sort an array of Numbers?
 
-    /js var luckyNumbers = [ 9, 23, 5, 40, 21 ];
-    /js luckyNumbers.sort();
-    /js console.log( luckyNumbers );
+    js var luckyNumbers = [ 9, 23, 5, 40, 21 ];
+    js luckyNumbers.sort();
+    js console.log( luckyNumbers );
     > 21, 23, 40, 5, 9
 
 ... well that makes no sense! In Javascript, the default way to sort items in an array is alphabetically. It even does this when the items in an array are all numbers. In Javascript, arrays can contain *anything*, numbers, strings, objects, other arrays and even a mixture of all of these types. If you want the *Array.sort()* method to sort by any way other than alphabetically, you have to tell it how. Let's see an example. Issue the following commands at the server console prompt:
 
-    /js var numerically = function( a, b ) { return a - b };
-    /js luckyNumbers.sort( numerically );
-    /js console.log( luckyNumbers );
+    js var numerically = function( a, b ) { return a - b };
+    js luckyNumbers.sort( numerically );
+    js console.log( luckyNumbers );
     > 5, 9, 21, 23, 40
 
 Now the `luckyNumbers` array is sorted in the correct order. The *numerically()* function we created in the first command above is a function which takes two parameters, *a* and *b* and compares them. This function is then passed to the *Array.sort()* method and will be called many times by *Array.sort()* is it plucks two items from the array and asks the *numerically()* function 'Which item is bigger - a or b?'. You can see that your *numericall()* function will get called many times if you add a *console.log()* statement...
 
-    /js numerically = function( a, b ) { console.log('a = ' + a + ', b = ' + b); return a - b }
-    /js luckyNumbers.sort( numerically );
+    js numerically = function( a, b ) { console.log('a = ' + a + ', b = ' + b); return a - b }
+    js luckyNumbers.sort( numerically );
     > a = 9, b = 5
     > a = 21, b = 9
     > a = 23, b = 21
@@ -1932,15 +1932,37 @@ The *numerically()* function we created above is called a *Comparator* function 
 
 Let's look at these rules and see how they're used in the *numerically()* function:
 
+    js var numerically = function( a, b ) { return a - b ; }
 
-    var numerically = function( a, b ) { return a - b ; }
+Sorting numerically is relatively easy. For numeric sorts we just need to subtract one number from another to give  the *Array.sort()* method the information it needs to sort. So plucking any 2 numbers from the array and passing them to the *numerically()* function should give the right order...
 
-Sorting numerically is relatively easy. For numeric sorts we just need to subtract one number from another to give  the *Array.sort()* method the information it needs to sort. 
+* 21 - 40 is -19 which is less than 0 meaning 21 will be listed *before* 40 in the array
+* 21 - 9 is 12 which is greater than 0 meaning 21 will be listed *after* 9 in the array
+* 5 - 9 is -4 which is less than 0 meaning 5 will be listed *before* 9 in the array and so on...
 
+The *Array.sort()* method takes the results of all these calculations to move each item into its correct position in the array. At first glance, it might seem that the Array.sort() method is pretty dumb - after all, it doesn't even understand how to sort numbers and has to be explicitly told how to do so - but actually it's pretty flexible and powerful. Array.sort() can sort anything really, you just need to tell it what rules to use for sorting. 
 
-#### default sort
-#### sorting by name
-#### sorting by experience
+Let's look at a slightly more complex example. Typically, your server will have 3 worlds created when it starts up. The worlds are usually called 'world', 'world_nether' and 'world_the_end'. If you wanted to sort these worlds based on their populations (how many living entities - animals, mobs and players are present) you could do so by creating a new *byPopulation()* function that would look something like this:
+
+    js var byPopulation( a, b ) { return a.entities.size() - b.entities.size() }
+
+The *byPopulation()* function takes 2 parameters a and b both of which it assumes are Minecraft worlds. Each Minecraft world object has an *entities* property which is a Java list of living things. The entities property in turn has a *size()* function so if we want to find out how many living beings are on a world we call the world's *entities.size()* method. We can compare the populations by subtracting one population size from another. 
+
+#### Term: Java Collection
+A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins will actually be Java objects. You need to be mindful of which objects are Javascript objects and which objects are Java objects and it's not always easy to remember. As a general rule, the *server* variable and any of its properties will all be Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
+
+The code to use your new *byPopulation()* function would look like this:
+
+    js var utils = require('utils');
+    js var worlds = utils.array( server.worlds ); 
+    js worlds.sort( byPopulation );
+    js console.log( worlds );
+
+The first two commands load the ScriptCraft *utils* module and convert the server.worlds property to an array. The *server* variable is one of a few built-in variables in ScriptCraft. It is a Java object which refrs to the Minecraft Server. The `server.worlds` Java collection is converted to a Javascript array, then sorted and the results a printed to the console. The above example demonstrates how you can apply whatever rules you like to sorting items in an array. Now let's talk about sorting Players...
+
+#### Sorting Players by name
+#### Sorting Players by experience
+#### Sorting Players by other rules
 
 ### reverse
 

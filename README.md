@@ -2289,10 +2289,98 @@ The code to use your new *byPopulation()* function would look like this:
 The first two commands load the ScriptCraft *utils* module and convert the server.worlds property to an array. The *server* variable is one of a few built-in variables in ScriptCraft. It is a Java object which refrs to the Minecraft Server. The `server.worlds` Java collection is converted to a Javascript array, then sorted and the results a printed to the console. The above example demonstrates how you can apply whatever rules you like to sorting items in an array. Now let's talk about sorting Players...
 
 #### Sorting Players by name
-#### Sorting Players by experience
-#### Sorting Players by other rules
+One way to sort players is by name. This isn't strictly a leaderboard in the truest sense of the word but it does demonstrate how to sort based on a player's attribute - his name. Create a new file called *playerSort.js* in the *scriptcraft/modules* folder and type in the following code:
 
-### reverse
+<caption>Listing 7.1</caption>
+
+    var utils = require('utils');
+    
+    var byName = function( a, b ) { 
+      if (a.name == b.name) {
+        return 0;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+    };
+    
+    exports.byName = byName;
+
+This module is the first module we've written which exports more than one function. Here's how you might use the module:
+
+    js var playerSort = require('playerSort');
+    js var sortedPlayers = playerSort.sort( playerSort.byName );
+    js console.log(sortedPlayers);
+
+The *byName()* function performs a couple of comparisons of the name of each player. When comparing two strings using the `<` and `>` operators, the comparison is always based on the alphabetic sequence of characters so `'cat' < 'cow'` will return true while `'cat' > 'cow'` will return false. However, we don't want the comparator function *byName()* to return true or false, we want it to return a number. This is a common mistake even experienced programmers make when writing functions for use in sorting. They forget that the comparing function must return a number not simply true or false.
+
+To try out this module, issue the following commands at the server console prompt - Make sure there's at least two players on your server or the results won't be very interesting:
+
+    js var sortPlayers = require('sortPlayers');
+    js var players = utils.array( server.onlinePlayers );
+    js var sorted = players.sort( sortPlayers.byName );
+    js console.log( sorted );
+
+#### Sorting Players by experience
+
+Let's face it, a leaderboard based on player names would be both boring and unfair. Let's try one based on a player's experience points. Update your *playerSort.js* file adding a new *byExp()* function (exp is short for experience):
+
+<caption>Listing 7.2</caption>
+
+    var utils = require('utils');
+    
+    var byName = function( a, b ) { 
+      if (a.name == b.name) {
+        return 0;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+    };
+    
+    exports.byName = byName;
+    
+    var byExp = function( a, b ) { 
+      return a.totalExperience - b.totalExperience;
+    };
+    
+    exports.byExperience = byExp;
+    exports.byExp = byExp;
+
+The new *byExp()* function just does a numeric sort - that is it returns the result of subtracting player a's totalExperience from player b's totalExperience. One thing to note is that although there is only one single function used for sorting by experience, we *export* it twice - under the name *byExp* and also under the longer name *byExperience*. This gives programmers who use this module the option of using the short name or long name for that function - whichever name they use it will be the same function being called. Issue the following commands to see this function in action - again - it helps if there's more than one player on your server :-) ...
+
+    js var sortPlayers = require('sortPlayers');
+    js var players = utils.array( server.onlinePlayers );
+    js var sorted = players.sort( sortPlayers.byExp );
+    js console.log( sorted );
+
+When I ran this code with just two players I got the following output.
+
+    [walterh, sean_higgins]
+
+Our actual experience points at the time were:
+
+    Player      Total Experience
+    ----------------------------
+    walterh        52
+    sean_higgins   103
+
+You should be surprised by the results. In any leaderboard based on player experience, the *most* experienced players - that is, the players with the highest experience number - should be placed first ahead of lesser experienced players. However , our *byExp()* function sorts in ascending order; that is, from lowest to highest so the *sorted* leaderboard will list least-experienced players first. That's not what we want for a leaderboard. 
+
+### Reversing Arrays
+
+You can easily reverse an array by calling the *reverse()* method...
+
+    js sorted.reverse()
+
+The reverse() method reverses an array in place. The first array element becomes the last and the last becomes the first. This is exactly what we want for a leaderboard where the highest score - that is; the larger numeric value - should be in the first position in the array.
+
+There is another way we can sort players for inclusion in a leaderboard without using the reverse() method. We can change the sort order in the comparing function itself. To sort items numerically we compare the first parameter (usually called *a*) to the second parameter (usually called *b*) by subtracting a from b. When we say `return a - b` we are sorting in *ascending* order from lowest to highest. If we want to sort in *descending* order (most leaderboards are presented in descending order) then we say `return b - a` instead. For now, you can continue to write comparing functions using ascending order and use the *reverse()* function to change the order from ascending to descending.
+
+#### Sorting Players by other rules
+There are many different player statistics we can use for sorting players. We can have a leaderboard of players who have jumped the most, have flown the most, have caught the most fish, have spent most time riding horses, have crafted the most items or mined the most blocks. In short there's plenty of statistics to use for display in leaderboards. 
 
 ### Player statistics
 ### display leaderboard

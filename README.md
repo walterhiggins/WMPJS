@@ -969,7 +969,7 @@ Now restart the server again. Once again, the message will appear every time the
 OK. So we've wrapped the original code inside a function of our own and we call that function. So far so good. Sometimes you'll want to write functions to use at the in-game or server console prompt. Try running the helloWorld function at the in-game or server console prompt.
    
     js helloWorld()
-	
+    
 This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
 <caption>Listing 1.3</caption>
@@ -983,7 +983,7 @@ This command fails with an error `ReferenceError: helloWorld is not defined`. Th
 Restart the server again. Now the message appears in the server console. Let's look at the last statement in the code:
 
     exports.helloWorld = helloWorld;
-	
+    
 What we are doing here is 'exporting' the helloWorld variable/function for use outside of the plugin. 
 
 The 'exports' variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module loading convention called 'CommonJS'. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt so have become very popular lately, especially with the rising popularity of a Javascript-based system called Node.js which is used by professional programmers for all sorts of things. 
@@ -1089,11 +1089,11 @@ Tip: While working on a Minecraft plugin, if the plugin isn't working as you exp
 Once you've executed the /js refresh() function, you're ready to try out your new function. Try issuing the following command:
 
     /js dice.roll()
-	
+    
 You should see an error message like this: ReferenceError: "dice" is not defined. OK. Let's try calling roll() on it's own so:
 
     /js roll()
-	
+    
 You'll see another error message: ReferenceError: "roll" is not defined. Why doesn't this work?
 
 If you remember, the new file we just created, dice.js, was saved in the scriptcraft/modules folder not the scriptcraft/plugins folder. The scriptcraft/plugins folder is special for a couple of reasons:
@@ -1165,7 +1165,7 @@ Don't worry if this seems confusing at first. We'll use the `exports` variable t
 All numbers in Javascript are floating point numbers, that is they have an integer part (the part before the dot) and a fractional part (the part after the dot). The number 'two and a half' is represented in javascript as:
 
     2.5
-	
+    
 This number is a floating point number. The integer part is 2. In Javascript if we want to 'round up' or 'round down' a number to its nearest integer we use one of the Math functions.
 
 * Math.floor(n) - Takes a number and chops off the fractional part. It rounds down the number. For example, 2.5 becomes 2.0.
@@ -1204,19 +1204,19 @@ In this recipe we'll build on the code written in the previous recipe to let us 
 If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each dice...
 
     var rollSixSided = function(){ 
-	  ...
-	};
-	var rollFourSided = function(){
-	  ...
-	};
-	var rollEightSided = function(){
-	  ...
-	};
-	exports.rollSixSided = rollSixSided;
-	exports.rollFourSided = rollFourSided;
-	exports.rollEightSided = rollEightSided;
+      ...
+    };
+    var rollFourSided = function(){
+      ...
+    };
+    var rollEightSided = function(){
+      ...
+    };
+    exports.rollSixSided = rollSixSided;
+    exports.rollFourSided = rollFourSided;
+    exports.rollEightSided = rollEightSided;
     ...
-	
+    
 ... and so on. That would be time-consuming, repetitive and laborious, and the whole point of programming is to **make the computer do the work!**. The problem with this approach (apart from being time-consuming to type) is that every time we want to support a new type of dice - say 10, 12 and 20 sided dice - we have to write a new function. If we wanted to simulate the roll of a 24 sided dice, we'd have to write *yet another* function. Fortunately there's a better way. 
 
 What if, when we call the *roll()* function, we could tell the function how many sides the dice has and the *roll()* function behaved accordingly? If we could say 'Hey throw a 6-sided dice' or 'Hey throw a 20-sided dice' and *roll* would do the right thing (return a random number between 0 and 5 for the first call and return a random number between 0 and 19 for the second call). This is where *Parameters* come in. 
@@ -1231,7 +1231,7 @@ We've already been using parameters in earlier code examples. In an earlier reci
 You should see the message 'Hello world' appear in your server window. 'Hello world' is the instruction (or *parameter* to use the formal term) you gave to the *console.log* function when you ran it. Try again with the following command:
 
     js console.log( 5 + 9 );
-	
+    
 You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to *console.log* and the *console.log* function just printed the resulting value. An important point: console.log did not do the math, that was done just before the function was called so the parameter which *console.log* received was 14. It had no knowledge of the math that was done before it was called - console.log only saw 14, it did not see `5 + 9`. The *console.log* function is commonly used for *logging*. Logging is the practice of printing output to screen usually for the purpose of debugging or better understanding your code's behaviour.
 
 Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous recipe. You don't have to type this code, I just want to highlight some changes:
@@ -1268,7 +1268,7 @@ The first change was to make the number 6 used in the computation a variable. Th
     /js var dice = require('dice');
 
     /js dice.roll(6);
-	/js dice.roll(20);
+    /js dice.roll(20);
 
 Try calling `dice.roll(20)` a couple of times to confirm that it does in fact choose random numbers between 0 and 19. 
 
@@ -1297,21 +1297,21 @@ You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascr
 What I've done here is add 3 new lines of code near the top of the *roll* function. The rest of the function remains unchanged.
 
     if ( typeof sides === 'undefined' ) {
-	  sides = 6;
-	}
+      sides = 6;
+    }
 
 The *if* statement is how decisions are made in Javascript. It's used to test something (a condition) and if the test is true then the code inside the `{` and `}` curly braces (called the 'if block') is executed. In english, we'd write the above code like this.
 
     if there is no 'sides' parameter then
-	   let sides be equal to 6
-	   
+       let sides be equal to 6
+       
 We'll look at the `if` statement in more detail in later recipes. All you need to know for now is that it can be useful for controlling how our programs behave under different conditions. The code inside the round brackets `typeof sides === 'undefined'` returns the type of the sides parameter. If no parameter was supplied then it will be of type *undefined* in which case we set the sides parameter to a default value of 6. Once you've edited and saved your dice.js file, make sure to issue the `/js refresh()` command at the in-game prompt and then issue the following statements:
 
     /js var dice = require('dice');
-	/js dice.roll(20);
-	/js dice.roll();
-	/js dice.roll(4);
-	/js dice.roll();
+    /js dice.roll(20);
+    /js dice.roll();
+    /js dice.roll(4);
+    /js dice.roll();
 
 You should see a random number output for each of the above calls. The *roll* function is now robust enough to handle parameters and use a sensible default value of 6 if no parameters are given when it's called.
 
@@ -1334,20 +1334,20 @@ Since the only purpose of the roll variable inside of our modules is to be attac
 The above listing is one line shorter than the previous listing (listing 3.3). If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
 
     var cow = 'Cow';
-	var sheep = 'Sheep';
-	var pig = 'Pig';
+    var sheep = 'Sheep';
+    var pig = 'Pig';
     exports.cow = cow;
-	exports.sheep = sheep;
-	exports.pig = pig;
-	
+    exports.sheep = sheep;
+    exports.pig = pig;
+    
 But since the first 3 parameters aren't really used except to assign to exports, we could simply write:
 
     exports.cow = 'Cow';
-	exports.sheep = 'Sheep';
-	exports.pig = 'Pig';
-	
+    exports.sheep = 'Sheep';
+    exports.pig = 'Pig';
+    
 and save ourselves some typing. There may be times when this isn't suitable. If the *cow* variable is used inside the module then it makes sense to declare it and assign to the exports variable. If not then it's simpler to just assign the value directly to the exports variable rather than creating an extra variable which won't be used for any other purpose.
-	
+    
 Before we move on to the next recipe, I want to talk more about Comments. 
 
 ### more on comments
@@ -1364,23 +1364,23 @@ Commenting can be really useful for *documenting* your code. For example, the Sc
 You can make any line into a comment by starting it with two `/` (forward-slash) characters:
 
     // this is a javascript comment
-	console.log('... while this is not a comment');
-	
+    console.log('... while this is not a comment');
+    
 If you were to run the above code you'd get the following output:
 
     ...while this is not a comment
-	
+    
 The first line is ignored and is only readable by programmers.
 
 #### End-of-line comments
 You can also add comments to the end of lines like this:
 
     console.log('The rain in spain'); // falls mainly in the plain
-	
+    
 If you run the above code you see:
 
     The rain in spain
-	
+    
 Everything before the `//` is regular code, everything after the `//` is a comment.
 
 #### Multiline comments
@@ -1407,19 +1407,19 @@ Most programming editors will display comments in a different color so that they
 You can also use comments to *turn off* the execution of code. This can be useful if you want to temporarily change your code or if you have sections of code which you no longer need but do not want to remove just yet.
  
      console.log('Pig says: Oink');
-	 // console.log('Cow says: Moo');
-	 console.log('Sheep says: Baa');
-	 
+     // console.log('Cow says: Moo');
+     console.log('Sheep says: Baa');
+     
 The output from the above code would be:
 
     Pig says: Oink
-	Sheep says: Baa
+    Sheep says: Baa
 
 The second statement is ignored because it has a `//` in front of it. Remember, everything after `//` on a line is treated as a comment.
   
 #### Comments in this book
 Most of the source listings in this book will not include comments because the code is explained throughout. If you look at the ScriptCraft source code you will see that the code is commented.
-	
+    
 #### Commenting dice.js
 Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
 
@@ -1447,15 +1447,15 @@ Open dice.js in your editor and add a comment section at the top of the file. Th
 Make sure to save the file after you've changed it, run `/js refresh()` at the in-game prompt then run the following commands to ensure your code still works:
 
     /js var dice = require('dice');
-	/js dice.roll();
-	/js dice.roll(20);
-	
+    /js dice.roll();
+    /js dice.roll(20);
+    
 ![](img/achievement-plugin-dev-6.png)
 Congratulations. You've taken another step towards becoming a responsible plugin developer. Your code is robust and well commented. Commenting code is really important if you want to share your work with others.
 
 ### Summary
 You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
-	
+    
 ## Recipe 3: Greeting Players
 ### Introduction
 In this recipe we'll actually change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
@@ -1489,24 +1489,24 @@ So far we've used variables to store single items in memory. Those items have be
 An array starts with `[` (open square bracket) and ends with `]` (close square bracket) and each item in the list is separated with a `,` (comma). The last item in the list should not have a comma after it. Let's do some server console experimentation with arrays. Issue the following commands at the server console prompt:
 
     js var farmAnimals = [ 'Sheep', 'Cow', 'Pig', 'Chicken' ];
-	js console.log(farmAnimals);
-	
+    js console.log(farmAnimals);
+    
 The output should be:
 
     Sheep,Cow,Pig,Chicken
-	
+    
 Arrays have a special property which tells us how many items are in the array. Issue the following command at the server console:
 
     js farmAnimals.length
-	
+    
 The output should be:
 
     4
-	
+    
 The `length` property tells us how many items are in the array and is very useful as we'll see later. Okay, now for the tricky part. We use the `[]` characters when constructing a new array but it's also possible to get a particular item from the array using those same `[]` characters if we put a number between them. Let's try it out. If we wanted to get the 1st item from the array (Sheep) a non-programmer would naturally write something like this:
 
     js farmAnimals[1]
-	
+    
 Go ahead and issue that command now before reading any further. 
 
 Were you surprised by the result? If you're new to programming you should be. The result is `Cow` and not `Sheep` as most of us expect. That's because in Javascript (and many other programming languages too), indexes start at 0 not 1 so if I want to get the *first* item in the farmAnimals array I say `farmAnimals[0]`. If I want to get the second item I say `farmAnimals[1]` , for the third item I say `farmAnimals[2]` and so on. This can be a constant source of confusion for even experienced programmers. The reason why arrays start at 0 and not 1 harks back to the old days of computing when computer memory was not as abundant and cheap as it is today. Having arrays start at 0 rather than 1 was slightly more efficient. 
@@ -1529,9 +1529,9 @@ I told you arrays were tricky! Just remember the golden rule of arrays: *Arrays 
 Okay. Having explained the basics of how arrays work, the *greetings.js* listing should be a little easier to understand now. The *random* function rolls a dice (whose sides are the length of the array : 4) and then assigns the random number returned to a variable called *index*. We then use that index to get an item from the *greetings* array. We are effectively plucking a random item from the list of greetings. Try it out for yourself by issuing the following commands at the in-game prompt.
 
     /js refresh(); // reloads plugins
-	/js var greetings = require('greetings');
-	/js greetings.random();
-	/js greetings.random();
+    /js var greetings = require('greetings');
+    /js greetings.random();
+    /js greetings.random();
     /js greetings.random();
 
 You should definitely call `greetings.random()` a couple of times to verify it returns a random greeting each time. Remember, you can call up the previous command at the in-game prompt by pressing `/` then pressing the UP arrow key. 
@@ -1555,12 +1555,12 @@ The length of the array would change from 4 to 5. You can check this by issuing 
 The *push()* function always *appends* items to the end of the array. If you want to insert an item into the array at a position other than the end, you'll need to use the *splice()* function instead. Here's how you insert a new animal into the farmAnimals array at position 2:
 
     /js farmAnimals.splice( 2, 0, "Cat" );
-	
+    
 This is what the array will look like after you run the above command:
 
     [0] 'Sheep'
     [1] 'Cow'
-	[2] 'Cat'     <=== New item inserted
+    [2] 'Cat'     <=== New item inserted
     [3] 'Pig'
     [4] 'Chicken'
     [5] 'Horse'
@@ -1568,14 +1568,14 @@ This is what the array will look like after you run the above command:
 You can see that the new item is inserted at position 2 and that the indexes for all of the items after position 2 have changed. 'Pig' is bumped from index 2 to index 3, 'Chicken' from index 3 to index 4 and so on. The *splice()* function lets you insert items anywhere in an array. The first parameter is the position you want to insert the items, the second parameter is how many items you want to remove - if you're only inserting items then leave this as 0, and the third and subsequent parameters are the items you want to insert. You can insert one or more items at a time:
 
     /js farmAnimals.splice( 1, 0, "Ocelot", "Wolf" );
-	
+    
 This is what the array would look like after running the above command: 
 
     [0] 'Sheep'
-	[1] 'Ocelot'  <=== New items inserted
-	[2] 'Wolf'    <=== New items inserted
+    [1] 'Ocelot'  <=== New items inserted
+    [2] 'Wolf'    <=== New items inserted
     [3] 'Cow'
-	[4] 'Cat'     
+    [4] 'Cat'     
     [5] 'Pig'
     [6] 'Chicken'
     [7] 'Horse'
@@ -1591,8 +1591,8 @@ The output from the above command will be an array of items removed so in your d
 That's because the *splice()* function does not return the array it spliced, instead it returns the items it removed from the array. Remember, the first parameter you pass to *splice()* is the index of the item, and the second parameter is always the number of items you want to remove. If no additional parameters are provided, then splice will only remove items and not insert new items. To see what your farmAnimals array looks like now run the `/js farmAnimals` statement. Your array will look something like this in memory:
 
     [0] 'Sheep'
-	[1] 'Ocelot'  
-	[2] 'Wolf'    
+    [1] 'Ocelot'  
+    [2] 'Wolf'    
     [3] 'Cow'
     [4] 'Pig'
     [5] 'Chicken'
@@ -1601,7 +1601,7 @@ That's because the *splice()* function does not return the array it spliced, ins
 Now let's tidy up the array some more by removing the pesky Ocelot and Wolf :
 
     /js farmAnimals.splice( 1, 2 );
-	
+    
 The above statement says 'starting at index 1, remove 2 items'. The array will now look like this:
 
     [0] 'Sheep'
@@ -1711,8 +1711,8 @@ In this recipe we'll create a simple number-guessing game using the `if` stateme
 In this program the *guessTheNumber()* function rolls a 6-sided dice, then asks the player to guess the number. If the player guesses correctly `You guessed correct!` is displayed. After the player has guessed (either rightly or wrongly) the message `Thanks for playing` is displayed. You can try out this code by issuing the following commands at the server console prompt:
 
     js refresh();
-	js guessTheNumber( self )
-	
+    js guessTheNumber( self )
+    
 The *guessTheNumber()* function needs a Player as a parameter. The special ScriptCraft variable `self` is a variable whose type is 'Player' and refers to you the person issuing the command. That's why we pass `self` as the parameter to *guessTheNumber()* . You can try running the *guessTheNumber()* function a couple of times and the number should be different.
 
 Let's take a closer look at how this function works by first looking at how ScriptCraft asks questions of players.
@@ -1732,8 +1732,8 @@ The problem with modal dialogs is that they interrupt the program and the progra
 This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in recipe 3 when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
 
     js var input = require('input');
-	js var respond = function( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
-	js input( self, 'How old are you?', respond )
+    js var respond = function( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
+    js input( self, 'How old are you?', respond )
 
 The important thing to keep in mind when writing code that depends on asking players questions is that you can't force players to answer questions right away or even answer at all, they could be busy fighting spiders, trading with villagers, climbing, building or simply ignoring the question altogether. In the commands above, the *respond()* function will be called by *input()* when the player has answered the question. There's a name often used for functions which are called by other functions - they're called *Callbacks*. The *input()* function when called will return immediately and it does not return any value. Instead, it waits in the background (remember, there's a lot going on in Minecraft so we can't stop the game in its tracks) until the player eventually answers the question and then calls the *Callback*. A *Callback* is literally a function which will be called back later on. *Callbacks* are also used when writing Javascript code for web browsers. For example, functions can be written which will only be called when a visitor clicks a button. *Callback* functions are super useful and part of what makes Javascript such a flexible language. 
 
@@ -1743,14 +1743,14 @@ So we've seen how to ask a player a question. Now let's take a look at how we ch
 In @@chapter{js} we briefly looked at comparing numbers at the server console prompt. When we *compare* something to something else there can only be two possible answers: `true` or `false`. For example, if I issue the command `js 5 == 3` to ask the computer is 5 equal to 3 the answer will be `false`. If I ask the computer a different question `js 5 > 3` - is 5 greater than 3 - the answer will be `true`. When asking such questions there is no *I don't know* or *Sometimes* or *Maybe*. The answer will always be `true` or `false`. When we *compare* things we *test* for true or false. We can compare not only numbers but any variable. We can write code in such a way that it will only execute if some test passes. Try the following commands at the server console prompt:
 
     js if ( 5 > 3 ) { console.log('test is true') }
-	js if ( 5 > 13 ) { console.log('test is true') }
-	js if ( 5 == 18 ) { console.log('test is true') }
-	js if ( 5 < 18 ) { console.log('test is true') }
-	
+    js if ( 5 > 13 ) { console.log('test is true') }
+    js if ( 5 == 18 ) { console.log('test is true') }
+    js if ( 5 < 18 ) { console.log('test is true') }
+    
 The message `test is true` should only be displayed for the first and last commands. The *if* statement uses the form:
 
     if ( condition ) {
-	    // code to execute if condition is true
+        // code to execute if condition is true
     }
 
 So in the number guessing game the code...
@@ -1764,35 +1764,35 @@ So in the number guessing game the code...
 The test is always placed between the `(` and `)` round brackets. There are many other kinds of tests you can use other than comparisons. If you use just a single number it can be tested. Any single number except 0 will resolve to `true` when used inside an `if` test, while any non-empty text will resolve to true. Try issuing the following commands at the sever console prompt:
 
     js var gems = 5;
-	js if ( gems ) { console.log("you have gems"); }
-	js gems = 0;
-	js if ( gems ) { console.log("you have gems"); }
+    js if ( gems ) { console.log("you have gems"); }
+    js gems = 0;
+    js if ( gems ) { console.log("you have gems"); }
 
 If `gems` is 0 then the if statement does not execute the code inside the *if block* (the code which appears between the `{ }` curly brackets). Now try the following statements to see how String variables are resolved to true or false:
 
     js var name = "steve"
-	js if ( name ) { console.log("you have a name and it is " + name ); }
-	js name = "" 
-	js if ( name ) { console.log("you have a name and it is " + name ); }
-	
+    js if ( name ) { console.log("you have a name and it is " + name ); }
+    js name = "" 
+    js if ( name ) { console.log("you have a name and it is " + name ); }
+    
 The last command will not output anything because a variable which is "" (empty string) or 0 will resolve to `false` if used as a condition in an `if` statement. We can test to see if name is equal to steve like this:
 
     js if (name == "steve'){ console.log("Hey steve!"); }
-	
+    
 What if we want to test that something is *not* true? To test that something *isn"t* true you *enclose* the test in `()` round brackets and put a `!` (exclamation mark) in front ...
 
     js if (! (name == "steve') ) { console.log("Hey, you're not steve!"); }
-	
+    
 The `!` operator *negates* (that is - makes the opposite of) any boolean expression which appears after it so all of the following expressions would return false...
 
     js ! (5 > 2)
-	> false
-	js ! (5 < 8)
-	> false
-	js ! (8 < 5)
-	> true
-	js ! (name == "steve")
-	> false
+    > false
+    js ! (5 < 8)
+    > false
+    js ! (8 < 5)
+    > true
+    js ! (name == "steve")
+    > false
 
 ### The if-else construct
 Let"s say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
@@ -1825,8 +1825,8 @@ Let"s say we want the program to output one message if the player guesses correc
 Change your existing numberGuess.js file to match the code above, save it then issue the following commands to test it:
 
     js refresh()
-	js guessTheNumber( self )
-	
+    js guessTheNumber( self )
+    
 Now when you guess incorrectly you should see a message `Better luck next time.` appear.
 
 ### The if-else-if construct
@@ -1913,7 +1913,7 @@ The `if` statement is one of several *block* statements in javascript, that is, 
 Now jump into the game and at the in-game prompt issue the following commands:
 
     /js refresh() // to load the changes
-	/js guessTheNumber( self ) // self is now an actual player in the game
+    /js guessTheNumber( self ) // self is now an actual player in the game
 
 When prompted, press the T key to start typing your guess. You may need to re-run the guessTheNumber() function a couple of times before you guess the right answer but this time, when you do get it right, a firework will launch directly above your head. Pretty cool huh?
 
@@ -1928,12 +1928,12 @@ To test to see whether it is night or day in the game issue the following comman
 
     /js var world = self.world;
     /js if ( ( world.time > 13000 ) && ( world.time < 23000 ) ) { self.sendMessage('Night!') } 
-	
+    
 ### Logical AND
 You can combine one or more tests to perform more complex tests. In the statements above you check to see if the time is greater than 13000 *AND* less than 23000 and if the test passes we know it's Night. If you are combining tests like this, it's a good idea to enclose each test in its own `( )` round brackets pair. That's why we write:
     
-	( world.time > 13000 ) && ( world.time < 23000 )
-	
+    ( world.time > 13000 ) && ( world.time < 23000 )
+    
 rather than just:
 
     world.time > 13000 && world.time < 23000 
@@ -1944,13 +1944,13 @@ The `&&` (two ampersand symbols side-by-side) operator combines the expressions 
 There's more than one way to combine tests. You can use the `||` (*or* operator) to test if *any one* of 2 or more conditions are true. Let's say we want to add a new rule to the game. The rule is this:
 
     if a player breaks a block while either sneaking OR flying then 
-	    the block yields 2 cookies.
-	
+        the block yields 2 cookies.
+    
 How would we write such a rule in Javascript? Well let's refine the statement above. Remember, Minecraft is event-driven so we want our rule to be enforced whenever any block is broken. The statement might be better written in English as:
 
     when a block is broken
-	    if the player is flying or the player is sneaking then 
-		   the block yields 2 cookies. 
+        if the player is flying or the player is sneaking then 
+           the block yields 2 cookies. 
 
 In javascript you write it like this:
 
@@ -1975,8 +1975,8 @@ The test `breaker.sneaking || breaker.flying` checks to see if the player who br
 So we've seen the use of the `&&` (logical AND) operator and the `||` (logical OR) operator. These two operators can be combined to form even more complex logic. Let's say for example we want to refine the earlier rule so that cookies will only be given up when the player breaks a block of sand. In English we might write such a rule like this:
 
     when a block is broken
-	    if the block is sand AND the player is flying or the player is sneaking then 
-		   the block yields 2 cookies. 
+        if the block is sand AND the player is flying or the player is sneaking then 
+           the block yields 2 cookies. 
 
 To you and I that rule might look clear enough but the computer would be confused. There are actually two possible ways to interpret the above rule:
 
@@ -2061,12 +2061,12 @@ You will be prompted to type the name of your favorite animal. Press the *T* key
 The switch statement works much like the *if-else-if* construct we used in recipe 4 . We could have written the *animalSounds.js* module using an if-else-if form:
 
     if (animal == 'cat') { 
-		sounds.catMeow(player.location);
-	} else if (animal == 'chicken') { 
-		sounds.chickenIdle(player.location);
-	} else if (animal == 'cow') { 
-	    sounds.cowIdle(player.location);
-	...
+        sounds.catMeow(player.location);
+    } else if (animal == 'chicken') { 
+        sounds.chickenIdle(player.location);
+    } else if (animal == 'cow') { 
+        sounds.cowIdle(player.location);
+    ...
 
 But since every test is on the same *animal* variable it makes more sense to use a *switch* statement instead. Some things to note about the switch statement:
 
@@ -2080,7 +2080,7 @@ The `default` case is executed when you enter an animal that isn't one of cat, c
 A common pitfall when using the switch statement is forgetting to include the `break` statement at the end of each case. As an exercise try commenting out the `break` statement inside of the block for 'sheep'. Remember: to *comment out* a line of code, just put `//` at the start of the line. Save and reload then run the program again `/js animalSounds( self );` and this time enter 'sheep' as your favorite animal. What happens? The following output will appear in your screen:
 
     A sheep says 'baa'
-	A wolf says 'woof'
+    A wolf says 'woof'
 
 And you will hear both a sheep bleat *and* a wolf bark! That's because in a case block, the code will keep executing until it hits a `break` statement and if it doesn't hit one it carries right on through to the next case statement. 
 
@@ -2106,9 +2106,9 @@ These are just some of the functions in the sounds module, for a full reference 
 The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds:
 
     /js var sounds = require('sounds');
-	/js sounds.catMeow( self.location );
-	/js sounds.burp( self.location );
-    /js sounds.villagerNo( self.location );	
+    /js sounds.catMeow( self.location );
+    /js sounds.burp( self.location );
+    /js sounds.villagerNo( self.location );    
 
 In Minecraft Players, Blocks, Monsters, Animals and Villagers all have a location property which can be passed to any of the sounds module functions.
 
@@ -2118,14 +2118,14 @@ When running the *animalSounds()* function what happens if you enter 'Cow' inste
 If you enter 'Cow', or 'COW', the function says it hasn't heard of a 'Cow' or 'COW'. To you and I, a Cow is a COW is a cow ,but to a computer they are 3 different strings. That's because computers are *case-sensitive* - they don't see the word 'Cow' and know that whether it's spelt with capital letters or lowercase letters, it means the same thing. The computer only sees a sequence (or list) of letters and as far as the computer is concerned, `C` and `c` are completely different. You can see this for yourself by issuing these commands at the in-game prompt:
 
     /js 'COW' == 'cow'
-	> false
-	/js 'Cow' == 'cow'
-	> false
+    > false
+    /js 'Cow' == 'cow'
+    > false
 
 How do we make the *animalSounds()* function understand that when a player types 'COW' it should be treated the same as 'cow'? Fortunately there's a String function that helps solve this problem. Issue the following command at the in-game prompt:
 
     /js 'COW'.toLowerCase() == 'cow'
-	> true
+    > true
 
 The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
@@ -2183,29 +2183,29 @@ This statement ensures that the *animal* parameter is converted to lowercase fir
 All Strings in Javascript also have a *toUpperCase()* function which returns an UPPERCASE version of the string. Note that neither the *toLowerCase()* nor *toUpperCase()* functions change the original string, they just return a new string which is why I need to assign the *animal* variable to the returned value. If I simply used:
 
     animal.toLowerCase();
-	
-The switch cases would still fail for 'COW'	because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In recipe 3 we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
+    
+The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In recipe 3 we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
 
     /js var animals = ['cow','pig'];
-	/js animals.push('sheep');
-	/js animals[2]
-	> sheep
+    /js animals.push('sheep');
+    /js animals[2]
+    > sheep
     
 The above `animals.push('sheep');` statement actually *changes* the animals value. With Strings, this never happens. None of the String methods (and there are quite a few) change the value for which they are called. For example there is a *String.concat()* function which adds another string:
 
     /js var name = "steve ";
-	/js name.concat("crafter");
-	> steve crafter
-	/js name
-	> steve
+    /js name.concat("crafter");
+    > steve crafter
+    /js name
+    > steve
 
 You can see that while `name.concat("crafter");` returns a value `steve crafter`, the original *name* variable remains unchanged. If we wanted to change the name variable we'd have to do it like this:
 
     /js var name = "steve ";
-	/js name = name.concat("crafter");
-	> steve crafter
-	/js name
-	> steve crafter
+    /js name = name.concat("crafter");
+    > steve crafter
+    /js name
+    > steve crafter
 
 A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String .
 
@@ -2214,12 +2214,65 @@ In this recipe you learned how to use the *switch* statements to make decisions.
 
 ## Recipe 6: Leaderboards - More fun with Arrays
 ### Introduction
-### sort
+One of the really cool things about Arrays in Javascript is that they can be sorted. Sorting is the process of looking at each item in an array and deciding whether it is greater than or less than another item in the same array. When all of the items in an array are sorted the array is like a leaderboard - a ranked list of items. In this recipe you'll create a ranked list of players based on different stats. Let's get started.
+
+### Array.sort() 
+The Array.sort() method is used to sort items in a array. Let's see it in action. Issue the following commands at the server console prompt:
+
+    /js var animals = ['pig','wolf','cow','cat','sheep'];
+    /js console.log( animals );
+    > pig,wolf,cat,cow,sheep
+    /js animals.sort();
+    /js console.log( animals );
+    > cat,cow,pig,sheep,wolf
+    
+You can see from the output that Array.sort() will sort a list of Strings alphabetically - that is in the order that the letters appear in the alphabet. So 'cat' is moved to the 1st position in the array while 'wolf' is moved to the last position in the array and all of the animals in between are sorted alphabetically too. What happens if you try to sort an array of Numbers?
+
+    /js var luckyNumbers = [ 9, 23, 5, 40, 21 ];
+    /js luckyNumbers.sort();
+    /js console.log( luckyNumbers );
+    > 21, 23, 40, 5, 9
+
+... well that makes no sense! In Javascript, the default way to sort items in an array is alphabetically. It even does this when the items in an array are all numbers. In Javascript, arrays can contain *anything*, numbers, strings, objects, other arrays and even a mixture of all of these types. If you want the *Array.sort()* method to sort by any way other than alphabetically, you have to tell it how. Let's see an example. Issue the following commands at the server console prompt:
+
+    /js var numerically = function( a, b ) { return a - b };
+    /js luckyNumbers.sort( numerically );
+    /js console.log( luckyNumbers );
+    > 5, 9, 21, 23, 40
+
+Now the `luckyNumbers` array is sorted in the correct order. The *numerically()* function we created in the first command above is a function which takes two parameters, *a* and *b* and compares them. This function is then passed to the *Array.sort()* method and will be called many times by *Array.sort()* is it plucks two items from the array and asks the *numerically()* function 'Which item is bigger - a or b?'. You can see that your *numericall()* function will get called many times if you add a *console.log()* statement...
+
+    /js numerically = function( a, b ) { console.log('a = ' + a + ', b = ' + b); return a - b }
+    /js luckyNumbers.sort( numerically );
+    > a = 9, b = 5
+    > a = 21, b = 9
+    > a = 23, b = 21
+    > a = 40, b = 23
+
+The exact output you see probably won't be the same as above but the point of adding the *console.log()* statement is to illustrate that the *numerically()* function will be called many times over during the course of an Array sort. 
+
+#### How to compare items in an Array
+
+The *numerically()* function we created above is called a *Comparator* function because it's only job is to *Compare* things to one another. The rules which *Array.sort()* uses when sorting are simple. The *Array.sort()* method plucks two items from the array and calls the comparator (the comparing function) passing the two items. Comparator functions typically just name their parameters *a* and *b*. 
+* If the comparing function returns the number 0 then it means that *a* and *b* are the same (in ranking at least). 
+* If the comparing function returns a number less than 0 then it means that *a is less than b* so *a* should appear before *b* in the array.
+* If the comparing function returns a number greater than 0 then it means that *a is greater than b* and so a should appear after *b* in the array.
+
+Let's look at these rules and see how they're used in the *numerically()* function:
+
+
+    var numerically = function( a, b ) { return a - b ; }
+
+Sorting numerically is relatively easy. For numeric sorts we just need to subtract one number from another to give  the *Array.sort()* method the information it needs to sort. 
+
+
 #### default sort
 #### sorting by name
 #### sorting by experience
 
 ### reverse
+
+### Player statistics
 ### display leaderboard
 ### while loop
 ### for loop
@@ -2263,17 +2316,17 @@ You should see output like this in your server console window:
 
     exports.elevator = function(){
         var floor = 1;
-	    while ( floor < 10 ) {
-		    console.log(floor);
-			floor = floor + 1;
-		}
-	  }
-	}
+        while ( floor < 10 ) {
+            console.log(floor);
+            floor = floor + 1;
+        }
+      }
+    }
 
 ### for loops
 ### Drone
 #### targeting
-How to create a new drone in the game. (player must target a block and issue one of the drone functions)	
+How to create a new drone in the game. (player must target a block and issue one of the drone functions)    
 #### fluency
 What is a fluent API?
 JQuery
@@ -2281,10 +2334,10 @@ Demonstration fwd(3).right(2).up(4).box(blocks.gold)
 Why is drone fluent? Limitations of the in-game prompt and command length. Not a limiting factor in modules so you can write
 
     this
-	.fwd(3)
-	.right(2)
-	.up(4)
-	.box(blocks.gold);
+    .fwd(3)
+    .right(2)
+    .up(4)
+    .box(blocks.gold);
 
 #### Digging Deeper
 ##### Extending Drone
@@ -2304,9 +2357,9 @@ In this recipe we're going to write code to create a spectacular fireworks show 
 ### The fireworks module
 ScriptCraft includes a *fireworks* module which can be used to launch a single firework at a given location. You can use the fireworks module directly at the in-game commmand prompt like this:
     
-	/js var fireworks = require('fireworks')
-	/js fireworks.firework( self.location )
-	
+    /js var fireworks = require('fireworks')
+    /js fireworks.firework( self.location )
+    
 The fireworks module's *firework()* function takes a single parameter - a Location - and launches a firework at that location. A Location in Minecraft is any place in the game. Most objects - players, animals, blocks etc - have a location. When I pass the parameter `self.location` I am passing my own location meaning the firework will launch from where I am in the game. I urge you to run the above commands and then look directly up to see the firework explode. 
 
 ### Deferred Execution
@@ -2325,8 +2378,8 @@ In the commands you just executed at the in-game prompt, the firework launches i
 Save the file then issue the `js refresh()` command to reload your javascript plugins. Now issue this command to launch a firework:
 
     /js fireworkshow( self.location )
-	
-Move back a couple of steps so you can better see the firework. Did you notice the firework did not launch immediately? There was a delay of 2 seconds. 	
+    
+Move back a couple of steps so you can better see the firework. Did you notice the firework did not launch immediately? There was a delay of 2 seconds.     
 
 #### The setTimeout() function
 The setTimeout() function lets you delay calling of a function. It takes two parameters:
@@ -2365,14 +2418,14 @@ Move back a couple of steps and watch the show as 5 fireworks are launched one a
 You might have noticed something unusual about the *launch()* function in the listing above. In the listing 10.1 we created the launch function like this:
 
     var launch = function() { 
-	    ... 
+        ... 
     };
 
 ... This style of creating functions is what we've been using so far in this book. We declare a variable then assign a *function expression* to the variable. But in listing 10.2 we create the function like this:
 
     function launch(){
-	   ...
-	}
+       ...
+    }
 
 ... This style of creating functions is called a *function declaration* . It's called a function declaration because the *function* keyword is the first word on the line. When you create a function this way you *must* give the function a name. The name is written between the `function` keyword and the parameters section. What's the difference between a function expression assigned to a variable (what we've seen so far) and a function declaration? When we say `var launch = function(){}` we aren't giving the function itself a name, we're just assigning it to a variable, but when we say `function launch(){}` then the function itself is given a name which it knows about and can use.
 
@@ -2407,7 +2460,6 @@ A recipe which periodically checks each player's location and automatically move
 1. for loops  ( looping over the array of online players ) 20140517 - introd' in leaderboard recipe - still applicable??
 2. Conditionals are examined in more detail. (not sure this still applies - see earlier recipe - this might be just reinforcement)
 
-	
 # Part III Advanced Modding
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
 ## Recipe 12: Arrows that Teleport you.
@@ -2452,6 +2504,7 @@ This is the first recipe in a series of recipes which will introduce mini-games.
 ### Goal
 This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
 
+
 # Appendices
 ## On the use of the `self` variable
 Don't use it in your modules. It's only a convenience function for use at the in-game prompt.
@@ -2474,5 +2527,6 @@ A collection of gotchas
 2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
 3. Saving and restoring Location objects using utils module
 
-<!--  LocalWords:  png img
+<!--  LocalWords:  png img Bukkit API Javascript ScriptCraft
  -->
+ 

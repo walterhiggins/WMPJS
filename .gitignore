@@ -212,6 +212,8 @@ pip-log.txt
 *.mo
 
 #Mr Developer
+*#
+*~
 .mr.developer.cfg
 /.#book-outline.md
 /#book-outline.md#

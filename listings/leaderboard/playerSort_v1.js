@@ -1,5 +1,3 @@
-var utils = require('utils');
-
 var byName = function( a, b ) { 
   if (a.name == b.name) {
     return 0;
@@ -9,5 +7,4 @@ var byName = function( a, b ) {
     return -1;
   }
 };
-
 exports.byName = byName;

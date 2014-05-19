@@ -1886,7 +1886,7 @@ In this recipe you learned how to use the *switch* statements to make decisions.
 
 ## @@nextRecipe{leaderboard}: Leaderboards - More fun with Arrays
 ### Introduction
-One of the really cool things about Arrays in Javascript is that they can be sorted. Sorting is the process of looking at each item in an array and deciding whether it is greater than or less than another item in the same array. When all of the items in an array are sorted the array is like a leaderboard - a ranked list of items. In this recipe you'll create a ranked list of players based on different stats. Let's get started.
+One of the really cool things about Arrays in Javascript is that they can be sorted. Sorting is the process of looking at each item in an array and deciding whether it is greater than or less than another item in the same array. When all of the items in an array are sorted the array is like a leaderboard - a ranked list of items. In this recipe you'll create a ranked list of players based on who has jumped most.
 
 ### Array.sort() 
 The Array.sort() method is used to sort items in a array. Let's see it in action. Issue the following commands at the server console prompt:
@@ -1925,7 +1925,7 @@ The exact output you see probably won't be the same as above but the point of ad
 
 #### How to compare items in an Array
 
-The *numerically()* function we created above is called a *Comparator* function because it's only job is to *Compare* things to one another. The rules which *Array.sort()* uses when sorting are simple. The *Array.sort()* method plucks two items from the array and calls the comparator (the comparing function) passing the two items. Comparator functions typically just name their parameters *a* and *b*. 
+The *numerically()* function we created above is called a *Comparator* function because it's only job is to *Compare* things to one another. The rules which *Array.sort()* uses when sorting are simple. The *Array.sort()* method plucks two items from the array and calls the comparator (the comparing function) passing the two items. It repeats this process until all of the items in the array have been compared to each other. Comparator functions typically just name their parameters *a* and *b*. 
 * If the comparing function returns the number 0 then it means that *a* and *b* are the same (in ranking at least). 
 * If the comparing function returns a number less than 0 then it means that *a is less than b* so *a* should appear before *b* in the array.
 * If the comparing function returns a number greater than 0 then it means that *a is greater than b* and so a should appear after *b* in the array.
@@ -1934,7 +1934,7 @@ Let's look at these rules and see how they're used in the *numerically()* functi
 
     js var numerically = function( a, b ) { return a - b ; }
 
-Sorting numerically is relatively easy. For numeric sorts we just need to subtract one number from another to give  the *Array.sort()* method the information it needs to sort. So plucking any 2 numbers from the array and passing them to the *numerically()* function should give the right order...
+Sorting numerically is relatively easy. For numeric sorts we just need to subtract one number from another to give  the *Array.sort()* method the information it needs to sort. So plucking any 2 numbers from the array and passing them to the *numerically()* function should give the correct order...
 
 * 21 - 40 is -19 which is less than 0 meaning 21 will be listed *before* 40 in the array
 * 21 - 9 is 12 which is greater than 0 meaning 21 will be listed *after* 9 in the array
@@ -1949,16 +1949,15 @@ Let's look at a slightly more complex example. Typically, your server will have 
 The *byPopulation()* function takes 2 parameters a and b both of which it assumes are Minecraft worlds. Each Minecraft world object has an *entities* property which is a Java list of living things. The entities property in turn has a *size()* function so if we want to find out how many living beings are on a world we call the world's *entities.size()* method. We can compare the populations by subtracting one population size from another. 
 
 #### Term: Java Collection
-A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins will actually be Java objects. You need to be mindful of which objects are Javascript objects and which objects are Java objects and it's not always easy to remember. As a general rule, the *server* variable and any of its properties will all be Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
+A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins will actually be Java objects. TODO REWORD THIS You need to be mindful of which objects are Javascript objects and which objects are Java objects and it's not always easy to remember. As a general rule, the *server* variable and any of its properties will all be Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
 
 The code to use your new *byPopulation()* function would look like this:
 
-    js var utils = require('utils');
-    js var worlds = utils.array( server.worlds ); 
+    js var worlds = bukkit.worlds();
     js worlds.sort( byPopulation );
     js console.log( worlds );
 
-The first two commands load the ScriptCraft *utils* module and convert the server.worlds property to an array. The *server* variable is one of a few built-in variables in ScriptCraft. It is a Java object which refrs to the Minecraft Server. The `server.worlds` Java collection is converted to a Javascript array, then sorted and the results a printed to the console. The above example demonstrates how you can apply whatever rules you like to sorting items in an array. Now let's talk about sorting Players...
+The *bukkit.worlds()* function returns an array of all of the worlds on the server. It is sorted and the results are printed to the console. The above example demonstrates how you can apply whatever rules you like to sorting items in an array. Now let's talk about sorting Players...
 
 #### Sorting Players by name
 One way to sort players is by name. This isn't strictly a leaderboard in the truest sense of the word but it does demonstrate how to sort based on a player's attribute - his name. Create a new file called *playerSort.js* in the *scriptcraft/modules* folder and type in the following code:
@@ -1968,17 +1967,18 @@ One way to sort players is by name. This isn't strictly a leaderboard in the tru
 This module is the first module we've written which exports more than one function. Here's how you might use the module:
 
     js var playerSort = require('playerSort');
-    js var sortedPlayers = playerSort.sort( playerSort.byName );
-    js console.log(sortedPlayers);
+    js var players = bukkit.players();
+    js players.sort( playerSort.byName );
+    js console.log( players );
 
 The *byName()* function performs a couple of comparisons of the name of each player. When comparing two strings using the `<` and `>` operators, the comparison is always based on the alphabetic sequence of characters so `'cat' < 'cow'` will return true while `'cat' > 'cow'` will return false. However, we don't want the comparator function *byName()* to return true or false, we want it to return a number. This is a common mistake even experienced programmers make when writing functions for use in sorting. They forget that the comparing function must return a number not simply true or false.
 
 To try out this module, issue the following commands at the server console prompt - Make sure there's at least two players on your server or the results won't be very interesting:
 
     js var sortPlayers = require('sortPlayers');
-    js var players = utils.array( server.onlinePlayers );
-    js var sorted = players.sort( sortPlayers.byName );
-    js console.log( sorted );
+    js var players = bukkit.players();
+    js players.sort( sortPlayers.byName );
+    js console.log( players );
 
 #### Sorting Players by experience
 
@@ -1989,9 +1989,9 @@ Let's face it, a leaderboard based on player names would be both boring and unfa
 The new *byExp()* function just does a numeric sort - that is it returns the result of subtracting player a's totalExperience from player b's totalExperience. One thing to note is that although there is only one single function used for sorting by experience, we *export* it twice - under the name *byExp* and also under the longer name *byExperience*. This gives programmers who use this module the option of using the short name or long name for that function - whichever name they use it will be the same function being called. Issue the following commands to see this function in action - again - it helps if there's more than one player on your server :-) ...
 
     js var sortPlayers = require('sortPlayers');
-    js var players = utils.array( server.onlinePlayers );
-    js var sorted = players.sort( sortPlayers.byExp );
-    js console.log( sorted );
+    js var players = bukkit.players();
+    js players.sort( sortPlayers.byExp );
+    js console.log( players );
 
 When I ran this code with just two players I got the following output.
 
@@ -2004,13 +2004,13 @@ Our actual experience points at the time were:
     walterh        52
     sean_higgins   103
 
-You should be surprised by the results. In any leaderboard based on player experience, the *most* experienced players - that is, the players with the highest experience number - should be placed first ahead of lesser experienced players. However , our *byExp()* function sorts in ascending order; that is, from lowest to highest so the *sorted* leaderboard will list least-experienced players first. That's not what we want for a leaderboard. 
+You should be surprised by the results. In any leaderboard based on player experience, the *most* experienced players - that is, the players with the highest experience number - should be placed first ahead of lesser experienced players. However , our *byExp()* function sorts in ascending order; that is, from lowest to highest so the *players* array will list least-experienced players first. That's not what we want for a leaderboard. 
 
 ### Reversing Arrays
 
 You can easily reverse an array by calling the *reverse()* method...
 
-    js sorted.reverse()
+    js players.reverse()
 
 The reverse() method reverses an array in place. The first array element becomes the last and the last becomes the first. This is exactly what we want for a leaderboard where the highest score - that is; the larger numeric value - should be in the first position in the array.
 
@@ -2018,11 +2018,95 @@ There is another way we can sort players for inclusion in a leaderboard without 
 
 #### Sorting Players by other rules
 There are many different player statistics we can use for sorting players. We can have a leaderboard of players who have jumped the most, have flown the most, have caught the most fish, have spent most time riding horses, have crafted the most items or mined the most blocks. In short there's plenty of statistics to use for display in leaderboards. 
-
 ### Player statistics
-### display leaderboard
-### while loop
-### for loop
+In Minecraft each player is an *Object* in the game. *Objects* in javascript are variables which have both data and behavior. A player has a name (data) and amongst other things can shoot arrows (behavior). You can see this by issuing the following commands at the in-game prompt:
+
+    /js self.name
+    /js self.shootArrow()
+
+The first command will display your name. The second command will make you shoot an arrow so be careful who you point at when you issue this command. In the first command we access a *property* of the object called *self* and in the second command we call a *method* on the object called *self*. *Properties* are just variables which belong to objects. *Methods* are just functions which belong to objects. In later recipes I'll show you how to discover all of the properties and methods of the *Player* object and other in-game objects. For now we're going to use another player method called *getStatistic()* which returns a statistic for a player. You use it like this:
+
+    /js self.getStatistic( bukkit.stat.JUMP );
+
+This command calls the *.getStatistic()* method on the *self* object which refers to your in-game character and displays the number returned by that method. Now jump again and issue the same command once more (remember, you can issue the previous command by pressing / then the UP arrow key). The number returned should be greater by 1. We're going to use each player's JUMP statistic to display a leaderboard of players who have jumped the most. Open up your *playerSort.js* file in the editor and update it adding the *byJumps()* function:
+
+@@listing playerSort_v3.js
+
+Save the file then issue the `/js refresh()` command to reload ScriptCraft. Test your new function by issuing the following commands at the server console prompt:
+
+    js var playerSort = require('playerSort');
+    js var players = bukkit.players();
+    js players.sort( playerSort.byJumps );
+    js console.log( players );
+
+The output from the last command doesn't look much like a leaderboard, it simply prints all of the Player objects on a single line with a `,` comma between each player. Let's make it look better...
+
+### Displaying the Leaderboard
+So far we've just been using the *console.log()* function to display the entire contents of the array on a single line. The output when display the array of players using *console.log()* might look something like this:
+    
+     CraftPlayer{name=abcdefg}, CraftPlayer{name=hijklmn}, CraftPlayer{name=opqrst}
+   
+For a leaderboard display you'll want something a little more sophisticated. In this recipe we'll create a function which displays each player's name and number of jumps on a single line. To do that we'll need to process each item in the array one at a time. One of the ways you can process items in an array is using *loops*. Computers are very good at repeating the same thing over and over. In programming repeating the same thing over is called *looping*. There are two *looping* statements in Javascript, the *for* statement and the *while* statement.
+
+### The *for* Loop
+The *for* loop is usually used to process each item in an array. For example, if we have an array of animals `['cat','cow','pig','sheep','wolf']` we could print out each animal using the following code:
+
+    js var animals = ['cat','cow','pig','sheep','wolf'];
+    js console.log( animals[0] ); //  < --- 'cat'
+    js console.log( aniamls[1] ); //  < --- 'cow'
+    js console.log( aniamls[2] ); //  < --- 'pig'
+    js console.log( aniamls[3] ); //  < --- 'sheep'
+    js console.log( aniamls[4] ); //  < --- 'wolf'
+
+This would get really repetitive and tiring to type. Fortunately there's an easier way to print out each item in the array on its own line. The best way to see how the *for* statement works is with an example. Issue the following commands at the server prompt and see what happens:
+
+    js var animals = ['cat','cow','pig','sheep','wolf'];
+    js for (var i = 0; i < animals.length; i++ ) { console.log( animals[i] ); }
+
+The *for* loop is used for looping over or repeating a block of statements over and over. Did you notice how quickly the array of animals was printed? Let's try using the *for* statement again, this time just to print all of the numbers from 0 to 99 ...
+
+    js for (var i = 0; i < 100; i++ ) { console.log(i); }
+
+On a modern computer those 100 numbers are printed in the blink of an eye. If you're curious, try running the command again, this time changing the number from 100 to 1 million (that's 1 with six zeros after it). It should take a good deal longer but will still complete before you or I could count to one hundred. Computers are fast - now you're starting to get a feel for just how fast! Let's take a closer look at the first *for* statement we used:
+
+    js for (var i = 0; i < animals.length; i++ ) { console.log( animals[i] ); }
+
+The part of the *for* statement in round brackets `(var i = 0; i < animals.length; i++ )` sets up some rules for the *for* loop. Each rule is separated by a `;` semicolon. 
+
+* The first rule `var i = 0` is called the *initialize* expression and is run only once before the loop begins.
+* The second rule `i < animals.length` is called the *test* expression and is run at the start of each time through the loop to see if the loop should end.
+* The third rule `i++` is called the *increment* expression and is run at the *end* of each time through the loop.
+
+Following the for statement you usually have a block of one or more statements contained inside curly brackets. These statements will be executed each time through the loop. Let's put *for* loops to use to create a more pleasing leaderboard display of players who jump the most. Create a new file called *leaderboard.js* in the *scriptcraft/modules* folder and type in the following code:
+
+@@listing leaderboard_v1.js
+
+To try out the new module save it, issue the `js refresh()` command to reload ScriptCraft then issue the following commands at the in-game prompt:
+
+    /js var leaderboard = require('leaderboard');
+    /js leaderboard.jumps( self );
+
+The list of all players on the server and the number of times they've jumped should be displayed in descending order - that is - the players who have jumped the most will be at the top of the list. In a later recipe we'll revisit this module to display the leaderboard using an on-screen scoreboard as seen on popular player-vs-player servers.
+
+The *jumps()* function takes a single parameter called *sender*. *sender* is short for CommandSender, a ComandSender is anything in the game capable of sending commands. For examples, Players are command senders since they can send commands using the in-game prompt. What we want to do in this function is send output to the player who issued the command. That's why we use *sender.sendMessage()* instead of *console.log()* to display the leaderboard. If we used *console.log()* then players would not see the leaderboard because *console.log()* only writes messages to the server console window, not to players. In the above *jumps()* function we sort the players by how many times they've jumped, then reverse the array so that the higher numbers are at the front of the array, then we *loop* over the array using the *for* loop. Inside the for loop we have a block of statements:
+
+    var player = players[i];
+    var jumpStats = player.getStatistic( bukkit.stat.JUMP );
+    sender.sendMessage( player.name + ' ' + jumpStats);
+
+The above block of code gets executed a number of times - the number depends on how many players are connected to the server. The variable *i* is the current position in the *players* array. This variable's value will change each time through the loop. The first time through the loop it will be 0, then 1, then 2 and so on until it reaches the end of the array and there are no more players to process. The first statement gets the player at the current position ( `players[i]` ) and assigns it to a new variable called *player*. We then get this player's jump count and name and display them on screen. 
+
+### The *while* Loop
+
+The second kind of loop is called the *while* loop. The *for* loop is very useful for *iterating* (a fancy word for looping) over arrays or if you know in advance how many times you need to loop. Sometimes you won't know how many times you need to loop, you'll want to keep looping until something happens and you don't know how many times you'll need to loop until it does. A *while* loop is also called a *conditional* loop - it's like the *if* statement except it will keep repeating the same block of code over and over until a *test condition* is no longer true. The best way to understand this is by example. Let's look at the leaderboard module again - this time it's been written using a *while* loop instead of a *for* loop. The code behaves *exactly* the same, it just uses *while* instead of *for*.
+
+@@listing leaderboard_v2.js
+
+#### Breaking out of loops
+Say we want to only display the top 3 jumpers in the leaderboard....
+
+#### infinite loops
+what happens when you remove the i++ statement 
 
 ### creating new commands for players
 #### jsp 

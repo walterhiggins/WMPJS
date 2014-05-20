@@ -2374,7 +2374,7 @@ The reverse() method reverses an array in place. The first array element becomes
 
 There is another way we can sort players for inclusion in a leaderboard without using the reverse() method. We can change the sort order in the comparing function itself. To sort items numerically we compare the first parameter (usually called *a*) to the second parameter (usually called *b*) by subtracting a from b. When we say `return a - b` we are sorting in *ascending* order from lowest to highest. If we want to sort in *descending* order (most leaderboards are presented in descending order) then we say `return b - a` instead. For now, you can continue to write comparing functions using ascending order and use the *reverse()* function to change the order from ascending to descending.
 
-#### Sorting Players by other rules
+### Sorting Players by other rules
 There are many different player statistics we can use for sorting players. We can have a leaderboard of players who have jumped the most, have flown the most, have caught the most fish, have spent most time riding horses, have crafted the most items or mined the most blocks. In short there's plenty of statistics to use for display in leaderboards. 
 ### Player statistics
 In Minecraft each player is an *Object* in the game. *Objects* in javascript are variables which have both data and behavior. A player has a name (data) and amongst other things can shoot arrows (behavior). You can see this by issuing the following commands at the in-game prompt:
@@ -2470,13 +2470,13 @@ Following the for statement you usually have a block of one or more statements c
       players.sort( playerSort.byJumps );
       players.reverse();
     
-      for (var i = 0; i < players.length; i++ ) {
+      for ( var i = 0; i < players.length; i++ ) { // start of loop
     
         var player = players[i];
         var jumpStats = player.getStatistic( bukkit.stat.JUMP );
         sender.sendMessage( player.name + ' ' + jumpStats);
     
-      }
+      } // end of loop
     
     };
     
@@ -2511,28 +2511,137 @@ The second kind of loop is called the *while* loop. The *for* loop is very usefu
       players.reverse();
     
       var i = 0;
-      while (i < players.length ){
+      while ( i < players.length ) { // start of loop
     
         var player = players[i];
         var jumpStats = player.getStatistic( bukkit.stat.JUMP );
         sender.sendMessage( player.name + ' ' + jumpStats);
         
         i++;
-      }
+    
+      } // end of loop
     
     };
     
     exports.jumps = jumps;
 
 #### Breaking out of loops
-Say we want to only display the top 3 jumpers in the leaderboard....
+There are times when you'll want to break out of a loop early. If for example, you only want to display a list of players who have actually jumped - that is - players whose jump count is greater than zero. You can break out of a loop early using the javascript *break* statement. Take a look at the following listing to see an example of the *break* statement:
 
-#### infinite loops
-what happens when you remove the i++ statement 
+<caption>Listing 7.6</caption>
 
-### creating new commands for players
-#### jsp 
-##### jsp leaderboard example
+    var playerSort = require('playerSort');
+    
+    var jumps = function( sender ) {
+      var players = bukkit.players();
+      players.sort( playerSort.byJumps );
+      players.reverse();
+    
+      var i = 0;
+      while ( i < players.length ) { // start of loop
+    
+        var player = players[i];
+        var jumpStats = player.getStatistic( bukkit.stat.JUMP );
+        if ( jumpStats == 0 ) {
+          break;
+        }
+        sender.sendMessage( player.name + ' ' + jumpStats);
+          
+        i++;
+    
+      } // end of loop
+    
+    };
+    
+    exports.jumps = jumps;
+
+In the above code, the while loop will stop when it encouters the first player who has not jumped. 
+
+#### Skipping a turn in a loop.
+The *break* statement will break out of a loop effectively ending the loop so that the block of code in the loop won't be executed again. Sometimes you just want to skip an iteration (a turn) on the loop. Let's say we have an *unsorted* list of players and only want to display players who have jumped. The *continue* lets you skip on to the next iteration of the loop. In the following listing, only players who have jumped will be displayed. This isn't a leaderboard because players are displayed in no particular order:
+
+<caption>Listing 7.7</caption>
+
+    
+    var jumps = function( sender ) {
+      var players = bukkit.players();
+    
+      var i = 0;
+      while ( i < players.length ) { // start of loop
+    
+        var player = players[i];
+        var jumpStats = player.getStatistic( bukkit.stat.JUMP );
+        if ( jumpStats == 0 ) {
+          continue;
+        }
+        sender.sendMessage( player.name + ' ' + jumpStats);
+          
+        i++;
+      } // end of loop
+    
+    };
+    
+    exports.jumps = jumps;
+
+#### Infinite Loops
+Within any loop block there must be a statement which will affect the loop's condition. For example, in the above code we check the value of the *i* variable each time round the loop. If we never changed the *i* variable, what do you think would happen? If *i* never changed then the test `i < players.length` would always be true (unless of course there were no players on the server in which case the code inside the *while* block would never execute). A loop which keeps running and never stops is called an *infinite loop*. Infinite loops usually happen because a programmer forgot to increment a counter variable or because the loop condition is wrong. An infinite loop is usually a sign that something went wrong - that there's a bug in the code. There are infinite loops which aren't accidental. Most games and programs which have a user interface (windows, buttons etc) have an *event loop* which is a loop that's constantly running and listening for incoming events from the user or other parts of the system. A game's event loop might listen for key presses from the user, check to see if any collisions between objects in the game have occurred, check the player's health and so on. The Minecraft server has just such a loop.
+
+### Creating a new command for players.
+So far in this recipe we've been creating Javascript functions which can be invoked by anyone on the server who is an operator. Only operators can and should be able to execute javascript code at the in-game or server prompts. *The ability to execute code is potentially dangerous so you definitely don't want to grant that permission to everyone on your server*. The `js` command will take any javascript code and try to execute it. There's another command provided by ScriptCraft and that's the `jsp` command. The `jsp` command is available for *everyone* to use. Unlike the `js` command, the `jsp` command *does not execute* javascript code so it can be used safely by players without operator privileges. The `jsp` command lets you create your own custom commands which can be used by all players. 
+
+We want *all* players to be able to call up the leaderboard with a simple in-game command and we want them to be able to do so without them needing to know Javascript. In the next part of this recipe we're going to change the *leaderboard.js* file so that anyone can call up the leaderboard using this command:
+
+    jsp leaderboard
+
+When a player issues this command at the in-game prompt, a leaderboard of players who have jumped most will be displayed to the player who issued the command. Don't try this just yet - we haven't created the `leaderboard` command yet.
+
+### jsp 
+The `jsp` command by itself doesn't do much. It's just a placeholder, a dummy command which can be extended to support new types of commands. In Minecraft server, commands have a *name* and one or more arguments. For example in the following command:
+
+    /gamemode creative walterh
+
+... `gamemode` is the name of the command and `creative` and `walterh` are the command's arguments. The purpose of the `jsp` command is to make it easy to create your own custom commands using javascript. The `jsp` command name was made deliberately short because it's really just a prefix for custom commands. We want to be able to create custom commands with a `jsp` prefix so that our custom commands don't conflict with commands provided by other plugins. 
+
+In ScriptCraft you create new commands for use by everyone using the *command()* function. The best way to see how the *command()* function works is with a simple example:
+
+    /js var boo = function( params, sender ) { sender.sendMessage('Boo!') }
+    /js command('boo', boo);
+
+In the first command I create a new function called *boo()* which will simply say Boo!. In the second command I call the ScriptCraft *command()* function passing two arguments, a string 'boo' which will be used by *all* players and the newly created function *boo()* which will be called whenever any player issues this command:
+
+    /jsp boo
+    > Boo!
+
+The important points to note are:
+
+* Any player can now issue this new `jsp boo` command and will see a message on their screen. They don't have to be operators to do so.
+* The *command()* function lets you - the javascript programmer - provide new commands for use by all players. 
+
+Now let's dive in and create a new `jsp leaderboard` command. Create a new file called *leaderboardCmd.js* in the *scriptcraft/plugins* folder and type in the following code:
+
+<caption>Listing 7.8</caption>
+
+    var leaderboard = require('leaderboard');
+    
+    var leaderboardCmd = function( params, sender ) {
+      leaderboard.jumps( sender );
+    };
+    
+    command( 'leaderboard', leaderboardCmd );
+
+This file must be saved in the *scriptcraft/plugins* folder so that it will be automatically loaded and run at startup. This module loads the *leaderboard* module we created earlier, creates a new *leaderboardCmd()* function and calls ScriptCraft's *command()* function passing in a String 'leaderboard' which is the name of the new command and a function which will be run whenever any player invokes the command. You may have noticed there's no *exports* in this new module. That's because we don't need to *export* anything for this particular module - we provide a new command for use by all players through the *command()* function instead. Now let's see this new command in action. Issue the `js refresh()` command to reload ScriptCraft then at the in-game prompt issue the following command:
+
+    /jsp leaderboard
+
+The list of player names and jump counts should appear as messages on screen. Now try the following: type `/jsp le` then press the TAB key. Pressing the TAB key should fill in the rest of the command name for you just as it does with regular Minecraft commands! The `jsp` command makes use of *TAB Completion* - that is the ability to fill in the remaining parts of a command or cycle through command argument values by just pressing TAB repeatedly.
+
+### Achievement Unlocked!
+![](img/achievement-plugin-dev-8.png)
+
+You've just learned how to provide new custom commands in Minecraft!
+
+### Summary
+In this recipe we learned how to loop over each item in an array using *for* loops and *while* loops. We also learned how to sort and reverse arrays and how to provide new custom commands using ScriptCraft's *command()* function. 
 
 ## Recipe 7: Building a Skyscraper
 ### Introducion

@@ -10,8 +10,11 @@ var jumps = function( sender ) {
 
     var player = players[i];
     var jumpStats = player.getStatistic( bukkit.stat.JUMP );
+    if ( jumpStats == 0 ) {
+      break;
+    }
     sender.sendMessage( player.name + ' ' + jumpStats);
-    
+      
     i++;
 
   } // end of loop

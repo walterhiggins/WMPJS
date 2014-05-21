@@ -17,8 +17,7 @@ Before we begin I better explain some of the words I'll use throughout this book
  * API - API is short for Application Programming Interface - an official way to write Minecraft Plugins using a guide. Players and regular users of software don't need to care about APIs but they are essential for programmers, because they make it easier to change the software. An API is like a list of Recipes - you probably crafted your first pick-axe by refering to an online guide - how much more difficult would it be to have tried creating one without knowing where all the materials show go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API we will use in this book is the Bukkit API. We'll learn more about this later.
  * Multiplayer - The mode of playing minecraft with other players all connected to the same server.
  * Server - A computer which is running the minecraft server software. In this book I will show you how to setup and run your own minecraft server.
- * Client Mod - A modification for Minecraft which only works with the Minecraft Client. TODO: Example
- * Server Mod - A modification for Minecraft which works on the Minecraft Server so that the extensions to the game are available for all players who connect to that server. Example: Hunger Games Mod.
+ * Plugin - A modification for Minecraft which works on the Minecraft Server so that the extensions to the game are available for all players who connect to that server. Example: Hunger Games Mod.
 
 ## Why I wrote this book
 
@@ -2645,53 +2644,293 @@ In this recipe we learned how to loop over each item in an array using *for* loo
 
 ## Recipe 7: Building a Skyscraper
 ### Introducion
-In this recipe we'll build a 10-story Skyscraper using just a couple of lines of code and some useful Javascript *repeating loop* statements. Computers are ideal for doing repetitive tasks. In this recipe you'll learn about Javascript's *while* and *for* statements and explore ScriptCraft's *Drone* functions which are used for building stuff in Minecraft. 
+In this recipe we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. In this recipe we'll use *for* and *while* loops combined with ScriptCraft's *Drone* functions to build large structures in Minecraft. 
 
-### Taking the Elevator.
-#### while loops
-If you've ever used an elevator, you'll have noticed an array of buttons on the inside near the door. The buttons usually light up as you journey up or down so you know which floor the elevator is currently at. We're going to take an elevator trip in Javscript. Issue the following statement at the server console:
+### Building using Drones
+In Minecraft Building by hand is fun but can be tedious when you want to build big structures - Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using Javascript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a javascript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using Javascript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
 
-    js var floor = 1; while ( floor < 10 ) { console.log( floor ); floor = floor + 1; }
+![Targeting a block in Minecraft](img/sky/drone_target.png)
 
-The above statements do the following:
+Once you've targeted a block - pick any block you like but preferably one just above ground level - issue the following command at the in-game prompt:
 
-1. Create a new variable called *floor* and set it to 1.
-2. A *while* loop is setup. The first part of the loop block `while ( floor < 10 )` says that the block should be executed 
+    /js box( blocks.gold, 1, 3);
 
-You should see output like this in your server console window:
+The targeted block will disappear and a column of gold blocks 1 block wide and 3 blocks high will instantly appear in its place.
 
-    [scriptcraft] 1
-    [scriptcraft] 2
-    [scriptcraft] 3
-    [scriptcraft] 4
-    [scriptcraft] 5
-    [scriptcraft] 6
-    [scriptcraft] 7
-    [scriptcraft] 8
-    [scriptcraft] 9
+![gold column](img/sky/1x3gold.png)
 
-#### for loops
+The *box()* function is used to place blocks in the game. It takes 4 parameters:
 
-### Summary
-### while loops
-#### Taking the elevator
+1. Material - The type of material you want the blocks to be made from.
+2. Width - How wide you want the box to extend. The box will extend from the targeted block to the right.
+3. Height - How high you want the box to extend. The box will extend from the targeted block upwards.
+4. Length - How far away you want the box to extend. The box will extend from the targeted block away from you.
 
-    exports.elevator = function(){
-        var floor = 1;
-        while ( floor < 10 ) {
-            console.log(floor);
-            floor = floor + 1;
-        }
-      }
-    }
+The *box()* function is used to create cubes and cuboids of any size. A cube is a 3D shape whose sides are all the same length. A cuboid is a 3D shape whose width, height and length can differ.
 
-### for loops
-### Drone
-#### targeting
-How to create a new drone in the game. (player must target a block and issue one of the drone functions)    
+![3D Shapes][(img/sky/3Dshapes.jpg)
+
+Let's try a couple of more examples. While targeting the original block (it's gold now) issue the following command to turn the column from Gold to Iron.
+
+    /js box( blocks.iron, 1, 3)
+
+If you are unsure which material to use, you can use *TAB completion* to fill in the material. Just type `box (blocks.` then press TAB to see a list of possible materials. Now target a different block - this time one that is at ground level preferably - and create a stone path 2 blocks wide and 10 blocks long by issuing the following command:
+
+    /js box( blocks.stone, 2, 1, 10)
+
+This will create a stony path that extends 10 blocks away from you. 
+
+![Stone path 2 x 1 x 10](img/sky/stone_path.png)
+
+If you leave out any of the width, height and length parameters they will default to 1. So `box( blocks.gold, 5, 3)` will create a box 5 blocks wide, 3 blocks high and 1 block long, `box( blocks.gold, 5)` will create a box 5 blocks wide, 1 block high and 1 block long, and `box( blocks.gold )` will create a gold box 1 block wide, high and long. For the first parameter - the Material - you can use any of the values in the special *blocks* variable. The table below lists all of the possible block materials which can be used for building.
+
+<caption>Listing 8.1</caption>
+
+    blocks.air
+    blocks.anvil
+    blocks.beacon
+    blocks.bed
+    blocks.bedrock
+    blocks.birch
+    blocks.bookshelf
+    blocks.brewing_stand
+    blocks.brick.chiseled
+    blocks.brick.cracked
+    blocks.brick.mossy
+    blocks.brick.red
+    blocks.brick.stone
+    blocks.button_wood
+    blocks.cactus
+    blocks.cake
+    blocks.carpet.black
+    blocks.carpet.blue
+    blocks.carpet.brown
+    blocks.carpet.cyan
+    blocks.carpet.gray
+    blocks.carpet.green
+    blocks.carpet.lightblue
+    blocks.carpet.lightgray
+    blocks.carpet.lime
+    blocks.carpet.magenta
+    blocks.carpet.orange
+    blocks.carpet.pink
+    blocks.carpet.purple
+    blocks.carpet.red
+    blocks.carpet.white
+    blocks.carpet.yellow
+    blocks.carrots
+    blocks.cauldron
+    blocks.chest
+    blocks.chest_locked
+    blocks.chest_trapped
+    blocks.clay
+    blocks.coal_block
+    blocks.coal_ore
+    blocks.cobblestone
+    blocks.cobblestone_wall
+    blocks.cobweb
+    blocks.cocoa
+    blocks.command
+    blocks.crafting_table
+    blocks.dandelion
+    blocks.daylight_sensor
+    blocks.dead_bush
+    blocks.detector_rail
+    blocks.diamond
+    blocks.diamond_ore
+    blocks.dirt
+    blocks.dispenser
+    blocks.door_iron
+    blocks.door_wood
+    blocks.double_plant
+    blocks.dragon_egg
+    blocks.dropper
+    blocks.emerald
+    blocks.emerald_ore
+    blocks.enderchest
+    blocks.endportal
+    blocks.endportal_frame
+    blocks.endstone
+    blocks.farmland
+    blocks.fence
+    blocks.fence_gate
+    blocks.fire
+    blocks.flower_red
+    blocks.flower_yellow
+    blocks.flowerpot
+    blocks.furnace
+    blocks.furnace_burning
+    blocks.glass
+    blocks.glass_pane
+    blocks.glowstone
+    blocks.gold
+    blocks.gold_ore
+    blocks.grass
+    blocks.grass_tall
+    blocks.gravel
+    blocks.hardened_clay
+    blocks.hay
+    blocks.hopper
+    blocks.ice
+    blocks.iron
+    blocks.iron_bars
+    blocks.iron_ore
+    blocks.jackolantern
+    blocks.jukebox
+    blocks.jungle
+    blocks.ladder
+    blocks.lapis_lazuli_block
+    blocks.lapis_lazuli_ore
+    blocks.lava
+    blocks.lava_still
+    blocks.leaves
+    blocks.lever
+    blocks.lily_pad
+    blocks.melon
+    blocks.melon_stem
+    blocks.mobhead
+    blocks.monster_egg
+    blocks.monster_spawner
+    blocks.moss_stone
+    blocks.mushroom_brown
+    blocks.mushroom_brown_huge
+    blocks.mushroom_red
+    blocks.mushroom_red_huge
+    blocks.mycelium
+    blocks.nether
+    blocks.nether_fence
+    blocks.netherportal
+    blocks.netherquartzore
+    blocks.netherrack
+    blocks.netherwart
+    blocks.note
+    blocks.oak
+    blocks.obsidian
+    blocks.packed_ice
+    blocks.piston
+    blocks.piston_extn
+    blocks.potatoes
+    blocks.powered_rail
+    blocks.pressure_plate_stone
+    blocks.pressure_plate_weighted_heavy
+    blocks.pressure_plate_weighted_light
+    blocks.pressure_plate_wood
+    blocks.pumpkin
+    blocks.pumpkin_stem
+    blocks.quartz
+    blocks.rail
+    blocks.rail_activator
+    blocks.redeston_repeater_active
+    blocks.redstone
+    blocks.redstone_comparator
+    blocks.redstone_comparator_active
+    blocks.redstone_lamp
+    blocks.redstone_lamp_active
+    blocks.redstone_ore
+    blocks.redstone_ore_glowing
+    blocks.redstone_repeater
+    blocks.redstone_wire
+    blocks.rose
+    blocks.sand
+    blocks.sandstone
+    blocks.sapling
+    blocks.sapling.birch
+    blocks.sapling.jungle
+    blocks.sapling.oak
+    blocks.sapling.spruce
+    blocks.sign
+    blocks.sign_post
+    blocks.slab.birch
+    blocks.slab.brick
+    blocks.slab.cobblestone
+    blocks.slab.jungle
+    blocks.slab.netherbrick
+    blocks.slab.oak
+    blocks.slab.quartz
+    blocks.slab.sandstone
+    blocks.slab.snow
+    blocks.slab.spruce
+    blocks.slab.stone
+    blocks.slab.stonebrick
+    blocks.slab.wooden
+    blocks.slab.upper.birch
+    blocks.slab.upper.brick
+    blocks.slab.upper.cobblestone
+    blocks.slab.upper.jungle
+    blocks.slab.upper.netherbrick
+    blocks.slab.upper.oak
+    blocks.slab.upper.quartz
+    blocks.slab.upper.sandstone
+    blocks.slab.upper.spruce
+    blocks.slab.upper.stone
+    blocks.slab.upper.stonebrick
+    blocks.slab.upper.wooden
+    blocks.snow
+    blocks.soulsand
+    blocks.sponge
+    blocks.spruce
+    blocks.stained_clay.black
+    blocks.stained_clay.blue
+    blocks.stained_clay.brown
+    blocks.stained_clay.cyan
+    blocks.stained_clay.gray
+    blocks.stained_clay.green
+    blocks.stained_clay.lightblue
+    blocks.stained_clay.lightgray
+    blocks.stained_clay.lime
+    blocks.stained_clay.magenta
+    blocks.stained_clay.orange
+    blocks.stained_clay.pink
+    blocks.stained_clay.purple
+    blocks.stained_clay.red
+    blocks.stained_clay.white
+    blocks.stained_clay.yellow
+    blocks.stairs.birch
+    blocks.stairs.brick
+    blocks.stairs.cobblestone
+    blocks.stairs.jungle
+    blocks.stairs.nether
+    blocks.stairs.oak
+    blocks.stairs.quartz
+    blocks.stairs.sandstone
+    blocks.stairs.spruce
+    blocks.stairs.stone
+    blocks.sticky_piston
+    blocks.stone
+    blocks.stone_button
+    blocks.sugar_cane
+    blocks.table_enchantment
+    blocks.tnt
+    blocks.torch
+    blocks.torch_redstone
+    blocks.torch_redstone_active
+    blocks.trapdoor
+    blocks.tripwire
+    blocks.tripwire_hook
+    blocks.vines
+    blocks.water
+    blocks.water_still
+    blocks.wheat_seeds
+    blocks.wood
+    blocks.wool.black
+    blocks.wool.blue
+    blocks.wool.brown
+    blocks.wool.cyan
+    blocks.wool.gray
+    blocks.wool.green
+    blocks.wool.lightblue
+    blocks.wool.lightgray
+    blocks.wool.lime
+    blocks.wool.magenta
+    blocks.wool.orange
+    blocks.wool.pink
+    blocks.wool.purple
+    blocks.wool.red
+    blocks.wool.white
+    blocks.wool.yellow
+
 #### fluency
 What is a fluent API?
-JQuery
 Demonstration fwd(3).right(2).up(4).box(blocks.gold)
 Why is drone fluent? Limitations of the in-game prompt and command length. Not a limiting factor in modules so you can write
 
@@ -2703,6 +2942,7 @@ Why is drone fluent? Limitations of the in-game prompt and command length. Not a
 
 #### Digging Deeper
 ##### Extending Drone
+### Summary
 
 ## Recipe 8: Farts in Minecraft
 
@@ -2747,7 +2987,7 @@ Move back a couple of steps so you can better see the firework. Did you notice t
 The setTimeout() function lets you delay calling of a function. It takes two parameters:
 
 1. A function which it should eventually call.
-2. A delay. The delay is measured in milliseconds - that's 1/1000th of a second to you and I. There are 1,000 milliseconds in a second so a delay of 2,000 is equal to 2 seconds.
+2. A delay. The delay is measured in milliseconds - that's 1/1000th of a second. There are 1,000 milliseconds in a second so a delay of 2,000 is equal to 2 seconds.
 
 Although setTimeout() is not part of the Javascript Language, it is provided with web browsers and Node.js and it's implemented in ScriptCraft too. A common mistake when using *setTimeout()* is to assume that the delay is in seconds rather than milliseconds.
 
@@ -2791,18 +3031,26 @@ You might have noticed something unusual about the *launch()* function in the li
 
 ... This style of creating functions is called a *function declaration* . It's called a function declaration because the *function* keyword is the first word on the line. When you create a function this way you *must* give the function a name. The name is written between the `function` keyword and the parameters section. What's the difference between a function expression assigned to a variable (what we've seen so far) and a function declaration? When we say `var launch = function(){}` we aren't giving the function itself a name, we're just assigning it to a variable, but when we say `function launch(){}` then the function itself is given a name which it knows about and can use.
 
-One of the ways in which a function can use it's name is to call itself. A function which calls itself is called a *recursive* function.
+#### Me, a name I call myself...
+One of the ways in which a function can use its own name is to call itself. A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all of files and folders on a hard drive or drawing pretty fractal diagrams. Recursion is beyond the scope of this book but imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
 
-### Recursion
+    function openRussianDoll( doll ){
+      console.log( doll.size );
+      if ( doll.inner ) {
+        openRussianDoll( doll.inner );
+      }
+    }
 
-> To Iterate is Human, to Recurse, Divine
-> 
-> -- James O. Coplien, Bell Labs
+The *openRussianDoll()* function wouldn't be called just once or twice but would be called every time a new doll was uncovered. This is the power of recursion. 
 
-Recursion is an important idea in computer programming. TODO: Explanation with a diagram explaining the runtime flow of the listing.
+![](img/fworks/russiandoll.png)
+
+A few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations below:
+
+![Malin Christersson's Fractal Cube Stars](img/fworks/malinchristersson_fractals.png)
 
 ### Summary
-In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself. You learned about recursion which is a very powerful technique in programming. 
+In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself. 
 
 ## Recipe 10: Animal Sounds Revisited
 when talking about objects and lookup tables, implement the same logic as was used in sounds1 using a lookup table.

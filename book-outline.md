@@ -1804,19 +1804,11 @@ There are many sounds in Minecraft and the list of sounds available in the game 
 2. The volume at which you want to play the sound. This parameter is optional, if left out then it defaults to 1.0 (full volume). Volume is in the range 0 to 1 with 0 being no sound at all and 1 being maximum volume. For example, if you wanted to play a Cat's Meow at half volume you would write `sounds.catMeow( location, 0.5 );`
 3. The Pitch at which you want to play the sound. The parameter is also optional and if left out will default to 1.0 (moderate pitch). Pitch can vary between 0 and 4.
 
-These are just some of the functions in the sounds module, for a full reference see the Appendices at the back of the book:
+This is a table of all of the possible sound functions available at the time of writing. This list may not be up to date because new sounds are being added on an ongoing basis while some sounds may also be removed.
 
-* catMeow()
-* burp()
-* eat()
-* drink()
-* fizz()
-* villagerNo()
-* villagerYes()
-* lavaPop()
-* pigWalk()
+@@listing all_sounds.txt
 
-The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds:
+The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds like this:
 
     /js var sounds = require('sounds');
     /js sounds.catMeow( self.location );
@@ -2388,7 +2380,7 @@ A set of tables of events, one table for each set of events, Player Events, Serv
 A table of all the items in the items module and how to use them (API calls which require an ItemStack)
 ## Sounds reference
 A table of all the possible sounds in the sounds module (with caveat)
-## Drone API 
+## Drone API Reference
 ## Java and Javascript Notes
 A collection of gotchas
 1. Java Strings - converting from Java string to Javascript String

@@ -3,33 +3,35 @@
 #### variables (command prompt) DONE
 #### data types DONE
 #### comments DONE
-#### conditionals
-##### if
+#### conditionals DONE
+##### if DONE
 intro'd in recipe2 
 needs more detail in later recipes
-###### else if
-##### switch
-#### loops
-##### while
-##### for
+###### else if DONE
+##### switch DONE
+#### loops DONE
+##### while DONE
+##### for DONE
 ###### for in
-##### labels
-##### break
-##### continue
-#### functions
-##### functions as parameters / callbacks 
+##### labels 
+##### break DONE
+##### continue DONE
+#### functions DONE
+##### functions as parameters / callbacks  DONE
 INTRO'D in recipe3
-##### setTimeout
-##### setInterval
+##### setTimeout DONE
+##### clearTimeout DONE
+##### setInterval DONE
+##### clearInterval DONE
 #### arrays
-##### construction DONE
-recipe3
-##### accessing DONE
-recipe3
+##### construction DONE recipe3
+##### accessing DONE recipe3
 ##### mixed data TODO
 ##### nested arrays TODO
-##### methods DONE
-recipe3
+##### methods DONE recipe3
+TODO A table of array methods
+TODO A table of string methods
+
 #### objects
 ##### Date object
 ##### Methods in detail 
@@ -68,3 +70,17 @@ recipe3
 3. save file as -edited.html
 3. Open MS Word and open edited.html 
 4. select all and copy and paste into a new word document that uses publisher's template.
+
+
+# Recipe: Sign of the Times
+## setInterval
+## clearInterval
+## how do we know where all the clock signs are?
+## persistence?
+## protection?
+## background processes
+
+# Recipe: Time display in scoreboard?
+## converting from minecraft time to 24hr clock.
+## setInterval
+## clearInterval

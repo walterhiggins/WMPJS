@@ -1,13 +1,13 @@
 var fireworks = require('fireworks');
 exports.fireworkshow = function ( location, count ) {
   
-  function launch( ){
+  function launch( ) {
     fireworks.firework( location );
     count = count - 1;
-    if ( count ) {
-      setTimeout( launch, 2000 );
+    if ( count == 0 ) {
+      clearInterval(scheduled);
     }
   }
-
-  setTimeout( launch, 2000 );
+  var scheduled = setInterval( launch, 2000 );
+  return scheduled;
 };

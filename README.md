@@ -3171,10 +3171,18 @@ Save the file then issue the `js refresh()` command to reload your javascript pl
 Move back a couple of steps so you can better see the firework. Did you notice the firework did not launch immediately? There was a delay of 2 seconds.     
 
 #### The setTimeout() function
-The setTimeout() function lets you delay calling of a function. It takes two parameters:
+The *setTimeout()* function lets you delay calling of a function. It takes two parameters:
 
 1. A function which it should eventually call.
 2. A delay. The delay is measured in milliseconds - that's 1/1000th of a second. There are 1,000 milliseconds in a second so a delay of 2,000 is equal to 2 seconds.
+
+*setTimeout()* returns a value which can be used to stop the timed function from executing. To stop a function you've scheduled to execute you need to store the value returned by setTimeout() in a variable and pass this value to the *clearTimeout()* function like this:
+
+    js var later = function(){ console.log('I ran!') };
+    js var scheduled = setTimeout( later, 1000 );
+    js clearTimeout( scheduled );
+
+The *later()* function above will never get to execute because the *scheduled* task for running that function is canceled when we call *clearTimeout( scheduled )*.
 
 Although setTimeout() is not part of the Javascript Language, it is provided with web browsers and Node.js and it's implemented in ScriptCraft too. A common mistake when using *setTimeout()* is to assume that the delay is in seconds rather than milliseconds.
 
@@ -3184,7 +3192,7 @@ I promised you a fireworks show at the start of this recipe. A single firework w
 <caption>Listing 10.2</caption>
 
     var fireworks = require('fireworks');
-    exports.fireworkshow = function (location, count){
+    exports.fireworkshow = function ( location, count ) {
       
       function launch( ){
         fireworks.firework( location );
@@ -3236,8 +3244,56 @@ A few people have created some very cool Fractals in Minecraft using recursion. 
 
 ![Malin Christersson's Fractal Cube Stars](img/fworks/malinchristersson_fractals.png)
 
+### Cancelling the Fireworks show
+Let's say you kicked off a long running fireworks show and after a while you get bored and want to *cancel* the show. There are two ways to schedule a repeating task in Javascript, one way is to use *setTimeout()* and have a function which calls itself. We've already seen this in the earlier example. Another way is to use the *setInterval()* function which is like *setTimeout()* except it will keep on executing the task after each delay instead of only executing once after the delay. Let's take a look at an example of using *setInterval()* at the server console prompt:
+
+    js var askQuestion = function(){ console.log('Are we there yet?') }
+    js var scheduled = setInterval( askQuestion, 1000 )
+
+Run the above commands and you will see an 'Are we there yet?' message appear every second. 
+
+    [19:24:00 INFO]: [scriptcraft] Are we there yet?
+    [19:24:01 INFO]: [scriptcraft] Are we there yet?
+    [19:24:02 INFO]: [scriptcraft] Are we there yet?
+    [19:24:03 INFO]: [scriptcraft] Are we there yet?
+    [19:24:04 INFO]: [scriptcraft] Are we there yet?
+    [19:24:05 INFO]: [scriptcraft] Are we there yet?
+    [19:24:06 INFO]: [scriptcraft] Are we there yet?
+
+The message will keep printing out for as long as the server is running. Fortunately there's a way to cancel this scheduled function. At the server console prompt issue the following command:
+
+    js clearInterval( scheduled )
+
+... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following listing:
+
+<caption>Listing 10.3</caption>
+
+    var fireworks = require('fireworks');
+    exports.fireworkshow = function ( location, count ) {
+      
+      function launch( ) {
+        fireworks.firework( location );
+        count = count - 1;
+        if ( count == 0 ) {
+          clearInterval(scheduled);
+        }
+      }
+      var scheduled = setInterval( launch, 2000 );
+      return scheduled;
+    };
+
+In listing 10.3 we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
+
+    /js var show = fireworkshow( self.location, 300 );
+
+The above statements start a firework show in which there'll be 300 launches each 2 seconds apart. The show will go on for about 10 minutes if left alone but we're going to cancel the show early. Issue the following command to cancel the show:
+
+    /js clearTimeout( show );
+
+And the fireworks will cease. If you ever schedule tasks using the *setInterval()* or *setTimeout()* functions it's always a good idea to keep the value returned by these functions so that you have the option of canceling the task using *clearInterval()* and *clearTimeout()* respectively.
+
 ### Summary
-In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself. 
+In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
 
 ## Recipe 10: Animal Sounds Revisited
 when talking about objects and lookup tables, implement the same logic as was used in sounds1 using a lookup table.

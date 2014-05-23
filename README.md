@@ -2842,7 +2842,7 @@ Once you've targeted a block - pick any block you like but preferably one just a
 
     /js box( blocks.gold, 1, 3);
 
-The targeted block will disappear and a column of gold blocks 1 block wide and 3 blocks high will instantly appear in its place.
+The targeted block will disappear and a column of gold blocks 1 block wide and 3 blocks high will instantly appear in its place. 
 
 ![gold column](img/sky/1x3gold.png)
 
@@ -2853,9 +2853,9 @@ The *box()* function is used to place blocks in the game. It takes 4 parameters:
 3. Height - How high you want the box to extend. The box will extend from the targeted block upwards.
 4. Length - How far away you want the box to extend. The box will extend from the targeted block away from you.
 
-The *box()* function is used to create cubes and cuboids of any size. A cube is a 3D shape whose sides are all the same length. A cuboid is a 3D shape whose width, height and length can differ.
+The *box()* function is used to create cubes and cuboids of any size. A cube is a 3 Dimensional shape whose sides are all the same length. A cuboid is a 3 Dimensional shape whose width, height and length can differ.
 
-![3D Shapes][(img/sky/3Dshapes.jpg)
+![Box Parameters][(img/sky/box-params.png)
 
 Let's try a couple of more examples. While targeting the original block (it's gold now) issue the following command to turn the column from Gold to Iron.
 
@@ -3116,18 +3116,62 @@ If you leave out any of the width, height and length parameters they will defaul
     blocks.wool.white
     blocks.wool.yellow
 
-#### fluency
-What is a fluent API?
-Demonstration fwd(3).right(2).up(4).box(blocks.gold)
-Why is drone fluent? Limitations of the in-game prompt and command length. Not a limiting factor in modules so you can write
+#### Moving your Drone
+A Drone which didn't move about and only built on one location wouldn't be very interesting. You can direct the Drone to move about and even turn and place blocks in any direction. There are a couple of functions which you can use to move the drown along any axis.
 
-    this
-    .fwd(3)
-    .right(2)
-    .up(4)
-    .box(blocks.gold);
+##### Term: Axis
+When drawing on paper you draw in two dimensions. The two dimensions are Width which is along what's called the *X Axis* and Height which is along the *Y Axis*. In real life there is a 3rd dimension, Length which along the *Z Axis*. The X axis, Y axis and Z axis make up the 3 dimensions.
 
-#### Digging Deeper
+Let's get familiar with some of the movement functions by using them first at the in-game prompt. To place a block of gold then move 2 places to the right and place another block of gold, target a block then issue the following command:
+
+    /js box(blocks.gold).right(2).box(blocks.gold)
+
+The statement above might look odd but it's perfectly valid Javascript. This style of calling functions one after another is called *chaining* because each `.` forms a link in a chain of function calls. You can't call *all* functions in javascript like this but can call all of the Drone's functions this way. Another term used by programmers to describe this style of function calling is *Fluency*. As we'll see later you can extend the abilities of the Drone by adding your own functions which can be called in the same *fluent* way.
+
+In the above statement there are 3 different function calls being made, the first call `box(blocks.gold)` creates a gold block. The `box()` function returns a Drone object which can be used to call other Drone functions. The next call `.right(2)` moves the Drone right 2 blocks and it too returns the same Drone object. The last call `.box(blocks.gold)` creates another gold block. If we were to plot this out on graph paper it would look like this:
+
+![Moving the Drone, Graph Paper Plot](img/sky/graph-paper-movement.png)
+
+We could also write the above code as 3 distinct statements like this:
+
+    /js var drone = box(blocks.gold);
+    /js drone.right(2);
+    /js drone.box(blocks.gold);
+
+I personally prefer to write it using a single statement `box(blocks.gold).right(2).box(blocks.gold)` as it fits on one line and is slightly shorter than the 3 separate statements. Be careful though when writing such statements because the in-game command prompt only accepts a maximum of 100 letters for each command. 
+
+##### The Corner Stone
+If building just above ground level it's a good idea to always place a block where you would like to build, then target that block before issuing any Drone functions. Think of the targeted block as the *Corner Stone* of your building. If building on a flat world, you will first need to manually place a corner stone block or else your building will begin in the ground instead of just above ground level.
+
+![Corner Stone](img/sky/cornerstone.png)
+
+Let's use more chaining to create a series of 3 parkour platforms each of which are 2 blocks apart. Target a block then issue the following command:
+
+    /js box(blocks.gold).fwd(2).box(blocks.gold,1,2).fwd(2).box(blocks.gold,1,3)
+
+This statement will create 3 platforms. The first platform will be 1 block high, the second platform 2 blocks high and the third, 3 blocks high. Since each platform is 2 blocks away they are perfect for in-game parkour practice.
+
+In the digram below you can see how the pillars are constructed and in the screenshot that follows, how the parkour platforms look in the game.
+
+![Parkour Platforms on Graph Paper](img/sky/graph-paper-parkour.png)
+
+![Parkour Platforms](img/sky/jumping-pillars.png)
+
+In addition to moving, you can make your Drone change direction too. To change direction use the *turn()* function. When turning you always turn right 90 degrees. To turn around so you're facing the opposite way turn twice `turn(2)`. To turn left you need to turn right 3 times `turn(3)`. You can combine turning and movement and building in a single chained statement like this:
+
+    /js box(blocks.gold,1,1,4).fwd(4).turn().box(blocks.iron,1,1,3).fwd(3).turn().box(blocks.ice,1,1,2)
+
+This command creates 3 small walls of gold, iron and ice. In the diagram below you can see how the walls are constructed using a combination of *box()*, *turn()* and *fwd()* function calls:
+
+![3 Walls on Graph Paper](img/sky/graph-paper-3walls.png)
+
+And here is the result in Minecraft:
+
+![Turning and Movement while building](img/sky/turning)
+
+All of the Drone's functions return the Drone itself so each function can chain directly onto another. This is a table of Drone functions but the functions themselves are described in more detail in the Drone API Reference in the Appendices.
+
+### A Blueprint for a Skyscraper
 ##### Extending Drone
 ### Summary
 

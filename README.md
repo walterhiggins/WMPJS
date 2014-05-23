@@ -3157,6 +3157,7 @@ In the digram below you can see how the pillars are constructed and in the scree
 
 ![Parkour Platforms](img/sky/jumping-pillars.png)
 
+#### Turning your Drone
 In addition to moving, you can make your Drone change direction too. To change direction use the *turn()* function. When turning you always turn right 90 degrees. To turn around so you're facing the opposite way turn twice `turn(2)`. To turn left you need to turn right 3 times `turn(3)`. You can combine turning and movement and building in a single chained statement like this:
 
     /js box(blocks.gold,1,1,4).fwd(4).turn().box(blocks.iron,1,1,3).fwd(3).turn().box(blocks.ice,1,1,2)
@@ -3167,9 +3168,9 @@ This command creates 3 small walls of gold, iron and ice. In the diagram below y
 
 And here is the result in Minecraft:
 
-![Turning and Movement while building](img/sky/turning)
+![Turning and Movement while building](img/sky/turning.png)
 
-All of the Drone's functions return the Drone itself so each function can chain directly onto another. This is a table of Drone functions but the functions themselves are described in more detail in the Drone API Reference in the Appendices.
+All of the Drone's functions return the Drone itself so each function can chain directly onto another. Presented below is a table of Drone functions and brief descriptions of each. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference in the Appendices.
 
 ### A Blueprint for a Skyscraper
 ##### Extending Drone

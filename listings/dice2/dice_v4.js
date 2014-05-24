@@ -1,4 +1,4 @@
-var roll = function( sides ) {
+function roll( sides ) {
   if ( typeof sides === 'undefined' ) { 
     sides = 6;
   }

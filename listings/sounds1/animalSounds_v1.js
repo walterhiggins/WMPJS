@@ -1,6 +1,6 @@
 var sounds = require('sounds');
 var input = require('input');
-var onInput = function ( animal, player ) {
+function onInput( animal, player ) {
 
   switch (animal) { 
     case 'cat': 

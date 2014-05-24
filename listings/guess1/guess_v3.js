@@ -6,7 +6,7 @@ exports.guessTheNumber = function( player ){
 
   var randomNumber = dice.roll(6);
 
-  var checkAnswer = function( guess, guesser, repeat ){
+  function checkAnswer( guess, guesser, repeat ){
 
     if ( guess == randomNumber ) {
       guesser.sendMessage('You guessed correct!');

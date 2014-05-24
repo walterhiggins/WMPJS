@@ -1,4 +1,4 @@
-var roll = function( ) {
+function roll( ) {
   var result = Math.random();
   var sides = 6;
   result = result * sides;

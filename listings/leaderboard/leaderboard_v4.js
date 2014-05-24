@@ -1,5 +1,5 @@
 
-var jumps = function( sender ) {
+function jumps( sender ) {
   var players = bukkit.players();
 
   var i = 0;

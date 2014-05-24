@@ -1,6 +1,6 @@
 var leaderboard = require('leaderboard');
 
-var leaderboardCmd = function( params, sender ) {
+function leaderboardCmd( params, sender ) {
   leaderboard.jumps( sender );
 };
 

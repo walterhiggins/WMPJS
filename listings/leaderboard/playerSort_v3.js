@@ -1,4 +1,4 @@
-var byName = function( a, b ) { 
+function byName( a, b ) { 
   if (a.name == b.name) {
     return 0;
   } else if (a.name > b.name) {
@@ -9,13 +9,13 @@ var byName = function( a, b ) {
 };
 exports.byName = byName;
 
-var byExp = function( a, b ) { 
+function byExp( a, b ) { 
   return a.totalExperience - b.totalExperience;
 };
 exports.byExperience = byExp;
 exports.byExp = byExp;
 
-var byJumps = function( a, b ) {
+function byJumps( a, b ) {
   var aJumps = a.getStatistic( bukkit.stat.JUMP );
   var bJumps = b.getStatistic( bukkit.stat.JUMP );
   return aJumps - bJumps;

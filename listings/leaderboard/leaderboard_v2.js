@@ -1,6 +1,6 @@
 var playerSort = require('playerSort');
 
-var jumps = function( sender ) {
+function jumps( sender ) {
   var players = bukkit.players();
   players.sort( playerSort.byJumps );
   players.reverse();

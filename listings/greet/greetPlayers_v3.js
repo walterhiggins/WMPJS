@@ -1,6 +1,6 @@
 var greeting = require('greetings');
 var fireworks = require('fireworks');
-var greetPlayer = function( event ) {
+function greetPlayer( event ) {
   var player = event.player;
   var message = greeting.random() + player.name;
   player.sendMessage( message );

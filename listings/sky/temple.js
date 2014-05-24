@@ -1,15 +1,18 @@
 var Drone = require('../drone').Drone;
-var blocks = require('blocks');
-
+//
+// constructs a pyramid
+// 
 function pyramid ( side ) {
   if ( !side ) {
-    side = 30;
+    side = 10;
   }
   var i = side;
+  var material = blocks.sandstone;
+
   this.chkpt('pyramid');
 
   while ( i > 0 ) {
-    this.box( blocks.sandstone, i, 1, i)
+    this.box( material, i, 1, i)
       .up()
       .right()
       .fwd();
@@ -17,6 +20,5 @@ function pyramid ( side ) {
   }
 
   this.move('pyramid');      
-}
-
+};
 Drone.extend( pyramid );

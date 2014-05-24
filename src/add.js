@@ -1,6 +1,3 @@
-var add = function( firstNumber, secondNumber ) {
+function add( firstNumber, secondNumber ) {
   return firstNumber + secondNumber;
-  
-  
-  
 };

@@ -2,11 +2,11 @@
 
 ## Who is this book for?
 
-This book is for anyone who is curious about Minecraft Modding and Programming. It teaches how to create Minecraft Server Plugins and assumes the reader has no previous programming experience. This book is for beginners of all ages. 
+This book is for anyone who is curious about Programming and creating Minecraft Plugins. It teaches how to create Minecraft Server Plugins and assumes the reader has no previous programming experience. This book is for beginners of all ages. 
 
 ## Introduction
 
-This book shows you how to create your own Minecraft Server Plugins using Javascript. In this book I will sometimes use the word 'mod' and sometimes use the term 'plugin'. For the purpose of this book, these words mean the same thing. Mojang - the makers of Minecraft - prefer to use the term 'Plugin API' rather than 'Modding API' when refering to their forthcoming official API which will make extending Minecraft easier.
+This book shows you how to create your own Minecraft Server Plugins using Javascript. There's often confusion about the words 'Mod' and 'Plugin'. For the purpose of this book, they mean the same thing. Mojang - the makers of Minecraft - prefer to use the term 'Plugin API' rather than 'Modding API' when refering to their forthcoming official API which will make extending Minecraft easier.
 
 Before we begin I better explain some of the words I'll use throughout this book. 
 
@@ -47,6 +47,7 @@ In this book I will teach you how to program using the Javascript programming la
  * Javascript isn't a toy. Javascript is a proper programming language used professionally by thousands of programmers around the world. Although originally only used for adding simple extensions to web pages, it's now used for developing all kinds of software and has become one of the most popular programming languages. 
  * Javascript is cross-platform. What this means is Javascript is available on Macintosh, Windows and Linux.
 
+The Javascript programming Language is a simple language to get started with but it can be quite flexible in how you do things. In Javascript there's usually more than one way to do it. This book is not intended as a comprehensive tour of all of Javascript's features. Its aim is to focus on the fun parts of Javascript and to help those who are curious about programming get a taste for what programming in Javascript is like.
 
 ### About the Upcoming Minecraft API
 
@@ -725,9 +726,9 @@ We are effectively saying to parseInt "here's some text - give me the number (an
 ##### Writing your own functions
 One of the really cool things about programming is that you're not limited to using only the built-in functions provided by the language. You can create your own functions. In this book we're going to create a lot of functions to do cool things you wouldn't normally be able to do in Minecraft. For now let's create a simple new function that adds two numbers together. 
 
-    js var add = function( firstNumber, secondNumber ) { return firstNumber + secondNumber }
+    js function add( firstNumber, secondNumber ) { return firstNumber + secondNumber }
 
-When you enter this command nothing happens. That's because what we've just done is declared a new function. The function won't do anything until we call it. Let's do that:
+When you enter this command nothing happens. That's because what we've just done is declared a new function called *add*. The function won't do anything until we call it. Let's do that:
 
     js add( 1, 2 )
 
@@ -736,14 +737,14 @@ The result is 3. Try calling it with different values to test that the function 
     js add( 5, 6 )
     js add( 9, 1 )
 
-Now let's look at the earlier function declaration in more detail. First we declare a new variable called 'add' but instead of assigning it a number or a string, we assign it a function. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what parameters the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function definition `function( firstNumber, secondNumber )` says what the function should expect. The next step in definining the function is to say what the function should actually do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
+Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in definining the function is to say what the function should actually do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
 
 ![Function Outline](img/function-outline.png)
 
 You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber. You should give your parameters names which are memorable so you don't forget what the parameters are for. The same is true of the variable name you create for your function. Give it a name which is meaningful and memorable. 
 
 ### Term: Reuse
-Reuse is important in programming. While programming you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There's two ways to do this: You can copy and paste the code you've already written but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code - functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
+Reuse is important in programming. While programming you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There's two ways to do this: You can copy and paste the code you've already written but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code - packaging up code in functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
 
 In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every single time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
 
@@ -948,7 +949,7 @@ So far the plugin we've written works fine in that it is loaded and executed whe
    
 <caption>Listing 1.1</caption>
 
-    var helloWorld = function( ) { 
+    function helloWorld( ) { 
       console.log('Hello World');
     };
    
@@ -958,7 +959,7 @@ What just happened? *The message no longer displays at startup!* That's because 
 
 <caption>Listing 1.2</caption>
 
-    var helloWorld = function( ) { 
+    function helloWorld( ) { 
       console.log('Hello World');
     };
     helloWorld();
@@ -973,7 +974,7 @@ This command fails with an error `ReferenceError: helloWorld is not defined`. Th
 
 <caption>Listing 1.3</caption>
 
-    var helloWorld = function( ) { 
+    function helloWorld( ) { 
       console.log('Hello World');
     };
     helloWorld();
@@ -1065,7 +1066,7 @@ Type the following code into the newly created file...
 
 <caption>Listing 2.1</caption>
 
-    var roll = function(){
+    function roll(){
       var result = Math.random();
       result = result * 6;
       result = Math.floor(result);
@@ -1141,7 +1142,7 @@ Let's look at the code we've just added to Minecraft. The code is reprinted belo
 
 <caption>Listing 2.1</caption>
 
-    var roll = function(){
+    function roll(){
       var result = Math.random();
       result = result * 6;
       result = Math.floor(result);
@@ -1156,7 +1157,7 @@ A Javascript module is a file with one or more related functions. In the above f
 3. Next we convert the number to a integer by passing it to the `Math.floor()` function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
 4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the roll() function to return the `result` variable.
 
-As in the previous recipe, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function expression which begins on line 1 of the file).
+As in the previous recipe, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
 
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
@@ -1202,15 +1203,15 @@ In this recipe we'll build on the code written in the previous recipe to let us 
 
 If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each dice...
 
-    var rollSixSided = function(){ 
+    function rollSixSided(){ 
       ...
-    };
-    var rollFourSided = function(){
+    }
+    function rollFourSided(){
       ...
-    };
-    var rollEightSided = function(){
+    }
+    function rollEightSided(){
       ...
-    };
+    }
     exports.rollSixSided = rollSixSided;
     exports.rollFourSided = rollFourSided;
     exports.rollEightSided = rollEightSided;
@@ -1237,7 +1238,7 @@ Just as *console.log* and many other functions can take parameters, we can write
 
 <caption>Listing 3.1</caption>
 
-    var roll = function( ) {
+    function roll( ) {
       var result = Math.random();
       var sides = 6;
       result = result * sides;
@@ -1250,7 +1251,7 @@ The above code is similar to code from the previous recipe except I declare a ne
 
 <caption>Listing 3.2</caption>
 
-    var roll = function( sides ) {
+    function roll( sides ) {
       var result = Math.random();
       result = result * sides;
       result = Math.floor(result);
@@ -1262,7 +1263,7 @@ Can you spot the difference? I removed the `var sides = 6;` statement and put a 
 
 ![](img/recipe2/magicnumber-to-parameter.png)
 
-The first change was to make the number 6 used in the computation a variable. The next change was to make the variable a parameter. Parameters are like variables. In the first version of this program (on the left hand side) the number 6 is 'hard-coded'. 'Hard-coding' is when you have a specific number or text or other data in your function which at the time seemed like it might never need to change (this would be true if we assumed we'd only ever need a number between 0 and 5). It's usually a good idea to instead turn these values into parameters so you don't have to change your code every time the data changes. Once you've edited your dice.js file to match the version on the right, save it and then ttype `/js refresh()` at the in-game prompt and try each of the following commands in turn:
+The first change was to make the number 6 used in the computation a variable. The next change was to make the variable a parameter. Parameters are like variables. In the first version of this program (on the left hand side) the number 6 is 'hard-coded'. 'Hard-coding' is when you have a specific number or text or other data in your function which at the time seemed like it might never need to change (this would be true if we assumed we'd only ever need a number between 0 and 5). It's usually a good idea to instead turn these values into parameters so you don't have to change your code every time the data changes. Once you've edited your dice.js file to match the version on the right, save it and then type `/js refresh()` at the in-game prompt and try each of the following commands in turn:
 
     /js var dice = require('dice');
 
@@ -1282,7 +1283,7 @@ You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascr
 
 <caption>Listing 3.3</caption>
 
-    var roll = function( sides ) {
+    function roll( sides ) {
       if ( typeof sides === 'undefined' ) { 
         sides = 6;
       }
@@ -1617,13 +1618,15 @@ There are a couple of other useful Array insertion and removal functions:
 
 You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
 
+TODO @@table array_methods.org
+
 ### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
 
 <caption>Listing 4.2</caption>
 
     var greeting = require('greetings');
-    var greetPlayer = function( event ) {
+    function greetPlayer( event ) {
       var player = event.player;
       var message = greeting.random() + player.name;
       player.sendMessage( message );
@@ -1640,7 +1643,7 @@ The message will of course be different for you. The screenshot below shows wher
 
 ScriptCraft comes bundled with a built-in variable called *events*. The *events* variable is used to listen for and react to events in the game. There are approximately 200 different types of events that you can register for in Minecraft. When you *register* for an *event* in your code you are telling the server that you want to be notified when a particular type of activity occurs in the game. You register by giving the server a function which won't be called immediately but will only be called when the activity occurs. In the code above we are basically saying to Minecraft "Hey, whenever someone joins the game, I want you (the server) to call this 'greetPlayer' function" . 
 
-This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding - passing functions as parameters to other functions - is called functional programming. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because it's purpose is to handle - that is: react - to events, specifically the event which is fired by the server whenever a player joins the game. 
+This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding - passing functions as parameters to other functions - is called *functional programming*. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because its purpose is to handle - that is: react - to events, specifically the event which is fired by the server whenever a player joins the game. 
 
 We'll look more closely at events and event-handling functions in a later recipe.
 
@@ -1661,7 +1664,7 @@ As a final fluorish to this recipe let's add something a little more spectacular
 
     var greeting = require('greetings');
     var fireworks = require('fireworks');
-    var greetPlayer = function( event ) {
+    function greetPlayer( event ) {
       var player = event.player;
       var message = greeting.random() + player.name;
       player.sendMessage( message );
@@ -1694,7 +1697,7 @@ In this recipe we'll create a simple number-guessing game using the `if` stateme
     
       var randomNumber = dice.roll(6);
     
-      var checkAnswer = function( answer, guesser ){
+      function checkAnswer( answer, guesser ){
     
         if ( answer == randomNumber ) {
           guesser.sendMessage('You guessed correct!');
@@ -1731,7 +1734,7 @@ The problem with modal dialogs is that they interrupt the program and the progra
 This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in recipe 3 when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
 
     js var input = require('input');
-    js var respond = function( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
+    js function respond( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
     js input( self, 'How old are you?', respond )
 
 The important thing to keep in mind when writing code that depends on asking players questions is that you can't force players to answer questions right away or even answer at all, they could be busy fighting spiders, trading with villagers, climbing, building or simply ignoring the question altogether. In the commands above, the *respond()* function will be called by *input()* when the player has answered the question. There's a name often used for functions which are called by other functions - they're called *Callbacks*. The *input()* function when called will return immediately and it does not return any value. Instead, it waits in the background (remember, there's a lot going on in Minecraft so we can't stop the game in its tracks) until the player eventually answers the question and then calls the *Callback*. A *Callback* is literally a function which will be called back later on. *Callbacks* are also used when writing Javascript code for web browsers. For example, functions can be written which will only be called when a visitor clicks a button. *Callback* functions are super useful and part of what makes Javascript such a flexible language. 
@@ -1805,7 +1808,7 @@ Let"s say we want the program to output one message if the player guesses correc
     
       var randomNumber = dice.roll(6);
     
-      var checkAnswer = function( guess, guesser ){
+      function checkAnswer( guess, guesser ){
     
         if ( guess == randomNumber ) {
           guesser.sendMessage('You guessed correct!');
@@ -1841,7 +1844,7 @@ So far the guessing games gives players just one shot at guessing the number. In
     
       var randomNumber = dice.roll(6);
     
-      var checkAnswer = function( guess, guesser, repeat ){
+      function checkAnswer( guess, guesser, repeat ){
     
         if ( guess == randomNumber ) {
           guesser.sendMessage('You guessed correct!');
@@ -1884,7 +1887,7 @@ The `if` statement is one of several *block* statements in javascript, that is, 
     
       var randomNumber = dice.roll(6);
     
-      var checkAnswer = function( guess, guesser, repeat ){
+       function checkAnswer( guess, guesser, repeat ){
     
         if ( guess == randomNumber ) {
           guesser.sendMessage('You guessed correct!');
@@ -1956,14 +1959,16 @@ In javascript you write it like this:
 <caption>Listing 5.5</caption>
 
     var items = require('items');
-    events.blockBreak(function(event){
+    
+    function dropCookiesIfSneakingOrFlying(event){
       var breaker = event.player;
       var broken = event.block;
       
       if ( breaker.sneaking || breaker.flying ) {
         broken.world.dropItem( broken.location, items.cookie(2));
       }
-    });
+    }
+    events.blockBreak( dropCookiesIfSneakingOrFlying );
     		 
 
 If you like you can save the above code into a file called stealthCookies.js in your *scriptcraft/plugins* folder, reload your plugins (using `/js refresh()`) and try breaking some blocks while flying or sneaking to see the code in action.
@@ -2011,7 +2016,7 @@ In recipe 4 you learned how to get input from players and how to test the input 
 
     var sounds = require('sounds');
     var input = require('input');
-    var onInput = function ( animal, player ) {
+    function onInput( animal, player ) {
     
       switch (animal) { 
         case 'cat': 
@@ -2288,6 +2293,7 @@ This is a table of all of the possible sound functions available at the time of 
     sounds.zombieWalk()
     sounds.zombieWood()
     sounds.zombieWoodbreak()
+TODO @@table all_sounds.org
 
 The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds like this:
 
@@ -2319,7 +2325,7 @@ The *String.toLowerCase()* function will convert any string to its lowercase equ
 
     var sounds = require('sounds');
     var input = require('input');
-    var onInput = function ( animal, player ) {
+    function onInput( animal, player ) {
       animal = animal.toLowerCase();
       switch (animal) { 
         case 'cat': 
@@ -2421,14 +2427,14 @@ You can see from the output that Array.sort() will sort a list of Strings alphab
 
 ... well that makes no sense! In Javascript, the default way to sort items in an array is alphabetically. It even does this when the items in an array are all numbers. In Javascript, arrays can contain *anything*, numbers, strings, objects, other arrays and even a mixture of all of these types. If you want the *Array.sort()* method to sort by any way other than alphabetically, you have to tell it how. Let's see an example. Issue the following commands at the server console prompt:
 
-    js var numerically = function( a, b ) { return a - b };
+    js function numerically( a, b ) { return a - b };
     js luckyNumbers.sort( numerically );
     js console.log( luckyNumbers );
     > 5, 9, 21, 23, 40
 
 Now the `luckyNumbers` array is sorted in the correct order. The *numerically()* function we created in the first command above is a function which takes two parameters, *a* and *b* and compares them. This function is then passed to the *Array.sort()* method and will be called many times by *Array.sort()* is it plucks two items from the array and asks the *numerically()* function 'Which item is bigger - a or b?'. You can see that your *numericall()* function will get called many times if you add a *console.log()* statement...
 
-    js numerically = function( a, b ) { console.log('a = ' + a + ', b = ' + b); return a - b }
+    js function numerically( a, b ) { console.log('a = ' + a + ', b = ' + b); return a - b }
     js luckyNumbers.sort( numerically );
     > a = 9, b = 5
     > a = 21, b = 9
@@ -2446,7 +2452,7 @@ The *numerically()* function we created above is called a *Comparator* function 
 
 Let's look at these rules and see how they're used in the *numerically()* function:
 
-    js var numerically = function( a, b ) { return a - b ; }
+    js function numerically( a, b ) { return a - b ; }
 
 Sorting numerically is relatively easy. For numeric sorts we just need to subtract one number from another to give  the *Array.sort()* method the information it needs to sort. So plucking any 2 numbers from the array and passing them to the *numerically()* function should give the correct order...
 
@@ -2458,7 +2464,7 @@ The *Array.sort()* method takes the results of all these calculations to move ea
 
 Let's look at a slightly more complex example. Typically, your server will have 3 worlds created when it starts up. The worlds are usually called 'world', 'world_nether' and 'world_the_end'. If you wanted to sort these worlds based on their populations (how many living entities - animals, mobs and players are present) you could do so by creating a new *byPopulation()* function that would look something like this:
 
-    js var byPopulation( a, b ) { return a.entities.size() - b.entities.size() }
+    js function byPopulation( a, b ) { return a.entities.size() - b.entities.size() }
 
 The *byPopulation()* function takes 2 parameters a and b both of which it assumes are Minecraft worlds. Each Minecraft world object has an *entities* property which is a Java list of living things. The entities property in turn has a *size()* function so if we want to find out how many living beings are on a world we call the world's *entities.size()* method. We can compare the populations by subtracting one population size from another. 
 
@@ -2478,7 +2484,7 @@ One way to sort players is by name. This isn't strictly a leaderboard in the tru
 
 <caption>Listing 7.1</caption>
 
-    var byName = function( a, b ) { 
+    function byName( a, b ) { 
       if (a.name == b.name) {
         return 0;
       } else if (a.name > b.name) {
@@ -2511,7 +2517,7 @@ Let's face it, a leaderboard based on player names would be both boring and unfa
 
 <caption>Listing 7.2</caption>
 
-    var byName = function( a, b ) { 
+    function byName( a, b ) { 
       if (a.name == b.name) {
         return 0;
       } else if (a.name > b.name) {
@@ -2523,7 +2529,7 @@ Let's face it, a leaderboard based on player names would be both boring and unfa
     
     exports.byName = byName;
     
-    var byExp = function( a, b ) { 
+    function byExp( a, b ) { 
       return a.totalExperience - b.totalExperience;
     };
     
@@ -2576,7 +2582,7 @@ This command calls the *.getStatistic()* method on the *self* object which refer
 
 <caption>Listing 7.3</caption>
 
-    var byName = function( a, b ) { 
+    function byName( a, b ) { 
       if (a.name == b.name) {
         return 0;
       } else if (a.name > b.name) {
@@ -2587,13 +2593,13 @@ This command calls the *.getStatistic()* method on the *self* object which refer
     };
     exports.byName = byName;
     
-    var byExp = function( a, b ) { 
+    function byExp( a, b ) { 
       return a.totalExperience - b.totalExperience;
     };
     exports.byExperience = byExp;
     exports.byExp = byExp;
     
-    var byJumps = function( a, b ) {
+    function byJumps( a, b ) {
       var aJumps = a.getStatistic( bukkit.stat.JUMP );
       var bJumps = b.getStatistic( bukkit.stat.JUMP );
       return aJumps - bJumps;
@@ -2651,7 +2657,7 @@ Following the for statement you usually have a block of one or more statements c
 
     var playerSort = require('playerSort');
     
-    var jumps = function( sender ) {
+    function jumps( sender ) {
       var players = bukkit.players();
       players.sort( playerSort.byJumps );
       players.reverse();
@@ -2691,7 +2697,7 @@ The second kind of loop is called the *while* loop. The *for* loop is very usefu
 
     var playerSort = require('playerSort');
     
-    var jumps = function( sender ) {
+    function jumps( sender ) {
       var players = bukkit.players();
       players.sort( playerSort.byJumps );
       players.reverse();
@@ -2749,7 +2755,7 @@ The *break* statement will break out of a loop effectively ending the loop so th
 <caption>Listing 7.7</caption>
 
     
-    var jumps = function( sender ) {
+    function jumps( sender ) {
       var players = bukkit.players();
     
       var i = 0;
@@ -2790,7 +2796,7 @@ The `jsp` command by itself doesn't do much. It's just a placeholder, a dummy co
 
 In ScriptCraft you create new commands for use by everyone using the *command()* function. The best way to see how the *command()* function works is with a simple example:
 
-    /js var boo = function( params, sender ) { sender.sendMessage('Boo!') }
+    /js function boo( params, sender ) { sender.sendMessage('Boo!') }
     /js command('boo', boo);
 
 In the first command I create a new function called *boo()* which will simply say Boo!. In the second command I call the ScriptCraft *command()* function passing two arguments, a string 'boo' which will be used by *all* players and the newly created function *boo()* which will be called whenever any player issues this command:
@@ -2809,7 +2815,7 @@ Now let's dive in and create a new `jsp leaderboard` command. Create a new file 
 
     var leaderboard = require('leaderboard');
     
-    var leaderboardCmd = function( params, sender ) {
+    function leaderboardCmd( params, sender ) {
       leaderboard.jumps( sender );
     };
     
@@ -3180,18 +3186,17 @@ A *Blueprint* is a technical drawing of a building. Blueprints are created by Ar
 <caption>Listing 8.2</caption>
 
     var Drone = require('../drone').Drone;
+    var blocks = require('blocks');
     
     function pyramid ( side ) {
       if ( !side ) {
         side = 30;
       }
       var i = side;
-      var material = blocks.sandstone;
-    
       this.chkpt('pyramid');
     
       while ( i > 0 ) {
-        this.box( material, i, 1, i)
+        this.box( blocks.sandstone, i, 1, i)
           .up()
           .right()
           .fwd();
@@ -3211,12 +3216,137 @@ You can what the result looks like in the screenshot below:
 
 ![A Pyramid](img/sky/pyramid.png)
 
-We'll dive deeper into Drone blueprints in the next exercise - building a skyscraper.
+We'll dive deeper into Drone blueprints in the next exercise - Blueprint basics.
+
+### Blueprint basics
+Before designing our skyscraper let's start with something a little smaller so we can better understand the basics of adding new blueprints for building in Minecraft. We'll start with a simple structure we'll call *monolith*. It will be a large black slab 4 blocks wide X 9 blocks high X 1 block long. The *monolith* is from an old movie called '2001: A Space Oddyssey'. In the movie, astronauts discover this large black slab of stone on the moon. I use it as an example here because it can be created using a single call to Drone's *box()* method. 
+
+You've seen already that the Drone has many functions for building, moving and turning and that these functions can be chained together to perform complex building operations. What you haven't yet seen is that the Drone can be extended - that is - new functions can be added to the Drone and combined with existing functions. For example: wouldn't it be cool if, once you have created a blueprint for a monolith, you could build a couple of them side by side using a single command? Well the Drone API has a function called *extend()* which lets you do just that. Once we've created the Monolith blueprint we should be able to perform any of these commands (*don't try to execute these - we haven't yet defined the monolith() function*) :
+
+    /js monolith()
+    /js monolith().fwd(4).monolith().fwd(4).monolith().fwd(4).monolith()
+
+In the first example we just call *monolith()* because any function which belongs to the Drone API is a *global* function meaning it can be called without first calling *require()*. In the second example you can see that once we've created the *monolith()* function we'll be able to use it in a Drone building chain that forms part of a series of building commands. The second command sets up a series of monoliths like a line of dominoes. I'll explain how this works but first let's create a new module called *monolith.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
+
+<caption>Listing 8.3</caption>
+
+    var Drone = require('../drone').Drone;
+    var blocks = require('blocks');
+    
+    function monolith( ) {
+      this.box( blocks.wool.black, 4, 9, 1);
+    }
+    Drone.extend( monolith );
+
+Once you've saved the file issue the `js refresh()` command to reload your plugins and then find a nice clear parcel of land in the game, place a cornerstone and then issue this command:
+
+    /js monolith()
+
+In a very short time, an imposing black Monolith will appear. Now let's take a closer look at the *monolith.js* source code...
+
+#### Modules needed for Blueprints
+The first two lines of the *monolith.js* module load both the *Drone* and *blocks* modules. You may be wondering why I required `'../drone'` and not simply `'drone'`. The `../` part means look for the drone module in the folder above this one (also known as the *parent folder*). Remember - the *monolith.js* module is saved in the *scriptcraft/plugins/drone/contrib* folder. The Drone module is located in the *scriptcraft/plugins/drone* folder so `require('../drone')` effectively says 'load the drone.js module from the parent folder scriptcraft/plugins/drone'. The `../` part of the string means this is what programmers call a *relative path*. A *relative path* is how you say that one folder is *related* to another. In this instance we're saying we want to load a module from the parent folder. 
+
+The other thing to note about the first require statement is the trailing `.Drone` just after the call to *require()*. Every call to *require()* returns a module object with zero or more properties and methods. If we're only interested in 1 of the returned object's properties or methods then we can just grab that one property using the dot-notation (adding a `.` and getting the property or method by name). The statement:
+
+    var Drone = require('../drone').Drone;
+
+... is how all blueprints usually begin and access the Drone API so if you're creating a blueprint of your own you'll want to do this too.
+
+The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
+
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in the next recipe. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
+
+Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword.
+
+Having declared the *monolith()* function we turn it into a Drone method using the *Drone.extend()* function which takes a function and turns it into a method effectively attaching that function to itself so it can form part of a chain of calls. The Drone is extensible - it is capable of taking on new blueprints and building using those blueprints. When you add a new function to the Drone using the *extend()* method it is as if the function were an integral part of the Drone. As if by magic, the function becomes global and chainable and can be chained with any other Drone methods:
+
+    /js box(blocks.gold).fwd(2).monolith().fwd(4).turn().fwd(4).monolith()
+
+So now you can see how easy it is to extend the Drone to build new interesting things in Minecraft. Let's build a skyscraper!
 
 ### A Blueprint for a Skyscraper
+In this recipe we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-##### Extending Drone
+<caption>Listing 8.4</caption>
+
+    var Drone = require('../drone').Drone;
+    var blocks = require('blocks');
+    
+    function skyscraper( floors ) {
+      var i = 0;
+      if ( typeof floors == 'undefined' ) { 
+        floors = 10; 
+      }
+      this.chkpt('skyscraper');
+      for ( i = 0; i < floors; i++ ) {
+        this          
+          .box( blocks.iron, 20, 1, 20)  
+          .up()       
+          .box0(blocks.glass_pane, 20, 3, 20) 
+          .up(3);
+      }
+      this.move('skyscraper');
+    }
+    Drone.extend( skyscraper );
+    
+
+Once you've saved the file issue the `js refresh()` command to reload your plugins and then find a nice clear parcel of land in the game, place a cornerstone and then issue this command:
+
+    /js skyscraper()
+
+In a very short time, a 10 story skyscraper will appear. Pretty impressive huh? You might already be thinking of new and wonderful buildings and structures to add to Minecraft but before you start coding, let's take a close look at the skyscraper code.
+
+#### The skyscraper method
+The first few lines of the *skyscraper()* method declare a variable *i* and check to see if the *floors* parameter is set, if it isn't then a default of 10 floors will be created. Next we see the first occurrence of the *this* keyword in this method. The *.chkpt()* method - which is short for 'checkpoint' - bookmarks the drone's current location so it can return there later. It's a good idea to bookmark the drone's current location at the start of any method and to return to that location at the end of your method because - ideally - your method should only be used for building and not moving or turning the drone. You can of course turn and move the drone within your method but you should return the drone to where it was before your method was called. The *.chkpt()* and *.move()* pair of functions will respectively save a drone's location before it goes on an excursion and return to the location when the excursion is done. 
+
+The next section of the method is a *for* loop which repeatedly (for each floor) :
+
+1. Builds an iron floor 20 blocks wide by 1 block high by 20 blocks long
+2. Moves up one block
+3. Builds a glass pane wall 3 blocks high on all 4 sides.
+4. Moves up another 3 blocks
+
+The above 4 steps are repeated for each floor so that when the *for* loop is done an entire skyscraper has been constructed. You can see what just one floor of the skyscraper (one pass through the *for* loop) looks like in the screenshot below:
+
+![](img/sky/skyscraper_floor.png)
+
+At the end of the method, an entire skyscraper is constructed. This is what the result looks like in the game:
+
+![](img/sky/skyscraper.png)
+
+##### Chaining in source files.
+At the in-game prompt we are limited to a single line for our code so when chaining together a couple of Drone method calls we need to write code like this:
+
+    /js box(block.iron, 20,1,20).up().box0(blocks.glass_pane, 20, 3, 20).up(3) 
+
+... which can be difficult to read and understand. Fortunately we have no such limits when writing code in source files and can have statements which span more than one line like this:
+
+    this          
+      .box( blocks.iron, 20, 1, 20)  
+      .up()       
+      .box0(blocks.glass_pane, 20, 3, 20) 
+      .up(3);
+
+This is actually a single statement - notice that there's only a semicolon after the last line above. The above code could also be written on a single line but breaking up the statement as above makes the code more readable. Another alternative way of writing the above code would be as a series of statements:
+
+    this.box( blocks.iron, 20, 1, 20);
+    this.up();
+    this.box0(blocks.glass_pane, 20, 3, 20);
+    this.up(3);
+
+Since each of the Drone methods returns the drone object it's possible to chain methods using the `.` character so in the example above there's strictly no need to repeatedly use the *this.* prefix after the first line. I personally prefer the former approach but it's largely a matter of personal taste. What's important is that your code is readable and understandable.
+
+##### The *box0()* Method.
+The *box0()* method is another method provided by the Drone, it's similar to *box()* except it only creates 4 walls and does not fill in the 4 walls. The *box0()* method is especially useful for construction dwellings. It takes the same parameters as the *box()* method.
+
+### Achievement Unlocked!
+![](img/achievement-plugin-dev-9.png)
+
+Congratulations Master Builder, You've just discovered how to build massive structures using Javascript and some Object extension magic. 
+
 ### Summary
+In this recipe you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on objects and methods and Javascript's *this* keyword and what it means when used inside a method. 
 
 ## Recipe 8: Farts in Minecraft
 
@@ -3245,7 +3375,7 @@ In the commands you just executed at the in-game prompt, the firework launches i
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function (location){
-      var launch = function(){
+      function launch(){
         fireworks.firework(location);
       };
       setTimeout(launch, 2000);
@@ -3265,7 +3395,7 @@ The *setTimeout()* function lets you delay calling of a function. It takes two p
 
 *setTimeout()* returns a value which can be used to stop the timed function from executing. To stop a function you've scheduled to execute you need to store the value returned by setTimeout() in a variable and pass this value to the *clearTimeout()* function like this:
 
-    js var later = function(){ console.log('I ran!') };
+    js function later(){ console.log('I ran!') };
     js var scheduled = setTimeout( later, 1000 );
     js clearTimeout( scheduled );
 
@@ -3298,23 +3428,8 @@ Then issue the `/js refresh()` command and at the in-game command prompt issue t
 
 Move back a couple of steps and watch the show as 5 fireworks are launched one after another. The show should end after the 5th firewok has launched. You can change the number of fireworks launched by changing the second parameter. 
 
-### Naming Functions
-You might have noticed something unusual about the *launch()* function in the listing above. In the listing 10.1 we created the launch function like this:
-
-    var launch = function() { 
-        ... 
-    };
-
-... This style of creating functions is what we've been using so far in this book. We declare a variable then assign a *function expression* to the variable. But in listing 10.2 we create the function like this:
-
-    function launch(){
-       ...
-    }
-
-... This style of creating functions is called a *function declaration* . It's called a function declaration because the *function* keyword is the first word on the line. When you create a function this way you *must* give the function a name. The name is written between the `function` keyword and the parameters section. What's the difference between a function expression assigned to a variable (what we've seen so far) and a function declaration? When we say `var launch = function(){}` we aren't giving the function itself a name, we're just assigning it to a variable, but when we say `function launch(){}` then the function itself is given a name which it knows about and can use.
-
 #### Me, a name I call myself...
-One of the ways in which a function can use its own name is to call itself. A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all of files and folders on a hard drive or drawing pretty fractal diagrams. Recursion is beyond the scope of this book but imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
+A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all of files and folders on a hard drive or drawing pretty fractal diagrams. Recursion is beyond the scope of this book so I won't go into great detail. To get a taste for what recursion is about, imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
 
     function openRussianDoll( doll ){
       console.log( doll.size );
@@ -3327,14 +3442,14 @@ The *openRussianDoll()* function wouldn't be called just once or twice but would
 
 ![](img/fworks/russiandoll.png)
 
-A few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations below:
+If you're curious about recursion, a few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations below:
 
 ![Malin Christersson's Fractal Cube Stars](img/fworks/malinchristersson_fractals.png)
 
 ### Cancelling the Fireworks show
 Let's say you kicked off a long running fireworks show and after a while you get bored and want to *cancel* the show. There are two ways to schedule a repeating task in Javascript, one way is to use *setTimeout()* and have a function which calls itself. We've already seen this in the earlier example. Another way is to use the *setInterval()* function which is like *setTimeout()* except it will keep on executing the task after each delay instead of only executing once after the delay. Let's take a look at an example of using *setInterval()* at the server console prompt:
 
-    js var askQuestion = function(){ console.log('Are we there yet?') }
+    js function askQuestion(){ console.log('Are we there yet?') }
     js var scheduled = setInterval( askQuestion, 1000 )
 
 Run the above commands and you will see an 'Are we there yet?' message appear every second. 
@@ -3470,3 +3585,26 @@ A collection of gotchas
 <!--  LocalWords:  png img Bukkit API Javascript ScriptCraft
  -->
  
+
+## Function Declarations vs Function Expressions
+In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
+
+    function myFunction(){
+    }
+
+...while a function expression might look like this:
+
+    var myFunction = function(){
+    };
+
+Throughout this book I have defined functions using *function declarations* rather than *function expressions*. I've done so because 
+
+1. This is a book for beginners. Wherever there are  2 or more possible approaches to doing something in Javascript, I've endeavored to present only the simplest approach so that beginners are not overwhelmed by Javascript's flexible syntax.
+2. Function declarations *require* the function to have a name whereas function expressions do not. A named function - that is - a function which was given a name as part of its definition rather than merely assigned to a named variable - can call itself since its name is guaranteed to be in scope within the function's body. It's considered best practice to name functions whether they are defined as expressions or declarations.
+3. Function declarations are slightly shorter to type than their function expression equivalents.
+4. The topic of recursion requires the use of named functions. 
+5. The Drone API's *extend()* function is made simpler by providing named function.
+
+This book is not intended as a comprehensive tour of all of javascript's features. Its aim is to focus on the fun parts of Javascript and to help those who are curious about programming get a taste for what programming is like.
+
+

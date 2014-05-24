@@ -3172,7 +3172,49 @@ And here is the result in Minecraft:
 
 All of the Drone's functions return the Drone itself so each function can chain directly onto another. Presented below is a table of Drone functions and brief descriptions of each. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference in the Appendices.
 
+TODO @@table drone_functions.org
+
+### Blueprints
+A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
+
+<caption>Listing 8.2</caption>
+
+    var Drone = require('../drone').Drone;
+    
+    function pyramid ( side ) {
+      if ( !side ) {
+        side = 30;
+      }
+      var i = side;
+      var material = blocks.sandstone;
+    
+      this.chkpt('pyramid');
+    
+      while ( i > 0 ) {
+        this.box( material, i, 1, i)
+          .up()
+          .right()
+          .fwd();
+        i = i - 2; 
+      }
+    
+      this.move('pyramid');      
+    }
+    
+    Drone.extend( pyramid );
+
+The listing above will let you create pyramids by simply targeting a block in the game and issuing this command at the in-game prompt:
+
+    /js pyramid()
+
+You can what the result looks like in the screenshot below:
+
+![A Pyramid](img/sky/pyramid.png)
+
+We'll dive deeper into Drone blueprints in the next exercise - building a skyscraper.
+
 ### A Blueprint for a Skyscraper
+
 ##### Extending Drone
 ### Summary
 

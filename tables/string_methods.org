@@ -1,0 +1,12 @@
+| Method Name                  | Description                                                                                                                                                                  |
+|------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| .charAt(index)               | Returns the character at index from the string.                                                                                                                              |
+| .concat(text1, text2)        | Combines the text from one or more strings and returns a new string.                                                                                                         |
+| .indexOf(text)               | Returns the first position where text was found or -1 if the text is not in the string. For example "Ice Cream".indexOf("Cream") returns 4.                                  |
+| .lastIndexOf(text)           | Returns the last position where text was found.                                                                                                                              |
+| .replace(regex, replacement) | Returns a new string with with some or all mathces of a patter replaced by a replacement. For example "I hate Creepers".replace(/Creepers/,"Spiders")                        |
+| .split(separator)            | Splits a string into an array of strings. For example: "I hate creepers".split(" ") returns ["I", "hate", "creepers"]                                                        |
+| .substring(indexA,[indexB])  | Extracts characters starting at indexA and continuing to indexB (or end of string if indexB is not provided). For example: "I hate creepers".substring(7) returns "creepers" |
+| .toLowerCase()               | Returns a new string with all characters in lowercase.                                                                                                                       |
+| .toUpperCase()               | Returns a new string with all characters in uppercase.                                                                                                                       |
+| .trim()                      | Returns a new string with whitespace removed from both ends of the string. For example "  I hate Creepers ".trim() returns "I hate creepers".                                |

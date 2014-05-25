@@ -1618,7 +1618,13 @@ There are a couple of other useful Array insertion and removal functions:
 
 You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
 
-TODO @@table array_methods.org
+<table>
+<caption><h4> Table 1: Array Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
+<tr><td>.push()</td><td>Appends a new item to the end of the array.</td></tr>
+<tr><td>.pop()</td><td>Removes and returns the first item in the array.</td></tr>
+<tr></tr>
+
+</table>
 
 ### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
@@ -2097,203 +2103,75 @@ There are many sounds in Minecraft and the list of sounds available in the game 
 
 This is a table of all of the possible sound functions available at the time of writing. This list may not be up to date because new sounds are being added on an ongoing basis while some sounds may also be removed.
 
-<caption>Listing 6.2</caption>
+<table>
+<caption><h4> Table 2: Sound Functions</h4></caption><tr><td>sounds.ambienceCave()</td><td>sounds.ambienceRain()</td><td>sounds.ambienceThunder()</td></tr>
+<tr><td>sounds.anvilLand()</td><td>sounds.anvilUse()</td><td>sounds.arrowHit()</td></tr>
+<tr><td>sounds.batDeath()</td><td>sounds.batHurt()</td><td>sounds.batIdle()</td></tr>
+<tr><td>sounds.batLoop()</td><td>sounds.batTakeoff()</td><td>sounds.blazeBreath()</td></tr>
+<tr><td>sounds.blazeDeath()</td><td>sounds.blazeHit()</td><td>sounds.burp()</td></tr>
+<tr><td>sounds.catHiss()</td><td>sounds.catHit()</td><td>sounds.catMeow()</td></tr>
+<tr><td>sounds.catPurr()</td><td>sounds.catPurreow()</td><td>sounds.chestClose()</td></tr>
+<tr><td>sounds.chestOpen()</td><td>sounds.chickenEggPop()</td><td>sounds.chickenHurt()</td></tr>
+<tr><td>sounds.chickenIdle()</td><td>sounds.chickenWalk()</td><td>sounds.click()</td></tr>
+<tr><td>sounds.cowHurt()</td><td>sounds.cowIdle()</td><td>sounds.cowWalk()</td></tr>
+<tr><td>sounds.creeperDeath()</td><td>sounds.creeperHiss()</td><td>sounds.digGrass()</td></tr>
+<tr><td>sounds.digGravel()</td><td>sounds.digSand()</td><td>sounds.digSnow()</td></tr>
+<tr><td>sounds.digStone()</td><td>sounds.digWood()</td><td>sounds.digWool()</td></tr>
+<tr><td>sounds.donkeyAngry()</td><td>sounds.donkeyDeath()</td><td>sounds.donkeyHit()</td></tr>
+<tr><td>sounds.donkeyIdle()</td><td>sounds.doorClose()</td><td>sounds.doorOpen()</td></tr>
+<tr><td>sounds.drink()</td><td>sounds.eat()</td><td>sounds.enderdragonDeath()</td></tr>
+<tr><td>sounds.enderdragonGrowl()</td><td>sounds.enderdragonHit()</td><td>sounds.enderdragonWings()</td></tr>
+<tr><td>sounds.endermanDeath()</td><td>sounds.endermanHit()</td><td>sounds.endermanIdle()</td></tr>
+<tr><td>sounds.endermanScream()</td><td>sounds.endermanStare()</td><td>sounds.endermanTeleport()</td></tr>
+<tr><td>sounds.explode()</td><td>sounds.fallBig()</td><td>sounds.fallSmall()</td></tr>
+<tr><td>sounds.fire()</td><td>sounds.fireIgnite()</td><td>sounds.fireworkBlast()</td></tr>
+<tr><td>sounds.fireworkBlast2()</td><td>sounds.fireworkLargeBlast()</td><td>sounds.fireworkLargeBlast2()</td></tr>
+<tr><td>sounds.fireworkLaunch()</td><td>sounds.fireworkTwinkle()</td><td>sounds.fireworkTwinkle2()</td></tr>
+<tr><td>sounds.fizz()</td><td>sounds.fuse()</td><td>sounds.ghastCharge()</td></tr>
+<tr><td>sounds.ghastDeath()</td><td>sounds.ghastFireball()</td><td>sounds.ghastMoan()</td></tr>
+<tr><td>sounds.ghastScream()</td><td>sounds.ghastScream2()</td><td>sounds.glass()</td></tr>
+<tr><td>sounds.horseAngry()</td><td>sounds.horseArmor()</td><td>sounds.horseBreathe()</td></tr>
+<tr><td>sounds.horseDeath()</td><td>sounds.horseGallop()</td><td>sounds.horseHit()</td></tr>
+<tr><td>sounds.horseIdle()</td><td>sounds.horseJump()</td><td>sounds.horseLand()</td></tr>
+<tr><td>sounds.horseSaddle()</td><td>sounds.horseSkeletonDeath()</td><td>sounds.horseSkeletonHit()</td></tr>
+<tr><td>sounds.horseSkeletonIdle()</td><td>sounds.horseSoft()</td><td>sounds.horseWood()</td></tr>
+<tr><td>sounds.horseZombieDeath()</td><td>sounds.horseZombieHit()</td><td>sounds.horseZombieIdle()</td></tr>
+<tr><td>sounds.hurtFlesh()</td><td>sounds.irongolemDeath()</td><td>sounds.irongolemHit()</td></tr>
+<tr><td>sounds.irongolemThrow()</td><td>sounds.irongolemWalk()</td><td>sounds.itemBreak()</td></tr>
+<tr><td>sounds.itemPickup()</td><td>sounds.lava()</td><td>sounds.lavaPop()</td></tr>
+<tr><td>sounds.levelUp()</td><td>sounds.magmacubeJump()</td><td>sounds.magmacubeWalk()</td></tr>
+<tr><td>sounds.magmacubeWalk2()</td><td>sounds.minecartBase()</td><td>sounds.minecartInside()</td></tr>
+<tr><td>sounds.noteBass()</td><td>sounds.noteBassDrum()</td><td>sounds.noteBassGuitar()</td></tr>
+<tr><td>sounds.notePiano()</td><td>sounds.notePling()</td><td>sounds.noteSnareDrum()</td></tr>
+<tr><td>sounds.noteSticks()</td><td>sounds.orbPickup()</td><td>sounds.pigDeath()</td></tr>
+<tr><td>sounds.pigIdle()</td><td>sounds.pigWalk()</td><td>sounds.pistonExtend()</td></tr>
+<tr><td>sounds.pistonRetract()</td><td>sounds.portal()</td><td>sounds.portalTravel()</td></tr>
+<tr><td>sounds.portalTrigger()</td><td>sounds.sheepIdle()</td><td>sounds.sheepShear()</td></tr>
+<tr><td>sounds.sheepWalk()</td><td>sounds.shootArrow()</td><td>sounds.silverfishHit()</td></tr>
+<tr><td>sounds.silverfishIdle()</td><td>sounds.silverfishKill()</td><td>sounds.silverfishWalk()</td></tr>
+<tr><td>sounds.skeletonDeath()</td><td>sounds.skeletonHurt()</td><td>sounds.skeletonIdle()</td></tr>
+<tr><td>sounds.skeletonWalk()</td><td>sounds.slimeAttack()</td><td>sounds.slimeWalk()</td></tr>
+<tr><td>sounds.slimeWalk2()</td><td>sounds.spiderDeath()</td><td>sounds.spiderIdle()</td></tr>
+<tr><td>sounds.spiderWalk()</td><td>sounds.splash()</td><td>sounds.splash2()</td></tr>
+<tr><td>sounds.stepGrass()</td><td>sounds.stepGravel()</td><td>sounds.stepLadder()</td></tr>
+<tr><td>sounds.stepSand()</td><td>sounds.stepSnow()</td><td>sounds.stepStone()</td></tr>
+<tr><td>sounds.stepWood()</td><td>sounds.stepWool()</td><td>sounds.successfulHit()</td></tr>
+<tr><td>sounds.swim()</td><td>sounds.villagerDeath()</td><td>sounds.villagerHaggle()</td></tr>
+<tr><td>sounds.villagerHit()</td><td>sounds.villagerIdle()</td><td>sounds.villagerNo()</td></tr>
+<tr><td>sounds.villagerYes()</td><td>sounds.water()</td><td>sounds.witherDeath()</td></tr>
+<tr><td>sounds.witherHurt()</td><td>sounds.witherIdle()</td><td>sounds.witherShoot()</td></tr>
+<tr><td>sounds.witherSpawn()</td><td>sounds.wolfBark()</td><td>sounds.wolfDeath()</td></tr>
+<tr><td>sounds.wolfGrowl()</td><td>sounds.wolfHowl()</td><td>sounds.wolfHurt()</td></tr>
+<tr><td>sounds.wolfPant()</td><td>sounds.wolfShake()</td><td>sounds.wolfWalk()</td></tr>
+<tr><td>sounds.wolfWhine()</td><td>sounds.woodClick()</td><td>sounds.zombieDeath()</td></tr>
+<tr><td>sounds.zombieHurt()</td><td>sounds.zombieIdle()</td><td>sounds.zombieInfect()</td></tr>
+<tr><td>sounds.zombieMetal()</td><td>sounds.zombiePigAngry()</td><td>sounds.zombiePigDeath()</td></tr>
+<tr><td>sounds.zombiePigHurt()</td><td>sounds.zombiePigIdle()</td><td>sounds.zombieRemedy()</td></tr>
+<tr><td>sounds.zombieUnfect()</td><td>sounds.zombieWalk()</td><td>sounds.zombieWood()</td></tr>
+<tr><td>sounds.zombieWoodbreak()</td></tr>
+<tr></tr>
 
-    sounds.ambienceCave()
-    sounds.ambienceRain()
-    sounds.ambienceThunder()
-    sounds.anvilBreak()
-    sounds.anvilLand()
-    sounds.anvilUse()
-    sounds.arrowHit()
-    sounds.batDeath()
-    sounds.batHurt()
-    sounds.batIdle()
-    sounds.batLoop()
-    sounds.batTakeoff()
-    sounds.blazeBreath()
-    sounds.blazeDeath()
-    sounds.blazeHit()
-    sounds.burp()
-    sounds.catHiss()
-    sounds.catHit()
-    sounds.catMeow()
-    sounds.catPurr()
-    sounds.catPurreow()
-    sounds.chestClose()
-    sounds.chestOpen()
-    sounds.chickenEggPop()
-    sounds.chickenHurt()
-    sounds.chickenIdle()
-    sounds.chickenWalk()
-    sounds.click()
-    sounds.cowHurt()
-    sounds.cowIdle()
-    sounds.cowWalk()
-    sounds.creeperDeath()
-    sounds.creeperHiss()
-    sounds.digGrass()
-    sounds.digGravel()
-    sounds.digSand()
-    sounds.digSnow()
-    sounds.digStone()
-    sounds.digWood()
-    sounds.digWool()
-    sounds.donkeyAngry()
-    sounds.donkeyDeath()
-    sounds.donkeyHit()
-    sounds.donkeyIdle()
-    sounds.doorClose()
-    sounds.doorOpen()
-    sounds.drink()
-    sounds.eat()
-    sounds.enderdragonDeath()
-    sounds.enderdragonGrowl()
-    sounds.enderdragonHit()
-    sounds.enderdragonWings()
-    sounds.endermanDeath()
-    sounds.endermanHit()
-    sounds.endermanIdle()
-    sounds.endermanScream()
-    sounds.endermanStare()
-    sounds.endermanTeleport()
-    sounds.explode()
-    sounds.fallBig()
-    sounds.fallSmall()
-    sounds.fire()
-    sounds.fireIgnite()
-    sounds.fireworkBlast()
-    sounds.fireworkBlast2()
-    sounds.fireworkLargeBlast()
-    sounds.fireworkLargeBlast2()
-    sounds.fireworkLaunch()
-    sounds.fireworkTwinkle()
-    sounds.fireworkTwinkle2()
-    sounds.fizz()
-    sounds.fuse()
-    sounds.ghastCharge()
-    sounds.ghastDeath()
-    sounds.ghastFireball()
-    sounds.ghastMoan()
-    sounds.ghastScream()
-    sounds.ghastScream2()
-    sounds.glass()
-    sounds.horseAngry()
-    sounds.horseArmor()
-    sounds.horseBreathe()
-    sounds.horseDeath()
-    sounds.horseGallop()
-    sounds.horseHit()
-    sounds.horseIdle()
-    sounds.horseJump()
-    sounds.horseLand()
-    sounds.horseSaddle()
-    sounds.horseSkeletonDeath()
-    sounds.horseSkeletonHit()
-    sounds.horseSkeletonIdle()
-    sounds.horseSoft()
-    sounds.horseWood()
-    sounds.horseZombieDeath()
-    sounds.horseZombieHit()
-    sounds.horseZombieIdle()
-    sounds.hurtFlesh()
-    sounds.irongolemDeath()
-    sounds.irongolemHit()
-    sounds.irongolemThrow()
-    sounds.irongolemWalk()
-    sounds.itemBreak()
-    sounds.itemPickup()
-    sounds.lava()
-    sounds.lavaPop()
-    sounds.levelUp()
-    sounds.magmacubeJump()
-    sounds.magmacubeWalk()
-    sounds.magmacubeWalk2()
-    sounds.minecartBase()
-    sounds.minecartInside()
-    sounds.noteBass()
-    sounds.noteBassDrum()
-    sounds.noteBassGuitar()
-    sounds.notePiano()
-    sounds.notePling()
-    sounds.noteSnareDrum()
-    sounds.noteSticks()
-    sounds.orbPickup()
-    sounds.pigDeath()
-    sounds.pigIdle()
-    sounds.pigWalk()
-    sounds.pistonExtend()
-    sounds.pistonRetract()
-    sounds.portal()
-    sounds.portalTravel()
-    sounds.portalTrigger()
-    sounds.sheepIdle()
-    sounds.sheepShear()
-    sounds.sheepWalk()
-    sounds.shootArrow()
-    sounds.silverfishHit()
-    sounds.silverfishIdle()
-    sounds.silverfishKill()
-    sounds.silverfishWalk()
-    sounds.skeletonDeath()
-    sounds.skeletonHurt()
-    sounds.skeletonIdle()
-    sounds.skeletonWalk()
-    sounds.slimeAttack()
-    sounds.slimeWalk()
-    sounds.slimeWalk2()
-    sounds.spiderDeath()
-    sounds.spiderIdle()
-    sounds.spiderWalk()
-    sounds.splash()
-    sounds.splash2()
-    sounds.stepGrass()
-    sounds.stepGravel()
-    sounds.stepLadder()
-    sounds.stepSand()
-    sounds.stepSnow()
-    sounds.stepStone()
-    sounds.stepWood()
-    sounds.stepWool()
-    sounds.successfulHit()
-    sounds.swim()
-    sounds.villagerDeath()
-    sounds.villagerHaggle()
-    sounds.villagerHit()
-    sounds.villagerIdle()
-    sounds.villagerNo()
-    sounds.villagerYes()
-    sounds.water()
-    sounds.witherDeath()
-    sounds.witherHurt()
-    sounds.witherIdle()
-    sounds.witherShoot()
-    sounds.witherSpawn()
-    sounds.wolfBark()
-    sounds.wolfDeath()
-    sounds.wolfGrowl()
-    sounds.wolfHowl()
-    sounds.wolfHurt()
-    sounds.wolfPant()
-    sounds.wolfShake()
-    sounds.wolfWalk()
-    sounds.wolfWhine()
-    sounds.woodClick()
-    sounds.zombieDeath()
-    sounds.zombieHurt()
-    sounds.zombieIdle()
-    sounds.zombieInfect()
-    sounds.zombieMetal()
-    sounds.zombiePigAngry()
-    sounds.zombiePigDeath()
-    sounds.zombiePigHurt()
-    sounds.zombiePigIdle()
-    sounds.zombieRemedy()
-    sounds.zombieUnfect()
-    sounds.zombieWalk()
-    sounds.zombieWood()
-    sounds.zombieWoodbreak()
-TODO @@table all_sounds.org
+</table>
 
 The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds like this:
 
@@ -2321,7 +2199,7 @@ How do we make the *animalSounds()* function understand that when a player types
 
 The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
-<caption>Listing 6.3</caption>
+<caption>Listing 6.2</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -2398,6 +2276,23 @@ You can see that while `name.concat("crafter");` returns a value `steve crafter`
     > steve crafter
     /js name
     > steve crafter
+
+Listed below is a table of the most common String methods.
+
+<table>
+<caption><h4> Table 3: Commonly used String Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
+<tr><td>.charAt(index)</td><td>Returns the character at index from the string.</td></tr>
+<tr><td>.concat(text1, text2)</td><td>Combines the text from one or more strings and returns a new string.</td></tr>
+<tr><td>.indexOf(text)</td><td>Returns the first position where text was found or -1 if the text is not in the string. For example "Ice Cream".indexOf("Cream") returns 4.</td></tr>
+<tr><td>.lastIndexOf(text)</td><td>Returns the last position where text was found.</td></tr>
+<tr><td>.replace(regex, replacement)</td><td>Returns a new string with with some or all mathces of a patter replaced by a replacement. For example "I hate Creepers".replace(/Creepers/,"Spiders")</td></tr>
+<tr><td>.split(separator)</td><td>Splits a string into an array of strings. For example: "I hate creepers".split(" ") returns ["I", "hate", "creepers"]</td></tr>
+<tr><td>.substring(indexA,[indexB])</td><td>Extracts characters starting at indexA and continuing to indexB (or end of string if indexB is not provided). For example: "I hate creepers".substring(7) returns "creepers"</td></tr>
+<tr><td>.toLowerCase()</td><td>Returns a new string with all characters in lowercase.</td></tr>
+<tr><td>.toUpperCase()</td><td>Returns a new string with all characters in uppercase.</td></tr>
+<tr><td>.trim()</td><td>Returns a new string with whitespace removed from both ends of the string. For example "  I hate Creepers ".trim() returns "I hate creepers".</td></tr>
+
+</table>
 
 A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String .
 
@@ -2877,250 +2772,90 @@ This will create a stony path that extends 10 blocks away from you.
 
 If you leave out any of the width, height and length parameters they will default to 1. So `box( blocks.gold, 5, 3)` will create a box 5 blocks wide, 3 blocks high and 1 block long, `box( blocks.gold, 5)` will create a box 5 blocks wide, 1 block high and 1 block long, and `box( blocks.gold )` will create a gold box 1 block wide, high and long. For the first parameter - the Material - you can use any of the values in the special *blocks* variable. The table below lists all of the possible block materials which can be used for building.
 
-<caption>Listing 8.1</caption>
+<table>
+<caption><h4> Table 4: Building Materials</h4></caption><tr><td>blocks.air</td><td>blocks.anvil</td><td>blocks.beacon</td></tr>
+<tr><td>blocks.bed</td><td>blocks.bedrock</td><td>blocks.bookshelf</td></tr>
+<tr><td>blocks.brewing_stand</td><td>blocks.brick.chiseled</td><td>blocks.brick.cracked</td></tr>
+<tr><td>blocks.brick.mossy</td><td>blocks.brick.red</td><td>blocks.brick.stone</td></tr>
+<tr><td>blocks.button_wood</td><td>blocks.cactus</td><td>blocks.cake</td></tr>
+<tr><td>blocks.carpet.black</td><td>blocks.carpet.blue</td><td>blocks.carpet.brown</td></tr>
+<tr><td>blocks.carpet.cyan</td><td>blocks.carpet.gray</td><td>blocks.carpet.green</td></tr>
+<tr><td>blocks.carpet.lightblue</td><td>blocks.carpet.lightgray</td><td>blocks.carpet.lime</td></tr>
+<tr><td>blocks.carpet.magenta</td><td>blocks.carpet.orange</td><td>blocks.carpet.pink</td></tr>
+<tr><td>blocks.carpet.purple</td><td>blocks.carpet.red</td><td>blocks.carpet.white</td></tr>
+<tr><td>blocks.carpet.yellow</td><td>blocks.carrots</td><td>blocks.cauldron</td></tr>
+<tr><td>blocks.chest</td><td>blocks.chest_locked</td><td>blocks.chest_trapped</td></tr>
+<tr><td>blocks.clay</td><td>blocks.coal_block</td><td>blocks.coal_ore</td></tr>
+<tr><td>blocks.cobblestone</td><td>blocks.cobblestone_wall</td><td>blocks.cobweb</td></tr>
+<tr><td>blocks.cocoa</td><td>blocks.command</td><td>blocks.crafting_table</td></tr>
+<tr><td>blocks.dandelion</td><td>blocks.daylight_sensor</td><td>blocks.dead_bush</td></tr>
+<tr><td>blocks.detector_rail</td><td>blocks.diamond</td><td>blocks.diamond_ore</td></tr>
+<tr><td>blocks.dirt</td><td>blocks.dispenser</td><td>blocks.door_iron</td></tr>
+<tr><td>blocks.door_wood</td><td>blocks.double_plant</td><td>blocks.dragon_egg</td></tr>
+<tr><td>blocks.dropper</td><td>blocks.emerald</td><td>blocks.emerald_ore</td></tr>
+<tr><td>blocks.enderchest</td><td>blocks.endportal</td><td>blocks.endportal_frame</td></tr>
+<tr><td>blocks.endstone</td><td>blocks.farmland</td><td>blocks.fence</td></tr>
+<tr><td>blocks.fence_gate</td><td>blocks.fire</td><td>blocks.flower_red</td></tr>
+<tr><td>blocks.flower_yellow</td><td>blocks.flowerpot</td><td>blocks.furnace</td></tr>
+<tr><td>blocks.furnace_burning</td><td>blocks.glass</td><td>blocks.glass_pane</td></tr>
+<tr><td>blocks.glowstone</td><td>blocks.gold</td><td>blocks.gold_ore</td></tr>
+<tr><td>blocks.grass</td><td>blocks.grass_tall</td><td>blocks.gravel</td></tr>
+<tr><td>blocks.hardened_clay</td><td>blocks.hay</td><td>blocks.hopper</td></tr>
+<tr><td>blocks.ice</td><td>blocks.iron</td><td>blocks.iron_bars</td></tr>
+<tr><td>blocks.iron_ore</td><td>blocks.jackolantern</td><td>blocks.jukebox</td></tr>
+<tr><td>blocks.jungle</td><td>blocks.ladder</td><td>blocks.lapis_lazuli_block</td></tr>
+<tr><td>blocks.lapis_lazuli_ore</td><td>blocks.lava</td><td>blocks.lava_still</td></tr>
+<tr><td>blocks.leaves</td><td>blocks.lever</td><td>blocks.lily_pad</td></tr>
+<tr><td>blocks.melon</td><td>blocks.melon_stem</td><td>blocks.mobhead</td></tr>
+<tr><td>blocks.monster_egg</td><td>blocks.monster_spawner</td><td>blocks.moss_stone</td></tr>
+<tr><td>blocks.mushroom_brown</td><td>blocks.mushroom_brown_huge</td><td>blocks.mushroom_red</td></tr>
+<tr><td>blocks.mushroom_red_huge</td><td>blocks.mycelium</td><td>blocks.nether</td></tr>
+<tr><td>blocks.nether_fence</td><td>blocks.netherportal</td><td>blocks.netherquartzore</td></tr>
+<tr><td>blocks.netherrack</td><td>blocks.netherwart</td><td>blocks.note</td></tr>
+<tr><td>blocks.oak</td><td>blocks.obsidian</td><td>blocks.packed_ice</td></tr>
+<tr><td>blocks.piston</td><td>blocks.piston_extn</td><td>blocks.potatoes</td></tr>
+<tr><td>blocks.powered_rail</td><td>blocks.pressure_plate_stone</td><td>blocks.pressure_plate_weighted_heavy</td></tr>
+<tr><td>blocks.pressure_plate_weighted_light</td><td>blocks.pressure_plate_wood</td><td>blocks.pumpkin</td></tr>
+<tr><td>blocks.pumpkin_stem</td><td>blocks.quartz</td><td>blocks.rail</td></tr>
+<tr><td>blocks.rail_activator</td><td>blocks.redeston_repeater_active</td><td>blocks.redstone</td></tr>
+<tr><td>blocks.redstone_comparator</td><td>blocks.redstone_comparator_active</td><td>blocks.redstone_lamp</td></tr>
+<tr><td>blocks.redstone_lamp_active</td><td>blocks.redstone_ore</td><td>blocks.redstone_ore_glowing</td></tr>
+<tr><td>blocks.redstone_repeater</td><td>blocks.redstone_wire</td><td>blocks.rose</td></tr>
+<tr><td>blocks.sand</td><td>blocks.sandstone</td><td>blocks.sapling</td></tr>
+<tr><td>blocks.sapling.birch</td><td>blocks.sapling.jungle</td><td>blocks.sapling.oak</td></tr>
+<tr><td>blocks.sapling.spruce</td><td>blocks.sign</td><td>blocks.sign_post</td></tr>
+<tr><td>blocks.slab.birch</td><td>blocks.slab.brick</td><td>blocks.slab.cobblestone</td></tr>
+<tr><td>blocks.slab.jungle</td><td>blocks.slab.netherbrick</td><td>blocks.slab.oak</td></tr>
+<tr><td>blocks.slab.quartz</td><td>blocks.slab.sandstone</td><td>blocks.slab.snow</td></tr>
+<tr><td>blocks.slab.spruce</td><td>blocks.slab.stone</td><td>blocks.slab.stonebrick</td></tr>
+<tr><td>blocks.slab.wooden</td><td>blocks.slab.upper.birch</td><td>blocks.slab.upper.brick</td></tr>
+<tr><td>blocks.slab.upper.cobblestone</td><td>blocks.slab.upper.jungle</td><td>blocks.slab.upper.netherbrick</td></tr>
+<tr><td>blocks.slab.upper.oak</td><td>blocks.slab.upper.quartz</td><td>blocks.slab.upper.sandstone</td></tr>
+<tr><td>blocks.slab.upper.spruce</td><td>blocks.slab.upper.stone</td><td>blocks.slab.upper.stonebrick</td></tr>
+<tr><td>blocks.slab.upper.wooden</td><td>blocks.snow</td><td>blocks.soulsand</td></tr>
+<tr><td>blocks.sponge</td><td>blocks.spruce</td><td>blocks.stained_clay.black</td></tr>
+<tr><td>blocks.stained_clay.blue</td><td>blocks.stained_clay.brown</td><td>blocks.stained_clay.cyan</td></tr>
+<tr><td>blocks.stained_clay.gray</td><td>blocks.stained_clay.green</td><td>blocks.stained_clay.lightblue</td></tr>
+<tr><td>blocks.stained_clay.lightgray</td><td>blocks.stained_clay.lime</td><td>blocks.stained_clay.magenta</td></tr>
+<tr><td>blocks.stained_clay.orange</td><td>blocks.stained_clay.pink</td><td>blocks.stained_clay.purple</td></tr>
+<tr><td>blocks.stained_clay.red</td><td>blocks.stained_clay.white</td><td>blocks.stained_clay.yellow</td></tr>
+<tr><td>blocks.stairs.birch</td><td>blocks.stairs.brick</td><td>blocks.stairs.cobblestone</td></tr>
+<tr><td>blocks.stairs.jungle</td><td>blocks.stairs.nether</td><td>blocks.stairs.oak</td></tr>
+<tr><td>blocks.stairs.quartz</td><td>blocks.stairs.sandstone</td><td>blocks.stairs.spruce</td></tr>
+<tr><td>blocks.stairs.stone</td><td>blocks.sticky_piston</td><td>blocks.stone</td></tr>
+<tr><td>blocks.stone_button</td><td>blocks.sugar_cane</td><td>blocks.table_enchantment</td></tr>
+<tr><td>blocks.tnt</td><td>blocks.torch</td><td>blocks.torch_redstone</td></tr>
+<tr><td>blocks.torch_redstone_active</td><td>blocks.trapdoor</td><td>blocks.tripwire</td></tr>
+<tr><td>blocks.tripwire_hook</td><td>blocks.vines</td><td>blocks.water</td></tr>
+<tr><td>blocks.water_still</td><td>blocks.wheat_seeds</td><td>blocks.wood</td></tr>
+<tr><td>blocks.wool.black</td><td>blocks.wool.blue</td><td>blocks.wool.brown</td></tr>
+<tr><td>blocks.wool.cyan</td><td>blocks.wool.gray</td><td>blocks.wool.green</td></tr>
+<tr><td>blocks.wool.lightblue</td><td>blocks.wool.lightgray</td><td>blocks.wool.lime</td></tr>
+<tr><td>blocks.wool.magenta</td><td>blocks.wool.orange</td><td>blocks.wool.pink</td></tr>
+<tr><td>blocks.wool.purple</td><td>blocks.wool.red</td><td>blocks.wool.white</td></tr>
+<tr><td>blocks.wool.yellow</td></tr>
 
-    blocks.air
-    blocks.anvil
-    blocks.beacon
-    blocks.bed
-    blocks.bedrock
-    blocks.birch
-    blocks.bookshelf
-    blocks.brewing_stand
-    blocks.brick.chiseled
-    blocks.brick.cracked
-    blocks.brick.mossy
-    blocks.brick.red
-    blocks.brick.stone
-    blocks.button_wood
-    blocks.cactus
-    blocks.cake
-    blocks.carpet.black
-    blocks.carpet.blue
-    blocks.carpet.brown
-    blocks.carpet.cyan
-    blocks.carpet.gray
-    blocks.carpet.green
-    blocks.carpet.lightblue
-    blocks.carpet.lightgray
-    blocks.carpet.lime
-    blocks.carpet.magenta
-    blocks.carpet.orange
-    blocks.carpet.pink
-    blocks.carpet.purple
-    blocks.carpet.red
-    blocks.carpet.white
-    blocks.carpet.yellow
-    blocks.carrots
-    blocks.cauldron
-    blocks.chest
-    blocks.chest_locked
-    blocks.chest_trapped
-    blocks.clay
-    blocks.coal_block
-    blocks.coal_ore
-    blocks.cobblestone
-    blocks.cobblestone_wall
-    blocks.cobweb
-    blocks.cocoa
-    blocks.command
-    blocks.crafting_table
-    blocks.dandelion
-    blocks.daylight_sensor
-    blocks.dead_bush
-    blocks.detector_rail
-    blocks.diamond
-    blocks.diamond_ore
-    blocks.dirt
-    blocks.dispenser
-    blocks.door_iron
-    blocks.door_wood
-    blocks.double_plant
-    blocks.dragon_egg
-    blocks.dropper
-    blocks.emerald
-    blocks.emerald_ore
-    blocks.enderchest
-    blocks.endportal
-    blocks.endportal_frame
-    blocks.endstone
-    blocks.farmland
-    blocks.fence
-    blocks.fence_gate
-    blocks.fire
-    blocks.flower_red
-    blocks.flower_yellow
-    blocks.flowerpot
-    blocks.furnace
-    blocks.furnace_burning
-    blocks.glass
-    blocks.glass_pane
-    blocks.glowstone
-    blocks.gold
-    blocks.gold_ore
-    blocks.grass
-    blocks.grass_tall
-    blocks.gravel
-    blocks.hardened_clay
-    blocks.hay
-    blocks.hopper
-    blocks.ice
-    blocks.iron
-    blocks.iron_bars
-    blocks.iron_ore
-    blocks.jackolantern
-    blocks.jukebox
-    blocks.jungle
-    blocks.ladder
-    blocks.lapis_lazuli_block
-    blocks.lapis_lazuli_ore
-    blocks.lava
-    blocks.lava_still
-    blocks.leaves
-    blocks.lever
-    blocks.lily_pad
-    blocks.melon
-    blocks.melon_stem
-    blocks.mobhead
-    blocks.monster_egg
-    blocks.monster_spawner
-    blocks.moss_stone
-    blocks.mushroom_brown
-    blocks.mushroom_brown_huge
-    blocks.mushroom_red
-    blocks.mushroom_red_huge
-    blocks.mycelium
-    blocks.nether
-    blocks.nether_fence
-    blocks.netherportal
-    blocks.netherquartzore
-    blocks.netherrack
-    blocks.netherwart
-    blocks.note
-    blocks.oak
-    blocks.obsidian
-    blocks.packed_ice
-    blocks.piston
-    blocks.piston_extn
-    blocks.potatoes
-    blocks.powered_rail
-    blocks.pressure_plate_stone
-    blocks.pressure_plate_weighted_heavy
-    blocks.pressure_plate_weighted_light
-    blocks.pressure_plate_wood
-    blocks.pumpkin
-    blocks.pumpkin_stem
-    blocks.quartz
-    blocks.rail
-    blocks.rail_activator
-    blocks.redeston_repeater_active
-    blocks.redstone
-    blocks.redstone_comparator
-    blocks.redstone_comparator_active
-    blocks.redstone_lamp
-    blocks.redstone_lamp_active
-    blocks.redstone_ore
-    blocks.redstone_ore_glowing
-    blocks.redstone_repeater
-    blocks.redstone_wire
-    blocks.rose
-    blocks.sand
-    blocks.sandstone
-    blocks.sapling
-    blocks.sapling.birch
-    blocks.sapling.jungle
-    blocks.sapling.oak
-    blocks.sapling.spruce
-    blocks.sign
-    blocks.sign_post
-    blocks.slab.birch
-    blocks.slab.brick
-    blocks.slab.cobblestone
-    blocks.slab.jungle
-    blocks.slab.netherbrick
-    blocks.slab.oak
-    blocks.slab.quartz
-    blocks.slab.sandstone
-    blocks.slab.snow
-    blocks.slab.spruce
-    blocks.slab.stone
-    blocks.slab.stonebrick
-    blocks.slab.wooden
-    blocks.slab.upper.birch
-    blocks.slab.upper.brick
-    blocks.slab.upper.cobblestone
-    blocks.slab.upper.jungle
-    blocks.slab.upper.netherbrick
-    blocks.slab.upper.oak
-    blocks.slab.upper.quartz
-    blocks.slab.upper.sandstone
-    blocks.slab.upper.spruce
-    blocks.slab.upper.stone
-    blocks.slab.upper.stonebrick
-    blocks.slab.upper.wooden
-    blocks.snow
-    blocks.soulsand
-    blocks.sponge
-    blocks.spruce
-    blocks.stained_clay.black
-    blocks.stained_clay.blue
-    blocks.stained_clay.brown
-    blocks.stained_clay.cyan
-    blocks.stained_clay.gray
-    blocks.stained_clay.green
-    blocks.stained_clay.lightblue
-    blocks.stained_clay.lightgray
-    blocks.stained_clay.lime
-    blocks.stained_clay.magenta
-    blocks.stained_clay.orange
-    blocks.stained_clay.pink
-    blocks.stained_clay.purple
-    blocks.stained_clay.red
-    blocks.stained_clay.white
-    blocks.stained_clay.yellow
-    blocks.stairs.birch
-    blocks.stairs.brick
-    blocks.stairs.cobblestone
-    blocks.stairs.jungle
-    blocks.stairs.nether
-    blocks.stairs.oak
-    blocks.stairs.quartz
-    blocks.stairs.sandstone
-    blocks.stairs.spruce
-    blocks.stairs.stone
-    blocks.sticky_piston
-    blocks.stone
-    blocks.stone_button
-    blocks.sugar_cane
-    blocks.table_enchantment
-    blocks.tnt
-    blocks.torch
-    blocks.torch_redstone
-    blocks.torch_redstone_active
-    blocks.trapdoor
-    blocks.tripwire
-    blocks.tripwire_hook
-    blocks.vines
-    blocks.water
-    blocks.water_still
-    blocks.wheat_seeds
-    blocks.wood
-    blocks.wool.black
-    blocks.wool.blue
-    blocks.wool.brown
-    blocks.wool.cyan
-    blocks.wool.gray
-    blocks.wool.green
-    blocks.wool.lightblue
-    blocks.wool.lightgray
-    blocks.wool.lime
-    blocks.wool.magenta
-    blocks.wool.orange
-    blocks.wool.pink
-    blocks.wool.purple
-    blocks.wool.red
-    blocks.wool.white
-    blocks.wool.yellow
+</table>
 
 #### Moving your Drone
 A Drone which didn't move about and only built on one location wouldn't be very interesting. You can direct the Drone to move about and even turn and place blocks in any direction. There are a couple of functions which you can use to move the drown along any axis.
@@ -3178,12 +2913,17 @@ And here is the result in Minecraft:
 
 All of the Drone's functions return the Drone itself so each function can chain directly onto another. Presented below is a table of Drone functions and brief descriptions of each. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference in the Appendices.
 
-TODO @@table drone_functions.org
+<table>
+<caption><h4> Table 5: Drone Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
+<tr><td>.box()</td><td>Places a cuboid of blocks of a given material at the Drone's current location</td></tr>
+<tr></tr>
+
+</table>
 
 ### Blueprints
 A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
 
-<caption>Listing 8.2</caption>
+<caption>Listing 8.1</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -3228,7 +2968,7 @@ You've seen already that the Drone has many functions for building, moving and t
 
 In the first example we just call *monolith()* because any function which belongs to the Drone API is a *global* function meaning it can be called without first calling *require()*. In the second example you can see that once we've created the *monolith()* function we'll be able to use it in a Drone building chain that forms part of a series of building commands. The second command sets up a series of monoliths like a line of dominoes. I'll explain how this works but first let's create a new module called *monolith.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-<caption>Listing 8.3</caption>
+<caption>Listing 8.2</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -3241,6 +2981,8 @@ In the first example we just call *monolith()* because any function which belong
 Once you've saved the file issue the `js refresh()` command to reload your plugins and then find a nice clear parcel of land in the game, place a cornerstone and then issue this command:
 
     /js monolith()
+
+![An imposing black Monolith](img/sky/monolith.png)
 
 In a very short time, an imposing black Monolith will appear. Now let's take a closer look at the *monolith.js* source code...
 
@@ -3255,9 +2997,9 @@ The other thing to note about the first require statement is the trailing `.Dron
 
 The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
 
-The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in the next recipe. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in recipe undefined. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
 
-Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword.
+Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
 
 Having declared the *monolith()* function we turn it into a Drone method using the *Drone.extend()* function which takes a function and turns it into a method effectively attaching that function to itself so it can form part of a chain of calls. The Drone is extensible - it is capable of taking on new blueprints and building using those blueprints. When you add a new function to the Drone using the *extend()* method it is as if the function were an integral part of the Drone. As if by magic, the function becomes global and chainable and can be chained with any other Drone methods:
 
@@ -3268,7 +3010,7 @@ So now you can see how easy it is to extend the Drone to build new interesting t
 ### A Blueprint for a Skyscraper
 In this recipe we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-<caption>Listing 8.4</caption>
+<caption>Listing 8.3</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -3348,15 +3090,7 @@ Congratulations Master Builder, You've just discovered how to build massive stru
 ### Summary
 In this recipe you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on objects and methods and Javascript's *this* keyword and what it means when used inside a method. 
 
-## Recipe 8: Farts in Minecraft
-
-### Minecraft Concepts Introduced:
-
-1. Sounds
-2. Effects
-3. Events (more)
-
-## Recipe 9: Create a Fireworks Show
+## Recipe 8: Create a Fireworks Show
 ### Introduction
 In this recipe we're going to write code to create a spectacular fireworks show in Minecraft. We'll learn about ScriptCraft's built-in *fireworks* module, the *setTimeout()* function and use a powerful programming technique called *recursion*. We'll begin by writing code to launch a single firework after a delay of 2 seconds, then build on that code to launch many fireworks.
 
@@ -3371,7 +3105,7 @@ The fireworks module's *firework()* function takes a single parameter - a Locati
 ### Deferred Execution
 In the commands you just executed at the in-game prompt, the firework launches immediately. What we'd like to do is delay the launch by a couple of seconds so that we can move to a safe position with a better view. Fortunately there's a way to delay the execution of a function. Create a new file called scriptcraft/plugins/fireworkshow.js and type in the following code:
 
-<caption>Listing 10.1</caption>
+<caption>Listing 9.1</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function (location){
@@ -3406,7 +3140,7 @@ Although setTimeout() is not part of the Javascript Language, it is provided wit
 ### A fireworks show
 I promised you a fireworks show at the start of this recipe. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
 
-<caption>Listing 10.2</caption>
+<caption>Listing 9.2</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function ( location, count ) {
@@ -3468,7 +3202,7 @@ The message will keep printing out for as long as the server is running. Fortuna
 
 ... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following listing:
 
-<caption>Listing 10.3</caption>
+<caption>Listing 9.3</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function ( location, count ) {
@@ -3484,7 +3218,7 @@ The message will keep printing out for as long as the server is running. Fortuna
       return scheduled;
     };
 
-In listing 10.3 we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
+In listing 9.3 we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
 
     /js var show = fireworkshow( self.location, 300 );
 
@@ -3497,7 +3231,7 @@ And the fireworks will cease. If you ever schedule tasks using the *setInterval(
 ### Summary
 In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
 
-## Recipe 10: Animal Sounds Revisited
+## Recipe 9: Animal Sounds Revisited
 when talking about objects and lookup tables, implement the same logic as was used in sounds1 using a lookup table.
 This recipe will use object lookup instead of a switch statement to play animal sounds. 
 ### objects
@@ -3506,7 +3240,7 @@ This recipe will use object lookup instead of a switch statement to play animal 
 ##### by name
 ##### by index
 
-## Recipe 11: Don't stray too far
+## Recipe 10: Don't stray too far
 
 ### Goal
 A recipe which periodically checks each player's location and automatically moves them back into an area close to the spawn location. 
@@ -3517,31 +3251,31 @@ A recipe which periodically checks each player's location and automatically move
 
 # Part III Advanced Modding
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
-## Recipe 12: Arrows that Teleport you.
+## Recipe 11: Arrows that Teleport you.
 
 ### Goal
 
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
-## Recipe 13: Leaderboard revisited
+## Recipe 12: Leaderboard revisited
 In this recipe readers learn about the scoreboard api and how to display a leaderboard on screen.
 jsp leaderboard hide
 listen for player experience changes and update leaderboard on screen?
 (need to figure out how to do this myself)
 
-## Recipe 14: A TNT-Free Zone
+## Recipe 13: A TNT-Free Zone
 
 ### Goal 
 
 In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
 
-## Recipe 15: Protecting areas against griefing.
+## Recipe 14: Protecting areas against griefing.
 
 ### Goal
 
 In this recipe, players will learn how to listen for and cancel block-breaking events.
 
-## Recipe 16: It's a small world
+## Recipe 15: It's a small world
 
 ### Goal
 Readers learn how to limit the size of the game world and so make more memory-efficient game worlds. This is an event-driven refinement of recipe 5.
@@ -3550,12 +3284,12 @@ Readers learn how to limit the size of the game world and so make more memory-ef
 
 Computer Memory.
 
-## Recipe 17: Horse-Clicker, A simple mini-game
+## Recipe 16: Horse-Clicker, A simple mini-game
 
 ### Goal
 This is the first recipe in a series of recipes which will introduce mini-games. In this recipe, basic game mechanics are introduced.  Keeping score.
     
-## Recipe 18: Snowball Fight, A player-vs-player mini-game
+## Recipe 17: Snowball Fight, A player-vs-player mini-game
 ### Goal
 This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
 
@@ -3573,18 +3307,786 @@ Don't use it in modules especially in multi-player mode!
 A set of tables of events, one table for each set of events, Player Events, Server Events etc.
 ## Items reference
 A table of all the items in the items module and how to use them (API calls which require an ItemStack)
-## Sounds reference
-A table of all the possible sounds in the sounds module (with caveat)
+
 ## Drone API Reference
+/*********************************************************************
+
+The Drone is a convenience class for building. It can be used for...
+
+ 1. Building
+ 2. Copying and Pasting
+
+It uses a fluent interface which means all of the Drone's methods return `this` and can 
+be chained together like so...
+
+    var theDrone = new Drone();
+    theDrone.up().left().box(blocks.oak).down().fwd(3).cylinder0(blocks.lava,8); 
+
+### Constructing a Drone Object
+
+Drones can be created in any of the following ways...
+    
+ 1. Calling any one of the methods listed below will return a Drone object. For example...
+         
+        var d = box( blocks.oak )
+
+   ... creates a 1x1x1 wooden block at the cross-hairs or player's location and returns a Drone
+   object. This might look odd (if you're familiar with Java's Object-dot-method syntax) but all 
+   of the Drone class's methods are also global functions that return new Drone objects. 
+   This is short-hand for creating drones and is useful for playing around with Drones at the in-game 
+   command prompt. It's shorter than typing ...
+    
+        var d = new Drone().box( blocks.oak ) 
+        
+   ... All of the Drone's methods return `this` so you can chain operations together like this...
+        
+        var d = box( blocks.oak )
+                  .up()
+                  .box( blocks.oak ,3,1,3)
+                  .down()
+                  .fwd(2)
+                  .box( blocks.oak )
+                  .turn()
+                  .fwd(2)
+                  .box( blocks.oak )
+                  .turn()
+                  .fwd(2)
+                  .box( blocks.oak );
+    
+ 2. Using the following form...
+
+        d = new Drone()
+    
+    ...will create a new Drone. If the cross-hairs are pointing at a
+    block at the time then, that block's location becomes the drone's
+    starting point.  If the cross-hairs are _not_ pointing at a block,
+    then the drone's starting location will be 2 blocks directly in
+    front of the player.  TIP: Building always happens right and front
+    of the drone's position...
+    
+    Plan View:
+
+        ^
+        |
+        |
+        D---->
+      
+    For convenience you can use a _corner stone_ to begin building.
+    The corner stone should be located just above ground level.  If
+    the cross-hair is point at or into ground level when you create a
+    new Drone(), then building begins at that point. You can get
+    around this by pointing at a 'corner stone' just above ground
+    level or alternatively use the following statement...
+    
+        d = new Drone().up();
+          
+    ... which will move the drone up one block as soon as it's created.
+
+    ![corner stone](img/drone-api-ref/cornerstone1.png)
+
+ 3. Or by using the following form...
+    
+        d = new Drone(x,y,z,direction,world);
+
+    This will create a new Drone at the location you specified using
+    x, y, z In minecraft, the X axis runs west to east and the Z axis runs
+    north to south.  The direction parameter says what direction you want
+    the drone to face: 0 = east, 1 = south, 2 = west, 3 = north.  If the
+    direction parameter is omitted, the player's direction is used
+    instead.
+
+    Both the `direction` and `world` parameters are optional.
+
+ 4. Create a new Drone based on a Bukkit Location object...
+
+        d = new Drone(location);
+
+    This is useful when you want to create a drone at a given
+    `org.bukkit.Location` . The `Location` class is used throughout
+    the bukkit API. For example, if you want to create a drone when a
+    block is broken at the block's location you would do so like
+    this...
+
+        events.blockBreak( function( event) { 
+            var location = event.block.location;
+            var drone = new Drone(location);
+            // do more stuff with the drone here...
+        });
+
+#### Parameters
+
+ * location (optional) : *NB* If an `org.bukkit.Location` object is provided as a parameter, then it should be the only parameter.
+ * x (optional) : The x coordinate of the Drone
+ * y (optional) : The y coordinate of the Drone
+ * z (optional) : The z coordinate of the Drone
+ * direction (optional) : The direction in which the Drone is
+   facing. Possible values are 0 (east), 1 (south), 2 (west) or 3 (north)
+ * world (optional) : The world in which the drone is created.
+  
+### Drone.box() method
+
+the box() method is a convenience method for building things. (For the more performance-oriented method - see cuboid)
+
+#### parameters
+
+ * b - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
+   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * w (optional - default 1) - the width of the structure 
+ * h (optional - default 1) - the height of the structure 
+ * d (optional - default 1) - the depth of the structure - NB this is
+   not how deep underground the structure lies - this is how far
+   away (depth of field) from the drone the structure will extend.
+
+#### Example
+
+To create a black structure 4 blocks wide, 9 blocks tall and 1 block long...
+    
+    box(blocks.wool.black, 4, 9, 1);
+
+... or the following code does the same but creates a variable that can be used for further methods...
+
+    var drone = new Drone();
+    drone.box(blocks.wool.black, 4, 9, 1);
+
+![box example 1](img/drone-api-ref/boxex1.png)
+    
+### Drone.box0() method
+
+Another convenience method - this one creates 4 walls with no floor or ceiling.
+
+#### Parameters
+
+ * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
+   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * width (optional - default 1) - the width of the structure 
+ * height (optional - default 1) - the height of the structure 
+ * length (optional - default 1) - the length of the structure - how far
+   away (depth of field) from the drone the structure will extend.
+
+#### Example
+
+To create a stone building with the insided hollowed out 7 wide by 3 tall by 6 long...
+
+    box0( blocks.stone, 7, 3, 6);
+
+![example box0](img/drone-api-ref/box0ex1.png)
+   
+### Drone.boxa() method
+
+Construct a cuboid using an array of blocks. As the drone moves first along the width axis,
+then the height (y axis) then the length, each block is picked from the array and placed.
+
+#### Parameters
+
+ * blocks - An array of blocks - each block in the array will be placed in turn.
+ * width
+ * height
+ * length
+
+#### Example
+
+Construct a rainbow-colored road 100 blocks long...
+
+    var rainbowColors = [blocks.wool.red, blocks.wool.orange, blocks.wool.yellow, blocks.wool.lime,
+                         blocks.wool.lightblue, blocks.wool.blue, blocks.wool.purple];
+    
+    boxa(rainbowColors,7,1,30);
+
+![boxa example](img/drone-api-ref/boxaex1.png)
+
+### Drone Movement
+
+Drones can move freely in minecraft's 3-D world. You control the
+Drone's movement using any of the following methods..
+
+ * up()
+ * down()
+ * left()
+ * right()
+ * fwd()
+ * back()
+ * turn()
+
+... Each of these methods takes a single optional parameter
+`numBlocks` - the number of blocks to move in the given direction. If
+no parameter is given, the default is 1.
+
+to change direction use the `turn()` method which also takes a single
+optional parameter (numTurns) - the number of 90 degree turns to make.
+Turns are always clock-wise. If the drone is facing north, then
+drone.turn() will make the turn face east. If the drone is facing east
+then drone.turn(2) will make the drone turn twice so that it is facing
+west.
+
+### Drone Positional Info
+
+ * getLocation() - Returns a Bukkit Location object for the drone
+
+### Drone Markers
+
+Markers are useful when your Drone has to do a lot of work. You can
+set a check-point and return to the check-point using the move()
+method.  If your drone is about to undertake a lot of work -
+e.g. building a road, skyscraper or forest you should set a
+check-point before doing so if you want your drone to return to its
+current location.  
+
+A 'start' checkpoint is automatically created when the Drone is first created.
+
+Markers are created and returned to using the followng two methods...
+
+ * chkpt - Saves the drone's current location so it can be returned to later.
+ * move - moves the drone to a saved location. Alternatively you can provide an 
+   org.bukkit.Location object or x,y,z and direction parameters.
+
+#### Parameters
+
+ * name - the name of the checkpoint to save or return to.
+
+#### Example
+
+    drone.chkpt('town-square');
+    //
+    // the drone can now go off on a long excursion
+    //
+    for ( i = 0; i< 100; i++) {  
+        drone.fwd(12).box(6); 
+    }
+    //
+    // return to the point before the excursion
+    //
+    drone.move('town-square');
+
+### Drone.prism() method
+
+Creates a prism. This is useful for roofs on houses.
+
+#### Parameters
+
+ * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
+   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * width - the width of the prism
+ * length - the length of the prism (will be 2 time its height)
+
+#### Example
+
+    prism(blocks.oak,3,12);
+
+![prism example](img/drone-api-ref/prismex1.png)
+
+### Drone.prism0() method
+
+A variation on `prism` which hollows out the inside of the prism. It uses the same parameters as `prism`.
+
+### Drone.cylinder() method
+
+A convenience method for building cylinders. Building begins radius blocks to the right and forward.
+
+#### Parameters
+
+ * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
+   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * radius 
+ * height
+
+#### Example
+
+To create a cylinder of Iron 7 blocks in radius and 1 block high...
+
+    cylinder(blocks.iron, 7 , 1);
+
+![cylinder example](img/drone-api-ref/cylinderex1.png)
+
+### Drone.cylinder0() method
+
+A version of cylinder that hollows out the middle.
+
+#### Example
+
+To create a hollow cylinder of Iron 7 blocks in radius and 1 block high...
+
+    cylinder0(blocks.iron, 7, 1);
+
+![cylinder0 example](img/drone-api-ref/cylinder0ex1.png)
+
+### Drone.arc() method
+
+The arc() method can be used to create 1 or more 90 degree arcs in the horizontal or vertical planes.
+This method is called by cylinder() and cylinder0() and the sphere() and sphere0() methods.
+
+#### Parameters
+
+arc() takes a single parameter - an object with the following named properties...
+
+ * radius - The radius of the arc.
+ * blockType - The type of block to use - this is the block Id only (no meta). See [Data Values][dv].
+ * meta - The metadata value. See [Data Values][dv].
+ * orientation (default: 'horizontal' ) - the orientation of the arc - can be 'vertical' or 'horizontal'.
+ * stack (default: 1 ) - the height or length of the arc (depending on
+   the orientation - if orientation is horizontal then this parameter
+   refers to the height, if vertical then it refers to the length ).
+ * strokeWidth (default: 1 ) - the width of the stroke (how many
+   blocks) - if drawing nested arcs it's usually a good idea to set
+   strokeWidth to at least 2 so that there are no gaps between each
+   arc. The arc method uses a [bresenham algorithm][bres] to plot
+   points along the circumference.
+ * fill - If true (or present) then the arc will be filled in.
+ * quadrants (default:
+   `{topleft:true,topright:true,bottomleft:true,bottomright:true}` - An
+   object with 4 properties indicating which of the 4 quadrants of a
+   circle to draw. If the quadrants property is absent then all 4
+   quadrants are drawn.
+
+#### Examples
+
+To draw a 1/4 circle (top right quadrant only) with a radius of 10 and stroke width of 2 blocks ...
+
+    arc({blockType: blocks.iron, 
+         meta: 0, 
+         radius: 10,
+         strokeWidth: 2,
+         quadrants: { topright: true },
+         orientation: 'vertical', 
+         stack: 1,
+         fill: false
+         } );
+
+![arc example 1](img/drone-api-ref/arcex1.png)
+
+[bres]: http://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+[dv]: http://www.minecraftwiki.net/wiki/Data_values
+
+### Drone.door() method
+
+create a door - if a parameter is supplied an Iron door is created otherwise a wooden door is created.
+
+#### Parameters
+
+ * doorType (optional - default wood) - If a parameter is provided then the door is Iron.
+
+#### Example
+
+To create a wooden door at the crosshairs/drone's location...
+
+    var drone = new Drone();
+    drone.door();
+
+To create an iron door...
+
+    drone.door( blocks.door_iron );
+
+![iron door](img/drone-api-ref/doorex1.png)
+
+### Drone.door_iron() method
+
+create an Iron door.
+
+### Drone.door2() method
+
+Create double doors (left and right side)
+
+#### Parameters
+
+ * doorType (optional - default wood) - If a parameter is provided then the door is Iron.
+
+#### Example
+
+To create double-doors at the cross-hairs/drone's location...
+
+    drone.door2();
+
+![double doors](img/drone-api-ref/door2ex1.png)
+
+### Drone.door2_iron() method
+
+Create double iron doors
+    
+
+### Drone.sign() method
+
+Signs must use block 63 (stand-alone signs) or 68 (signs on walls)
+
+#### Parameters
+
+ * message -  can be a string or an array of strings. 
+ * block - can be 63 or 68
+
+#### Example
+
+To create a free-standing sign...
+
+    drone.sign(["Hello","World"],63);
+
+![ground sign](img/drone-api-ref/signex1.png)
+
+... to create a wall mounted sign...
+
+    drone.sign(["Welcome","to","Scriptopia"], 68 );
+
+![wall sign](img/drone-api-ref/signex2.png)
+
+### Drone Trees methods
+
+ * oak()
+ * spruce()
+ * birch()
+ * jungle()
+
+#### Example
+
+To create 4 trees in a row, point the cross-hairs at the ground then type `/js ` and ...
+
+    up( ).oak( ).right(8 ).spruce( ).right(8 ).birch( ).right(8 ).jungle( );
+
+Trees won't always generate unless the conditions are right. You
+should use the tree methods when the drone is directly above the
+ground. Trees will usually grow if the drone's current location is
+occupied by Air and is directly above an area of grass (That is why
+the `up( )` method is called first).
+
+![tree example](img/drone-api-ref/treeex1.png)
+
+None of the tree methods require parameters. Tree methods will only be successful
+if the tree is placed on grass in a setting where trees can grow.
+
+### Drone.garden() method
+
+places random flowers and long grass (similar to the effect of placing bonemeal on grass)
+
+#### Parameters
+
+ * width - the width of the garden
+ * length - how far from the drone the garden extends
+
+#### Example
+
+To create a garden 10 blocks wide by 5 blocks long...
+
+    garden(10,5);
+
+![garden example](img/drone-api-ref/gardenex1.png)
+
+### Drone.rand() method
+
+rand takes either an array (if each blockid has the same chance of occurring)
+or an object where each property is a blockid and the value is it's weight (an integer)
+
+#### Example
+
+place random blocks stone, mossy stone and cracked stone (each block has the same chance of being picked)
+
+    rand( [blocks.brick.stone, blocks.brick.mossy, blocks.brick.cracked ],w,d,h) 
+
+to place random blocks stone has a 50% chance of being picked, 
+
+    var distribution = {};
+    distribution[ blocks.brick.stone ] = 5;
+    distribution[ blocks.brick.mossy ] = 3;
+    distribution[ blocks.brick.cracked ] = 2;
+
+    rand( distribution, width, height, depth) 
+
+regular stone has a 50% chance, mossy stone has a 30% chance and cracked stone has just a 20% chance of being picked.
+
+### Copy & Paste using Drone
+
+A drone can be used to copy and paste areas of the game world.
+
+### Drone.copy() method
+
+Copies an area so it can be pasted elsewhere. The name can be used for
+pasting the copied area elsewhere...
+
+#### Parameters
+
+ * name - the name to be given to the copied area (used by `paste`)
+ * width - the width of the area to copy
+ * height - the height of the area to copy
+ * length - the length of the area (extending away from the drone) to copy
+
+#### Example
+
+    drone.copy('somethingCool',10,5,10 ).right(12 ).paste('somethingCool' );
+
+### Drone.paste() method
+
+Pastes a copied area to the current location.
+
+#### Example
+
+To copy a 10x5x10 area (using the drone's coordinates as the starting
+point) into memory.  the copied area can be referenced using the name
+'somethingCool'. The drone moves 12 blocks right then pastes the copy.
+
+    drone.copy('somethingCool',10,5,10 )
+         .right(12 )
+         .paste('somethingCool' );
+
+### Chaining
+
+All of the Drone methods return a Drone object, which means methods
+can be 'chained' together so instead of writing this...
+
+    drone = new Drone(); 
+    drone.fwd(3);
+    drone.left(2);
+    drone.box(2); // create a grass block 
+    drone.up();
+    drone.box(2); // create another grass block
+    drone.down();
+
+...you could simply write ...
+    
+    var drone = new Drone().fwd(3).left(2).box(2).up().box(2).down();
+
+... since each Drone method is also a global function that constructs
+a drone if none is supplied, you can shorten even further to just...
+    
+    fwd(3).left(2).box(2).up().box(2).down()
+
+The Drone object uses a [Fluent Interface][fl] to make ScriptCraft
+scripts more concise and easier to write and read.  Minecraft's
+in-game command prompt is limited to about 80 characters so chaining
+drone commands together means more can be done before hitting the
+command prompt limit. For complex building you should save your
+commands in a new script file and load it using /js load()
+
+[fl]: http://en.wikipedia.org/wiki/Fluent_interface
+
+### Drone Properties
+
+ * x - The Drone's position along the west-east axis (x increases as you move east)
+ * y - The Drone's position along the vertical axis (y increses as you move up)
+ * z - The Drone's position along the north-south axis (z increases as you move south)
+ * dir - The Drone's direction 0 is east, 1 is south , 2 is west and 3 is north.
+
+### Extending Drone
+
+The Drone object can be easily extended - new buidling recipes/blueprints can be added and can
+become part of a Drone's chain using the *static* method `Drone.extend`. 
+
+### Drone.extend() static method
+
+Use this method to add new methods (which also become chainable global functions) to the Drone object.
+
+#### Parameters
+
+ * name - The name of the new method e.g. 'pyramid'. 
+ * function - The method body.
+
+Alternatively if you provide just a function as a parameter, then the function name will be used as the new method name. For example the following two approaches are both valid.
+
+
+#### Example 1 Using name and function as parameters
+
+    // submitted by [edonaldson][edonaldson]
+    Drone.extend('pyramid', function( block,height) { 
+        this.chkpt('pyramid');
+        for ( var i = height; i > 0; i -= 2) {
+            this.box(block, i, 1, i).up().right().fwd();
+        }
+        return this.move('pyramid');      
+    });
+
+#### Example 2 Using just a named function as a parameter
+
+    Drone.extend(function pyramid( block,height) { 
+        this.chkpt('pyramid');
+        for ( var i = height; i > 0; i -= 2) {
+            this.box(block, i, 1, i).up().right().fwd();
+        }
+        return this.move('pyramid');      
+    });
+
+Once the method is defined (it can be defined in a new pyramid.js file) it can be used like so...
+
+    var d = new Drone();
+    d.pyramid(blocks.brick.stone, 12);
+
+... or simply ...
+
+    pyramid(blocks.brick.stone, 12);
+
+[edonaldson]: https://github.com/edonaldson
+
+### Drone Constants
+
+#### Drone.PLAYER_STAIRS_FACING
+
+An array which can be used when constructing stairs facing in the Drone's direction...
+
+    var d = new Drone();
+    d.box(blocks.stairs.oak + ':' + Drone.PLAYER_STAIRS_FACING[d.dir]);
+
+... will construct a single oak stair block facing the drone.
+
+#### Drone.PLAYER_SIGN_FACING
+
+An array which can be used when placing signs so they face in a given direction.
+This is used internally by the Drone.sign() method. It should also be used for placing
+any of the following blocks...
+
+ * chest 
+ * ladder
+ * furnace
+ * dispenser
+
+To place a chest facing the Drone ...
+
+    drone.box( blocks.chest + ':' + Drone.PLAYER_SIGN_FACING[drone.dir]);
+
+#### Drone.PLAYER_TORCH_FACING
+
+Used when placing torches so that they face towards the drone. 
+
+    drone.box( blocks.torch + ':' + Drone.PLAYER_TORCH_FACING[drone.dir]);
+
+/**************************************************************************
+
+The times() method makes building multiple copies of buildings easy. It's possible to create rows or grids of buildings without resorting to `for` or `while` loops.
+
+#### Parameters
+
+ * numTimes (optional - default 2) : The number of times you want to repeat the preceding statements.
+
+#### Example
+
+Say you want to do the same thing over and over. You have a couple of options...
+
+ * You can use a for loop...
+
+    d = new Drone(); for ( var i =0;i < 4; i++) {  d.cottage().right(8); }
+
+While this will fit on the in-game prompt, it's awkward. You need to
+declare a new Drone object first, then write a for loop to create the
+4 cottages. It's also error prone, even the `for` loop is too much
+syntax for what should really be simple.
+
+ * You can use a while loop...
+   
+    d = new Drone(); var i=4; while (i--) {  d.cottage().right(8); }
+
+... which is slightly shorter but still too much syntax. Each of the
+above statements is fine for creating a 1-dimensional array of
+structures. But what if you want to create a 2-dimensional or
+3-dimensional array of structures? Enter the `times()` method.
+
+The `times()` method lets you repeat commands in a chain any number of
+times. So to create 4 cottages in a row you would use the following
+statement...
+
+    cottage().right(8).times(4);
+
+...which will build a cottage, then move right 8 blocks, then do it
+again 4 times over so that at the end you will have 4 cottages in a
+row. What's more the `times()` method can be called more than once in
+a chain. So if you wanted to create a *grid* of 20 houses ( 4 x 5 ),
+you would do so using the following statement...
+
+    cottage().right(8).times(4).fwd(8).left(32).times(5);
+
+... breaking it down...
+
+ 1. The first 3 calls in the chain ( `cottage()`, `right(8)`,
+    `times(4)` ) build a single row of 4 cottages.
+
+ 2. The last 3 calls in the chain ( `fwd(8)`, `left(32)`, `times(5)` )
+    move the drone forward 8 then left 32 blocks (4 x 8) to return to
+    the original x coordinate, then everything in the chain is
+    repeated again 5 times so that in the end, we have a grid of 20
+    cottages, 4 x 5.  Normally this would require a nested loop but
+    the `times()` method does away with the need for loops when
+    repeating builds.
+
+Another example: This statement creates a row of trees 2 by 3 ...
+
+    oak().right(10).times(2).left(20).fwd(10).times(3)
+
+... You can see the results below.
+
+![times example 1](img/drone-api-ref/times-trees.png)
+
+/************************************************************************
+
+Creates a sphere.
+
+#### Parameters
+ 
+ * block - The block the sphere will be made of.
+ * radius - The radius of the sphere.
+
+#### Example
+
+To create a sphere of Iron with a radius of 10 blocks...
+
+    sphere( blocks.iron, 10);
+
+![sphere example](img/drone-api-ref/sphereex1.png)
+
+Spheres are time-consuming to make. You *can* make large spheres (250 radius) but expect the
+server to be very busy for a couple of minutes while doing so.
+
+/************************************************************************
+
+Creates an empty sphere.
+
+#### Parameters
+ 
+ * block - The block the sphere will be made of.
+ * radius - The radius of the sphere.
+
+#### Example
+
+To create a sphere of Iron with a radius of 10 blocks...
+
+    sphere0( blocks.iron, 10);
+
+Spheres are time-consuming to make. You *can* make large spheres (250 radius) but expect the
+server to be very busy for a couple of minutes while doing so.
+
+/************************************************************************
+
+Creates a hemisphere. Hemispheres can be either north or south.
+
+#### Parameters
+
+ * block - the block the hemisphere will be made of.
+ * radius - the radius of the hemisphere
+ * northSouth - whether the hemisphere is 'north' or 'south'
+
+#### Example
+
+To create a wood 'north' hemisphere with a radius of 7 blocks...
+
+    hemisphere(blocks.oak, 7, 'north');
+
+![hemisphere example](img/drone-api-ref/hemisphereex1.png)
+
+/************************************************************************
+
+Creates a hollow hemisphere. Hemispheres can be either north or south.
+
+#### Parameters
+
+ * block - the block the hemisphere will be made of.
+ * radius - the radius of the hemisphere
+ * northSouth - whether the hemisphere is 'north' or 'south'
+
+#### Example
+
+To create a glass 'north' hemisphere with a radius of 20 blocks...
+
+    hemisphere0(blocks.glass, 20, 'north');
+
+![hemisphere example](img/drone-api-ref/hemisphereex2.png)
+
+
 ## Java and Javascript Notes
 A collection of gotchas
 1. Java Strings - converting from Java string to Javascript String
 2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
 3. Saving and restoring Location objects using utils module
 
-<!--  LocalWords:  png img Bukkit API Javascript ScriptCraft
- -->
- 
 
 ## Function Declarations vs Function Expressions
 In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:

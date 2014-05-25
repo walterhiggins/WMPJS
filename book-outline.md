@@ -1519,7 +1519,7 @@ There are a couple of other useful Array insertion and removal functions:
 
 You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
 
-TODO @@table array_methods.org
+@@table array_methods.org Array Methods
 
 ### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
@@ -1809,8 +1809,7 @@ There are many sounds in Minecraft and the list of sounds available in the game 
 
 This is a table of all of the possible sound functions available at the time of writing. This list may not be up to date because new sounds are being added on an ongoing basis while some sounds may also be removed.
 
-@@listing all_sounds.txt
-TODO @@table all_sounds.org
+@@table all_sounds.org Sound Functions
 
 The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds like this:
 
@@ -1873,6 +1872,10 @@ You can see that while `name.concat("crafter");` returns a value `steve crafter`
     > steve crafter
     /js name
     > steve crafter
+
+Listed below is a table of the most common String methods.
+
+@@table string_methods.org Commonly used String Methods
 
 A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String .
 
@@ -2203,7 +2206,7 @@ This will create a stony path that extends 10 blocks away from you.
 
 If you leave out any of the width, height and length parameters they will default to 1. So `box( blocks.gold, 5, 3)` will create a box 5 blocks wide, 3 blocks high and 1 block long, `box( blocks.gold, 5)` will create a box 5 blocks wide, 1 block high and 1 block long, and `box( blocks.gold )` will create a gold box 1 block wide, high and long. For the first parameter - the Material - you can use any of the values in the special *blocks* variable. The table below lists all of the possible block materials which can be used for building.
 
-@@listing block_materials.txt
+@@table block_materials.org Building Materials
 
 #### Moving your Drone
 A Drone which didn't move about and only built on one location wouldn't be very interesting. You can direct the Drone to move about and even turn and place blocks in any direction. There are a couple of functions which you can use to move the drown along any axis.
@@ -2261,7 +2264,7 @@ And here is the result in Minecraft:
 
 All of the Drone's functions return the Drone itself so each function can chain directly onto another. Presented below is a table of Drone functions and brief descriptions of each. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference in the Appendices.
 
-TODO @@table drone_functions.org
+@@table drone_functions.org Drone Methods
 
 ### Blueprints
 A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
@@ -2294,6 +2297,8 @@ Once you've saved the file issue the `js refresh()` command to reload your plugi
 
     /js monolith()
 
+![An imposing black Monolith](img/sky/monolith.png)
+
 In a very short time, an imposing black Monolith will appear. Now let's take a closer look at the *monolith.js* source code...
 
 #### Modules needed for Blueprints
@@ -2309,7 +2314,7 @@ The second *require()* call loads the *blocks* module which provides useful name
 
 The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in @@recipe{sounds2}. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
 
-Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword.
+Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
 
 Having declared the *monolith()* function we turn it into a Drone method using the *Drone.extend()* function which takes a function and turns it into a method effectively attaching that function to itself so it can form part of a chain of calls. The Drone is extensible - it is capable of taking on new blueprints and building using those blueprints. When you add a new function to the Drone using the *extend()* method it is as if the function were an integral part of the Drone. As if by magic, the function becomes global and chainable and can be chained with any other Drone methods:
 
@@ -2378,14 +2383,6 @@ Congratulations Master Builder, You've just discovered how to build massive stru
 
 ### Summary
 In this recipe you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on objects and methods and Javascript's *this* keyword and what it means when used inside a method. 
-
-## @@nextRecipe{fart}: Farts in Minecraft
-
-### Minecraft Concepts Introduced:
-
-1. Sounds
-2. Effects
-3. Events (more)
 
 ## @@nextRecipe{fworks}: Create a Fireworks Show
 ### Introduction
@@ -2568,18 +2565,16 @@ Don't use it in modules especially in multi-player mode!
 A set of tables of events, one table for each set of events, Player Events, Server Events etc.
 ## Items reference
 A table of all the items in the items module and how to use them (API calls which require an ItemStack)
-## Sounds reference
-A table of all the possible sounds in the sounds module (with caveat)
+
 ## Drone API Reference
+@@include target/drone-api-reference.md
+
 ## Java and Javascript Notes
 A collection of gotchas
 1. Java Strings - converting from Java string to Javascript String
 2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
 3. Saving and restoring Location objects using utils module
 
-<!--  LocalWords:  png img Bukkit API Javascript ScriptCraft
- -->
- 
 
 ## Function Declarations vs Function Expressions
 In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:

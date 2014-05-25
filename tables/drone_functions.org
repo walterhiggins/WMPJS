@@ -1,0 +1,4 @@
+| Method Name | Description                                                                   |
+|-------------+-------------------------------------------------------------------------------|
+| .box()      | Places a cuboid of blocks of a given material at the Drone's current location |
+|             |                                                                               |

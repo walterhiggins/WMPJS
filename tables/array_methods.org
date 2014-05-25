@@ -1,0 +1,5 @@
+| Method Name | Description                                      |
+|-------------+--------------------------------------------------|
+| .push()     | Appends a new item to the end of the array.      |
+| .pop()      | Removes and returns the first item in the array. |
+

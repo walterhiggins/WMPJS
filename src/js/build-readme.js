@@ -4,7 +4,49 @@ var err = java.lang.System.err;
 
 var template = args[0];
 
-var readFile = function(filename){
+function toHTMLTable( contents, caption,tableNumber ) {
+  var headers = true;
+  var result = ['<table>\n'];
+  if (caption){
+    result.push('<caption><h4> Table ' + tableNumber + ': '+ caption + '</h4></caption>');
+  }
+  var fCells = [];
+  function toRow(cells,header){
+    var result2 = [];
+    var el = header ? 'th' : 'td';
+    for (var k = 0;k < cells.length; k++){
+      result2.push('<' + el + '>' + cells[k] + '</' + el + '>');
+    }
+    return result2.join('');
+  }
+  for (var i = 0;i < contents.length; i++){
+    fCells = [];
+    var line = contents[i];
+    var cells = (''+line).split(/\|/);
+    for (var j = 0; j < cells.length; j++){
+      var trimmed = cells[j].trim();
+      if (trimmed)
+	fCells.push(trimmed);
+    }
+    if (headers){
+      if (fCells.length > 0){
+	result.push('<tr>');
+	result.push(toRow(fCells, true));
+	result.push('</tr>\n');
+      }
+      i += 1; // skip past separator
+      headers = false;
+    }else {
+      result.push('<tr>');
+      result.push(toRow(fCells,false));
+      result.push('</tr>\n');
+    }
+  }
+  result.push('\n</table>');
+  return result;
+}
+
+function readFile ( filename ) {
   
   var BufferedReader = java.io.BufferedReader;
   var FileReader = java.io.FileReader;
@@ -30,6 +72,8 @@ var nextAchieve = 1;
 var currentRecipe = '';
 var nextRecipe = 0;
 var recipeKeys = {};
+
+var tableCount = 1;
 
 var currentChap = '';
 var nextChap = 1;
@@ -60,6 +104,11 @@ var xforms = {
     }
     return result.join('\n');
   },
+  '@@table ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
+    err.println("file="+file + ",caption="+caption);
+    var tableContents = readFile('tables/' + file);
+    return toHTMLTable(tableContents,caption,tableCount++).join('');
+  },
   '@@nextRecipe\{([a-zA-Z0-9]+)\}': function(match, key, matchIndex, line){
     recipeKeys[key] = nextRecipe++;
     listingCounts[key] = 1;
@@ -74,6 +123,10 @@ var xforms = {
   },
   '@@recipe\{([a-zA-Z0-9]+)\}': function(match, key){
     return 'recipe ' + recipeKeys[key];
+  },
+  '@@include (.*)': function(match, file){
+    var contents = readFile(file);
+    return contents.join('\n');
   },
   '@@listref\{([a-zA-Z0-9_\.]+)\}': function(match, key){
     return 'listing ' + listingKeys[key];

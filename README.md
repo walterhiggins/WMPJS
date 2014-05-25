@@ -996,7 +996,7 @@ Making variables private by default means that 2 or more plugins don't have to w
 There are times when you want to make a variable public so it can be used by other parts of the system. To do this, you attach the variable to the special `exports` variable as we did earlier. As a general rule you should not make all of your variables public unless you really think they'll be needed elsewhere. We'll talk more about public and private variables later.
 
 ### A short note about Objects
-The exports variable is a special type of variable - it is an 'object'. An object in javascript is something that can hold or contain other variables. So we can create a new variable that belongs to the exports object much like we'd normally create a new variable ...
+The exports variable is a special type of variable - it is an 'object'. An object in javascript is something that can hold or contain other variables and functions. So we can create a new variable that belongs to the exports object much like we'd normally create a new variable ...
 
     exports.favoriteGame = 'Minecraft';
 
@@ -3232,64 +3232,292 @@ And the fireworks will cease. If you ever schedule tasks using the *setInterval(
 In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
 
 ## Recipe 9: Animal Sounds Revisited
-when talking about objects and lookup tables, implement the same logic as was used in sounds1 using a lookup table.
-This recipe will use object lookup instead of a switch statement to play animal sounds. 
-### objects
-### properties
-#### accessing properties
-##### by name
-##### by index
+### Introduction
+In this recipe we'll revisit the Animal Sounds recipe from earlier but this time, instead of using a switch statment we'll use a lookup table instead. 
+### Objects
+I've mentioned objects a couple of times in this book. It's time to take  a closer look. 
 
-## Recipe 10: Don't stray too far
+An object in Javascript is something which can hold both data and functions. We've already been using objects throughout this book. We've used the *console* object to *log()* messages to the Minecraft server log and console window. We've use the *exports* object to provide new properties and functions for others to use. We've used array objects to *sort()* arrays. Last but not least we've used some of Minecraft's built-in objects such as Player and Event to respond to events that happen in the game. 
 
-### Goal
-A recipe which periodically checks each player's location and automatically moves them back into an area close to the spawn location. 
+Objects are very useful in programming. Java - the language Minecraft is written in - is an *Object Oriented* language which means that in Java *everything* is an object - Players, Worlds, Blocks, Tools, Recipes and so on. Objects let you group together related *properties* and *functions*. For Example a Player:
 
-### Javascript Concepts introduced:
-1. for loops  ( looping over the array of online players ) 20140517 - introd' in leaderboard recipe - still applicable??
-2. Conditionals are examined in more detail. (not sure this still applies - see earlier recipe - this might be just reinforcement)
+* has a food level (how much food they have)
+* has a bed (or not)
+* has an experience level 
+* can perform commands
+* can fly
+* can sneak
+* can shoot arrows
+
+... and so on. In programming terms, something which the player *has* is called a *property* while something which the player *does* is called a *method*. Methods are just functions which belong to an object.
+
+#### How to make an Object
+In Javascript creating a new object is easy. Here's an example you can try at the in-game prompt:
+
+    /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
+
+To create an object in javascript you start with the curly bracket `{` followed by a *key* , a colon `:`and then a value. You can separate each key-value pair using the comma `,`. You finish the object definition with a closing curly bracket `}`. The object example above has 2 key-value pairs. It has a *name* and a *job*. You can find out what's inside an object if you know its keys:
+
+    /js myFirstObject.name
+    > "steve"
+    
+    /js myFirstObject.job
+    > "minecrafter"
+
+Javascript is quite a flexible language. We've already seen how you can use square brackets `[]` to access items in an array. You can use the same square bracket notation to get object values:
+
+    /js myFirstObject["name"]
+    > "steve"
+    
+    /js myFirstObject["job"]
+    > "minecrafter"
+
+... which means you can also access object keys using variables rather than string literals...
+
+    /js var key = "name";
+    /js myFirstObject[key]
+    > "steve"
+
+Even if you don't already know what keys an object has, you can find out using a special form of *for* loop:
+
+    /js for (var key in myFirstObject){ self.sendMessage( key ) }
+
+... you can even use this form of *for* loop to process all of the keys *and values* of an object:
+
+    function displayObject ( object ) {
+      var value = null;
+      var key = null;
+      for ( key in object ) { 
+        value = object[ key ]; 
+        console.log( key + ' = ' + value );
+      }
+    }
+
+When we create an object like this:
+
+    /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
+
+this form of creating an object is known as an *object literal*. There are other ways to create objects in javascript but in this book we'll focus on obect literals only. We can add a new key to an existing Javascript object easily:
+
+    /js myFirstObject.toolOfChoice = 'Axe'
+
+and you can delete a key from an object using the *delete* keyword:
+
+    /js delete myFirstObject.toolOfChoice
+
+There are no rules about what keys you can add or remove from a Javascript object because Javascript does not enforce strict rules about such things. Javascript is a *dynamically typed* language which means you can create new objects on the fly and add and remove keys from them and change the key's value types while your program is running. 
+
+#### Two kinds of Objects
+When programming plugins using ScriptCraft, we have 2 different types of objects available to us. ScriptCraft uses Javascript - a special version of Javascript which is available from within any Java program. That means that from within our javascript plugins we can not only use javascript objects but can also access and use all of the *Java* objects available via the *Bukkit* API. Unlike Javascript, Java *does* have strict rules about what you can and cannot do with Java objects. Java is said to by *strictly typed* because it does not let you add and remove keys from Java Objects and enforces strict rules about types. For example, the *self* object which we've used for some command-prompt examples in this book is a *Java* object so while we can access the object's keys like this:
+
+    /js self.flying
+    > false
+
+... we could not *add* new keys to the object like this:
+
+    /js self.favoriteFood = 'Pizza'
+
+... this would display a Java error, while attempting to delete a key from a Java object:
+
+    /js delete self.flying
+
+... will fail silently. The key will *not* be deleted. 
+
+### Objects as Lookup tables
+In javascript it's easy for programmers to create objects and javascript can *lookup* object keys very quickly. A lookup table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
+
+In the following recipe we're going to change the *animalSounds.js* module from recipe 5 and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
+
+<caption>Listing 10.1</caption>
+
+    var sounds = require('sounds');
+    var input = require('input');
+    
+    var noises = {
+      cat: sounds.catMeow,
+      chicken: sounds.chickIdle,
+      cow: sounds.cowIdle,
+      'ender dragon': sounds.enderDragonGrowl,
+      horse: sounds.horseIdle,
+      pig: sounds.pigIdle,
+      sheep: sounds.sheepIdle,
+      wolf: sounds.wolfBark
+    };
+    function onInput( animal, player ) {
+      var makeNoise = null;
+      animal = animal.toLowerCase();
+    
+      if ( animal in noises ) {
+    
+        makeNoise = noises[ animal ];
+        makeNoise( player.location );
+    
+      } else {
+    
+        player.sendMessage("I never heard of a " + animal);
+    
+      }
+    };
+    
+    exports.animalSounds = function( player ) {
+      input( player, 
+    	 "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", 
+    	 onInput );
+    };
+
+In the above listing we've created a new object and called it *noises* :
+
+    var noises = {
+      cat: sounds.catMeow,
+      chicken: sounds.chickIdle,
+      cow: sounds.cowIdle,
+      'ender dragon': sounds.enderDragonGrowl,
+      horse: sounds.horseIdle,
+      pig: sounds.pigIdle,
+      sheep: sounds.sheepIdle,
+      wolf: sounds.wolfBark
+    };
+
+There are a couple of points to note about this statement:
+
+* The statement creates a single object. Like many statements in Javascript, it can span more than one line. Having the object definition span more than one line makes the code more readable.
+* The *noises* object has the following keys: cat, chicken, cow, horse, pig, sheep, wolf. Keys are always on the left hand side in an object literal. 
+* The keys do not need to have quote marks around them but if the key contains whitespace - for example 'ender dragon' (the space between 'ender' and 'dragon' is whitespace) - then it should be enclosed in either single or double quotes. 
+* You cannot use javascript keywords as keys in an object so the literal values *true*, *false*, *default* etc can't be used. 
+* Keys must be of type number or string. You cannot have another object as a key in an object - you can however have another object as a value in an object.
+* Values in objects *can* be of any type - even functions and other objects! When an object contains another object as a value, that value is called a nested object. We'll see an example of a nested object later.
+* Every key-value pair must be separated with a single comma `,`. Try to avoid putting an extra comma at the end of the last key-value pair. There is no comma after the last key-value pair `wolf: sounds.wolfBark` because it is not needed and some versions of Javascript will report an error if they see an extra comma just before the closing curly bracket `}`.
+
+Having created the *noises* lookup table we use it in the *onInput()* function. The first use is to check to see if the animal the player typed in is in the *noises* object. The *if* statement below...
+
+    if ( animal in noises ) {
+
+... checks to see if the animal is in the noises table. This *key in object* construct will lookup the object and return true if *key* is in it. If the animal is not in the lookup table the function reports it hasn't heard of that animal. If it *is* in the lookup table it gets the appropriate noise function:
+
+    makeNoise = noises[ animal ];
+
+Each value in the *noises* table is a function so when we lookup an animal in the *noises* table what we get back is a function which when called will emit that animal's noise. So *makeNoise* is a variable which will point to a function which emits an animal noise. This is yet another example of the use of functions as data. In this case the functions are values in a lookup table. This is a very powerful idea in computer programming. In the next statement in the function:
+
+    makeNoise( player.location );
+
+... we invoke the function we've just found in the lookup table, passing in the player's location as the place where we want the sound to play. The remaining parts of the module are unchanged from the previous version.
+
+#### Why use a lookup table instead of *switch* statement?
+There are a couple of reasons why we should do this:
+
+* Adding new sounds is easier if we only need to change the data in the lookup table, not the code in the *onInput* function. 
+* Changing code is error prone. Every time we have to change the *onInput* function because we want to support a new sound, we run the risk of introducing errors into the code.
+* There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, would could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table meaning the function is shorter and more maintainable.
+
+### Nested Objects
+Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from recipe 8 when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
+
+    var largeDoll = {
+       size: 'large',
+       inner: {
+          size: 'Medium',
+          inner: { 
+             size: 'Small',
+             inner: {  
+                size: 'Tiny',
+		inner: null
+             }
+          }
+       }       
+    };
+
+This is an example of an object which has objects *nested* within it, just as a Russian Doll has other dolls inside it. In this example we have a 'Large' doll housing a 'Medium' doll housing a 'Small' doll and so on. The innermost 'Tiny' doll has an *inner* property of null meaning there's nothing inside. The above code could also be written as a series of statements each creating a distinct object like this:
+
+    var tinyDoll = { size: 'Tiny', inner: null };
+    var smallDoll = { size: 'Small', inner: tinyDoll };
+    var mediumDoll = { size: 'Medium', inner: smallDoll };
+    var largeDoll = { size: 'Large', inner: mediumDoll };
+
+Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in recipe 8. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
+
+<caption>Listing 10.2</caption>
+
+    
+    var tinyDoll = { size: 'Tiny', inner: null };
+    var smallDoll = { size: 'Small', inner: tinyDoll };
+    var mediumDoll = { size: 'Medium', inner: smallDoll };
+    var largeDoll = { size: 'Large', inner: mediumDoll };
+    
+    function openRussianDoll( doll ){
+      console.log( doll.size );
+      if ( doll.inner ) {
+        openRussianDoll( doll.inner );
+      }
+    }
+    
+    function openDoll(){
+      openRussianDoll( largeDoll );
+    }
+    exports.openDoll = openDoll;
+
+Save the file and issue the `js refresh()` command to reload your plugins, then at the server console issue the command:
+    
+    js openDoll()
+
+You should see the following output on your screen:
+
+    > Large
+    > Medium
+    > Small
+    > Tiny
+
+Try changing the value passed to openRussianDoll from `largeDoll` to another value and see what the output looks like.
+
+### JSON
+I can't talk about Objects in javascript without briefly mentioning JSON. JSON is short for *JavaScript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. 
+
+There is also a JSON module which provides methods to:
+
+1. Let programmers print out an object in a way which is *somewhat* readable by humans.
+2. Read a string of JSON output and convert it from a string back into an object.
+
+We'll learn more about JSON, loading and saving data later in the book.
+
+### Achievement Unlocked!
+![](img/achievement-plugin-dev-10.png)
+
+Congratulations! You've discovered some of the power of Objects in Javascript and how to create efficient lookups. Your plugin development apprenticeship is complete!
+
+### Summary
+In this recipe you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final recipe in the Basic Modding section of the book. Next, we move on to advanced modding.
 
 # Part III Advanced Modding
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
-## Recipe 11: Arrows that Teleport you.
+## Recipe 10: Arrows that Teleport you.
 
 ### Goal
 
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
-## Recipe 12: Leaderboard revisited
+## Recipe 11: Leaderboard revisited
 In this recipe readers learn about the scoreboard api and how to display a leaderboard on screen.
 jsp leaderboard hide
 listen for player experience changes and update leaderboard on screen?
 (need to figure out how to do this myself)
 
-## Recipe 13: A TNT-Free Zone
+## Recipe 12: A TNT-Free Zone
 
 ### Goal 
 
 In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
 
-## Recipe 14: Protecting areas against griefing.
+## Recipe 13: Protecting areas against griefing.
 
 ### Goal
 
 In this recipe, players will learn how to listen for and cancel block-breaking events.
 
-## Recipe 15: It's a small world
-
-### Goal
-Readers learn how to limit the size of the game world and so make more memory-efficient game worlds. This is an event-driven refinement of recipe 5.
-
-### Concepts introduced
-
-Computer Memory.
-
-## Recipe 16: Horse-Clicker, A simple mini-game
+## Recipe 14: Horse-Clicker, A simple mini-game
 
 ### Goal
 This is the first recipe in a series of recipes which will introduce mini-games. In this recipe, basic game mechanics are introduced.  Keeping score.
     
-## Recipe 17: Snowball Fight, A player-vs-player mini-game
+## Recipe 15: Snowball Fight, A player-vs-player mini-game
 ### Goal
 This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
 

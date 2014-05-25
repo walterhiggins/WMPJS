@@ -30,7 +30,7 @@ INTRO'D in recipe3
 ##### nested arrays TODO
 ##### methods DONE recipe3
 TODO A table of array methods
-TODO A table of string methods
+A table of string methods DONE
 
 #### objects
 ##### Date object
@@ -48,14 +48,13 @@ TODO A table of string methods
 ##### Persistence and Java objects (no JSON)
 ##### Looking up the Bukkit API
 
-
 ### scriptcraft
-#### Drone
-#### events
+#### Drone DONE
+#### events DONE
 #### persistence
 #### plugin
-#### command
-#### asking players questions
+#### command DONE
+#### asking players questions DONE
 
 ## Missing
 2. multi-sided dice

@@ -440,7 +440,7 @@ Congratulations! You've just installed ScriptCraft and executed your first line 
 
 ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute javascript code right away. More on this in the next chapter...
 
-## @@nextChaper{js}: A Javascript command prompt
+## @@nextChapter{js}: A Javascript command prompt
 
 Once you've installed ScriptCraft, you can use the `js` command to evaluate Javascript. The `js` command will try to evaluate any of the text which follows it, as Javascript. You must type a `SPACE` between the `js` and the javascript you want to evaluate. The `js` command will evaluate the javascript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, try to evaluate it, and if it can, will print the result. Let's practice with a few simple Javascript expressions.
 
@@ -758,7 +758,7 @@ We've only scratched the surface of functions in javascript. We'll explore funct
 ### Summary
 In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. We also touched on functions - how to call them and how to create them. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
  
-## @@nextChaper{ed}: Choosing and Using a Text Editor
+## @@nextChapter{ed}: Choosing and Using a Text Editor
 
 Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
 
@@ -947,13 +947,13 @@ Well that was easy wasn't it? This might be a trivially simple plugin but it dem
 
 So far the plugin we've written works fine in that it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
    
-@@listing helloWorld_v1.js 
+@@listing helloWorld_v1.js TODO ADD CAPTION
    
 Now restart the server. 
    
 What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function but we haven't called the function yet! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
 
-@@listing helloWorld_v2.js
+@@listing helloWorld_v2.js TODO ADD CAPTION
 
 Now restart the server again. Once again, the message will appear every time the server starts up. The helloWorld() function you wrote will be loaded and executed by the Minecraft Server every time it starts.
    
@@ -963,7 +963,7 @@ OK. So we've wrapped the original code inside a function of our own and we call 
     
 This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
-@@listing helloWorld_v3.js 
+@@listing helloWorld_v3.js  TODO ADD CAPTION
 
 Restart the server again. Now the message appears in the server console. Let's look at the last statement in the code:
 
@@ -1049,7 +1049,7 @@ Right-click and choose 'New File' from the menu. Call your new file 'dice.js' th
 
 Type the following code into the newly created file...
 
-@@listing dice_v1.js
+@@listing dice_v1.js TODO ADD CAPTION
 
 We'll talk about this code later. For now, type the code as you see it above. Once you've typed the code, save your work (go to the File menu and choose 'Save').
 
@@ -1106,7 +1106,7 @@ You'll notice that the above statement doesn't appear to have called `roll()` ye
 
 A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
 
-Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in @@listref{dice_v1.js}.
+Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing @@listref{dice_v1.js}.
 
 You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we actually get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
@@ -1117,7 +1117,7 @@ Major Kudos! You've create created your first Javascript module, loaded it and u
 ### Digging Deeper
 Let's look at the code we've just added to Minecraft. The code is reprinted below...
 
-@@listing dice_v1.js
+@@listing dice_v1.js TODO ADD CAPTION
 
 A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later recipes, for now let's look at the function body itself (lines 2 through 5). 
 
@@ -1205,11 +1205,11 @@ You should see '14' appear in your server window. The expression `5 + 9` is the 
 
 Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous recipe. You don't have to type this code, I just want to highlight some changes:
 
-@@listing dice_v2.js
+@@listing dice_v2.js TODO ADD CAPTION
 
 The above code is similar to code from the previous recipe except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous recipe. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous recipe. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
 
-@@listing dice_v3.js
+@@listing dice_v3.js TODO ADD CAPTION
 
 Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parmeter we can say what it should be each time we call the *roll* function. The following diagram illustrates the changes the function has just undergone.
 
@@ -1233,7 +1233,7 @@ What happens if you call dice.roll() *without* passing a parameter? You can see 
 
 You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascript and it means the computed value - the result of the math operations that is - was not a number. Do you know why? Our function always expects a number (how many sides the dice has) and if we don't give it one then the math won't work as expected. Wouldn't it be nice if, when no number is passed to `dice.roll()` it just assumes that we want the roll of a six-sided dice? Six-sided dice are after all the most common type of dice. Let's make another minor change to the *roll* function:
 
-@@listing dice_v4.js
+@@listing dice_v4.js TODO ADD CAPTION
 
 What I've done here is add 3 new lines of code near the top of the *roll* function. The rest of the function remains unchanged.
 
@@ -1259,9 +1259,9 @@ You should see a random number output for each of the above calls. The *roll* fu
 ### Assiging to the exports variable
 Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
 
-@@listing dice_v5.js
+@@listing dice_v5.js TODO ADD CAPTION
 
-The above listing is one line shorter than the previous listing (@@listref{dice_v4.js}). If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
+The above listing is one line shorter than listing @@listref{dice_v4.js}. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
 
     var cow = 'Cow';
     var sheep = 'Sheep';
@@ -1353,7 +1353,7 @@ Most of the source listings in this book will not include comments because the c
 #### Commenting dice.js
 Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
 
-@@listing dice_v6.js
+@@listing dice_v6.js TODO ADD CAPTION
 
 Make sure to save the file after you've changed it, run `/js refresh()` at the in-game prompt then run the following commands to ensure your code still works:
 
@@ -1376,7 +1376,7 @@ Back in the early days of programming there was no such thing as Event Driven Pr
 
 In the first part of this recipe we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in @@recipe{dice2} to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
 
-@@listing greetings_v1.js
+@@listing greetings_v1.js TODO ADD CAPTION
 
 We're already getting the benefit of modules and reuse in that we can reuse the *dice* module we created earlier. This is the first statement in our new module. If your module depends on other modules, it's usually a good idea to load those modules at the top of your code. It's another of those good habits you should adopt as a Javascript programmer because in the long run it will make programming easier. 
 
@@ -1524,7 +1524,7 @@ You can learn more about the Array object and its functions and properties at ht
 ### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
 
-@@listing greetPlayers_v2.js
+@@listing greetPlayers_v2.js TODO ADD CAPTION
 
 Make sure to save your file then run the javascript `refresh()` function to reload ScriptCraft (`/js refresh()` from the in-game prompt or `js refresh()` from the server prompt). Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
 
@@ -1553,7 +1553,7 @@ Minecraft is often described as 'Virtual Lego', Programming is similar and offer
 ### Greeting Players in Style
 As a final fluorish to this recipe let's add something a little more spectacular than a simple text message. Let's greet each new player with a firework which launches when and where they join the server. 
 
-@@listing greetPlayers_v3.js
+@@listing greetPlayers_v3.js TODO ADD CAPTION
 
 We'll use and explore the ScriptCraft *fireworks* module again in a later recipe. Events and event-handling functions can be used to trigger all kinds of cool new game mechanics.
 
@@ -1571,7 +1571,7 @@ One of the great things about computers is that they can make decisions and take
 
 In this recipe we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
 
-@@listing guess_v1.js
+@@listing guess_v1.js TODO ADD CAPTION
 
 In this program the *guessTheNumber()* function rolls a 6-sided dice, then asks the player to guess the number. If the player guesses correctly `You guessed correct!` is displayed. After the player has guessed (either rightly or wrongly) the message `Thanks for playing` is displayed. You can try out this code by issuing the following commands at the server console prompt:
 
@@ -1662,7 +1662,7 @@ The `!` operator *negates* (that is - makes the opposite of) any boolean express
 ### The if-else construct
 Let"s say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
 
-@@listing guess_v2.js
+@@listing guess_v2.js TODO ADD CAPTION
 
 Change your existing numberGuess.js file to match the code above, save it then issue the following commands to test it:
 
@@ -1672,22 +1672,22 @@ Change your existing numberGuess.js file to match the code above, save it then i
 Now when you guess incorrectly you should see a message `Better luck next time.` appear.
 
 ### The if-else-if construct
-So far the guessing games gives players just one shot at guessing the number. In the following listing the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if - else - if* form which is quite common in Javascript:
+So far the guessing games gives players just one shot at guessing the number. In the following listing @@listref{guess_v3.js} the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if - else - if* form which is quite common in Javascript:
 
-@@listing guess_v3.js
+@@listing guess_v3.js TODO ADD CAPTION
 
 In this revision of the number guessing game, we're using an extra parameter called *repeat* which is a parameter passed by the *input()* function to our input handler function *checkAnswer()*. We didn't use this parameter in the previous version of the game because we didn't need it. The *repeat* parameter is itself a function which when called will repeat the question. That's why we call it when the answer is too high or too low. The *repeat* function when called will ask the player the same question again and when the player answers, will call your *callback* function again. 
 
 Another change in the above function is that we've given the player the option of simply quitting the game by typing `quit` as an answer to the question. You may be wondering why there's a check to see if the guess is too low but no equivalent check to see if the guess is too high. The resaon is, if the guess is not the same or less than the randomNumber, then it *must* be too high - there are no other options.
 
-How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how @@listref{guess_v3.js} behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
+How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how listing @@listref{guess_v3.js} behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
 
 ![](img/guess1/flowchart.png)
 
 ### Nested blocks
 The `if` statement is one of several *block* statements in javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
 
-@@listing guess_v4.js
+@@listing guess_v4.js TODO ADD CAPTION
 
 Now jump into the game and at the in-game prompt issue the following commands:
 
@@ -1733,7 +1733,7 @@ How would we write such a rule in Javascript? Well let's refine the statement ab
 
 In javascript you write it like this:
 
-@@listing stealthCookies_v1.js
+@@listing stealthCookies_v1.js TODO ADD CAPTION
 
 If you like you can save the above code into a file called stealthCookies.js in your *scriptcraft/plugins* folder, reload your plugins (using `/js refresh()`) and try breaking some blocks while flying or sneaking to see the code in action.
 
@@ -1752,7 +1752,7 @@ To you and I that rule might look clear enough but the computer would be confuse
 
 We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following javascript code:
 
-@@listing stealthCookies_v2.js
+@@listing stealthCookies_v2.js TODO ADD CAPTION
 
 Notice the additional `( )` round brackets around the test `breaker.sneaking || breaker.flying`. These are needed so that we can phrase the rule in a way which the computer will read it the same way we do.
 
@@ -1766,7 +1766,7 @@ In this recipe we'll create a simple program to ask players a question and play 
 ### The switch statement
 In @@recipe{guess1} you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
 
-@@listing animalSounds_v1.js
+@@listing animalSounds_v1.js TODO ADD CAPTION
 
 Save your file then issue the `js refresh()` or `reload` command to reload all javascript code. Then at the in-game prompt issue the following command:
 
@@ -1837,7 +1837,7 @@ How do we make the *animalSounds()* function understand that when a player types
 
 The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
-@@listing animalSounds_v2.js
+@@listing animalSounds_v2.js TODO ADD CAPTION
 
 The only change to this module is a new statement just before the switch statement:
 
@@ -1960,7 +1960,7 @@ The *bukkit.worlds()* function returns an array of all of the worlds on the serv
 #### Sorting Players by name
 One way to sort players is by name. This isn't strictly a leaderboard in the truest sense of the word but it does demonstrate how to sort based on a player's attribute - his name. Create a new file called *playerSort.js* in the *scriptcraft/modules* folder and type in the following code:
 
-@@listing playerSort_v1.js
+@@listing playerSort_v1.js TODO ADD CAPTION
 
 This module is the first module we've written which exports more than one function. Here's how you might use the module:
 
@@ -1982,7 +1982,7 @@ To try out this module, issue the following commands at the server console promp
 
 Let's face it, a leaderboard based on player names would be both boring and unfair. Let's try one based on a player's experience points. Update your *playerSort.js* file adding a new *byExp()* function (exp is short for experience):
 
-@@listing playerSort_v2.js
+@@listing playerSort_v2.js TODO ADD CAPTION
 
 The new *byExp()* function just does a numeric sort - that is it returns the result of subtracting player a's totalExperience from player b's totalExperience. One thing to note is that although there is only one single function used for sorting by experience, we *export* it twice - under the name *byExp* and also under the longer name *byExperience*. This gives programmers who use this module the option of using the short name or long name for that function - whichever name they use it will be the same function being called. Issue the following commands to see this function in action - again - it helps if there's more than one player on your server :-) ...
 
@@ -2028,7 +2028,7 @@ The first command will display your name. The second command will make you shoot
 
 This command calls the *.getStatistic()* method on the *self* object which refers to your in-game character and displays the number returned by that method. Now jump again and issue the same command once more (remember, you can issue the previous command by pressing / then the UP arrow key). The number returned should be greater by 1. We're going to use each player's JUMP statistic to display a leaderboard of players who have jumped the most. Open up your *playerSort.js* file in the editor and update it adding the *byJumps()* function:
 
-@@listing playerSort_v3.js
+@@listing playerSort_v3.js TODO ADD CAPTION
 
 Save the file then issue the `/js refresh()` command to reload ScriptCraft. Test your new function by issuing the following commands at the server console prompt:
 
@@ -2077,7 +2077,7 @@ The part of the *for* statement in round brackets `(var i = 0; i < animals.lengt
 
 Following the for statement you usually have a block of one or more statements contained inside curly brackets. These statements will be executed each time through the loop. Let's put *for* loops to use to create a more pleasing leaderboard display of players who jump the most. Create a new file called *leaderboard.js* in the *scriptcraft/modules* folder and type in the following code:
 
-@@listing leaderboard_v1.js
+@@listing leaderboard_v1.js TODO ADD CAPTION
 
 To try out the new module save it, issue the `js refresh()` command to reload ScriptCraft then issue the following commands at the in-game prompt:
 
@@ -2098,19 +2098,19 @@ The above block of code gets executed a number of times - the number depends on 
 
 The second kind of loop is called the *while* loop. The *for* loop is very useful for *iterating* (a fancy word for looping) over arrays or if you know in advance how many times you need to loop. Sometimes you won't know how many times you need to loop, you'll want to keep looping until something happens and you don't know how many times you'll need to loop until it does. A *while* loop is also called a *conditional* loop - it's like the *if* statement except it will keep repeating the same block of code over and over until a *test condition* is no longer true. The best way to understand this is by example. Let's look at the leaderboard module again - this time it's been written using a *while* loop instead of a *for* loop. The code behaves *exactly* the same, it just uses *while* instead of *for*.
 
-@@listing leaderboard_v2.js
+@@listing leaderboard_v2.js TODO ADD CAPTION
 
 #### Breaking out of loops
 There are times when you'll want to break out of a loop early. If for example, you only want to display a list of players who have actually jumped - that is - players whose jump count is greater than zero. You can break out of a loop early using the javascript *break* statement. Take a look at the following listing to see an example of the *break* statement:
 
-@@listing leaderboard_v3.js
+@@listing leaderboard_v3.js TODO ADD CAPTION
 
 In the above code, the while loop will stop when it encouters the first player who has not jumped. 
 
 #### Skipping a turn in a loop.
 The *break* statement will break out of a loop effectively ending the loop so that the block of code in the loop won't be executed again. Sometimes you just want to skip an iteration (a turn) on the loop. Let's say we have an *unsorted* list of players and only want to display players who have jumped. The *continue* lets you skip on to the next iteration of the loop. In the following listing, only players who have jumped will be displayed. This isn't a leaderboard because players are displayed in no particular order:
 
-@@listing leaderboard_v4.js
+@@listing leaderboard_v4.js TODO ADD CAPTION
 
 #### Infinite Loops
 Within any loop block there must be a statement which will affect the loop's condition. For example, in the above code we check the value of the *i* variable each time round the loop. If we never changed the *i* variable, what do you think would happen? If *i* never changed then the test `i < players.length` would always be true (unless of course there were no players on the server in which case the code inside the *while* block would never execute). A loop which keeps running and never stops is called an *infinite loop*. Infinite loops usually happen because a programmer forgot to increment a counter variable or because the loop condition is wrong. An infinite loop is usually a sign that something went wrong - that there's a bug in the code. There are infinite loops which aren't accidental. Most games and programs which have a user interface (windows, buttons etc) have an *event loop* which is a loop that's constantly running and listening for incoming events from the user or other parts of the system. A game's event loop might listen for key presses from the user, check to see if any collisions between objects in the game have occurred, check the player's health and so on. The Minecraft server has just such a loop.
@@ -2148,7 +2148,7 @@ The important points to note are:
 
 Now let's dive in and create a new `jsp leaderboard` command. Create a new file called *leaderboardCmd.js* in the *scriptcraft/plugins* folder and type in the following code:
 
-@@listing leaderboardCmd_v1.js
+@@listing leaderboardCmd_v1.js TODO ADD CAPTION
 
 This file must be saved in the *scriptcraft/plugins* folder so that it will be automatically loaded and run at startup. This module loads the *leaderboard* module we created earlier, creates a new *leaderboardCmd()* function and calls ScriptCraft's *command()* function passing in a String 'leaderboard' which is the name of the new command and a function which will be run whenever any player invokes the command. You may have noticed there's no *exports* in this new module. That's because we don't need to *export* anything for this particular module - we provide a new command for use by all players through the *command()* function instead. Now let's see this new command in action. Issue the `js refresh()` command to reload ScriptCraft then at the in-game prompt issue the following command:
 
@@ -2269,7 +2269,7 @@ All of the Drone's functions return the Drone itself so each function can chain 
 ### Blueprints
 A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
 
-@@listing pyramid2.js
+@@listing pyramid2.js TODO ADD CAPTION
 
 The listing above will let you create pyramids by simply targeting a block in the game and issuing this command at the in-game prompt:
 
@@ -2291,7 +2291,7 @@ You've seen already that the Drone has many functions for building, moving and t
 
 In the first example we just call *monolith()* because any function which belongs to the Drone API is a *global* function meaning it can be called without first calling *require()*. In the second example you can see that once we've created the *monolith()* function we'll be able to use it in a Drone building chain that forms part of a series of building commands. The second command sets up a series of monoliths like a line of dominoes. I'll explain how this works but first let's create a new module called *monolith.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-@@listing monolith_v1.js
+@@listing monolith_v1.js TODO ADD CAPTION
 
 Once you've saved the file issue the `js refresh()` command to reload your plugins and then find a nice clear parcel of land in the game, place a cornerstone and then issue this command:
 
@@ -2325,7 +2325,7 @@ So now you can see how easy it is to extend the Drone to build new interesting t
 ### A Blueprint for a Skyscraper
 In this recipe we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-@@listing skyscraper_v1.js
+@@listing skyscraper_v1.js TODO ADD CAPTION
 
 Once you've saved the file issue the `js refresh()` command to reload your plugins and then find a nice clear parcel of land in the game, place a cornerstone and then issue this command:
 
@@ -2399,7 +2399,7 @@ The fireworks module's *firework()* function takes a single parameter - a Locati
 ### Deferred Execution
 In the commands you just executed at the in-game prompt, the firework launches immediately. What we'd like to do is delay the launch by a couple of seconds so that we can move to a safe position with a better view. Fortunately there's a way to delay the execution of a function. Create a new file called scriptcraft/plugins/fireworkshow.js and type in the following code:
 
-@@listing fwkshow_v1.js
+@@listing fwkshow_v1.js TODO ADD CAPTION
 
 Save the file then issue the `js refresh()` command to reload your javascript plugins. Now issue this command to launch a firework:
 
@@ -2426,7 +2426,7 @@ Although setTimeout() is not part of the Javascript Language, it is provided wit
 ### A fireworks show
 I promised you a fireworks show at the start of this recipe. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
 
-@@listing fwkshow_v2.js
+@@listing fwkshow_v2.js TODO ADD CAPTION
 
 Then issue the `/js refresh()` command and at the in-game command prompt issue the following command:
 
@@ -2474,9 +2474,9 @@ The message will keep printing out for as long as the server is running. Fortuna
 
 ... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following listing:
 
-@@listing fwkshow_v3.js
+@@listing fwkshow_v3.js TODO ADD CAPTION
 
-In @@listref{fwkshow_v3.js} we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
+In listing @@listref{fwkshow_v3.js} we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
 
     /js var show = fireworkshow( self.location, 300 );
 
@@ -2586,7 +2586,7 @@ In javascript it's easy for programmers to create objects and javascript can *lo
 
 In the following recipe we're going to change the *animalSounds.js* module from @@recipe{sounds1} and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
 
-@@listing animalSounds_v3.js 
+@@listing animalSounds_v3.js  TODO ADD CAPTION
 
 In the above listing we've created a new object and called it *noises* :
 
@@ -2658,7 +2658,7 @@ This is an example of an object which has objects *nested* within it, just as a 
 
 Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in @@recipe{fworks}. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
 
-@@listing russiandoll.js
+@@listing russiandoll.js TODO ADD CAPTION
 
 Save the file and issue the `js refresh()` command to reload your plugins, then at the server console issue the command:
     
@@ -2699,6 +2699,7 @@ The latter half of the book will focus on Event-Driven Programming and using Buk
 
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
+## @@nextRecipe{bukkitapi}: Exploring the Bukkit API
 ## @@nextRecipe{leaderboard2}: Leaderboard revisited
 In this recipe readers learn about the scoreboard api and how to display a leaderboard on screen.
 jsp leaderboard hide

@@ -68,6 +68,17 @@ function readFile ( filename ) {
 
 };
 
+function getListingNumber( source, chapter){
+  var result = listingKeys[source],
+    recipeNum;
+  if (!result){
+    recipeNum = recipeKeys[ chapter ];
+    result = (recipeNum+1) + '.' + listingCounts[ chapter ];
+    listingCounts[ chapter ] = listingCounts[ chapter ] + 1;
+    listingKeys[ source ] = result;
+  }
+  return result;
+}
 var nextAchieve = 1;
 var currentRecipe = '';
 var nextRecipe = 0;
@@ -86,26 +97,23 @@ var xforms = {
   '@@nextAchievement': function(match,matchIndex,line){
     return 'img/achievement-plugin-dev-' + (nextAchieve++) + '.png';
   },
-  '.*@@listing .*': function(match, matchIndex, line){
+  '@@listing ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
     var result = [];
-    var source = match.replace(/@@listing\s/,'').trim();
-    var recipeNum = recipeKeys[currentRecipe];
-    var listingNum = listingKeys[source];
-    if (!listingNum){
-      listingNum = (recipeNum+1) + '.' + listingCounts[currentRecipe];
-      listingCounts[currentRecipe] = listingCounts[currentRecipe]+1;
-    }
-    listingKeys[source] = listingNum;
-    result.push('<caption>Listing ' + listingNum + '</caption>');
+
+    var listingNum = getListingNumber(file, currentRecipe);
+
+    result.push('<caption>Listing ' + listingNum + ': ' + caption + '</caption>');
     result.push('');
-    var sourceContents = readFile('listings/' + currentRecipe + '/' + source);
+    var sourceContents = readFile('listings/' + currentRecipe + '/' + file);
     for (var i = 0;i <sourceContents.length; i++){
       result.push('    ' + sourceContents[i]);
     }
     return result.join('\n');
   },
+  '@@listref\{([a-zA-Z0-9_\.]+)\}': function(match, key){
+    return getListingNumber(key, currentRecipe);
+  },
   '@@table ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
-    err.println("file="+file + ",caption="+caption);
     var tableContents = readFile('tables/' + file);
     return toHTMLTable(tableContents,caption,tableCount++).join('');
   },
@@ -127,9 +135,6 @@ var xforms = {
   '@@include (.*)': function(match, file){
     var contents = readFile(file);
     return contents.join('\n');
-  },
-  '@@listref\{([a-zA-Z0-9_\.]+)\}': function(match, key){
-    return 'listing ' + listingKeys[key];
   }
 };
 

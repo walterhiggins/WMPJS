@@ -1616,7 +1616,7 @@ There are a couple of other useful Array insertion and removal functions:
 * shift() Is used to **remove** the *first* item from the array.
 * pop() Is used to **remove** the *last* item from the array.
 
-You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
+You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In later recipes we'll learn how to process all of the items in an array using Javascript's looping statements.
 
 <table>
 <caption><h4> Table 1: Array Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
@@ -3409,6 +3409,65 @@ There are a couple of reasons why we should do this:
 * Changing code is error prone. Every time we have to change the *onInput* function because we want to support a new sound, we run the risk of introducing errors into the code.
 * There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, would could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table meaning the function is shorter and more maintainable.
 
+### Objects and References
+One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute javascript statements at the in-game or server prompt, there's a special variable available. The *self* variable refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
+
+    /js var me = self;
+
+Does not create a clone of the player. It merely adds a new javascript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
+
+![Obects and References: Player](img/sounds2/obects_player.png)
+
+If I have more than one variable that refers to the same object then I can control or change that object through any of the variables that refer to it (also known as references). What this means is that if I have 3 variables *self*, *me* and *walter* all of which refer to the same player, I can make that player shoot an arrow by using any of the following statements:
+
+    /js me.shootArrow();
+
+or 
+    
+    /js self.shootArrow();
+
+or 
+   
+    /js walter.shootArrow();
+    
+
+This is an important point to remember when passing around variables which refer to objects. When you change the *.flying* property for *any* of the *self*, *me* and *walter* variables, you effectively change it for *all* of them because they all refer to the same object. Try the following as an exercise. Execute each of the following commands and make a note of the results:
+
+    /js var player = self;
+    /js player.customName;
+    /js self.customName;
+    /js player.customName = 'steeeeve';
+    /js player.customName
+    /js self.customName
+
+When you change the *player* object or call any of its methods, the changes are reflected in all of the variables which refer to the object.
+
+### Obects as Parameters
+In Javascript, when you pass an object as a parameter to a function, the object is passed *by reference*. This means a reference to the original object is passed, not a copy of the object. To illustrate this, let's imagine we have a function which will force a player to drop to the ground if they are currently flying. If a player is flying, we can disable flight by setting the player's *.flying* property to false. Try this yourself at the in-game prompt. Make your gamemode creative by issuing the `/gamemode creative` command then press the SPACE bar twice to start flying. While in mid-air issue the following command:
+
+    /js self.flying = false;
+
+... and you will drop to the ground. Now let's create a function called drop which we can use to drop a player. The first draft of the function will look like this:
+
+    /js function drop( flying ) { flying = false; }
+
+Now try to run this function (while flying) by issuing the following command:
+
+    /js drop( self.flying );
+
+Did anything happen?
+
+The reason nothing happens when you call the *drop()* function is because in this first draft of the function, we only change the boolean value passed in as a parameter. Setting the *flying* parameter to *false* has no bearing on the object because we haven't passed the object as a reference. Instead we've passed the object's *flying* property. Let's revisit the *drop()* function this time changing it so that it takes an object instead:
+
+
+    /js function drop( player ) { player.flying = false; }
+
+We're also going to change how we call the *drop()* function. This time we'll pass the *self* variable instead.
+
+    /js drop(self);
+
+Now the *drop()* function works because we've passed a reference to the object so any changes to the object inside of the function act upon the object. This is an important point to remember, if you want to change an object within a function, you must accept the object as a parameter not just the object's property you want to change.
+	
 ### Nested Objects
 Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from recipe 8 when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
 
@@ -3469,14 +3528,16 @@ You should see the following output on your screen:
 Try changing the value passed to openRussianDoll from `largeDoll` to another value and see what the output looks like.
 
 ### JSON
-I can't talk about Objects in javascript without briefly mentioning JSON. JSON is short for *JavaScript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. 
+I can't talk about Objects in javascript without mentioning JSON. JSON is short for *JavaScript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
+
+    var steve = { "name": "steve", "occupation": "miner" }
 
 There is also a JSON module which provides methods to:
 
 1. Let programmers print out an object in a way which is *somewhat* readable by humans.
 2. Read a string of JSON output and convert it from a string back into an object.
 
-We'll learn more about JSON, loading and saving data later in the book.
+We'll learn more about JSON, and loading and saving data later in the book.
 
 ### Achievement Unlocked!
 ![](img/achievement-plugin-dev-10.png)
@@ -3487,38 +3548,65 @@ Congratulations! You've discovered some of the power of Objects in Javascript an
 In this recipe you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final recipe in the Basic Modding section of the book. Next, we move on to advanced modding.
 
 # Part III Advanced Modding
-The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
-## Recipe 10: Arrows that Teleport you.
+The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for multi-player servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. The API is vast. In the following chapters we'll learn how to explore the Bukkit API using the online documentation and how to better understand the types of data provided by Bukkit.
+
+## Recipe 10: Saving Player preferences.
+### Introduction
+In this recipe we'll learn how to load and save player preferences. We'll create a new player command which lets them choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
+### A day in the life of a Minecraft Plugin
+I get knocked down but I get up again.
+
+### Chat colors
+### Saving state
+#### Loading data at startup
+#### Automatic saving at shutdown
+### JSON in depth
+#### use of "" in keys
+
+### Summary
+In this recipe you learned about persistence - saving and restoring state. This is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
+
+## Recipe 11: Add new Crafting Recipes: An Ender Bow
+### Crafting an Ender Bow
+#### What the ender bow should do
+#### Choosing what materials should be used
+##### ender pearls
+THey're hard to get and tie in with teleoporting.
+The ender bow is going to be a powerful tool we don't want it to be *too* easy to craft.
+##### The crafting Grid
+Mapping the grid to shape() function.
+##### Note on VarArgs and calling VarArg functions from javascript?
+## Recipe 12: Arrows that Teleport you.
 
 ### Goal
 
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
-## Recipe 11: Exploring the Bukkit API
-## Recipe 12: Leaderboard revisited
+## Recipe 13: Exploring the Bukkit API
+## Recipe 14: Leaderboard revisited
 In this recipe readers learn about the scoreboard api and how to display a leaderboard on screen.
 jsp leaderboard hide
 listen for player experience changes and update leaderboard on screen?
 (need to figure out how to do this myself)
 
-## Recipe 13: A TNT-Free Zone
+## Recipe 15: A TNT-Free Zone
 
 ### Goal 
 
 In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
 
-## Recipe 14: Protecting areas against griefing.
+## Recipe 16: Protecting areas against griefing.
 
 ### Goal
 
 In this recipe, players will learn how to listen for and cancel block-breaking events.
 
-## Recipe 15: Horse-Clicker, A simple mini-game
+## Recipe 17: Horse-Clicker, A simple mini-game
 
 ### Goal
 This is the first recipe in a series of recipes which will introduce mini-games. In this recipe, basic game mechanics are introduced.  Keeping score.
     
-## Recipe 16: Snowball Fight, A player-vs-player mini-game
+## Recipe 18: Snowball Fight, A player-vs-player mini-game
 ### Goal
 This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
 

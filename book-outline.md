@@ -1374,7 +1374,7 @@ In this recipe we'll actually change the Minecraft game for all players. The bes
 ### Term: Event Driven Programming
 Back in the early days of programming there was no such thing as Event Driven Programming. Programs were started and ran to completion, then exited. If your program needed to ask the user a question, it did so using a command prompt and did not resume until the user had typed a response and hit enter. With the advent of Graphical User Interfaces in the 80s and 90s, the possibilities for what users could do exploded. Programs and user-interaction became more sophisticated. Programs had to be written differently to accomodate the new ways users could interact with programs (Menus, Buttons, Windows and so on). When you click a link or a button on a web page or other application, that click is an *event*. In Minecraft, when you fire an arrow, break a block, open a door, join the server or do pretty much anything, that's an *event*. Event driven programming lets programmers write functions which listen for and react to such events.
 
-In the first part of this recipe we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in @@recipe{dice2} to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
+In the first part of this recipe we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in recipe @@recipe{dice2} to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
 
 @@listing greetings_v1.js TODO ADD CAPTION
 
@@ -1517,7 +1517,7 @@ There are a couple of other useful Array insertion and removal functions:
 * shift() Is used to **remove** the *first* item from the array.
 * pop() Is used to **remove** the *last* item from the array.
 
-You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In a later recipe we'll learn how to process all of the items in an array using Javascript's looping statements.
+You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In later recipes we'll learn how to process all of the items in an array using Javascript's looping statements.
 
 @@table array_methods.org Array Methods
 
@@ -1594,7 +1594,7 @@ The problem with modal dialogs is that they interrupt the program and the progra
 2. The question you want to ask.
 3. The function you want to call when the player has answered the question. The function when called will have the answer and the player who answered as parameters.
 
-This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in @@recipe{greet} when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
+This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in recipe @@recipe{greet} when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
 
     js var input = require('input');
     js function respond( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
@@ -1764,7 +1764,7 @@ In this recipe you learned how to use *if* statement to make decisions and make 
 In this recipe we'll create a simple program to ask players a question and play back sounds based on the answer given. You'll learn about Javascript's *switch* statement and ScriptCraft's *sounds* module. The new program will ask players what their favorite animal is and play back that animal's sound.
 
 ### The switch statement
-In @@recipe{guess1} you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
+In recipe @@recipe{guess1} you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
 
 @@listing animalSounds_v1.js TODO ADD CAPTION
 
@@ -1774,7 +1774,7 @@ Save your file then issue the `js refresh()` or `reload` command to reload all j
 
 You will be prompted to type the name of your favorite animal. Press the *T* key to enter text then type in any of the following: cat, chicken, cow, horse, pig, sheep, wolf. When you hit enter you should hear an appropriate sound - a wolf bar, cow moo and so on. If you don't enter any of the above animals, then the program responds with a message saying it never heard of whatever it was you typed.
 
-The switch statement works much like the *if-else-if* construct we used in @@recipe{guess1} . We could have written the *animalSounds.js* module using an if-else-if form:
+The switch statement works much like the *if-else-if* construct we used in recipe @@recipe{guess1} . We could have written the *animalSounds.js* module using an if-else-if form:
 
     if (animal == 'cat') { 
         sounds.catMeow(player.location);
@@ -1850,7 +1850,7 @@ All Strings in Javascript also have a *toUpperCase()* function which returns an 
 
     animal.toLowerCase();
     
-The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In @@recipe{greet} we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
+The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In recipe @@recipe{greet} we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
 
     /js var animals = ['cow','pig'];
     /js animals.push('sheep');
@@ -2312,7 +2312,7 @@ The other thing to note about the first require statement is the trailing `.Dron
 
 The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
 
-The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in @@recipe{sounds2}. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in recipe @@recipe{sounds2}. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
 
 Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
 
@@ -2584,7 +2584,7 @@ When programming plugins using ScriptCraft, we have 2 different types of objects
 ### Objects as Lookup tables
 In javascript it's easy for programmers to create objects and javascript can *lookup* object keys very quickly. A lookup table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
 
-In the following recipe we're going to change the *animalSounds.js* module from @@recipe{sounds1} and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
+In the following recipe we're going to change the *animalSounds.js* module from recipe @@recipe{sounds1} and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
 
 @@listing animalSounds_v3.js  TODO ADD CAPTION
 
@@ -2632,8 +2632,67 @@ There are a couple of reasons why we should do this:
 * Changing code is error prone. Every time we have to change the *onInput* function because we want to support a new sound, we run the risk of introducing errors into the code.
 * There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, would could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table meaning the function is shorter and more maintainable.
 
+### Objects and References
+One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute javascript statements at the in-game or server prompt, there's a special variable available. The *self* variable refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
+
+    /js var me = self;
+
+Does not create a clone of the player. It merely adds a new javascript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
+
+![Obects and References: Player](img/sounds2/obects_player.png)
+
+If I have more than one variable that refers to the same object then I can control or change that object through any of the variables that refer to it (also known as references). What this means is that if I have 3 variables *self*, *me* and *walter* all of which refer to the same player, I can make that player shoot an arrow by using any of the following statements:
+
+    /js me.shootArrow();
+
+or 
+    
+    /js self.shootArrow();
+
+or 
+   
+    /js walter.shootArrow();
+    
+
+This is an important point to remember when passing around variables which refer to objects. When you change the *.flying* property for *any* of the *self*, *me* and *walter* variables, you effectively change it for *all* of them because they all refer to the same object. Try the following as an exercise. Execute each of the following commands and make a note of the results:
+
+    /js var player = self;
+    /js player.customName;
+    /js self.customName;
+    /js player.customName = 'steeeeve';
+    /js player.customName
+    /js self.customName
+
+When you change the *player* object or call any of its methods, the changes are reflected in all of the variables which refer to the object.
+
+### Obects as Parameters
+In Javascript, when you pass an object as a parameter to a function, the object is passed *by reference*. This means a reference to the original object is passed, not a copy of the object. To illustrate this, let's imagine we have a function which will force a player to drop to the ground if they are currently flying. If a player is flying, we can disable flight by setting the player's *.flying* property to false. Try this yourself at the in-game prompt. Make your gamemode creative by issuing the `/gamemode creative` command then press the SPACE bar twice to start flying. While in mid-air issue the following command:
+
+    /js self.flying = false;
+
+... and you will drop to the ground. Now let's create a function called drop which we can use to drop a player. The first draft of the function will look like this:
+
+    /js function drop( flying ) { flying = false; }
+
+Now try to run this function (while flying) by issuing the following command:
+
+    /js drop( self.flying );
+
+Did anything happen?
+
+The reason nothing happens when you call the *drop()* function is because in this first draft of the function, we only change the boolean value passed in as a parameter. Setting the *flying* parameter to *false* has no bearing on the object because we haven't passed the object as a reference. Instead we've passed the object's *flying* property. Let's revisit the *drop()* function this time changing it so that it takes an object instead:
+
+
+    /js function drop( player ) { player.flying = false; }
+
+We're also going to change how we call the *drop()* function. This time we'll pass the *self* variable instead.
+
+    /js drop(self);
+
+Now the *drop()* function works because we've passed a reference to the object so any changes to the object inside of the function act upon the object. This is an important point to remember, if you want to change an object within a function, you must accept the object as a parameter not just the object's property you want to change.
+	
 ### Nested Objects
-Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from @@recipe{fworks} when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
+Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from recipe @@recipe{fworks} when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
 
     var largeDoll = {
        size: 'large',
@@ -2656,7 +2715,7 @@ This is an example of an object which has objects *nested* within it, just as a 
     var mediumDoll = { size: 'Medium', inner: smallDoll };
     var largeDoll = { size: 'Large', inner: mediumDoll };
 
-Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in @@recipe{fworks}. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
+Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in recipe @@recipe{fworks}. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
 
 @@listing russiandoll.js TODO ADD CAPTION
 
@@ -2674,14 +2733,16 @@ You should see the following output on your screen:
 Try changing the value passed to openRussianDoll from `largeDoll` to another value and see what the output looks like.
 
 ### JSON
-I can't talk about Objects in javascript without briefly mentioning JSON. JSON is short for *JavaScript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. 
+I can't talk about Objects in javascript without mentioning JSON. JSON is short for *JavaScript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
+
+    var steve = { "name": "steve", "occupation": "miner" }
 
 There is also a JSON module which provides methods to:
 
 1. Let programmers print out an object in a way which is *somewhat* readable by humans.
 2. Read a string of JSON output and convert it from a string back into an object.
 
-We'll learn more about JSON, loading and saving data later in the book.
+We'll learn more about JSON, and loading and saving data later in the book.
 
 ### Achievement Unlocked!
 ![](@@nextAchievement)
@@ -2692,7 +2753,34 @@ Congratulations! You've discovered some of the power of Objects in Javascript an
 In this recipe you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final recipe in the Basic Modding section of the book. Next, we move on to advanced modding.
 
 # Part III Advanced Modding
-The latter half of the book will focus on Event-Driven Programming and using Bukkit's API - in particular, how Bukkit's Java-based API maps to Javascript.
+The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for multi-player servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. The API is vast. In the following chapters we'll learn how to explore the Bukkit API using the online documentation and how to better understand the types of data provided by Bukkit.
+
+## @@nextRecipe{chatcolor}: Saving Player preferences.
+### Introduction
+In this recipe we'll learn how to load and save player preferences. We'll create a new player command which lets them choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
+### A day in the life of a Minecraft Plugin
+I get knocked down but I get up again.
+
+### Chat colors
+### Saving state
+#### Loading data at startup
+#### Automatic saving at shutdown
+### JSON in depth
+#### use of "" in keys
+
+### Summary
+In this recipe you learned about persistence - saving and restoring state. This is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
+
+## @@nextRecipe{recipes}: Add new Crafting Recipes: An Ender Bow
+### Crafting an Ender Bow
+#### What the ender bow should do
+#### Choosing what materials should be used
+##### ender pearls
+THey're hard to get and tie in with teleoporting.
+The ender bow is going to be a powerful tool we don't want it to be *too* easy to craft.
+##### The crafting Grid
+Mapping the grid to shape() function.
+##### Note on VarArgs and calling VarArg functions from javascript?
 ## @@nextRecipe{arrows}: Arrows that Teleport you.
 
 ### Goal

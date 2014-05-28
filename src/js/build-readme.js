@@ -79,6 +79,7 @@ function getListingNumber( source, chapter){
   }
   return result;
 }
+
 var nextAchieve = 1;
 var currentRecipe = '';
 var nextRecipe = 0;
@@ -130,7 +131,7 @@ var xforms = {
     return 'Chapter ' + chapKeys[key];
   },
   '@@recipe\{([a-zA-Z0-9]+)\}': function(match, key){
-    return 'recipe ' + recipeKeys[key];
+    return recipeKeys[key];
   },
   '@@include (.*)': function(match, file){
     var contents = readFile(file);

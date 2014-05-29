@@ -101,7 +101,7 @@ Minecraft Server Plugin developers run their own servers because they need to be
 
 ### Which Minecraft Server Software should I use?
 
-There are a couple of different flavours of Minecraft Server. Mojang provide their own server software which can be downloaded from the Minecraft.net website. This was the very first server software released for Minecraft. This is often refered to as 'Vanilla' Minecraft Server. At the time of writing it doesn't provide any way to add plugins although this will probably change once Mojang release an official Plugin API. The Minecraft Server provided by Mojang is fine if you want to run a server with no modifications. The problems with running such a server are that there's no reliable way to protect against 'griefing'. 
+There are a couple of different flavors of Minecraft Server. Mojang provide their own server software which can be downloaded from the Minecraft.net website. This was the very first server software released for Minecraft. This is often refered to as 'Vanilla' Minecraft Server. At the time of writing it doesn't provide any way to add plugins although this will probably change once Mojang release an official Plugin API. The Minecraft Server provided by Mojang is fine if you want to run a server with no modifications. The problems with running such a server are that there's no reliable way to protect against 'griefing'. 
 
 #### Term: Griefing 
 A griefer is a player in a multiplayer video game who deliberately irritates and harasses other players within the game, using aspects of the game in unintended ways. A griefer enjoys annoying other users by destroying other player's work, cursing and harrassing players and server administrators.
@@ -3416,7 +3416,7 @@ One thing to note about objects and variables is that when we assign a new varia
 
 Does not create a clone of the player. It merely adds a new javascript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
 
-![Obects and References: Player](img/sounds2/obects_player.png)
+![Obects and References: Player](img/sounds2/objects_player.png)
 
 If I have more than one variable that refers to the same object then I can control or change that object through any of the variables that refer to it (also known as references). What this means is that if I have 3 variables *self*, *me* and *walter* all of which refer to the same player, I can make that player shoot an arrow by using any of the following statements:
 
@@ -3430,7 +3430,6 @@ or
    
     /js walter.shootArrow();
     
-
 This is an important point to remember when passing around variables which refer to objects. When you change the *.flying* property for *any* of the *self*, *me* and *walter* variables, you effectively change it for *all* of them because they all refer to the same object. Try the following as an exercise. Execute each of the following commands and make a note of the results:
 
     /js var player = self;
@@ -3553,11 +3552,53 @@ The latter half of the book will focus on Event-Driven Programming and using Buk
 ## Recipe 10: Saving Player preferences.
 ### Introduction
 In this recipe we'll learn how to load and save player preferences. We'll create a new player command which lets them choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
+
 ### A day in the life of a Minecraft Plugin
-I get knocked down but I get up again.
+Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behaviour and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
 
 ### Chat colors
+In this recipe we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key a list of colors will be displayed. We've encountered the */jsp* command before in recipe 6. This commmand is a prefix (something which is added at the start) for new custom commands. 
+
+### TAB completion for custom commands
+One of the nice things about issuing commands at the in-game or server console prompt in Minecraft is TAB completion - the ability to have the program fill in the remaining parts of a command without you having to type the entire command yourself. You can create your own custom commands which support TAB completion quite easily in Javascript. Let's create an example command at the in-game prompt which avails of TAB completion. This custom command will be called *jsp icecream* and will prompt the player to enter a flavor when the TAB key is hit. The first thing we need to do is say what the possible flavors can be. We'll do this by creating an array called *flavors*:
+
+    /js var flavors = ['chocolate','strawberry','vanilla'];
+
+Next we create a new function which will be executed when a player issues the command:
+  
+    /js function icecream( args, player ){ player.sendMessage('Yum ! ' + args[0] ) }
+
+And finally we create a new custom command which will allow players to issue an *icecream* command that prompts them to choose flavors:
+
+    /js command( 'icecream', icecream, flavors );
+
+Now try it and see what happens when you type the following and hit the TAB key:
+
+    /jsp ice
+
+Hitting the TAB key should complete the first part of the command so now your command prompt input looks like this:
+
+    /jsp icecream
+
+Now press the SPACE key and then press the TAB key once more and you'll see a list of possible flavors to choose from. You can cycle through the list of flavors by repeatedly pressing the TAB key. How did we do this? The secret is in how we created the new */jsp icecream* command using the *command()* function. The command function takes 3 parameters:
+
+1. The command name which will be used by players. Players invoke the command using a *prefix* of 'jsp' so while the name of the command we define is *icecream*, players must use *jsp icecream* when issuing the command. 
+2. The function which will be executed when a player issues the command. This function in turn takes 2 parameters, *args* which is an array of strings, and *player* which is the player who issued the command.
+3. A list of possible options for the command. This is the list of strings used by Minecraft's TAB completion feature.
+
+In upcoming sections we're going to create a new command which provides a list of colors as possible options that will display when the player hits the TAB key.
+
+### Choosing Chat Color
+#### Text colors in Minecraft.
+
+So now let's create a new player command. In your editor, create a new file called *colorcodes.js* in the *plugins/scriptcraft/modules* folder and type in the following code:
+
+@@listing colorcodes.js
+
+@@listing chatcolor_v1.js
+
 ### Saving state
+
 #### Loading data at startup
 #### Automatic saving at shutdown
 ### JSON in depth

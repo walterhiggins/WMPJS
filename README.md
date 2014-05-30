@@ -553,7 +553,9 @@ In javascript, text is also called 'Strings'. A String is the word Programmers u
 
 That last one might surprise you. Javascript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in javascript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming minecraft plugins when you want to display information to players. 
 
-You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable name cannot have space characters. There are a few other rules about what javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
+The letters, numbers and other symbols which form a string are known as *Characters*. A *Character* is any single letter, number or symbol. 'a','B','9', '-', '.', '/' and ':' are all examples of *Characters*.
+
+You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable names cannot have space characters. There are a few other rules about what javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
 
 Javascript programmers - as a habit - generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among javascript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
 
@@ -3589,13 +3591,210 @@ Now press the SPACE key and then press the TAB key once more and you'll see a li
 In upcoming sections we're going to create a new command which provides a list of colors as possible options that will display when the player hits the TAB key.
 
 ### Choosing Chat Color
+The color of text messages in Minecraft can be changed by using a special § symbol known as the 'Section' symbol. This symbol can't be entered in Minecraft itself, it's only used internally by Minecraft and Plugin developers. There are 16 different colors you can use for chat messages, and each color must use a special *code*. For example to say "Hello" using Yellow text, you would need to put the special code `\xa7a` in front of the message. You can try this out by issuing the following command at the in-game prompt:
+
+    /js self.sendMessage('\xa7aHello');
+
+The text `\xa7` is just another way of writing the § symbol in Javascript. The first character following `\xa7` should be a number between 0 and 9 *or* a letter in the range a through f. 
+
+#### How we count
+We typically count in what's called *Base 10* which means our numbers start at 0 and go all the way up to 9. If we want to write a number bigger than 9 then we add another digit on the left. So a number 475 is:
+
+* 4 times 100 +
+* 7 times 10 +
+* 5 times 1
+
+We count in base 10 because that's the numbering system the Romans used. Why did they use base 10? It might be because of how many digits we have on our hands but I don't know for sure. There are other ways to count. Base 2 - also known as binary - has just two numbers 0 and 1. How would you count to 5 with just two numbers? When we reach 1 we can add a digit on the left so:
+
+*   0 in binary is equal to 0 in decimal
+*   1 in binary is equal to 1 in decimal
+*  10 in binary is equal to 2 in decimal
+*  11 in binary is equal to 3 in decimal
+* 100 in binary is equal to 4 in decimal
+* 101 in binary is equal to 5 in decimal and so on.
+
+Another base that's more commonly used by programmers is Hexadecimal or Base 16. In hexadecimal (often shortened to just 'hex') the numbers 10 through 15 are substituted with the letters a through f so the a sequnce of numbers 0 through 32 looks like this:
+
+<table>
+<caption><h4> Table 6: Hexadecimal Numbers and their Decimal Equivalents    </h4></caption><tr><th>Hexadecimal</th><th>Decimal</th></tr>
+<tr><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>2</td></tr>
+<tr><td>3</td><td>3</td></tr>
+<tr><td>4</td><td>4</td></tr>
+<tr><td>5</td><td>5</td></tr>
+<tr><td>6</td><td>6</td></tr>
+<tr><td>7</td><td>7</td></tr>
+<tr><td>8</td><td>8</td></tr>
+<tr><td>9</td><td>9</td></tr>
+<tr><td>a</td><td>10</td></tr>
+<tr><td>b</td><td>11</td></tr>
+<tr><td>c</td><td>12</td></tr>
+<tr><td>d</td><td>13</td></tr>
+<tr><td>e</td><td>14</td></tr>
+<tr><td>f</td><td>15</td></tr>
+<tr><td>10</td><td>16</td></tr>
+<tr><td>11</td><td>17</td></tr>
+<tr><td>12</td><td>18</td></tr>
+<tr><td>13</td><td>19</td></tr>
+<tr><td>14</td><td>20</td></tr>
+<tr><td>15</td><td>21</td></tr>
+<tr><td>16</td><td>22</td></tr>
+<tr><td>17</td><td>23</td></tr>
+<tr><td>18</td><td>24</td></tr>
+<tr><td>19</td><td>25</td></tr>
+<tr><td>1a</td><td>26</td></tr>
+<tr><td>1b</td><td>27</td></tr>
+<tr><td>1c</td><td>28</td></tr>
+<tr><td>1d</td><td>29</td></tr>
+<tr><td>1e</td><td>30</td></tr>
+<tr><td>1f</td><td>31</td></tr>
+<tr><td>20</td><td>32</td></tr>
+<tr></tr>
+
+</table>
+
+#### Character Codes
+The characters displayed in Minecraft and in other programs on your computer each have a *code* or number which the computer uses internally. The letter 'A' has the character code 65, 'B' is 66 and so on. The lowercase alphabet starts at number 97 so 'a' is character code 97, 'b' is 98 and so on. You can see a full list of characters and their codes at http://en.wikipedia.org/wiki/ISO/IEC_8859-1 .
+
 #### Text colors in Minecraft.
+The special § symbol has the character code 167 and Minecraft uses this special character at the start of a String to mean the String should be displayed in a certain color. The exact color is one of 16 possible colors listed below:
 
-So now let's create a new player command. In your editor, create a new file called *colorcodes.js* in the *plugins/scriptcraft/modules* folder and type in the following code:
+<table>
+<caption><h4> Table 7: Text Colors and their Hexadecimal equivalent http://minecraft.gamepedia.com/Formatting_codes</h4></caption><tr><th>Color</th><th>Hex Code</th></tr>
+<tr><td>Black</td><td>0</td></tr>
+<tr><td>Dark Blue</td><td>1</td></tr>
+<tr><td>Dark Green</td><td>2</td></tr>
+<tr><td>Dark Aqua</td><td>3</td></tr>
+<tr><td>Dark Red</td><td>4</td></tr>
+<tr><td>Dark Purple</td><td>5</td></tr>
+<tr><td>Gold</td><td>6</td></tr>
+<tr><td>Gray</td><td>7</td></tr>
+<tr><td>Dark Gray</td><td>8</td></tr>
+<tr><td>Blue</td><td>9</td></tr>
+<tr><td>Green</td><td>a</td></tr>
+<tr><td>Aqua</td><td>b</td></tr>
+<tr><td>Red</td><td>c</td></tr>
+<tr><td>Light Purple</td><td>d</td></tr>
+<tr><td>Yellow</td><td>e</td></tr>
+<tr><td>White</td><td>f</td></tr>
 
-@@listing colorcodes.js
+</table>
 
-@@listing chatcolor_v1.js
+In the first part of this recipe we'll create a module which will be used to provide a list of color names and a *colorize()* function which will add color to any chat message. In your editor, create a new file called *textcolors.js* in the *plugins/scriptcraft/modules* folder and type in the following code:
+
+<caption>Listing 11.1: Text Colors Module</caption>
+
+    var names = [
+      'black',
+      'darkblue',
+      'darkgreen', 
+      'darkaqua', 
+      'darkred',
+      'darkpurple', 
+      'gold', 
+      'gray', 
+      'darkgray', 
+      'blue',
+      'green', 
+      'aqua', 
+      'red', 
+      'lightpurple', 
+      'yellow' , 
+      'white'
+    ];
+    
+    function colorize( color, text ) {
+      var index = names.indexOf( color );
+      if (index >= 0){
+        return '\xa7' + index.toString(16) + text;
+      } else {
+        return text;
+      }
+    }
+    
+    exports.names = names;
+    exports.colorize = colorize;
+
+Once you've saved this file and reloaded the plugin using `js refresh()`, test it by issuing the following commands at the in-game prompt to display a message in gold:
+
+    /js var textcolors = require('textcolors');
+    /js var goldText = textcolors.colorize( 'gold', 'I am gold!' );
+    /js self.sendMessage(goldText);
+
+The module in listing 11.1 exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged - no color code will be added to the text.
+
+The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special § symbol which is written as `\xa7` combine to form the color code which is prepended to the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
+
+The next steps in writing the Chat Color plugin are:
+
+1. Provide a new command so players can choose their color and ...
+2. Add an event handler so that chat messages are colored according to a player's preferences.
+
+In your editor, create a new file called *chatcolor.js* in the *plugins/scriptcraft/plugins* folder and type the following:
+
+<caption>Listing 11.2: Setting and Applying Player Chat Color Preferences</caption>
+
+    var textcolors = require('textcolors');
+    var preferences = { };
+    
+    function setChatColor ( args, player ) {
+      var color = args[0];
+      preferences[ player.name ] = color;
+    }
+    command( 'chatcolor', setChatColor, textcolors.names );
+    
+    function onChat( event ) { 
+      var player = event.player;
+      var playerChatColor = preferences[ player.name ];
+      if ( playerChatColor ) {
+        event.message = textcolors.colorize( playerChatColor, event.message );
+      }
+    }
+    events.asyncPlayerChat( onChat );
+
+In this plugin we use the *textcolors* module we created earlier, and we create a new *preferences* variable which is an empty object `{ }`. This *preferences* object will be used to store each player's prefered color. Let's say we have a server with 3 players who have chosen custom chat colors. In such a scenario the *preferences* object might look something like this:
+
+    {
+       "steve1901": "blue",
+       "jane1908": "gold",
+       "john1911": "red"
+    }
+
+... where "steve1901" is the name of a player and "blue" is his chosen chat color, "jane1908" is the name of another player and her chosen chat color is "gold" and so on. The *preferences* object is a lookup table of player names and their colors. If I wanted to find out what player jane1908's chosen color was, I'd do so using the expression `preferences["jane1908"]` which would return "gold".
+
+The *setChatColor()* function is a *callback* which will be called when a player issues the `jsp chatcolor` command. The name of the player who issued the command and the color they chose are stored in the *preferences* object using the statement:
+
+    preferences[ player.name ] = color;
+
+We can add any property we like to an object using the `[]` square brackets and putting the property name inside the square brackets. The property name does not have to be an object literal like `'age'` or `'address'`, it can be any javascript expression which evaluates to a string. So in this case, whatever the player's name is becomes a new property of the preferences object - a key by which the preferences can be looked up. 
+
+The *command()* function creates a new `/jsp chatcolor` command which will invoke the *setChatColor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
+
+The first section of listing 11.2 up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in minecraft and ensures that player color preferences are applied to any chat messages:
+
+    function onChat( event ) { 
+      var player = event.player;
+      var playerChatColor = preferences[ player.name ];
+      if ( playerChatColor ) {
+        event.message = textcolors.colorize( playerChatColor, event.message );
+      }
+    }
+    events.asyncPlayerChat( onChat );
+
+The *onChat()* function is another callback function. This function is invoked whenever a player chats in the game. The function gets the player who is chatting, checks to see if they have a prefered color and if they *do* have a prefered color, changes the event's message property (the .message property of the event is the text of the message which the player is about to send) by adding the player's chosen color using the super useful *textcolors.colorize()* function we wrote earlier.
+
+Once you've saved the *chatcolor.js* file, reload the plugins using */js refresh()* or */reload* and at the in-game prompt type:
+
+    /jsp chatcolor
+
+Press the SPACE key then the TAB key and you should see a list of possible colors to choose from. You can cycle through the list of colors by repeatedly pressing TAB. Choose a color, then press T to begin chatting. Type a message and the message should appear in the color you've chosen.
+
+Cool! You've just created a useful new command which a lot of players are going to like. Plugins like the one you've just created are very popular on multiplayer servers. Try changing the chosen color a few times using the `/jsp chatcolor` command to make sure all of the colors work.
+
+What happens if you issue the `/reload` command?
+
+Right now, our plugin does not save the chat color preferences so when the plugin is reloaded or the server shuts down, the color preferences for each player are lost. The player's chat colors will revert to the default color. It would be nice if it was possible to load and save preferences for our plugin. Not only is it possible, it's super easy too!
 
 ### Saving state
 

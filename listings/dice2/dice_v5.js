@@ -1,4 +1,4 @@
-exports.roll = function( sides ) {
+exports.roll = function roll( sides ) {
   if ( typeof sides === 'undefined' ) { 
     sides = 6;
   }

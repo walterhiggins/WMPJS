@@ -949,7 +949,7 @@ Well that was easy wasn't it? This might be a trivially simple plugin but it dem
 
 So far the plugin we've written works fine in that it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
    
-<caption>Listing 1.1: TODO ADD CAPTION</caption>
+<caption>Listing 1.1: helloWorld() Function Declaration</caption>
 
     function helloWorld( ) { 
       console.log('Hello World');
@@ -959,7 +959,7 @@ Now restart the server.
    
 What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function but we haven't called the function yet! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
 
-<caption>Listing 1.2: TODO ADD CAPTION</caption>
+<caption>Listing 1.2: helloWorld() Function Declaration and Execution</caption>
 
     function helloWorld( ) { 
       console.log('Hello World');
@@ -974,7 +974,7 @@ OK. So we've wrapped the original code inside a function of our own and we call 
     
 This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
-<caption>Listing 1.3:  TODO ADD CAPTION</caption>
+<caption>Listing 1.3: Making helloWorld() public</caption>
 
     function helloWorld( ) { 
       console.log('Hello World');
@@ -1066,7 +1066,7 @@ Right-click and choose 'New File' from the menu. Call your new file 'dice.js' th
 
 Type the following code into the newly created file...
 
-<caption>Listing 2.1: TODO ADD CAPTION</caption>
+<caption>Listing 2.1: Rolling Dice</caption>
 
     function roll(){
       var result = Math.random();
@@ -1142,7 +1142,7 @@ Major Kudos! You've create created your first Javascript module, loaded it and u
 ### Digging Deeper
 Let's look at the code we've just added to Minecraft. The code is reprinted below...
 
-<caption>Listing 2.1: TODO ADD CAPTION</caption>
+<caption>Listing 2.1: Rolling Dice</caption>
 
     function roll(){
       var result = Math.random();
@@ -1238,7 +1238,7 @@ You should see '14' appear in your server window. The expression `5 + 9` is the 
 
 Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous recipe. You don't have to type this code, I just want to highlight some changes:
 
-<caption>Listing 3.1: TODO ADD CAPTION</caption>
+<caption>Listing 3.1: Rolling Dice - sides as a variable.</caption>
 
     function roll( ) {
       var result = Math.random();
@@ -1251,7 +1251,7 @@ Just as *console.log* and many other functions can take parameters, we can write
 
 The above code is similar to code from the previous recipe except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous recipe. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous recipe. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
 
-<caption>Listing 3.2: TODO ADD CAPTION</caption>
+<caption>Listing 3.2: Rolling Dice - sides as a parameter.</caption>
 
     function roll( sides ) {
       var result = Math.random();
@@ -1283,7 +1283,7 @@ What happens if you call dice.roll() *without* passing a parameter? You can see 
 
 You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascript and it means the computed value - the result of the math operations that is - was not a number. Do you know why? Our function always expects a number (how many sides the dice has) and if we don't give it one then the math won't work as expected. Wouldn't it be nice if, when no number is passed to `dice.roll()` it just assumes that we want the roll of a six-sided dice? Six-sided dice are after all the most common type of dice. Let's make another minor change to the *roll* function:
 
-<caption>Listing 3.3: TODO ADD CAPTION</caption>
+<caption>Listing 3.3: Rolling Dice. Default Parameters</caption>
 
     function roll( sides ) {
       if ( typeof sides === 'undefined' ) { 
@@ -1320,9 +1320,9 @@ You should see a random number output for each of the above calls. The *roll* fu
 ### Assiging to the exports variable
 Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
 
-<caption>Listing 3.4: TODO ADD CAPTION</caption>
+<caption>Listing 3.4: Exporting a function Expression.</caption>
 
-    exports.roll = function( sides ) {
+    exports.roll = function roll( sides ) {
       if ( typeof sides === 'undefined' ) { 
         sides = 6;
       }
@@ -1425,7 +1425,7 @@ Most of the source listings in this book will not include comments because the c
 #### Commenting dice.js
 Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
 
-<caption>Listing 3.5: TODO ADD CAPTION</caption>
+<caption>Listing 3.5: Commenting Code</caption>
 
     /*
      this module provides a roll() function which returns a random number.
@@ -1467,7 +1467,7 @@ Back in the early days of programming there was no such thing as Event Driven Pr
 
 In the first part of this recipe we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in recipe 2 to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
 
-<caption>Listing 4.1: TODO ADD CAPTION</caption>
+<caption>Listing 4.1: Random Greetings</caption>
 
     var dice = require('dice');
     var greetings = [ 'Hello ', 'Hola ', 'Bonjour ', 'Konnichiwa ' ];
@@ -1631,7 +1631,7 @@ You can learn more about the Array object and its functions and properties at ht
 ### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
 
-<caption>Listing 4.2: TODO ADD CAPTION</caption>
+<caption>Listing 4.2: Greeting Players as they join the Server.</caption>
 
     var greeting = require('greetings');
     function greetPlayer( event ) {
@@ -1668,7 +1668,7 @@ Minecraft is often described as 'Virtual Lego', Programming is similar and offer
 ### Greeting Players in Style
 As a final fluorish to this recipe let's add something a little more spectacular than a simple text message. Let's greet each new player with a firework which launches when and where they join the server. 
 
-<caption>Listing 4.3: TODO ADD CAPTION</caption>
+<caption>Listing 4.3: Greeting Players with Fireworks</caption>
 
     var greeting = require('greetings');
     var fireworks = require('fireworks');
@@ -1696,7 +1696,7 @@ One of the great things about computers is that they can make decisions and take
 
 In this recipe we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
 
-<caption>Listing 5.1: TODO ADD CAPTION</caption>
+<caption>Listing 5.1: A Guessing Game</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1807,7 +1807,7 @@ The `!` operator *negates* (that is - makes the opposite of) any boolean express
 ### The if-else construct
 Let"s say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
 
-<caption>Listing 5.2: TODO ADD CAPTION</caption>
+<caption>Listing 5.2: Guessing Wrong.</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1842,7 +1842,7 @@ Now when you guess incorrectly you should see a message `Better luck next time.`
 ### The if-else-if construct
 So far the guessing games gives players just one shot at guessing the number. In the following listing 5.3 the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if - else - if* form which is quite common in Javascript:
 
-<caption>Listing 5.3: TODO ADD CAPTION</caption>
+<caption>Listing 5.3: Too High, Too Low.</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1885,7 +1885,7 @@ How a program behaves while running is often called its *flow*. *Flow Diagrams* 
 ### Nested blocks
 The `if` statement is one of several *block* statements in javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
 
-<caption>Listing 5.4: TODO ADD CAPTION</caption>
+<caption>Listing 5.4: Fireworks for Winners.</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1964,7 +1964,7 @@ How would we write such a rule in Javascript? Well let's refine the statement ab
 
 In javascript you write it like this:
 
-<caption>Listing 5.5: TODO ADD CAPTION</caption>
+<caption>Listing 5.5: Cookies for Ninjas.</caption>
 
     var items = require('items');
     
@@ -1996,7 +1996,7 @@ To you and I that rule might look clear enough but the computer would be confuse
 
 We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following javascript code:
 
-<caption>Listing 5.6: TODO ADD CAPTION</caption>
+<caption>Listing 5.6: If X and ( Y or Z )</caption>
 
     var items = require('items');
     events.blockBreak(function(event){
@@ -2020,7 +2020,7 @@ In this recipe we'll create a simple program to ask players a question and play 
 ### The switch statement
 In recipe 4 you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
 
-<caption>Listing 6.1: TODO ADD CAPTION</caption>
+<caption>Listing 6.1: Animal Sounds</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -2201,7 +2201,7 @@ How do we make the *animalSounds()* function understand that when a player types
 
 The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
-<caption>Listing 6.2: TODO ADD CAPTION</caption>
+<caption>Listing 6.2: Case-insenstive Animal Sounds.</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -2366,7 +2366,7 @@ Let's look at a slightly more complex example. Typically, your server will have 
 The *byPopulation()* function takes 2 parameters a and b both of which it assumes are Minecraft worlds. Each Minecraft world object has an *entities* property which is a Java list of living things. The entities property in turn has a *size()* function so if we want to find out how many living beings are on a world we call the world's *entities.size()* method. We can compare the populations by subtracting one population size from another. 
 
 #### Term: Java Collection
-A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins will actually be Java objects. TODO REWORD THIS You need to be mindful of which objects are Javascript objects and which objects are Java objects and it's not always easy to remember. As a general rule, the *server* variable and any of its properties will all be Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
+A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins will actually be Java objects. As a general rule, the *server* variable and any of its properties are Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
 
 The code to use your new *byPopulation()* function would look like this:
 
@@ -2379,7 +2379,7 @@ The *bukkit.worlds()* function returns an array of all of the worlds on the serv
 #### Sorting Players by name
 One way to sort players is by name. This isn't strictly a leaderboard in the truest sense of the word but it does demonstrate how to sort based on a player's attribute - his name. Create a new file called *playerSort.js* in the *scriptcraft/modules* folder and type in the following code:
 
-<caption>Listing 7.1: TODO ADD CAPTION</caption>
+<caption>Listing 7.1: Sorting Players by name.</caption>
 
     function byName( a, b ) { 
       if (a.name == b.name) {
@@ -2412,7 +2412,7 @@ To try out this module, issue the following commands at the server console promp
 
 Let's face it, a leaderboard based on player names would be both boring and unfair. Let's try one based on a player's experience points. Update your *playerSort.js* file adding a new *byExp()* function (exp is short for experience):
 
-<caption>Listing 7.2: TODO ADD CAPTION</caption>
+<caption>Listing 7.2: Sorting players by Experience.</caption>
 
     function byName( a, b ) { 
       if (a.name == b.name) {
@@ -2477,7 +2477,7 @@ The first command will display your name. The second command will make you shoot
 
 This command calls the *.getStatistic()* method on the *self* object which refers to your in-game character and displays the number returned by that method. Now jump again and issue the same command once more (remember, you can issue the previous command by pressing / then the UP arrow key). The number returned should be greater by 1. We're going to use each player's JUMP statistic to display a leaderboard of players who have jumped the most. Open up your *playerSort.js* file in the editor and update it adding the *byJumps()* function:
 
-<caption>Listing 7.3: TODO ADD CAPTION</caption>
+<caption>Listing 7.3: Sorting players by number of jumps.</caption>
 
     function byName( a, b ) { 
       if (a.name == b.name) {
@@ -2550,7 +2550,7 @@ The part of the *for* statement in round brackets `(var i = 0; i < animals.lengt
 
 Following the for statement you usually have a block of one or more statements contained inside curly brackets. These statements will be executed each time through the loop. Let's put *for* loops to use to create a more pleasing leaderboard display of players who jump the most. Create a new file called *leaderboard.js* in the *scriptcraft/modules* folder and type in the following code:
 
-<caption>Listing 7.4: TODO ADD CAPTION</caption>
+<caption>Listing 7.4: A Simple Jumps Leaderboard: for loop.</caption>
 
     var playerSort = require('playerSort');
     
@@ -2590,7 +2590,7 @@ The above block of code gets executed a number of times - the number depends on 
 
 The second kind of loop is called the *while* loop. The *for* loop is very useful for *iterating* (a fancy word for looping) over arrays or if you know in advance how many times you need to loop. Sometimes you won't know how many times you need to loop, you'll want to keep looping until something happens and you don't know how many times you'll need to loop until it does. A *while* loop is also called a *conditional* loop - it's like the *if* statement except it will keep repeating the same block of code over and over until a *test condition* is no longer true. The best way to understand this is by example. Let's look at the leaderboard module again - this time it's been written using a *while* loop instead of a *for* loop. The code behaves *exactly* the same, it just uses *while* instead of *for*.
 
-<caption>Listing 7.5: TODO ADD CAPTION</caption>
+<caption>Listing 7.5: A Simple Jumps Leaderboard: while loop.</caption>
 
     var playerSort = require('playerSort');
     
@@ -2617,7 +2617,7 @@ The second kind of loop is called the *while* loop. The *for* loop is very usefu
 #### Breaking out of loops
 There are times when you'll want to break out of a loop early. If for example, you only want to display a list of players who have actually jumped - that is - players whose jump count is greater than zero. You can break out of a loop early using the javascript *break* statement. Take a look at the following listing to see an example of the *break* statement:
 
-<caption>Listing 7.6: TODO ADD CAPTION</caption>
+<caption>Listing 7.6: Breaking out of loops.</caption>
 
     var playerSort = require('playerSort');
     
@@ -2649,7 +2649,7 @@ In the above code, the while loop will stop when it encouters the first player w
 #### Skipping a turn in a loop.
 The *break* statement will break out of a loop effectively ending the loop so that the block of code in the loop won't be executed again. Sometimes you just want to skip an iteration (a turn) on the loop. Let's say we have an *unsorted* list of players and only want to display players who have jumped. The *continue* lets you skip on to the next iteration of the loop. In the following listing, only players who have jumped will be displayed. This isn't a leaderboard because players are displayed in no particular order:
 
-<caption>Listing 7.7: TODO ADD CAPTION</caption>
+<caption>Listing 7.7: Skipping a loop iteration.</caption>
 
     
     function jumps( sender ) {
@@ -2708,7 +2708,7 @@ The important points to note are:
 
 Now let's dive in and create a new `jsp leaderboard` command. Create a new file called *leaderboardCmd.js* in the *scriptcraft/plugins* folder and type in the following code:
 
-<caption>Listing 7.8: TODO ADD CAPTION</caption>
+<caption>Listing 7.8: Adding a custom command for all players.</caption>
 
     var leaderboard = require('leaderboard');
     
@@ -2925,7 +2925,7 @@ All of the Drone's functions return the Drone itself so each function can chain 
 ### Blueprints
 A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
 
-<caption>Listing 8.1: TODO ADD CAPTION</caption>
+<caption>Listing 8.1: A Blueprint for a Pyramid.</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -2970,7 +2970,7 @@ You've seen already that the Drone has many functions for building, moving and t
 
 In the first example we just call *monolith()* because any function which belongs to the Drone API is a *global* function meaning it can be called without first calling *require()*. In the second example you can see that once we've created the *monolith()* function we'll be able to use it in a Drone building chain that forms part of a series of building commands. The second command sets up a series of monoliths like a line of dominoes. I'll explain how this works but first let's create a new module called *monolith.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-<caption>Listing 8.2: TODO ADD CAPTION</caption>
+<caption>Listing 8.2: A Blueprint for a Monolith.</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -3012,7 +3012,7 @@ So now you can see how easy it is to extend the Drone to build new interesting t
 ### A Blueprint for a Skyscraper
 In this recipe we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-<caption>Listing 8.3: TODO ADD CAPTION</caption>
+<caption>Listing 8.3: A Blueprint for a Skyscraper.</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -3107,7 +3107,7 @@ The fireworks module's *firework()* function takes a single parameter - a Locati
 ### Deferred Execution
 In the commands you just executed at the in-game prompt, the firework launches immediately. What we'd like to do is delay the launch by a couple of seconds so that we can move to a safe position with a better view. Fortunately there's a way to delay the execution of a function. Create a new file called scriptcraft/plugins/fireworkshow.js and type in the following code:
 
-<caption>Listing 9.1: TODO ADD CAPTION</caption>
+<caption>Listing 9.1: A Short Fireworks Show.</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function (location){
@@ -3142,7 +3142,7 @@ Although setTimeout() is not part of the Javascript Language, it is provided wit
 ### A fireworks show
 I promised you a fireworks show at the start of this recipe. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
 
-<caption>Listing 9.2: TODO ADD CAPTION</caption>
+<caption>Listing 9.2: A Longer Fireworks Show.</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function ( location, count ) {
@@ -3204,7 +3204,7 @@ The message will keep printing out for as long as the server is running. Fortuna
 
 ... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following listing:
 
-<caption>Listing 9.3: TODO ADD CAPTION</caption>
+<caption>Listing 9.3: Using setInterval() and clearInterval() to create a Fireworks Show.</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function ( location, count ) {
@@ -3330,7 +3330,7 @@ In javascript it's easy for programmers to create objects and javascript can *lo
 
 In the following recipe we're going to change the *animalSounds.js* module from recipe 5 and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
 
-<caption>Listing 10.1:  TODO ADD CAPTION</caption>
+<caption>Listing 10.1: A lookup table of Animal Sounds.</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -3495,7 +3495,7 @@ This is an example of an object which has objects *nested* within it, just as a 
 
 Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in recipe 8. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
 
-<caption>Listing 10.2: TODO ADD CAPTION</caption>
+<caption>Listing 10.2: A Russian Doll</caption>
 
     
     var tinyDoll = { size: 'Tiny', inner: null };
@@ -3533,7 +3533,7 @@ I can't talk about Objects in javascript without mentioning JSON. JSON is short 
 
     var steve = { "name": "steve", "occupation": "miner" }
 
-There is also a JSON module which provides methods to:
+There is also a built-in *JSON* module which provides methods to:
 
 1. Let programmers print out an object in a way which is *somewhat* readable by humans.
 2. Read a string of JSON output and convert it from a string back into an object.
@@ -3722,6 +3722,8 @@ Once you've saved this file and reloaded the plugin using `js refresh()`, test i
     /js var goldText = textcolors.colorize( 'gold', 'I am gold!' );
     /js self.sendMessage(goldText);
 
+![Gold Text](img/chatcolor/gold.png)
+
 The module in listing 11.1 exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged - no color code will be added to the text.
 
 The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special § symbol which is written as `\xa7` combine to form the color code which is prepended to the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
@@ -3794,17 +3796,85 @@ Cool! You've just created a useful new command which a lot of players are going 
 
 What happens if you issue the `/reload` command?
 
-Right now, our plugin does not save the chat color preferences so when the plugin is reloaded or the server shuts down, the color preferences for each player are lost. The player's chat colors will revert to the default color. It would be nice if it was possible to load and save preferences for our plugin. Not only is it possible, it's super easy too!
+Right now, our plugin does not save the chat color preferences so when the plugin is reloaded or the server shuts down, the color preferences for each player are lost. The player's chat colors will revert to the default color. It would be nice if it was possible to load and save preferences for our plugin so color preferences weren't lost when the server stops. Not only is it possible, it's super easy too!
 
-### Saving state
+### Plugin Data
+For any Minecraft Javascript Plugin we want to be able to load plugin data when the plugin code is loaded and automatically save plugin data when the plugin coded is unloaded. That way we can be sure that plugin-specific data is never lost when the server is shut down. Let's look first at loading data.
 
-#### Loading data at startup
-#### Automatic saving at shutdown
-### JSON in depth
-#### use of "" in keys
+#### Loading Plugin Data
+Scriptcraft provides a *persist()* function which handles saving and loading of data. Let's take a look at the *chatcolor.js* file again. The only data in that file we'd like to *persist* is the *preferences* object declared near the top of the file and assigned a value of `{ }` which means it is an empty object. 
+
+    var preferences = { };
+
+The above code *initializes* the plugin's data to an empty object. What we'd like to do instead is:
+
+* Check to see if there is saved data in a file.
+* Load the data from the file if a save file is present or...
+* Initialize the data to a default value defined by the plugin.
+
+This is where the *persist()* function helps - it performs all of the above functions (and more). To understand how to call the *persist()* function, let's look at an example. Open up the *chatcolor.js* function in your editor and change the following line:
+
+    var preferences = { };
+
+... to ...
+
+    var preferences = persist('chatcolor-prefs', { } );
+	
+The *persist()* function takes up to 3 parameters but only the first parameter is required. The parameters are:
+
+1. A unique filename to use when loading or saving data. The filename should be unique so avoid using generic names like 'data' or 'preferences'. In the example above we use the name 'chatcolor-prefs'. 
+
+2. An object which will be used as the initial value for the data. If no object is provided then the default value is `{ }` (empty object). 
+
+3. A write flag. The write flag indicates whether or not the data should be written to the file right now. The write flag should be *true* or *false*. If no write flag parameter is provided then the default is *false* - that is - data will be read not written.
+
+The *persist()* function returns an object which will be either of two things:
+
+1. The data loaded from the file if the file exists merged with the data provided in the 2nd parameter or... 
+2. The data in the second parameter if the file does not yet exist.
+
+The statement `var preferences = persist('chatcolor-prefs', { } )` in plain english says: Set the preferences variable to whatever's in the 'chatcolor_prefs' file or an empty object if there's no file.
+
+Save the *chatcolor.js* file and reload your plugins using the `/reload` command. At this point you'll notice that the chat color preferences still have not been preserved. Change your color preferences at the in-game prompt using the following command:
+
+    /jsp chatcolor yellow
+	
+Type a message or two to verify the chat messages appear in the chosen color then issue the */reload* command and type another message. You'll notice that the chat color preferences have been preserved. 
+
+#### Saving Plugin Data
+At this point you might be wondering how chat color preferences were preserved after the server plugins were unloaded and reloaded. The *persist()* function in addition to loading data, marks data for saving when the plugin is unloaded. This means that any data returned by the *persist()* function is *automatically* saved when the plugin is unloaded. As a Javascript plugin developer you don't need to worry about saving your plugin's data because it will be saved automatically once you load it using the *persist()* function. That's why there's only 1 call to *persist()* in the *chatcolor.js* module. You may be wondering 'Where is the plugin data saved to?'. Let's take a look...
+
+### Saved Data
+ScriptCraft saves plugin data in the *plugins/scriptcraft/data* folder. If you open the folder in your editor you'll notice there's now a *chatcolor-prefs-store.json* file already present. Open this file in your editor and you'll see something like this:
+
+    {
+	    "walterh": "blue"
+	}
+
+The *.json* at the end of the filename means this is a JSON file. JSON remember is short for Javascript Obect Notation and is just a way to load, store and send javascript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for Javascript to store and load data. 
+
+#### More on JSON
+When we create a new object in Javascript with name and value pairs we can do so like this:
+
+    var player = { name: "steve" }
+	
+... or like this:
+
+    var player = { "name": "steve" }
+
+That is; we can do so with or without quotes around the *name* property. However, when saving data, the built-in JSON module will write out *player* like this:
+
+    { "name": "steve" }
+	
+... adding double-quotes around each of the object's keys. This is just a standard JSON uses. The builti-in JSON module has 2 important functions which are used by ScriptCraft's *persist()* function:
+
+1. JSON.parse(string) Takes a string and tries to convert it to a javascript object. For example: `JSON.parse("[9,5,3]")` will take the string "[9,5,3]" and return an array with 3 items: 9, 5 and 3.
+2. JSON.stringify(object) Does the opposite of JSON.parse(). It takes a javascript object and converts it to a string so for example: `JSON.stringify([ 9, 5, 3])` takes an array and returns a string "[9,5,3]".
+
+If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
 
 ### Summary
-In this recipe you learned about persistence - saving and restoring state. This is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
+In this recipe you learned about providing TAB-completion hints for your own custom commands and you learned about persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
 
 ## Recipe 11: Add new Crafting Recipes: An Ender Bow
 ### Crafting an Ender Bow
@@ -3866,7 +3936,7 @@ A set of tables of events, one table for each set of events, Player Events, Serv
 A table of all the items in the items module and how to use them (API calls which require an ItemStack)
 
 ## Drone API Reference
-/*********************************************************************
+## Drone Plugin
 
 The Drone is a convenience class for building. It can be used for...
 
@@ -4498,7 +4568,7 @@ Used when placing torches so that they face towards the drone.
 
     drone.box( blocks.torch + ':' + Drone.PLAYER_TORCH_FACING[drone.dir]);
 
-/**************************************************************************
+### Drone.times() Method
 
 The times() method makes building multiple copies of buildings easy. It's possible to create rows or grids of buildings without resorting to `for` or `while` loops.
 
@@ -4563,7 +4633,7 @@ Another example: This statement creates a row of trees 2 by 3 ...
 
 ![times example 1](img/drone-api-ref/times-trees.png)
 
-/************************************************************************
+### Drone.sphere() method
 
 Creates a sphere.
 
@@ -4583,7 +4653,7 @@ To create a sphere of Iron with a radius of 10 blocks...
 Spheres are time-consuming to make. You *can* make large spheres (250 radius) but expect the
 server to be very busy for a couple of minutes while doing so.
 
-/************************************************************************
+### Drone.sphere0() method
 
 Creates an empty sphere.
 
@@ -4601,7 +4671,7 @@ To create a sphere of Iron with a radius of 10 blocks...
 Spheres are time-consuming to make. You *can* make large spheres (250 radius) but expect the
 server to be very busy for a couple of minutes while doing so.
 
-/************************************************************************
+### Drone.hemisphere() method
 
 Creates a hemisphere. Hemispheres can be either north or south.
 
@@ -4619,7 +4689,7 @@ To create a wood 'north' hemisphere with a radius of 7 blocks...
 
 ![hemisphere example](img/drone-api-ref/hemisphereex1.png)
 
-/************************************************************************
+### Drone.hemisphere0() method
 
 Creates a hollow hemisphere. Hemispheres can be either north or south.
 

@@ -65,7 +65,7 @@ for (var i = 0;i < contents.length; i++){
         writeComment = false;
     }
     if (writeComment){
-	line = line.replace(/img\//,'img/drone-api-ref/');
+	line = contents[i].replace(/img\//,'img/drone-api-ref/');
         java.lang.System.out.println(line);
     }
 }

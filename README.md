@@ -3842,14 +3842,30 @@ Save the *chatcolor.js* file and reload your plugins using the `/reload` command
 Type a message or two to verify the chat messages appear in the chosen color then issue the */reload* command and type another message. You'll notice that the chat color preferences have been preserved. 
 
 #### Saving Plugin Data
-At this point you might be wondering how chat color preferences were preserved after the server plugins were unloaded and reloaded. The *persist()* function in addition to loading data, marks data for saving when the plugin is unloaded. This means that any data returned by the *persist()* function is *automatically* saved when the plugin is unloaded. As a Javascript plugin developer you don't need to worry about saving your plugin's data because it will be saved automatically once you load it using the *persist()* function. That's why there's only 1 call to *persist()* in the *chatcolor.js* module. You may be wondering 'Where is the plugin data saved to?'. Let's take a look...
+At this point you might be wondering how chat color preferences were preserved after the server plugins were unloaded and reloaded. The *persist()* function in addition to loading data, marks data for saving when the plugin is unloaded. This means that any data returned by the *persist()* function is *automatically* saved when the plugin is unloaded. As a Javascript plugin developer you don't need to worry about saving your plugin's data because it will be saved automatically once you load it using the *persist()* function. Any changes you make to the object returned by *persist()* will be saved. You can verify this at the in-game prompt by trying the following commands:
+
+    /js var test = persist('testpers', {});
+    /js test.name = 'Your name here';
+    /js refresh();
+
+The *refresh()* function will cause ScriptCraft to reload. Now issue the following commands:
+
+    /js var test = persist('testpers', {});
+    /js test.name
+
+The name you entered earlier should display. It's important to note that only changes to the object returned by *persist()* will be saved. In the above example, if you were to later reassign the *test* variable to another object and make changes then those changes would not be saved. The following code *would not work*:
+
+    /js var test = persist('testpers', {});
+    /js test = { name: 'Your name here' }; // WARNING: changes to test will not be saved.
+
+You may be wondering 'Where is the plugin data saved to?'. Let's take a look...
 
 ### Saved Data
 ScriptCraft saves plugin data in the *plugins/scriptcraft/data* folder. If you open the folder in your editor you'll notice there's now a *chatcolor-prefs-store.json* file already present. Open this file in your editor and you'll see something like this:
 
     {
-	    "walterh": "blue"
-	}
+      "walterh": "blue"
+    }
 
 The *.json* at the end of the filename means this is a JSON file. JSON remember is short for Javascript Obect Notation and is just a way to load, store and send javascript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for Javascript to store and load data. 
 
@@ -3981,6 +3997,7 @@ Exceptions are error types in Java. They work much like errors in Javascript. In
 ##### Annotations
 You don't need to worry about Annotation types when calling Java code from Javascript.
 
+### The Code
 That's just enough Java for now. Before we explore the Bukkit API further let's fire up the programming editor and write some code. Create a new folder in the *plugins/scripcraft/plugins* folder and call the new folder *enderbow*. Then inside the *enderbow* folder create a new file called *recipe.js* and add the following code:
 
 <caption>Listing 12.1: The Ender Bow Recipe</caption>
@@ -4014,26 +4031,55 @@ Save the file, reload using the `/reload` command and then bring up the crafting
 
 ![Crafting Recipe for a Bow](img/recipes/ender-bow-recipe.png)
 
-#### Using Bukkit Classes and Enums in Javascript
-The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers TODO
+Put the crafted Ender Bow in your inventory but don't try using it just yet. It will still behave just like a regular bow. We'll add the teleportation magic in the next recipe.
+### Using Bukkit Classes and Enums in Javascript
+On lines 2 and 3 of listing 12.1 we declare 2 variables:
 
-#### Enchantments
+    var bkEnchantment = org.bukkit.enchantments.Enchantment;
+    var bkShapedRecipe = org.bukkit.inventory.ShapedRecipe;
+
+The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers call this the *fully qualified name*. In Java programmers will often save themselves the need to use fully qualified names by *importing* packages. The Javascript engine which runs inside Java has an *importPackage()* function but this function is not supported in later versions of Javascript for Java. I personally like to avoid using fully qualified names throughout javascript code which is why whenever I need to refer to a Bukkit Type I declare a short-named variable at the top of the module which refers to the longer fully-qualified name of the Bukkit Type. I also put a *bk* at the front of the variable name so I know I'm working with a Bukkit object and not a regular Javascript object. This is just a personal preference. I've found it helps me when I'm writing plugins in Javascript. It may be useful to you too.
+
+### Enchantments
 One way you can mark an item as having special powers is to add an enchantment to it. Enchanted items shimmer and glow in the game. An Ender Bow should shimmer so that the player knows they're not holding a regular bow. For most of the activities you can do in the game, there are equivalent classes and methods in the Bukkit API. For example: In the game players can *add enchantments* to *items*. If we browse the Bukki API reference we see there's an *inventory* package which has a couple of classes one of which is called *ItemStack*. An ItemStack is a collection of one or more *Items* which can be placed in one of the player's inventory slots or held in the player's hand. This *ItemStack* class has *addEnchantment()* and *addUnsafeEnchantment()* methods which we can use to add special powers to items in the game. I'll get into why I chose *addUnsafeEnchantment()* over *addEnchantment()* in a moment but first let's figure out what we want to do:
 
 1. We want to *enchant* the item created from the recipe so that it shimmers and is visually distinct from a regular Bow.
 2. We're going to use a ShapedRecipe object. The ShapedRecipe constructor - that is the function which will create a new Recipe() object, takes an *Item* as a parameter - this item will in turn be created each time a player uses the recipe in the in-game crafting table.
 3. We know (from browsing the API reference) that we can add a new recipe to the game using Bukkit.addRecipe() or Server.addRecipe()
 
-The first thing we do is load ScriptCraft's *items* module. This module simplifies the creation of Java ItemStack objects. If you want to create ItemStack of 1 Bow. You call *items.bow(1)* and it will return a Java ItemStack object to which enchantments can be added.
+The first thing we do is load ScriptCraft's *items* module. This module simplifies the creation of Java ItemStack objects. If you want to create ItemStack of 1 Bow. You call *items.bow(1)* and it will return a Java ItemStack object to which enchantments can be added. The *items* module has roughly 350 different functions - 1 for each of the materials in Minecraft. You can call each of these functions in 3 different ways. Let's take the *items.bow()* function as an example:
+
+* items.bow() when called without parameters will return the value *org.bukkit.Material.BOW*. This is a *Material* object which is used throughout the Bukkit API.
+* items.bow() when called with a number as a parameter e.g. *items.bow(2)* will return an *org.bukkit.inventory.ItemStack* object of 2 Bows. The *ItemStack* type is also used throughout the Bukkit API.
+* items.bow() when called with a *Material* as a parameter e.g. *items.bow(material)* will compare the material to the material for this function (each function has its own material) and return true if it's the same or false if it isn't. We saw an example of this in listing 5.6 when we wanted to check if a broken block was of type SAND.
 
 There are many different *Enchantments* in Minecraft some of which are designed for use with Bows. We want to use an enchantment which is not already designed for a Bow because we don't want to interfere with existing enchantment rules. The problem is, if we add an enchantment which was not designed for the item, the enchantment might not stick. For this reason, we use the *addUnsafeEnchantment()* method because we want to add an enchantment which was not designed for the Bow item. If we look at the list of possible *Enchantments* in the Bukkit API docs, there are no obvious teleportation-related enchantments so I chose the *LUCK* enchantment as it's normally for use with Fishing Rods. 
 
 Adding a Level 3 LUCK enchantment to a Bow minimizes the risk that this particular configuration of Item, Enchantment and Level will conflict with existing Item/Enchantment game rules.
 
-#### The Recipe
+### The Recipe
 Having created and enchanted the item which will be cooked every time the player uses the recipe, the next step is to setup the ingredients for the recipe.
 
-##### The crafting Grid
+#### A *new* way to create objects
+In Javascript we can create objects using *Object Literals* like this:
+
+    var myNewObject = { name: 'Ender Bow' }
+
+... but there's another way to create objects we haven't mentioned yet. The *new* keyword in javascript can be used to create a new javascript Ojbect. For example Javascript has a Date function which when you call it like this returns the current date and time as a String (In Java 7 for Linux the following code throws an exception but the official Javascript Specification says you should be able to call Date() as follows) :
+
+    var today = Date();
+
+... However, when you add the *new* keyword in front of the call to Date() it behaves differently. When called like this, the *Date()* function returns a new Object of type Date:
+
+    var today = new Date();
+
+The *new* keyword in Javascript means the Date() function becomes a *constructor*. A constructor is any function which returns a new object. In *Java* there are only limited ways to create objects using Object Literals so the most common way to construct a new object in *Java* is using the *new* keyword. The statement below:
+
+    var enderBowRecipe = new bkShapedRecipe( enderBow );
+
+... creates a new Java object of type *org.bukkit.inventory.ShapedRecipe* (remember: we declared the bkShapedRecipe variable as short-hand for *org.bukkit.inventory.ShapedRecipe*), passing the *enderBow* object as a parameter.
+
+#### The crafting Grid
 The Crafting Grid in Minecraft is what appears on screen when you right-click on a crafting table. It's essential for creating tools and weapons in the game. The Grid is 3 x 3. It consists of 3 rows each of which have 3 slots. We need to be able to define - in code - what combination of ingredients will result in a new Ender Bow. Fortunately this is relatively easy. The in-game grid can be mapped to an Array of JavaScript strings which substitute each letter for a material. The following diagram shows the crafting grid with letters superimposed on each cell. 
 
 ![Crafting Grid with material codes](img/recipes/gridwithletters.png)
@@ -4052,7 +4098,7 @@ This is how we define the layout of a new shaped recipe in code too. The ShapedR
       "ESW"
     ]);
 
-##### Note on VarArgs and calling VarArg functions from javascript?
+#### Note on VarArgs and calling VarArg functions from javascript?
 TODO
 
 Now we've defined the shape of the recipe we need to say what each of the letters E, S and W mean. We do this using the *ShapedRecipe.setIngredient()* method which takes 2 parameters, a character and the material it which should be placed wherever that character appears in the shape.
@@ -4061,11 +4107,16 @@ Now we've defined the shape of the recipe we need to say what each of the letter
     enderBowRecipe.setIngredient('S', items.stick());
     enderBowRecipe.setIngredient('W', items.string());
 
-Finally, have set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method.
+### Inheritance
+Finally, having set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method.
 
+### Achievement Unlocked 
+![next achievement](img/achievement-plugin-dev-11.png)
 
+Congratulations! You've begun exploring the Bukkit API and have learnt a few tricks to understanding the reference documentation and how to use it in your own plugins.
 
-
+### Summary
+In this recipe we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next recipe, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
 
 ## Recipe 12: Arrows that Teleport you.
 

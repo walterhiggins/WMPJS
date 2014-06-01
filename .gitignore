@@ -225,3 +225,5 @@ pip-log.txt
 /listings/fireworks/#fireworkShow.js#
 /listings/recipe3/.#greetPlayers_v1.js
 /listings/recipe3/#greetPlayers_v1.js#
+*target/*
+*.#*

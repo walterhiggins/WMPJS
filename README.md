@@ -4108,7 +4108,43 @@ Now we've defined the shape of the recipe we need to say what each of the letter
     enderBowRecipe.setIngredient('W', items.string());
 
 ### Inheritance
-Finally, having set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method.
+Finally, having set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method. Let's look at this method again in the online documentation:
+
+1. Go to jd.bukkit.org/beta/apidocs
+2. Click the *org.bukkit* link in the top left pane.
+3. Click the *Server* link in the bottom left pane.
+4. Click the *addRecipe* link in the right (main) pane.
+
+The details in the right pane will look something like this:
+
+    boolean addRecipe(Recipe recipe)
+      Adds a recipe to the crafting manager.
+      Parameters:
+        recipe - the recipe to add
+      Returns:
+        true if the recipe was added, false if it wasn't for some reason
+
+If the *server.addRecipe()* function expects a *Recipe* but we give it a *ShapedRecipe* (that's what enderBow is), why does no error occur? No error occurs because a *ShapedRecipe* is a sub-type of *Recipe*. In Java programming we say that *ShapedRecipe* **inherits** from *Recipe* or is a *Subclass* of it.
+
+Inheritance is an important principle in programming and it's useful to understand what it is to better understand and navigate the Bukkit API Reference document. If we click on the *Recipe* link (the link inside the round brackets above) we're taken to the *Recipe* details page where you'll find the following information in the heading:
+
+    org.bukkit.inventory 
+      Interface Recipe
+    
+        All Known Implementing Classes:
+          FurnaceRecipe, ShapedRecipe, ShapelessRecipe
+        public interface Recipe
+        Represents some type of crafting recipe.
+
+Under *All Known Implementing Classes:* are a list of *Subclasses* or specialized types of *Recipe*. You can think of these classes as *children* of *Recipe*. Each of the classes *FurnaceRecipe*, *ShapedRecipe* and *ShapelessRecipe* are also *Recipe* objects and they *inherit* all of the parent Class's methods and properties, much like people inherit some of the characteristics of their parents: Eye color, Hair color and so on. Since the parent class *Recipe* only has one single method *.getResult()*, you can infer that there's a *FurnaceRecipe.getResult()* method and a *ShapedRecipe.getResult()* method and so on. You can click on the *ShapedRecipe* link to verify this. *ShapedRecipe* does indeed have a *.getResult()* method along with many other of its own methods. 
+
+In programming, Inheritance diagrams like the one below are useful for understanding inheritance:
+
+![Recipe Inheritance](img/recipes/recipe-inheritance.png)
+
+From this diagram we can see that *FurnaceRecipe*, *ShapedRecipe* and *ShapelessRecipe* share a common ancestor.
+
+Ultimately the *server.addRecipe()* method *doesn't care* what type of *Recipe* is added, *FurnaceRecipe*, *ShapedRecipe* or *ShapelessRecipe*, it doesn't matter, all the *server* object cares is that it *is* a *Recipe* object so it can call the *Recipe.getResult()* method (which is common to all 3 subclasses) when someone uses the recipe in a crafting grid. We'll revist this topic in the following Chapter.
 
 ### Achievement Unlocked 
 ![next achievement](img/achievement-plugin-dev-11.png)
@@ -4119,6 +4155,13 @@ Congratulations! You've begun exploring the Bukkit API and have learnt a few tri
 In this recipe we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next recipe, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
 
 ## Recipe 12: Arrows that Teleport you.
+
+### Inheritance Revisited
+#### Event Ancestry ?
+See event.entity
+
+#### Player Ancestry
+A look at the Player object and it's complicated ancestry. A digram of the Player inheritance will be needed here. see shooter.itemInHand
 
 ### Goal
 

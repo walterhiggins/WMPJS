@@ -72,8 +72,8 @@ function getListingNumber( source, chapter){
   var result = listingKeys[source],
     recipeNum;
   if (!result){
-    recipeNum = recipeKeys[ chapter ];
-    result = (recipeNum+1) + '.' + listingCounts[ chapter ];
+    recipeNum = chapKeys[ chapter ];
+    result = (recipeNum) + '.' + listingCounts[ chapter ];
     listingCounts[ chapter ] = listingCounts[ chapter ] + 1;
     listingKeys[ source ] = result;
   }
@@ -100,19 +100,20 @@ var xforms = {
   },
   '@@listing ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
     var result = [];
-
-    var listingNum = getListingNumber(file, currentRecipe);
+    var cur = currentChap;
+    var listingNum = getListingNumber(file, cur);
 
     result.push('<caption>Listing ' + listingNum + ': ' + caption + '</caption>');
     result.push('');
-    var sourceContents = readFile('listings/' + currentRecipe + '/' + file);
+    var sourceContents = readFile('listings/' + cur + '/' + file);
     for (var i = 0;i <sourceContents.length; i++){
       result.push('    ' + sourceContents[i]);
     }
     return result.join('\n');
   },
   '@@listref\{([a-zA-Z0-9_\.]+)\}': function(match, key){
-    return getListingNumber(key, currentRecipe);
+    var cur = currentChap;
+    return getListingNumber(key, cur);
   },
   '@@table ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
     var tableContents = readFile('tables/' + file);
@@ -132,6 +133,9 @@ var xforms = {
   },
   '@@recipe\{([a-zA-Z0-9]+)\}': function(match, key){
     return recipeKeys[key];
+  },
+  '@@chapter\{([a-zA-Z0-9]+)\}': function(match, key){
+    return chapKeys[key];
   },
   '@@include (.*)': function(match, file){
     var contents = readFile(file);

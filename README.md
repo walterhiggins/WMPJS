@@ -68,13 +68,14 @@ Welcome to the exciting world of Minecraft Modding. In this first section of the
 ... The following chapters will show you how to install and setup each of the above.
 
 ## Chapter 1: Running your own Minecraft server
-
+### Introduction
 I began playing Minecraft in 2010 in Single Player mode. It was fun and a relaxing way to pass the time. One year later, one afternoon I installed the Minecraft Server software and ran it on one of the computers on our kitchen table. My youngest son Sean had just finished his homework so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter Kate joined in and we began some serious building together. Building in Minecraft is much more fun with others. 
 
 ![](img/Client_Server_Kids.png "multiplayer Minecraft")
 
 When You play Minecraft in multiplayer mode and chat, build and mine with other players, you do so on a Minecraft "Server". The Minecraft Server is just a computer program (like Minecraft Client, Microsoft Word or Internet Explorer) which when running provides a shared virtual place for minecraft players to connect, build and chat. You don't need to buy any special type of computer to run a Minecraft Server. You can run a Minecraft Server on your laptop computer (assuming it's not too old). Minecraft server software won't run on an iPad or Android Tablet or phone. It only runs on Windows, Macintosh or Linux computers. 
 
+### Client Server Networking
 Minecraft multiplayer is "Client-Server". That means that one or more "client" computers - computers running the minecraft game - can connect to a central "server" - a computer which is responsible for storing all of the Minecraft World information so that players can play together in the same world. The following diagram is shows a simple Client/Server network with just one client (Player) connected to a Server.
 
 ![A Simple client server network](img/Client_Server1.png "A simple client server network")
@@ -381,7 +382,7 @@ Once you've mastered Server Administration and Modding you might eventually deci
 Mojang are rolling out their own Minecraft Hosting solution - Minecraft Realms - throughout the world. It's available in some countries right now and will be available in more soon. Minecraft Realms does not currently support plugins of any kind though that may change in the future. 
 
 ## Chapter 2: ScriptCraft
-
+### Introduction
 In the previous chapter we downloaded and installed CraftBukkit; a customizable Minecraft Server. In this chapter we'll install ScriptCraft - a server plugin which lets you write your own plugins using the Javascript programming language. 
 
 ### What is ScriptCraft?
@@ -441,7 +442,7 @@ Congratulations! You've just installed ScriptCraft and executed your first line 
 ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute javascript code right away. More on this in the next chapter...
 
 ## Chapter 3: A Javascript command prompt
-
+### Introduction
 Once you've installed ScriptCraft, you can use the `js` command to evaluate Javascript. The `js` command will try to evaluate any of the text which follows it, as Javascript. You must type a `SPACE` between the `js` and the javascript you want to evaluate. The `js` command will evaluate the javascript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, try to evaluate it, and if it can, will print the result. Let's practice with a few simple Javascript expressions.
 
 ### Basic Math operations
@@ -761,7 +762,7 @@ We've only scratched the surface of functions in javascript. We'll explore funct
 In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. We also touched on functions - how to call them and how to create them. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
  
 ## Chapter 4: Choosing and Using a Text Editor
-
+### Introduction
 Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
 
 ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
@@ -915,12 +916,13 @@ This is where the fun begins.
 
 # Part II Basic Modding 
 ## Overview
-In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about Javascript. This section is presented as a list of Recipes because crafting a plugin is similar to crafting any new item in Minecraft. You need to know what parts are required and how to put them together. Programming isn't too different. 
+In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about Javascript. In aach chapter in this section we'll develop a working plugin and learn about Javascript along the way.
 
-## Recipe 0: Your first minecraft plugin
-So let's dive in and create our first Minecraft plugin. A plugin is a program which is a small program which is loaded and executed by a larger program. The larger program we'll be using is of course Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first recipe and try to understand the code and the notes. We'll build on the knowledge learned here in later Recipes.
-
-Launch your Editor and open the helloWorld.js file you created in the previous section. Once opened, you can now remove the comment entered previously and type the following text:
+## Chapter 5: Your first minecraft plugin
+### Introduction
+So let's dive in and create our first Minecraft plugin. A plugin is a program which is a small program which is loaded and executed by a larger program. The larger program we'll be using is of course Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first chapter and try to understand the code and the notes. We'll build on the knowledge learned here in later Chapters.
+### Hello World
+Launch your Editor and open the helloWorld.js file you created in the 4 of the previous section. Once opened, you can now remove the comment entered previously and type the following text:
 
     console.log('Hello World');
 
@@ -949,7 +951,7 @@ Well that was easy wasn't it? This might be a trivially simple plugin but it dem
 
 So far the plugin we've written works fine in that it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
    
-<caption>Listing 1.1: helloWorld() Function Declaration</caption>
+<caption>Listing 5.1: helloWorld() Function Declaration</caption>
 
     function helloWorld( ) { 
       console.log('Hello World');
@@ -959,7 +961,7 @@ Now restart the server.
    
 What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function but we haven't called the function yet! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
 
-<caption>Listing 1.2: helloWorld() Function Declaration and Execution</caption>
+<caption>Listing 5.2: helloWorld() Function Declaration and Execution</caption>
 
     function helloWorld( ) { 
       console.log('Hello World');
@@ -974,7 +976,7 @@ OK. So we've wrapped the original code inside a function of our own and we call 
     
 This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
-<caption>Listing 1.3: Making helloWorld() public</caption>
+<caption>Listing 5.3: Making helloWorld() public</caption>
 
     function helloWorld( ) { 
       console.log('Hello World');
@@ -1008,16 +1010,16 @@ The exports variable is a special type of variable - it is an 'object'. An objec
 A *property* is an attribute of an Object - for example in real life we (humans that is) all have properties: eye-color, date-of-birth, name and so on. Objects in Javascript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables (called objects).
 
 ### Summary
-In this recipe you've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.
+In this chapter you've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.
 
-## Recipe 1: Rolling Dice
+## Chapter 6: Rolling Dice
+### Introduction
+Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this chapter we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll reuse this module in later chapters to give random greetings to players who join the game.
 
-Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an element of chance. Success is sometimes down solely to luck and the roll of the dice. In this recipe we're going to create a Javascript module which mimics a 6-sided dice (the standard dice that comes with most board-games). We'll reuse this module in later recipes to give random greetings to players who join the game.
-
-In this recipe, I'll walk you through creating your very first *reusable* Javascript module.
+In this chapter, I'll walk you through creating your very first *reusable* Javascript module.
 
 ### Randomness
-When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time what the number will be. The number which is thrown is said to be 'Random'. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this recipe we'll use this method to get a random number. 
+When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time what the number will be. The number which is thrown is said to be 'Random'. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this chapter we'll use this method to get a random number. 
 
 ### Think of a number between 0 and 1
 Before we begin writing the module, let's do some command-prompt exploration. At the in-game prompt type the following and hit ENTER...
@@ -1043,10 +1045,10 @@ In Javascript the count would look like this...
 
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 
-This can be confusing for beginning and experienced programmers and takes some getting used to. I'll explain why counting from 0 is important in the following recipes. Our virtual 6-sided dice will have the numbers 0, 1, 2, 3, 4, 5 rather than the usual 1, 2, 3, 4, 5, 6.
+This can be confusing for beginning and experienced programmers and takes some getting used to. I'll explain why counting from 0 is important in the following chapters. Our virtual 6-sided dice will have the numbers 0, 1, 2, 3, 4, 5 rather than the usual 1, 2, 3, 4, 5, 6.
 
 ### Playing with Numbers
-We have a problem to solve. Math.random() will give us a number between 0.0 and 0. 9999999999999999 which isn't useful for most everyday uses. We're only interested in 6 possible numbers so we need to do some Math to get the result we need. We'll explore some basic Math you can do in Javascript and some operations you can perform on floating point numbers but first let's think about what we want to be able to do once our first recipe is complete. 
+We have a problem to solve. Math.random() will give us a number between 0.0 and 0. 9999999999999999 which isn't useful for most everyday uses. We're only interested in 6 possible numbers so we need to do some Math to get the result we need. We'll explore some basic Math you can do in Javascript and some operations you can perform on floating point numbers but first let's think about what we want to be able to do once our first plugin is complete. 
 
 Ideally we'd like to be able to issue the following command at the in-game prompt and have a useful number returned...
 
@@ -1066,7 +1068,7 @@ Right-click and choose 'New File' from the menu. Call your new file 'dice.js' th
 
 Type the following code into the newly created file...
 
-<caption>Listing 2.1: Rolling Dice</caption>
+<caption>Listing 6.1: Rolling Dice</caption>
 
     function roll(){
       var result = Math.random();
@@ -1111,7 +1113,7 @@ There are other folders in scriptcraft. The 'modules' folder is much like the pl
 So this leaves us in a bit of a pickle. We've written some useful code, but how do we actually get to use it?
 
 ### Modules
-What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later recipese we'll create modules which have many functions.
+What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
 
 ![Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg](img/nasa-apollo-modules.jpg)
 
@@ -1131,7 +1133,7 @@ You'll notice that the above statement doesn't appear to have called `roll()` ye
 
 A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
 
-Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing 2.1.
+Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing 6.1.
 
 You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we actually get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
@@ -1142,7 +1144,7 @@ Major Kudos! You've create created your first Javascript module, loaded it and u
 ### Digging Deeper
 Let's look at the code we've just added to Minecraft. The code is reprinted below...
 
-<caption>Listing 2.1: Rolling Dice</caption>
+<caption>Listing 6.1: Rolling Dice</caption>
 
     function roll(){
       var result = Math.random();
@@ -1152,14 +1154,14 @@ Let's look at the code we've just added to Minecraft. The code is reprinted belo
     };
     exports.roll = roll;
 
-A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later recipes, for now let's look at the function body itself (lines 2 through 5). 
+A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later chapters, for now let's look at the function body itself (lines 2 through 5). 
 
 1. The first statement of the function, `var result = Math.random();` declares a new variable called 'result' and assigns a random number to it. Remember: Math.random() will return a random number between 0 and 1. 
 2. The next statement `result = result * 6` takes the number and multiplies it by 6. Remember; the `*` symbol is used in Javascript to multiply numbers. 
 3. Next we convert the number to a integer by passing it to the `Math.floor()` function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
 4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the roll() function to return the `result` variable.
 
-As in the previous recipe, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
+As in the previous plugin, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
 
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
@@ -1196,13 +1198,13 @@ The return statement is used inside functions to:
 The `return` statement can only be used inside a function. It's possible to have functions which don't have a return statement at all in which case the function stops executing when it runs the last statement in the function. Functions don't *have* to return a value, in fact, many of the functions we'll write later won't. 
 
 ### Summary
-In this recipe we created our first truly reusable module. We learned about Modules, Random numbers and the Math object. In the next recipe we'll enhance this module further and in the recipe after we'll use the module to create custom greetings for players joining the server.
+In this chapter we created our first truly reusable module. We learned about Modules, Random numbers and the Math object. In the next chapter we'll enhance this module further and in the chapter after we'll use the module to create custom greetings for players joining the server.
 
-## Recipe 2: Multi-sided dice
+## Chapter 7: Multi-sided dice
 ![](img/BluePlatonicDice.png)
-
-In this recipe we'll build on the code written in the previous recipe to let us roll a dice of any number of sides. Sometimes we want a random number that doesn't fit in the range 1 to 6. Ideally we'd like our virtual dice module to return a random number for any range we give it. We're going to take our 6-sided dice from the earlier recipe and enhance it so it can change shape to any number of sides like the multi-sided dice used in some table-top and role-playing games.
-
+### Introduction
+In this chapter we'll build on the code written in the previous chapter to let us roll a dice of any number of sides. Sometimes we want a random number that doesn't fit in the range 1 to 6. Ideally we'd like our virtual dice module to return a random number for any range we give it. We're going to take our 6-sided dice from the earlier chapter and enhance it so it can change shape to any number of sides like the multi-sided dice used in some table-top and role-playing games.
+### Flexible Functions
 If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each dice...
 
     function rollSixSided(){ 
@@ -1226,7 +1228,7 @@ What if, when we call the *roll()* function, we could tell the function how many
 ### Term: Parameter
 *Parameters* provide a way to give some instructions to functions. We can pass values to a function and the function will treat them like variables. There's another word often used in programming which can mean the same thing: Arguments. We say that we pass arguments to functions and the function receives them as paramaters. The distinction isn't very important. You can use the words *arguments* or *parameters* when talking about passing values to functions.
 
-We've already been using parameters in earlier code examples. In an earlier recipe we used the *console.log* function and passed it a parameter. Try issuing the following statements at the server console window:
+We've already been using parameters in earlier code examples. In an earlier chapter we used the *console.log* function and passed it a parameter. Try issuing the following statements at the server console window:
 
     js console.log('Hello world');
 
@@ -1236,9 +1238,9 @@ You should see the message 'Hello world' appear in your server window. 'Hello wo
     
 You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to *console.log* and the *console.log* function just printed the resulting value. An important point: console.log did not do the math, that was done just before the function was called so the parameter which *console.log* received was 14. It had no knowledge of the math that was done before it was called - console.log only saw 14, it did not see `5 + 9`. The *console.log* function is commonly used for *logging*. Logging is the practice of printing output to screen usually for the purpose of debugging or better understanding your code's behaviour.
 
-Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous recipe. You don't have to type this code, I just want to highlight some changes:
+Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous chapter. You don't have to type this code, I just want to highlight some changes:
 
-<caption>Listing 3.1: Rolling Dice - sides as a variable.</caption>
+<caption>Listing 7.1: Rolling Dice - sides as a variable.</caption>
 
     function roll( ) {
       var result = Math.random();
@@ -1249,9 +1251,9 @@ Just as *console.log* and many other functions can take parameters, we can write
     };
     exports.roll = roll;
 
-The above code is similar to code from the previous recipe except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous recipe. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous recipe. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
+The above code is similar to code from the previous chapter except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous chapter. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous chapter. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
 
-<caption>Listing 3.2: Rolling Dice - sides as a parameter.</caption>
+<caption>Listing 7.2: Rolling Dice - sides as a parameter.</caption>
 
     function roll( sides ) {
       var result = Math.random();
@@ -1274,7 +1276,7 @@ The first change was to make the number 6 used in the computation a variable. Th
 
 Try calling `dice.roll(20)` a couple of times to confirm that it does in fact choose random numbers between 0 and 19. 
 
-Our updated roll() function now takes a parameter which says how many sides the dice should have. The type of parameter this function takes is of type 'Number'. Functions can take parameters of any type, Numbers, Strings (text), Booleans (true or false), even other functions! We'll see an example in the next recipe of a function which takes another function as a parameter. Remember - functions are just values like anything else in Javascript so they too can be assigned to variables (as we've already seen) or passed as parameters (as we'll soon see). 
+Our updated roll() function now takes a parameter which says how many sides the dice should have. The type of parameter this function takes is of type 'Number'. Functions can take parameters of any type, Numbers, Strings (text), Booleans (true or false), even other functions! We'll see an example in the next chapter of a function which takes another function as a parameter. Remember - functions are just values like anything else in Javascript so they too can be assigned to variables (as we've already seen) or passed as parameters (as we'll soon see). 
 
 ### Default parameter values
 What happens if you call dice.roll() *without* passing a parameter? You can see for yourself by issuing this command at the in-game prompt:
@@ -1283,7 +1285,7 @@ What happens if you call dice.roll() *without* passing a parameter? You can see 
 
 You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascript and it means the computed value - the result of the math operations that is - was not a number. Do you know why? Our function always expects a number (how many sides the dice has) and if we don't give it one then the math won't work as expected. Wouldn't it be nice if, when no number is passed to `dice.roll()` it just assumes that we want the roll of a six-sided dice? Six-sided dice are after all the most common type of dice. Let's make another minor change to the *roll* function:
 
-<caption>Listing 3.3: Rolling Dice. Default Parameters</caption>
+<caption>Listing 7.3: Rolling Dice. Default Parameters</caption>
 
     function roll( sides ) {
       if ( typeof sides === 'undefined' ) { 
@@ -1307,7 +1309,7 @@ The *if* statement is how decisions are made in Javascript. It's used to test so
     if there is no 'sides' parameter then
        let sides be equal to 6
        
-We'll look at the `if` statement in more detail in later recipes. All you need to know for now is that it can be useful for controlling how our programs behave under different conditions. The code inside the round brackets `typeof sides === 'undefined'` returns the type of the sides parameter. If no parameter was supplied then it will be of type *undefined* in which case we set the sides parameter to a default value of 6. Once you've edited and saved your dice.js file, make sure to issue the `/js refresh()` command at the in-game prompt and then issue the following statements:
+We'll look at the `if` statement in more detail in later chapters. All you need to know for now is that it can be useful for controlling how our programs behave under different conditions. The code inside the round brackets `typeof sides === 'undefined'` returns the type of the sides parameter. If no parameter was supplied then it will be of type *undefined* in which case we set the sides parameter to a default value of 6. Once you've edited and saved your dice.js file, make sure to issue the `/js refresh()` command at the in-game prompt and then issue the following statements:
 
     /js var dice = require('dice');
     /js dice.roll(20);
@@ -1320,7 +1322,7 @@ You should see a random number output for each of the above calls. The *roll* fu
 ### Assiging to the exports variable
 Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
 
-<caption>Listing 3.4: Exporting a function Expression.</caption>
+<caption>Listing 7.4: Exporting a function Expression.</caption>
 
     exports.roll = function roll( sides ) {
       if ( typeof sides === 'undefined' ) { 
@@ -1333,7 +1335,7 @@ Since the only purpose of the roll variable inside of our modules is to be attac
     };
     
 
-The above listing is one line shorter than listing 3.3. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
+The above listing is one line shorter than listing 7.3. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
 
     var cow = 'Cow';
     var sheep = 'Sheep';
@@ -1350,9 +1352,9 @@ But since the first 3 parameters aren't really used except to assign to exports,
     
 and save ourselves some typing. There may be times when this isn't suitable. If the *cow* variable is used inside the module then it makes sense to declare it and assign to the exports variable. If not then it's simpler to just assign the value directly to the exports variable rather than creating an extra variable which won't be used for any other purpose.
     
-Before we move on to the next recipe, I want to talk more about Comments. 
+Before we move on to the next chapter, I want to talk more about Comments. 
 
-### more on comments
+### More on comments
 In the very first javascript file we created, we started with a single line:
 
     // TO DO : Add some code later
@@ -1425,7 +1427,7 @@ Most of the source listings in this book will not include comments because the c
 #### Commenting dice.js
 Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
 
-<caption>Listing 3.5: Commenting Code</caption>
+<caption>Listing 7.5: Commenting Code</caption>
 
     /*
      this module provides a roll() function which returns a random number.
@@ -1458,16 +1460,16 @@ Congratulations. You've taken another step towards becoming a responsible plugin
 ### Summary
 You've seen that functions can both return *and take* a value as a parameter. Parameters can be really useful when we want to provide information to a function. It's usually a good idea to have default values if your function is called without parameters. We've also learned about comments and how they can be used to add useful notes for ourselves and others to help understand our code.
     
-## Recipe 3: Greeting Players
+## Chapter 8: Greeting Players
 ### Introduction
-In this recipe we'll actually change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
+In this chapter we'll actually change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
 
 ### Term: Event Driven Programming
 Back in the early days of programming there was no such thing as Event Driven Programming. Programs were started and ran to completion, then exited. If your program needed to ask the user a question, it did so using a command prompt and did not resume until the user had typed a response and hit enter. With the advent of Graphical User Interfaces in the 80s and 90s, the possibilities for what users could do exploded. Programs and user-interaction became more sophisticated. Programs had to be written differently to accomodate the new ways users could interact with programs (Menus, Buttons, Windows and so on). When you click a link or a button on a web page or other application, that click is an *event*. In Minecraft, when you fire an arrow, break a block, open a door, join the server or do pretty much anything, that's an *event*. Event driven programming lets programmers write functions which listen for and react to such events.
 
-In the first part of this recipe we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in recipe 2 to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
+In the first part of this chapter we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in chapter 7 to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
 
-<caption>Listing 4.1: Random Greetings</caption>
+<caption>Listing 8.1: Random Greetings</caption>
 
     var dice = require('dice');
     var greetings = [ 'Hello ', 'Hola ', 'Bonjour ', 'Konnichiwa ' ];
@@ -1552,7 +1554,7 @@ Once you've constructed an array you can add new items to the end of the array u
     [3] 'Chicken'
     [4] 'Horse'   <=== New item appended
 
-The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push()* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that belongs to a particular object so it can only be called using the form *object.method()*, 'object' in this case being 'farmAnimals' and 'method()' being 'push()'. We'll explore Objects more in later recipes.
+The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push()* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that belongs to a particular object so it can only be called using the form *object.method()*, 'object' in this case being 'farmAnimals' and 'method()' being 'push()'. We'll explore Objects more in later chapters.
 
 The *push()* function always *appends* items to the end of the array. If you want to insert an item into the array at a position other than the end, you'll need to use the *splice()* function instead. Here's how you insert a new animal into the farmAnimals array at position 2:
 
@@ -1618,7 +1620,7 @@ There are a couple of other useful Array insertion and removal functions:
 * shift() Is used to **remove** the *first* item from the array.
 * pop() Is used to **remove** the *last* item from the array.
 
-You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In later recipes we'll learn how to process all of the items in an array using Javascript's looping statements.
+You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In later chapters we'll learn how to process all of the items in an array using Javascript's looping statements.
 
 <table>
 <caption><h4> Table 1: Array Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
@@ -1631,7 +1633,7 @@ You can learn more about the Array object and its functions and properties at ht
 ### First steps with Events
 So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
 
-<caption>Listing 4.2: Greeting Players as they join the Server.</caption>
+<caption>Listing 8.2: Greeting Players as they join the Server.</caption>
 
     var greeting = require('greetings');
     function greetPlayer( event ) {
@@ -1653,11 +1655,11 @@ ScriptCraft comes bundled with a built-in variable called *events*. The *events*
 
 This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding - passing functions as parameters to other functions - is called *functional programming*. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because its purpose is to handle - that is: react - to events, specifically the event which is fired by the server whenever a player joins the game. 
 
-We'll look more closely at events and event-handling functions in a later recipe.
+We'll look more closely at events and event-handling functions in a later chapter.
 
 ### More on Modules
 
-From looking at the *greetPlayers* module you can see the first thing it does is load another module: *greetings* which we created earlier in this recipe. If you remember, the *greetings* module in turn loads yet another module - the *dice* module we worked on in the previous recipes. This is a classic example of how programming is typically done. We start with small dedicated modules and then work on bigger and bigger modules piecing them together to solve a problem. In programming, a big part of problem-solving is breaking problems down into smaller and smaller problems and solving each of these smaller problems then piecing together the solutions. Programming can often feel like playing with toy building bricks except *you* get to design the bricks and put them together. When a program module relies on another module we say it *depends* on the module. A module which loads another module *depends* on that module and that module in turn will *depend* on other modules. All of the modules which are required - either directly or indirectly - by a program are called *dependencies*. You can see in the diagram below the relationship between the *greetPlayers*, *greetings* and *dice* modules. 
+From looking at the *greetPlayers* module you can see the first thing it does is load another module: *greetings* which we created earlier in this chapter. If you remember, the *greetings* module in turn loads yet another module - the *dice* module we worked on in the previous chapters. This is a classic example of how programming is typically done. We start with small dedicated modules and then work on bigger and bigger modules piecing them together to solve a problem. In programming, a big part of problem-solving is breaking problems down into smaller and smaller problems and solving each of these smaller problems then piecing together the solutions. Programming can often feel like playing with toy building bricks except *you* get to design the bricks and put them together. When a program module relies on another module we say it *depends* on the module. A module which loads another module *depends* on that module and that module in turn will *depend* on other modules. All of the modules which are required - either directly or indirectly - by a program are called *dependencies*. You can see in the diagram below the relationship between the *greetPlayers*, *greetings* and *dice* modules. 
 
 ![](img/recipe3/encapsulation.png)
 
@@ -1666,9 +1668,9 @@ The *greetPlayers* module depends on *greetings* but it does not know or care th
 Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
 
 ### Greeting Players in Style
-As a final fluorish to this recipe let's add something a little more spectacular than a simple text message. Let's greet each new player with a firework which launches when and where they join the server. 
+As a final fluorish to this plugin let's add something a little more spectacular than a simple text message. Let's greet each new player with a firework which launches when and where they join the server. 
 
-<caption>Listing 4.3: Greeting Players with Fireworks</caption>
+<caption>Listing 8.3: Greeting Players with Fireworks</caption>
 
     var greeting = require('greetings');
     var fireworks = require('fireworks');
@@ -1680,7 +1682,7 @@ As a final fluorish to this recipe let's add something a little more spectacular
     };
     events.playerJoin( greetPlayer );
 
-We'll use and explore the ScriptCraft *fireworks* module again in a later recipe. Events and event-handling functions can be used to trigger all kinds of cool new game mechanics.
+We'll use and explore the ScriptCraft *fireworks* module again in a later chapter. Events and event-handling functions can be used to trigger all kinds of cool new game mechanics.
 
 ### Achievement Unlocked!
 ![](img/achievement-plugin-dev-7.png)
@@ -1688,15 +1690,15 @@ We'll use and explore the ScriptCraft *fireworks* module again in a later recipe
 Major Kudos! You've created your first custom event handler and have had your first encounter with event-driven programming. Soon you'll be putting event-handling to use to protect your server and add your own fun effects.
 
 ### Summary
-In this recipe you learned about how to create and manipulate lists of items using Javascript Arrays. You also learned about Event programming and wrote your first event-handling function to greet players when they join your server. In the next recipe we'll explore events further and play with Sounds in Minecraft.
+In this chapter you learned about how to create and manipulate lists of items using Javascript Arrays. You also learned about Event programming and wrote your first event-handling function to greet players when they join your server. In the next chapter we'll explore events further and play with Sounds in Minecraft.
 
-## Recipe 4: A Guessing Game
+## Chapter 9: A Guessing Game
 ### Introduction
 One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including Java and Javascript.
 
-In this recipe we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
+In this chapter we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
 
-<caption>Listing 5.1: A Guessing Game</caption>
+<caption>Listing 9.1: A Guessing Game</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1739,7 +1741,7 @@ The problem with modal dialogs is that they interrupt the program and the progra
 2. The question you want to ask.
 3. The function you want to call when the player has answered the question. The function when called will have the answer and the player who answered as parameters.
 
-This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in recipe 3 when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
+This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in chapter 8 when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
 
     js var input = require('input');
     js function respond( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
@@ -1750,7 +1752,7 @@ The important thing to keep in mind when writing code that depends on asking pla
 So we've seen how to ask a player a question. Now let's take a look at how we check to see if the answer is correct.
 
 ### The if statement
-In @@chapter{js} we briefly looked at comparing numbers at the server console prompt. When we *compare* something to something else there can only be two possible answers: `true` or `false`. For example, if I issue the command `js 5 == 3` to ask the computer is 5 equal to 3 the answer will be `false`. If I ask the computer a different question `js 5 > 3` - is 5 greater than 3 - the answer will be `true`. When asking such questions there is no *I don't know* or *Sometimes* or *Maybe*. The answer will always be `true` or `false`. When we *compare* things we *test* for true or false. We can compare not only numbers but any variable. We can write code in such a way that it will only execute if some test passes. Try the following commands at the server console prompt:
+In 3 we briefly looked at comparing numbers at the server console prompt. When we *compare* something to something else there can only be two possible answers: `true` or `false`. For example, if I issue the command `js 5 == 3` to ask the computer is 5 equal to 3 the answer will be `false`. If I ask the computer a different question `js 5 > 3` - is 5 greater than 3 - the answer will be `true`. When asking such questions there is no *I don't know* or *Sometimes* or *Maybe*. The answer will always be `true` or `false`. When we *compare* things we *test* for true or false. We can compare not only numbers but any variable. We can write code in such a way that it will only execute if some test passes. Try the following commands at the server console prompt:
 
     js if ( 5 > 3 ) { console.log('test is true') }
     js if ( 5 > 13 ) { console.log('test is true') }
@@ -1807,7 +1809,7 @@ The `!` operator *negates* (that is - makes the opposite of) any boolean express
 ### The if-else construct
 Let"s say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
 
-<caption>Listing 5.2: Guessing Wrong.</caption>
+<caption>Listing 9.2: Guessing Wrong.</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1840,9 +1842,9 @@ Change your existing numberGuess.js file to match the code above, save it then i
 Now when you guess incorrectly you should see a message `Better luck next time.` appear.
 
 ### The if-else-if construct
-So far the guessing games gives players just one shot at guessing the number. In the following listing 5.3 the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if - else - if* form which is quite common in Javascript:
+So far the guessing games gives players just one shot at guessing the number. In the following listing 9.3 the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if - else - if* form which is quite common in Javascript:
 
-<caption>Listing 5.3: Too High, Too Low.</caption>
+<caption>Listing 9.3: Too High, Too Low.</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1878,14 +1880,14 @@ In this revision of the number guessing game, we're using an extra parameter cal
 
 Another change in the above function is that we've given the player the option of simply quitting the game by typing `quit` as an answer to the question. You may be wondering why there's a check to see if the guess is too low but no equivalent check to see if the guess is too high. The resaon is, if the guess is not the same or less than the randomNumber, then it *must* be too high - there are no other options.
 
-How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how listing 5.3 behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
+How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how listing 9.3 behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
 
 ![](img/guess1/flowchart.png)
 
 ### Nested blocks
 The `if` statement is one of several *block* statements in javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
 
-<caption>Listing 5.4: Fireworks for Winners.</caption>
+<caption>Listing 9.4: Fireworks for Winners.</caption>
 
     var input = require('input');
     var dice = require('dice');
@@ -1964,7 +1966,7 @@ How would we write such a rule in Javascript? Well let's refine the statement ab
 
 In javascript you write it like this:
 
-<caption>Listing 5.5: Cookies for Ninjas.</caption>
+<caption>Listing 9.5: Cookies for Ninjas.</caption>
 
     var items = require('items');
     
@@ -1996,7 +1998,7 @@ To you and I that rule might look clear enough but the computer would be confuse
 
 We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following javascript code:
 
-<caption>Listing 5.6: If X and ( Y or Z )</caption>
+<caption>Listing 9.6: If X and ( Y or Z )</caption>
 
     var items = require('items');
     events.blockBreak(function(event){
@@ -2011,16 +2013,16 @@ We have to be careful when writing test conditions in Javascript. It's very easy
 Notice the additional `( )` round brackets around the test `breaker.sneaking || breaker.flying`. These are needed so that we can phrase the rule in a way which the computer will read it the same way we do.
 
 ### Summary
-In this recipe you learned how to use *if* statement to make decisions and make your program do different things based on tests. You also learned about combining different tests for true and false and about ScriptCraft's *input* function which is used for asking for input from players. 
+In this chapter you learned how to use *if* statement to make decisions and make your program do different things based on tests. You also learned about combining different tests for true and false and about ScriptCraft's *input* function which is used for asking for input from players. 
 
-## Recipe 5: Animal Sounds
+## Chapter 10: Animal Sounds
 ### Introduction
-In this recipe we'll create a simple program to ask players a question and play back sounds based on the answer given. You'll learn about Javascript's *switch* statement and ScriptCraft's *sounds* module. The new program will ask players what their favorite animal is and play back that animal's sound.
+In this chapter we'll create a simple program to ask players a question and play back sounds based on the answer given. You'll learn about Javascript's *switch* statement and ScriptCraft's *sounds* module. The new program will ask players what their favorite animal is and play back that animal's sound.
 
 ### The switch statement
-In recipe 4 you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
+In chapter 9 you learned how to get input from players and how to test the input using Javascript's *if* statement. Javascript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
 
-<caption>Listing 6.1: Animal Sounds</caption>
+<caption>Listing 10.1: Animal Sounds</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -2070,7 +2072,7 @@ Save your file then issue the `js refresh()` or `reload` command to reload all j
 
 You will be prompted to type the name of your favorite animal. Press the *T* key to enter text then type in any of the following: cat, chicken, cow, horse, pig, sheep, wolf. When you hit enter you should hear an appropriate sound - a wolf bar, cow moo and so on. If you don't enter any of the above animals, then the program responds with a message saying it never heard of whatever it was you typed.
 
-The switch statement works much like the *if-else-if* construct we used in recipe 4 . We could have written the *animalSounds.js* module using an if-else-if form:
+The switch statement works much like the *if-else-if* construct we used in chapter 9 . We could have written the *animalSounds.js* module using an if-else-if form:
 
     if (animal == 'cat') { 
         sounds.catMeow(player.location);
@@ -2201,7 +2203,7 @@ How do we make the *animalSounds()* function understand that when a player types
 
 The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
-<caption>Listing 6.2: Case-insenstive Animal Sounds.</caption>
+<caption>Listing 10.2: Case-insenstive Animal Sounds.</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -2256,7 +2258,7 @@ All Strings in Javascript also have a *toUpperCase()* function which returns an 
 
     animal.toLowerCase();
     
-The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In recipe 3 we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
+The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In chapter 8 we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
 
     /js var animals = ['cow','pig'];
     /js animals.push('sheep');
@@ -2299,11 +2301,11 @@ Listed below is a table of the most common String methods.
 A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String .
 
 ### Summary
-In this recipe you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module. In an upcoming recipe we'll learn how to simplify this module even further using Objects.
+In this chapter you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module. In an upcoming chapter we'll learn how to simplify this module even further using Objects.
 
-## Recipe 6: Leaderboards - More fun with Arrays
+## Chapter 11: Leaderboards - More fun with Arrays
 ### Introduction
-One of the really cool things about Arrays in Javascript is that they can be sorted. Sorting is the process of looking at each item in an array and deciding whether it is greater than or less than another item in the same array. When all of the items in an array are sorted the array is like a leaderboard - a ranked list of items. In this recipe you'll create a ranked list of players based on who has jumped most.
+One of the really cool things about Arrays in Javascript is that they can be sorted. Sorting is the process of looking at each item in an array and deciding whether it is greater than or less than another item in the same array. When all of the items in an array are sorted the array is like a leaderboard - a ranked list of items. In this chapter you'll create a ranked list of players based on who has jumped most.
 
 ### Array.sort() 
 The Array.sort() method is used to sort items in a array. Let's see it in action. Issue the following commands at the server console prompt:
@@ -2379,7 +2381,7 @@ The *bukkit.worlds()* function returns an array of all of the worlds on the serv
 #### Sorting Players by name
 One way to sort players is by name. This isn't strictly a leaderboard in the truest sense of the word but it does demonstrate how to sort based on a player's attribute - his name. Create a new file called *playerSort.js* in the *scriptcraft/modules* folder and type in the following code:
 
-<caption>Listing 7.1: Sorting Players by name.</caption>
+<caption>Listing 11.1: Sorting Players by name.</caption>
 
     function byName( a, b ) { 
       if (a.name == b.name) {
@@ -2412,7 +2414,7 @@ To try out this module, issue the following commands at the server console promp
 
 Let's face it, a leaderboard based on player names would be both boring and unfair. Let's try one based on a player's experience points. Update your *playerSort.js* file adding a new *byExp()* function (exp is short for experience):
 
-<caption>Listing 7.2: Sorting players by Experience.</caption>
+<caption>Listing 11.2: Sorting players by Experience.</caption>
 
     function byName( a, b ) { 
       if (a.name == b.name) {
@@ -2471,13 +2473,13 @@ In Minecraft each player is an *Object* in the game. *Objects* in javascript are
     /js self.name
     /js self.shootArrow()
 
-The first command will display your name. The second command will make you shoot an arrow so be careful who you point at when you issue this command. In the first command we access a *property* of the object called *self* and in the second command we call a *method* on the object called *self*. *Properties* are just variables which belong to objects. *Methods* are just functions which belong to objects. In later recipes I'll show you how to discover all of the properties and methods of the *Player* object and other in-game objects. For now we're going to use another player method called *getStatistic()* which returns a statistic for a player. You use it like this:
+The first command will display your name. The second command will make you shoot an arrow so be careful who you point at when you issue this command. In the first command we access a *property* of the object called *self* and in the second command we call a *method* on the object called *self*. *Properties* are just variables which belong to objects. *Methods* are just functions which belong to objects. In later chapters I'll show you how to discover all of the properties and methods of the *Player* object and other in-game objects. For now we're going to use another player method called *getStatistic()* which returns a statistic for a player. You use it like this:
 
     /js self.getStatistic( bukkit.stat.JUMP );
 
 This command calls the *.getStatistic()* method on the *self* object which refers to your in-game character and displays the number returned by that method. Now jump again and issue the same command once more (remember, you can issue the previous command by pressing / then the UP arrow key). The number returned should be greater by 1. We're going to use each player's JUMP statistic to display a leaderboard of players who have jumped the most. Open up your *playerSort.js* file in the editor and update it adding the *byJumps()* function:
 
-<caption>Listing 7.3: Sorting players by number of jumps.</caption>
+<caption>Listing 11.3: Sorting players by number of jumps.</caption>
 
     function byName( a, b ) { 
       if (a.name == b.name) {
@@ -2517,7 +2519,7 @@ So far we've just been using the *console.log()* function to display the entire 
     
      CraftPlayer{name=abcdefg}, CraftPlayer{name=hijklmn}, CraftPlayer{name=opqrst}
    
-For a leaderboard display you'll want something a little more sophisticated. In this recipe we'll create a function which displays each player's name and number of jumps on a single line. To do that we'll need to process each item in the array one at a time. One of the ways you can process items in an array is using *loops*. Computers are very good at repeating the same thing over and over. In programming repeating the same thing over is called *looping*. There are two *looping* statements in Javascript, the *for* statement and the *while* statement.
+For a leaderboard display you'll want something a little more sophisticated. In this chapter we'll create a function which displays each player's name and number of jumps on a single line. To do that we'll need to process each item in the array one at a time. One of the ways you can process items in an array is using *loops*. Computers are very good at repeating the same thing over and over. In programming repeating the same thing over is called *looping*. There are two *looping* statements in Javascript, the *for* statement and the *while* statement.
 
 ### The *for* Loop
 The *for* loop is usually used to process each item in an array. For example, if we have an array of animals `['cat','cow','pig','sheep','wolf']` we could print out each animal using the following code:
@@ -2550,7 +2552,7 @@ The part of the *for* statement in round brackets `(var i = 0; i < animals.lengt
 
 Following the for statement you usually have a block of one or more statements contained inside curly brackets. These statements will be executed each time through the loop. Let's put *for* loops to use to create a more pleasing leaderboard display of players who jump the most. Create a new file called *leaderboard.js* in the *scriptcraft/modules* folder and type in the following code:
 
-<caption>Listing 7.4: A Simple Jumps Leaderboard: for loop.</caption>
+<caption>Listing 11.4: A Simple Jumps Leaderboard: for loop.</caption>
 
     var playerSort = require('playerSort');
     
@@ -2576,7 +2578,7 @@ To try out the new module save it, issue the `js refresh()` command to reload Sc
     /js var leaderboard = require('leaderboard');
     /js leaderboard.jumps( self );
 
-The list of all players on the server and the number of times they've jumped should be displayed in descending order - that is - the players who have jumped the most will be at the top of the list. In a later recipe we'll revisit this module to display the leaderboard using an on-screen scoreboard as seen on popular player-vs-player servers.
+The list of all players on the server and the number of times they've jumped should be displayed in descending order - that is - the players who have jumped the most will be at the top of the list. In a later chapter we'll revisit this module to display the leaderboard using an on-screen scoreboard as seen on popular player-vs-player servers.
 
 The *jumps()* function takes a single parameter called *sender*. *sender* is short for CommandSender, a ComandSender is anything in the game capable of sending commands. For examples, Players are command senders since they can send commands using the in-game prompt. What we want to do in this function is send output to the player who issued the command. That's why we use *sender.sendMessage()* instead of *console.log()* to display the leaderboard. If we used *console.log()* then players would not see the leaderboard because *console.log()* only writes messages to the server console window, not to players. In the above *jumps()* function we sort the players by how many times they've jumped, then reverse the array so that the higher numbers are at the front of the array, then we *loop* over the array using the *for* loop. Inside the for loop we have a block of statements:
 
@@ -2590,7 +2592,7 @@ The above block of code gets executed a number of times - the number depends on 
 
 The second kind of loop is called the *while* loop. The *for* loop is very useful for *iterating* (a fancy word for looping) over arrays or if you know in advance how many times you need to loop. Sometimes you won't know how many times you need to loop, you'll want to keep looping until something happens and you don't know how many times you'll need to loop until it does. A *while* loop is also called a *conditional* loop - it's like the *if* statement except it will keep repeating the same block of code over and over until a *test condition* is no longer true. The best way to understand this is by example. Let's look at the leaderboard module again - this time it's been written using a *while* loop instead of a *for* loop. The code behaves *exactly* the same, it just uses *while* instead of *for*.
 
-<caption>Listing 7.5: A Simple Jumps Leaderboard: while loop.</caption>
+<caption>Listing 11.5: A Simple Jumps Leaderboard: while loop.</caption>
 
     var playerSort = require('playerSort');
     
@@ -2617,7 +2619,7 @@ The second kind of loop is called the *while* loop. The *for* loop is very usefu
 #### Breaking out of loops
 There are times when you'll want to break out of a loop early. If for example, you only want to display a list of players who have actually jumped - that is - players whose jump count is greater than zero. You can break out of a loop early using the javascript *break* statement. Take a look at the following listing to see an example of the *break* statement:
 
-<caption>Listing 7.6: Breaking out of loops.</caption>
+<caption>Listing 11.6: Breaking out of loops.</caption>
 
     var playerSort = require('playerSort');
     
@@ -2649,7 +2651,7 @@ In the above code, the while loop will stop when it encouters the first player w
 #### Skipping a turn in a loop.
 The *break* statement will break out of a loop effectively ending the loop so that the block of code in the loop won't be executed again. Sometimes you just want to skip an iteration (a turn) on the loop. Let's say we have an *unsorted* list of players and only want to display players who have jumped. The *continue* lets you skip on to the next iteration of the loop. In the following listing, only players who have jumped will be displayed. This isn't a leaderboard because players are displayed in no particular order:
 
-<caption>Listing 7.7: Skipping a loop iteration.</caption>
+<caption>Listing 11.7: Skipping a loop iteration.</caption>
 
     
     function jumps( sender ) {
@@ -2676,9 +2678,9 @@ The *break* statement will break out of a loop effectively ending the loop so th
 Within any loop block there must be a statement which will affect the loop's condition. For example, in the above code we check the value of the *i* variable each time round the loop. If we never changed the *i* variable, what do you think would happen? If *i* never changed then the test `i < players.length` would always be true (unless of course there were no players on the server in which case the code inside the *while* block would never execute). A loop which keeps running and never stops is called an *infinite loop*. Infinite loops usually happen because a programmer forgot to increment a counter variable or because the loop condition is wrong. An infinite loop is usually a sign that something went wrong - that there's a bug in the code. There are infinite loops which aren't accidental. Most games and programs which have a user interface (windows, buttons etc) have an *event loop* which is a loop that's constantly running and listening for incoming events from the user or other parts of the system. A game's event loop might listen for key presses from the user, check to see if any collisions between objects in the game have occurred, check the player's health and so on. The Minecraft server has just such a loop.
 
 ### Creating a new command for players.
-So far in this recipe we've been creating Javascript functions which can be invoked by anyone on the server who is an operator. Only operators can and should be able to execute javascript code at the in-game or server prompts. *The ability to execute code is potentially dangerous so you definitely don't want to grant that permission to everyone on your server*. The `js` command will take any javascript code and try to execute it. There's another command provided by ScriptCraft and that's the `jsp` command. The `jsp` command is available for *everyone* to use. Unlike the `js` command, the `jsp` command *does not execute* javascript code so it can be used safely by players without operator privileges. The `jsp` command lets you create your own custom commands which can be used by all players. 
+So far in this chapter we've been creating Javascript functions which can be invoked by anyone on the server who is an operator. Only operators can and should be able to execute javascript code at the in-game or server prompts. *The ability to execute code is potentially dangerous so you definitely don't want to grant that permission to everyone on your server*. The `js` command will take any javascript code and try to execute it. There's another command provided by ScriptCraft and that's the `jsp` command. The `jsp` command is available for *everyone* to use. Unlike the `js` command, the `jsp` command *does not execute* javascript code so it can be used safely by players without operator privileges. The `jsp` command lets you create your own custom commands which can be used by all players. 
 
-We want *all* players to be able to call up the leaderboard with a simple in-game command and we want them to be able to do so without them needing to know Javascript. In the next part of this recipe we're going to change the *leaderboard.js* file so that anyone can call up the leaderboard using this command:
+We want *all* players to be able to call up the leaderboard with a simple in-game command and we want them to be able to do so without them needing to know Javascript. In the next part of this chapter we're going to change the *leaderboard.js* file so that anyone can call up the leaderboard using this command:
 
     jsp leaderboard
 
@@ -2708,7 +2710,7 @@ The important points to note are:
 
 Now let's dive in and create a new `jsp leaderboard` command. Create a new file called *leaderboardCmd.js* in the *scriptcraft/plugins* folder and type in the following code:
 
-<caption>Listing 7.8: Adding a custom command for all players.</caption>
+<caption>Listing 11.8: Adding a custom command for all players.</caption>
 
     var leaderboard = require('leaderboard');
     
@@ -2730,11 +2732,11 @@ The list of player names and jump counts should appear as messages on screen. No
 You've just learned how to provide new custom commands in Minecraft!
 
 ### Summary
-In this recipe we learned how to loop over each item in an array using *for* loops and *while* loops. We also learned how to sort and reverse arrays and how to provide new custom commands using ScriptCraft's *command()* function. 
+In this chapter we learned how to loop over each item in an array using *for* loops and *while* loops. We also learned how to sort and reverse arrays and how to provide new custom commands using ScriptCraft's *command()* function. 
 
-## Recipe 7: Building a Skyscraper
-### Introducion
-In this recipe we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. In this recipe we'll use *for* and *while* loops combined with ScriptCraft's *Drone* functions to build large structures in Minecraft. 
+## Chapter 12: Building a Skyscraper
+### Introduction
+In this chapter we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. In this chapter we'll use *for* and *while* loops combined with ScriptCraft's *Drone* functions to build large structures in Minecraft. 
 
 ### Building using Drones
 In Minecraft Building by hand is fun but can be tedious when you want to build big structures - Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using Javascript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a javascript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using Javascript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
@@ -2758,7 +2760,7 @@ The *box()* function is used to place blocks in the game. It takes 4 parameters:
 
 The *box()* function is used to create cubes and cuboids of any size. A cube is a 3 Dimensional shape whose sides are all the same length. A cuboid is a 3 Dimensional shape whose width, height and length can differ.
 
-![Box Parameters][(img/sky/box-params.png)
+![Box Parameters](img/sky/box-params.png)
 
 Let's try a couple of more examples. While targeting the original block (it's gold now) issue the following command to turn the column from Gold to Iron.
 
@@ -2925,7 +2927,7 @@ All of the Drone's functions return the Drone itself so each function can chain 
 ### Blueprints
 A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
 
-<caption>Listing 8.1: A Blueprint for a Pyramid.</caption>
+<caption>Listing 12.1: A Blueprint for a Pyramid.</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -2970,7 +2972,7 @@ You've seen already that the Drone has many functions for building, moving and t
 
 In the first example we just call *monolith()* because any function which belongs to the Drone API is a *global* function meaning it can be called without first calling *require()*. In the second example you can see that once we've created the *monolith()* function we'll be able to use it in a Drone building chain that forms part of a series of building commands. The second command sets up a series of monoliths like a line of dominoes. I'll explain how this works but first let's create a new module called *monolith.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-<caption>Listing 8.2: A Blueprint for a Monolith.</caption>
+<caption>Listing 12.2: A Blueprint for a Monolith.</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -2999,7 +3001,7 @@ The other thing to note about the first require statement is the trailing `.Dron
 
 The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
 
-The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in recipe undefined. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter undefined. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
 
 Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
 
@@ -3010,9 +3012,9 @@ Having declared the *monolith()* function we turn it into a Drone method using t
 So now you can see how easy it is to extend the Drone to build new interesting things in Minecraft. Let's build a skyscraper!
 
 ### A Blueprint for a Skyscraper
-In this recipe we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
+In this chapter we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
-<caption>Listing 8.3: A Blueprint for a Skyscraper.</caption>
+<caption>Listing 12.3: A Blueprint for a Skyscraper.</caption>
 
     var Drone = require('../drone').Drone;
     var blocks = require('blocks');
@@ -3090,11 +3092,11 @@ The *box0()* method is another method provided by the Drone, it's similar to *bo
 Congratulations Master Builder, You've just discovered how to build massive structures using Javascript and some Object extension magic. 
 
 ### Summary
-In this recipe you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on objects and methods and Javascript's *this* keyword and what it means when used inside a method. 
+In this chapter you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on objects and methods and Javascript's *this* keyword and what it means when used inside a method. 
 
-## Recipe 8: Create a Fireworks Show
+## Chapter 13: Create a Fireworks Show
 ### Introduction
-In this recipe we're going to write code to create a spectacular fireworks show in Minecraft. We'll learn about ScriptCraft's built-in *fireworks* module, the *setTimeout()* function and use a powerful programming technique called *recursion*. We'll begin by writing code to launch a single firework after a delay of 2 seconds, then build on that code to launch many fireworks.
+In this chapter we're going to write code to create a spectacular fireworks show in Minecraft. We'll learn about ScriptCraft's built-in *fireworks* module, the *setTimeout()* function and use a powerful programming technique called *recursion*. We'll begin by writing code to launch a single firework after a delay of 2 seconds, then build on that code to launch many fireworks.
 
 ### The fireworks module
 ScriptCraft includes a *fireworks* module which can be used to launch a single firework at a given location. You can use the fireworks module directly at the in-game commmand prompt like this:
@@ -3107,7 +3109,7 @@ The fireworks module's *firework()* function takes a single parameter - a Locati
 ### Deferred Execution
 In the commands you just executed at the in-game prompt, the firework launches immediately. What we'd like to do is delay the launch by a couple of seconds so that we can move to a safe position with a better view. Fortunately there's a way to delay the execution of a function. Create a new file called scriptcraft/plugins/fireworkshow.js and type in the following code:
 
-<caption>Listing 9.1: A Short Fireworks Show.</caption>
+<caption>Listing 13.1: A Short Fireworks Show.</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function (location){
@@ -3140,9 +3142,9 @@ The *later()* function above will never get to execute because the *scheduled* t
 Although setTimeout() is not part of the Javascript Language, it is provided with web browsers and Node.js and it's implemented in ScriptCraft too. A common mistake when using *setTimeout()* is to assume that the delay is in seconds rather than milliseconds.
 
 ### A fireworks show
-I promised you a fireworks show at the start of this recipe. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
+I promised you a fireworks show at the start of this chapter. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
 
-<caption>Listing 9.2: A Longer Fireworks Show.</caption>
+<caption>Listing 13.2: A Longer Fireworks Show.</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function ( location, count ) {
@@ -3204,7 +3206,7 @@ The message will keep printing out for as long as the server is running. Fortuna
 
 ... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following listing:
 
-<caption>Listing 9.3: Using setInterval() and clearInterval() to create a Fireworks Show.</caption>
+<caption>Listing 13.3: Using setInterval() and clearInterval() to create a Fireworks Show.</caption>
 
     var fireworks = require('fireworks');
     exports.fireworkshow = function ( location, count ) {
@@ -3220,7 +3222,7 @@ The message will keep printing out for as long as the server is running. Fortuna
       return scheduled;
     };
 
-In listing 9.3 we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
+In listing 13.3 we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
 
     /js var show = fireworkshow( self.location, 300 );
 
@@ -3231,11 +3233,11 @@ The above statements start a firework show in which there'll be 300 launches eac
 And the fireworks will cease. If you ever schedule tasks using the *setInterval()* or *setTimeout()* functions it's always a good idea to keep the value returned by these functions so that you have the option of canceling the task using *clearInterval()* and *clearTimeout()* respectively.
 
 ### Summary
-In this recipe you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
+In this chapter you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
 
-## Recipe 9: Animal Sounds Revisited
+## Chapter 14: Animal Sounds Revisited
 ### Introduction
-In this recipe we'll revisit the Animal Sounds recipe from earlier but this time, instead of using a switch statment we'll use a lookup table instead. 
+In this chapter we'll revisit the Animal Sounds plugin from earlier but this time, instead of using a switch statment we'll use a lookup table instead. 
 ### Objects
 I've mentioned objects a couple of times in this book. It's time to take  a closer look. 
 
@@ -3328,9 +3330,9 @@ When programming plugins using ScriptCraft, we have 2 different types of objects
 ### Objects as Lookup tables
 In javascript it's easy for programmers to create objects and javascript can *lookup* object keys very quickly. A lookup table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
 
-In the following recipe we're going to change the *animalSounds.js* module from recipe 5 and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
+In the following chapter we're going to change the *animalSounds.js* module from chapter 10 and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
 
-<caption>Listing 10.1: A lookup table of Animal Sounds.</caption>
+<caption>Listing 14.1: A lookup table of Animal Sounds.</caption>
 
     var sounds = require('sounds');
     var input = require('input');
@@ -3470,7 +3472,7 @@ We're also going to change how we call the *drop()* function. This time we'll pa
 Now the *drop()* function works because we've passed a reference to the object so any changes to the object inside of the function act upon the object. This is an important point to remember, if you want to change an object within a function, you must accept the object as a parameter not just the object's property you want to change.
 	
 ### Nested Objects
-Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from recipe 8 when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
+Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from chapter 13 when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
 
     var largeDoll = {
        size: 'large',
@@ -3493,9 +3495,9 @@ This is an example of an object which has objects *nested* within it, just as a 
     var mediumDoll = { size: 'Medium', inner: smallDoll };
     var largeDoll = { size: 'Large', inner: mediumDoll };
 
-Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in recipe 8. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
+Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in chapter 13. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
 
-<caption>Listing 10.2: A Russian Doll</caption>
+<caption>Listing 14.2: A Russian Doll</caption>
 
     
     var tinyDoll = { size: 'Tiny', inner: null };
@@ -3546,20 +3548,21 @@ We'll learn more about JSON, and loading and saving data later in the book.
 Congratulations! You've discovered some of the power of Objects in Javascript and how to create efficient lookups. Your plugin development apprenticeship is complete!
 
 ### Summary
-In this recipe you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final recipe in the Basic Modding section of the book. Next, we move on to advanced modding.
+In this chapter you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final chapter in the Basic Modding section of the book. Next, we move on to advanced modding.
 
 # Part III Advanced Modding
+## Overview
 The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for multi-player servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. The API is vast. In the following chapters we'll learn how to explore the Bukkit API using the online documentation and how to better understand the types of data provided by Bukkit.
 
-## Recipe 10: Saving Player preferences.
+## Chapter 15: Saving Player preferences.
 ### Introduction
-In this recipe we'll learn how to load and save player preferences. We'll create a new player command which lets them choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
+In this chapter we'll learn how to load and save player preferences. We'll create a new player command which lets them choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
 
 ### A day in the life of a Minecraft Plugin
 Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behaviour and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
 
 ### Chat colors
-In this recipe we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key a list of colors will be displayed. We've encountered the */jsp* command before in recipe 6. This commmand is a prefix (something which is added at the start) for new custom commands. 
+In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key a list of colors will be displayed. We've encountered the */jsp* command before in chapter 11. This commmand is a prefix (something which is added at the start) for new custom commands. 
 
 ### TAB completion for custom commands
 One of the nice things about issuing commands at the in-game or server console prompt in Minecraft is TAB completion - the ability to have the program fill in the remaining parts of a command without you having to type the entire command yourself. You can create your own custom commands which support TAB completion quite easily in Javascript. Let's create an example command at the in-game prompt which avails of TAB completion. This custom command will be called *jsp icecream* and will prompt the player to enter a flavor when the TAB key is hit. The first thing we need to do is say what the possible flavors can be. We'll do this by creating an array called *flavors*:
@@ -3681,9 +3684,9 @@ The special § symbol has the character code 167 and Minecraft uses this special
 
 </table>
 
-In the first part of this recipe we'll create a module which will be used to provide a list of color names and a *colorize()* function which will add color to any chat message. In your editor, create a new file called *textcolors.js* in the *plugins/scriptcraft/modules* folder and type in the following code:
+In the first part of this chapter we'll create a module which will be used to provide a list of color names and a *colorize()* function which will add color to any chat message. In your editor, create a new file called *textcolors.js* in the *plugins/scriptcraft/modules* folder and type in the following code:
 
-<caption>Listing 11.1: Text Colors Module</caption>
+<caption>Listing 15.1: Text Colors Module</caption>
 
     var names = [
       'black',
@@ -3724,7 +3727,7 @@ Once you've saved this file and reloaded the plugin using `js refresh()`, test i
 
 ![Gold Text](img/chatcolor/gold.png)
 
-The module in listing 11.1 exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged - no color code will be added to the text.
+The module in listing 15.1 exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged - no color code will be added to the text.
 
 The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special § symbol which is written as `\xa7` combine to form the color code which is prepended to the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
 
@@ -3735,7 +3738,7 @@ The next steps in writing the Chat Color plugin are:
 
 In your editor, create a new file called *chatcolor.js* in the *plugins/scriptcraft/plugins* folder and type the following:
 
-<caption>Listing 11.2: Setting and Applying Player Chat Color Preferences</caption>
+<caption>Listing 15.2: Setting and Applying Player Chat Color Preferences</caption>
 
     var textcolors = require('textcolors');
     var preferences = { };
@@ -3773,7 +3776,7 @@ We can add any property we like to an object using the `[]` square brackets and 
 
 The *command()* function creates a new `/jsp chatcolor` command which will invoke the *setChatColor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
 
-The first section of listing 11.2 up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in minecraft and ensures that player color preferences are applied to any chat messages:
+The first section of listing 15.2 up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in minecraft and ensures that player color preferences are applied to any chat messages:
 
     function onChat( event ) { 
       var player = event.player;
@@ -3890,13 +3893,13 @@ That is; we can do so with or without quotes around the *name* property. However
 If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
 
 ### Summary
-In this recipe you learned about providing TAB-completion hints for your own custom commands and you learned about persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
+In this chapter you learned about providing TAB-completion hints for your own custom commands and you learned about persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
 
-## Recipe 11: Add new Crafting Recipes: The Ender Bow
+## Chapter 16: Add new Crafting Recipes: The Ender Bow
 ### Introduction
-All fun Minecraft Plugins begin with a simple question: What if ... ? Minecraft has become such a popular game because the possibilities are endless. For Minecraft Plugin Developers it's even more fun because the programming API allows for endless creativity in customizing the game. In this recipe we're going to use the Bukkit API to create a new Crafting Recipe - one which will produce a new in-game item - the *Ender Bow*. What's an Ender Bow? It's a bow which shoots arrows which will teleport the shooter to where ever the arrow lands! This could be a handy tool to have if you're in a tight spot surrounded by monsters on all sides and need to make a quick getaway. With Ender Bow in hand, you just draw your bow, aim at where you want to teleport and shoot. As soon as the arrow hits, you'll be teleported. 
+All fun Minecraft Plugins begin with a simple question: What if ... ? Minecraft has become such a popular game because the possibilities are endless. For Minecraft Plugin Developers it's even more fun because the programming API allows for endless creativity in customizing the game. In this chapter we're going to use the Bukkit API to create a new Crafting Recipe - one which will produce a new in-game item - the *Ender Bow*. What's an Ender Bow? It's a bow which shoots arrows which will teleport the shooter to where ever the arrow lands! This could be a handy tool to have if you're in a tight spot surrounded by monsters on all sides and need to make a quick getaway. With Ender Bow in hand, you just draw your bow, aim at where you want to teleport and shoot. As soon as the arrow hits, you'll be teleported. 
 
-In this recipe we're going to add a new crafting recipe which will construct an *Ender Bow* and we're going to start exploring the Bukkit API in more detail and I'll explain how to go about exploring and discovering features of the API which you can use in your own plugins. We'll learn more about Java *Classes* and *Inheritance* and how these ideas help us figure out the Bukkit API's capabilities. In the follow-up recipe we'll add teleporting behaviour to the bow.
+In this chapter we're going to add a new crafting recipe which will construct an *Ender Bow* and we're going to start exploring the Bukkit API in more detail and I'll explain how to go about exploring and discovering features of the API which you can use in your own plugins. We'll learn more about Java *Classes* and *Inheritance* and how these ideas help us figure out the Bukkit API's capabilities. In the follow-up chapter we'll add teleporting behaviour to the bow.
 
 Before we get into the 'How' of adding the new Crafting Recipe to the game, let's first consider the 'What' - what ingredients will be required for the new recipe and how we go about choosing them.
 
@@ -3924,7 +3927,7 @@ So we've answered the question of *What* we want to do, now we must ask *How* ar
 1. Add a new Crafting Recipe to the game 
 2. Add new Teleoporting behavior for arrows fired from an Ender Bow.
 
-We'll tackle the 2nd item in the next recipe so let's look at how we add a new crafting recipe to the game. 
+We'll tackle the 2nd item in the next chapter so let's look at how we add a new crafting recipe to the game. 
 
 Bukkit has been around for a few years and has a large community of developers who have been using the API and posting questions and answers on the Bukkit forums. If there's something you want to do in Bukkit, a good place to start (apart from books like the one you're holding right now of course) is by searching online. A quick search online for 'bukkit add recipe' at the time of writing yields as the first result a link to the Bukkit forums where one poster asks a question about adding custom recipes:
 
@@ -4000,7 +4003,7 @@ You don't need to worry about Annotation types when calling Java code from Javas
 ### The Code
 That's just enough Java for now. Before we explore the Bukkit API further let's fire up the programming editor and write some code. Create a new folder in the *plugins/scripcraft/plugins* folder and call the new folder *enderbow*. Then inside the *enderbow* folder create a new file called *recipe.js* and add the following code:
 
-<caption>Listing 12.1: The Ender Bow Recipe</caption>
+<caption>Listing 16.1: The Ender Bow Recipe</caption>
 
     var items = require('items');
     var bkEnchantment = org.bukkit.enchantments.Enchantment;
@@ -4033,7 +4036,7 @@ Save the file, reload using the `/reload` command and then bring up the crafting
 
 Put the crafted Ender Bow in your inventory but don't try using it just yet. It will still behave just like a regular bow. We'll add the teleportation magic in the next recipe.
 ### Using Bukkit Classes and Enums in Javascript
-On lines 2 and 3 of listing 12.1 we declare 2 variables:
+On lines 2 and 3 of listing 16.1 we declare 2 variables:
 
     var bkEnchantment = org.bukkit.enchantments.Enchantment;
     var bkShapedRecipe = org.bukkit.inventory.ShapedRecipe;
@@ -4051,7 +4054,7 @@ The first thing we do is load ScriptCraft's *items* module. This module simplifi
 
 * items.bow() when called without parameters will return the value *org.bukkit.Material.BOW*. This is a *Material* object which is used throughout the Bukkit API.
 * items.bow() when called with a number as a parameter e.g. *items.bow(2)* will return an *org.bukkit.inventory.ItemStack* object of 2 Bows. The *ItemStack* type is also used throughout the Bukkit API.
-* items.bow() when called with a *Material* as a parameter e.g. *items.bow(material)* will compare the material to the material for this function (each function has its own material) and return true if it's the same or false if it isn't. We saw an example of this in listing 5.6 when we wanted to check if a broken block was of type SAND.
+* items.bow() when called with a *Material* as a parameter e.g. *items.bow(material)* will compare the material to the material for this function (each function has its own material) and return true if it's the same or false if it isn't. We saw an example of this in listing 9.6 when we wanted to check if a broken block was of type SAND.
 
 There are many different *Enchantments* in Minecraft some of which are designed for use with Bows. We want to use an enchantment which is not already designed for a Bow because we don't want to interfere with existing enchantment rules. The problem is, if we add an enchantment which was not designed for the item, the enchantment might not stick. For this reason, we use the *addUnsafeEnchantment()* method because we want to add an enchantment which was not designed for the Bow item. If we look at the list of possible *Enchantments* in the Bukkit API docs, there are no obvious teleportation-related enchantments so I chose the *LUCK* enchantment as it's normally for use with Fishing Rods. 
 
@@ -4152,9 +4155,30 @@ Ultimately the *server.addRecipe()* method *doesn't care* what type of *Recipe* 
 Congratulations! You've begun exploring the Bukkit API and have learnt a few tricks to understanding the reference documentation and how to use it in your own plugins.
 
 ### Summary
-In this recipe we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next recipe, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
+In this chapter we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next chapter, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
 
-## Recipe 12: Arrows that Teleport you.
+## Chapter 17: Arrows that Teleport you.
+### Introduction
+In the previous chapter we learned how to add a new Crafting Recipe to the game. In this chapter we'll expand upon the work done previously by adding event-handling code which will listen for *Projectile Hit* events and teleport the player who shot the arrow, if it was fired from an Ender Bow. We'll also learn more about Inheritance and how to use the Bukkit API reference documentation.
+
+### Making the Ender Bow work
+The Ender Bow crafted from our new *Crafting Recipe* doesn't do much right now. If you fire an arrow using the Ender Bow, it behaves just like an arrow fired from a regular bow. We're going to change that. 
+
+What we'd like is for players to be able to use the Ender Bow to shoot arrows which teleport them to where ever the arrow lands. To do this we'll need to:
+
+1. Listen for the *Projectile Hit* events and when we receive such an event..
+2. Get the player who shot the arrow
+3. Get the item the player is currently holding
+4. If it's an Ender Bow...
+5. Remove the arrow and...
+6. Teleport the player to the arrow's location
+
+### Exploring Events
+There are over 150 possible events which we can listen for in Minecraft. Event-driven programming means we can write functions which will automatically be called by the game when an event occurs. Such functions are called *callback* functions because the programmer does not call them directly, the program does. It's a case of "Don't call me. I'll call you!". In order to have your callback function be executed when an event occurs, you must *register* the function. ScriptCraft makes registering your callback function easy by providing a registration function for each of the 150+ types of events. 
+
+You can see a list of all of the possible 
+    /js function ouch( evt ) { evt.entity.shooter.sendMessage('ouch!') }
+    /js events.projectileHit( ouch );
 
 ### Inheritance Revisited
 #### Event Ancestry ?
@@ -4163,42 +4187,45 @@ See event.entity
 #### Player Ancestry
 A look at the Player object and it's complicated ancestry. A digram of the Player inheritance will be needed here. see shooter.itemInHand
 
+
+### Summary
+In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned about the Player object and inheritance.
+
 ### Goal
+In this chapter, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
-In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
-
-## Recipe 13: Exploring the Bukkit API
-## Recipe 14: Leaderboard revisited
-In this recipe readers learn about the scoreboard api and how to display a leaderboard on screen.
+## Chapter 18: Leaderboard revisited
+### Introduction
+In this chapter readers learn about the scoreboard api and how to display a leaderboard on screen.
+### Scoreboard Display
+### Live Updates
 jsp leaderboard hide
 listen for player experience changes and update leaderboard on screen?
 (need to figure out how to do this myself)
 
-## Recipe 15: A TNT-Free Zone
-
-### Goal 
-
-In this recipe, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This recipe provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
-
-## Recipe 16: Protecting areas against griefing.
-
-### operator-only commands?
+## Chapter 19: Protecting your Server and Players
+### Introduction
+In this chapter, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This chapter provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
+### Canceling Events
+### Prohibiting TNT and other Blocks
+In this chapter, players will learn how to listen for and cancel block-breaking events.
+### Player Plots
+### Creating Plots
+### Claiming Plots
+### Preventing Griefing
+### Operator-only Commands
 Allow operators to mark an area for protection?
-
-### Goal
-
-In this recipe, players will learn how to listen for and cancel block-breaking events.
-
-## Recipe 17: Horse-Clicker, A simple mini-game
-
-### Goal
-This is the first recipe in a series of recipes which will introduce mini-games. In this recipe, basic game mechanics are introduced.  Keeping score.
-    
-## Recipe 18: Snowball Fight, A player-vs-player mini-game
-### Goal
-This recipe and the following recipe will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two recipes will be to reinforce what the reader has learnt in the preceding recipes/chapters.
-
-
+### Summary
+## Chapter 20: Snowball Fight!
+### Introduction
+This chapter and the following chapter will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two chapters will be to reinforce what the reader has learnt in the preceding chapters.
+### A player-vs-player mini-game
+### Game Mechanics
+### The game loop
+### Starting the game
+### Who's playing
+### Displaying the Score
+### Ending the game
 # Appendices
 ## On the use of the `self` variable
 Don't use it in your modules. It's only a convenience function for use at the in-game prompt.
@@ -4991,8 +5018,6 @@ A collection of gotchas
 1. Java Strings - converting from Java string to Javascript String
 2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
 3. Saving and restoring Location objects using utils module
-
-
 ## Function Declarations vs Function Expressions
 In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
 

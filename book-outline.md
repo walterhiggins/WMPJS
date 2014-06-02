@@ -1088,7 +1088,7 @@ There are other folders in scriptcraft. The 'modules' folder is much like the pl
 So this leaves us in a bit of a pickle. We've written some useful code, but how do we actually get to use it?
 
 ### Modules
-What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later recipese we'll create modules which have many functions.
+What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later recipes we'll create modules which have many functions.
 
 ![Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg](img/nasa-apollo-modules.jpg)
 
@@ -3229,7 +3229,28 @@ Congratulations! You've begun exploring the Bukkit API and have learnt a few tri
 ### Summary
 In this recipe we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next recipe, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
 
-## @@nextRecipe{arrows}: Arrows that Teleport you.
+## @@nextRecipe{arrow}: Arrows that Teleport you.
+### Introduction
+In the previous chapter we learned how to add a new Crafting Recipe to the game. In this chapter we'll expand upon the work done previously by adding event-handling code which will listen for *Projectile Hit* events and teleport the player who shot the arrow, if it was fired from an Ender Bow. We'll also learn more about Inheritance and how to use the Bukkit API reference documentation.
+
+### Making the Ender Bow work
+The Ender Bow crafted from our new *Crafting Recipe* doesn't do much right now. If you fire an arrow using the Ender Bow, it behaves just like an arrow fired from a regular bow. We're going to change that. 
+
+What we'd like is for players to be able to use the Ender Bow to shoot arrows which teleport them to where ever the arrow lands. To do this we'll need to:
+
+1. Listen for the *Projectile Hit* events and when we receive such an event..
+2. Get the player who shot the arrow
+3. Get the item the player is currently holding
+4. If it's an Ender Bow...
+5. Remove the arrow and...
+6. Teleport the player to the arrow's location
+
+### Exploring Events
+There are over 150 possible events which we can listen for in Minecraft. Event-driven programming means we can write functions which will automatically be called by the game when an event occurs. Such functions are called *callback* functions because the programmer does not call them directly, the program does. It's a case of "Don't call me. I'll call you!". In order to have your callback function be executed when an event occurs, you must *register* the function. ScriptCraft makes registering your callback function easy by providing a registration function for each of the 150+ types of events. 
+
+You can see a list of all of the possible 
+    /js function ouch( evt ) { evt.entity.shooter.sendMessage('ouch!') }
+    /js events.projectileHit( ouch );
 
 ### Inheritance Revisited
 #### Event Ancestry ?
@@ -3238,8 +3259,11 @@ See event.entity
 #### Player Ancestry
 A look at the Player object and it's complicated ancestry. A digram of the Player inheritance will be needed here. see shooter.itemInHand
 
-### Goal
 
+### Summary
+In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned about the Player object and inheritance.
+
+### Goal
 In this recipe, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
 
 ## @@nextRecipe{bukkitapi}: Exploring the Bukkit API

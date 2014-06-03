@@ -4230,7 +4230,7 @@ Of the 3 ways to register for events, using one of the *events* module's short-h
 ### Types of Events and Event properties
 Once we register for an event the callback we provide will be executed whenever that event type occurs in the game. The callback is passed a parameter - the event which was fired. Typically, in your callback function you'll want to do something with the event. The event your callback receives as a parameter will usually have valuable information inside it - information you'll want to look at and use in your callback. How do we know what information is inside a given event? It's time to revisit a topic we touched on in the previous chapter - *Inheritance*.
 
-### Inheritance Revisited
+### Digging Deeper into Inheritance
 Every event callback function takes a single argument. You can call the parameter anything you like - *event* or you can shorten it to *evt* or even just *e*. We'll want to do something with the parameter in the function callback. In the case of the Ender Bow, we'll need to get some crucial information from the event so we can teleport the player. This is where - yet again - the Bukkit API Reference documentation and the ability to browse it, is essential. 
 
 In this particular instance we're interested in exploring the properties and methods of the *org.bukkit.event.entity.ProjectileHitEvent* type in the online Bukkit Reference at http://jd.bukkit.org/beta/apidocs. Visit the link just mentioned in a web browser, click on the *org.bukkit.event.entity* link in the top left pane, then click on the *ProjectileHitEvent* link in the bottom pane and information about this type of event will appear in the right hand pane. The information we're interested in is the *Method Summary*:
@@ -4240,7 +4240,27 @@ In this particular instance we're interested in exploring the properties and met
     static HandlerList getHandlerList()
     HandlerList getHandlers()
 
-The *getEntity()* method TODO
+The *getEntity()* method returns an object of type *Projectile*. If we click on the *Projectile* link we're taken to the information page for this type where we find the following:
+
+![Projectile API Hierarchy](img/arrow/projectile-api.png)
+
+    package: org.bukkit.entity 
+    Interface Projectile
+
+    All Superinterfaces:
+      Entity, Metadatable
+    All Known Subinterfaces:
+      Arrow, Egg, EnderPearl, Fireball, Fish, LargeFireball, SmallFireball, Snowball, ThrownExpBottle, ThrownPotion, WitherSkull
+
+The pieces of information which are useful here are the *Superinterfaces* - that is, the parents of this type, and the *Subinterfaces* or children of this type. The following inheritance diagram shows us the relationship better. In this diagram only some of the *Projectile* sub-types are shown for sake of clarity:
+
+![Projectile Inheritance](img/arrow/projectile-inheritance.png)
+
+The *Superinterfaces* and *Subinterfaces* are important when browsing the Bukkit API types because they tell us about the type's *Ancestry*. The *ancestry* of a type is important because anything a Type's parent Type can do, the Type can do too. The same goes for the Type's children , they *inherit* the properties and methods of the type. From this you can infer that because the *Projectile* type has a method called *getShooter()*, then the *Arrow*, *Egg* and other other sub-types also have this *getShooter()* method. 
+
+If we look at the *Projectile* type's *parent type* - *Entity*, listed under *All Superinterfaces* - we'll find a treasure trove of useful properties and methods. For example, we can find out where the projectile  is by calling the parent type's *.getLocation()* method. We can also *remove* the projectile by calling the parent type's *.remove()* method. Note that neither the *.getLocation()* method nor the *.remove()* method appear on the information page for the *Projectile* type. You need to click on the Projectile Type's parent link *Entity* to see all these super useful methods. Remember, because Projectile is a *child* or sub-type of the *Entity* type, it *inherits* or has all of these properties and methods too! That's the power of Inheritance in Java and it's useful to keep this rule in mind when browsing the Bukkit API Reference. Anything the *Parent Type* can do, the *Type* can do too! So anything an Entity can do, the Projectile can do too! 
+
+If you browse around the Bukkit API and find a type (like *Projectile*) which only appears to have a handful of methods, look at the ancestry - visit the parent-type links under *extends* or *Superinterface*. If you don't find what you're looking for there, look at the parent type's parent type and so on. There are lots of useful properties and methods in the Bukkit API but it's often a matter of knowing where and how to look for them. Understanding *Inheritance* helps you dig deeper into the Bukkit API Documentation.
 
 ### Java Beans
 

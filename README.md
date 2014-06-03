@@ -4101,7 +4101,7 @@ This is how we define the layout of a new shaped recipe in code too. The ShapedR
       "ESW"
     ]);
 
-#### Note on VarArgs and calling VarArg functions from javascript?
+#### Note on VarArgs and calling VarArg functions from javascript
 TODO
 
 Now we've defined the shape of the recipe we need to say what each of the letters E, S and W mean. We do this using the *ShapedRecipe.setIngredient()* method which takes 2 parameters, a character and the material it which should be placed wherever that character appears in the shape.
@@ -4174,11 +4174,75 @@ What we'd like is for players to be able to use the Ender Bow to shoot arrows wh
 6. Teleport the player to the arrow's location
 
 ### Exploring Events
-There are over 150 possible events which we can listen for in Minecraft. Event-driven programming means we can write functions which will automatically be called by the game when an event occurs. Such functions are called *callback* functions because the programmer does not call them directly, the program does. It's a case of "Don't call me. I'll call you!". In order to have your callback function be executed when an event occurs, you must *register* the function. ScriptCraft makes registering your callback function easy by providing a registration function for each of the 150+ types of events. 
+There are over 150 possible events which we can listen for in Minecraft. Event-driven programming means we can write functions which will automatically be called by the game when an event occurs. Such functions are called *callback* functions because the programmer does not call them directly, the program does. It's a case of "Don't call me. I'll call you!". In order to have your callback function be executed when an event occurs, you must *register* the function. ScriptCraft makes registering your callback function easy by providing a registration function for each of the 150+ types of events. You can register your own callback function to listen for *ProjectileHit* events by issuing the following commands at the in-game prompt:
 
-You can see a list of all of the possible 
     /js function ouch( evt ) { evt.entity.shooter.sendMessage('ouch!') }
     /js events.projectileHit( ouch );
+
+Now every time you throw any projectile: a snowball, an egg or fire an arrow, you'll see 'Ouch!' appear on your screen. We'll dig deeper into how the above code works in a moment.
+
+You can see a list of all *events* functions in the Appendices at the back of the book. Each function of the *events* module corresponds to a type of Event in the game. There are so many types of events in Minecraft that they need to be grouped into Java packages:
+
+* org.bukkit.event.block
+* org.bukkit.event.enchantment
+* org.bukkit.event.entity
+* org.bukkit.event.hanging
+* org.bukkit.event.inventory
+* org.bukkit.event.painting
+* org.bukkit.event.player
+* org.bukkit.event.server
+* org.bukkit.event.vehicle
+* org.bukkit.event.weather
+* org.bukkit.event.world
+
+In each of these packages you'll find dozens of event types and each event type is different. So when we register for an event using one of the *events* module's functions we can be guaranteed that when that type of event occurs in the game, our callback will be executed and will be passed as a parameter, the event that was fired.
+
+### The events module and event packages
+The *events* module has hundreds of functions - one for each event type - and was designed to make event registration discoverable at the server or in-game prompt. If you type `events.` then press TAB at the server prompt you will see all 150 plus event registration functions. Each function lets you register for one type of event.
+
+The *events.projectileHit()* function lets you register for events of type *org.bukkit.event.entity.ProjectileHitEvent*; the *events.playerJoin()* function lets you register for events of type *org.bukkit.event.player.PlayerJoinEvent* and so on. The *events.projectileHit()*, *events.playerJoin()* and most other *events* functions are short-hand functions. The function names are *deliberately* short to save typing and to make playing with events at the command prompt easier. There's another function you should know about if you ever need to register for events which are not part of the Bukkit Standard - e.g. events provided by other plugins.
+
+### The events.on() function
+The *events.on()* function lets you register for an event of *any* type. It takes 2 parameters:
+
+1. eventType - This must be either a fully qualified Event Type name or a string with a value equal to a bukkit event class without the 'org.bukkit.event.' package prefix. This is better explained by the examples below.
+2. callback - A function which will be invoked when the event occurs. This callback behaves exactly as it would when using one of the *events* module's short-hand functions.
+
+So there are 3 possible ways in which a *Projectile Hit* event can be listened for. The first way is using the short-hand *events.projectileHit()* function:
+
+    function onProjectileHit( event ) { console.log('projectile hit') }
+    events.projectileHit( onProjectileHit );
+
+The second way is to use the *events.on()* function passing a fully qualified Event Type name:
+
+    function onProjectileHit( event ) { console.log('projectile hit') }
+    events.on( org.bukkit.event.entity.ProjectileHitEvent, onProjectileHit );
+
+The third way is to use the *events.on()* function passing part of the Event Type name as a String:
+
+    function onProjectileHit( event ) { console.log('projectile hit') }
+    events.on( 'entity.ProjectileHitEvent', onProjectileHit );
+
+It doesn't really matter which of the 3 approaches you use but in the rare case you find you need to listen for events which are not part of the Bukkit standard events, you should choose method number 2 and pass the event type's fully qualified name to *events.on()*. 
+
+Of the 3 ways to register for events, using one of the *events* module's short-hand functions is probably the easiest.
+
+### Types of Events and Event properties
+Once we register for an event the callback we provide will be executed whenever that event type occurs in the game. The callback is passed a parameter - the event which was fired. Typically, in your callback function you'll want to do something with the event. The event your callback receives as a parameter will usually have valuable information inside it - information you'll want to look at and use in your callback. How do we know what information is inside a given event? It's time to revisit a topic we touched on in the previous chapter - *Inheritance*.
+
+### Inheritance Revisited
+Every event callback function takes a single argument. You can call the parameter anything you like - *event* or you can shorten it to *evt* or even just *e*. We'll want to do something with the parameter in the function callback. In the case of the Ender Bow, we'll need to get some crucial information from the event so we can teleport the player. This is where - yet again - the Bukkit API Reference documentation and the ability to browse it, is essential. 
+
+In this particular instance we're interested in exploring the properties and methods of the *org.bukkit.event.entity.ProjectileHitEvent* type in the online Bukkit Reference at http://jd.bukkit.org/beta/apidocs. Visit the link just mentioned in a web browser, click on the *org.bukkit.event.entity* link in the top left pane, then click on the *ProjectileHitEvent* link in the bottom pane and information about this type of event will appear in the right hand pane. The information we're interested in is the *Method Summary*:
+
+    Projectile getEntity() 
+      Returns the Entity involved in this event
+    static HandlerList getHandlerList()
+    HandlerList getHandlers()
+
+The *getEntity()* method TODO
+
+### Java Beans
 
 ### Inheritance Revisited
 #### Event Ancestry ?

@@ -1,5 +1,24 @@
 var items = require('items');
 var bkEnchantment = org.bukkit.enchantments.Enchantment;
+var bkArrow = org.bukkit.entity.Arrow;
+
+function onArrowHit( event ) {
+  var projectile = event.entity;
+  if (! (projectile instanceof bkArrow) ) {
+    return; 
+  }
+  var shooter = projectile.shooter;
+  if (! (shooter instanceof bkPlayer) ) {
+    return;
+  }
+  var itemInHand = shooter.itemInHand;
+  if ( isEnderBow( itemInHand ) ) {
+    projectile.remove();
+    shooter.teleport( projectile.location );
+  }
+}
+events.projectileHit( onArrowHit );
+
 function isEnderBow( item ){
   if (item && 
       (item.type == items.bow()) &&
@@ -9,13 +28,3 @@ function isEnderBow( item ){
   return false;
 }
 
-function onArrowHit( event ) {
-  var arrow = event.entity;
-  var shooter = arrow.shooter;
-  var itemInHand = shooter.itemInHand;
-  if ( isEnderBow( itemInHand ) ) {
-    arrow.remove();
-    shooter.teleport( arrow.location );
-  }
-}
-events.projectileHit( onArrowHit );

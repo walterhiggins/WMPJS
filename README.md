@@ -4034,7 +4034,7 @@ Save the file, reload using the `/reload` command and then bring up the crafting
 
 ![Crafting Recipe for a Bow](img/recipes/ender-bow-recipe.png)
 
-Put the crafted Ender Bow in your inventory but don't try using it just yet. It will still behave just like a regular bow. We'll add the teleportation magic in the next recipe.
+Put the crafted Ender Bow in your inventory but don't try using it just yet. It will still behave just like a regular bow. We'll add the teleportation magic in the next chapter.
 ### Using Bukkit Classes and Enums in Javascript
 On lines 2 and 3 of listing 16.1 we declare 2 variables:
 
@@ -4101,9 +4101,31 @@ This is how we define the layout of a new shaped recipe in code too. The ShapedR
       "ESW"
     ]);
 
-#### Note on VarArgs and calling VarArg functions from javascript
-TODO
+#### Calling Variable Argument Java Methods from JavaScript
+In the *org.bukkit.inventory.ShapedRecipe* details page at http://jd.bukkit.org/beta/apidocs, the information about the *.shape()* method is presented as follows:
 
+     ShapedRecipe   shape(String... shape) 
+         Set the shape of this recipe to the specified rows.    
+
+The `String... shape` within the parameters section means that the *.shape()* method takes 1 *or more* Strings as parameters. In Java, this style of parameter passing is called *varargs* which is short for *a variable number of arguments*. When you see a Java method which uses this style of argument passing - the `...` tells us there can be one or more parameters of that type. When calling such methods from JavaScript we need to pass the parameters as an Array instead. That's why we call the *.shape()* method like this:
+
+    enderBowRecipe.shape([
+      "ESW", 
+      "SEW", 
+      "ESW"
+    ]);
+
+Notice the opening `[` and closing `]` array brackets. If we try to call the *.shape()* method as follows, it will fail:
+
+    enderBowRecipe.shape(
+      "ESW", 
+      "SEW", 
+      "ESW"
+    );
+
+Whenever you see a method which uses the `...` notation for a parameter, pass an Array in its place.
+
+#### Setting ingredients
 Now we've defined the shape of the recipe we need to say what each of the letters E, S and W mean. We do this using the *ShapedRecipe.setIngredient()* method which takes 2 parameters, a character and the material it which should be placed wherever that character appears in the shape.
 
     enderBowRecipe.setIngredient('E', items.enderPearl());
@@ -4176,10 +4198,10 @@ What we'd like is for players to be able to use the Ender Bow to shoot arrows wh
 ### Exploring Events
 There are over 150 possible events which we can listen for in Minecraft. Event-driven programming means we can write functions which will automatically be called by the game when an event occurs. Such functions are called *callback* functions because the programmer does not call them directly, the program does. It's a case of "Don't call me. I'll call you!". In order to have your callback function be executed when an event occurs, you must *register* the function. ScriptCraft makes registering your callback function easy by providing a registration function for each of the 150+ types of events. You can register your own callback function to listen for *ProjectileHit* events by issuing the following commands at the in-game prompt:
 
-    /js function ouch( evt ) { evt.entity.shooter.sendMessage('ouch!') }
+    /js function ouch( event ) { event.entity.shooter.sendMessage('ouch!') }
     /js events.projectileHit( ouch );
 
-Now every time you throw any projectile: a snowball, an egg or fire an arrow, you'll see 'Ouch!' appear on your screen. We'll dig deeper into how the above code works in a moment.
+Now every time you throw any projectile: a snowball, an egg or fire an arrow, you'll see 'Ouch!' appear on your screen. We'll dig deeper into how the above code works later.
 
 You can see a list of all *events* functions in the Appendices at the back of the book. Each function of the *events* module corresponds to a type of Event in the game. There are so many types of events in Minecraft that they need to be grouped into Java packages:
 
@@ -4208,19 +4230,20 @@ The *events.on()* function lets you register for an event of *any* type. It take
 1. eventType - This must be either a fully qualified Event Type name or a string with a value equal to a bukkit event class without the 'org.bukkit.event.' package prefix. This is better explained by the examples below.
 2. callback - A function which will be invoked when the event occurs. This callback behaves exactly as it would when using one of the *events* module's short-hand functions.
 
-So there are 3 possible ways in which a *Projectile Hit* event can be listened for. The first way is using the short-hand *events.projectileHit()* function:
+So there are 3 possible ways in which a *Projectile Hit* event can be listened for. Imagine we have a listening function called *onProjectileHit* which looks something like this:
 
     function onProjectileHit( event ) { console.log('projectile hit') }
+
+The first way to register is using the short-hand *events.projectileHit()* function:
+
     events.projectileHit( onProjectileHit );
 
 The second way is to use the *events.on()* function passing a fully qualified Event Type name:
 
-    function onProjectileHit( event ) { console.log('projectile hit') }
     events.on( org.bukkit.event.entity.ProjectileHitEvent, onProjectileHit );
 
 The third way is to use the *events.on()* function passing part of the Event Type name as a String:
 
-    function onProjectileHit( event ) { console.log('projectile hit') }
     events.on( 'entity.ProjectileHitEvent', onProjectileHit );
 
 It doesn't really matter which of the 3 approaches you use but in the rare case you find you need to listen for events which are not part of the Bukkit standard events, you should choose method number 2 and pass the event type's fully qualified name to *events.on()*. 
@@ -4262,21 +4285,144 @@ If we look at the *Projectile* type's *parent type* - *Entity*, listed under *Al
 
 If you browse around the Bukkit API and find a type (like *Projectile*) which only appears to have a handful of methods, look at the ancestry - visit the parent-type links under *extends* or *Superinterface*. If you don't find what you're looking for there, look at the parent type's parent type and so on. There are lots of useful properties and methods in the Bukkit API but it's often a matter of knowing where and how to look for them. Understanding *Inheritance* helps you dig deeper into the Bukkit API Documentation.
 
+### The Code
+We're going to put what we learned about inheritance to use in the following code which will add teleporting behavior to arrows fired by the Ender Bow. Launch your programming editor and create a new file called *arrow.js* in the *enderbow* folder you created in the previous chapter, then enter the following code:
+
+<caption>Listing 17.1: Teleporting Arrows</caption>
+
+    var items = require('items');
+    var bkEnchantment = org.bukkit.enchantments.Enchantment;
+    var bkArrow = org.bukkit.entity.Arrow;
+    var bkPlayer = org.bukkit.entity.Player;
+    
+    function onArrowHit( event ) {
+      var projectile = event.getEntity();
+      if (! (projectile instanceof bkArrow) ) {
+        return; 
+      }
+      var shooter = projectile.getShooter();
+      if (! (shooter instanceof bkPlayer) ) {
+        return;
+      }
+      var itemInHand = shooter.getItemInHand();
+      var arrowLocation = projectile.getLocation();
+      if ( isEnderBow( itemInHand ) ) {
+        projectile.remove();
+        shooter.teleport( arrowLocation );
+      }
+    }
+    events.projectileHit( onArrowHit );
+    
+    function isEnderBow( item ){
+      if (item && 
+          (item.getType() == items.bow()) &&
+          item.getEnchantmentLevel(bkEnchantment.LUCK) == 3){
+        return true;
+      }
+      return false;
+    }
+    
+
+Save the above code then reload the plugins using either `/reload' or '/js refresh()` then with Ender Bow in hand, fire an arrow to teleport! 
+
+Now let's look at the above code in more detail. As in the previous chapter we load the *items* module because it has functions for comparing Minecraft items. Next we declare 2 variables which refer to Bukkit Java classes. I use the same naming convention as in the previous chapter, bkEnchantment is short for org.bukkit.enchantments.Enchantment and bkArrow is short for org.bukkit.entity.Arrow. Having the names begin with 'bk' is a reminder to myself that these are Bukkit classes.
+
+The *onArrowHit()* function is a callback which will be executed by the server whenever a Projectile strikes something. In this function we need to: 
+
+1. Get the event's projectile - the thing which was fired.
+2. Get the projectile's shooter - the person or thing which fired the arrow.
+3. Get the shooter's item held - the thing the shooter is currently holding.
+4. Check if the item held is an Ender Bow and if it is teleport the player.
+
+Like all event-handling callback functions it takes a single parameter: *event*. We know that, because we'll register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/beta/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
+
+We test to see if the *projectile* variable is of type bkArrow and if it is we return - this function is only concerned with Arrows, not Eggs or Snowballs. 
+
+Next we need to get the shooter - the person (or thing) which fired the arrow. The *.getShooter()* method returns an object of type *ProjectileSource* which is another abstract type - that is - there can be many possible sub-types. If we browse the online reference and look at *org.bukkit.projectiles.ProjectileSource* we see it has many *SubInterfaces* or Sub-types: Player, Animal, BlockProjectileSource etc. We test to see if the *shooter* is a *Player* which is a specific type of *ProjectileSource*. Again, we're only interested in teleporting players. 
+
+Then we get the item currently held by the player by calling the *.getItemInHand()* method. This is yet another example where we need to use Inheritance rules to find out what methods a Player object has. If you look at the online reference for the *org.bukkit.entity.Player* object you will see that the *Player* object itself does not have *.getItemInHand()* method **but** one of its ancestory types does. A *Player* is a sub-type of *HumanEntity* which has a *.getItemInHand()* method. Because there's a *HumanEntity.getItemInHand()* method and *Player* is a sub-type of *HumanEntity*, we can call the *.getItemInHand()* method on Player too! The Inheritance Diagram for the *Player* type below shows just *some* of the player's ancestry:
+
+![Player Ancestry](img/arrow/player-inheritance.png)
+
+As you can see in the diagram above, each type in Java can have more than one direct ancestor. Every type inherits all of the properties and methods of its ancestry. So a *Player* object can for example use any of the *InventoryHolder* or *Entity* methods. The *Player* type in Minecraft is one of the most versatile object types because of its rich ancestry. 
+
+Once we have the item the player is currently holding we pass it to a function we define called *isEnderBow()* . This function checks to see if the item is of type Bow and if it has a level 3 LUCK enchantment.
+
+Finally, if the item held *is* an Ender Bow, we remove the projectile because we don't want the arrow left behind - it makes sense that an arrow which teleports you should disappear - then we teleport the shooter to the arrow's location.
+
+### More on Types
+The *instanceof* operator is an operator common to both Java and JavaScript. It's used to test the *Type* of an object. It can be useful when calling the Bukkit API from JavaScript when we want to identify the exact type of an object. In listing 17.1 we use the operator to check if the projectile fired was actually an Arrow. It could be any type of projectile - an Egg, Fireball, Snowball etc - but we're only interested in handling the event if it was an Arrow. The *instanceof* operator will compare the expression on the left to the expression on the right and if they are of the same type will return true. You can test this at the command line:
+
+    /js self instanceof org.bukkit.entity.Horse
+    > "false"
+    /js self instanceof org.bukkit.entity.Player
+    > "true"
+
+The *instanceof* operator lets us test a generic type against a specific type. Note that because of the way Java inheritance works, it's possible for an object to be an instance of more than one type. For example, both of these javascript expressions will return true:
+
+    /js self instanceof org.bukkit.entity.AnimalTamer
+    > "true"
+    /js self instanceof org.bukkit.entity.LivingEntity
+    > "true"
+
+Since a player is an instance of both types, AnimalTamer and LivingEntity. The *instanceof* operator is most commonly used to narrow down an object to a specific type so that we can be confident that we can call methods for that type without exceptions being thrown. If for example you wanted to be sure that a given object was an actual Player and not just any LivingEntity (all creatures and villagers are also of type LivingEntity) you would do so by testing like so:
+
+    /js self instanceof org.bukkit.entity.Player
+
+The *org.bukkit.entity* package is where you'll find all of the entity types. The *instanceof* operator can be used for testing *any* type of object in Java or JavaScript.
+
 ### Java Beans
+The type of functions we used to get information about the event, projectile and shooter in listing 17.1 are called *getters*. They're called *getters* because they each *get* some property of the object they're called for; `event.getEntity()` gets the event's entity property, `projectile.getShooter()` gets the projectile's shooter property and so on. As you can probably guess there's also a family of functions called *setters* - that is - functions whose job is to *set* the property for an object. For example you can get your current food level using the *.getFoodLevel()* method:
 
-### Inheritance Revisited
-#### Event Ancestry ?
-See event.entity
+    /js self.getFoodLevel()
 
-#### Player Ancestry
-A look at the Player object and it's complicated ancestry. A digram of the Player inheritance will be needed here. see shooter.itemInHand
+... and you can *set* your current food level using the *.setFoodLevel()* method:
 
+    /js self.setFoodLevel(20)
+
+Java classes which use the convention of having *getters* and *setters* methods to get and set properties are knows as **Java Beans**. Javascript enables you to treat getter and setter methods in JavaBeans as equivalent JavaScript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowecase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
+
+    /js self.foodLevel
+    > "17"
+
+To set the foodLevel property just assign a value to it.
+
+    /js self.foodLevel = 20
+
+This is a nice convenience when writing Javascript code which uses Java Types. Let's revisit the code from earlier, this time using just property names instead of *get()* methods:
+
+@@listing arrow_v2.js
+
+I personally prefer using just the property names rather than the get and set methods because I think the code is more readable but it's a matter of personal taste. If you feel more comfortable sticking to the Java convention of using the getX() and setX() (where X is some property) when working with Java types from within Javascript, then by all means use those methods. 
+
+### A Note on Style
+At the start of this chapter I suggested running the following code and said I'd explain how it works:
+
+    /js function ouch( event ) { event.entity.shooter.sendMessage('ouch!') }
+    /js events.projectileHit( ouch );
+
+The *ouch()* function above uses the Java Bean property shorthand notation described previously to get the *entity* property for the *event*, then the *shooter* property for the *entity* then sends a message using the *sendMessage()* method of the *shooter*. The entire function body is just a single Javascript statement:
+
+    event.entity.shooter.sendMessage('ouch!')
+
+I wrote it like this so I could create a short callback function at the in-game prompt. Functions at the in-game prompt are limited to just 100 characters on a single line. If I were writing the function in a module I might be more verbose and write it like this instead:
+
+    function ouch( event ) {
+      var entity = event.entity;
+      var shooter = entity.shooter;
+      shooter.sendMessage('ouch!');
+    } 
+
+The one-line version of the code avoids the need to create new variables for the entity and the shooter but is probably more readable - especially for beginning programmers. Once again, whichever style you use is up to you. You should experiment with different styles as you become more adept and comfortable writing Javascript code.
+
+### Achievement Unlocked
+
+![](img/achievement-plugin-dev-12.png)
+
+You've crafted a new Recipe, added teleporting behavior to the game and dug deep into the Bukkit API Documentation. You have the wherewithall to go exploring the Bukkit API Reference and begin using it in your own plugins. You are an adept plugin developer!
 
 ### Summary
-In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned about the Player object and inheritance.
-
-### Goal
-In this chapter, event-driven programming is explained in more detail. At the end of the chapter the reader will have created a simple mod which teleports players when they fire arrows. Players are teleported to wherever the arrow lands.
+In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned more about Inheritance and how to use it when browsing the Bukkit API reference.
 
 ## Chapter 18: Leaderboard revisited
 ### Introduction

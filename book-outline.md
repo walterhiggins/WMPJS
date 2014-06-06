@@ -3466,21 +3466,61 @@ You've crafted a new Recipe, added teleporting behavior to the game and dug deep
 ### Summary
 In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned more about Inheritance and how to use it when browsing the Bukkit API reference.
 
-## @@nextChapter{leaderboard2}: Leaderboard revisited
+## @@nextChapter{tntfree}: Protecting your Server against Griefing
 ### Introduction
-In this chapter readers learn about the scoreboard api and how to display a leaderboard on screen.
-### Scoreboard Display
-### Live Updates
-jsp leaderboard hide
-listen for player experience changes and update leaderboard on screen?
-(need to figure out how to do this myself)
+One of the great things about running a Bukkit Server instead of the standard Minecraft Server is its customizability and the ability to add plugins. On a public non-whitelisted server where anyone can connect and play, one of the first things a Server Administrator will want to do is protect against griefing or wanton destruction. In this chapter I'll show you how to prevent players from destroying property and how to prevent them from placing destructive blocks such as TNT and Lava. 
 
-## @@nextChapter{tntfree}: Protecting your Server and Players
-### Introduction
-In this chapter, readers learn about more events and will explore Bukkit's event package. They'll learn how to browse JavaDoc documentation and how to map Bukkit event classes to Javascript. This chapter provides a mod which will prevent players from placing TNT, Lava and other destructive blocks in the game. Learn how to cancel events.
+### Simple Protection
+The easiest way to prevent griefing is to prevent all players from breaking any blocks at all. This isn't very practical since breaking blocks and placing blocks is part of the process of building in Minecraft. The following code shows how to prevent any blocks from being broken:
+
+    /js function cancel( event ){ event.cancelled = true; }
+    /js var dontBreak = events.blockBreak( cancel );
+
 ### Canceling Events
+If you run the above code then any attempt to break a block in the game will fail. The block will reappear just as it was about to be broken. This is because of the statement:
+
+    event.cancelled = true;
+
+This statement cancels the event preventing the normal procedure for breaking blocks from occurring. It was as if the block was never broken. Not all types of events can be canceled but most can. You can see a list of all of the types of events which can be cancelled at http://jd.bukkit.org/beta/apidocs/org/bukkit/event/Cancellable.html under the heading *All Known Implementing Classes*. 
+
+Another type of Griefing is when players place blocks where they shouldn't - for example, filling up another player's house with brick or other materials. You can also prevent all blocks being placed using the same *cancel()* function defined above:
+
+    /js var dontPlace = events.blockPlace( cancel );
+
+If you run the above code then try to place any block, the block you try to place will disappear. This *cancel()* event handler isn't very practical but it does illustrate an important property of many types of events - they can be cancelled. 
+
+### How to stop listening for events.
+You'll notice that I stored the return value from  *events.blockBreak()* and *events.blockPlace()* in variables in the previous examples. When you call any of the *events* module functions, an object is returned. This object can be used to *unregister* the events listener. If you want listen for events only for a short while and then stop or stop listening when a condition occurs you can do so in one of two ways. You can call the *unregister()* method on the object returned by any of the *events* functions:
+
+    var dontBreak = events.blockBreak( cancel );
+    ... 
+    dontBreak.unregister();
+
+... or you can unregister from within the event handling function itself:
+
+    var protectBlocks = 5;
+    function cancel( event ) {
+       if (protecBlocks > 0) { 
+          protectBlocks = protectBlocks - 1;
+          event.cancelled = true;
+       } else {
+          this.unregister();
+       }
+    }
+    events.blockBreak( cancel );
+
+In the above code the *cancel()* function will only cancel 5 block-break events and then will unregister() itself. By unregistering, the function is telling the server not to call it any more when a block-break event occurs. 
+    
 ### Prohibiting TNT and other Blocks
-In this chapter, players will learn how to listen for and cancel block-breaking events.
+Prohibiting the placement of all blocks in the game wouldn't make for a very fun Minecraft experience. We can adapt the code used earlier to provide a very simple plugin which prevents anyone except operators from placing TNT or Lava in the game. In your programming editor, create a new file called *no-tnt.js* in the *plugins/scriptcraft/plugins* folder and type in the following code:
+
+@@listing no-tnt_v1.js
+
+In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{arrow}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/beta/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/beta/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. 
+
+Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different: TODO
+
+We use the *items* module's *tnt()* function, passing the material as a parameter to test if the material is TNT. If it is then we cancel the event.
 ### Player Plots
 ### Creating Plots
 ### Claiming Plots
@@ -3490,7 +3530,20 @@ Allow operators to mark an area for protection?
 ### Summary
 ## @@nextChapter{snowball}: Snowball Fight!
 ### Introduction
-This chapter and the following chapter will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of these two chapters will be to reinforce what the reader has learnt in the preceding chapters.
+This chapter and the following chapter will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of this chapter will be to reinforce what the reader has learnt in the preceding chapters.
+### Scoreboards in Minecraft
+
+#### The /scoreboard command
+
+    /scoreboard objectives add Jumping stat.jump
+    /scoreboard objectives setdisplay sidebar Jumping
+
+#### Executing commands from JavaScript
+
+    server.dispatchCommand(server.consoleSender, 'time set 4000');
+
+This can be used to execute commands provided by other plugins too.
+
 ### A player-vs-player mini-game
 ### Game Mechanics
 ### The game loop

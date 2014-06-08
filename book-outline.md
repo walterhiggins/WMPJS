@@ -3584,7 +3584,50 @@ Right now you can still break and place blocks within the area. The next step to
 
 @@listing events.js
 
-In the above code we listen for two events and cancel the events if the block being placed or broken is within a safe zone. If the player is an operator we return immediately as operators should be able to place and break blocks.
+In the above code we listen for two events and cancel the events if the block being placed or broken is within a safe zone. If the player is an operator we return immediately as operators should be able to place and break blocks. Save these files then reload your plugins using the */reload* command, then temporarily */deop* yourself and try to place or break blocks in the safe zone you created earlier. You should not be able to do so. Once you're satisfied you can't break blocks as a non-operator player, re-enable your operator privileges by issuing the */op* command at the server console command prompt.
+
+So far we have a way to create *Safe Zones* where non-operators can't break or place blocks. What we need to do next is provide a way to create *Player Plots* within this *Safe Zone* where players - once they've claimed a plot - can build.
+
+### Refactoring
+Before we get into the mechanics of creating, claiming and sharing player plots let's think about what a Player Plot is and how it's similar to something we've already created - Safe Zones. A Zone and a Plot are both *Regions* within the world where certain rules apply. A Region has a starting point and extends in two directions (along the X axis and the Z axis). So Zones and Plots are really just parcels (or *Regions*) of land. For any block placed or broken we'll want to test to see if the block is within a given region. There's going to be much in common between Zones and Plots so let's *refactor* the code we've alread written. *Refactoring* is the process of changing code you've already written so that it can be made more reusable. The goal of refactoring is to improve the code so we don't write the same code over and over. What we're going to do is take some of the code from the *zones.js* module we created earlier and move it into a new more reusable module called *region.js*. In your editor create a new file called *region.js* in the *plugins/scriptcraft/modules/protection/* folder and edit the file so it resembles the code in the listing below. 
+
+You'll notice the *create()* function is *very* similar to the *addZone()* function from the *zones.js* module. That's because it is the same except the statement `store.push(result);` from the *addZones()* function is not present in the *create()* function. If you want to take a shortcut, I recommend copying and pasting the body of the *addZone()* function into the *copy()* function then removing the `store.push(result);` line from the *create()* function:
+
+@@listing region.js
+
+The *contains()* function can be copied directly from the *zones.js* file into the *region.js* file and requires no changes. Once you've saved changes to the *region.js* file edit your *zones.js* file so it looks like the listing below:
+
+@@listing zones_v2.js
+
+The *addZone()* function is greatly simplified and the *getBoundingZones()* function has changed slightly. The statement:
+
+    if ( contains(zone, location) ){
+      result.push(zone);
+    }
+
+... changes to ...
+
+    if ( region.contains(zone, location) ){
+      result.push(zone);
+    }
+
+...since the *contains()* function now lives in the *regions* module. Now that we've completed the refactoring we're ready to begin working on Player Plots. There are a couple of things we'll want to be able to do with Player Plots:
+
+* Operators will want to be able to *Create* Plots.
+* Players will want to be able to *Claim* Plots.
+* Players will want to be able to *Share* Plots with other trusted players.
+* Players will want to be able to *Abandon* their claim to a plot.
+
+Before we look at *Creating* plots, we'll need to create a *plots* module which will support each of these operations. In your programming editor, create a new file called *plots.js* in the *plugins/scriptcraft/modules/protection/* folder and enter the following code:
+
+    
+plots.js module
+-- creating plots
+-- claiming plots
+-- sharing plots
+
+plotmaker drone function
+update protection/events.js 
 
 ### Creating Plots
 ### Claiming Plots

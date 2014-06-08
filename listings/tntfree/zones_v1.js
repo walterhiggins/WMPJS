@@ -1,5 +1,5 @@
 
-var store = persist( 'zones', { zones: [] } );
+var store = persist( 'zones', [] );
 
 function addZone( a, b ){
   var result = { 
@@ -22,31 +22,27 @@ function addZone( a, b ){
     result.startZ = b.z;
     result.extentZ = (a.z - b.z);
   }
-  store.zones.push(result);
-
+  store.push(result);
   return result;
 }
-function getBoundingZones( location ){
-  var i = 0;
-  var result = [];
-  var zone = null;
-  for (i = 0; i < store.zones.length; i++ ){
-    zone = store.zones[i];
-    if (isBounding( location, zone ) ){
-      result.push(zone);
-    }
-  }
-  return result;
-}
-function isBounding( location , zone){
-  if (!zone){
-    return false;
-  }
+function contains( zone, location){
   if ( (location.x >= zone.startX && location.x <= (zone.startX + zone.extentX) ) &&
        (location.z >= zone.startZ && location.z <= (zone.startZ + zone.extentZ) ) ) { 
     return true;
   }
   return false;
+}
+function getBoundingZones( location ){
+  var i = 0;
+  var result = [];
+  var zone = null;
+  for (i = 0; i < store.length; i++ ){
+    zone = store[i];
+    if (contains( location, zone ) ){
+      result.push(zone);
+    }
+  }
+  return result;
 }
 
 exports.add = addZone;

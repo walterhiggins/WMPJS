@@ -1,6 +1,6 @@
 var zones = require('protection/zones');
 
-function zonePlace( event ) {
+function onPlace( event ) {
   if (event.player.op){
     return;
   }
@@ -10,7 +10,7 @@ function zonePlace( event ) {
   }
   event.cancelled = true;
 }
-function zoneBreak( event ){
+function onBreak( event ){
   if (event.player.op){
     return;
   }
@@ -20,5 +20,5 @@ function zoneBreak( event ){
   }
   event.cancelled = true;
 }
-events.blockPlace( zonePlace );
-events.blockBreak( zoneBreak );
+events.blockPlace( onPlace );
+events.blockBreak( onBreak );

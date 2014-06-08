@@ -1,7 +1,7 @@
-var leaderboard = require('leaderboard');
+var lboard = require('leaderboard');
 
-function leaderboardCmd( params, sender ) {
-  leaderboard.jumps( sender );
+function leaderboard( params, sender ) {
+  lboard.jumps( sender );
 };
 
-command( 'leaderboard', leaderboardCmd );
+command( leaderboard );

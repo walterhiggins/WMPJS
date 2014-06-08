@@ -1,11 +1,11 @@
 var textcolors = require('textcolors');
 var preferences = { };
 
-function setChatColor ( args, player ) {
+function chatcolor ( args, player ) {
   var color = args[0];
   preferences[ player.name ] = color;
 }
-command( 'chatcolor', setChatColor, textcolors.names );
+command( chatcolor, textcolors.names );
 
 function onChat( event ) { 
   var player = event.player;

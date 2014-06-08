@@ -32,5 +32,17 @@ function contains(region, location){
   return false;
 }
 
+function getBoundingRegions(regions, location ){
+  var i = 0;
+  var result = [];
+  for (i = 0; i < regions.length; i++ ){
+    if ( contains(regions[i], location) ){
+      result.push(regions[i]);
+    }
+  }
+  return result;
+}
+
 exports.create = create;
 exports.contains = contains;
+exports.getBoundingRegions = getBoundingRegions;

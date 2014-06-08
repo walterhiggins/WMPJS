@@ -636,7 +636,7 @@ It has become commonplace to declare many variables using a single statement.
 
 #### Play with your 'food'
 
-Has anyone ever told you not to play with your food? Well we're going to play with the 'hungerBar' variable while exploring some more javascript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In javascript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
+We're going to play with the 'hungerBar' variable while exploring some more javascript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In javascript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
 
     js hungerBar = hungerBar + 1
 
@@ -2138,9 +2138,9 @@ The `jsp` command by itself doesn't do much. It's just a placeholder, a dummy co
 In ScriptCraft you create new commands for use by everyone using the *command()* function. The best way to see how the *command()* function works is with a simple example:
 
     /js function boo( params, sender ) { sender.sendMessage('Boo!') }
-    /js command('boo', boo);
+    /js command( boo );
 
-In the first command I create a new function called *boo()* which will simply say Boo!. In the second command I call the ScriptCraft *command()* function passing two arguments, a string 'boo' which will be used by *all* players and the newly created function *boo()* which will be called whenever any player issues this command:
+In the first command I create a new function called *boo()* which will simply say Boo!. In the second command I call the ScriptCraft *command()* function passing the newly created function *boo()* which will be called whenever any player issues this command:
 
     /jsp boo
     > Boo!
@@ -2148,13 +2148,13 @@ In the first command I create a new function called *boo()* which will simply sa
 The important points to note are:
 
 * Any player can now issue this new `jsp boo` command and will see a message on their screen. They don't have to be operators to do so.
-* The *command()* function lets you - the javascript programmer - provide new commands for use by all players. 
+* The *command()* function lets you - the javascript programmer - safely provide new commands for use by all players.
 
 Now let's dive in and create a new `jsp leaderboard` command. Create a new file called *leaderboardCmd.js* in the *scriptcraft/plugins* folder and type in the following code:
 
 @@listing leaderboardCmd_v1.js Adding a custom command for all players.
 
-This file must be saved in the *scriptcraft/plugins* folder so that it will be automatically loaded and run at startup. This module loads the *leaderboard* module we created earlier, creates a new *leaderboardCmd()* function and calls ScriptCraft's *command()* function passing in a String 'leaderboard' which is the name of the new command and a function which will be run whenever any player invokes the command. You may have noticed there's no *exports* in this new module. That's because we don't need to *export* anything for this particular module - we provide a new command for use by all players through the *command()* function instead. Now let's see this new command in action. Issue the `js refresh()` command to reload ScriptCraft then at the in-game prompt issue the following command:
+This file must be saved in the *scriptcraft/plugins* folder so that it will be automatically loaded and run at startup. This module loads the *leaderboard* module we created earlier, creates a new *leaderboard()* function and calls ScriptCraft's *command()* function passing the new *leaderboard()* function which will be run whenever any player invokes the command. You may have noticed there's no *exports* in this new module. That's because we don't need to *export* anything for this particular module - we provide a new command for use by all players through the *command()* function instead. Now let's see this new command in action. Issue the `js refresh()` command to reload ScriptCraft then at the in-game prompt issue the following command:
 
     /jsp leaderboard
 
@@ -2780,7 +2780,7 @@ Next we create a new function which will be executed when a player issues the co
 
 And finally we create a new custom command which will allow players to issue an *icecream* command that prompts them to choose flavors:
 
-    /js command( 'icecream', icecream, flavors );
+    /js command( icecream, flavors );
 
 Now try it and see what happens when you type the following and hit the TAB key:
 
@@ -2790,11 +2790,10 @@ Hitting the TAB key should complete the first part of the command so now your co
 
     /jsp icecream
 
-Now press the SPACE key and then press the TAB key once more and you'll see a list of possible flavors to choose from. You can cycle through the list of flavors by repeatedly pressing the TAB key. How did we do this? The secret is in how we created the new */jsp icecream* command using the *command()* function. The command function takes 3 parameters:
+Now press the SPACE key and then press the TAB key once more and you'll see a list of possible flavors to choose from. You can cycle through the list of flavors by repeatedly pressing the TAB key. How did we do this? The secret is in how we created the new */jsp icecream* command using the *command()* function. The command function takes 2 parameters:
 
-1. The command name which will be used by players. Players invoke the command using a *prefix* of 'jsp' so while the name of the command we define is *icecream*, players must use *jsp icecream* when issuing the command. 
-2. The function which will be executed when a player issues the command. This function in turn takes 2 parameters, *args* which is an array of strings, and *player* which is the player who issued the command.
-3. A list of possible options for the command. This is the list of strings used by Minecraft's TAB completion feature.
+1. The function which will be executed when a player issues the command. This function in turn takes 2 parameters, *args* which is an array of strings, and *player* which is the player who issued the command. The function *must* have a name as the function's name is used by the *command()* function to present a new command name for players with a prefix of 'jsp '. So while the name of the command we define is *icecream*, players must use *jsp icecream* when issuing the command.
+2. A list of possible options for the command. This is the list of strings used by Minecraft's TAB completion feature.
 
 In upcoming sections we're going to create a new command which provides a list of colors as possible options that will display when the player hits the TAB key.
 
@@ -2868,13 +2867,13 @@ In this plugin we use the *textcolors* module we created earlier, and we create 
 
 ... where "steve1901" is the name of a player and "blue" is his chosen chat color, "jane1908" is the name of another player and her chosen chat color is "gold" and so on. The *preferences* object is a lookup table of player names and their colors. If I wanted to find out what player jane1908's chosen color was, I'd do so using the expression `preferences["jane1908"]` which would return "gold".
 
-The *setChatColor()* function is a *callback* which will be called when a player issues the `jsp chatcolor` command. The name of the player who issued the command and the color they chose are stored in the *preferences* object using the statement:
+The *chatcolor()* function is a *callback* which will be called when a player issues the `jsp chatcolor` command. The name of the player who issued the command and the color they chose are stored in the *preferences* object using the statement:
 
     preferences[ player.name ] = color;
 
 We can add any property we like to an object using the `[]` square brackets and putting the property name inside the square brackets. The property name does not have to be an object literal like `'age'` or `'address'`, it can be any javascript expression which evaluates to a string. So in this case, whatever the player's name is becomes a new property of the preferences object - a key by which the preferences can be looked up. 
 
-The *command()* function creates a new `/jsp chatcolor` command which will invoke the *setChatColor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
+The *command()* function creates a new `/jsp chatcolor` command which will invoke the *chatcolor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
 
 The first section of listing @@listref{chatcolor_v1.js} up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in minecraft and ensures that player color preferences are applied to any chat messages:
 
@@ -3433,7 +3432,7 @@ To set the foodLevel property just assign a value to it.
 
 This is a nice convenience when writing Javascript code which uses Java Types. Let's revisit the code from earlier, this time using just property names instead of *get()* methods:
 
-@@listing arrow_v2.js
+@@listing arrow_v2.js Accessing JavaBean properties directly
 
 I personally prefer using just the property names rather than the get and set methods because I think the code is more readable but it's a matter of personal taste. If you feel more comfortable sticking to the Java convention of using the getX() and setX() (where X is some property) when working with Java types from within Javascript, then by all means use those methods. 
 
@@ -3514,7 +3513,7 @@ In the above code the *cancel()* function will only cancel 5 block-break events 
 ### Prohibiting TNT 
 Prohibiting the placement of all blocks in the game wouldn't make for a very fun Minecraft experience. We can adapt the code used earlier to provide a very simple plugin which prevents anyone except operators from placing TNT. In your programming editor, create a new sub-folder in the *plugins/scriptcraft/plugins* called *protection* and in that folder create a new file called *no-tnt.js*, then type in the following code:
 
-@@listing no-tnt_v1.js
+@@listing no-tnt_v1.js Preventing Placement of TNT
 
 You can test this code by reloading the plugins using the */reload* or */js refresh()* commands. You'll also need to use the */deop* command to temporarily remove your operator privileges so you can verify that trying to place TNT when you're not an operator is impossible. You can re-enable your operator privileges later by running the *op* command at the server console prompt. With TNT in hand, try to place a block of TNT anywhere and the TNT will appear very briefly before disappearing. 
 
@@ -3542,7 +3541,7 @@ Finally We use the *items* module's *tnt()* function, passing the material as a 
 ### Prohibiting Lava
 The procedure for prevent the placement of Lava is slightly different but the principle is the same. We cancel the event if the event involves emptying Lava into the world. Lava is not a material that can be held in a player's hand, instead it's carried in a bucket and emptied from the bucket. The event we want to listen for is not the placement of blocks but the emptying of buckets. In your editor create a new file called *no-lava.js* and place it in the *plugins/scriptcraft/plugins/protection* folder and type the following code:
 
-@@listing no-lava_v1.js
+@@listing no-lava_v1.js Preventing placement of Lava
 
 The code is very similar to the TNT-prohibiting code. We just listen for the Bucket Empty event instead of the Block Place event. You'll find a table of *events* functions and their corresponding event types in the appendices at the back of the book.
 
@@ -3564,13 +3563,13 @@ A Safe Zone starts at a location in the world and extends along the X axis and Y
 
 The first step is to create a shared module which will be used in steps 2 and 3 above. Open your editor and create a new folder called *protection* in the *plugins/scriptcraft/modules* folder. Create a new file called *zones.js* and enter the following code:
 
-@@listing zones.js
+@@listing zones_v1.js Safe Zone Management Module
 
 This module lets us add zones which will be loaded at start-up (or when the module is first used) and saved automatically when the server is shut down. Persistence is definitely something we want for safe zones - we want them to last. The module's *add()* function takes 2 parameters both of them of type *org.bukkit.Location* and stores their 2-dimensional coordinates (the x and x properties). An additional function *getBoundingZones()* will return a list of encompassing zones for a given location. Zones can overlap so it's possible that a Location can be in more than one safe zone.
 
 Next up we'll create a new Drone extension called *zonemaker()* . In your editor switch to the *plugins/scriptcraft/plugins* folder and create another sub-folder called *protection*, then create a new file called *zonemaker.js* and enter the following code:
 
-@@listing zonemaker.js
+@@listing zonemaker.js A Drone-based Zone Creator
 
 As we saw in chapter @@chapter{sky} it's possible to extend the Drone object to build whatever you want. In this case we want to be able to construct a bounding box in which no one except operators may place or break blocks. In addition to constructing a bounding box of whatever material you choose, the *zonemaker()* function also gets the Drone's starting location and the farthest corner location and calls the *zones.add()* function to add a new safe zone. Once you've saved this file (and the *zones.js* file), you can test it by reloading your plugins (using the */reload* command) and then at the in-game prompt, point at the ground and type the following command:
 
@@ -3582,7 +3581,7 @@ A bounding box similar to that shown in the screenshot below should appear.
 
 Right now you can still break and place blocks within the area. The next step to 'securing' the Safe Zone is to add event handlers which will prohibit placement and breaking of blocks. In your editor create a new file called *events.js* in the *plugins/scriptcraft/plugins/protection/* folder and enter the following code:
 
-@@listing events.js
+@@listing events_v1.js Event-handling for Protection
 
 In the above code we listen for two events and cancel the events if the block being placed or broken is within a safe zone. If the player is an operator we return immediately as operators should be able to place and break blocks. Save these files then reload your plugins using the */reload* command, then temporarily */deop* yourself and try to place or break blocks in the safe zone you created earlier. You should not be able to do so. Once you're satisfied you can't break blocks as a non-operator player, re-enable your operator privileges by issuing the */op* command at the server console command prompt.
 
@@ -3593,11 +3592,11 @@ Before we get into the mechanics of creating, claiming and sharing player plots 
 
 You'll notice the *create()* function is *very* similar to the *addZone()* function from the *zones.js* module. That's because it is the same except the statement `store.push(result);` from the *addZones()* function is not present in the *create()* function. If you want to take a shortcut, I recommend copying and pasting the body of the *addZone()* function into the *copy()* function then removing the `store.push(result);` line from the *create()* function:
 
-@@listing region.js
+@@listing region.js Region Management Module
 
 The *contains()* function can be copied directly from the *zones.js* file into the *region.js* file and requires no changes. Once you've saved changes to the *region.js* file edit your *zones.js* file so it looks like the listing below:
 
-@@listing zones_v2.js
+@@listing zones_v2.js Zones using Regions
 
 The *addZone()* function is greatly simplified and the *getBoundingZones()* function has changed slightly. The statement:
 
@@ -3620,22 +3619,115 @@ The *addZone()* function is greatly simplified and the *getBoundingZones()* func
 
 Before we look at *Creating* plots, we'll need to create a *plots* module which will support each of these operations. In your programming editor, create a new file called *plots.js* in the *plugins/scriptcraft/modules/protection/* folder and enter the following code:
 
-    
-plots.js module
--- creating plots
--- claiming plots
--- sharing plots
+@@listing plots_v1.js Plot Management Module
 
-plotmaker drone function
-update protection/events.js 
+So far the plots module looks very like the zones module. When we add a plot though there are 3 extra properties we want to store:
+
+1. The plot's number ( the *.number* property ) The plot number is incremented (increased by 1) every time a new plot is added. The *.plotCounter* property of the store is persisted so that even across server restarts, each plot is guaranteed to have a unique number.
+2. The name of the player who has claimed the plot ( the *.claimedBy* property). 
+3. The list of players the plot is shared with (the *.sharedWith* property). We want players to be able to collaborate with other trusted players so they can build on the same plot.
+
+Now let's flesh out the *plots* module some more by adding functions for claiming plots. Add the following code to your *plots.js* file:
+
+@@listing plots-claims_v1.js Claiming Plots
 
 ### Creating Plots
+We're starting to put in place, functions which will be used by operators and players to add and claim plots. The next step is to extend the *Drone* module yet again, this time adding a *plotmaker()* function which operators will use to create plots which players can later claim. In your editor, create a new file called *plotmaker.js* in the *plugins/scriptcraft/plugins/protection/* folder and add the following code:
+
+@@listing plotmaker_v1.js Creating Plots
+
+Once you've saved this file and reloaded your plugins using the */reload* command, you can create a plot using the following command (target a block at ground level first):
+
+    /js plotmaker( blocks.brick.red, 10, 10)
+
+A new plot outline will be created and a sign will appear with instructions for players. 
+
+![Player Plot](img/tntfree/player-plot.png)
+
 ### Claiming Plots
-### Preventing Griefing
+Right now the instructions which appear on the sign (move inside the plot area and issue the */jsp claim* command) don't work. The next step is to provide a */jsp claim* command for players to claim plots in which they are standing. In your editor, create a new file called *claim.js* in the *plugins/scriptcraft/plugins/protection/* folder and enter the following code:
+
+@@listing claim_v1.js The /jsp claim Command
+
+Save the above code then reload your plugins using the */reload* command. 
+
+### Preventing Griefing on Plots
+When a player successfully claims a plot of land, they're sent a message of congratulations and a firework launches at their location. We're nearly there. Now all we need to do is update the *events.js* file in the *plugins/scriptcraft/plugins/protection/* folder so that it checks to see if the player is in a plot and owns it. Change the events.js file so it matches the following code:
+
+@@listing events_v2.js Event-handling for Plots
+
+Now we check to see if the block being placed or broken is in a player plot and if it the plot is owned by the player - if it is, then the event proceeds as normal. If the block is within a region and that region is not owned by the player then they cannot place or break and the event is cancelled.
+
+So now we have a basic working protected server where operators can create safe zones and within those zones (or even outside them) create safe plots of land for claiming by players. Players build uninhibited in unsafe zones or off-plot but must claim a plot of land if they want to build without worrying about griefing. 
+
+### Abandoning Plots
+The next step is to provide a way for players to *abandon* their plots so they can claim new ones. We'll do this by providing yet another new command */jsp abandon* which will cause the player who issues the command to give up any claim they have on a plot so they are free to claim a new one. Open the *claim.js* file from earlier and add the following additional code:
+
+@@listing claim-abandon.js The /jsp abandon Command
+
+Now reload your plugins using the */reload* command and your players are now upwardly mobile and can move from plot to plot as different plots become available!
+
 ### Sharing Plots
-### Operator-only Commands
-Allow operators to mark an area for protection?
+We're almost there. We have one last feature to add to this protection plugin. We'd like players to be able to choose collaborators who are allowed build on their plots. To do this we need to:
+
+1. Add a new */jsp share* command which will let players choose one or more trusted players.
+2. Adjust the event-handling rules for block breaking and block placement to accomodate players who don't own a plot but who are trusted.
+
+Let's start with the new */jsp share* comand. Open your *claim.js* file and update it adding the following code:
+
+@@listing claim-share.js The /jsp share Command
+
+Save the *claim.js* file and then reload your plugins and you can now share your plot with others by issuing the command:
+
+    /jsp share [TAB]
+
+If you hit the TAB key after typing '/jsp share ' (that's share followed by a SPACE), you'll notice that a list of player names will show up as possible completions for the command.
+
+### Dynamic command options
+We already covered the topic of the *command()* function, how it can be used to add new custom commands for players to use and how it can be provided a list of possible options for TAB completion. The *command()* function can take either a static list of options (as we saw previously with the *icecream* and *chatcolor* examples in chapter @@chapter{chatcolor}) or it can take another *function* as a parameter. If the *options* parameter is a list, then that list will be used for TAB completion. If the *options* parameter is a *function* then the function will be executed and should return a list of strings to be used for TAB completion. In listing @@listref{claim-share.js} we pass the *bukkit.playerNames* function as the 2nd parameter to *command()*. This means that the *bukkit.playerNames()* function will be invoked whenever a player issues the */jsp share* command and presses SPACE followed by TAB. If you don't know ahead of time what the possible options for your custom command will be then providing a function which will return a list of possible options when the player issues the command is the way to go. In the example above, we won't know what players are online at the time the command is issued so providing a static list of player names would not work. That's why we pass the *bukkit.playerNames* function as the 2nd parameter.
+
+### Updating event-handling to accomodate trusted players.
+Next we must update our event-handling code related to protection. We want to allow players to place or break blocks if they are within a plot and they are in the plot's *.sharedWith* list. Open the *events.js* file in the *plugins/scriptcraft/plugins/protection/* folder and update it as below:
+
+@@listing events_v3.js Event-handling for Trusted Players
+
+There's a new *playerIsTrusted()* function in this revision of the *events.js* file. This function returns true if the player is trusted to work on the plot. There's 2 interesting things to note in this function. The first is how we use the player's name to test if they are in the *sharedWith* list. 
+
+#### Java Strings and JavaScript Strings
+The String type in JavaScript and the String type in Java - they both share the same name - are slightly different so there are some things you can do with a javascript string which you can't do with a Java string and vice versa. When comparing two strings - one of them a JavaScript String and the other a Java String it's safest to convert the Java String to a Javascript string. The easiest way to convert a Java String to a JavaScript string is to prepend an empty Javascript string to the front of the Java String like this:
+
+    var jsString = '' + javaString;
+
+This is what we do in the first statement of the *playerIsTrusted()* function:
+
+    var playerName = '' + player.name;
+
+... declares and assigns a new javascript variable the value of player.name. The *player* variable is a Java object so it follows that all of its String properties are *Java* Strings. Unfortunately, different versions of the Javascript engine provided with Java on different platforms each behave slightly differently when comparing Java Strings to JavaScript Strings so the only way to be sure is to convert a Java String to a JavaScript string if you want to compare it with another Javascript string using the `==` operator or if you want to use it with standard JavaScript string-based operations.
+
+#### Loops within Loops
+The second thing to note about about the *playerIsTrusted()* function is its use of nested loops. A nested loop is a loop within a loop. In this case we loop through all of the plots and for each plot we loop through all of the plot's trusted players:
+
+    for (var i = 0;i < boundingPlots.length; i++){
+      var plot = boundingPlots[i];
+      var sharedWith = plot.sharedWith;
+      if (!sharedWith ) {
+        continue;
+      }
+      for (var j = 0; j < sharedWith.length; j++){
+        if (sharedWith[j] == playerName){
+          return true;
+        }
+      }
+    }
+
+In the inner-most loop we use a different looping variable to the outer-most loop. The outer-most loop uses the *i* variable as an index and counter while the inner-most loop uses the *j* variable. This is very important. When you have nested loops you must be very careful not to reuse the outermost loop's index variable in the innermost loop. This is a very common mistake and one which I made myself while writing this code.
+
+It's possible to have any number of nested loops but if you find yourself writing a function which has many nested loops you should consider refactoring the function so it is easier to read and understand.
+
 ### Summary
+In this chapter we walked through step by step the process of adding protection to our server. You can see from the amount of code and number of files we used that protecting servers is no easy task! However if you tackle the problem by breaking it down into smaller problems and solving each of these in turn, it becomes easier. Programming is an iterative process - we write some code, test it, make changes as we go, and gradually improve the code adding new features piece by piece until it does what we want. Throughout this chapter we revisited code we had written earlier, making gradual improvements and additions each time. This is how programming is typically done. Even the best programmers in the world don't arrive at a perfect solution first time!
+
+While not a comprehensive protection plugin, the code we created in this chapter provides a good basis for a more fully-functional protected server plugin. There are a couple of outstanding features we'd need to address to make this plugin better, like what should happen to plots once they're abandoned? Right now there's no way for a player to tell if a plot which has buildings has been abandoned or not. Ideally there should be a sign put in place 'This plot is available' when plots have been abandoned.  That's just one of many possible improvements, I'm sure you can think of more!
 
 ## @@nextChapter{snowball}: Snowball Fight!
 ### Introduction

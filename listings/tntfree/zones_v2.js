@@ -1,6 +1,5 @@
-
-var store = persist( 'zones', [] );
 var region = require('./region');
+var store = persist( 'zones', [] );
 
 function addZone( a, b ){
   var result = region.create(a,b);
@@ -8,16 +7,7 @@ function addZone( a, b ){
   return result;
 }
 function getBoundingZones( location ){
-  var i = 0;
-  var result = [];
-  var zone = null;
-  for (i = 0; i < store.length; i++ ){
-    zone = store[i];
-    if ( region.contains(zone, location) ){
-      result.push(zone);
-    }
-  }
-  return result;
+  return region.getBoundingRegions(store, location);
 }
 
 exports.add = addZone;

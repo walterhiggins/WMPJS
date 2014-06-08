@@ -1355,7 +1355,7 @@ The second statement is ignored because it has a `//` in front of it. Remember, 
 Most of the source listings in this book will not include comments because the code is explained throughout. If you look at the ScriptCraft source code you will see that the code is commented.
     
 #### Commenting dice.js
-Open dice.js in your editor and add a comment section at the top of the file. The comment section shoudl briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
+Open dice.js in your editor and add a comment section at the top of the file. The comment section should briefly describe what the module does. You can use either `//` comments or `/* */` style comments. The comment text can be as short or as long as you like. Here is an example:
 
 @@listing dice_v6.js Commenting Code
 
@@ -3511,23 +3511,89 @@ You'll notice that I stored the return value from  *events.blockBreak()* and *ev
 
 In the above code the *cancel()* function will only cancel 5 block-break events and then will unregister() itself. By unregistering, the function is telling the server not to call it any more when a block-break event occurs. 
     
-### Prohibiting TNT and other Blocks
-Prohibiting the placement of all blocks in the game wouldn't make for a very fun Minecraft experience. We can adapt the code used earlier to provide a very simple plugin which prevents anyone except operators from placing TNT or Lava in the game. In your programming editor, create a new file called *no-tnt.js* in the *plugins/scriptcraft/plugins* folder and type in the following code:
+### Prohibiting TNT 
+Prohibiting the placement of all blocks in the game wouldn't make for a very fun Minecraft experience. We can adapt the code used earlier to provide a very simple plugin which prevents anyone except operators from placing TNT. In your programming editor, create a new sub-folder in the *plugins/scriptcraft/plugins* called *protection* and in that folder create a new file called *no-tnt.js*, then type in the following code:
 
 @@listing no-tnt_v1.js
 
-In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{arrow}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/beta/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/beta/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. 
+You can test this code by reloading the plugins using the */reload* or */js refresh()* commands. You'll also need to use the */deop* command to temporarily remove your operator privileges so you can verify that trying to place TNT when you're not an operator is impossible. You can re-enable your operator privileges later by running the *op* command at the server console prompt. With TNT in hand, try to place a block of TNT anywhere and the TNT will appear very briefly before disappearing. 
 
-Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different: TODO
+In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{arrow}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/beta/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/beta/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
 
-We use the *items* module's *tnt()* function, passing the material as a parameter to test if the material is TNT. If it is then we cancel the event.
+    var material = event.getBlockPlaced().getType();
+
+... but JavaScript lets us use the Java Bean properties without calling the getter methods:
+
+    var material = event.blockPlaced.type;
+
+Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different. In the Player Inheritance Diagram in chapter @@chapter{arrow} you can see that a Player is a descendant of the ServerOperator type so it inherits all of its properties and methods. If you look at the Java Documentation for the ServerOperator type at http://jd.bukkit.org/beta/apidocs/org/bukkit/permissions/ServerOperator.html There are just 2 methods:
+
+    boolean isOp()
+    void setOp(boolean value)
+
+The *isOp()* function returns true if the sub-type is an operator (A player with administrative privileges or the Console Operator). The *setOp()* function is used to turn on or off operator privileges for the sub-type. The *isOp()* and *setOp()* pair of functions both conform to the JavaBean standard for setting and getting properties. For boolean properties, there must be an *isX()* function where *X* is some property. So we can infer that because there's an *isOp()* and *setOp()* function, there must be an *op* property which we can access directly in JavaScript. The expression:
+
+    player.op
+
+...evaluates to `true` if the player is an operator or `false` if they are not. If the player *is* an operator then we don't want to interfere with the normal course of events for placing blocks - that is - we don't want to prohibit operators from placing blocks. 
+
+Finally We use the *items* module's *tnt()* function, passing the material as a parameter to test if the material is TNT. If it is then we cancel the event.
+
+### Prohibiting Lava
+The procedure for prevent the placement of Lava is slightly different but the principle is the same. We cancel the event if the event involves emptying Lava into the world. Lava is not a material that can be held in a player's hand, instead it's carried in a bucket and emptied from the bucket. The event we want to listen for is not the placement of blocks but the emptying of buckets. In your editor create a new file called *no-lava.js* and place it in the *plugins/scriptcraft/plugins/protection* folder and type the following code:
+
+@@listing no-lava_v1.js
+
+The code is very similar to the TNT-prohibiting code. We just listen for the Bucket Empty event instead of the Block Place event. You'll find a table of *events* functions and their corresponding event types in the appendices at the back of the book.
+
 ### Player Plots
+Preventing the placement of TNT and Lava goes some way towards creating a safe server for players to create and collaborate. As the earlier examples demonstrated, in creating a safe environment where no griefing is possible, we can easily go too far and prevent any player from placing or removing blocks. What we want instead is to make it possible to create *Plots* where players can build and collaborate with other trusted players without fear of griefing by non-trusted players. 
+
+In the following sections of this chapter we'll develop a set of functions that will enable operators to construct a *Safe Zone* where no one except operators can place or break blocks. Within this *Safe Zone* there will be *Plots* - small tracts of land - which can be claimed by a player and once claimed can be built on. Each *Plot* will have a surrounding path so players can amble around and between plots. We'll also need to provide some way for players to *claim* a plot of land and we'll need to keep a *registry* of players and their plots. We'll make it so players can only claim one plot.
+
+### Safe Zones
+The first step in creating a safe server is adding the ability to create Safe Zones. Outside of these safe zones it should be possible for any player to place and break blocks but inside the safe zones, only operators should be able to do so. We'll define a Safe Zone as an area of width and length and which - for the sake of simplicity - extends indefinitely up and down along the Z axis. So a Zone can be defined using just 2 points in 3D space - the bottom left corner and the top right corner.
+
+![Safe Zones](img/tntfree/safe-zone.png)
+
+A Safe Zone starts at a location in the world and extends along the X axis and Y axis so a Zone will have a start location and an extent - how far away it extends. We'll need to use this information when testing if a broken or placed block is within the Zone. We need 3 different components to manage safe zones:
+
+1. A module which will be responsible for creating zones, storing zones (persistence) and checking if a given block or location is within a safe zone.
+2. A way to easily create safe zones - We'll add a new extension to the Drone object discussed in chapter @@chapter{sky} to let us create zones without needing to work directly with Locations.
+3. A few event listeners to prohibit block placement and breaking in safe zones.
+
+The first step is to create a shared module which will be used in steps 2 and 3 above. Open your editor and create a new folder called *protection* in the *plugins/scriptcraft/modules* folder. Create a new file called *zones.js* and enter the following code:
+
+@@listing zones.js
+
+This module lets us add zones which will be loaded at start-up (or when the module is first used) and saved automatically when the server is shut down. Persistence is definitely something we want for safe zones - we want them to last. The module's *add()* function takes 2 parameters both of them of type *org.bukkit.Location* and stores their 2-dimensional coordinates (the x and x properties). An additional function *getBoundingZones()* will return a list of encompassing zones for a given location. Zones can overlap so it's possible that a Location can be in more than one safe zone.
+
+Next up we'll create a new Drone extension called *zonemaker()* . In your editor switch to the *plugins/scriptcraft/plugins* folder and create another sub-folder called *protection*, then create a new file called *zonemaker.js* and enter the following code:
+
+@@listing zonemaker.js
+
+As we saw in chapter @@chapter{sky} it's possible to extend the Drone object to build whatever you want. In this case we want to be able to construct a bounding box in which no one except operators may place or break blocks. In addition to constructing a bounding box of whatever material you choose, the *zonemaker()* function also gets the Drone's starting location and the farthest corner location and calls the *zones.add()* function to add a new safe zone. Once you've saved this file (and the *zones.js* file), you can test it by reloading your plugins (using the */reload* command) and then at the in-game prompt, point at the ground and type the following command:
+
+    /js zonemaker( blocks.brick.chiseled, 20 , 20 )
+
+A bounding box similar to that shown in the screenshot below should appear.
+
+![](img/tntfree/zonemaker.png)
+
+Right now you can still break and place blocks within the area. The next step to 'securing' the Safe Zone is to add event handlers which will prohibit placement and breaking of blocks. In your editor create a new file called *events.js* in the *plugins/scriptcraft/plugins/protection/* folder and enter the following code:
+
+@@listing events.js
+
+In the above code we listen for two events and cancel the events if the block being placed or broken is within a safe zone. If the player is an operator we return immediately as operators should be able to place and break blocks.
+
 ### Creating Plots
 ### Claiming Plots
 ### Preventing Griefing
+### Sharing Plots
 ### Operator-only Commands
 Allow operators to mark an area for protection?
 ### Summary
+
 ## @@nextChapter{snowball}: Snowball Fight!
 ### Introduction
 This chapter and the following chapter will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of this chapter will be to reinforce what the reader has learnt in the preceding chapters.
@@ -3558,7 +3624,7 @@ it should not be used in any function which is deferred as it does not exist out
 Don't use it in modules especially in multi-player mode!
 
 ## Using ScriptCraft with other Plugins
-### Calling sendCommand() to programmtically use othe plugin commands
+### Calling dispatchCommand() to programmtically use othe plugin commands
 ### accessing the plugin API from javascript (get plugin by name - see example code on plugin.bukkit scriptcraft page)
 ## Events reference
 A set of tables of events, one table for each set of events, Player Events, Server Events etc.

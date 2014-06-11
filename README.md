@@ -289,7 +289,7 @@ If you run into trouble installing CraftBukkit you can find plenty of useful tip
 
 
 ### Configuring your server
-Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft Server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be Player vs Player, and so on. While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone, just bear in mind you will need to restart your server if you change the configuration. I'll show you how to do that later.
+Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft Server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be Player vs. Player, and so on. While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone, just bear in mind you will need to restart your server if you change the configuration. I'll show you how to do that later.
 
 #### The server.properties file
 When you first launch CraftBukkit a couple of configuration files and folders will be created in the CraftBukkit folder (the folder where you store the craftbukkit jar file and startup script). When configuring your server, the most important file is `server.properties`. This is a plain-text file (meaning it can be edited using any text editor) containing all of the configuration for your server. The first few lines of my own `server.properties` look like this:
@@ -393,7 +393,7 @@ ScriptCraft is a plugin for Minecraft which lets you create plugins using Javasc
 2. To make it easier for my kids (and others) to create Minecraft mods.
 3. To make it easier to teach programming to kids using Javascript and Minecraft as tools.
 
-Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes - that's what we programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself and Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
+Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes - that's what programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself and Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
 
 Java is a fine language and is widely used. However, it can be a little difficult to learn - especially if you are completely new to programming. Java can be verbose - meaning you need to write a lot of Java code to do even simple things. Java code can't be executed right away either. You need to first "compile" it. Compiling is the process of converting Java source code into a form the computer can understand. 
 
@@ -634,7 +634,7 @@ You can use the `var` keyword to declare just one variable or you can use it to 
 
 It has become commonplace to declare many variables using a single statement. 
 
-#### Play with your 'food'
+#### Adding and Subtracting
 
 We're going to play with the 'hungerBar' variable while exploring some more javascript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In javascript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
 
@@ -740,7 +740,7 @@ The result is 3. Try calling it with different values to test that the function 
     js add( 5, 6 )
     js add( 9, 1 )
 
-Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in definining the function is to say what the function should actually do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
+Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in definining the function is to say what the function should do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
 
 ![Function Outline](img/function-outline.png)
 
@@ -896,7 +896,7 @@ The file has just been created but hasn't been opened. If using TextWrangler cli
 
     // TO DO : Add some code later
 
-The above code isn't actually real code. It's just a note we've added to remind ourselves that we must add some proper code later. This 'note' isn't actually understandable to the computer so we can write whatever we like here, the computer will not try to interpret and execute it. Notes like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing - you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
+The above code isn't actually real code. It's just a note we've added to remind ourselves that we must add some proper code later. This 'note' isn't understandable to the computer so we can write whatever we like here, the computer will not try to interpret and execute it. Notes like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing - you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
 
 These notes are called 'comments' and most programming languages provide a way to add comments. In javascript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
 
@@ -1110,7 +1110,7 @@ There are other folders in scriptcraft. The 'modules' folder is much like the pl
 1. Javascript files inside the scriptcraft/modules folder are *not* automatically loaded or executed when the server starts.
 2. Variables exported from files in the scriptcraft/modules folder are not automatically available everywhere - they are not 'global' variables.
 
-So this leaves us in a bit of a pickle. We've written some useful code, but how do we actually get to use it?
+So this leaves us in a bit of a pickle. We've written some useful code, but how do we get to use it?
 
 ### Modules
 What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
@@ -1135,7 +1135,7 @@ A random number between 0 and 5 should be displayed. Try running the above comma
 
 Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing 6.1.
 
-You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we actually get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
+You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
 ![](img/achievement-plugin-dev-5.png)
 
@@ -1361,8 +1361,7 @@ In the very first javascript file we created, we started with a single line:
 
 This is called a comment. Comments are notes we write in our code to help us remember things. Source code can be difficult to understand even when you yourself have written it. In the heat of tackling a tricky problem or coding up a cool new plugin you might end up writing some very clever code but you'll often find that after you come back to it a couple of days or weeks later, you no longer understand what you've written. This is where comments come in. It's a good habit to write comments alongside your code, particularly if your code is particularly tricky. 
 
-Comments aren't read by the computer so you can write whatever you like in a comment. Comments should be helpful and provide sign-posts to yourself and others about what the code does. You can comment as much or as little as you like. When working with others on the same source code it's considered good practice to comment your code but again, how much you comment your code seems to be a matter of personal taste. 
-Commenting can be really useful for *documenting* your code. For example, the ScriptCraft API reference documentation available at https://github.com/walterhiggins/ScriptCraft/blob/master/docs/API-Reference.md is actually created automatically from comments in the scriptcraft source code. 
+Comments aren't read by the computer so you can write whatever you like in a comment. Comments should be helpful and provide sign-posts to yourself and others about what the code does. You can comment as much or as little as you like. When working with others on the same source code it's considered good practice to comment your code but again, how much you comment your code seems to be a matter of personal taste. Commenting can be really useful for *documenting* your code. For example, the ScriptCraft API reference documentation available at https://github.com/walterhiggins/ScriptCraft/blob/master/docs/API-Reference.md is created automatically from comments in the scriptcraft source code. 
 
 #### Single-line comments
 You can make any line into a comment by starting it with two `/` (forward-slash) characters:
@@ -1462,7 +1461,7 @@ You've seen that functions can both return *and take* a value as a parameter. Pa
     
 ## Chapter 8: Greeting Players
 ### Introduction
-In this chapter we'll actually change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
+In this chapter we'll change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
 
 ### Term: Event Driven Programming
 Back in the early days of programming there was no such thing as Event Driven Programming. Programs were started and ran to completion, then exited. If your program needed to ask the user a question, it did so using a command prompt and did not resume until the user had typed a response and hit enter. With the advent of Graphical User Interfaces in the 80s and 90s, the possibilities for what users could do exploded. Programs and user-interaction became more sophisticated. Programs had to be written differently to accomodate the new ways users could interact with programs (Menus, Buttons, Windows and so on). When you click a link or a button on a web page or other application, that click is an *event*. In Minecraft, when you fire an arrow, break a block, open a door, join the server or do pretty much anything, that's an *event*. Event driven programming lets programmers write functions which listen for and react to such events.
@@ -2368,7 +2367,7 @@ Let's look at a slightly more complex example. Typically, your server will have 
 The *byPopulation()* function takes 2 parameters a and b both of which it assumes are Minecraft worlds. Each Minecraft world object has an *entities* property which is a Java list of living things. The entities property in turn has a *size()* function so if we want to find out how many living beings are on a world we call the world's *entities.size()* method. We can compare the populations by subtracting one population size from another. 
 
 #### Term: Java Collection
-A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins will actually be Java objects. As a general rule, the *server* variable and any of its properties are Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
+A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins are Java objects. As a general rule, the *server* variable and any of its properties are Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
 
 The code to use your new *byPopulation()* function would look like this:
 
@@ -2578,7 +2577,7 @@ To try out the new module save it, issue the `js refresh()` command to reload Sc
     /js var leaderboard = require('leaderboard');
     /js leaderboard.jumps( self );
 
-The list of all players on the server and the number of times they've jumped should be displayed in descending order - that is - the players who have jumped the most will be at the top of the list. In a later chapter we'll revisit this module to display the leaderboard using an on-screen scoreboard as seen on popular player-vs-player servers.
+The list of all players on the server and the number of times they've jumped should be displayed in descending order - that is - the players who have jumped the most will be at the top of the list. In a later chapter we'll revisit this module to display the leaderboard using an on-screen scoreboard as seen on popular player vs. player servers.
 
 The *jumps()* function takes a single parameter called *sender*. *sender* is short for CommandSender, a ComandSender is anything in the game capable of sending commands. For examples, Players are command senders since they can send commands using the in-game prompt. What we want to do in this function is send output to the player who issued the command. That's why we use *sender.sendMessage()* instead of *console.log()* to display the leaderboard. If we used *console.log()* then players would not see the leaderboard because *console.log()* only writes messages to the server console window, not to players. In the above *jumps()* function we sort the players by how many times they've jumped, then reverse the array so that the higher numbers are at the front of the array, then we *loop* over the array using the *for* loop. Inside the for loop we have a block of statements:
 
@@ -3918,7 +3917,7 @@ The ingredient we're going to add is *Ender Pearls*. These are obtained from tel
 
 ![Crafting Recipe for a Bow](img/recipes/ender-bow-recipe-not-yet.png)
 
-You'll notice in the above screenshot that no item appears in the right hand side. That's because we haven't yet instructed the server to recognize that recipe. Now that we've figured out what we want our new Crafting Recipe to look like from a Player's point of view, let's dive in to how we actually program this new behavior into the game.
+You'll notice in the above screenshot that no item appears in the right hand side. That's because we haven't yet instructed the server to recognize that recipe. Now that we've figured out what we want our new Crafting Recipe to look like from a Player's point of view, let's dive in to how we'll program this new behavior into the game.
 
 ### Exploring the Bukkit API.
 So we've answered the question of *What* we want to do, now we must ask *How* are we going to do it? This is a list of what we want to do:
@@ -4350,7 +4349,7 @@ Once we have the item the player is currently holding we pass it to a function w
 Finally, if the item held *is* an Ender Bow, we remove the projectile because we don't want the arrow left behind - it makes sense that an arrow which teleports you should disappear - then we teleport the shooter to the arrow's location.
 
 ### More on Types
-The *instanceof* operator is an operator common to both Java and JavaScript. It's used to test the *Type* of an object. It can be useful when calling the Bukkit API from JavaScript when we want to identify the exact type of an object. In listing 17.1 we use the operator to check if the projectile fired was actually an Arrow. It could be any type of projectile - an Egg, Fireball, Snowball etc - but we're only interested in handling the event if it was an Arrow. The *instanceof* operator will compare the expression on the left to the expression on the right and if they are of the same type will return true. You can test this at the command line:
+The *instanceof* operator is an operator common to both Java and JavaScript. It's used to test the *Type* of an object. It can be useful when calling the Bukkit API from JavaScript when we want to identify the exact type of an object. In listing 17.1 we use the operator to check if the projectile fired was an Arrow. It could be any type of projectile - an Egg, Fireball, Snowball etc - but we're only interested in handling the event if it was an Arrow. The *instanceof* operator will compare the expression on the left to the expression on the right and if they are of the same type will return true. You can test this at the command line:
 
     /js self instanceof org.bukkit.entity.Horse
     > "false"
@@ -5157,27 +5156,307 @@ While not a comprehensive protection plugin, the code we created in this chapter
 
 ## Chapter 19: Snowball Fight!
 ### Introduction
-This chapter and the following chapter will go into much greater detail in developing and presenting a javascript mini-game within Minecraft. Each part of the mini-game source code will be explained. The goal of this chapter will be to reinforce what the reader has learnt in the preceding chapters.
-### Scoreboards in Minecraft
+In this chapter we're going to create a Player vs. Player mini-game called Snowball Fight. The aim of the game is to hit your opponents with snowballs as many times as possible while avoiding being hit yoursel or hitting players on your own team. The game will be playable in either Team mode where players can form opposing teams or free-for-all mode where every player must hit other players.
+
+The game will be kept simple for the sake of providing example code which you might want to adapt and extend to create your own mini-game. 
+
+The game will be started using a javascript function and its duration and team structure will be passed as paramters. If no parameters are passed then the default game duration will be 60 seconds and the game will be in free-for-all mode - all players against each other.
+
+First I'll present the game in a single Javascript module with a function which operators will use to start the game and later in this chapter we'll cover how players can start the game using in-game mechanisms. We'll also cover how to create an Arena for the game to be played in.
+
+### Game Rules
+Before we begin coding let's lay down some of the rules of the Snowball Fight mini-game.
+
+1. Players will each be allocated a number of snowballs when the game begins.
+2. Players gain a point if they hit an opponent.
+3. Players lose a point if they hit a member of their own team.
+4. When the game starts, players will enter Survival Mode. This is crucial to how the game works. When a player is hit by a snowball we need to be able to update the score. In creative mode, there's no way to listen for this event. 
+5. When the game ends, players will return to the Game Mode they were in before the game started.
+6. A scoreboard of players and their scores will be displayed during the game.
+7. A count-down timer (in seconds) will be displayed at the top of the scoreboard.
+8. At the end of the game, the scoreboard will remain on-screen for a few seconds so players can see the final score for each team/player.
+
+### Logistics
+For the game to work, players should be in close proximity to one another. Later in the chapter we'll construct a special arena for the game to make it more fun. Much of the fun of Minecraft mini-games comes from the anticipation of the game and the ceremony surrounding it. For example, many player vs. player mini-games have a holding area where players wait to jump into the mini-game or choose teams to participate in prior to the game starting. The mechanism for starting a game can vary from mini-game to mini-game. Initially we'll keep things simple - only the operator may start a Snowball Fight mini-game using the */js SnowballFight()* command. 
+
+### Keeping Score
+In chapter undefined we used a Javascript array to create a simple leaderboard which sorted players by how many times they had jumped. Minecraft has some built-in commmands which let you easily create and display an in-game translucent side-bar with a leaderboard or *scoreboard* of players. 
 
 #### The /scoreboard command
+The */scoreboard* command provides a neat way to specify what should be displayed in the in-game list view , side-bar view and also what can be displayed above player's heads. For example, revisiting the leaderboard code from the earlier chapter, we could display the same leaderboard using the following built-in commands in Minecraft:
 
     /scoreboard objectives add Jumping stat.jump
     /scoreboard objectives setdisplay sidebar Jumping
 
-#### Executing commands from JavaScript
+Notice that once you've run these commands, whenever you or any other player on the server jumps, the scoreboard is updated. 
 
-    server.dispatchCommand(server.consoleSender, 'time set 4000');
+This is a really nice feature and one we'll definitely want to use in our Snowball game. 
 
-This can be used to execute commands provided by other plugins too.
+#### Executing commands from Javascript
+It's possible to execute any built-in command from Javascript using the *server.dispatchCommand()* method. To execute the scoreboard commands already mentioned you'd use the following code:
 
-### A player-vs-player mini-game
-### Game Mechanics
+    server.dispatchCommand(server.consoleSender, 'scoreboard objectives add Jumping stat.jump');
+    server.dispatchCommand(server.consoleSender, 'scoreboard objectives setdisplay sidebar Jumping');
+
+The *server.dispatchCommand()* method is really useful when you want to call built-in commands or commands provided by other plugins from Javascript. The appendices include more information on using other plugins from with Javascript.
+
+#### The main scoreboard
+The problem with using the */scoreboard* command is that it updates Minecraft's *main* scoreboard. That means that the scoreboard is changed for *all* players connected to the server. In a mini-game where only some of the players may be playing we don't want to update the scoreboard for *all* players, only those players who are playing the mini-game. 
+
+#### The Scoreboard API
+Fortunately Bukkit includes a set of Java classes for working with Scoreboards. As well as using Minecraft's *main* scoreboard, you can construct completely new scoreboards for use by only a select few players. This is what we'll do in the Snowball Fight mini-game since only those players who are in the mini-game will be interested in the leaderboard. The Bukkit *org.bukkit.scoreboard.ScoreboardManager* class has 2 methods:
+
+    Scoreboard getMainScoreboard() Gets the primary Scoreboard controlled by the server.
+    Scoreboard getNewScoreboard() Gets a new Scoreboard to be tracked by the server.
+
+We'll use the *getNewScoreboard()* method to obtain a new scoreboard which will be used exclusively by the mini-game. 
+
+### The game source code
+We have a lot of ground to cover so let's dive right in and write the core game code. In your editor create a new folder called *snowball* in the *plugins/scriptcraft/plugins/* folder. Inside the *snowball* folder, create a new file called *game.js* and enter the following code:
+
+<caption>Listing 19.1: Snowball Fight core game source</caption>
+
+    var items = require('items');
+    var bkGameMode = org.bukkit.GameMode;
+    var bkSnowball = org.bukkit.entity.Snowball;
+    var bkDisplaySlot = org.bukkit.scoreboard.DisplaySlot;
+    
+    function SnowballFight( duration, teams ) {
+      var players;
+      var i;
+      var game;
+      var teamName;
+    
+      if ( typeof duration == 'undefined' ) {
+        duration = 60;
+      }
+      if ( typeof teams == 'undefined' ) {
+        teams =  {};
+        players = server.onlinePlayers;
+        for ( i = 0; i < players.length; i++ ) {
+          teamName = '' + players[i].name;
+          teams[ teamName ] = [teamName];
+        }
+      }
+      game = {
+        teams: teams,
+        duration: duration,
+        teamScores: {},
+        eventListener: null,
+        savedModes: {},
+        snowballs: [ items.snowBall( 64 ) ]
+      };
+    
+      function loop(){
+        if ( game.duration-- ){
+          game.objective.displayName = 'Snowball ' + game.duration;
+          updateScoreboard( game );
+          setTimeout( loop, 1000 );
+        } else {
+          end( game );
+        }
+      }
+      function onSnowballHit( event ) {
+        var snowball = event.damager;
+        if ( !snowball || !( snowball instanceof bkSnowball ) ) {
+          return;
+        }
+        var thrower = snowball.shooter;
+        var damaged = event.entity;
+        var throwerTeam = getPlayerTeam( thrower, game.teams );
+        var damagedTeam = getPlayerTeam( damaged, game.teams );
+    
+        if ( !throwerTeam || !damagedTeam ) {
+          return; // thrower/damagee wasn't in game
+        }
+        if ( throwerTeam != damagedTeam ) {
+          game.teamScores[ throwerTeam ]++;
+        } else {
+          game.teamScores[ throwerTeam ]--;
+        }
+      }
+    
+      start( game );
+      game.eventListener = events.entityDamageByEntity( onSnowballHit );
+      setTimeout(loop, 1000);
+    }
+    
+    function start( game ) {
+      var i;
+      var teamName;
+      var team;
+      var player;
+    
+      /*
+       Initialize the scoreboard
+       */
+      var scoreboard = server.scoreboardManager.getNewScoreboard();
+      var objective = scoreboard.registerNewObjective('win','dummy');
+      objective.displayName = ('Snowball ' + game.duration).underline().bold();
+      objective.displaySlot = bkDisplaySlot.SIDEBAR;
+      game.objective = objective;
+    
+      /*
+       put all players in survival mode and give them each 64 snowballs 
+       for every 20 seconds of play
+       */
+      for ( i = 0; i < game.duration; i += 20 ) {
+        game.snowballs.push( game.snowballs[ 0 ] );
+      }
+      
+      for ( teamName in game.teams ) {
+    
+        game.teamScores[ teamName ] = -1;
+        team = game.teams[ teamName ];
+    
+        for ( i = 0; i < team.length; i++ ) {
+    
+          player = server.getPlayer( team[i] );
+          game.savedModes[ player.name ] = player.gameMode;
+          player.gameMode = bkGameMode.SURVIVAL;
+          player.inventory.addItem( game.snowballs );
+          player.scoreboard = scoreboard;
+    
+        }
+    
+      }
+      updateScoreboard(game);
+      /*
+       due to a bug in Scoreboard, we need to force it to refresh by changing the score from -1 to 0
+       */
+      for ( teamName in game.teams ) {
+        game.teamScores[ teamName ] = 0;
+      }
+      updateScoreboard(game);
+    }
+    
+    function updateScoreboard( game ) {
+      var team;
+      var teamScore;
+      for (team in game.teamScores){
+        teamScore = game.objective.getScore( team );
+        teamScore.score = game.teamScores[ team ];
+      }
+    }
+    
+    function end( game ) {
+      var scores = [];
+      var i;
+      var teamName;
+      var team;
+      var player;
+      var scoreboard = server.scoreboardManager.getMainScoreboard();
+      var players = [];
+    
+      function resetScoreboard(){
+        var i;
+        for ( i = 0; i < players.length; i++ ) {
+          players[i].scoreboard = scoreboard;
+        }
+        game.objective.unregister();
+      }
+      for ( teamName in game.teams ) {
+        team = game.teams[teamName];
+        for ( i = 0; i < team.length; i++ ) {
+          // restore player's previous game mode and take back snowballs
+          player = server.getPlayer( team[i] );
+          player.gameMode = game.savedModes[ player.name ];
+          player.inventory.removeItem( game.snowballs );
+          players.push(player);
+        }
+      }
+      game.eventListener.unregister();
+      game.objective.displayName = 'GAME OVER';
+      /*
+       display scoreboard for 5 seconds after game ends
+       */
+      setTimeout(resetScoreboard, 5000);
+    }
+    
+    function getPlayerTeam( player, teams ) {
+      var teamName;
+      var team;
+      var i;
+      for ( teamName in teams ) {
+        team = teams[ teamName ];
+        for ( i = 0; i < team.length; i++ ) {
+          if ( team[i] == player.name ) {
+            return teamName;
+          }
+        }
+      }
+      return null;
+    }
+    
+    exports.SnowballFight = SnowballFight;
+
+### Running the game
+Once you've saved the file, reload your plugins using the */reload* or */js refresh()* command and then with 2 or more Players connected to the server issue the following command:
+
+    /js SnowballFight()
+
+The game should begin. Each player is allocated a number of snowballs and as soon any player strikes another with a snowball, the scoreboard is updated. Every participant in the mini-game can see the scoreboard. The game will continue for 60 seconds. At the end of the game, the scoreboard remains for a couple of seconds so the victors can savour the moment. 
+
+### Creating an Arena
+The mini-game is created using the *SnowballFight()* function which takes 2 parameters: duration and teams. If neither a duration nor teams parameter is provided then the default values are 60 seconds for the duration and a set of teams comprised of all of the players on the server. The following section of code in the *SnowballFight()* function:
+
+    if ( typeof teams == 'undefined' ) {
+      teams =  {};
+      players = server.onlinePlayers;
+      for ( i = 0; i < players.length; i++ ) {
+        teamName = '' + players[i].name;
+        teams[ teamName ] = [teamName];
+      }
+    }
+
+...creates a set of teams - one for each player - each of which is comprised of a single member. If you had two players online when the game started, the *teams* object would look something like this:
+
+    { 
+       "sean": ["sean"],
+       "walter": ["walter"]
+     }
+
+That's 2 teams whose names are same as the players' names and which each have a single member which happens to be the player. Each player becomes a team of one if no teams are explicitly passed as a parameter. Next we create a variable called *game* which will be used to store the state of the game and will be passed to other functions in the module.
+
 ### The game loop
+The *loop()* function is called once every second using the *setTimeout()* function and subtracts 1 from the game's duration counter, updates the scoreboard and schedules another call to itself in 1 second. If the game's duration counter is 0 it means that time has run out and the game is over in which case the *end()* funciton is called. 
+
+### Scope and functions
+You might be wondering why the *loop()* function is declared inside of the *SnowballFight()* function. The *loop()* function must be declared inside of the *SnowballFight()* function because it needs to use the *game* variable. Because both the *game* variable and the *loop()* function are declared inside of the *SnowballFight()* function, the *loop()* function can *see* the *game* variable. If the *loop()* function was declared *outside* the *SnowballFight()* function, it would not be able to see the *game* variable because variables are *private* to the function in which they're declared. Normally we'd declare the function outside of the *SnowballFight()* function and pass the *game* variable as a parameter, except we schedule the call to *loop()* using a *setTimeout()* call. There are actually a couple of ways to handle scope and functions in Javascript but I think declaring the *loop()* function inside the *SnowballFight()* function so it can see and work with the *game* variable is the simplest.
+
+### Listening for snowball hits
+Next we declare a new Event-handling function called *onSnowballHit()* which will be called every time an entity damages another entity. The peculiarly named *events.entityDamageByEntity()* function can be used to listen for damage caused to living things in the game. In our case, we're only concerned with damage caused by snowballs thrown by mini-game participants. The *getPlayerTeam()* function will return the team a player belongs to. If the thrower and damaged player are on different teams then the thrower's team score is increased, otherwise it's decreased.
+
+    if ( throwerTeam != damagedTeam ) {
+      game.teamScores[ throwerTeam ]++;
+    } else {
+      game.teamScores[ throwerTeam ]--;
+    }
+
 ### Starting the game
+The main part of the *SnowBallFight()* function is at the end. The following 3 lines of code are responsible for starting the game, listening for events and starting the game's loop.
+
+    start( game );
+    game.eventListener = events.entityDamageByEntity( onSnowballHit );
+    setTimeout(loop, 1000);
+
+The *start()* function is responsible for initializing the game's scoreboard and team scores, storing each player's current game mode so it can be restored after the game, setting the player's game mode to SURVIVAL, and giving each player snowballs to throw. At the time of writing there was a problem with Scoreboards which made it necessary to first set each team's score to -1, update the scoreboard, then set each team's score to 0 and update again to force the scoreboard to display all teams' scores at the start of the game. Withouth this workaround, team scores only appeared when the team scored a point.
+
+### Initializing and updating the Scoreboard
+The first group of statements in the *start()* function use Bukkit's Scoreboard API to initialize the mini-game's Scoreboard:
+
+    var scoreboard = server.scoreboardManager.getNewScoreboard();
+    var objective = scoreboard.registerNewObjective('win','dummy');
+    objective.displayName = ('Snowball ' + game.duration).underline().bold();
+    objective.displaySlot = bkDisplaySlot.SIDEBAR;
+    game.objective = objective;
+
+Each Scoreboard object can have one or more objectives and each objective can be linked to a different *Display Slot*. There are 3 different display slots: BELOW_NAME, SIDEBAR, and PLAYER_LIST. In our game we use the SIDEBAR slot as it provides a nice leaderboard view which is always visible at the side of the screen. 
+
 ### Who's playing
 ### Displaying the Score
 ### Ending the game
+
 # Appendices
 ## On the use of the `self` variable
 Don't use it in your modules. It's only a convenience function for use at the in-game prompt.

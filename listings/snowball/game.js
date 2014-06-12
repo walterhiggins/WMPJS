@@ -1,4 +1,5 @@
 var items = require('items');
+var textcolors = require('textcolors');
 var bkGameMode = org.bukkit.GameMode;
 var bkSnowball = org.bukkit.entity.Snowball;
 var bkDisplaySlot = org.bukkit.scoreboard.DisplaySlot;
@@ -15,9 +16,12 @@ function SnowballFight( duration, teams ) {
   if ( typeof teams == 'undefined' ) {
     teams =  {};
     players = server.onlinePlayers;
-    for ( i = 0; i < players.length; i++ ) {
-      teamName = '' + players[i].name;
-      teams[ teamName ] = [teamName];
+    var teamNames = ['red','blue','yellow'];
+    var playerCount = players.length;
+    for ( i = 0; i < playerCount; i++ ) {
+      var playerName = players[i].name;
+      teamName = teamNames[ i % playerCount ];
+      teams[ teamName ] = [playerName];
     }
   }
   game = {
@@ -68,15 +72,15 @@ function start( game ) {
   var teamName;
   var team;
   var player;
-
+  var bkTeam;
   /*
    Initialize the scoreboard
    */
-  var scoreboard = server.scoreboardManager.getNewScoreboard();
-  var objective = scoreboard.registerNewObjective('win','dummy');
-  objective.displayName = ('Snowball ' + game.duration).underline().bold();
-  objective.displaySlot = bkDisplaySlot.SIDEBAR;
-  game.objective = objective;
+  var bkScoreboard = server.scoreboardManager.getNewScoreboard();
+  var bkObjective = bkScoreboard.registerNewObjective('win','dummy');
+  bkObjective.displayName = ('Snowball ' + game.duration).underline().bold();
+  bkObjective.displaySlot = bkDisplaySlot.SIDEBAR;
+  game.objective = bkObjective;
 
   /*
    put all players in survival mode and give them each 64 snowballs 
@@ -91,14 +95,17 @@ function start( game ) {
     game.teamScores[ teamName ] = -1;
     team = game.teams[ teamName ];
 
+    bkTeam = bkScoreboard.registerNewTeam( teamName );
+    bkTeam.prefix = textcolors.colorize(teamName, '');
     for ( i = 0; i < team.length; i++ ) {
 
       player = server.getPlayer( team[i] );
       game.savedModes[ player.name ] = player.gameMode;
       player.gameMode = bkGameMode.SURVIVAL;
       player.inventory.addItem( game.snowballs );
-      player.scoreboard = scoreboard;
+      player.scoreboard = bkScoreboard;
 
+      bkTeam.addPlayer( player );
     }
 
   }
@@ -114,10 +121,10 @@ function start( game ) {
 
 function updateScoreboard( game ) {
   var team;
-  var teamScore;
+  var bkScore;
   for (team in game.teamScores){
-    teamScore = game.objective.getScore( team );
-    teamScore.score = game.teamScores[ team ];
+    bkScore = game.objective.getScore( team );
+    bkScore.score = game.teamScores[ team ];
   }
 }
 
@@ -127,13 +134,13 @@ function end( game ) {
   var teamName;
   var team;
   var player;
-  var scoreboard = server.scoreboardManager.getMainScoreboard();
+  var mainScoreboard = server.scoreboardManager.getMainScoreboard();
   var players = [];
 
   function resetScoreboard(){
     var i;
     for ( i = 0; i < players.length; i++ ) {
-      players[i].scoreboard = scoreboard;
+      players[i].scoreboard = mainScoreboard;
     }
     game.objective.unregister();
   }

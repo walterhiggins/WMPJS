@@ -3742,13 +3742,14 @@ First I'll present the game in a single Javascript module with a function which 
 Before we begin coding let's lay down some of the rules of the Snowball Fight mini-game.
 
 1. Players will each be allocated a number of snowballs when the game begins.
-2. Players gain a point if they hit an opponent.
-3. Players lose a point if they hit a member of their own team.
-4. When the game starts, players will enter Survival Mode. This is crucial to how the game works. When a player is hit by a snowball we need to be able to update the score. In creative mode, there's no way to listen for this event. 
-5. When the game ends, players will return to the Game Mode they were in before the game started.
-6. A scoreboard of players and their scores will be displayed during the game.
-7. A count-down timer (in seconds) will be displayed at the top of the scoreboard.
-8. At the end of the game, the scoreboard will remain on-screen for a few seconds so players can see the final score for each team/player.
+2. Each player will be a member of a team. There can be up to 3 teams: red, blue and yellow. Each player's name appears in the color of their team. 
+3. Players gain a point if they hit an opponent.
+4. Players lose a point if they hit a member of their own team.
+5. When the game starts, players will enter Survival Mode. This is crucial to how the game works. When a player is hit by a snowball we need to be able to update the score. In creative mode, there's no way to listen for this event. 
+6. When the game ends, players will return to the Game Mode they were in before the game started.
+7. A scoreboard of players and their scores will be displayed during the game.
+8. A count-down timer (in seconds) will be displayed at the top of the scoreboard.
+9. At the end of the game, the scoreboard will remain on-screen for a few seconds so players can see the final score for each team/player.
 
 ### Logistics
 For the game to work, players should be in close proximity to one another. Later in the chapter we'll construct a special arena for the game to make it more fun. Much of the fun of Minecraft mini-games comes from the anticipation of the game and the ceremony surrounding it. For example, many player vs. player mini-games have a holding area where players wait to jump into the mini-game or choose teams to participate in prior to the game starting. The mechanism for starting a game can vary from mini-game to mini-game. Initially we'll keep things simple - only the operator may start a Snowball Fight mini-game using the */js SnowballFight()* command. 
@@ -3803,20 +3804,24 @@ The mini-game is created using the *SnowballFight()* function which takes 2 para
     if ( typeof teams == 'undefined' ) {
       teams =  {};
       players = server.onlinePlayers;
-      for ( i = 0; i < players.length; i++ ) {
-        teamName = '' + players[i].name;
-        teams[ teamName ] = [teamName];
+      var teamNames = ['red','blue','yellow'];
+      var playerCount = players.length;
+      for ( i = 0; i < playerCount; i++ ) {
+        var playerName = players[i].name;
+        teamName = teamNames[ i % playerCount ];
+        teams[ teamName ] = [playerName];
       }
     }
 
-...creates a set of teams - one for each player - each of which is comprised of a single member. If you had two players online when the game started, the *teams* object would look something like this:
+...creates a set of up to 3 teams and each player is allocated to a team in turn. If you had 8 players online when the game started, the *teams* object might look something like this:
 
     { 
-       "sean": ["sean"],
-       "walter": ["walter"]
-     }
+       red: ['sean', 'moe', 'curly'],
+       blue: ['walter', 'larry', 'oliver'],
+       yellow: ['john', 'paul']
+    }
 
-That's 2 teams whose names are same as the players' names and which each have a single member which happens to be the player. Each player becomes a team of one if no teams are explicitly passed as a parameter. Next we create a variable called *game* which will be used to store the state of the game and will be passed to other functions in the module.
+In this game there should ideally only be up to 3 teams where each team name is one of the following 3 colors: red, blue, yellow. Try to avoid having green and red teams because the colors can be difficult to tell apart for some players. Each player's name will appear in the color of their team to make it easier for players to tell who is an opponent and who is on the same team. Next we create a variable called *game* which will be used to store the state of the game and will be passed to other functions in the module.
 
 ### The game loop
 The *loop()* function is called once every second using the *setTimeout()* function and subtracts 1 from the game's duration counter, updates the scoreboard and schedules another call to itself in 1 second. If the game's duration counter is 0 it means that time has run out and the game is over in which case the *end()* funciton is called. 
@@ -3845,17 +3850,28 @@ The *start()* function is responsible for initializing the game's scoreboard and
 ### Initializing and updating the Scoreboard
 The first group of statements in the *start()* function use Bukkit's Scoreboard API to initialize the mini-game's Scoreboard:
 
-    var scoreboard = server.scoreboardManager.getNewScoreboard();
-    var objective = scoreboard.registerNewObjective('win','dummy');
-    objective.displayName = ('Snowball ' + game.duration).underline().bold();
-    objective.displaySlot = bkDisplaySlot.SIDEBAR;
-    game.objective = objective;
+    var bkScoreboard = server.scoreboardManager.getNewScoreboard();
+    var bkObjective = bkScoreboard.registerNewObjective('win','dummy');
+    bkObjective.displayName = ('Snowball ' + game.duration).underline().bold();
+    bkObjective.displaySlot = bkDisplaySlot.SIDEBAR;
+    game.objective = bkObjective;
 
 Each Scoreboard object can have one or more objectives and each objective can be linked to a different *Display Slot*. There are 3 different display slots: BELOW_NAME, SIDEBAR, and PLAYER_LIST. In our game we use the SIDEBAR slot as it provides a nice leaderboard view which is always visible at the side of the screen. 
 
-### Who's playing
+### Who's playing?
+The next step in starting the game is to loop over all of the teams in the game and for each team, create a *org.bukkit.scoreboard.Team* object which is used to display each player's name in their team colors, then for each player in each team, save the player's game mode, and add the player to the *Team* object. The following lines of code:
+
+    bkTeam = scoreboard.registerNewTeam( teamName );
+    bkTeam.prefix = textcolors.colorize(teamName, '');
+
+Construct a new Team object and set the team's *prefix*. The *prefix* is a special string which is placed in front of each player's name in the game. In chapter @@chapter{chatcolor} we created a *textcolor* module for changing chat message colors and here we re-use that module to change the color of the player's name as it appears above their head. When we call *textcolors.colorize('gold','')* it returns a special string which is empty except for the color-code used by minecraft. If this special string is placed in front of a chat message or used as a team prefix it will change the color of the message or team member name.
+
 ### Displaying the Score
+The *updateScoreboard()* function is called twice at the start of the game because each score must first be set to -1 then 0 for the scoreboard to be refreshed. It's also called from within the *loop()* function every second of the game.
+
 ### Ending the game
+The *end()* function is responsible for ending the game and ensuring that each player's game mode is restored. Any snowballs which were given to the player at game start are taken away. The event listener is unregistered and finally, after an interval of a few seconds the scoreboard disappears and the main scoreboard is restored for each player.
+
 
 # Appendices
 ## On the use of the `self` variable

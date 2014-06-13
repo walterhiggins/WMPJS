@@ -72,15 +72,15 @@ function start( game ) {
   var teamName;
   var team;
   var player;
-  var bkTeam;
+
   /*
    Initialize the scoreboard
    */
-  var bkScoreboard = server.scoreboardManager.getNewScoreboard();
-  var bkObjective = bkScoreboard.registerNewObjective('win','dummy');
-  bkObjective.displayName = ('Snowball ' + game.duration).underline().bold();
-  bkObjective.displaySlot = bkDisplaySlot.SIDEBAR;
-  game.objective = bkObjective;
+  var scoreboard = server.scoreboardManager.getNewScoreboard();
+  var objective = scoreboard.registerNewObjective('win','dummy');
+  objective.displayName = ('Snowball ' + game.duration).underline().bold();
+  objective.displaySlot = bkDisplaySlot.SIDEBAR;
+  game.objective = objective;
 
   /*
    put all players in survival mode and give them each 64 snowballs 
@@ -95,17 +95,17 @@ function start( game ) {
     game.teamScores[ teamName ] = -1;
     team = game.teams[ teamName ];
 
-    bkTeam = bkScoreboard.registerNewTeam( teamName );
-    bkTeam.prefix = textcolors.colorize(teamName, '');
+    var sbTeam = scoreboard.registerNewTeam( teamName );
+    sbTeam.prefix = textcolors.colorize(teamName, '');
     for ( i = 0; i < team.length; i++ ) {
 
       player = server.getPlayer( team[i] );
       game.savedModes[ player.name ] = player.gameMode;
       player.gameMode = bkGameMode.SURVIVAL;
       player.inventory.addItem( game.snowballs );
-      player.scoreboard = bkScoreboard;
+      player.scoreboard = scoreboard;
 
-      bkTeam.addPlayer( player );
+      sbTeam.addPlayer( player );
     }
 
   }
@@ -121,10 +121,10 @@ function start( game ) {
 
 function updateScoreboard( game ) {
   var team;
-  var bkScore;
+  var teamScore;
   for (team in game.teamScores){
-    bkScore = game.objective.getScore( team );
-    bkScore.score = game.teamScores[ team ];
+    teamScore = game.objective.getScore( team );
+    teamScore.score = game.teamScores[ team ];
   }
 }
 
@@ -134,13 +134,13 @@ function end( game ) {
   var teamName;
   var team;
   var player;
-  var mainScoreboard = server.scoreboardManager.getMainScoreboard();
+  var scoreboard = server.scoreboardManager.getMainScoreboard();
   var players = [];
 
   function resetScoreboard(){
     var i;
     for ( i = 0; i < players.length; i++ ) {
-      players[i].scoreboard = mainScoreboard;
+      players[i].scoreboard = scoreboard;
     }
     game.objective.unregister();
   }

@@ -2749,7 +2749,7 @@ We'll learn more about JSON, and loading and saving data later in the book.
 ### Achievement Unlocked!
 ![](@@nextAchievement)
 
-Congratulations! You've discovered some of the power of Objects in Javascript and how to create efficient lookups. Your plugin development apprenticeship is complete!
+Congratulations! You've discovered the power of Objects in Javascript and how to create efficient lookups. Your plugin development apprenticeship is complete!
 
 ### Summary
 In this chapter you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final chapter in the Basic Modding section of the book. Next, we move on to advanced modding.
@@ -3244,11 +3244,6 @@ From this diagram we can see that *FurnaceRecipe*, *ShapedRecipe* and *Shapeless
 
 Ultimately the *server.addRecipe()* method *doesn't care* what type of *Recipe* is added, *FurnaceRecipe*, *ShapedRecipe* or *ShapelessRecipe*, it doesn't matter, all the *server* object cares is that it *is* a *Recipe* object so it can call the *Recipe.getResult()* method (which is common to all 3 subclasses) when someone uses the recipe in a crafting grid. We'll revist this topic in the following Chapter.
 
-### Achievement Unlocked 
-![next achievement](@@nextAchievement)
-
-Congratulations! You've begun exploring the Bukkit API and have learnt a few tricks to understanding the reference documentation and how to use it in your own plugins.
-
 ### Summary
 In this chapter we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next chapter, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
 
@@ -3454,12 +3449,6 @@ I wrote it like this so I could create a short callback function at the in-game 
     } 
 
 The one-line version of the code avoids the need to create new variables for the entity and the shooter but is probably more readable - especially for beginning programmers. Once again, whichever style you use is up to you. You should experiment with different styles as you become more adept and comfortable writing Javascript code.
-
-### Achievement Unlocked
-
-![](@@nextAchievement)
-
-You've crafted a new Recipe, added teleporting behavior to the game and dug deep into the Bukkit API Documentation. You have the wherewithall to go exploring the Bukkit API Reference and begin using it in your own plugins. You are an adept plugin developer!
 
 ### Summary
 In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned more about Inheritance and how to use it when browsing the Bukkit API reference.
@@ -3732,11 +3721,13 @@ While not a comprehensive protection plugin, the code we created in this chapter
 ### Introduction
 In this chapter we're going to create a Player vs. Player mini-game called Snowball Fight. The aim of the game is to hit your opponents with snowballs as many times as possible while avoiding being hit yoursel or hitting players on your own team. The game will be playable in either Team mode where players can form opposing teams or free-for-all mode where every player must hit other players.
 
+![Snowball Fight](img/snowball/snowball-fight.png)
+
 The game will be kept simple for the sake of providing example code which you might want to adapt and extend to create your own mini-game. 
 
 The game will be started using a javascript function and its duration and team structure will be passed as paramters. If no parameters are passed then the default game duration will be 60 seconds and the game will be in free-for-all mode - all players against each other.
 
-First I'll present the game in a single Javascript module with a function which operators will use to start the game and later in this chapter we'll cover how players can start the game using in-game mechanisms. We'll also cover how to create an Arena for the game to be played in.
+First I'll present the game in a single Javascript module with a function which operators will use to start the game and later in this chapter we'll cover how players can start the game using in-game mechanisms. We'll also cover how to create an Arena for the game to be played in and a command for use by players to start the game.
 
 ### Game Rules
 Before we begin coding let's lay down some of the rules of the Snowball Fight mini-game.
@@ -3872,6 +3863,104 @@ The *updateScoreboard()* function is called twice at the start of the game becau
 ### Ending the game
 The *end()* function is responsible for ending the game and ensuring that each player's game mode is restored. Any snowballs which were given to the player at game start are taken away. The event listener is unregistered and finally, after an interval of a few seconds the scoreboard disappears and the main scoreboard is restored for each player.
 
+### Creating an Arena
+So far we've created a single javascript function for use by operators to start a new Snowball Fight game. The game works but could be made much more fun by constructing an arena to play in and making it fun and easy for players to join and start and game and choose a team. Let's use the Drone (again) to construct a simple 24 by 24 block arena of snow with some walls to make an interesting place to play the game. The Arena will have a glass wall so spectators can watch and will have 3 large colored waiting areas outside the walled arena where players can choose their team simply by waiting in one of the 3 colored zones. The entire arena and waiting areas will be protected from griefing using the *zonemaker()* and *region* functions we developed in chapter @@chapter{tntfree} so if you haven't already added the protection modules from that chapter, I recommend doing so now.
+
+Later on we'll add the ability for any player waiting in a colored zone can start the game using the `/jsp snowball` command which we'll develop later. First let's write the code to build an arena. In the *snowball* folder create a new file called *arena.js* and enter the following code:
+
+@@listing snowball/arena.js plugins/snowball/arena.js Constructing an Snowball Fight Arena
+
+The *snowballArena()* function is a new Drone extension and is meant for use by operators to create an arena for play. Operators can use this function as they would use any Drone function. In the game (with operator privileges) target a block at ground level and issue the following command:
+
+    /js snowballArena();
+
+An arena should appear shortly. The arena looks like this from above (plan view):
+
+![Snowball Arena](img/snowball/arena-plan.png)
+
+Unlike other Drone functions we've created, we want to save some information about the newly-created arena for later (so when we develop the */jsp snowball* command we can tell which players are on each team using the player's starting zone). We used the *persist()* function we first learnt about in chapter @@chapter{chatcolor} to load and automatically save the arena data. I recommend issuing the */js refresh()* statement after you create each snowball arena so that the arena data is saved immediately.
+
+In each of the colored zones is a sign with instructions for players who want to play. The instructions read:
+
+    Snowball Fight
+    In color area:
+    /jsp snowball
+
+These signs are created using the Drone's *sign()* function which makes it easy to produce sign posts or hanging signs with messages. 
+
+#### Protecting the arena
+The arena is protected using the *zonemaker()* function which takes 3 parameters: A material, width and length. If no material is provided then the zone will be protected but no border blocks are laid down. For this arena, we only want to protect it, and don't need to lay down a border so we call it like this:
+
+    this.zonemaker( null, 24, 32 );
+
+When null is passed instead of a material, no border is built but the area is protected from block-break and block-place events by non-operators.
+
+### Making it easy for players to start the game
+Having created the core game code and an arena in which to play the game, the next step is to add some simple mechanics for starting and stopping the game, and choosing teams. The Drone's *snowballArena()* function creates not just the arena in which the game is played but a waiting zone outside the arena which is divided into 3 colored areas - one for each team. Players who wish to play the game simply move into one of the 3 colored areas - the area they choose is important because this will be the team they belong to once the game begins. 
+
+Any one of the players in a waiting area can choose to start the game when other players are on at least one other color area by issuing the following command:
+
+    /jsp snowball
+
+Let's complete the game by writing the code which will handle this command. In the *snowball* folder, create a new file called *command.js* and enter the following code:
+
+@@listing command.js command.js A New Command /jsp snowball
+
+This module also uses the *protection/region* module we developed in chapter @@chapter{tntfree} as well as the *game* module we developed earlier in this chapter.
+
+#### Where is the player?
+The first thing the *snowball* command does is check the location of the player who invoked the command. If the player who issues the */jsp snowball* command isn't on one of the 3 colored waiting areas then the game won't begin (we don't want just anyone starting a game - only those who want to play the game should be able to start it). We use the *region.contains()* function from chapter @@chapter{tntfree} to see if the player is located in one of the 3 color waiting areas. 
+
+#### Who wants to play?
+If the player *is* in one of the waiting areas we keep a reference to the waiting area's *arena*. We then loop over *all* of the players on the server and if any player is in one of the *arenas* color zones we add them to the appropriate team:
+
+    for (i = 0;i < allPlayers.length; i++) {
+
+      participant = allPlayers[i];
+      var loc = participant.location;
+      isParticipant = false;
+      
+      if (region.contains( arena.redZone, loc) ){
+        teams.red.push(''+participant.name);
+        spawn = arena.redSpawn;
+        isParticipant = true;
+      } 
+      ...
+      if (isParticipant){
+        pregameLocs.push({
+	  player: participant, 
+	  location: loc
+        });
+        gameLocs.push({
+	  player: participant,
+	  location: new bkLocation( loc.world, spawn.x, spawn.y, spawn.z)
+        });
+      }
+    }
+
+The *pregameLocs* array is a list of players and their locations just before the game begins. We need to keep a list of such locations because we'll teleport the players inside the arena when the game begins and would like to return each player to their original location when the game ends. Each arena also has 3 spawn points where players will be teleported when the game begins. 
+
+![Snowball Fight Waiting Area](img/snowball/waiting-area.png)
+
+#### How many teams?
+Next the *snowball* command function checks how many teams have players. If there's only one team then the game won't begin:
+
+    if ( (teams.red.length == 0 && teams.blue.length == 0)
+      || (teams.red.length == 0 && teams.yellow.length == 0)
+      || (teams.blue.length == 0 && teams.yellow.length == 0))
+    {
+      player.sendMessage('Need more than one team to play. Someone choose a different color.');
+      return;
+    }
+
+#### Starting and Stopping the game
+Finally - assuming the player who issued the command wants to play and there are enough teams/players to play - we teleport the players into the arena and begin the game using the *SnowballFight()* function defined earlier in this chapter. 
+We also schedule a deferred function call using the *setTimeout()* function. The *returnPlayers()* function will be invoked 5 seconds after the game has ended and will return each player to the waiting area they were in before the game started. A firework will launch above each player of the winning team so everyone - players and spectators - will know which team won the game. 
+
+### Summary
+In this chapter we built a player vs. player mini-game from scratch. We *re-used* many of the functions we wrote in earlier chapters and made good use of the Drone object to create an arena in which to play the game. This has been the most complex of the new features we've added to Minecraft over the course of this book, but it's also one which is fun to play with your friends. 
+
+Playing games is fun but writing your own games can be hugely rewarding, especially when you get to see your friends play a game you created!
 
 # Appendices
 ## On the use of the `self` variable

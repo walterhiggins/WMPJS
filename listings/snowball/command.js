@@ -5,81 +5,72 @@ var bkLocation = org.bukkit.Location;
 var game = require('./game');
 var arenas = persist('snowball-arenas', []);
 
-function snowball( params, player ){
-  var playerLoc = player.location;
-  var i = 0;
+function snowball( params, sender ){
+  var i;
   var arena = null;
   var gameOn = false;
-  var participant = null;
 
-  for (; i < arenas.length; i++){
+  var allPlayers = bukkit.players();
+  var player;
+  var teams = {red: [], blue:[], yellow:[]};
+  var spawns = [];
+  var spawn = null;
+
+  for ( i = 0; i < arenas.length; i++ ) {
     arena = arenas[i];
-    if (region.contains( arena.redZone, playerLoc) ||
-	region.contains( arena.blueZone, playerLoc) ||
-	region.contains( arena.yellowZone, playerLoc) ){
+    if ( region.contains( arena.redZone, sender.location) 
+	|| region.contains( arena.blueZone, sender.location) 
+	|| region.contains( arena.yellowZone, sender.location) ) {
       // game on!
       gameOn = true;
       break;
     } 
   }
   if (!gameOn){
-    player.sendMessage('You must issue this command while in a colored zone');
+    sender.sendMessage('You must issue this command while in a colored zone');
     return;
   }
-  var allPlayers = bukkit.players();
-  var teams = {red: [], blue:[], yellow:[]};
-  var pregameLocs = [];
-  var gameLocs = [];
-  var isParticipant = false;
-  var spawn = null;
 
   for (i = 0;i < allPlayers.length; i++) {
-
-    participant = allPlayers[i];
-    var loc = participant.location;
-    isParticipant = false;
-    if (region.contains( arena.redZone, loc) ){
-      teams.red.push(''+participant.name);
-      spawn = arena.redSpawn;
-      isParticipant = true;
+    player = allPlayers[i];
+    inZone = false;
+    if (region.contains( arena.redZone, player.location) ){
+      teams.red.push( player.name );
+      inZone = arena.redSpawn;
+    } else if (region.contains( arena.blueZone, player.location) ) {
+      teams.blue.push( player.name );
+      inZone = arena.blueSpawn;
+    } else if (region.contains( arena.yellowZone, player.location) ){
+      teams.yellow.push( player.name );
+      inZone = arena.yellowSpawn;
     } 
-    if (region.contains( arena.blueZone, loc) ) {
-      teams.blue.push(''+participant.name);
-      spawn = arena.blueSpawn;
-      isParticipant = true;
-    }
-    if (region.contains( arena.yellowZone, loc) ){
-      teams.yellow.push(''+participant.name);
-      spawn = arena.yellowSpawn;
-      isParticipant = true;
-    } 
-    if (isParticipant){
-      pregameLocs.push({
-	player: participant, 
-	location: loc
-      });
-      gameLocs.push({
-	player: participant,
-	location: new bkLocation( loc.world, spawn.x, spawn.y, spawn.z)
-      });
+    if ( inZone ) {
+      spawns.push( {
+	participant: player,
+	oldLocation: player.location,
+	newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+      } );
     }
   }
   if ( (teams.red.length == 0 && teams.blue.length == 0)
-    || (teams.red.length == 0 && teams.yellow.length == 0)
-    || (teams.blue.length == 0 && teams.yellow.length == 0))
+      || (teams.red.length == 0 && teams.yellow.length == 0)
+      || (teams.blue.length == 0 && teams.yellow.length == 0))
   {
-    player.sendMessage('Need more than one team to play. Someone choose a different color.');
+    sender.sendMessage('Need more than one team to play. Someone choose a different color.');
     return;
   }
-  function returnPlayers(){
-    for (var i = 0;i < pregameLocs.length; i++) { 
-      pregameLocs[i].player.teleport(pregameLocs[i].location, bkTeleportCause.PLUGIN);
-      fireworks.firework( pregameLocs[i].location );
+  function returnPlayers() {
+    var spawn;
+    for (var i = 0;i < spawns.length; i++) { 
+      spawn = spawns[i];
+      spawn.participant.teleport(spawn.oldLocation, bkTeleportCause.PLUGIN);
+      fireworks.firework( spawn.oldLocation );
     }
   }
 
-  for (var i = 0;i < pregameLocs.length; i++) { 
-    gameLocs[i].player.teleport(gameLocs[i].location, bkTeleportCause.PLUGIN);
+  for (i = 0;i < spawns.length; i++) { 
+    spawn = spawns[i];
+    spawn.participant.teleport(spawn.newLocation, bkTeleportCause.PLUGIN);
   }
   setTimeout(returnPlayers, 65000);
   

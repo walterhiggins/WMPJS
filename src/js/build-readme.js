@@ -149,7 +149,7 @@ for (var i = 0;i < contents.length; i++){
   var line = contents[i];
   for (var xf in xforms){
     try{
-      line = line.replace(new RegExp(xf,'g'), xforms[xf]);
+      line = (''+line).replace(new RegExp(xf,'g'), xforms[xf]);
     }catch (e){
       err.println('Error occurred while processing ' + line + ' Error: ' + e);
       throw e;

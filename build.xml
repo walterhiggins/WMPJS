@@ -7,8 +7,13 @@
     <mkdir dir="${build}"/>
   </target>
 
+  <target name="clean">
+    <delete dir="${dist}"/>
+  </target>
   <target name="compile" depends="init">
-    <javac includeantruntime="false" srcdir="${src}" destdir="${build}"/>
+    <javac includeantruntime="false" 
+	   srcdir="${src}" 
+	   destdir="${build}"/>
   </target>
 
   <target name="build-drone-ref" depends="compile">
@@ -20,7 +25,27 @@
     </java>
   </target>
 
-  <target name="build-readme.md" depends="build-drone-ref,compile">
+  <target name="build-events-ref" depends="compile">
+    <java classname="jscript" failonerror="true" fork="true" error="error.log" output="target/events-reference.html">
+      <classpath>
+	<pathelement path="${build}"/>
+	<pathelement path="../ScriptCraft/target/minecraft/craftbukkit.jar"/>
+      </classpath>
+      <arg value="src/js/generateEventsReference.js"/>
+    </java>
+  </target>
+
+  <target name="build-items-ref" depends="compile">
+    <java classname="jscript" failonerror="true" fork="true" error="error.log" output="target/items-reference.html">
+      <classpath>
+	<pathelement path="${build}"/>
+	<pathelement path="../ScriptCraft/target/minecraft/craftbukkit.jar"/>
+      </classpath>
+      <arg value="src/js/generateItemsReference.js"/>
+    </java>
+  </target>
+
+  <target name="build-readme.md" depends="build-drone-ref, build-events-ref, build-items-ref, compile">
     <java classname="jscript" failonerror="true" fork="true" error="error.log" output="README.md">
       <classpath>
 	<pathelement path="${build}"/>

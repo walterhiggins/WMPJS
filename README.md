@@ -482,7 +482,7 @@ The answer to the above is `false` (3 is not greater than 5). I can ask *Is 3 le
 ... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is code which asks 'Does the player have any health points left?' and if the answer to that question is `true` then the player can continue playing.
 
 ### Variables
-
+#### Creating Variables
 ![](img/hearts.png)
 
 You can't type just anything after the `js` command and expect an answer. You have to use expressions that Javascript understands. For example if I type:
@@ -491,19 +491,19 @@ You can't type just anything after the `js` command and expect an answer. You ha
     
 The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined` which is Javascript's way of saying "I don't understand what you mean by 'hearts' ".
 
-Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is you do so like this...
+Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is, you do so like this:
 
     js hearts = 8;
     
 ... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
-![](img/chest.png "Variables are like Chests. You can store stuff in them.")
+![Variables are like Chests. You can store stuff in them.](img/chest.png "Variables are like Chests. You can store stuff in them.")
 
 Now when you type `js hearts`, Javascript understands what `hearts` and remembers its value and prints it out. Try it:
 
     js hearts
     
-It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an 'assignment'. I've 'assigned' the value 8 to the variable 'hearts' which I've done using a *single* `=` sign. I can reassign the variable 'hearts' a different value like this:
+It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an *assignment*. I've *assigned* the value 8 to the variable *hearts* using a *single* `=` sign. I can reassign the variable *hearts* a different value like this:
 
     js hearts = 9
     
@@ -532,6 +532,7 @@ You'll notice that the value of the 'hearts' variable is unchanged. It's still `
     
 What we've done here is combine a math operation and an assignment in a single statement. Now issue the command `js hearts` and you'll see that hearts is now `10`.
 
+#### String variables
 Let's create another variable called 'healthMessage' and assign it a value:
 
     js healthMessage = 'You have ' + hearts + ' health remaining'
@@ -556,12 +557,14 @@ That last one might surprise you. Javascript treats anything between quotes as a
 
 The letters, numbers and other symbols which form a string are known as *Characters*. A *Character* is any single letter, number or symbol. 'a','B','9', '-', '.', '/' and ':' are all examples of *Characters*.
 
+#### Naming variables
 You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable names cannot have space characters. There are a few other rules about what javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
 
 Javascript programmers - as a habit - generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among javascript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
 
 You can read more about CamelCase on WikiPedia http://en.wikipedia.org/wiki/CamelCase
 
+#### Making mistakes
 Feel free to experiment at this point. Create your own variables using your own numbers, strings and operators. If you make a mistake you'll see a long-winded error message in your console window. These error messages are called stack traces and they're the computers way of telling you something went wrong. Stack traces can be very useful for Java programmers but not so useful for Javascript. Remember - the Minecraft Server software is written in Java not Javascript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the Javascript code you type into Java code so that the server can understand it. If the javascript code doesn't make sense then the translation won't work. 
 
 Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even if we are talking and there's background noise. Computers on the other hand are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake you learn something new. Each of the following statements will cause an error:
@@ -703,17 +706,12 @@ The 'console' variable is one of the built-in variables in ScriptCraft and its t
 
     js Herobrine
 
-The type of a variable is very important because it determines what you can do with it and how it behaves. 
-Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
+The type of a variable is very important because it determines what you can do with it and how it behaves. Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
 
-#### Functions
-Functions in javascript are very powerful because they contain code which can be called any number of times. Let's look at one of the built-in functions in Javascript - the `parseInt()` function.
-
-##### Term: Built-in 
-Javascript comes with many 'built-in' functions. These are useful bits of code which can be used by programmers. A 'built-in' function is simply a function which comes bundled with Javascript. 
+### Functions
+Functions in javascript are very powerful because they are containers for code which can be called any number of times. In Javascript you can write your own functions or use any of the *built-in* functions provided by the language. A *built-in* function is simply a function which comes bundled with JavaScript. Let's look at one of the built-in functions in Javascript - the `parseInt()` function.
 
 ##### Using functions
-
 The 'parseInt()' function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the parseInt() function, it will try to figure out what number is in the text. Let's try it out:
 
     js parseInt('4 hours until sunset')
@@ -726,7 +724,7 @@ We are effectively saying to parseInt "here's some text - give me the number (an
     js parseInt('This is not a number');
     js parseInt('3 blind mice');
 
-##### Writing your own functions
+#### Writing your own functions
 One of the really cool things about programming is that you're not limited to using only the built-in functions provided by the language. You can create your own functions. In this book we're going to create a lot of functions to do cool things you wouldn't normally be able to do in Minecraft. For now let's create a simple new function that adds two numbers together. 
 
     js function add( firstNumber, secondNumber ) { return firstNumber + secondNumber }
@@ -1004,7 +1002,17 @@ The exports variable is a special type of variable - it is an 'object'. An objec
 
     exports.favoriteGame = 'Minecraft';
 
-... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have an *yield* property which says how wide the explosion will be. Players have dozens of properties. For example to give yourself the ability to fly, issue `js self.allowFlight = true` at the in-game command prompt. To give yourself super-human speed issue `js self.walkSpeed = 1`. To reset your walkspeed to normal issue `js self.walkSpeed = 0` . The point is - everything in the game is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters. 
+... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have an *yield* property which says how wide the explosion will be. 
+
+Players have dozens of properties. For example to give yourself the ability to fly, issue the following command at the in-game prompt: 
+
+    js self.allowFlight = true
+
+To give yourself super-human speed issue this command: 
+    
+    js self.walkSpeed = 1 
+
+To reset your walkspeed to normal issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
 
 #### Term: Property
 A *property* is an attribute of an Object - for example in real life we (humans that is) all have properties: eye-color, date-of-birth, name and so on. Objects in Javascript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables (called objects).
@@ -1084,7 +1092,7 @@ Once you've saved your work go back to Minecraft and at the in-game command prom
 
     /js refresh()
 
-The refresh() function is a ScriptCraft function which reloads all of the javascript code. The server has a built-in /reload command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
+The refresh() function is a ScriptCraft function which reloads all of the javascript code. The server has a built-in */reload* command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
 
 The refresh() function is important, you should execute it every time you change your Javascript code because changes to your code won't be activated in the game until you do so.
 
@@ -1924,7 +1932,7 @@ The `if` statement is one of several *block* statements in javascript, that is, 
 Now jump into the game and at the in-game prompt issue the following commands:
 
     /js refresh() // to load the changes
-    /js guessTheNumber( self ) // self is now an actual player in the game
+    /js guessTheNumber( self ) 
 
 When prompted, press the T key to start typing your guess. You may need to re-run the guessTheNumber() function a couple of times before you guess the right answer but this time, when you do get it right, a firework will launch directly above your head. Pretty cool huh?
 
@@ -3890,6 +3898,13 @@ That is; we can do so with or without quotes around the *name* property. However
 
 If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
 
+### JSON, Persistence and Java Objects
+If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses the popular JSON module's *stringify()* and *parse()* functions to save and load data and these functions *only work with native JavaScript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
+
+    var utils = require('utils');
+    var locationAsJSON = utils.locationToJSON( player.location ); // convert from Java to JSON
+    var locationObject = utils.locationFromJSON ( locationAsJSON ); // convert from JSON to Java
+
 ### Summary
 In this chapter you learned about providing TAB-completion hints for your own custom commands and you learned about persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
 
@@ -3933,11 +3948,11 @@ https://forums.bukkit.org/threads/am-having-trouble-adding-custom-recipes.102722
 
 Very often such results can be very useful when starting down the path of creating your own plugin.
 
-What's even more useful is the comprehensive API reference available at http://jd.bukkit.org/beta/apidocs/. This API reference is a set of interlinked web pages which are generated automatically from comments in the Bukkit source code. The reference lists all of the *Classes*, *Packages* and *Methods* in the Bukkit API. A Java *Class* is much like a Javascript Module while a Java *Method* is much like a Javascript Method or Function. A Java *Package* is a folder of Java *Classes*, it's just another way of organizing large numbers of source files. Java programs can be quite large, much larger than their Javascript equivalents so the source files must be organized in folders and sub folders. Each folder and subfolder is known as a *Package* in Java terms. 
+What's even more useful is the comprehensive API reference available at http://jd.bukkit.org/rb/apidocs/. This API reference is a set of interlinked web pages which are generated automatically from comments in the Bukkit source code. The reference lists all of the *Classes*, *Packages* and *Methods* in the Bukkit API. A Java *Class* is much like a Javascript Module while a Java *Method* is much like a Javascript Method or Function. A Java *Package* is a folder of Java *Classes*, it's just another way of organizing large numbers of source files. Java programs can be quite large, much larger than their Javascript equivalents so the source files must be organized in folders and sub folders. Each folder and subfolder is known as a *Package* in Java terms. 
 
 For example, in Minecraft there are hundreds of different types of *events* which can occur in the game. It would be difficult for the Bukkit development team and for Plugin developers if all of the event source code was in a single folder called *events* so it makes sense to create subfolders for categories of events.
 
-If you visit http://jd.bukkit.org/beta/apidocs You'll see a web page with 3 distinct areas.
+If you visit http://jd.bukkit.org/rb/apidocs You'll see a web page with 3 distinct areas.
 
 ![Bukkit API Docs](img/recipes/apidocs.png)
 
@@ -4100,7 +4115,7 @@ This is how we define the layout of a new shaped recipe in code too. The ShapedR
     ]);
 
 #### Calling Variable Argument Java Methods from JavaScript
-In the *org.bukkit.inventory.ShapedRecipe* details page at http://jd.bukkit.org/beta/apidocs, the information about the *.shape()* method is presented as follows:
+In the *org.bukkit.inventory.ShapedRecipe* details page at http://jd.bukkit.org/rb/apidocs, the information about the *.shape()* method is presented as follows:
 
      ShapedRecipe   shape(String... shape) 
          Set the shape of this recipe to the specified rows.    
@@ -4133,7 +4148,7 @@ Now we've defined the shape of the recipe we need to say what each of the letter
 ### Inheritance
 Finally, having set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method. Let's look at this method again in the online documentation:
 
-1. Go to jd.bukkit.org/beta/apidocs
+1. Go to jd.bukkit.org/rb/apidocs
 2. Click the *org.bukkit* link in the top left pane.
 3. Click the *Server* link in the bottom left pane.
 4. Click the *addRecipe* link in the right (main) pane.
@@ -4249,7 +4264,7 @@ Once we register for an event the callback we provide will be executed whenever 
 ### Digging Deeper into Inheritance
 Every event callback function takes a single argument. You can call the parameter anything you like - *event* or you can shorten it to *evt* or even just *e*. We'll want to do something with the parameter in the function callback. In the case of the Ender Bow, we'll need to get some crucial information from the event so we can teleport the player. This is where - yet again - the Bukkit API Reference documentation and the ability to browse it, is essential. 
 
-In this particular instance we're interested in exploring the properties and methods of the *org.bukkit.event.entity.ProjectileHitEvent* type in the online Bukkit Reference at http://jd.bukkit.org/beta/apidocs. Visit the link just mentioned in a web browser, click on the *org.bukkit.event.entity* link in the top left pane, then click on the *ProjectileHitEvent* link in the bottom pane and information about this type of event will appear in the right hand pane. The information we're interested in is the *Method Summary*:
+In this particular instance we're interested in exploring the properties and methods of the *org.bukkit.event.entity.ProjectileHitEvent* type in the online Bukkit Reference at http://jd.bukkit.org/rb/apidocs. Visit the link just mentioned in a web browser, click on the *org.bukkit.event.entity* link in the top left pane, then click on the *ProjectileHitEvent* link in the bottom pane and information about this type of event will appear in the right hand pane. The information we're interested in is the *Method Summary*:
 
     Projectile getEntity() 
       Returns the Entity involved in this event
@@ -4327,7 +4342,7 @@ The *onArrowHit()* function is a callback which will be executed by the server w
 3. Get the shooter's item held - the thing the shooter is currently holding.
 4. Check if the item held is an Ender Bow and if it is teleport the player.
 
-Like all event-handling callback functions it takes a single parameter: *event*. We know that, because we'll register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/beta/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
+Like all event-handling callback functions it takes a single parameter: *event*. We know that, because we'll register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/rb/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
 
 We test to see if the *projectile* variable is of type bkArrow and if it is we return - this function is only concerned with Arrows, not Eggs or Snowballs. 
 
@@ -4457,7 +4472,7 @@ If you run the above code then any attempt to break a block in the game will fai
 
     event.cancelled = true;
 
-This statement cancels the event preventing the normal procedure for breaking blocks from occurring. It was as if the block was never broken. Not all types of events can be canceled but most can. You can see a list of all of the types of events which can be cancelled at http://jd.bukkit.org/beta/apidocs/org/bukkit/event/Cancellable.html under the heading *All Known Implementing Classes*. 
+This statement cancels the event preventing the normal procedure for breaking blocks from occurring. It was as if the block was never broken. Not all types of events can be canceled but most can. You can see a list of all of the types of events which can be cancelled at http://jd.bukkit.org/rb/apidocs/org/bukkit/event/Cancellable.html under the heading *All Known Implementing Classes*. 
 
 Another type of Griefing is when players place blocks where they shouldn't - for example, filling up another player's house with brick or other materials. You can also prevent all blocks being placed using the same *cancel()* function defined above:
 
@@ -4508,7 +4523,7 @@ Prohibiting the placement of all blocks in the game wouldn't make for a very fun
 
 You can test this code by reloading the plugins using the */reload* or */js refresh()* commands. You'll also need to use the */deop* command to temporarily remove your operator privileges so you can verify that trying to place TNT when you're not an operator is impossible. You can re-enable your operator privileges later by running the *op* command at the server console prompt. With TNT in hand, try to place a block of TNT anywhere and the TNT will appear very briefly before disappearing. 
 
-In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter 17, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/beta/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/beta/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
+In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter 17, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/rb/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/rb/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
 
     var material = event.getBlockPlaced().getType();
 
@@ -4516,7 +4531,7 @@ In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* whic
 
     var material = event.blockPlaced.type;
 
-Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different. In the Player Inheritance Diagram in chapter 17 you can see that a Player is a descendant of the ServerOperator type so it inherits all of its properties and methods. If you look at the Java Documentation for the ServerOperator type at http://jd.bukkit.org/beta/apidocs/org/bukkit/permissions/ServerOperator.html There are just 2 methods:
+Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different. In the Player Inheritance Diagram in chapter 17 you can see that a Player is a descendant of the ServerOperator type so it inherits all of its properties and methods. If you look at the Java Documentation for the ServerOperator type at http://jd.bukkit.org/rb/apidocs/org/bukkit/permissions/ServerOperator.html There are just 2 methods:
 
     boolean isOp()
     void setOp(boolean value)
@@ -5522,81 +5537,72 @@ Let's complete the game by writing the code which will handle this command. In t
     var game = require('./game');
     var arenas = persist('snowball-arenas', []);
     
-    function snowball( params, player ){
-      var playerLoc = player.location;
-      var i = 0;
+    function snowball( params, sender ){
+      var i;
       var arena = null;
       var gameOn = false;
-      var participant = null;
     
-      for (; i < arenas.length; i++){
+      var allPlayers = bukkit.players();
+      var player;
+      var teams = {red: [], blue:[], yellow:[]};
+      var spawns = [];
+      var spawn = null;
+    
+      for ( i = 0; i < arenas.length; i++ ) {
         arena = arenas[i];
-        if (region.contains( arena.redZone, playerLoc) ||
-    	region.contains( arena.blueZone, playerLoc) ||
-    	region.contains( arena.yellowZone, playerLoc) ){
+        if ( region.contains( arena.redZone, sender.location) 
+    	|| region.contains( arena.blueZone, sender.location) 
+    	|| region.contains( arena.yellowZone, sender.location) ) {
           // game on!
           gameOn = true;
           break;
         } 
       }
       if (!gameOn){
-        player.sendMessage('You must issue this command while in a colored zone');
+        sender.sendMessage('You must issue this command while in a colored zone');
         return;
       }
-      var allPlayers = bukkit.players();
-      var teams = {red: [], blue:[], yellow:[]};
-      var pregameLocs = [];
-      var gameLocs = [];
-      var isParticipant = false;
-      var spawn = null;
     
       for (i = 0;i < allPlayers.length; i++) {
-    
-        participant = allPlayers[i];
-        var loc = participant.location;
-        isParticipant = false;
-        if (region.contains( arena.redZone, loc) ){
-          teams.red.push(''+participant.name);
-          spawn = arena.redSpawn;
-          isParticipant = true;
+        player = allPlayers[i];
+        inZone = false;
+        if (region.contains( arena.redZone, player.location) ){
+          teams.red.push( player.name );
+          inZone = arena.redSpawn;
+        } else if (region.contains( arena.blueZone, player.location) ) {
+          teams.blue.push( player.name );
+          inZone = arena.blueSpawn;
+        } else if (region.contains( arena.yellowZone, player.location) ){
+          teams.yellow.push( player.name );
+          inZone = arena.yellowSpawn;
         } 
-        if (region.contains( arena.blueZone, loc) ) {
-          teams.blue.push(''+participant.name);
-          spawn = arena.blueSpawn;
-          isParticipant = true;
-        }
-        if (region.contains( arena.yellowZone, loc) ){
-          teams.yellow.push(''+participant.name);
-          spawn = arena.yellowSpawn;
-          isParticipant = true;
-        } 
-        if (isParticipant){
-          pregameLocs.push({
-    	player: participant, 
-    	location: loc
-          });
-          gameLocs.push({
-    	player: participant,
-    	location: new bkLocation( loc.world, spawn.x, spawn.y, spawn.z)
-          });
+        if ( inZone ) {
+          spawns.push( {
+    	participant: player,
+    	oldLocation: player.location,
+    	newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+          } );
         }
       }
       if ( (teams.red.length == 0 && teams.blue.length == 0)
-        || (teams.red.length == 0 && teams.yellow.length == 0)
-        || (teams.blue.length == 0 && teams.yellow.length == 0))
+          || (teams.red.length == 0 && teams.yellow.length == 0)
+          || (teams.blue.length == 0 && teams.yellow.length == 0))
       {
-        player.sendMessage('Need more than one team to play. Someone choose a different color.');
+        sender.sendMessage('Need more than one team to play. Someone choose a different color.');
         return;
       }
-      function returnPlayers(){
-        for (var i = 0;i < pregameLocs.length; i++) { 
-          pregameLocs[i].player.teleport(pregameLocs[i].location, bkTeleportCause.PLUGIN);
-          fireworks.firework( pregameLocs[i].location );
+      function returnPlayers() {
+        var spawn;
+        for (var i = 0;i < spawns.length; i++) { 
+          spawn = spawns[i];
+          spawn.participant.teleport(spawn.oldLocation, bkTeleportCause.PLUGIN);
+          fireworks.firework( spawn.oldLocation );
         }
       }
     
-      for (var i = 0;i < pregameLocs.length; i++) { 
-        gameLocs[i].player.teleport(gameLocs[i].location, bkTeleportCause.PLUGIN);
+      for (i = 0;i < spawns.length; i++) { 
+        spawn = spawns[i];
+        spawn.participant.teleport(spawn.newLocation, bkTeleportCause.PLUGIN);
       }
       setTimeout(returnPlayers, 65000);
       
@@ -5662,20 +5668,614 @@ In this chapter we built a player vs. player mini-game from scratch. We *re-used
 Playing games is fun but writing your own games can be hugely rewarding, especially when you get to see your friends play a game you created!
 
 # Appendices
-## On the use of the `self` variable
+
+## Appendix A: ScriptCraft variables
+### The *server* variable
+### The *bukkit* variable
+### The *self* variable
 Don't use it in your modules. It's only a convenience function for use at the in-game prompt.
 it should not be used in any function which is deferred as it does not exist outside the scope of the in-game or server prompts.
 Don't use it in modules especially in multi-player mode!
 
-## Using ScriptCraft with other Plugins
-### Calling dispatchCommand() to programmtically use othe plugin commands
-### accessing the plugin API from javascript (get plugin by name - see example code on plugin.bukkit scriptcraft page)
-## Events reference
-A set of tables of events, one table for each set of events, Player Events, Server Events etc.
-## Items reference
-A table of all the items in the items module and how to use them (API calls which require an ItemStack)
+## Appendix B: Using ScriptCraft with other Plugins
+ScriptCraft can be used to work with and control other Bukkit Plugins. There are two ways ScriptCraft can interact with other Plugins:
 
-## Drone API Reference
+1. By issuing plugin commands
+2. By using the plugin's methods and classes.
+
+### Issuing commands
+The *server.dispatchCommand()* method can be used to issue both built-in commands such as */time set* or commands provided by plugins. ScriptCraft can be used to *drive* commands provided by other plugins. For example, if you wanted to use the *Essentials* plugin's */eco give* command to give a player in-game money via JavaScript you'd write:
+
+    server.dispatchCommmand( server.consoleSender, 'eco give walterh 5')
+
+You could create an event listener function which listens for certain types of events and rewards or subtracts in-game currency from players who trigger those events. For example, you could reward players for crafting items like so:
+
+    events.craftItem( event ){
+      var crafter = event.whoClicked.name;
+      var command = 'eco give ' + crafter + ' 5';
+      server.dispatchCommand( server.consoleSender, command);
+    }    
+
+Many plugins provide their own set of commands all of which can be issued by the server console operator ( *server.consoleSender* ).
+
+### Using plugin methods and classes
+Another way to access and use another plugin is via the Java methods and classes provided by the plugin you want to control. In the following example, we're using the popular *PermissionsEx* plugin: a Bukkit plugin which provides fine-grained access control and permissions. You can explore the *PermissionsEx* API reference at http://ci.nixium.com/job/PermissionsEx/javadoc/.
+
+    var playerName = 'walterh';
+    var pexPlugin = server.pluginManager.getPlugin('PermissionsEx');
+    var pexUser = pex.getUser(playerName)
+    if (! pexUser.inGroup('moderator') ) {
+       pexUser.player.sendMessage("You can't do that!");
+    }
+
+In the above example, we call the *server.pluginManager.getPlugin()* method to get a particular plugin object. Once we have the plugin object we can call any of its methods to work with the plugin.
+
+## Appendix C: Events Reference
+The following tables list all of the *events* module's functions which can be used to register event listeners. Alongside each function, the equivalent Java Event type is shown. You should refer to the Bukkit API Reference documentation at http://jd.bukkit.org/rb/apidocs/ for details about each Java Event type. Event types fall into a number of categories each of which are listed below.
+
+<h3>Block Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.blockBreak()</td><td>org.bukkit.event.block.BlockBreakEvent</td>
+<tr><td>events.blockBurn()</td><td>org.bukkit.event.block.BlockBurnEvent</td>
+<tr><td>events.blockCanBuild()</td><td>org.bukkit.event.block.BlockCanBuildEvent</td>
+<tr><td>events.blockDamage()</td><td>org.bukkit.event.block.BlockDamageEvent</td>
+<tr><td>events.blockDispense()</td><td>org.bukkit.event.block.BlockDispenseEvent</td>
+<tr><td>events.blockExp()</td><td>org.bukkit.event.block.BlockExpEvent</td>
+<tr><td>events.blockFade()</td><td>org.bukkit.event.block.BlockFadeEvent</td>
+<tr><td>events.blockForm()</td><td>org.bukkit.event.block.BlockFormEvent</td>
+<tr><td>events.blockFromTo()</td><td>org.bukkit.event.block.BlockFromToEvent</td>
+<tr><td>events.blockGrow()</td><td>org.bukkit.event.block.BlockGrowEvent</td>
+<tr><td>events.blockIgnite()</td><td>org.bukkit.event.block.BlockIgniteEvent</td>
+<tr><td>events.blockMultiPlace()</td><td>org.bukkit.event.block.BlockMultiPlaceEvent</td>
+<tr><td>events.blockPhysics()</td><td>org.bukkit.event.block.BlockPhysicsEvent</td>
+<tr><td>events.blockPistonExtend()</td><td>org.bukkit.event.block.BlockPistonExtendEvent</td>
+<tr><td>events.blockPistonRetract()</td><td>org.bukkit.event.block.BlockPistonRetractEvent</td>
+<tr><td>events.blockPlace()</td><td>org.bukkit.event.block.BlockPlaceEvent</td>
+<tr><td>events.blockRedstone()</td><td>org.bukkit.event.block.BlockRedstoneEvent</td>
+<tr><td>events.blockSpread()</td><td>org.bukkit.event.block.BlockSpreadEvent</td>
+<tr><td>events.entityBlockForm()</td><td>org.bukkit.event.block.EntityBlockFormEvent</td>
+<tr><td>events.leavesDecay()</td><td>org.bukkit.event.block.LeavesDecayEvent</td>
+<tr><td>events.notePlay()</td><td>org.bukkit.event.block.NotePlayEvent</td>
+<tr><td>events.signChange()</td><td>org.bukkit.event.block.SignChangeEvent</td>
+</table>
+<h3>Enchantment Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.enchantItem()</td><td>org.bukkit.event.enchantment.EnchantItemEvent</td>
+<tr><td>events.prepareItemEnchant()</td><td>org.bukkit.event.enchantment.PrepareItemEnchantEvent</td>
+</table>
+<h3>Entity Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.creatureSpawn()</td><td>org.bukkit.event.entity.CreatureSpawnEvent</td>
+<tr><td>events.creeperPower()</td><td>org.bukkit.event.entity.CreeperPowerEvent</td>
+<tr><td>events.entityBreakDoor()</td><td>org.bukkit.event.entity.EntityBreakDoorEvent</td>
+<tr><td>events.entityChangeBlock()</td><td>org.bukkit.event.entity.EntityChangeBlockEvent</td>
+<tr><td>events.entityCombustByBlock()</td><td>org.bukkit.event.entity.EntityCombustByBlockEvent</td>
+<tr><td>events.entityCombustByEntity()</td><td>org.bukkit.event.entity.EntityCombustByEntityEvent</td>
+<tr><td>events.entityCombust()</td><td>org.bukkit.event.entity.EntityCombustEvent</td>
+<tr><td>events.entityCreatePortal()</td><td>org.bukkit.event.entity.EntityCreatePortalEvent</td>
+<tr><td>events.entityDamageByBlock()</td><td>org.bukkit.event.entity.EntityDamageByBlockEvent</td>
+<tr><td>events.entityDamageByEntity()</td><td>org.bukkit.event.entity.EntityDamageByEntityEvent</td>
+<tr><td>events.entityDamage()</td><td>org.bukkit.event.entity.EntityDamageEvent</td>
+<tr><td>events.entityDeath()</td><td>org.bukkit.event.entity.EntityDeathEvent</td>
+<tr><td>events.entityExplode()</td><td>org.bukkit.event.entity.EntityExplodeEvent</td>
+<tr><td>events.entityInteract()</td><td>org.bukkit.event.entity.EntityInteractEvent</td>
+<tr><td>events.entityPortalEnter()</td><td>org.bukkit.event.entity.EntityPortalEnterEvent</td>
+<tr><td>events.entityPortal()</td><td>org.bukkit.event.entity.EntityPortalEvent</td>
+<tr><td>events.entityPortalExit()</td><td>org.bukkit.event.entity.EntityPortalExitEvent</td>
+<tr><td>events.entityRegainHealth()</td><td>org.bukkit.event.entity.EntityRegainHealthEvent</td>
+<tr><td>events.entityShootBow()</td><td>org.bukkit.event.entity.EntityShootBowEvent</td>
+<tr><td>events.entityTame()</td><td>org.bukkit.event.entity.EntityTameEvent</td>
+<tr><td>events.entityTarget()</td><td>org.bukkit.event.entity.EntityTargetEvent</td>
+<tr><td>events.entityTargetLivingEntity()</td><td>org.bukkit.event.entity.EntityTargetLivingEntityEvent</td>
+<tr><td>events.entityTeleport()</td><td>org.bukkit.event.entity.EntityTeleportEvent</td>
+<tr><td>events.entityUnleash()</td><td>org.bukkit.event.entity.EntityUnleashEvent</td>
+<tr><td>events.expBottle()</td><td>org.bukkit.event.entity.ExpBottleEvent</td>
+<tr><td>events.explosionPrime()</td><td>org.bukkit.event.entity.ExplosionPrimeEvent</td>
+<tr><td>events.foodLevelChange()</td><td>org.bukkit.event.entity.FoodLevelChangeEvent</td>
+<tr><td>events.horseJump()</td><td>org.bukkit.event.entity.HorseJumpEvent</td>
+<tr><td>events.itemDespawn()</td><td>org.bukkit.event.entity.ItemDespawnEvent</td>
+<tr><td>events.itemSpawn()</td><td>org.bukkit.event.entity.ItemSpawnEvent</td>
+<tr><td>events.pigZap()</td><td>org.bukkit.event.entity.PigZapEvent</td>
+<tr><td>events.playerDeath()</td><td>org.bukkit.event.entity.PlayerDeathEvent</td>
+<tr><td>events.playerLeashEntity()</td><td>org.bukkit.event.entity.PlayerLeashEntityEvent</td>
+<tr><td>events.potionSplash()</td><td>org.bukkit.event.entity.PotionSplashEvent</td>
+<tr><td>events.projectileHit()</td><td>org.bukkit.event.entity.ProjectileHitEvent</td>
+<tr><td>events.projectileLaunch()</td><td>org.bukkit.event.entity.ProjectileLaunchEvent</td>
+<tr><td>events.sheepDyeWool()</td><td>org.bukkit.event.entity.SheepDyeWoolEvent</td>
+<tr><td>events.sheepRegrowWool()</td><td>org.bukkit.event.entity.SheepRegrowWoolEvent</td>
+<tr><td>events.slimeSplit()</td><td>org.bukkit.event.entity.SlimeSplitEvent</td>
+</table>
+<h3>Hanging Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.hangingBreakByEntity()</td><td>org.bukkit.event.hanging.HangingBreakByEntityEvent</td>
+<tr><td>events.hangingBreak()</td><td>org.bukkit.event.hanging.HangingBreakEvent</td>
+<tr><td>events.hangingPlace()</td><td>org.bukkit.event.hanging.HangingPlaceEvent</td>
+</table>
+<h3>Inventory Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.brew()</td><td>org.bukkit.event.inventory.BrewEvent</td>
+<tr><td>events.craftItem()</td><td>org.bukkit.event.inventory.CraftItemEvent</td>
+<tr><td>events.furnaceBurn()</td><td>org.bukkit.event.inventory.FurnaceBurnEvent</td>
+<tr><td>events.furnaceExtract()</td><td>org.bukkit.event.inventory.FurnaceExtractEvent</td>
+<tr><td>events.furnaceSmelt()</td><td>org.bukkit.event.inventory.FurnaceSmeltEvent</td>
+<tr><td>events.inventoryClick()</td><td>org.bukkit.event.inventory.InventoryClickEvent</td>
+<tr><td>events.inventoryClose()</td><td>org.bukkit.event.inventory.InventoryCloseEvent</td>
+<tr><td>events.inventoryCreative()</td><td>org.bukkit.event.inventory.InventoryCreativeEvent</td>
+<tr><td>events.inventoryDrag()</td><td>org.bukkit.event.inventory.InventoryDragEvent</td>
+<tr><td>events.inventory()</td><td>org.bukkit.event.inventory.InventoryEvent</td>
+<tr><td>events.inventoryMoveItem()</td><td>org.bukkit.event.inventory.InventoryMoveItemEvent</td>
+<tr><td>events.inventoryOpen()</td><td>org.bukkit.event.inventory.InventoryOpenEvent</td>
+<tr><td>events.inventoryPickupItem()</td><td>org.bukkit.event.inventory.InventoryPickupItemEvent</td>
+<tr><td>events.prepareItemCraft()</td><td>org.bukkit.event.inventory.PrepareItemCraftEvent</td>
+</table>
+<h3>Painting Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.paintingBreakByEntity()</td><td>org.bukkit.event.painting.PaintingBreakByEntityEvent</td>
+<tr><td>events.paintingBreak()</td><td>org.bukkit.event.painting.PaintingBreakEvent</td>
+<tr><td>events.paintingPlace()</td><td>org.bukkit.event.painting.PaintingPlaceEvent</td>
+</table>
+<h3>Player Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.asyncPlayerChat()</td><td>org.bukkit.event.player.AsyncPlayerChatEvent</td>
+<tr><td>events.asyncPlayerPreLogin()</td><td>org.bukkit.event.player.AsyncPlayerPreLoginEvent</td>
+<tr><td>events.playerAchievementAwarded()</td><td>org.bukkit.event.player.PlayerAchievementAwardedEvent</td>
+<tr><td>events.playerAnimation()</td><td>org.bukkit.event.player.PlayerAnimationEvent</td>
+<tr><td>events.playerBedEnter()</td><td>org.bukkit.event.player.PlayerBedEnterEvent</td>
+<tr><td>events.playerBedLeave()</td><td>org.bukkit.event.player.PlayerBedLeaveEvent</td>
+<tr><td>events.playerBucketEmpty()</td><td>org.bukkit.event.player.PlayerBucketEmptyEvent</td>
+<tr><td>events.playerBucketFill()</td><td>org.bukkit.event.player.PlayerBucketFillEvent</td>
+<tr><td>events.playerChangedWorld()</td><td>org.bukkit.event.player.PlayerChangedWorldEvent</td>
+<tr><td>events.playerChat()</td><td>org.bukkit.event.player.PlayerChatEvent</td>
+<tr><td>events.playerChatTabComplete()</td><td>org.bukkit.event.player.PlayerChatTabCompleteEvent</td>
+<tr><td>events.playerCommandPreprocess()</td><td>org.bukkit.event.player.PlayerCommandPreprocessEvent</td>
+<tr><td>events.playerDropItem()</td><td>org.bukkit.event.player.PlayerDropItemEvent</td>
+<tr><td>events.playerEditBook()</td><td>org.bukkit.event.player.PlayerEditBookEvent</td>
+<tr><td>events.playerEggThrow()</td><td>org.bukkit.event.player.PlayerEggThrowEvent</td>
+<tr><td>events.playerExpChange()</td><td>org.bukkit.event.player.PlayerExpChangeEvent</td>
+<tr><td>events.playerFish()</td><td>org.bukkit.event.player.PlayerFishEvent</td>
+<tr><td>events.playerGameModeChange()</td><td>org.bukkit.event.player.PlayerGameModeChangeEvent</td>
+<tr><td>events.playerInteractEntity()</td><td>org.bukkit.event.player.PlayerInteractEntityEvent</td>
+<tr><td>events.playerInteract()</td><td>org.bukkit.event.player.PlayerInteractEvent</td>
+<tr><td>events.playerInventory()</td><td>org.bukkit.event.player.PlayerInventoryEvent</td>
+<tr><td>events.playerItemBreak()</td><td>org.bukkit.event.player.PlayerItemBreakEvent</td>
+<tr><td>events.playerItemConsume()</td><td>org.bukkit.event.player.PlayerItemConsumeEvent</td>
+<tr><td>events.playerItemHeld()</td><td>org.bukkit.event.player.PlayerItemHeldEvent</td>
+<tr><td>events.playerJoin()</td><td>org.bukkit.event.player.PlayerJoinEvent</td>
+<tr><td>events.playerKick()</td><td>org.bukkit.event.player.PlayerKickEvent</td>
+<tr><td>events.playerLevelChange()</td><td>org.bukkit.event.player.PlayerLevelChangeEvent</td>
+<tr><td>events.playerLogin()</td><td>org.bukkit.event.player.PlayerLoginEvent</td>
+<tr><td>events.playerMove()</td><td>org.bukkit.event.player.PlayerMoveEvent</td>
+<tr><td>events.playerPickupItem()</td><td>org.bukkit.event.player.PlayerPickupItemEvent</td>
+<tr><td>events.playerPortal()</td><td>org.bukkit.event.player.PlayerPortalEvent</td>
+<tr><td>events.playerPreLogin()</td><td>org.bukkit.event.player.PlayerPreLoginEvent</td>
+<tr><td>events.playerQuit()</td><td>org.bukkit.event.player.PlayerQuitEvent</td>
+<tr><td>events.playerRegisterChannel()</td><td>org.bukkit.event.player.PlayerRegisterChannelEvent</td>
+<tr><td>events.playerRespawn()</td><td>org.bukkit.event.player.PlayerRespawnEvent</td>
+<tr><td>events.playerShearEntity()</td><td>org.bukkit.event.player.PlayerShearEntityEvent</td>
+<tr><td>events.playerStatisticIncrement()</td><td>org.bukkit.event.player.PlayerStatisticIncrementEvent</td>
+<tr><td>events.playerTeleport()</td><td>org.bukkit.event.player.PlayerTeleportEvent</td>
+<tr><td>events.playerToggleFlight()</td><td>org.bukkit.event.player.PlayerToggleFlightEvent</td>
+<tr><td>events.playerToggleSneak()</td><td>org.bukkit.event.player.PlayerToggleSneakEvent</td>
+<tr><td>events.playerToggleSprint()</td><td>org.bukkit.event.player.PlayerToggleSprintEvent</td>
+<tr><td>events.playerUnleashEntity()</td><td>org.bukkit.event.player.PlayerUnleashEntityEvent</td>
+<tr><td>events.playerUnregisterChannel()</td><td>org.bukkit.event.player.PlayerUnregisterChannelEvent</td>
+<tr><td>events.playerVelocity()</td><td>org.bukkit.event.player.PlayerVelocityEvent</td>
+</table>
+<h3>Server Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.mapInitialize()</td><td>org.bukkit.event.server.MapInitializeEvent</td>
+<tr><td>events.pluginDisable()</td><td>org.bukkit.event.server.PluginDisableEvent</td>
+<tr><td>events.pluginEnable()</td><td>org.bukkit.event.server.PluginEnableEvent</td>
+<tr><td>events.remoteServerCommand()</td><td>org.bukkit.event.server.RemoteServerCommandEvent</td>
+<tr><td>events.serverCommand()</td><td>org.bukkit.event.server.ServerCommandEvent</td>
+<tr><td>events.serverListPing()</td><td>org.bukkit.event.server.ServerListPingEvent</td>
+<tr><td>events.serviceRegister()</td><td>org.bukkit.event.server.ServiceRegisterEvent</td>
+<tr><td>events.serviceUnregister()</td><td>org.bukkit.event.server.ServiceUnregisterEvent</td>
+</table>
+<h3>Vehicle Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.vehicleBlockCollision()</td><td>org.bukkit.event.vehicle.VehicleBlockCollisionEvent</td>
+<tr><td>events.vehicleCreate()</td><td>org.bukkit.event.vehicle.VehicleCreateEvent</td>
+<tr><td>events.vehicleDamage()</td><td>org.bukkit.event.vehicle.VehicleDamageEvent</td>
+<tr><td>events.vehicleDestroy()</td><td>org.bukkit.event.vehicle.VehicleDestroyEvent</td>
+<tr><td>events.vehicleEnter()</td><td>org.bukkit.event.vehicle.VehicleEnterEvent</td>
+<tr><td>events.vehicleEntityCollision()</td><td>org.bukkit.event.vehicle.VehicleEntityCollisionEvent</td>
+<tr><td>events.vehicleExit()</td><td>org.bukkit.event.vehicle.VehicleExitEvent</td>
+<tr><td>events.vehicleMove()</td><td>org.bukkit.event.vehicle.VehicleMoveEvent</td>
+<tr><td>events.vehicleUpdate()</td><td>org.bukkit.event.vehicle.VehicleUpdateEvent</td>
+</table>
+<h3>Weather Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.lightningStrike()</td><td>org.bukkit.event.weather.LightningStrikeEvent</td>
+<tr><td>events.thunderChange()</td><td>org.bukkit.event.weather.ThunderChangeEvent</td>
+<tr><td>events.weatherChange()</td><td>org.bukkit.event.weather.WeatherChangeEvent</td>
+</table>
+<h3>World Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.chunkLoad()</td><td>org.bukkit.event.world.ChunkLoadEvent</td>
+<tr><td>events.chunkPopulate()</td><td>org.bukkit.event.world.ChunkPopulateEvent</td>
+<tr><td>events.chunkUnload()</td><td>org.bukkit.event.world.ChunkUnloadEvent</td>
+<tr><td>events.portalCreate()</td><td>org.bukkit.event.world.PortalCreateEvent</td>
+<tr><td>events.spawnChange()</td><td>org.bukkit.event.world.SpawnChangeEvent</td>
+<tr><td>events.structureGrow()</td><td>org.bukkit.event.world.StructureGrowEvent</td>
+<tr><td>events.worldInit()</td><td>org.bukkit.event.world.WorldInitEvent</td>
+<tr><td>events.worldLoad()</td><td>org.bukkit.event.world.WorldLoadEvent</td>
+<tr><td>events.worldSave()</td><td>org.bukkit.event.world.WorldSaveEvent</td>
+<tr><td>events.worldUnload()</td><td>org.bukkit.event.world.WorldUnloadEvent</td>
+</table>
+
+## Appendix D: Items reference
+The *items* module provides a suite of useful functions for creating *Item Stacks* - that is - collections of objects which are typically stored in a Player's inventory. Each of the functions in the following table can be called in 3 different ways:
+
+1. If there is no parameter supplied the function will return the equivalent *Material* - that is - one of the values of the *org.bukkit.Material* type. For example, calling `items.diamondOre()` will return the *org.bukkit.Material.DIAMOND_ORE* value which is of type *org.bukkit.Material* and can be used anywhere the Bukkit API expects an *org.bukkit.Material* object.
+2. If a number is supplied as the sole parameter, then a new *org.bukkit.inventory.ItemStack* object is returned. For example, calling `items.diamondOre(8)` will return an *ItemStack* composed of 8 blocks of diamond ore.
+3. If a *Material* object is supplied as the sole parameter, then the material is compared with the material type associated with the given function and will return *true* if the materials are of the same type. For example, to see if a player is currently holding diamond ore: `var isDiamond = items.diamondOre( player.itemInHand.type )`.
+
+Remember to load the *items* module using the following code before using any of its functions:
+
+    var items = require('items');
+
+Listed below are all of the *items* module's functions:
+
+<table>
+<tr><th>Function</th><th>Material</th></tr>
+<tr><td>items.air()</td><td>Material.AIR</td></tr>
+<tr><td>items.stone()</td><td>Material.STONE</td></tr>
+<tr><td>items.grass()</td><td>Material.GRASS</td></tr>
+<tr><td>items.dirt()</td><td>Material.DIRT</td></tr>
+<tr><td>items.cobblestone()</td><td>Material.COBBLESTONE</td></tr>
+<tr><td>items.wood()</td><td>Material.WOOD</td></tr>
+<tr><td>items.sapling()</td><td>Material.SAPLING</td></tr>
+<tr><td>items.bedrock()</td><td>Material.BEDROCK</td></tr>
+<tr><td>items.water()</td><td>Material.WATER</td></tr>
+<tr><td>items.stationaryWater()</td><td>Material.STATIONARY_WATER</td></tr>
+<tr><td>items.lava()</td><td>Material.LAVA</td></tr>
+<tr><td>items.stationaryLava()</td><td>Material.STATIONARY_LAVA</td></tr>
+<tr><td>items.sand()</td><td>Material.SAND</td></tr>
+<tr><td>items.gravel()</td><td>Material.GRAVEL</td></tr>
+<tr><td>items.goldOre()</td><td>Material.GOLD_ORE</td></tr>
+<tr><td>items.ironOre()</td><td>Material.IRON_ORE</td></tr>
+<tr><td>items.coalOre()</td><td>Material.COAL_ORE</td></tr>
+<tr><td>items.log()</td><td>Material.LOG</td></tr>
+<tr><td>items.leaves()</td><td>Material.LEAVES</td></tr>
+<tr><td>items.sponge()</td><td>Material.SPONGE</td></tr>
+<tr><td>items.glass()</td><td>Material.GLASS</td></tr>
+<tr><td>items.lapisOre()</td><td>Material.LAPIS_ORE</td></tr>
+<tr><td>items.lapisBlock()</td><td>Material.LAPIS_BLOCK</td></tr>
+<tr><td>items.dispenser()</td><td>Material.DISPENSER</td></tr>
+<tr><td>items.sandstone()</td><td>Material.SANDSTONE</td></tr>
+<tr><td>items.noteBlock()</td><td>Material.NOTE_BLOCK</td></tr>
+<tr><td>items.bedBlock()</td><td>Material.BED_BLOCK</td></tr>
+<tr><td>items.poweredRail()</td><td>Material.POWERED_RAIL</td></tr>
+<tr><td>items.detectorRail()</td><td>Material.DETECTOR_RAIL</td></tr>
+<tr><td>items.pistonStickyBase()</td><td>Material.PISTON_STICKY_BASE</td></tr>
+<tr><td>items.web()</td><td>Material.WEB</td></tr>
+<tr><td>items.longGrass()</td><td>Material.LONG_GRASS</td></tr>
+<tr><td>items.deadBush()</td><td>Material.DEAD_BUSH</td></tr>
+<tr><td>items.pistonBase()</td><td>Material.PISTON_BASE</td></tr>
+<tr><td>items.pistonExtension()</td><td>Material.PISTON_EXTENSION</td></tr>
+<tr><td>items.wool()</td><td>Material.WOOL</td></tr>
+<tr><td>items.pistonMovingPiece()</td><td>Material.PISTON_MOVING_PIECE</td></tr>
+<tr><td>items.yellowFlower()</td><td>Material.YELLOW_FLOWER</td></tr>
+<tr><td>items.redRose()</td><td>Material.RED_ROSE</td></tr>
+<tr><td>items.brownMushroom()</td><td>Material.BROWN_MUSHROOM</td></tr>
+<tr><td>items.redMushroom()</td><td>Material.RED_MUSHROOM</td></tr>
+<tr><td>items.goldBlock()</td><td>Material.GOLD_BLOCK</td></tr>
+<tr><td>items.ironBlock()</td><td>Material.IRON_BLOCK</td></tr>
+<tr><td>items.doubleStep()</td><td>Material.DOUBLE_STEP</td></tr>
+<tr><td>items.step()</td><td>Material.STEP</td></tr>
+<tr><td>items.brick()</td><td>Material.BRICK</td></tr>
+<tr><td>items.tnt()</td><td>Material.TNT</td></tr>
+<tr><td>items.bookshelf()</td><td>Material.BOOKSHELF</td></tr>
+<tr><td>items.mossyCobblestone()</td><td>Material.MOSSY_COBBLESTONE</td></tr>
+<tr><td>items.obsidian()</td><td>Material.OBSIDIAN</td></tr>
+<tr><td>items.torch()</td><td>Material.TORCH</td></tr>
+<tr><td>items.fire()</td><td>Material.FIRE</td></tr>
+<tr><td>items.mobSpawner()</td><td>Material.MOB_SPAWNER</td></tr>
+<tr><td>items.woodStairs()</td><td>Material.WOOD_STAIRS</td></tr>
+<tr><td>items.chest()</td><td>Material.CHEST</td></tr>
+<tr><td>items.redstoneWire()</td><td>Material.REDSTONE_WIRE</td></tr>
+<tr><td>items.diamondOre()</td><td>Material.DIAMOND_ORE</td></tr>
+<tr><td>items.diamondBlock()</td><td>Material.DIAMOND_BLOCK</td></tr>
+<tr><td>items.workbench()</td><td>Material.WORKBENCH</td></tr>
+<tr><td>items.crops()</td><td>Material.CROPS</td></tr>
+<tr><td>items.soil()</td><td>Material.SOIL</td></tr>
+<tr><td>items.furnace()</td><td>Material.FURNACE</td></tr>
+<tr><td>items.burningFurnace()</td><td>Material.BURNING_FURNACE</td></tr>
+<tr><td>items.signPost()</td><td>Material.SIGN_POST</td></tr>
+<tr><td>items.woodenDoor()</td><td>Material.WOODEN_DOOR</td></tr>
+<tr><td>items.ladder()</td><td>Material.LADDER</td></tr>
+<tr><td>items.rails()</td><td>Material.RAILS</td></tr>
+<tr><td>items.cobblestoneStairs()</td><td>Material.COBBLESTONE_STAIRS</td></tr>
+<tr><td>items.wallSign()</td><td>Material.WALL_SIGN</td></tr>
+<tr><td>items.lever()</td><td>Material.LEVER</td></tr>
+<tr><td>items.stonePlate()</td><td>Material.STONE_PLATE</td></tr>
+<tr><td>items.ironDoorBlock()</td><td>Material.IRON_DOOR_BLOCK</td></tr>
+<tr><td>items.woodPlate()</td><td>Material.WOOD_PLATE</td></tr>
+<tr><td>items.redstoneOre()</td><td>Material.REDSTONE_ORE</td></tr>
+<tr><td>items.glowingRedstoneOre()</td><td>Material.GLOWING_REDSTONE_ORE</td></tr>
+<tr><td>items.redstoneTorchOff()</td><td>Material.REDSTONE_TORCH_OFF</td></tr>
+<tr><td>items.redstoneTorchOn()</td><td>Material.REDSTONE_TORCH_ON</td></tr>
+<tr><td>items.stoneButton()</td><td>Material.STONE_BUTTON</td></tr>
+<tr><td>items.snow()</td><td>Material.SNOW</td></tr>
+<tr><td>items.ice()</td><td>Material.ICE</td></tr>
+<tr><td>items.snowBlock()</td><td>Material.SNOW_BLOCK</td></tr>
+<tr><td>items.cactus()</td><td>Material.CACTUS</td></tr>
+<tr><td>items.clay()</td><td>Material.CLAY</td></tr>
+<tr><td>items.sugarCaneBlock()</td><td>Material.SUGAR_CANE_BLOCK</td></tr>
+<tr><td>items.jukebox()</td><td>Material.JUKEBOX</td></tr>
+<tr><td>items.fence()</td><td>Material.FENCE</td></tr>
+<tr><td>items.pumpkin()</td><td>Material.PUMPKIN</td></tr>
+<tr><td>items.netherrack()</td><td>Material.NETHERRACK</td></tr>
+<tr><td>items.soulSand()</td><td>Material.SOUL_SAND</td></tr>
+<tr><td>items.glowstone()</td><td>Material.GLOWSTONE</td></tr>
+<tr><td>items.portal()</td><td>Material.PORTAL</td></tr>
+<tr><td>items.jackOLantern()</td><td>Material.JACK_O_LANTERN</td></tr>
+<tr><td>items.cakeBlock()</td><td>Material.CAKE_BLOCK</td></tr>
+<tr><td>items.diodeBlockOff()</td><td>Material.DIODE_BLOCK_OFF</td></tr>
+<tr><td>items.diodeBlockOn()</td><td>Material.DIODE_BLOCK_ON</td></tr>
+<tr><td>items.lockedChest()</td><td>Material.LOCKED_CHEST</td></tr>
+<tr><td>items.stainedGlass()</td><td>Material.STAINED_GLASS</td></tr>
+<tr><td>items.trapDoor()</td><td>Material.TRAP_DOOR</td></tr>
+<tr><td>items.monsterEggs()</td><td>Material.MONSTER_EGGS</td></tr>
+<tr><td>items.smoothBrick()</td><td>Material.SMOOTH_BRICK</td></tr>
+<tr><td>items.hugeMushroom1()</td><td>Material.HUGE_MUSHROOM_1</td></tr>
+<tr><td>items.hugeMushroom2()</td><td>Material.HUGE_MUSHROOM_2</td></tr>
+<tr><td>items.ironFence()</td><td>Material.IRON_FENCE</td></tr>
+<tr><td>items.thinGlass()</td><td>Material.THIN_GLASS</td></tr>
+<tr><td>items.melonBlock()</td><td>Material.MELON_BLOCK</td></tr>
+<tr><td>items.pumpkinStem()</td><td>Material.PUMPKIN_STEM</td></tr>
+<tr><td>items.melonStem()</td><td>Material.MELON_STEM</td></tr>
+<tr><td>items.vine()</td><td>Material.VINE</td></tr>
+<tr><td>items.fenceGate()</td><td>Material.FENCE_GATE</td></tr>
+<tr><td>items.brickStairs()</td><td>Material.BRICK_STAIRS</td></tr>
+<tr><td>items.smoothStairs()</td><td>Material.SMOOTH_STAIRS</td></tr>
+<tr><td>items.mycel()</td><td>Material.MYCEL</td></tr>
+<tr><td>items.waterLily()</td><td>Material.WATER_LILY</td></tr>
+<tr><td>items.netherBrick()</td><td>Material.NETHER_BRICK</td></tr>
+<tr><td>items.netherFence()</td><td>Material.NETHER_FENCE</td></tr>
+<tr><td>items.netherBrickStairs()</td><td>Material.NETHER_BRICK_STAIRS</td></tr>
+<tr><td>items.netherWarts()</td><td>Material.NETHER_WARTS</td></tr>
+<tr><td>items.enchantmentTable()</td><td>Material.ENCHANTMENT_TABLE</td></tr>
+<tr><td>items.brewingStand()</td><td>Material.BREWING_STAND</td></tr>
+<tr><td>items.cauldron()</td><td>Material.CAULDRON</td></tr>
+<tr><td>items.enderPortal()</td><td>Material.ENDER_PORTAL</td></tr>
+<tr><td>items.enderPortalFrame()</td><td>Material.ENDER_PORTAL_FRAME</td></tr>
+<tr><td>items.enderStone()</td><td>Material.ENDER_STONE</td></tr>
+<tr><td>items.dragonEgg()</td><td>Material.DRAGON_EGG</td></tr>
+<tr><td>items.redstoneLampOff()</td><td>Material.REDSTONE_LAMP_OFF</td></tr>
+<tr><td>items.redstoneLampOn()</td><td>Material.REDSTONE_LAMP_ON</td></tr>
+<tr><td>items.woodDoubleStep()</td><td>Material.WOOD_DOUBLE_STEP</td></tr>
+<tr><td>items.woodStep()</td><td>Material.WOOD_STEP</td></tr>
+<tr><td>items.cocoa()</td><td>Material.COCOA</td></tr>
+<tr><td>items.sandstoneStairs()</td><td>Material.SANDSTONE_STAIRS</td></tr>
+<tr><td>items.emeraldOre()</td><td>Material.EMERALD_ORE</td></tr>
+<tr><td>items.enderChest()</td><td>Material.ENDER_CHEST</td></tr>
+<tr><td>items.tripwireHook()</td><td>Material.TRIPWIRE_HOOK</td></tr>
+<tr><td>items.tripwire()</td><td>Material.TRIPWIRE</td></tr>
+<tr><td>items.emeraldBlock()</td><td>Material.EMERALD_BLOCK</td></tr>
+<tr><td>items.spruceWoodStairs()</td><td>Material.SPRUCE_WOOD_STAIRS</td></tr>
+<tr><td>items.birchWoodStairs()</td><td>Material.BIRCH_WOOD_STAIRS</td></tr>
+<tr><td>items.jungleWoodStairs()</td><td>Material.JUNGLE_WOOD_STAIRS</td></tr>
+<tr><td>items.command()</td><td>Material.COMMAND</td></tr>
+<tr><td>items.beacon()</td><td>Material.BEACON</td></tr>
+<tr><td>items.cobbleWall()</td><td>Material.COBBLE_WALL</td></tr>
+<tr><td>items.flowerPot()</td><td>Material.FLOWER_POT</td></tr>
+<tr><td>items.carrot()</td><td>Material.CARROT</td></tr>
+<tr><td>items.potato()</td><td>Material.POTATO</td></tr>
+<tr><td>items.woodButton()</td><td>Material.WOOD_BUTTON</td></tr>
+<tr><td>items.skull()</td><td>Material.SKULL</td></tr>
+<tr><td>items.anvil()</td><td>Material.ANVIL</td></tr>
+<tr><td>items.trappedChest()</td><td>Material.TRAPPED_CHEST</td></tr>
+<tr><td>items.goldPlate()</td><td>Material.GOLD_PLATE</td></tr>
+<tr><td>items.ironPlate()</td><td>Material.IRON_PLATE</td></tr>
+<tr><td>items.redstoneComparatorOff()</td><td>Material.REDSTONE_COMPARATOR_OFF</td></tr>
+<tr><td>items.redstoneComparatorOn()</td><td>Material.REDSTONE_COMPARATOR_ON</td></tr>
+<tr><td>items.daylightDetector()</td><td>Material.DAYLIGHT_DETECTOR</td></tr>
+<tr><td>items.redstoneBlock()</td><td>Material.REDSTONE_BLOCK</td></tr>
+<tr><td>items.quartzOre()</td><td>Material.QUARTZ_ORE</td></tr>
+<tr><td>items.hopper()</td><td>Material.HOPPER</td></tr>
+<tr><td>items.quartzBlock()</td><td>Material.QUARTZ_BLOCK</td></tr>
+<tr><td>items.quartzStairs()</td><td>Material.QUARTZ_STAIRS</td></tr>
+<tr><td>items.activatorRail()</td><td>Material.ACTIVATOR_RAIL</td></tr>
+<tr><td>items.dropper()</td><td>Material.DROPPER</td></tr>
+<tr><td>items.stainedClay()</td><td>Material.STAINED_CLAY</td></tr>
+<tr><td>items.stainedGlassPane()</td><td>Material.STAINED_GLASS_PANE</td></tr>
+<tr><td>items.leaves2()</td><td>Material.LEAVES_2</td></tr>
+<tr><td>items.log2()</td><td>Material.LOG_2</td></tr>
+<tr><td>items.acaciaStairs()</td><td>Material.ACACIA_STAIRS</td></tr>
+<tr><td>items.darkOakStairs()</td><td>Material.DARK_OAK_STAIRS</td></tr>
+<tr><td>items.hayBlock()</td><td>Material.HAY_BLOCK</td></tr>
+<tr><td>items.carpet()</td><td>Material.CARPET</td></tr>
+<tr><td>items.hardClay()</td><td>Material.HARD_CLAY</td></tr>
+<tr><td>items.coalBlock()</td><td>Material.COAL_BLOCK</td></tr>
+<tr><td>items.packedIce()</td><td>Material.PACKED_ICE</td></tr>
+<tr><td>items.doublePlant()</td><td>Material.DOUBLE_PLANT</td></tr>
+<tr><td>items.ironSpade()</td><td>Material.IRON_SPADE</td></tr>
+<tr><td>items.ironPickaxe()</td><td>Material.IRON_PICKAXE</td></tr>
+<tr><td>items.ironAxe()</td><td>Material.IRON_AXE</td></tr>
+<tr><td>items.flintAndSteel()</td><td>Material.FLINT_AND_STEEL</td></tr>
+<tr><td>items.apple()</td><td>Material.APPLE</td></tr>
+<tr><td>items.bow()</td><td>Material.BOW</td></tr>
+<tr><td>items.arrow()</td><td>Material.ARROW</td></tr>
+<tr><td>items.coal()</td><td>Material.COAL</td></tr>
+<tr><td>items.diamond()</td><td>Material.DIAMOND</td></tr>
+<tr><td>items.ironIngot()</td><td>Material.IRON_INGOT</td></tr>
+<tr><td>items.goldIngot()</td><td>Material.GOLD_INGOT</td></tr>
+<tr><td>items.ironSword()</td><td>Material.IRON_SWORD</td></tr>
+<tr><td>items.woodSword()</td><td>Material.WOOD_SWORD</td></tr>
+<tr><td>items.woodSpade()</td><td>Material.WOOD_SPADE</td></tr>
+<tr><td>items.woodPickaxe()</td><td>Material.WOOD_PICKAXE</td></tr>
+<tr><td>items.woodAxe()</td><td>Material.WOOD_AXE</td></tr>
+<tr><td>items.stoneSword()</td><td>Material.STONE_SWORD</td></tr>
+<tr><td>items.stoneSpade()</td><td>Material.STONE_SPADE</td></tr>
+<tr><td>items.stonePickaxe()</td><td>Material.STONE_PICKAXE</td></tr>
+<tr><td>items.stoneAxe()</td><td>Material.STONE_AXE</td></tr>
+<tr><td>items.diamondSword()</td><td>Material.DIAMOND_SWORD</td></tr>
+<tr><td>items.diamondSpade()</td><td>Material.DIAMOND_SPADE</td></tr>
+<tr><td>items.diamondPickaxe()</td><td>Material.DIAMOND_PICKAXE</td></tr>
+<tr><td>items.diamondAxe()</td><td>Material.DIAMOND_AXE</td></tr>
+<tr><td>items.stick()</td><td>Material.STICK</td></tr>
+<tr><td>items.bowl()</td><td>Material.BOWL</td></tr>
+<tr><td>items.mushroomSoup()</td><td>Material.MUSHROOM_SOUP</td></tr>
+<tr><td>items.goldSword()</td><td>Material.GOLD_SWORD</td></tr>
+<tr><td>items.goldSpade()</td><td>Material.GOLD_SPADE</td></tr>
+<tr><td>items.goldPickaxe()</td><td>Material.GOLD_PICKAXE</td></tr>
+<tr><td>items.goldAxe()</td><td>Material.GOLD_AXE</td></tr>
+<tr><td>items.string()</td><td>Material.STRING</td></tr>
+<tr><td>items.feather()</td><td>Material.FEATHER</td></tr>
+<tr><td>items.sulphur()</td><td>Material.SULPHUR</td></tr>
+<tr><td>items.woodHoe()</td><td>Material.WOOD_HOE</td></tr>
+<tr><td>items.stoneHoe()</td><td>Material.STONE_HOE</td></tr>
+<tr><td>items.ironHoe()</td><td>Material.IRON_HOE</td></tr>
+<tr><td>items.diamondHoe()</td><td>Material.DIAMOND_HOE</td></tr>
+<tr><td>items.goldHoe()</td><td>Material.GOLD_HOE</td></tr>
+<tr><td>items.seeds()</td><td>Material.SEEDS</td></tr>
+<tr><td>items.wheat()</td><td>Material.WHEAT</td></tr>
+<tr><td>items.bread()</td><td>Material.BREAD</td></tr>
+<tr><td>items.leatherHelmet()</td><td>Material.LEATHER_HELMET</td></tr>
+<tr><td>items.leatherChestplate()</td><td>Material.LEATHER_CHESTPLATE</td></tr>
+<tr><td>items.leatherLeggings()</td><td>Material.LEATHER_LEGGINGS</td></tr>
+<tr><td>items.leatherBoots()</td><td>Material.LEATHER_BOOTS</td></tr>
+<tr><td>items.chainmailHelmet()</td><td>Material.CHAINMAIL_HELMET</td></tr>
+<tr><td>items.chainmailChestplate()</td><td>Material.CHAINMAIL_CHESTPLATE</td></tr>
+<tr><td>items.chainmailLeggings()</td><td>Material.CHAINMAIL_LEGGINGS</td></tr>
+<tr><td>items.chainmailBoots()</td><td>Material.CHAINMAIL_BOOTS</td></tr>
+<tr><td>items.ironHelmet()</td><td>Material.IRON_HELMET</td></tr>
+<tr><td>items.ironChestplate()</td><td>Material.IRON_CHESTPLATE</td></tr>
+<tr><td>items.ironLeggings()</td><td>Material.IRON_LEGGINGS</td></tr>
+<tr><td>items.ironBoots()</td><td>Material.IRON_BOOTS</td></tr>
+<tr><td>items.diamondHelmet()</td><td>Material.DIAMOND_HELMET</td></tr>
+<tr><td>items.diamondChestplate()</td><td>Material.DIAMOND_CHESTPLATE</td></tr>
+<tr><td>items.diamondLeggings()</td><td>Material.DIAMOND_LEGGINGS</td></tr>
+<tr><td>items.diamondBoots()</td><td>Material.DIAMOND_BOOTS</td></tr>
+<tr><td>items.goldHelmet()</td><td>Material.GOLD_HELMET</td></tr>
+<tr><td>items.goldChestplate()</td><td>Material.GOLD_CHESTPLATE</td></tr>
+<tr><td>items.goldLeggings()</td><td>Material.GOLD_LEGGINGS</td></tr>
+<tr><td>items.goldBoots()</td><td>Material.GOLD_BOOTS</td></tr>
+<tr><td>items.flint()</td><td>Material.FLINT</td></tr>
+<tr><td>items.pork()</td><td>Material.PORK</td></tr>
+<tr><td>items.grilledPork()</td><td>Material.GRILLED_PORK</td></tr>
+<tr><td>items.painting()</td><td>Material.PAINTING</td></tr>
+<tr><td>items.goldenApple()</td><td>Material.GOLDEN_APPLE</td></tr>
+<tr><td>items.sign()</td><td>Material.SIGN</td></tr>
+<tr><td>items.woodDoor()</td><td>Material.WOOD_DOOR</td></tr>
+<tr><td>items.bucket()</td><td>Material.BUCKET</td></tr>
+<tr><td>items.waterBucket()</td><td>Material.WATER_BUCKET</td></tr>
+<tr><td>items.lavaBucket()</td><td>Material.LAVA_BUCKET</td></tr>
+<tr><td>items.minecart()</td><td>Material.MINECART</td></tr>
+<tr><td>items.saddle()</td><td>Material.SADDLE</td></tr>
+<tr><td>items.ironDoor()</td><td>Material.IRON_DOOR</td></tr>
+<tr><td>items.redstone()</td><td>Material.REDSTONE</td></tr>
+<tr><td>items.snowBall()</td><td>Material.SNOW_BALL</td></tr>
+<tr><td>items.boat()</td><td>Material.BOAT</td></tr>
+<tr><td>items.leather()</td><td>Material.LEATHER</td></tr>
+<tr><td>items.milkBucket()</td><td>Material.MILK_BUCKET</td></tr>
+<tr><td>items.clayBrick()</td><td>Material.CLAY_BRICK</td></tr>
+<tr><td>items.clayBall()</td><td>Material.CLAY_BALL</td></tr>
+<tr><td>items.sugarCane()</td><td>Material.SUGAR_CANE</td></tr>
+<tr><td>items.paper()</td><td>Material.PAPER</td></tr>
+<tr><td>items.book()</td><td>Material.BOOK</td></tr>
+<tr><td>items.slimeBall()</td><td>Material.SLIME_BALL</td></tr>
+<tr><td>items.storageMinecart()</td><td>Material.STORAGE_MINECART</td></tr>
+<tr><td>items.poweredMinecart()</td><td>Material.POWERED_MINECART</td></tr>
+<tr><td>items.egg()</td><td>Material.EGG</td></tr>
+<tr><td>items.compass()</td><td>Material.COMPASS</td></tr>
+<tr><td>items.fishingRod()</td><td>Material.FISHING_ROD</td></tr>
+<tr><td>items.watch()</td><td>Material.WATCH</td></tr>
+<tr><td>items.glowstoneDust()</td><td>Material.GLOWSTONE_DUST</td></tr>
+<tr><td>items.rawFish()</td><td>Material.RAW_FISH</td></tr>
+<tr><td>items.cookedFish()</td><td>Material.COOKED_FISH</td></tr>
+<tr><td>items.inkSack()</td><td>Material.INK_SACK</td></tr>
+<tr><td>items.bone()</td><td>Material.BONE</td></tr>
+<tr><td>items.sugar()</td><td>Material.SUGAR</td></tr>
+<tr><td>items.cake()</td><td>Material.CAKE</td></tr>
+<tr><td>items.bed()</td><td>Material.BED</td></tr>
+<tr><td>items.diode()</td><td>Material.DIODE</td></tr>
+<tr><td>items.cookie()</td><td>Material.COOKIE</td></tr>
+<tr><td>items.map()</td><td>Material.MAP</td></tr>
+<tr><td>items.shears()</td><td>Material.SHEARS</td></tr>
+<tr><td>items.melon()</td><td>Material.MELON</td></tr>
+<tr><td>items.pumpkinSeeds()</td><td>Material.PUMPKIN_SEEDS</td></tr>
+<tr><td>items.melonSeeds()</td><td>Material.MELON_SEEDS</td></tr>
+<tr><td>items.rawBeef()</td><td>Material.RAW_BEEF</td></tr>
+<tr><td>items.cookedBeef()</td><td>Material.COOKED_BEEF</td></tr>
+<tr><td>items.rawChicken()</td><td>Material.RAW_CHICKEN</td></tr>
+<tr><td>items.cookedChicken()</td><td>Material.COOKED_CHICKEN</td></tr>
+<tr><td>items.rottenFlesh()</td><td>Material.ROTTEN_FLESH</td></tr>
+<tr><td>items.enderPearl()</td><td>Material.ENDER_PEARL</td></tr>
+<tr><td>items.blazeRod()</td><td>Material.BLAZE_ROD</td></tr>
+<tr><td>items.ghastTear()</td><td>Material.GHAST_TEAR</td></tr>
+<tr><td>items.goldNugget()</td><td>Material.GOLD_NUGGET</td></tr>
+<tr><td>items.netherStalk()</td><td>Material.NETHER_STALK</td></tr>
+<tr><td>items.potion()</td><td>Material.POTION</td></tr>
+<tr><td>items.glassBottle()</td><td>Material.GLASS_BOTTLE</td></tr>
+<tr><td>items.spiderEye()</td><td>Material.SPIDER_EYE</td></tr>
+<tr><td>items.fermentedSpiderEye()</td><td>Material.FERMENTED_SPIDER_EYE</td></tr>
+<tr><td>items.blazePowder()</td><td>Material.BLAZE_POWDER</td></tr>
+<tr><td>items.magmaCream()</td><td>Material.MAGMA_CREAM</td></tr>
+<tr><td>items.brewingStandItem()</td><td>Material.BREWING_STAND_ITEM</td></tr>
+<tr><td>items.cauldronItem()</td><td>Material.CAULDRON_ITEM</td></tr>
+<tr><td>items.eyeOfEnder()</td><td>Material.EYE_OF_ENDER</td></tr>
+<tr><td>items.speckledMelon()</td><td>Material.SPECKLED_MELON</td></tr>
+<tr><td>items.monsterEgg()</td><td>Material.MONSTER_EGG</td></tr>
+<tr><td>items.expBottle()</td><td>Material.EXP_BOTTLE</td></tr>
+<tr><td>items.fireball()</td><td>Material.FIREBALL</td></tr>
+<tr><td>items.bookAndQuill()</td><td>Material.BOOK_AND_QUILL</td></tr>
+<tr><td>items.writtenBook()</td><td>Material.WRITTEN_BOOK</td></tr>
+<tr><td>items.emerald()</td><td>Material.EMERALD</td></tr>
+<tr><td>items.itemFrame()</td><td>Material.ITEM_FRAME</td></tr>
+<tr><td>items.flowerPotItem()</td><td>Material.FLOWER_POT_ITEM</td></tr>
+<tr><td>items.carrotItem()</td><td>Material.CARROT_ITEM</td></tr>
+<tr><td>items.potatoItem()</td><td>Material.POTATO_ITEM</td></tr>
+<tr><td>items.bakedPotato()</td><td>Material.BAKED_POTATO</td></tr>
+<tr><td>items.poisonousPotato()</td><td>Material.POISONOUS_POTATO</td></tr>
+<tr><td>items.emptyMap()</td><td>Material.EMPTY_MAP</td></tr>
+<tr><td>items.goldenCarrot()</td><td>Material.GOLDEN_CARROT</td></tr>
+<tr><td>items.skullItem()</td><td>Material.SKULL_ITEM</td></tr>
+<tr><td>items.carrotStick()</td><td>Material.CARROT_STICK</td></tr>
+<tr><td>items.netherStar()</td><td>Material.NETHER_STAR</td></tr>
+<tr><td>items.pumpkinPie()</td><td>Material.PUMPKIN_PIE</td></tr>
+<tr><td>items.firework()</td><td>Material.FIREWORK</td></tr>
+<tr><td>items.fireworkCharge()</td><td>Material.FIREWORK_CHARGE</td></tr>
+<tr><td>items.enchantedBook()</td><td>Material.ENCHANTED_BOOK</td></tr>
+<tr><td>items.redstoneComparator()</td><td>Material.REDSTONE_COMPARATOR</td></tr>
+<tr><td>items.netherBrickItem()</td><td>Material.NETHER_BRICK_ITEM</td></tr>
+<tr><td>items.quartz()</td><td>Material.QUARTZ</td></tr>
+<tr><td>items.explosiveMinecart()</td><td>Material.EXPLOSIVE_MINECART</td></tr>
+<tr><td>items.hopperMinecart()</td><td>Material.HOPPER_MINECART</td></tr>
+<tr><td>items.ironBarding()</td><td>Material.IRON_BARDING</td></tr>
+<tr><td>items.goldBarding()</td><td>Material.GOLD_BARDING</td></tr>
+<tr><td>items.diamondBarding()</td><td>Material.DIAMOND_BARDING</td></tr>
+<tr><td>items.leash()</td><td>Material.LEASH</td></tr>
+<tr><td>items.nameTag()</td><td>Material.NAME_TAG</td></tr>
+<tr><td>items.commandMinecart()</td><td>Material.COMMAND_MINECART</td></tr>
+<tr><td>items.goldRecord()</td><td>Material.GOLD_RECORD</td></tr>
+<tr><td>items.greenRecord()</td><td>Material.GREEN_RECORD</td></tr>
+<tr><td>items.record3()</td><td>Material.RECORD_3</td></tr>
+<tr><td>items.record4()</td><td>Material.RECORD_4</td></tr>
+<tr><td>items.record5()</td><td>Material.RECORD_5</td></tr>
+<tr><td>items.record6()</td><td>Material.RECORD_6</td></tr>
+<tr><td>items.record7()</td><td>Material.RECORD_7</td></tr>
+<tr><td>items.record8()</td><td>Material.RECORD_8</td></tr>
+<tr><td>items.record9()</td><td>Material.RECORD_9</td></tr>
+<tr><td>items.record10()</td><td>Material.RECORD_10</td></tr>
+<tr><td>items.record11()</td><td>Material.RECORD_11</td></tr>
+<tr><td>items.record12()</td><td>Material.RECORD_12</td></tr>
+</table>
+
+## Appendix E: Drone API Reference
 ## Drone Plugin
 
 The Drone is a convenience class for building. It can be used for...
@@ -5683,8 +6283,7 @@ The Drone is a convenience class for building. It can be used for...
  1. Building
  2. Copying and Pasting
 
-It uses a fluent interface which means all of the Drone's methods return `this` and can 
-be chained together like so...
+It uses a fluent interface which means all of the Drone's methods return `this` and can be chained together like so...
 
     var theDrone = new Drone();
     theDrone.up().left().box(blocks.oak).down().fwd(3).cylinder0(blocks.lava,8); 
@@ -5697,11 +6296,7 @@ Drones can be created in any of the following ways...
          
         var d = box( blocks.oak )
 
-   ... creates a 1x1x1 wooden block at the cross-hairs or player's location and returns a Drone
-   object. This might look odd (if you're familiar with Java's Object-dot-method syntax) but all 
-   of the Drone class's methods are also global functions that return new Drone objects. 
-   This is short-hand for creating drones and is useful for playing around with Drones at the in-game 
-   command prompt. It's shorter than typing ...
+   ... creates a 1x1x1 wooden block at the cross-hairs or player's location and returns a Drone object. This might look odd (if you're familiar with Java's Object-dot-method syntax) but all of the Drone class's methods are also global functions that return new Drone objects. This is short-hand for creating drones and is useful for playing around with Drones at the in-game command prompt. It's shorter than typing ...
     
         var d = new Drone().box( blocks.oak ) 
         
@@ -5724,12 +6319,7 @@ Drones can be created in any of the following ways...
 
         d = new Drone()
     
-    ...will create a new Drone. If the cross-hairs are pointing at a
-    block at the time then, that block's location becomes the drone's
-    starting point.  If the cross-hairs are _not_ pointing at a block,
-    then the drone's starting location will be 2 blocks directly in
-    front of the player.  TIP: Building always happens right and front
-    of the drone's position...
+    ...will create a new Drone. If the cross-hairs are pointing at a block at the time then, that block's location becomes the drone's starting point.  If the cross-hairs are _not_ pointing at a block, then the drone's starting location will be 2 blocks directly in front of the player.  TIP: Building always happens right and front of the drone's position...
     
     Plan View:
 
@@ -5738,12 +6328,7 @@ Drones can be created in any of the following ways...
         |
         D---->
       
-    For convenience you can use a _corner stone_ to begin building.
-    The corner stone should be located just above ground level.  If
-    the cross-hair is point at or into ground level when you create a
-    new Drone(), then building begins at that point. You can get
-    around this by pointing at a 'corner stone' just above ground
-    level or alternatively use the following statement...
+    For convenience you can use a _corner stone_ to begin building. The corner stone should be located just above ground level. If the cross-hair is point at or into ground level when you create a new Drone(), then building begins at that point. You can get around this by pointing at a 'corner stone' just above ground level or alternatively use the following statement...
     
         d = new Drone().up();
           
@@ -5755,26 +6340,15 @@ Drones can be created in any of the following ways...
     
         d = new Drone(x,y,z,direction,world);
 
-    This will create a new Drone at the location you specified using
-    x, y, z In minecraft, the X axis runs west to east and the Z axis runs
-    north to south.  The direction parameter says what direction you want
-    the drone to face: 0 = east, 1 = south, 2 = west, 3 = north.  If the
-    direction parameter is omitted, the player's direction is used
-    instead.
-
-    Both the `direction` and `world` parameters are optional.
+    This will create a new Drone at the location you specified using x, y, z In minecraft, the X axis runs west to east and the Z axis runs north to south.  The direction parameter says what direction you want the drone to face: 0 = east, 1 = south, 2 = west, 3 = north.  If the direction parameter is omitted, the player's direction is used instead. Both the `direction` and `world` parameters are optional.
 
  4. Create a new Drone based on a Bukkit Location object...
 
         d = new Drone(location);
 
-    This is useful when you want to create a drone at a given
-    `org.bukkit.Location` . The `Location` class is used throughout
-    the bukkit API. For example, if you want to create a drone when a
-    block is broken at the block's location you would do so like
-    this...
+    This is useful when you want to create a drone at a given `org.bukkit.Location` . The `Location` class is used throughout the bukkit API. For example, if you want to create a drone when a block is broken at the block's location you would do so like this...
 
-        events.blockBreak( function( event) { 
+        events.blockBreak( function( event ) { 
             var location = event.block.location;
             var drone = new Drone(location);
             // do more stuff with the drone here...
@@ -5796,13 +6370,10 @@ the box() method is a convenience method for building things. (For the more perf
 
 #### parameters
 
- * b - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
-   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * b - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
  * w (optional - default 1) - the width of the structure 
  * h (optional - default 1) - the height of the structure 
- * d (optional - default 1) - the depth of the structure - NB this is
-   not how deep underground the structure lies - this is how far
-   away (depth of field) from the drone the structure will extend.
+ * d (optional - default 1) - the depth of the structure - NB this is not how deep underground the structure lies - this is how far away (depth of field) from the drone the structure will extend.
 
 #### Example
 
@@ -5823,8 +6394,7 @@ Another convenience method - this one creates 4 walls with no floor or ceiling.
 
 #### Parameters
 
- * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
-   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
  * width (optional - default 1) - the width of the structure 
  * height (optional - default 1) - the height of the structure 
  * length (optional - default 1) - the length of the structure - how far
@@ -5840,8 +6410,7 @@ To create a stone building with the insided hollowed out 7 wide by 3 tall by 6 l
    
 ### Drone.boxa() method
 
-Construct a cuboid using an array of blocks. As the drone moves first along the width axis,
-then the height (y axis) then the length, each block is picked from the array and placed.
+Construct a cuboid using an array of blocks. As the drone moves first along the width axis, then the height (y axis) then the length, each block is picked from the array and placed.
 
 #### Parameters
 
@@ -5863,8 +6432,7 @@ Construct a rainbow-colored road 100 blocks long...
 
 ### Drone Movement
 
-Drones can move freely in minecraft's 3-D world. You control the
-Drone's movement using any of the following methods..
+Drones can move freely in minecraft's 3-D world. You control the Drone's movement using any of the following methods..
 
  * up()
  * down()
@@ -5874,16 +6442,9 @@ Drone's movement using any of the following methods..
  * back()
  * turn()
 
-... Each of these methods takes a single optional parameter
-`numBlocks` - the number of blocks to move in the given direction. If
-no parameter is given, the default is 1.
+... Each of these methods takes a single optional parameter `numBlocks` - the number of blocks to move in the given direction. If no parameter is given, the default is 1.
 
-to change direction use the `turn()` method which also takes a single
-optional parameter (numTurns) - the number of 90 degree turns to make.
-Turns are always clock-wise. If the drone is facing north, then
-drone.turn() will make the turn face east. If the drone is facing east
-then drone.turn(2) will make the drone turn twice so that it is facing
-west.
+To change direction use the `turn()` method which also takes a single optional parameter (numTurns) - the number of 90 degree turns to make. Turns are always clock-wise. If the drone is facing north, then drone.turn() will make the turn face east. If the drone is facing east then drone.turn(2) will make the drone turn twice so that it is facing west.
 
 ### Drone Positional Info
 
@@ -5891,20 +6452,14 @@ west.
 
 ### Drone Markers
 
-Markers are useful when your Drone has to do a lot of work. You can
-set a check-point and return to the check-point using the move()
-method.  If your drone is about to undertake a lot of work -
-e.g. building a road, skyscraper or forest you should set a
-check-point before doing so if you want your drone to return to its
-current location.  
+Markers are useful when your Drone has to do a lot of work. You can set a check-point and return to the check-point using the move() method.  If your drone is about to undertake a lot of work - e.g. building a road, skyscraper or forest you should set a check-point before doing so if you want your drone to return to its current location.  
 
 A 'start' checkpoint is automatically created when the Drone is first created.
 
 Markers are created and returned to using the followng two methods...
 
  * chkpt - Saves the drone's current location so it can be returned to later.
- * move - moves the drone to a saved location. Alternatively you can provide an 
-   org.bukkit.Location object or x,y,z and direction parameters.
+ * move - moves the drone to a saved location. Alternatively you can provide an org.bukkit.Location object or x,y,z and direction parameters.
 
 #### Parameters
 
@@ -5930,8 +6485,7 @@ Creates a prism. This is useful for roofs on houses.
 
 #### Parameters
 
- * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
-   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
  * width - the width of the prism
  * length - the length of the prism (will be 2 time its height)
 
@@ -5951,8 +6505,7 @@ A convenience method for building cylinders. Building begins radius blocks to th
 
 #### Parameters
 
- * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. 
-   Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
+ * block - the block id - e.g. 6 for an oak sapling or '6:2' for a birch sapling. Alternatively you can use any one of the `blocks` values e.g. `blocks.sapling.birch`
  * radius 
  * height
 
@@ -5978,8 +6531,7 @@ To create a hollow cylinder of Iron 7 blocks in radius and 1 block high...
 
 ### Drone.arc() method
 
-The arc() method can be used to create 1 or more 90 degree arcs in the horizontal or vertical planes.
-This method is called by cylinder() and cylinder0() and the sphere() and sphere0() methods.
+The arc() method can be used to create 1 or more 90 degree arcs in the horizontal or vertical planes. This method is called by cylinder() and cylinder0() and the sphere() and sphere0() methods.
 
 #### Parameters
 
@@ -5989,20 +6541,10 @@ arc() takes a single parameter - an object with the following named properties..
  * blockType - The type of block to use - this is the block Id only (no meta). See [Data Values][dv].
  * meta - The metadata value. See [Data Values][dv].
  * orientation (default: 'horizontal' ) - the orientation of the arc - can be 'vertical' or 'horizontal'.
- * stack (default: 1 ) - the height or length of the arc (depending on
-   the orientation - if orientation is horizontal then this parameter
-   refers to the height, if vertical then it refers to the length ).
- * strokeWidth (default: 1 ) - the width of the stroke (how many
-   blocks) - if drawing nested arcs it's usually a good idea to set
-   strokeWidth to at least 2 so that there are no gaps between each
-   arc. The arc method uses a [bresenham algorithm][bres] to plot
-   points along the circumference.
+ * stack (default: 1 ) - the height or length of the arc (depending on the orientation - if orientation is horizontal then this parameter refers to the height, if vertical then it refers to the length ).
+ * strokeWidth (default: 1 ) - the width of the stroke (how many blocks) - if drawing nested arcs it's usually a good idea to set strokeWidth to at least 2 so that there are no gaps between each arc. The arc method uses a [bresenham algorithm][bres] to plot points along the circumference.
  * fill - If true (or present) then the arc will be filled in.
- * quadrants (default:
-   `{topleft:true,topright:true,bottomleft:true,bottomright:true}` - An
-   object with 4 properties indicating which of the 4 quadrants of a
-   circle to draw. If the quadrants property is absent then all 4
-   quadrants are drawn.
+ * quadrants (default: `{topleft:true,topright:true,bottomleft:true,bottomright:true}` - An object with 4 properties indicating which of the 4 quadrants of a circle to draw. If the quadrants property is absent then all 4 quadrants are drawn.
 
 #### Examples
 
@@ -6105,16 +6647,11 @@ To create 4 trees in a row, point the cross-hairs at the ground then type `/js `
 
     up( ).oak( ).right(8 ).spruce( ).right(8 ).birch( ).right(8 ).jungle( );
 
-Trees won't always generate unless the conditions are right. You
-should use the tree methods when the drone is directly above the
-ground. Trees will usually grow if the drone's current location is
-occupied by Air and is directly above an area of grass (That is why
-the `up( )` method is called first).
+Trees won't always generate unless the conditions are right. You should use the tree methods when the drone is directly above the ground. Trees will usually grow if the drone's current location is occupied by Air and is directly above an area of grass (That is why the `up( )` method is called first).
 
 ![tree example](img/drone-api-ref/treeex1.png)
 
-None of the tree methods require parameters. Tree methods will only be successful
-if the tree is placed on grass in a setting where trees can grow.
+None of the tree methods require parameters. Tree methods will only be successful if the tree is placed on grass in a setting where trees can grow.
 
 ### Drone.garden() method
 
@@ -6135,8 +6672,7 @@ To create a garden 10 blocks wide by 5 blocks long...
 
 ### Drone.rand() method
 
-rand takes either an array (if each blockid has the same chance of occurring)
-or an object where each property is a blockid and the value is it's weight (an integer)
+rand takes either an array (if each blockid has the same chance of occurring) or an object where each property is a blockid and the value is it's weight (an integer)
 
 #### Example
 
@@ -6161,8 +6697,7 @@ A drone can be used to copy and paste areas of the game world.
 
 ### Drone.copy() method
 
-Copies an area so it can be pasted elsewhere. The name can be used for
-pasting the copied area elsewhere...
+Copies an area so it can be pasted elsewhere. The name can be used for pasting the copied area elsewhere...
 
 #### Parameters
 
@@ -6181,9 +6716,7 @@ Pastes a copied area to the current location.
 
 #### Example
 
-To copy a 10x5x10 area (using the drone's coordinates as the starting
-point) into memory.  the copied area can be referenced using the name
-'somethingCool'. The drone moves 12 blocks right then pastes the copy.
+To copy a 10x5x10 area (using the drone's coordinates as the starting point) into memory.  the copied area can be referenced using the name 'somethingCool'. The drone moves 12 blocks right then pastes the copy.
 
     drone.copy('somethingCool',10,5,10 )
          .right(12 )
@@ -6191,8 +6724,7 @@ point) into memory.  the copied area can be referenced using the name
 
 ### Chaining
 
-All of the Drone methods return a Drone object, which means methods
-can be 'chained' together so instead of writing this...
+All of the Drone methods return a Drone object, which means methods can be 'chained' together so instead of writing this...
 
     drone = new Drone(); 
     drone.fwd(3);
@@ -6206,17 +6738,11 @@ can be 'chained' together so instead of writing this...
     
     var drone = new Drone().fwd(3).left(2).box(2).up().box(2).down();
 
-... since each Drone method is also a global function that constructs
-a drone if none is supplied, you can shorten even further to just...
+... since each Drone method is also a global function that constructs a drone if none is supplied, you can shorten even further to just...
     
     fwd(3).left(2).box(2).up().box(2).down()
 
-The Drone object uses a [Fluent Interface][fl] to make ScriptCraft
-scripts more concise and easier to write and read.  Minecraft's
-in-game command prompt is limited to about 80 characters so chaining
-drone commands together means more can be done before hitting the
-command prompt limit. For complex building you should save your
-commands in a new script file and load it using /js load()
+The Drone object uses a [Fluent Interface][fl] to make ScriptCraft scripts more concise and easier to write and read.  Minecraft's in-game command prompt is limited to about 80 characters so chaining drone commands together means more can be done before hitting the command prompt limit. For complex building you should save your commands in a new script file and load it using /js load()
 
 [fl]: http://en.wikipedia.org/wiki/Fluent_interface
 
@@ -6229,8 +6755,7 @@ commands in a new script file and load it using /js load()
 
 ### Extending Drone
 
-The Drone object can be easily extended - new buidling recipes/blueprints can be added and can
-become part of a Drone's chain using the *static* method `Drone.extend`. 
+The Drone object can be easily extended - new buidling recipes/blueprints can be added and can become part of a Drone's chain using the *static* method `Drone.extend`. 
 
 ### Drone.extend() static method
 
@@ -6242,7 +6767,6 @@ Use this method to add new methods (which also become chainable global functions
  * function - The method body.
 
 Alternatively if you provide just a function as a parameter, then the function name will be used as the new method name. For example the following two approaches are both valid.
-
 
 #### Example 1 Using name and function as parameters
 
@@ -6257,13 +6781,14 @@ Alternatively if you provide just a function as a parameter, then the function n
 
 #### Example 2 Using just a named function as a parameter
 
-    Drone.extend(function pyramid( block,height) { 
+    function pyramid( block,height) { 
         this.chkpt('pyramid');
         for ( var i = height; i > 0; i -= 2) {
             this.box(block, i, 1, i).up().right().fwd();
         }
         return this.move('pyramid');      
-    });
+    }
+    Drone.extend( pyramid );
 
 Once the method is defined (it can be defined in a new pyramid.js file) it can be used like so...
 
@@ -6289,9 +6814,7 @@ An array which can be used when constructing stairs facing in the Drone's direct
 
 #### Drone.PLAYER_SIGN_FACING
 
-An array which can be used when placing signs so they face in a given direction.
-This is used internally by the Drone.sign() method. It should also be used for placing
-any of the following blocks...
+An array which can be used when placing signs so they face in a given direction. This is used internally by the Drone.sign() method. It should also be used for placing any of the following blocks...
 
  * chest 
  * ladder
@@ -6324,46 +6847,27 @@ Say you want to do the same thing over and over. You have a couple of options...
 
     d = new Drone(); for ( var i =0;i < 4; i++) {  d.cottage().right(8); }
 
-While this will fit on the in-game prompt, it's awkward. You need to
-declare a new Drone object first, then write a for loop to create the
-4 cottages. It's also error prone, even the `for` loop is too much
-syntax for what should really be simple.
+While this will fit on the in-game prompt, it's awkward. You need to declare a new Drone object first, then write a for loop to create the 4 cottages. It's also error prone, even the `for` loop is too much syntax for what should really be simple.
 
  * You can use a while loop...
    
     d = new Drone(); var i=4; while (i--) {  d.cottage().right(8); }
 
-... which is slightly shorter but still too much syntax. Each of the
-above statements is fine for creating a 1-dimensional array of
-structures. But what if you want to create a 2-dimensional or
-3-dimensional array of structures? Enter the `times()` method.
+... which is slightly shorter but still too much syntax. Each of the above statements is fine for creating a 1-dimensional array of structures. But what if you want to create a 2-dimensional or 3-dimensional array of structures? Enter the `times()` method.
 
-The `times()` method lets you repeat commands in a chain any number of
-times. So to create 4 cottages in a row you would use the following
-statement...
+The `times()` method lets you repeat commands in a chain any number of times. So to create 4 cottages in a row you would use the following statement...
 
     cottage().right(8).times(4);
 
-...which will build a cottage, then move right 8 blocks, then do it
-again 4 times over so that at the end you will have 4 cottages in a
-row. What's more the `times()` method can be called more than once in
-a chain. So if you wanted to create a *grid* of 20 houses ( 4 x 5 ),
-you would do so using the following statement...
+...which will build a cottage, then move right 8 blocks, then do it again 4 times over so that at the end you will have 4 cottages in a row. What's more the `times()` method can be called more than once in a chain. So if you wanted to create a *grid* of 20 houses ( 4 x 5 ), you would do so using the following statement...
 
     cottage().right(8).times(4).fwd(8).left(32).times(5);
 
 ... breaking it down...
 
- 1. The first 3 calls in the chain ( `cottage()`, `right(8)`,
-    `times(4)` ) build a single row of 4 cottages.
+ 1. The first 3 calls in the chain ( `cottage()`, `right(8)`, `times(4)` ) build a single row of 4 cottages.
 
- 2. The last 3 calls in the chain ( `fwd(8)`, `left(32)`, `times(5)` )
-    move the drone forward 8 then left 32 blocks (4 x 8) to return to
-    the original x coordinate, then everything in the chain is
-    repeated again 5 times so that in the end, we have a grid of 20
-    cottages, 4 x 5.  Normally this would require a nested loop but
-    the `times()` method does away with the need for loops when
-    repeating builds.
+ 2. The last 3 calls in the chain ( `fwd(8)`, `left(32)`, `times(5)` ) move the drone forward 8 then left 32 blocks (4 x 8) to return to the original x coordinate, then everything in the chain is repeated again 5 times so that in the end, we have a grid of 20 cottages, 4 x 5.  Normally this would require a nested loop but the `times()` method does away with the need for loops when repeating builds.
 
 Another example: This statement creates a row of trees 2 by 3 ...
 
@@ -6448,12 +6952,7 @@ To create a glass 'north' hemisphere with a radius of 20 blocks...
 ![hemisphere example](img/drone-api-ref/hemisphereex2.png)
 
 
-## Java and Javascript Notes
-A collection of gotchas
-1. Java Strings - converting from Java string to Javascript String
-2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
-3. Saving and restoring Location objects using utils module
-## Function Declarations vs Function Expressions
+## Appendix F: Function Declarations vs Function Expressions
 In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
 
     function myFunction(){
@@ -6464,7 +6963,7 @@ In Javascript there are 3 different ways to define functions (though one of thes
     var myFunction = function(){
     };
 
-Throughout this book I have defined functions using *function declarations* rather than *function expressions*. I've done so because 
+Throughout this book I have defined functions using *function declarations* rather than *function expressions*. I've done so because:
 
 1. This is a book for beginners. Wherever there are  2 or more possible approaches to doing something in Javascript, I've endeavored to present only the simplest approach so that beginners are not overwhelmed by Javascript's flexible syntax.
 2. Function declarations *require* the function to have a name whereas function expressions do not. A named function - that is - a function which was given a name as part of its definition rather than merely assigned to a named variable - can call itself since its name is guaranteed to be in scope within the function's body. It's considered best practice to name functions whether they are defined as expressions or declarations.
@@ -6472,6 +6971,5 @@ Throughout this book I have defined functions using *function declarations* rath
 4. The topic of recursion requires the use of named functions. 
 5. The Drone API's *extend()* function is made simpler by providing named function.
 
-This book is not intended as a comprehensive tour of all of javascript's features. Its aim is to focus on the fun parts of Javascript and to help those who are curious about programming get a taste for what programming is like.
 
 

@@ -482,7 +482,7 @@ The answer to the above is `false` (3 is not greater than 5). I can ask *Is 3 le
 ... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is code which asks 'Does the player have any health points left?' and if the answer to that question is `true` then the player can continue playing.
 
 ### Variables
-
+#### Creating Variables
 ![](img/hearts.png)
 
 You can't type just anything after the `js` command and expect an answer. You have to use expressions that Javascript understands. For example if I type:
@@ -491,19 +491,19 @@ You can't type just anything after the `js` command and expect an answer. You ha
     
 The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined` which is Javascript's way of saying "I don't understand what you mean by 'hearts' ".
 
-Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is you do so like this...
+Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is, you do so like this:
 
     js hearts = 8;
     
 ... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
-![](img/chest.png "Variables are like Chests. You can store stuff in them.")
+![Variables are like Chests. You can store stuff in them.](img/chest.png "Variables are like Chests. You can store stuff in them.")
 
 Now when you type `js hearts`, Javascript understands what `hearts` and remembers its value and prints it out. Try it:
 
     js hearts
     
-It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an 'assignment'. I've 'assigned' the value 8 to the variable 'hearts' which I've done using a *single* `=` sign. I can reassign the variable 'hearts' a different value like this:
+It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an *assignment*. I've *assigned* the value 8 to the variable *hearts* using a *single* `=` sign. I can reassign the variable *hearts* a different value like this:
 
     js hearts = 9
     
@@ -532,6 +532,7 @@ You'll notice that the value of the 'hearts' variable is unchanged. It's still `
     
 What we've done here is combine a math operation and an assignment in a single statement. Now issue the command `js hearts` and you'll see that hearts is now `10`.
 
+#### String variables
 Let's create another variable called 'healthMessage' and assign it a value:
 
     js healthMessage = 'You have ' + hearts + ' health remaining'
@@ -556,12 +557,14 @@ That last one might surprise you. Javascript treats anything between quotes as a
 
 The letters, numbers and other symbols which form a string are known as *Characters*. A *Character* is any single letter, number or symbol. 'a','B','9', '-', '.', '/' and ':' are all examples of *Characters*.
 
+#### Naming variables
 You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable names cannot have space characters. There are a few other rules about what javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
 
 Javascript programmers - as a habit - generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among javascript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
 
 You can read more about CamelCase on WikiPedia http://en.wikipedia.org/wiki/CamelCase
 
+#### Making mistakes
 Feel free to experiment at this point. Create your own variables using your own numbers, strings and operators. If you make a mistake you'll see a long-winded error message in your console window. These error messages are called stack traces and they're the computers way of telling you something went wrong. Stack traces can be very useful for Java programmers but not so useful for Javascript. Remember - the Minecraft Server software is written in Java not Javascript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the Javascript code you type into Java code so that the server can understand it. If the javascript code doesn't make sense then the translation won't work. 
 
 Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even if we are talking and there's background noise. Computers on the other hand are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake you learn something new. Each of the following statements will cause an error:
@@ -703,17 +706,12 @@ The 'console' variable is one of the built-in variables in ScriptCraft and its t
 
     js Herobrine
 
-The type of a variable is very important because it determines what you can do with it and how it behaves. 
-Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
+The type of a variable is very important because it determines what you can do with it and how it behaves. Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
 
-#### Functions
-Functions in javascript are very powerful because they contain code which can be called any number of times. Let's look at one of the built-in functions in Javascript - the `parseInt()` function.
-
-##### Term: Built-in 
-Javascript comes with many 'built-in' functions. These are useful bits of code which can be used by programmers. A 'built-in' function is simply a function which comes bundled with Javascript. 
+### Functions
+Functions in javascript are very powerful because they are containers for code which can be called any number of times. In Javascript you can write your own functions or use any of the *built-in* functions provided by the language. A *built-in* function is simply a function which comes bundled with JavaScript. Let's look at one of the built-in functions in Javascript - the `parseInt()` function.
 
 ##### Using functions
-
 The 'parseInt()' function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the parseInt() function, it will try to figure out what number is in the text. Let's try it out:
 
     js parseInt('4 hours until sunset')
@@ -726,7 +724,7 @@ We are effectively saying to parseInt "here's some text - give me the number (an
     js parseInt('This is not a number');
     js parseInt('3 blind mice');
 
-##### Writing your own functions
+#### Writing your own functions
 One of the really cool things about programming is that you're not limited to using only the built-in functions provided by the language. You can create your own functions. In this book we're going to create a lot of functions to do cool things you wouldn't normally be able to do in Minecraft. For now let's create a simple new function that adds two numbers together. 
 
     js function add( firstNumber, secondNumber ) { return firstNumber + secondNumber }
@@ -989,7 +987,17 @@ The exports variable is a special type of variable - it is an 'object'. An objec
 
     exports.favoriteGame = 'Minecraft';
 
-... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have an *yield* property which says how wide the explosion will be. Players have dozens of properties. For example to give yourself the ability to fly, issue `js self.allowFlight = true` at the in-game command prompt. To give yourself super-human speed issue `js self.walkSpeed = 1`. To reset your walkspeed to normal issue `js self.walkSpeed = 0` . The point is - everything in the game is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters. 
+... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have an *yield* property which says how wide the explosion will be. 
+
+Players have dozens of properties. For example to give yourself the ability to fly, issue the following command at the in-game prompt: 
+
+    js self.allowFlight = true
+
+To give yourself super-human speed issue this command: 
+    
+    js self.walkSpeed = 1 
+
+To reset your walkspeed to normal issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
 
 #### Term: Property
 A *property* is an attribute of an Object - for example in real life we (humans that is) all have properties: eye-color, date-of-birth, name and so on. Objects in Javascript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables (called objects).
@@ -1061,7 +1069,7 @@ Once you've saved your work go back to Minecraft and at the in-game command prom
 
     /js refresh()
 
-The refresh() function is a ScriptCraft function which reloads all of the javascript code. The server has a built-in /reload command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
+The refresh() function is a ScriptCraft function which reloads all of the javascript code. The server has a built-in */reload* command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
 
 The refresh() function is important, you should execute it every time you change your Javascript code because changes to your code won't be activated in the game until you do so.
 
@@ -1695,7 +1703,7 @@ The `if` statement is one of several *block* statements in javascript, that is, 
 Now jump into the game and at the in-game prompt issue the following commands:
 
     /js refresh() // to load the changes
-    /js guessTheNumber( self ) // self is now an actual player in the game
+    /js guessTheNumber( self ) 
 
 When prompted, press the T key to start typing your guess. You may need to re-run the guessTheNumber() function a couple of times before you guess the right answer but this time, when you do get it right, a firework will launch directly above your head. Pretty cool huh?
 
@@ -2990,6 +2998,13 @@ That is; we can do so with or without quotes around the *name* property. However
 
 If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
 
+### JSON, Persistence and Java Objects
+If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses the popular JSON module's *stringify()* and *parse()* functions to save and load data and these functions *only work with native JavaScript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
+
+    var utils = require('utils');
+    var locationAsJSON = utils.locationToJSON( player.location ); // convert from Java to JSON
+    var locationObject = utils.locationFromJSON ( locationAsJSON ); // convert from JSON to Java
+
 ### Summary
 In this chapter you learned about providing TAB-completion hints for your own custom commands and you learned about persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
 
@@ -3033,11 +3048,11 @@ https://forums.bukkit.org/threads/am-having-trouble-adding-custom-recipes.102722
 
 Very often such results can be very useful when starting down the path of creating your own plugin.
 
-What's even more useful is the comprehensive API reference available at http://jd.bukkit.org/beta/apidocs/. This API reference is a set of interlinked web pages which are generated automatically from comments in the Bukkit source code. The reference lists all of the *Classes*, *Packages* and *Methods* in the Bukkit API. A Java *Class* is much like a Javascript Module while a Java *Method* is much like a Javascript Method or Function. A Java *Package* is a folder of Java *Classes*, it's just another way of organizing large numbers of source files. Java programs can be quite large, much larger than their Javascript equivalents so the source files must be organized in folders and sub folders. Each folder and subfolder is known as a *Package* in Java terms. 
+What's even more useful is the comprehensive API reference available at http://jd.bukkit.org/rb/apidocs/. This API reference is a set of interlinked web pages which are generated automatically from comments in the Bukkit source code. The reference lists all of the *Classes*, *Packages* and *Methods* in the Bukkit API. A Java *Class* is much like a Javascript Module while a Java *Method* is much like a Javascript Method or Function. A Java *Package* is a folder of Java *Classes*, it's just another way of organizing large numbers of source files. Java programs can be quite large, much larger than their Javascript equivalents so the source files must be organized in folders and sub folders. Each folder and subfolder is known as a *Package* in Java terms. 
 
 For example, in Minecraft there are hundreds of different types of *events* which can occur in the game. It would be difficult for the Bukkit development team and for Plugin developers if all of the event source code was in a single folder called *events* so it makes sense to create subfolders for categories of events.
 
-If you visit http://jd.bukkit.org/beta/apidocs You'll see a web page with 3 distinct areas.
+If you visit http://jd.bukkit.org/rb/apidocs You'll see a web page with 3 distinct areas.
 
 ![Bukkit API Docs](img/recipes/apidocs.png)
 
@@ -3175,7 +3190,7 @@ This is how we define the layout of a new shaped recipe in code too. The ShapedR
     ]);
 
 #### Calling Variable Argument Java Methods from JavaScript
-In the *org.bukkit.inventory.ShapedRecipe* details page at http://jd.bukkit.org/beta/apidocs, the information about the *.shape()* method is presented as follows:
+In the *org.bukkit.inventory.ShapedRecipe* details page at http://jd.bukkit.org/rb/apidocs, the information about the *.shape()* method is presented as follows:
 
      ShapedRecipe   shape(String... shape) 
          Set the shape of this recipe to the specified rows.    
@@ -3208,7 +3223,7 @@ Now we've defined the shape of the recipe we need to say what each of the letter
 ### Inheritance
 Finally, having set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method. Let's look at this method again in the online documentation:
 
-1. Go to jd.bukkit.org/beta/apidocs
+1. Go to jd.bukkit.org/rb/apidocs
 2. Click the *org.bukkit* link in the top left pane.
 3. Click the *Server* link in the bottom left pane.
 4. Click the *addRecipe* link in the right (main) pane.
@@ -3324,7 +3339,7 @@ Once we register for an event the callback we provide will be executed whenever 
 ### Digging Deeper into Inheritance
 Every event callback function takes a single argument. You can call the parameter anything you like - *event* or you can shorten it to *evt* or even just *e*. We'll want to do something with the parameter in the function callback. In the case of the Ender Bow, we'll need to get some crucial information from the event so we can teleport the player. This is where - yet again - the Bukkit API Reference documentation and the ability to browse it, is essential. 
 
-In this particular instance we're interested in exploring the properties and methods of the *org.bukkit.event.entity.ProjectileHitEvent* type in the online Bukkit Reference at http://jd.bukkit.org/beta/apidocs. Visit the link just mentioned in a web browser, click on the *org.bukkit.event.entity* link in the top left pane, then click on the *ProjectileHitEvent* link in the bottom pane and information about this type of event will appear in the right hand pane. The information we're interested in is the *Method Summary*:
+In this particular instance we're interested in exploring the properties and methods of the *org.bukkit.event.entity.ProjectileHitEvent* type in the online Bukkit Reference at http://jd.bukkit.org/rb/apidocs. Visit the link just mentioned in a web browser, click on the *org.bukkit.event.entity* link in the top left pane, then click on the *ProjectileHitEvent* link in the bottom pane and information about this type of event will appear in the right hand pane. The information we're interested in is the *Method Summary*:
 
     Projectile getEntity() 
       Returns the Entity involved in this event
@@ -3369,7 +3384,7 @@ The *onArrowHit()* function is a callback which will be executed by the server w
 3. Get the shooter's item held - the thing the shooter is currently holding.
 4. Check if the item held is an Ender Bow and if it is teleport the player.
 
-Like all event-handling callback functions it takes a single parameter: *event*. We know that, because we'll register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/beta/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
+Like all event-handling callback functions it takes a single parameter: *event*. We know that, because we'll register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/rb/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
 
 We test to see if the *projectile* variable is of type bkArrow and if it is we return - this function is only concerned with Arrows, not Eggs or Snowballs. 
 
@@ -3468,7 +3483,7 @@ If you run the above code then any attempt to break a block in the game will fai
 
     event.cancelled = true;
 
-This statement cancels the event preventing the normal procedure for breaking blocks from occurring. It was as if the block was never broken. Not all types of events can be canceled but most can. You can see a list of all of the types of events which can be cancelled at http://jd.bukkit.org/beta/apidocs/org/bukkit/event/Cancellable.html under the heading *All Known Implementing Classes*. 
+This statement cancels the event preventing the normal procedure for breaking blocks from occurring. It was as if the block was never broken. Not all types of events can be canceled but most can. You can see a list of all of the types of events which can be cancelled at http://jd.bukkit.org/rb/apidocs/org/bukkit/event/Cancellable.html under the heading *All Known Implementing Classes*. 
 
 Another type of Griefing is when players place blocks where they shouldn't - for example, filling up another player's house with brick or other materials. You can also prevent all blocks being placed using the same *cancel()* function defined above:
 
@@ -3505,7 +3520,7 @@ Prohibiting the placement of all blocks in the game wouldn't make for a very fun
 
 You can test this code by reloading the plugins using the */reload* or */js refresh()* commands. You'll also need to use the */deop* command to temporarily remove your operator privileges so you can verify that trying to place TNT when you're not an operator is impossible. You can re-enable your operator privileges later by running the *op* command at the server console prompt. With TNT in hand, try to place a block of TNT anywhere and the TNT will appear very briefly before disappearing. 
 
-In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{arrow}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/beta/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/beta/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
+In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{arrow}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/rb/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/rb/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
 
     var material = event.getBlockPlaced().getType();
 
@@ -3513,7 +3528,7 @@ In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* whic
 
     var material = event.blockPlaced.type;
 
-Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different. In the Player Inheritance Diagram in chapter @@chapter{arrow} you can see that a Player is a descendant of the ServerOperator type so it inherits all of its properties and methods. If you look at the Java Documentation for the ServerOperator type at http://jd.bukkit.org/beta/apidocs/org/bukkit/permissions/ServerOperator.html There are just 2 methods:
+Next we check to see if the player who placed the block is an operator. The Java Bean rules for boolean properties are slightly different. In the Player Inheritance Diagram in chapter @@chapter{arrow} you can see that a Player is a descendant of the ServerOperator type so it inherits all of its properties and methods. If you look at the Java Documentation for the ServerOperator type at http://jd.bukkit.org/rb/apidocs/org/bukkit/permissions/ServerOperator.html There are just 2 methods:
 
     boolean isOp()
     void setOp(boolean value)
@@ -3963,28 +3978,72 @@ In this chapter we built a player vs. player mini-game from scratch. We *re-used
 Playing games is fun but writing your own games can be hugely rewarding, especially when you get to see your friends play a game you created!
 
 # Appendices
-## On the use of the `self` variable
+
+## Appendix A: ScriptCraft variables
+### The *server* variable
+### The *bukkit* variable
+### The *self* variable
 Don't use it in your modules. It's only a convenience function for use at the in-game prompt.
 it should not be used in any function which is deferred as it does not exist outside the scope of the in-game or server prompts.
 Don't use it in modules especially in multi-player mode!
 
-## Using ScriptCraft with other Plugins
-### Calling dispatchCommand() to programmtically use othe plugin commands
-### accessing the plugin API from javascript (get plugin by name - see example code on plugin.bukkit scriptcraft page)
-## Events reference
-A set of tables of events, one table for each set of events, Player Events, Server Events etc.
-## Items reference
-A table of all the items in the items module and how to use them (API calls which require an ItemStack)
+## Appendix B: Using ScriptCraft with other Plugins
+ScriptCraft can be used to work with and control other Bukkit Plugins. There are two ways ScriptCraft can interact with other Plugins:
 
-## Drone API Reference
+1. By issuing plugin commands
+2. By using the plugin's methods and classes.
+
+### Issuing commands
+The *server.dispatchCommand()* method can be used to issue both built-in commands such as */time set* or commands provided by plugins. ScriptCraft can be used to *drive* commands provided by other plugins. For example, if you wanted to use the *Essentials* plugin's */eco give* command to give a player in-game money via JavaScript you'd write:
+
+    server.dispatchCommmand( server.consoleSender, 'eco give walterh 5')
+
+You could create an event listener function which listens for certain types of events and rewards or subtracts in-game currency from players who trigger those events. For example, you could reward players for crafting items like so:
+
+    events.craftItem( event ){
+      var crafter = event.whoClicked.name;
+      var command = 'eco give ' + crafter + ' 5';
+      server.dispatchCommand( server.consoleSender, command);
+    }    
+
+Many plugins provide their own set of commands all of which can be issued by the server console operator ( *server.consoleSender* ).
+
+### Using plugin methods and classes
+Another way to access and use another plugin is via the Java methods and classes provided by the plugin you want to control. In the following example, we're using the popular *PermissionsEx* plugin: a Bukkit plugin which provides fine-grained access control and permissions. You can explore the *PermissionsEx* API reference at http://ci.nixium.com/job/PermissionsEx/javadoc/.
+
+    var playerName = 'walterh';
+    var pexPlugin = server.pluginManager.getPlugin('PermissionsEx');
+    var pexUser = pex.getUser(playerName)
+    if (! pexUser.inGroup('moderator') ) {
+       pexUser.player.sendMessage("You can't do that!");
+    }
+
+In the above example, we call the *server.pluginManager.getPlugin()* method to get a particular plugin object. Once we have the plugin object we can call any of its methods to work with the plugin.
+
+## Appendix C: Events Reference
+The following tables list all of the *events* module's functions which can be used to register event listeners. Alongside each function, the equivalent Java Event type is shown. You should refer to the Bukkit API Reference documentation at http://jd.bukkit.org/rb/apidocs/ for details about each Java Event type. Event types fall into a number of categories each of which are listed below.
+
+@@include target/events-reference.html
+
+## Appendix D: Items reference
+The *items* module provides a suite of useful functions for creating *Item Stacks* - that is - collections of objects which are typically stored in a Player's inventory. Each of the functions in the following table can be called in 3 different ways:
+
+1. If there is no parameter supplied the function will return the equivalent *Material* - that is - one of the values of the *org.bukkit.Material* type. For example, calling `items.diamondOre()` will return the *org.bukkit.Material.DIAMOND_ORE* value which is of type *org.bukkit.Material* and can be used anywhere the Bukkit API expects an *org.bukkit.Material* object.
+2. If a number is supplied as the sole parameter, then a new *org.bukkit.inventory.ItemStack* object is returned. For example, calling `items.diamondOre(8)` will return an *ItemStack* composed of 8 blocks of diamond ore.
+3. If a *Material* object is supplied as the sole parameter, then the material is compared with the material type associated with the given function and will return *true* if the materials are of the same type. For example, to see if a player is currently holding diamond ore: `var isDiamond = items.diamondOre( player.itemInHand.type )`.
+
+Remember to load the *items* module using the following code before using any of its functions:
+
+    var items = require('items');
+
+Listed below are all of the *items* module's functions:
+
+@@include target/items-reference.html
+
+## Appendix E: Drone API Reference
 @@include target/drone-api-reference.md
 
-## Java and Javascript Notes
-A collection of gotchas
-1. Java Strings - converting from Java string to Javascript String
-2. Persistence API and Java objects. Persistence won't work for Java objects - only Javascript objects.
-3. Saving and restoring Location objects using utils module
-## Function Declarations vs Function Expressions
+## Appendix F: Function Declarations vs Function Expressions
 In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
 
     function myFunction(){
@@ -3995,7 +4054,7 @@ In Javascript there are 3 different ways to define functions (though one of thes
     var myFunction = function(){
     };
 
-Throughout this book I have defined functions using *function declarations* rather than *function expressions*. I've done so because 
+Throughout this book I have defined functions using *function declarations* rather than *function expressions*. I've done so because:
 
 1. This is a book for beginners. Wherever there are  2 or more possible approaches to doing something in Javascript, I've endeavored to present only the simplest approach so that beginners are not overwhelmed by Javascript's flexible syntax.
 2. Function declarations *require* the function to have a name whereas function expressions do not. A named function - that is - a function which was given a name as part of its definition rather than merely assigned to a named variable - can call itself since its name is guaranteed to be in scope within the function's body. It's considered best practice to name functions whether they are defined as expressions or declarations.
@@ -4003,6 +4062,5 @@ Throughout this book I have defined functions using *function declarations* rath
 4. The topic of recursion requires the use of named functions. 
 5. The Drone API's *extend()* function is made simpler by providing named function.
 
-This book is not intended as a comprehensive tour of all of javascript's features. Its aim is to focus on the fun parts of Javascript and to help those who are curious about programming get a taste for what programming is like.
 
 

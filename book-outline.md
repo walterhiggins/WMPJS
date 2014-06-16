@@ -3981,11 +3981,16 @@ Playing games is fun but writing your own games can be hugely rewarding, especia
 
 ## Appendix A: ScriptCraft variables
 ### The *server* variable
+The *server* variable is a global variable provided by ScriptCraft. It refers to the *org.bukkit.Server* object which is a Java object representing the Minecraft Server. Refer to http://jd.bukkit.org/rb/apidocs/org/bukkit/Server.html for full details of all of the methods available for this object.
+
 ### The *bukkit* variable
+The *bukkit* variable is a global variable with just a handful of methods to make life easier for Javascript programmers. You can see the full list of methods at http://scriptcraftjs.org/docs/API-Reference.html#bukkit
+
+### The ____plugin variable
+This global variable is a reference to the ScriptCraft plugin. Some Bukkit API methods require an *org.bukkit.plugin.Plugin* object as a parameter. If you need to call such methods from Javascript you should provide the ____plugin variable where an object of type *org.bukkit.plugin.Plugin* is required.
+
 ### The *self* variable
-Don't use it in your modules. It's only a convenience function for use at the in-game prompt.
-it should not be used in any function which is deferred as it does not exist outside the scope of the in-game or server prompts.
-Don't use it in modules especially in multi-player mode!
+The *self* variable is a *short-lived* variable which only exists briefly during the execution of a */js* command. The *self* variable refers to the *sender* - that is - the player or console operator who is issuing the */js* command. You should never use the *self* variable in your modules - *especially in multi-player mode*! It should not be used in any function which is deferred as it does not exist outside the scope of the in-game or server prompts.
 
 ## Appendix B: Using ScriptCraft with other Plugins
 ScriptCraft can be used to work with and control other Bukkit Plugins. There are two ways ScriptCraft can interact with other Plugins:
@@ -4044,12 +4049,12 @@ Listed below are all of the *items* module's functions:
 @@include target/drone-api-reference.md
 
 ## Appendix F: Function Declarations vs Function Expressions
-In Javascript there are 3 different ways to define functions (though one of these 3 ways is *deprecated* - that is - no longer officially supported in upcoming versions of javascript). The two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
+In Javascript the two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
 
     function myFunction(){
     }
 
-...while a function expression might look like this:
+...while a function expression looks like this:
 
     var myFunction = function(){
     };
@@ -4058,9 +4063,7 @@ Throughout this book I have defined functions using *function declarations* rath
 
 1. This is a book for beginners. Wherever there are  2 or more possible approaches to doing something in Javascript, I've endeavored to present only the simplest approach so that beginners are not overwhelmed by Javascript's flexible syntax.
 2. Function declarations *require* the function to have a name whereas function expressions do not. A named function - that is - a function which was given a name as part of its definition rather than merely assigned to a named variable - can call itself since its name is guaranteed to be in scope within the function's body. It's considered best practice to name functions whether they are defined as expressions or declarations.
-3. Function declarations are slightly shorter to type than their function expression equivalents.
-4. The topic of recursion requires the use of named functions. 
-5. The Drone API's *extend()* function is made simpler by providing named function.
+3. A function declaration is slightly shorter to type than its function expression equivalent.
+4. Named functions are useful when covering the topic of recursion and are also used throughout ScriptCraft. 
 
-
-
+Even if you decide to use function expressions as you become more adept at Javascript programming, it's a good idea to give your function a name.

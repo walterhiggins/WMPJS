@@ -178,7 +178,9 @@ The CraftBukkit software is downloadable as a `.jar` file. Programs which are cr
 2. A warning prompt will appear at the bottom of the Chrome window with the following text: "This type of file can harm your computer. Do you want to keep craftbukkit.jar anyway?"
 3. Alongside the above message there will be two buttons "Discard" and "Keep". Make sure to click the "Keep" button to start downloading.
 4. Press the CTRL key (on the bottom left side of your keyboard) and the 'J' key together to open the Downloads view in Chrome.
-![](img/download-bukkit-chrome1.png)
+
+    ![](img/download-bukkit-chrome1.png)
+
 5. You will see a list of recently downloaded files. Underneath the craftbukkit jar file you just downloaded, you'll see a 'Show in Folder' link. Click this link to open the folder containing the recently downloaded file.
 
 6. Select the craftbukkit jar file you just downloaded, right-click and choose 'Copy' from the popup menu. 
@@ -189,7 +191,9 @@ The CraftBukkit software is downloadable as a `.jar` file. Programs which are cr
 
 1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
 2. Once the download is complete click the Download button (A button with a Down arrow) in the top right corner of the Safari screen. 
-![](img/download-bukkit-safari1.png)
+    
+    ![](img/download-bukkit-safari1.png)
+
 3. Next to the file you will see a 'Show in Finder' link. Click this link to open the folder containing the recently downloaded file.
 4. Select the craftbukkit jar file you just downloaded, ctrl-click (hold down the Ctrl key while clicking) and choose 'Copy' from the popup menu. 
 5. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
@@ -200,7 +204,9 @@ The CraftBukkit software is downloadable as a `.jar` file. Programs which are cr
 1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
 2. When prompted, you should click the 'Save' button to save the file.
 3. When the download has completed, you can view the downloads by pressing Ctrl+J
-![](img/download-bukkit-ie1.png)
+
+    ![](img/download-bukkit-ie1.png)
+
 4. Next to the file you will see a 'Downloads' link. Click this link to open the folder containing the recently downloaded file.
 5. Select the craftbukkit jar file you just downloaded, right-click and choose 'Copy' from the popup menu. 
 6. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
@@ -211,7 +217,9 @@ The CraftBukkit software is downloadable as a `.jar` file. Programs which are cr
 1. Click on the appropriate color-coded button on the Bukkit Downloads page (Remember: Green for Recommended/Stable, Amber for Beta and Red for Development/Unstable).
 2. When prompted, you should click the 'Save' button to save the file.
 3. Once the download is complete click the Download button (A button with a Down arrow) in the top right corner of the Firefox screen. 
-![](img/download-bukkit-firefox1.png)
+
+    ![](img/download-bukkit-firefox1.png)
+
 4. Next to the file you will see a 'Open Containing Folder' link. Click this link to open the folder containing the recently downloaded file.
 5. Select the craftbukkit jar file you just downloaded, right-click and choose 'Copy' from the popup menu. 
 6. Create a new folder on your computer and call it 'CraftBukkit'. Make sure you create the folder somewhere convenient so you don't forget where it is.
@@ -742,7 +750,7 @@ Now let's look at the earlier function declaration in more detail. A function is
 
 ![Function Outline](img/function-outline.png)
 
-You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber. You should give your parameters names which are memorable so you don't forget what the parameters are for. The same is true of the variable name you create for your function. Give it a name which is meaningful and memorable. 
+When you create a new function of your own, you should give the function a meaningful and memorable name. You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber but you should give your parameters names which are memorable so you don't forget what the parameters are for. 
 
 ### Term: Reuse
 Reuse is important in programming. While programming you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There's two ways to do this: You can copy and paste the code you've already written but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code - packaging up code in functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
@@ -1115,7 +1123,7 @@ You'll see another error message: ReferenceError: "roll" is not defined. Why doe
 If you remember, the new file we just created, dice.js, was saved in the scriptcraft/modules folder not the scriptcraft/plugins folder. The scriptcraft/plugins folder is special for a couple of reasons:
 
 1. All javascript files in the scriptcraft/plugins folder are automatically loaded and executed when the server starts.
-2. All variables 'exported' from files within the scriptcraft/plugins folder become what are called 'global' variables. That means they are public for all the rest of the sytem to see. 
+2. All variables 'exported' from files within the scriptcraft/plugins folder become what are called 'global' variables. That means they are public for all the rest of the system to see. 
 
 There are other folders in scriptcraft. The 'modules' folder is much like the plugins folder. It's a folder where you can create new javascript files. It's similar to scriptcraft/plugins except:
 
@@ -5475,7 +5483,7 @@ The first group of statements in the *start()* function use Bukkit's Scoreboard 
     bkObjective.displaySlot = bkDisplaySlot.SIDEBAR;
     game.objective = bkObjective;
 
-Each Scoreboard object can have one or more objectives and each objective can be linked to a different *Display Slot*. There are 3 different display slots: BELOW_NAME, SIDEBAR, and PLAYER_LIST. In our game we use the SIDEBAR slot as it provides a nice leaderboard view which is always visible at the side of the screen. 
+Each Scoreboard object can have one or more objectives and each objective can be linked to a different *Display Slot*. There are 3 different display slots: BELOW\_NAME, SIDEBAR, and PLAYER\_LIST. In our game we use the SIDEBAR slot as it provides a nice leaderboard view which is always visible at the side of the screen. 
 
 ### Who's playing?
 The next step in starting the game is to loop over all of the teams in the game and for each team, create a *org.bukkit.scoreboard.Team* object which is used to display each player's name in their team colors, then for each player in each team, save the player's game mode, and add the player to the *Team* object. The following lines of code:

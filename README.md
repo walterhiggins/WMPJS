@@ -811,13 +811,17 @@ Follow these steps to install gedit on Windows.
 5. Once it's downloaded, open the gedit-setup.exe file to begin the install.
 6. Follow all of the install wizard steps. You can use the default values.
 
-Once installed, gedit should appear in your Start Menu. If it doesn't appear in your Start Menu, you can search for it by typing 'gedit' in the Start Menu's Search field.
+Once installed, gedit should appear in your Start Menu. If it doesn't appear in your Start Menu, you can search for it by typing 'gedit' in the Start Menu's Search field. 
 
 #### gedit Preferences
 
 The first thing you should do once you've installed gedit is set some preferences. Most modern programming editors provide a file Browsing view where you can see at a glance all of your folders and files. The disk browser is super useful when you want to quickly navigate around your javascript folders and files. To enable the File browsing view in Gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will always be displayed the next time you launch because GEdit remembers your view settings.
 
 ![File Browser in Gedit](img/screenshot-gedit-file-browser.png "gedit's File Browser")
+
+The first time you launch gedit for windows, you will need to change one of the default settings so that all files and folders appear in the File Browser window. By default only folders are shown in the Windows File Browser. This isn't very useful as we'll want to work with Folders and Javascript files. To ensure you can see all types of files do the following: In the File Browser window, right-click anywhere (click the right mouse button) and make sure that the *Show Binary* option is selected under the *Filter* menu. This will ensure all file types are visible.
+
+![Ensuring all file types are visible in gedit for Windows](img/gedit-windows-show-binary.png "Ensuring all file types are visible in gedit for Windows")
 
 The next step is to set some preferences for how the editor should behave. You do this by choosing Edit => Preferences to open the Preferences dialog. Let's look at each of the preferences sections in turn.
 

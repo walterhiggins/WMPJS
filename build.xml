@@ -1,6 +1,7 @@
 <project name="sc-book" default="package" basedir=".">
   <property name="src" location="src/java"/>
   <property name="build" location="target/classes"/>
+  <property name="delivery" location="target/delivery"/>
   <property name="dist" location="target/" />
 
   <target name="init">
@@ -45,6 +46,27 @@
     </java>
   </target>
 
+  <target name="deliver" depends="package">
+    <mkdir dir="${delivery}"/>
+    <copy todir="${delivery}/img">
+      <fileset dir="img"/>
+    </copy>
+    <copy todir="${delivery}/listings">
+      <fileset dir="listings"/>
+    </copy>
+    <copy todir="${delivery}/diagrams">
+      <fileset dir="diagrams"/>
+    </copy>
+    <java classname="jscript" failonerror="true" fork="true" error="error.log">
+      <classpath>
+	<pathelement path="${build}"/>
+      </classpath>
+      <arg value="src/js/split.js"/>
+      <arg value="README.md"/>
+      <arg value="${delivery}"/>
+    </java>
+  </target>
+
   <target name="build-readme.md" depends="build-drone-ref, build-events-ref, build-items-ref, compile">
     <java classname="jscript" failonerror="true" fork="true" error="error.log" output="README.md">
       <classpath>
@@ -54,6 +76,7 @@
       <arg value="book-outline.md"/>
     </java>
   </target>
-  <target name="package" depends="build-readme.md">
-  </target>
+
+  <target name="package" depends="build-readme.md"/>
+
 </project>

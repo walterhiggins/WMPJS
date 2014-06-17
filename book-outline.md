@@ -3895,7 +3895,7 @@ So far we've created a single javascript function for use by operators to start 
 
 Later on we'll add the ability for any player waiting in a colored zone can start the game using the `/jsp snowball` command which we'll develop later. First let's write the code to build an arena. In the *snowball* folder create a new file called *arena.js* and enter the following code:
 
-@@listing snowball/arena.js plugins/snowball/arena.js Constructing an Snowball Fight Arena
+@@listing arena.js plugins/snowball/arena.js Constructing an Snowball Fight Arena
 
 The *snowballArena()* function is a new Drone extension and is meant for use by operators to create an arena for play. Operators can use this function as they would use any Drone function. In the game (with operator privileges) target a block at ground level and issue the following command:
 

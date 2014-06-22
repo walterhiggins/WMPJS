@@ -125,7 +125,7 @@ var xforms = {
     currentRecipe = key;
     return 'Recipe ' + recipeKeys[key];
   },
-  '@@nextChapter\{([a-zA-Z0-9]+)\}': function(match, key, matchIndex, line){
+  '@@nextChapter\{([a-zA-Z0-9\-]+)\}': function(match, key, matchIndex, line){
     chapKeys[key] = nextChap++;
     listingCounts[key] = 1;
     currentChap = key;
@@ -134,7 +134,7 @@ var xforms = {
   '@@recipe\{([a-zA-Z0-9]+)\}': function(match, key){
     return recipeKeys[key];
   },
-  '@@chapter\{([a-zA-Z0-9]+)\}': function(match, key){
+  '@@chapter\{([a-zA-Z0-9\-]+)\}': function(match, key){
     return chapKeys[key];
   },
   '@@include (.*)': function(match, file){

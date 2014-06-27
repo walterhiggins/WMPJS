@@ -48,8 +48,8 @@
 
   <target name="deliver" depends="package">
     <mkdir dir="${delivery}"/>
-    <copy todir="${delivery}/img">
-      <fileset dir="img"/>
+    <copy todir="${delivery}/images">
+      <fileset dir="images"/>
     </copy>
     <copy todir="${delivery}/listings">
       <fileset dir="listings"/>

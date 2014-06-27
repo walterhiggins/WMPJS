@@ -10,14 +10,13 @@ This book shows you how to create your own Minecraft Server Plugins using Javasc
 
 Before we begin I better explain some of the words I'll use throughout this book. 
 
- * Plugin - A Plugin is a file you add to Minecraft which extends the game in some way. 
+ * Plugin - A modification you add to Minecraft which changes the game in some way. The plugin is usually in the form of one or more files.
  * Mod - Mod is short for Modification. In this book, Plugin and Mod are used interchangebly (they mean the same thing).
  * Modding - The practice of writing modifications or plugins for Minecraft. Modding requires some programming knowledge which we will learn about in this book.
  * Mojang - Mojang is the name of the company which makes Minecraft.
  * API - API is short for Application Programming Interface - an official way to write Minecraft Plugins using a guide. Players and regular users of software don't need to care about APIs but they are essential for programmers, because they make it easier to change the software. An API is like a list of Recipes - you probably crafted your first pick-axe by refering to an online guide - how much more difficult would it be to have tried creating one without knowing where all the materials show go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API we will use in this book is the Bukkit API. We'll learn more about this later.
  * Multiplayer - The mode of playing minecraft with other players all connected to the same server.
  * Server - A computer which is running the minecraft server software. In this book I will show you how to setup and run your own minecraft server.
- * Plugin - A modification for Minecraft which works on the Minecraft Server so that the extensions to the game are available for all players who connect to that server. Example: Hunger Games Mod.
 
 ## Why I wrote this book
 
@@ -5746,6 +5745,11 @@ We also schedule a deferred function call using the *setTimeout()* function. The
 In this chapter we built a player vs. player mini-game from scratch. We *re-used* many of the functions we wrote in earlier chapters and made good use of the Drone object to create an arena in which to play the game. This has been the most complex of the new features we've added to Minecraft over the course of this book, but it's also one which is fun to play with your friends. 
 
 Playing games is fun but writing your own games can be hugely rewarding, especially when you get to see your friends play a game you created!
+
+### Conclusion
+While this brings us to the end of the book, we have only just begun to explore the world of Minecraft Plugin Development. My aim with this book was to provide a solid foundation from which to begin developing your own Minecraft Plugins. I've tried to cover all of the basics and some advanced topics, and provide examples along the way. There's still lots to learn about Minecraft Plugin development but I hope this book gives you the confidence to begin creating your own Plugins.
+
+It's been a lot of fun writing this book and I hope you've enjoyed reading it and have learned something about Programming along the way. 
 
 # Appendices
 

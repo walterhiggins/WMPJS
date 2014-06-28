@@ -96,7 +96,7 @@ var listingKeys = {};
 var listingCounts = {};
 var xforms = {
   '@@nextAchievement': function(match,matchIndex,line){
-    return 'img/achievement-plugin-dev-' + (nextAchieve++) + '.png';
+    return 'images/achievement-plugin-dev-' + (nextAchieve++) + '.png';
   },
   '@@listing ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
     var result = [];

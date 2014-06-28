@@ -64,6 +64,7 @@
       <arg value="src/js/split.js"/>
       <arg value="README.md"/>
       <arg value="${delivery}"/>
+      <arg value="enclose"/> <!-- omit if you don't want to enclose each chapter in html/body -->
     </java>
   </target>
 

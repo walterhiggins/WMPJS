@@ -375,7 +375,7 @@ If you get an error when trying to connect, ensure that your server is first run
 Once you've logged into your server take a look around. It's important that you have operator (Administrator) privileges on your own server. You can check to ensure you have the right privileges by issuing the `/op <player>` command (replacing <player> with your own Minecraft username). If you can run this command without error then you're all set up. If you see a warning message *You do not have permission to perform this command.* then you'll need to make yourself an operator from the server console window. Switch to the Server console window (ALT + TAB on windows, CMD + TAB on OS X) and type `op <player>` replacing <player> with your own username, then switch back to the Minecraft game and try issuing the `op <username>` command from the in-game prompt. Once you've verified you have operator permissions, kick back and relax or if you have a spare computer on your home network, invite a friend or family member to join you on your server. If this is the first time you've played Minecraft multiplayer with friends or family you'll have great fun.
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-1.png)
+![](images/achievement-plugin-dev-1.png)
 
 By now you should have your very own Minecraft server installed and running. **Congratulations, you're well on your way to becoming a Minecraft Modder!**
 
@@ -442,7 +442,7 @@ You can verify that ScriptCraft has been successfully installed by issuing the f
 Make sure to type the above text exactly as you see it and then hit the ENTER key. The response you get from the server console should of course be `5` . 
 
 #### Achievement Unlocked!
-![](img/achievement-plugin-dev-2.png)
+![](images/achievement-plugin-dev-2.png)
 
 Congratulations! You've just installed ScriptCraft and executed your first line of Javascript code. 
 
@@ -757,7 +757,7 @@ Reuse is important in programming. While programming you'll often find that a pr
 In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every single time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-3.png)
+![](images/achievement-plugin-dev-3.png)
 
 You've created and invoked your very first Javascript function. Functions are an important part of Javascript and you'll create many more functions in the course of this book.
 
@@ -950,7 +950,7 @@ After you've changed the helloWorld.js file, make sure to save it (choose Save f
 If your server isn't already started, then start it by running the script you created earlier. If the server is already started then restart your server by issuing the `reload` command in the server console window. After starting or restarting your server you should see the text 'Hello World' appear in your server console window. In fact you will see it every time the server starts. 
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-4.png)
+![](images/achievement-plugin-dev-4.png)
 
 Believe it or not, you've just written your first Minecraft Plugin!
 
@@ -1156,7 +1156,7 @@ Troubleshooting: If you don't see a number or if the /js var dice = require('dic
 
 You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
-![](img/achievement-plugin-dev-5.png)
+![](images/achievement-plugin-dev-5.png)
 
 Major Kudos! You've create created your first Javascript module, loaded it and used it! You've taken your second giant step to creating reusable code. 
 
@@ -1472,7 +1472,7 @@ Make sure to save the file after you've changed it, run `/js refresh()` at the i
     /js dice.roll();
     /js dice.roll(20);
     
-![](img/achievement-plugin-dev-6.png)
+![](images/achievement-plugin-dev-6.png)
 Congratulations. You've taken another step towards becoming a responsible plugin developer. Your code is robust and well commented. Commenting code is really important if you want to share your work with others.
 
 ### Summary
@@ -1703,7 +1703,7 @@ As a final fluorish to this plugin let's add something a little more spectacular
 We'll use and explore the ScriptCraft *fireworks* module again in a later chapter. Events and event-handling functions can be used to trigger all kinds of cool new game mechanics.
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-7.png)
+![](images/achievement-plugin-dev-7.png)
 
 Major Kudos! You've created your first custom event handler and have had your first encounter with event-driven programming. Soon you'll be putting event-handling to use to protect your server and add your own fun effects.
 
@@ -2745,7 +2745,7 @@ This file must be saved in the *scriptcraft/plugins* folder so that it will be a
 The list of player names and jump counts should appear as messages on screen. Now try the following: type `/jsp le` then press the TAB key. Pressing the TAB key should fill in the rest of the command name for you just as it does with regular Minecraft commands! The `jsp` command makes use of *TAB Completion* - that is the ability to fill in the remaining parts of a command or cycle through command argument values by just pressing TAB repeatedly.
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-8.png)
+![](images/achievement-plugin-dev-8.png)
 
 You've just learned how to provide new custom commands in Minecraft!
 
@@ -3105,7 +3105,7 @@ Since each of the Drone methods returns the drone object it's possible to chain 
 The *box0()* method is another method provided by the Drone, it's similar to *box()* except it only creates 4 walls and does not fill in the 4 walls. The *box0()* method is especially useful for construction dwellings. It takes the same parameters as the *box()* method.
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-9.png)
+![](images/achievement-plugin-dev-9.png)
 
 Congratulations Master Builder, You've just discovered how to build massive structures using Javascript and some Object extension magic. 
 
@@ -3561,7 +3561,7 @@ There is also a built-in *JSON* module which provides methods to:
 We'll learn more about JSON, and loading and saving data later in the book.
 
 ### Achievement Unlocked!
-![](img/achievement-plugin-dev-10.png)
+![](images/achievement-plugin-dev-10.png)
 
 Congratulations! You've discovered the power of Objects in Javascript and how to create efficient lookups. Your plugin development apprenticeship is complete!
 
@@ -6423,7 +6423,7 @@ Drones can be created in any of the following ways...
           
     ... which will move the drone up one block as soon as it's created.
 
-    ![corner stone](img/drone-api-ref/cornerstone1.png)
+    ![corner stone](images/drone-api-ref/cornerstone1.png)
 
  3. Or by using the following form...
     
@@ -6475,7 +6475,7 @@ To create a black structure 4 blocks wide, 9 blocks tall and 1 block long...
     var drone = new Drone();
     drone.box(blocks.wool.black, 4, 9, 1);
 
-![box example 1](img/drone-api-ref/boxex1.png)
+![box example 1](images/drone-api-ref/boxex1.png)
     
 ### Drone.box0() method
 
@@ -6495,7 +6495,7 @@ To create a stone building with the insided hollowed out 7 wide by 3 tall by 6 l
 
     box0( blocks.stone, 7, 3, 6);
 
-![example box0](img/drone-api-ref/box0ex1.png)
+![example box0](images/drone-api-ref/box0ex1.png)
    
 ### Drone.boxa() method
 
@@ -6517,7 +6517,7 @@ Construct a rainbow-colored road 100 blocks long...
     
     boxa(rainbowColors,7,1,30);
 
-![boxa example](img/drone-api-ref/boxaex1.png)
+![boxa example](images/drone-api-ref/boxaex1.png)
 
 ### Drone Movement
 
@@ -6582,7 +6582,7 @@ Creates a prism. This is useful for roofs on houses.
 
     prism(blocks.oak,3,12);
 
-![prism example](img/drone-api-ref/prismex1.png)
+![prism example](images/drone-api-ref/prismex1.png)
 
 ### Drone.prism0() method
 
@@ -6604,7 +6604,7 @@ To create a cylinder of Iron 7 blocks in radius and 1 block high...
 
     cylinder(blocks.iron, 7 , 1);
 
-![cylinder example](img/drone-api-ref/cylinderex1.png)
+![cylinder example](images/drone-api-ref/cylinderex1.png)
 
 ### Drone.cylinder0() method
 
@@ -6616,7 +6616,7 @@ To create a hollow cylinder of Iron 7 blocks in radius and 1 block high...
 
     cylinder0(blocks.iron, 7, 1);
 
-![cylinder0 example](img/drone-api-ref/cylinder0ex1.png)
+![cylinder0 example](images/drone-api-ref/cylinder0ex1.png)
 
 ### Drone.arc() method
 
@@ -6649,7 +6649,7 @@ To draw a 1/4 circle (top right quadrant only) with a radius of 10 and stroke wi
          fill: false
          } );
 
-![arc example 1](img/drone-api-ref/arcex1.png)
+![arc example 1](images/drone-api-ref/arcex1.png)
 
 [bres]: http://en.wikipedia.org/wiki/Midpoint_circle_algorithm
 [dv]: http://www.minecraftwiki.net/wiki/Data_values
@@ -6673,7 +6673,7 @@ To create an iron door...
 
     drone.door( blocks.door_iron );
 
-![iron door](img/drone-api-ref/doorex1.png)
+![iron door](images/drone-api-ref/doorex1.png)
 
 ### Drone.door_iron() method
 
@@ -6693,7 +6693,7 @@ To create double-doors at the cross-hairs/drone's location...
 
     drone.door2();
 
-![double doors](img/drone-api-ref/door2ex1.png)
+![double doors](images/drone-api-ref/door2ex1.png)
 
 ### Drone.door2_iron() method
 
@@ -6715,13 +6715,13 @@ To create a free-standing sign...
 
     drone.sign(["Hello","World"],63);
 
-![ground sign](img/drone-api-ref/signex1.png)
+![ground sign](images/drone-api-ref/signex1.png)
 
 ... to create a wall mounted sign...
 
     drone.sign(["Welcome","to","Scriptopia"], 68 );
 
-![wall sign](img/drone-api-ref/signex2.png)
+![wall sign](images/drone-api-ref/signex2.png)
 
 ### Drone Trees methods
 
@@ -6738,7 +6738,7 @@ To create 4 trees in a row, point the cross-hairs at the ground then type `/js `
 
 Trees won't always generate unless the conditions are right. You should use the tree methods when the drone is directly above the ground. Trees will usually grow if the drone's current location is occupied by Air and is directly above an area of grass (That is why the `up( )` method is called first).
 
-![tree example](img/drone-api-ref/treeex1.png)
+![tree example](images/drone-api-ref/treeex1.png)
 
 None of the tree methods require parameters. Tree methods will only be successful if the tree is placed on grass in a setting where trees can grow.
 
@@ -6757,7 +6757,7 @@ To create a garden 10 blocks wide by 5 blocks long...
 
     garden(10,5);
 
-![garden example](img/drone-api-ref/gardenex1.png)
+![garden example](images/drone-api-ref/gardenex1.png)
 
 ### Drone.rand() method
 
@@ -6964,7 +6964,7 @@ Another example: This statement creates a row of trees 2 by 3 ...
 
 ... You can see the results below.
 
-![times example 1](img/drone-api-ref/times-trees.png)
+![times example 1](images/drone-api-ref/times-trees.png)
 
 ### Drone.sphere() method
 
@@ -6981,7 +6981,7 @@ To create a sphere of Iron with a radius of 10 blocks...
 
     sphere( blocks.iron, 10);
 
-![sphere example](img/drone-api-ref/sphereex1.png)
+![sphere example](images/drone-api-ref/sphereex1.png)
 
 Spheres are time-consuming to make. You *can* make large spheres (250 radius) but expect the
 server to be very busy for a couple of minutes while doing so.
@@ -7020,7 +7020,7 @@ To create a wood 'north' hemisphere with a radius of 7 blocks...
 
     hemisphere(blocks.oak, 7, 'north');
 
-![hemisphere example](img/drone-api-ref/hemisphereex1.png)
+![hemisphere example](images/drone-api-ref/hemisphereex1.png)
 
 ### Drone.hemisphere0() method
 
@@ -7038,7 +7038,7 @@ To create a glass 'north' hemisphere with a radius of 20 blocks...
 
     hemisphere0(blocks.glass, 20, 'north');
 
-![hemisphere example](img/drone-api-ref/hemisphereex2.png)
+![hemisphere example](images/drone-api-ref/hemisphereex2.png)
 
 
 ## Appendix F: Function Declarations vs Function Expressions

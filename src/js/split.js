@@ -26,12 +26,27 @@ function toFilename(str){
   var prefix = partNum>9?'':'0';
   return outputDir + "/" + prefix + (partNum++) + '-' + result;
 }
+function newFile(out, line){
+  if (out != null){
+    if (enclose) {
+      out.println("</body></html>");
+    }
+    out.close();
+  }
+  var filename = toFilename(line);
+  out = new PrintWriter(filename, 'UTF-8');
+  if (enclose){
+    out.println("<html><body>");
+  }
+  return out;
+}
 var out = null;
 var contents = readFile(args[0]);
 var outputDir = args[1];
+var enclose = args[2];
 var partNum = 1;
 var sysout = java.lang.System.out;
-var filename;
+
 var PrintWriter = java.io.PrintWriter;
 var promote = false;
 
@@ -39,33 +54,15 @@ for (var i = 0;i < contents.length; i++){
   var line = ''+contents[i];
   if (line.match(/^# /)){
     promote = false;
-    if (out != null){
-      out.println("</body></html>");
-      out.close();
-    }
-    filename = toFilename(line);
-    out = new PrintWriter(filename, 'UTF-8');
-    out.println("<html><body>");
+    out = newFile(out, line);
   }
   if (line.match(/^## Chapter/)){
     promote = true;
-    if (out != null){
-      out.println("</body></html>");
-      out.close();
-    }
-    filename = toFilename(line);
-    out = new PrintWriter(filename, 'UTF-8');
-    out.println("<html><body>");
+    out = newFile(out, line);
   }
   if (line.match(/^## Appendix/)){
     promote = true;
-    if (out != null){
-      out.println("</body></html>");
-      out.close();
-    }
-    filename = toFilename(line);
-    out = new PrintWriter(filename, 'UTF-8');
-    out.println("<html><body>");
+    out = newFile(out, line);
   }
   if (out != null){
     if (promote){

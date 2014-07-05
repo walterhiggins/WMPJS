@@ -33,7 +33,7 @@ Walter Higgins
 
 April 2014
 
-## Why JavaScript?
+## Why Javascript?
 
 In this book I will teach you how to program using the Javascript programming language. Javascript is just one of many programming languages. When I set out with the goal of making Minecraft Plugin development easier, I chose Javascript for a few reasons:
 
@@ -287,7 +287,7 @@ For the same reason I suggest making your server a monster-free zone, I also sug
 
 The ops.json file is a configuration file listing all of the 'Operators' for the server. Operators are players who have special privileges on the server. Operators (also sometimes called 'Administrators' or 'Admins') are responsible for keeping the server running and ensuring that players play nice and don't grief. If players don't play nice, Operators have to power to ban or kick players off the server using special commands only available to them. 
 
-There may already be an ops.json file present in your CraftBukkit folder. If there isn't, then one will be created automatically when you run the `op` command from the server console. You will need to be an Operator to issue Javascript commands in the game so one of the first things you should do once you've installed the Minecraft Server is 'op' yourself - that is - make yourself an operator by issuing the `op username` command replacing `username` with your own Minecraft user name. For example, I would issue the command `op walterh` because `walterh` is my minecraft user name. ScriptCraft - the plugin we'll install later - only allows operators to issue javascript commands.
+There may already be an ops.json file present in your CraftBukkit folder. If there isn't, then one will be created automatically when you run the `op` command from the server console. You will need to be an Operator to issue Javascript commands in the game so one of the first things you should do once you've installed the Minecraft Server is 'op' yourself - that is - make yourself an operator by issuing the `op username` command replacing `username` with your own Minecraft user name. For example, I would issue the command `op walterh` because `walterh` is my minecraft user name. ScriptCraft - the plugin we'll install later - only allows operators to issue Javascript commands.
 
 We're done with all of the server configuration we'll need for now. If you want to delve deeper into server configuration, a good place to start is by reading the http://minecraft.gamepedia.com/Server.properties page.
 
@@ -353,13 +353,13 @@ ScriptCraft is a plugin for Minecraft which lets you create plugins using Javasc
 2. To make it easier for my kids (and others) to create Minecraft mods.
 3. To make it easier to teach programming to kids using Javascript and Minecraft as tools.
 
-Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes - that's what programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself and Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
+Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes - that's what programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself. Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
 
 Java is a fine language and is widely used. However, it can be a little difficult to learn - especially if you are completely new to programming. Java can be verbose - meaning you need to write a lot of Java code to do even simple things. Java code can't be executed right away either. You need to first "compile" it. Compiling is the process of converting Java source code into a form the computer can understand. 
 
-Javascript came along shortly after Java. It was invented in the mid 1990s just when the Internet was becoming really popular. Although their names sound alike they are very different languages. JavaScript is simpler than Java in many ways. In recent years it has become popular as a language not just for web programming but for all kinds of uses. 
+Javascript came along shortly after Java. It was invented in the mid 1990s just when the Internet was becoming really popular. Although their names sound alike they are very different languages. Javascript is simpler than Java in many ways. In recent years it has become popular as a language not just for web programming but for all kinds of uses. 
 
-ScriptCraft is a Minecraft Server plugin which makes it possible to write your own plugins using Javascript. As well as writing your own plugins, you can also use ScriptCraft to build large-scale structures (Skyscrapers, Temples, Roads, Castles and Forts) in the game.
+ScriptCraft is a Minecraft Server plugin which makes it possible to write your own plugins using Javascript. You can also use ScriptCraft to build large-scale structures (Skyscrapers, Temples, Roads, Castles and Forts) in the game.
 
 ### Installing ScriptCraft
 
@@ -373,7 +373,7 @@ If there is already a scriptcraft.jar file in your CraftBukkit plugins folder (i
 
 If CraftBukkit is running, stop it by issuing the `stop` command in the server console. 
 
-Launch Craftbukkit by double clicking the launch script you created earlier. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
+Launch Craftbukkit by double clicking the launch script you created in chapter 1. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
 
     Enabling scriptcraft v2.0.6-2014-04-20
     Directory /home/walter/cb179/plugins/scriptcraft does not exist.
@@ -384,7 +384,7 @@ Launch Craftbukkit by double clicking the launch script you created earlier. Whe
 
 ... There will be many more entries as there are many files bundled with ScriptCraft. 
 
-The 'plugins' sub-folder in CraftBukkit is important. It's where all Minecraft Server plugins should be stored. This is true not just for ScriptCraft.jar but for all server plugins. If you save a Server plugin jar file to any other location except the plugins folder, then it will not be loaded when the minecraft server starts up. The minecraft server only looks in the plugins sub-folder for plugins to load at startup.
+The *plugins* sub-folder in CraftBukkit is important. It's where all Minecraft Server plugins should be stored. This is true not just for ScriptCraft.jar but for all server plugins. If you save a Server plugin jar file to any other location except the plugins folder, then it will not be loaded when CraftBukkit starts. CraftBukkit only looks in the *plugins* folder for plugins to load at startup.
 
 ### Verifying ScriptCraft is installed.
 
@@ -399,29 +399,29 @@ Make sure to type the above text exactly as you see it and then hit the ENTER ke
 
 Congratulations! You've just installed ScriptCraft and executed your first line of Javascript code. 
 
-ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute javascript code right away. More on this in the next chapter...
+ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp` - we'll talk about `jsp` later in the book. The `js` command is short for `Javascript` and it lets you execute Javascript code right away. More on this in the next chapter...
 
 ## Chapter 3: A Javascript command prompt
 ### Introduction
-Once you've installed ScriptCraft, you can use the `js` command to evaluate Javascript. The `js` command will try to evaluate any of the text which follows it, as Javascript. You must type a `SPACE` between the `js` and the javascript you want to evaluate. The `js` command will evaluate the javascript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, try to evaluate it, and if it can, will print the result. Let's practice with a few simple Javascript expressions.
+Once you've installed ScriptCraft, you can use the `js` command to evaluate Javascript code. The `js` command will try to evaluate any of the text which follows it, as Javascript. You must type a `SPACE` between the `js` and the Javascript you want to evaluate. The `js` command will evaluate the Javascript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, try to evaluate it, and if it can, will print the result. Let's practice with a few simple Javascript expressions.
 
 ### Basic Math operations
 
-The expressions we've used so far are simple addition operations. Javascript has a number of mathematical operations. I want you to type each of the following expressions into the server console as you read them. It will be good practice for you. As a general rule you should try executing the code yourself. The best way to learn programming is to try stuff out rather than just reading. Try executing each of the following mathematical operations:
+The expressions we've used so far are simple addition operations. Javascript has a number of mathematical operations. I want you to type each of the following expressions into the server console as you read them. It will be good practice for you. As a general rule you should try executing the code yourself. The best way to learn programming is to try stuff out rather than just reading. Try executing each of the following mathematical operations.
 
-There's addition which uses the `+` operator. 
+Addition uses the `+` operator:
 
     js 2 + 2
     
-There's division which uses the `/` symbol (there's no &divide; key on your keyboard so `/` is used instead)
+Division uses the `/` symbol (there's no &divide; key on your keyboard so `/` is used instead):
 
     js 2 / 3
 	
-There's subtraction;
+To Subtract numbers:
 
     js 2 - 3
     
-And there's multiplication which uses the `*` symbol (this is called the asterisk symbol - it's usually typed by holding down the SHIFT key and 8)
+Multiplication uses the `*` symbol (this is called the asterisk symbol - it's usually typed by holding down the SHIFT key and 8):
 
     js 2 * 3
     
@@ -439,7 +439,7 @@ The answer to the above is `false` (3 is not greater than 5). I can ask *Is 3 le
 
     js 3 == 5 
     
-... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is code which asks 'Does the player have any health points left?' and if the answer to that question is `true` then the player can continue playing.
+... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is a section of code which asks '*Does the player have any health points left?*' and if the answer to that question is `true` then the player can continue playing.
 
 ### Variables
 #### Creating Variables
@@ -449,17 +449,17 @@ You can't type just anything after the `js` command and expect an answer. You ha
 
     js hearts
     
-The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined` which is Javascript's way of saying "I don't understand what you mean by 'hearts' ".
+The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined`, which is Javascript's way of saying "I don't understand what you mean by 'hearts' ".
 
 Right now Javascript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is, you do so like this:
 
     js hearts = 8;
     
-... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
+... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something Javascript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
 ![Variables are like Chests. You can store stuff in them.](images/chapter-03/chest.png "Variables are like Chests. You can store stuff in them.")
 
-Now when you type `js hearts`, Javascript understands what `hearts` and remembers its value and prints it out. Try it:
+Now when you type `js hearts`, Javascript understands what `hearts` is, remembers its value and prints it out. Try it:
 
     js hearts
     
@@ -497,13 +497,13 @@ Let's create another variable called 'healthMessage' and assign it a value:
 
     js healthMessage = 'You have ' + hearts + ' health remaining'
     
-What I've done here is create a new variable, and assigned it a value. The value is some text plus the value of the 'hearts' variable, plus some more text. Everything between `' '` (single quote symbols) or `" "` (double quote symbols) in javascript is treated as text. The result of this expression is:
+What I've done here is create a new variable, and assigned it a value. The value is the text 'You have', plus the value of the 'hearts' variable, plus the text ' health remaining'. Everything between `' '` (single quote symbols) or `" "` (double quote symbols) in Javascript is treated as text. The result of this expression is:
 
     You have 10 health remaining
 	
 Javascript creates a new variable called `healthMessage`, then joins together the 3 values `'You have '` (which is text) , `hearts` (which is a number) and `' health remaining'` (more text) and constructs a new value `'You have 10 health remaining'` and assigns it to the `healthMessage` variable.
 
-In javascript, text is also called 'Strings'. In Minecraft a *String* is the material Spiders sometimes drop when slain. A String is also the word Programmers use when talking about text. Here are some examples of Strings (text) in javascript:
+In Javascript, a piece of text is also called a *String*. In Minecraft a *String* is the material Spiders sometimes drop when slain. A String is also the word Programmers use when talking about text. Here are some examples of Strings (text) in Javascript:
 
 * `js "Hello"`
     
@@ -513,33 +513,50 @@ In javascript, text is also called 'Strings'. In Minecraft a *String* is the mat
     
 * `js "123"`
 
-That last one might surprise you. Javascript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in javascript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming minecraft plugins when you want to display information to players. 
+That last one might surprise you. Javascript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in Javascript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming minecraft plugins when you want to display information to players. 
 
 The letters, numbers and other symbols which form a string are known as *Characters*. A *Character* is any single letter, number or symbol. 'a','B','9', '-', '.', '/' and ':' are all examples of *Characters*.
 
-#### Naming variables
-You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable names cannot have space characters. There are a few other rules about what javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
+#### Escaping Quotes
+In Javascript you can enclose a String in either single quotes ('') or double quotes ("") but what if your string needs to include these characters? In Javascript there are a couple of ways to do this. 
 
-Javascript programmers - as a habit - generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among javascript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
+1. If your string contains only single quotes you can enclose the string in double quotes:
+
+   `js "I'm a String!"`
+
+2. If your string contains only double quotes you can enclose the string in single quotes:
+
+   `js 'He said "No"'`
+
+3. You can escape the single or double quote characters by putting a back-slash character `\` in front of it:
+ 
+   `js 'He said "I\'m a String!".'`
+
+   `js "He said \"No\""` 
+
+#### Naming variables
+You can create as many variables as you like in Javascript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable names cannot have space characters. There are a few other rules about what Javascript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
+
+Javascript programmers - as a habit - generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among Javascript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
 
 You can read more about CamelCase on WikiPedia http://en.wikipedia.org/wiki/CamelCase
 
 #### Making mistakes
-Feel free to experiment at this point. Create your own variables using your own numbers, strings and operators. If you make a mistake you'll see a long-winded error message in your console window. These error messages are called stack traces and they're the computers way of telling you something went wrong. Stack traces can be very useful for Java programmers but not so useful for Javascript. Remember - the Minecraft Server software is written in Java not Javascript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the Javascript code you type into Java code so that the server can understand it. If the javascript code doesn't make sense then the translation won't work. 
+Feel free to experiment at this point. Create your own variables using your own numbers, strings and operators. If you make a mistake you'll see a long-winded error message in your console window. These error messages are called stack traces and they're the computers way of telling you something went wrong. Stack traces can be very useful for Java programmers but not so useful for Javascript. Remember - the Minecraft Server software is written in Java not Javascript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the Javascript code you type into Java code so that the server can understand it. If the Javascript code doesn't make sense then the translation won't work. 
 
-Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even if we are talking and there's background noise. Computers on the other hand are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake you learn something new. Each of the following statements will cause an error:
+Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even when there's background noise. Computers on the other hand are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake you learn something new. Each of the following statements will cause an error:
 
  * `js help`
 
    `ReferenceError: "help" is not defined`
    
-   This is javascript's way of saying I don't know what 'help' is.
+   This is Javascript's way of saying I don't know what 'help' is.
    
  * `js 'steve`
  
    `EvaluatorException: unterminated string literal`
    
-   This means javascript encountered a string `'steve` which didn't have a closing quote symbol. Strings must begin and end with either a single-quote (') or a double-quote (") character. What's more, you can't mix them - that is - you can't start a string with a single quote and end it with a double quote. The Strings `'this is good'` and `"so is this"` are both valid but the Strings `'this is bad"` and `"another bad one'` are not.  
+   This means Javascript encountered a string `'steve` which didn't have a closing quote symbol. Strings must begin and end with either a single-quote (') or a double-quote (") character. What's more, you can't mix them - that is - you can't start a string with a single quote and end it with a double quote. The Strings `'this is good'` and `"so is this"` are both valid, but the Strings `'this is bad"` and `"another bad one'` are not.  
 
  * `js :-)` 
  
@@ -550,9 +567,9 @@ Don't worry about making mistakes. Making mistakes is an essential part of learn
 As you learn to program, you will encounter errors. One misplaced comma, quote or full-stop and the Computer will complain by 'throwing an Exception'. Just remember to be patient, Computers aren't as smart as us so we have to be extra careful when typing code. 
 
 #### Term: Exception
-An Exception is something the computer did not expect - that's what makes it 'exceptional'. In Javascript, 'throwing an exception' is Javascript's way of saying something unexpected happened. An exception will often include a 'Stack Trace'. The 'Stack Trace' is a map of where the computer was when the exception occurred.
+An Exception is something the computer did not expect - that's what makes it 'exceptional'. In Javascript, 'throwing an exception' is Javascript's way of saying something unexpected happened. An exception will often include a 'Stack Trace'. The 'Stack Trace' is a breadcrumb trail of where the computer was when the exception occurred.
 
-#### The 'var' keyword
+#### The *var* keyword
 
 I said earlier that we can create a new variable by typing a name and assigning it a value. In the earlier example...
 
@@ -560,14 +577,14 @@ I said earlier that we can create a new variable by typing a name and assigning 
 
 ... two things happen with this statement. 
 
-1. A new variable called 'hearts' is created. In programming we call this 'declared'. To declare a variable is to create a variable.
+1. A new variable called 'hearts' is *declared*. To declare a variable is to create a variable.
 2. The variable is also 'assigned' a new value (8). 'Assigning' a value to a variable means storing the value in the variable. 
 
-So in the above statement we both 'declare' and 'assign' a new variable. It's considered good practice to declare variables using the `var` keyword. `var` as you can probably guess is short for 'variable'. So a btter way to declare the variable is like this:
+So in the above statement we both 'declare' and 'assign' a new variable. It's considered good practice to declare variables using the `var` keyword. `var` as you can probably guess is short for 'variable'. So a better way to declare the variable is like this:
 
     js var hearts = 8
 
-We should always declare variables using the `var` keyword. If variables aren't declared using the `var` keyword, they become what are called 'global' variables. That is; variables which can be seen everywhere in the program. Global variables can lead to confusion because different parts of your program can access and change the variable which can lead to unexpected results. Global variables often end up becoming a source of bugs in the program. Using the `var` keyword to create a new variable is another good habit you should adopt when programming. 
+We should always declare variables using the `var` keyword. If variables aren't declared using the `var` keyword, they become what are called 'global' variables. That is; variables which can be seen everywhere in the program. Global variables can lead to confusion because different parts of your program can access and change the variable which can lead to unexpected results. Global variables often end up becoming a source of bugs in the program. Using the `var` keyword to create a new variable is another good habit you should adopt when writing Javascript code. 
 
 Another thing to note is that we don't always have to both declare and assign a variable in the same statement. We can create a variable just by issuing this command:
 
@@ -581,7 +598,7 @@ The result of this expression will be `true` . Note that I used two equals symbo
 
     js hungerBar = 10
 
-Note that I didn't need to use the `var` keyword here because the 'hungerBar' variable has *already* been declared. All I'm doing is assigning the variable a new value. You should only use the `var` keyword once for any new variables you create. 
+Note that I didn't need to use the `var` keyword here because the 'hungerBar' variable has *already* been declared. All I'm doing is assigning the variable a new value. You should only use the `var` keyword when declaring a variable. 
 
 #### Declaring multiple variables 
 
@@ -599,7 +616,7 @@ It has become commonplace to declare many variables using a single statement.
 
 #### Adding and Subtracting
 
-We're going to play with the 'hungerBar' variable while exploring some more javascript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In javascript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
+We're going to play with the 'hungerBar' variable while exploring some more Javascript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In Javascript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
 
     js hungerBar = hungerBar + 1
 
@@ -658,27 +675,27 @@ To get some practice using the `typeof` operator, try each of the following exam
 
     js typeof parseInt
 
-The values `true` and `false` are both 'boolean' values. A boolean type can only ever have the values `true` or `false`. Boolean values are really important in programming because as we'll learn later, they are the values the computer uses when making decisions. When deciding what to do, the computer uses only these two values - there's no gray area or 'maybe' when it comes to programming computers. 
+The values `true` and `false` are both *boolean* values. A boolean type can only ever have the values `true` or `false`. Boolean values are really important in programming because as we'll learn later, they are the values the computer uses when making decisions. When deciding what to do, the computer uses only these two values - there's no gray area or 'maybe' when it comes to boolean logic. 
 
-The result of the expression `typeof "5"` might surprise you. Even though 5 is a number, because it is inside quote characters, Javascript thinks of it as a string. Everything inside of quote characters is considered a string in javascript - even if there is a number inside the quotes.
+The result of the expression `typeof "5"` might surprise you. Even though 5 is a number, because it is inside quote characters, Javascript thinks of it as a string. Everything inside of quote characters is considered a string in Javascript - even if there is a number inside the quotes.
 
-The 'console' variable is one of the built-in variables in ScriptCraft and its type is 'object' - We'll talk about objects later. The `typeof Herobrine` returns `undefined` because there is no variable or value called 'Herobrine' in the system. We can safely use the `typeof` operator to test for the existence of variables in the system. If the variable doesn't exist then `typeof` will return `false`. If we were to try to access the undefined 'Herobrine' variable we'd get ReferenceError exception. Try it to see for yourself:
+The 'console' variable is one of the built-in variables in ScriptCraft and its type is 'object' - We'll talk about objects later. The `typeof Herobrine` returns `undefined` because there is no variable or value called 'Herobrine' in the system. We can safely use the `typeof` operator to test for the existence of variables in the system. If the variable doesn't exist then `typeof` will return `false`. If we were to try to access the undefined 'Herobrine' variable we'd get a *ReferenceError* exception. Try it to see for yourself:
 
     js Herobrine
 
 The type of a variable is very important because it determines what you can do with it and how it behaves. Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
 
 ### Functions
-Functions in javascript are very powerful because they are containers for code which can be called any number of times. In Javascript you can write your own functions or use any of the *built-in* functions provided by the language. A *built-in* function is simply a function which comes bundled with JavaScript. Let's look at one of the built-in functions in Javascript - the `parseInt()` function.
+Functions in Javascript are very powerful because they are containers for code which can be called any number of times. In Javascript you can write your own functions or use any of the *built-in* functions provided by the language. A *built-in* function is simply a function which comes bundled with Javascript. Let's look at one of the built-in functions in Javascript - the *parseInt()* function.
 
 ##### Using functions
-The 'parseInt()' function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the parseInt() function, it will try to figure out what number is in the text. Let's try it out:
+The *parseInt()* function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the parseInt() function, it will try to figure out what number is in the text. Let's try it out:
 
     js parseInt('4 hours until sunset')
 
 The result should be 4. What we did here was 'pass' the '4 hours until sunset' text to the parseInt function which processed the text and returned a value: 4.
 
-We are effectively saying to parseInt "here's some text - give me the number (and only the number) from it". We pass the text to the parseInt() function by putting it between the round brackets - that is - the ( and ) characters. Any values between the `(` and `)` symbols are passed into the function and are called 'parameters'. Parameters are values which are passed into functions. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+We are effectively saying to parseInt "here's some text - give me the number (and only the number) from it". We pass the text to the parseInt() function by putting it between the round brackets - the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *Parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
 
     js parseInt('5 hearts left');
     js parseInt('This is not a number');
@@ -698,32 +715,32 @@ The result is 3. Try calling it with different values to test that the function 
     js add( 5, 6 )
     js add( 9, 1 )
 
-Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets (the `(` and `)` symbols). A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in definining the function is to say what the function should do. Everthing between the opening and closing curly brackets (the `{` and `}` symbols) is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
+Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets - the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in definining the function is to say what the function should do. Everthing between the opening and closing curly brackets - the `{` and `}` symbols - is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
 
 ![Function Outline](images/chapter-03/function-outline.png)
 
 When you create a new function of your own, you should give the function a meaningful and memorable name. You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber but you should give your parameters names which are memorable so you don't forget what the parameters are for. 
 
 ### Term: Reuse
-Reuse is important in programming. While programming you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There's two ways to do this: You can copy and paste the code you've already written but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code - packaging up code in functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
+Reuse is important in programming. While programming, you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There are two ways to do this: You can copy and paste the code you've already written, but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code - packaging up code in functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
 
-In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every single time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
+In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every time this function is called. The `return` keyword is another special work in Javascript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
 
 ### Achievement Unlocked!
 ![](images/achievement-plugin-dev-3.png)
 
 You've created and invoked your very first Javascript function. Functions are an important part of Javascript and you'll create many more functions in the course of this book.
 
-We've only scratched the surface of functions in javascript. We'll explore functions more in later chapters.
+We've only scratched the surface of functions in Javascript. We'll explore functions more in later chapters.
 
 ### Summary
-In this chapter we learned about how to execute javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. We also touched on functions - how to call them and how to create them. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
+In this chapter we learned about how to execute Javascript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning Javascript. We also touched on functions - how to call them and how to create them. In the next chapter we'll learn about programming editors - the last piece of the puzzle in constructing your modding workbench.
  
 ## Chapter 4: Choosing and Using a Text Editor
 ### Introduction
-Up to now we've been typing javascript into the server console window by putting a `js ` command before every javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of javascript at the server console window each time your server starts up. 
+Up to now we've been typing Javascript into the server console window by putting a `js ` command before every Javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out Javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of Javascript at the server console window each time your server starts up. 
 
-ScriptCraft lets you load javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
+ScriptCraft lets you load Javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your Javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
 
 ![Javascript in a plain text editor ](images/chapter-04/screenshot-textedit-1.png "Javascript code in an editor with no Syntax Highlighting.")
 
@@ -775,7 +792,7 @@ Once installed, gedit should appear in your Start Menu. If it doesn't appear in 
 
 #### gedit Preferences
 
-The first thing you should do once you've installed gedit is set some preferences. Most modern programming editors provide a file Browsing view where you can see at a glance all of your folders and files. The disk browser is super useful when you want to quickly navigate around your javascript folders and files. To enable the File browsing view in Gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will always be displayed the next time you launch because GEdit remembers your view settings.
+The first thing you should do once you've installed gedit is set some preferences. Most modern programming editors provide a file Browsing view where you can see at a glance all of your folders and files. The disk browser is super useful when you want to quickly navigate around your Javascript folders and files. To enable the File browsing view in Gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will always be displayed the next time you launch because GEdit remembers your view settings.
 
 ![File Browser in Gedit](images/chapter-04/screenshot-gedit-file-browser.png "gedit's File Browser")
 
@@ -793,9 +810,9 @@ gedit will display a feint margin along the right side of the window in column 8
 
 The 'Enable text wrapping' setting should be turned off for programming. It's useful if you're writing a letter, essay or other non-programming text but it can be confusing if turned on while programming. 
 
-'Highlight current line' makes it easier to see where you currently are in the code. If looking at a large javascript file, it can be difficult to see the cursor (the blinking block that appears next to letters as you type).
+'Highlight current line' makes it easier to see where you currently are in the code. If looking at a large Javascript file, it can be difficult to see the cursor (the blinking block that appears next to letters as you type).
 
-'Highlight matching brackets' is a super useful programming feature. As you move the cursor around your javascript source, when the cursor is next to any of the following characters it will match the opening or closing character.
+'Highlight matching brackets' is a super useful programming feature. As you move the cursor around your Javascript source, when the cursor is next to any of the following characters it will match the opening or closing character.
 
 * Round brackets : (  )
 * Curly brackets : {  }
@@ -848,9 +865,9 @@ In the File Browser Pane ( the Disk Browser in TextWrangler on Mac OS ) locate a
 
 Your new folder will now appear in the File/Disk Browser Pane. 
 
-#### Create a new javascript file
+#### Create a new Javascript file
 
-The next step is to create a new javascript file in the sub-folder we just created. The file won't do much just yet but we'll work some more on it soon. Right-click on the Folder you just created and choose 'New File' from the menu. Call the new file 'helloWorld.js'.
+The next step is to create a new Javascript file in the sub-folder we just created. The file won't do much just yet but we'll work some more on it soon. Right-click on the Folder you just created and choose 'New File' from the menu. Call the new file 'helloWorld.js'.
 
 ![create a new file](images/chapter-04/screenshot-edit-new-file.png)
 
@@ -860,7 +877,7 @@ The file has just been created but hasn't been opened. If using TextWrangler cli
 
 The above code isn't actually real code. It's just a note we've added to remind ourselves that we must add some proper code later. This 'note' isn't understandable to the computer so we can write whatever we like here, the computer will not try to interpret and execute it. Notes like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing - you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
 
-These notes are called 'comments' and most programming languages provide a way to add comments. In javascript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
+These notes are called 'comments' and most programming languages provide a way to add comments. In Javascript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
 
 #### Saving your work.
 
@@ -872,7 +889,7 @@ When using scriptcraft, the folder where you save your work is important. You ca
 
 ### Summary
 
-We've installed a programming editor and have taken our first steps creating and editing a new javascript file. In the next section of the book we'll dive into creating working javascript plugins for Minecraft. 
+We've installed a programming editor and have taken our first steps creating and editing a new Javascript file. In the next section of the book we'll dive into creating working Javascript plugins for Minecraft. 
 
 This is where the fun begins.
 
@@ -894,9 +911,9 @@ We haven't used the console.log() function before. It's a built-in function whic
 
 Whenever you use the *console.log()* function, the output will start with `[scriptcraft]` because *console.log()* writes to the server's log file which is used by the core server and all plugins. The server software prepends the plugin name to make it easy for server administrators to tell which plugin is responsible for messages in the log file. We'll use console.log() quite a lot in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
 
-You may be wondering what the `;` (semicolon) is doing at the end of the line. The semicolon is used to end each statement in javascript. If you think of a statement as a sentence, then the semicolon ';' is to statements what the full stop '.' is to sentences. In javascript the semicolon isn't strictly needed but you should use it anyway. 
+You may be wondering what the `;` (semicolon) is doing at the end of the line. The semicolon is used to end each statement in Javascript. If you think of a statement as a sentence, then the semicolon ';' is to statements what the full stop '.' is to sentences. In Javascript the semicolon isn't strictly needed but you should use it anyway. 
 
-Another thing you might notice is there is no `js ` command in the helloWorld.js file. The `js ` prefix (text which is placed in front of other text) is only needed when executing javascript at the server console or in-game prompt. It's never used or needed inside javascript files.
+Another thing you might notice is there is no `js ` command in the helloWorld.js file. The `js ` prefix (text which is placed in front of other text) is only needed when executing Javascript at the server console or in-game prompt. It's never used or needed inside Javascript files.
 
 After you've changed the helloWorld.js file, make sure to save it (choose Save from the File menu).
 
@@ -955,14 +972,14 @@ What we are doing here is 'exporting' the helloWorld variable/function for use o
 The 'exports' variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module loading convention called 'CommonJS'. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt so have become very popular lately, especially with the rising popularity of a Javascript-based system called Node.js which is used by professional programmers for all sorts of things. 
 
 ### Private and Public Variables
-When you create a new variable in a javascript file, it is 'private'. That means that no other parts of the system can see it. Only code within the file itself can see variables declared in a file. That's why - earlier - we couldn't execute the helloWorld() function even though it was defined and used within the file itself. Having variables be private by default is a good thing. If every variable you created was visible everywhere in the system it would lead to confusion. Imagine you created a file called 'MySuperDooperPlugin.js' and another called 'MyExplodingZombiesPlugin.js' and in both these files you have a variable called 'livesRemaining' . If the livesRemaining variable wasn't private then both MySuperDooperPlugin and MyExplodingZombiesPlugin would end up using the same variable which may not be what was intended at all. 
+When you create a new variable in a Javascript file, it is 'private'. That means that no other parts of the system can see it. Only code within the file itself can see variables declared in a file. That's why - earlier - we couldn't execute the helloWorld() function even though it was defined and used within the file itself. Having variables be private by default is a good thing. If every variable you created was visible everywhere in the system it would lead to confusion. Imagine you created a file called 'MySuperDooperPlugin.js' and another called 'MyExplodingZombiesPlugin.js' and in both these files you have a variable called 'livesRemaining' . If the livesRemaining variable wasn't private then both MySuperDooperPlugin and MyExplodingZombiesPlugin would end up using the same variable which may not be what was intended at all. 
 
 Making variables private by default means that 2 or more plugins don't have to worry about stepping on each others toes when updating or reading variables. In short - private variables are good. 
 
 There are times when you want to make a variable public so it can be used by other parts of the system. To do this, you attach the variable to the special `exports` variable as we did earlier. As a general rule you should not make all of your variables public unless you really think they'll be needed elsewhere. We'll talk more about public and private variables later.
 
 ### A short note about Objects
-The exports variable is a special type of variable - it is an 'object'. An object in javascript is something that can hold or contain other variables and functions. So we can create a new variable that belongs to the exports object much like we'd normally create a new variable ...
+The exports variable is a special type of variable - it is an 'object'. An object in Javascript is something that can hold or contain other variables and functions. So we can create a new variable that belongs to the exports object much like we'd normally create a new variable ...
 
     exports.favoriteGame = 'Minecraft';
 
@@ -1056,7 +1073,7 @@ Once you've saved your work go back to Minecraft and at the in-game command prom
 
     /js refresh()
 
-The refresh() function is a ScriptCraft function which reloads all of the javascript code. The server has a built-in */reload* command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
+The refresh() function is a ScriptCraft function which reloads all of the Javascript code. The server has a built-in */reload* command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our Javascript. /js refresh() is like reload but it only reloads ScriptCraft and Javascript code.
 
 The refresh() function is important, you should execute it every time you change your Javascript code because changes to your code won't be activated in the game until you do so.
 
@@ -1074,10 +1091,10 @@ You'll see another error message: ReferenceError: "roll" is not defined. Why doe
 
 If you remember, the new file we just created, dice.js, was saved in the scriptcraft/modules folder not the scriptcraft/plugins folder. The scriptcraft/plugins folder is special for a couple of reasons:
 
-1. All javascript files in the scriptcraft/plugins folder are automatically loaded and executed when the server starts.
+1. All Javascript files in the scriptcraft/plugins folder are automatically loaded and executed when the server starts.
 2. All variables 'exported' from files within the scriptcraft/plugins folder become what are called 'global' variables. That means they are public for all the rest of the system to see. 
 
-There are other folders in scriptcraft. The 'modules' folder is much like the plugins folder. It's a folder where you can create new javascript files. It's similar to scriptcraft/plugins except:
+There are other folders in scriptcraft. The 'modules' folder is much like the plugins folder. It's a folder where you can create new Javascript files. It's similar to scriptcraft/plugins except:
 
 1. Javascript files inside the scriptcraft/modules folder are *not* automatically loaded or executed when the server starts.
 2. Variables exported from files in the scriptcraft/modules folder are not automatically available everywhere - they are not 'global' variables.
@@ -1085,11 +1102,11 @@ There are other folders in scriptcraft. The 'modules' folder is much like the pl
 So this leaves us in a bit of a pickle. We've written some useful code, but how do we get to use it?
 
 ### Modules
-What is a module? A module in ScriptCraft is simply a javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
+What is a module? A module in ScriptCraft is simply a Javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular Javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
 
 ![Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg](images/chapter-05/nasa-apollo-modules.jpg)
 
-Modular systems are good when programming. They're good because modules (much like the command, lander and service module in the above diagram) can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in the diagram above the lunar lander module was only used to land on the moon. That was its only purpose. Similarly, when writing javascript modules, it's considered good practice to have the module serve a single purpose. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
+Modular systems are good when programming. They're good because modules (much like the command, lander and service module in the above diagram) can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in the diagram above the lunar lander module was only used to land on the moon. That was its only purpose. Similarly, when writing Javascript modules, it's considered good practice to have the module serve a single purpose. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
 
 Getting back to our earlier problem - how do we use the new dice.js module we just created? Remember earlier we learned about the special 'exports' variable which is used to expose private variables for use by others? Well you may be wondering how we get at variables exposed in this way. Fortunately there's a special function called 'require()' which lets us do just that. The 'require()' function is the counterpart to the 'exports' variable. We use 'exports' to say "here's some of my code you can use" and we use require() to say "Hey I'd like to use the code in such-and-such module". 
 
@@ -1138,7 +1155,7 @@ As in the previous plugin, the last line of the file makes the *roll* function a
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
 #### Rounding Numbers
-All numbers in Javascript are floating point numbers, that is they have an integer part (the part before the dot) and a fractional part (the part after the dot). The number 'two and a half' is represented in javascript as:
+All numbers in Javascript are floating point numbers, that is they have an integer part (the part before the dot) and a fractional part (the part after the dot). The number 'two and a half' is represented in Javascript as:
 
     2.5
     
@@ -1157,7 +1174,7 @@ The built-in Math object has many other useful properties and functions, here ar
 * Math.min(n,m) - Math.min() will take any number of numbers and will return the *smallest* number. So for example, `Math.min( 3, 9, 2, 5)` will return 2.
 * Math.sqrt(n) - will return the square root of a number. For example, `Math.sqrt(9)` returns 3, `Math.sqrt(4)` returns 2, `Math.sqrt(16)` returns 4 and so on.
 
-I encourage you to try out each of the above properties and functions at the in-game prompt. Remember that in interactive mode you must prefix each javascript statement with `/js `.
+I encourage you to try out each of the above properties and functions at the in-game prompt. Remember that in interactive mode you must prefix each Javascript statement with `/js `.
 
 For more information about the Math object visit http://www.ecma-international.org/ecma-262/5.1/#sec-15.8
 
@@ -1327,7 +1344,7 @@ and save ourselves some typing. There may be times when this isn't suitable. If 
 Before we move on to the next chapter, I want to talk more about Comments. 
 
 ### More on comments
-In the very first javascript file we created, we started with a single line:
+In the very first Javascript file we created, we started with a single line:
 
     // TO DO : Add some code later
 
@@ -1338,7 +1355,7 @@ Comments aren't read by the computer so you can write whatever you like in a com
 #### Single-line comments
 You can make any line into a comment by starting it with two `/` (forward-slash) characters:
 
-    // this is a javascript comment
+    // this is a Javascript comment
     console.log('... while this is not a comment');
     
 If you were to run the above code you'd get the following output:
@@ -1591,7 +1608,7 @@ There are a couple of other useful Array insertion and removal functions:
 * shift() Is used to **remove** the *first* item from the array.
 * pop() Is used to **remove** the *last* item from the array.
 
-You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array. In later chapters we'll learn how to process all of the items in an array using Javascript's looping statements.
+You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/Javascript/Reference/Global_Objects/Array. In later chapters we'll learn how to process all of the items in an array using Javascript's looping statements.
 
 <table>
 <caption><h4> Table 1: Array Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
@@ -1614,7 +1631,7 @@ So we have a new module *greetings.js* with a single function *random()* which r
     };
     events.playerJoin( greetPlayer );
 
-Make sure to save your file then run the javascript `refresh()` function to reload ScriptCraft (`/js refresh()` from the in-game prompt or `js refresh()` from the server prompt). Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
+Make sure to save your file then run the Javascript `refresh()` function to reload ScriptCraft (`/js refresh()` from the in-game prompt or `js refresh()` from the server prompt). Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
 
     Konnichiwa walterh
 
@@ -1634,7 +1651,7 @@ From looking at the *greetPlayers* module you can see the first thing it does is
 
 ![](images/chapter-08/encapsulation.png)
 
-The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for - what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a javascript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
+The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for - what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a Javascript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
 
 Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
 
@@ -1856,7 +1873,7 @@ How a program behaves while running is often called its *flow*. *Flow Diagrams* 
 ![](images/chapter-09/flowchart.png)
 
 ### Nested blocks
-The `if` statement is one of several *block* statements in javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
+The `if` statement is one of several *block* statements in Javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
 
 <caption>Listing 9.4: Fireworks for Winners.</caption>
 
@@ -1935,7 +1952,7 @@ How would we write such a rule in Javascript? Well let's refine the statement ab
         if the player is flying or the player is sneaking then 
            the block yields 2 cookies. 
 
-In javascript you write it like this:
+In Javascript you write it like this:
 
 <caption>Listing 9.5: Cookies for Ninjas.</caption>
 
@@ -1967,7 +1984,7 @@ To you and I that rule might look clear enough but the computer would be confuse
 
 ![](images/chapter-09/cookie-drop-rule.png)
 
-We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following javascript code:
+We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following Javascript code:
 
 <caption>Listing 9.6: If X and ( Y or Z )</caption>
 
@@ -2037,7 +2054,7 @@ In chapter 9 you learned how to get input from players and how to test the input
       input(player, "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", onInput);
     };
 
-Save your file then issue the `js refresh()` or `reload` command to reload all javascript code. Then at the in-game prompt issue the following command:
+Save your file then issue the `js refresh()` or `reload` command to reload all Javascript code. Then at the in-game prompt issue the following command:
 
     /js animalSounds( self );
 
@@ -2269,7 +2286,7 @@ Listed below is a table of the most common String methods.
 
 </table>
 
-A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String .
+A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/Javascript/Reference/Global_Objects/String .
 
 ### Summary
 In this chapter you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module. In an upcoming chapter we'll learn how to simplify this module even further using Objects.
@@ -2339,7 +2356,7 @@ Let's look at a slightly more complex example. Typically, your server will have 
 The *byPopulation()* function takes 2 parameters a and b both of which it assumes are Minecraft worlds. Each Minecraft world object has an *entities* property which is a Java list of living things. The entities property in turn has a *size()* function so if we want to find out how many living beings are on a world we call the world's *entities.size()* method. We can compare the populations by subtracting one population size from another. 
 
 #### Term: Java Collection
-A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins are Java objects. As a general rule, the *server* variable and any of its properties are Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a JavaScript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
+A Java Collection is like a Javascript Array - it is a collection of items. However, it does not have the same methods or functions and can't be used the same same we we use a Javascript Array. For example, in Javascript, you can find out how many items are in an array using the array's *length* property. A Java Collection has no such property. To find out how many items are in a Java Collection you need to call a *size()* method instead. This can be a source of problems. Many of the objects you'll use in your plugins are Java objects. As a general rule, the *server* variable and any of its properties are Java objects. Similarly, Events and Players and Block objects are also Java objects so any of their properties will be Java objects too. If you want to sort a Java Collection, it's easier to first convert it to a Javascript Array. ScriptCraft comes with a *utils* module which has a *array()* function to do just that.
 
 The code to use your new *byPopulation()* function would look like this:
 
@@ -2439,7 +2456,7 @@ There is another way we can sort players for inclusion in a leaderboard without 
 ### Sorting Players by other rules
 There are many different player statistics we can use for sorting players. We can have a leaderboard of players who have jumped the most, have flown the most, have caught the most fish, have spent most time riding horses, have crafted the most items or mined the most blocks. In short there's plenty of statistics to use for display in leaderboards. 
 ### Player statistics
-In Minecraft each player is an *Object* in the game. *Objects* in javascript are variables which have both data and behavior. A player has a name (data) and amongst other things can shoot arrows (behavior). You can see this by issuing the following commands at the in-game prompt:
+In Minecraft each player is an *Object* in the game. *Objects* in Javascript are variables which have both data and behavior. A player has a name (data) and amongst other things can shoot arrows (behavior). You can see this by issuing the following commands at the in-game prompt:
 
     /js self.name
     /js self.shootArrow()
@@ -2588,7 +2605,7 @@ The second kind of loop is called the *while* loop. The *for* loop is very usefu
     exports.jumps = jumps;
 
 #### Breaking out of loops
-There are times when you'll want to break out of a loop early. If for example, you only want to display a list of players who have actually jumped - that is - players whose jump count is greater than zero. You can break out of a loop early using the javascript *break* statement. Take a look at the following listing to see an example of the *break* statement:
+There are times when you'll want to break out of a loop early. If for example, you only want to display a list of players who have actually jumped - that is - players whose jump count is greater than zero. You can break out of a loop early using the Javascript *break* statement. Take a look at the following listing to see an example of the *break* statement:
 
 <caption>Listing 11.6: Breaking out of loops.</caption>
 
@@ -2649,7 +2666,7 @@ The *break* statement will break out of a loop effectively ending the loop so th
 Within any loop block there must be a statement which will affect the loop's condition. For example, in the above code we check the value of the *i* variable each time round the loop. If we never changed the *i* variable, what do you think would happen? If *i* never changed then the test `i < players.length` would always be true (unless of course there were no players on the server in which case the code inside the *while* block would never execute). A loop which keeps running and never stops is called an *infinite loop*. Infinite loops usually happen because a programmer forgot to increment a counter variable or because the loop condition is wrong. An infinite loop is usually a sign that something went wrong - that there's a bug in the code. There are infinite loops which aren't accidental. Most games and programs which have a user interface (windows, buttons etc) have an *event loop* which is a loop that's constantly running and listening for incoming events from the user or other parts of the system. A game's event loop might listen for key presses from the user, check to see if any collisions between objects in the game have occurred, check the player's health and so on. The Minecraft server has just such a loop.
 
 ### Creating a new command for players.
-So far in this chapter we've been creating Javascript functions which can be invoked by anyone on the server who is an operator. Only operators can and should be able to execute javascript code at the in-game or server prompts. *The ability to execute code is potentially dangerous so you definitely don't want to grant that permission to everyone on your server*. The `js` command will take any javascript code and try to execute it. There's another command provided by ScriptCraft and that's the `jsp` command. The `jsp` command is available for *everyone* to use. Unlike the `js` command, the `jsp` command *does not execute* javascript code so it can be used safely by players without operator privileges. The `jsp` command lets you create your own custom commands which can be used by all players. 
+So far in this chapter we've been creating Javascript functions which can be invoked by anyone on the server who is an operator. Only operators can and should be able to execute Javascript code at the in-game or server prompts. *The ability to execute code is potentially dangerous so you definitely don't want to grant that permission to everyone on your server*. The `js` command will take any Javascript code and try to execute it. There's another command provided by ScriptCraft and that's the `jsp` command. The `jsp` command is available for *everyone* to use. Unlike the `js` command, the `jsp` command *does not execute* Javascript code so it can be used safely by players without operator privileges. The `jsp` command lets you create your own custom commands which can be used by all players. 
 
 We want *all* players to be able to call up the leaderboard with a simple in-game command and we want them to be able to do so without them needing to know Javascript. In the next part of this chapter we're going to change the *leaderboard.js* file so that anyone can call up the leaderboard using this command:
 
@@ -2662,7 +2679,7 @@ The `jsp` command by itself doesn't do much. It's just a placeholder, a dummy co
 
     /gamemode creative walterh
 
-... `gamemode` is the name of the command and `creative` and `walterh` are the command's arguments. The purpose of the `jsp` command is to make it easy to create your own custom commands using javascript. The `jsp` command name was made deliberately short because it's really just a prefix for custom commands. We want to be able to create custom commands with a `jsp` prefix so that our custom commands don't conflict with commands provided by other plugins. 
+... `gamemode` is the name of the command and `creative` and `walterh` are the command's arguments. The purpose of the `jsp` command is to make it easy to create your own custom commands using Javascript. The `jsp` command name was made deliberately short because it's really just a prefix for custom commands. We want to be able to create custom commands with a `jsp` prefix so that our custom commands don't conflict with commands provided by other plugins. 
 
 In ScriptCraft you create new commands for use by everyone using the *command()* function. The best way to see how the *command()* function works is with a simple example:
 
@@ -2677,7 +2694,7 @@ In the first command I create a new function called *boo()* which will simply sa
 The important points to note are:
 
 * Any player can now issue this new `jsp boo` command and will see a message on their screen. They don't have to be operators to do so.
-* The *command()* function lets you - the javascript programmer - safely provide new commands for use by all players.
+* The *command()* function lets you - the Javascript programmer - safely provide new commands for use by all players.
 
 Now let's dive in and create a new `jsp leaderboard` command. Create a new file called *leaderboardCmd.js* in the *scriptcraft/plugins* folder and type in the following code:
 
@@ -2710,7 +2727,7 @@ In this chapter we learned how to loop over each item in an array using *for* lo
 In this chapter we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. In this chapter we'll use *for* and *while* loops combined with ScriptCraft's *Drone* functions to build large structures in Minecraft. 
 
 ### Building using Drones
-In Minecraft Building by hand is fun but can be tedious when you want to build big structures - Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using Javascript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a javascript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using Javascript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
+In Minecraft Building by hand is fun but can be tedious when you want to build big structures - Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using Javascript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a Javascript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using Javascript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
 
 ![Targeting a block in Minecraft](images/chapter-12/drone_target.png)
 
@@ -2842,7 +2859,7 @@ Let's get familiar with some of the movement functions by using them first at th
 
     /js box(blocks.gold).right(2).box(blocks.gold)
 
-The statement above might look odd but it's perfectly valid Javascript. This style of calling functions one after another is called *chaining* because each `.` forms a link in a chain of function calls. You can't call *all* functions in javascript like this but can call all of the Drone's functions this way. Another term used by programmers to describe this style of function calling is *Fluency*. As we'll see later you can extend the abilities of the Drone by adding your own functions which can be called in the same *fluent* way.
+The statement above might look odd but it's perfectly valid Javascript. This style of calling functions one after another is called *chaining* because each `.` forms a link in a chain of function calls. You can't call *all* functions in Javascript like this but can call all of the Drone's functions this way. Another term used by programmers to describe this style of function calling is *Fluency*. As we'll see later you can extend the abilities of the Drone by adding your own functions which can be called in the same *fluent* way.
 
 In the above statement there are 3 different function calls being made, the first call `box(blocks.gold)` creates a gold block. The `box()` function returns a Drone object which can be used to call other Drone functions. The next call `.right(2)` moves the Drone right 2 blocks and it too returns the same Drone object. The last call `.box(blocks.gold)` creates another gold block. If we were to plot this out on graph paper it would look like this:
 
@@ -2972,7 +2989,7 @@ The other thing to note about the first require statement is the trailing `.Dron
 
 The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
 
-The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter undefined. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In Javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter undefined. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
 
 Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
 
@@ -2983,7 +3000,7 @@ Having declared the *monolith()* function we turn it into a Drone method using t
 So now you can see how easy it is to extend the Drone to build new interesting things in Minecraft. Let's build a skyscraper!
 
 ### A Blueprint for a Skyscraper
-In this chapter we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
+In this chapter we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single Javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
 <caption>Listing 12.3: A Blueprint for a Skyscraper.</caption>
 
@@ -3090,7 +3107,7 @@ In the commands you just executed at the in-game prompt, the firework launches i
       setTimeout(launch, 2000);
     };
 
-Save the file then issue the `js refresh()` command to reload your javascript plugins. Now issue this command to launch a firework:
+Save the file then issue the `js refresh()` command to reload your Javascript plugins. Now issue this command to launch a firework:
 
     /js fireworkshow( self.location )
     
@@ -3231,7 +3248,7 @@ In Javascript creating a new object is easy. Here's an example you can try at th
 
     /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
 
-To create an object in javascript you start with the curly bracket `{` followed by a *key* , a colon `:`and then a value. You can separate each key-value pair using the comma `,`. You finish the object definition with a closing curly bracket `}`. The object example above has 2 key-value pairs. It has a *name* and a *job*. You can find out what's inside an object if you know its keys:
+To create an object in Javascript you start with the curly bracket `{` followed by a *key* , a colon `:`and then a value. You can separate each key-value pair using the comma `,`. You finish the object definition with a closing curly bracket `}`. The object example above has 2 key-value pairs. It has a *name* and a *job*. You can find out what's inside an object if you know its keys:
 
     /js myFirstObject.name
     > "steve"
@@ -3272,7 +3289,7 @@ When we create an object like this:
 
     /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
 
-this form of creating an object is known as an *object literal*. There are other ways to create objects in javascript but in this book we'll focus on obect literals only. We can add a new key to an existing Javascript object easily:
+this form of creating an object is known as an *object literal*. There are other ways to create objects in Javascript but in this book we'll focus on obect literals only. We can add a new key to an existing Javascript object easily:
 
     /js myFirstObject.toolOfChoice = 'Axe'
 
@@ -3283,7 +3300,7 @@ and you can delete a key from an object using the *delete* keyword:
 There are no rules about what keys you can add or remove from a Javascript object because Javascript does not enforce strict rules about such things. Javascript is a *dynamically typed* language which means you can create new objects on the fly and add and remove keys from them and change the key's value types while your program is running. 
 
 #### Two kinds of Objects
-When programming plugins using ScriptCraft, we have 2 different types of objects available to us. ScriptCraft uses Javascript - a special version of Javascript which is available from within any Java program. That means that from within our javascript plugins we can not only use javascript objects but can also access and use all of the *Java* objects available via the *Bukkit* API. Unlike Javascript, Java *does* have strict rules about what you can and cannot do with Java objects. Java is said to by *strictly typed* because it does not let you add and remove keys from Java Objects and enforces strict rules about types. For example, the *self* object which we've used for some command-prompt examples in this book is a *Java* object so while we can access the object's keys like this:
+When programming plugins using ScriptCraft, we have 2 different types of objects available to us. ScriptCraft uses Javascript - a special version of Javascript which is available from within any Java program. That means that from within our Javascript plugins we can not only use Javascript objects but can also access and use all of the *Java* objects available via the *Bukkit* API. Unlike Javascript, Java *does* have strict rules about what you can and cannot do with Java objects. Java is said to by *strictly typed* because it does not let you add and remove keys from Java Objects and enforces strict rules about types. For example, the *self* object which we've used for some command-prompt examples in this book is a *Java* object so while we can access the object's keys like this:
 
     /js self.flying
     > false
@@ -3299,7 +3316,7 @@ When programming plugins using ScriptCraft, we have 2 different types of objects
 ... will fail silently. The key will *not* be deleted. 
 
 ### Objects as Lookup tables
-In javascript it's easy for programmers to create objects and javascript can *lookup* object keys very quickly. A lookup table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
+In Javascript it's easy for programmers to create objects and Javascript can *lookup* object keys very quickly. A lookup table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
 
 In the following chapter we're going to change the *animalSounds.js* module from chapter 10 and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
 
@@ -3358,7 +3375,7 @@ There are a couple of points to note about this statement:
 * The statement creates a single object. Like many statements in Javascript, it can span more than one line. Having the object definition span more than one line makes the code more readable.
 * The *noises* object has the following keys: cat, chicken, cow, horse, pig, sheep, wolf. Keys are always on the left hand side in an object literal. 
 * The keys do not need to have quote marks around them but if the key contains whitespace - for example 'ender dragon' (the space between 'ender' and 'dragon' is whitespace) - then it should be enclosed in either single or double quotes. 
-* You cannot use javascript keywords as keys in an object so the literal values *true*, *false*, *default* etc can't be used. 
+* You cannot use Javascript keywords as keys in an object so the literal values *true*, *false*, *default* etc can't be used. 
 * Keys must be of type number or string. You cannot have another object as a key in an object - you can however have another object as a value in an object.
 * Values in objects *can* be of any type - even functions and other objects! When an object contains another object as a value, that value is called a nested object. We'll see an example of a nested object later.
 * Every key-value pair must be separated with a single comma `,`. Try to avoid putting an extra comma at the end of the last key-value pair. There is no comma after the last key-value pair `wolf: sounds.wolfBark` because it is not needed and some versions of Javascript will report an error if they see an extra comma just before the closing curly bracket `}`.
@@ -3385,11 +3402,11 @@ There are a couple of reasons why we should do this:
 * There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, would could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table meaning the function is shorter and more maintainable.
 
 ### Objects and References
-One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute javascript statements at the in-game or server prompt, there's a special variable available. The *self* variable refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
+One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute Javascript statements at the in-game or server prompt, there's a special variable available. The *self* variable refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
 
     /js var me = self;
 
-Does not create a clone of the player. It merely adds a new javascript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
+Does not create a clone of the player. It merely adds a new Javascript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
 
 ![Obects and References: Player](images/chapter-14/objects_player.png)
 
@@ -3502,7 +3519,7 @@ You should see the following output on your screen:
 Try changing the value passed to openRussianDoll from `largeDoll` to another value and see what the output looks like.
 
 ### JSON
-I can't talk about Objects in javascript without mentioning JSON. JSON is short for *JavaScript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
+I can't talk about Objects in Javascript without mentioning JSON. JSON is short for *Javascript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
 
     var steve = { "name": "steve", "occupation": "miner" }
 
@@ -3742,7 +3759,7 @@ The *chatcolor()* function is a *callback* which will be called when a player is
 
     preferences[ player.name ] = color;
 
-We can add any property we like to an object using the `[]` square brackets and putting the property name inside the square brackets. The property name does not have to be an object literal like `'age'` or `'address'`, it can be any javascript expression which evaluates to a string. So in this case, whatever the player's name is becomes a new property of the preferences object - a key by which the preferences can be looked up. 
+We can add any property we like to an object using the `[]` square brackets and putting the property name inside the square brackets. The property name does not have to be an object literal like `'age'` or `'address'`, it can be any Javascript expression which evaluates to a string. So in this case, whatever the player's name is becomes a new property of the preferences object - a key by which the preferences can be looked up. 
 
 The *command()* function creates a new `/jsp chatcolor` command which will invoke the *chatcolor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
 
@@ -3840,7 +3857,7 @@ ScriptCraft saves plugin data in the *plugins/scriptcraft/data* folder. If you o
       "walterh": "blue"
     }
 
-The *.json* at the end of the filename means this is a JSON file. JSON remember is short for Javascript Obect Notation and is just a way to load, store and send javascript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for Javascript to store and load data. 
+The *.json* at the end of the filename means this is a JSON file. JSON remember is short for Javascript Obect Notation and is just a way to load, store and send Javascript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for Javascript to store and load data. 
 
 #### More on JSON
 When we create a new object in Javascript with name and value pairs we can do so like this:
@@ -3857,13 +3874,13 @@ That is; we can do so with or without quotes around the *name* property. However
 	
 ... adding double-quotes around each of the object's keys. This is just a standard JSON uses. The builti-in JSON module has 2 important functions which are used by ScriptCraft's *persist()* function:
 
-1. JSON.parse(string) Takes a string and tries to convert it to a javascript object. For example: `JSON.parse("[9,5,3]")` will take the string "[9,5,3]" and return an array with 3 items: 9, 5 and 3.
-2. JSON.stringify(object) Does the opposite of JSON.parse(). It takes a javascript object and converts it to a string so for example: `JSON.stringify([ 9, 5, 3])` takes an array and returns a string "[9,5,3]".
+1. JSON.parse(string) Takes a string and tries to convert it to a Javascript object. For example: `JSON.parse("[9,5,3]")` will take the string "[9,5,3]" and return an array with 3 items: 9, 5 and 3.
+2. JSON.stringify(object) Does the opposite of JSON.parse(). It takes a Javascript object and converts it to a string so for example: `JSON.stringify([ 9, 5, 3])` takes an array and returns a string "[9,5,3]".
 
 If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
 
 ### JSON, Persistence and Java Objects
-If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses the popular JSON module's *stringify()* and *parse()* functions to save and load data and these functions *only work with native JavaScript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
+If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses the popular JSON module's *stringify()* and *parse()* functions to save and load data and these functions *only work with native Javascript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
 
     var utils = require('utils');
     var locationAsJSON = utils.locationToJSON( player.location ); // convert from Java to JSON
@@ -4018,7 +4035,7 @@ On lines 2 and 3 of listing 16.1 we declare 2 variables:
     var bkEnchantment = org.bukkit.enchantments.Enchantment;
     var bkShapedRecipe = org.bukkit.inventory.ShapedRecipe;
 
-The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers call this the *fully qualified name*. In Java programmers will often save themselves the need to use fully qualified names by *importing* packages. The Javascript engine which runs inside Java has an *importPackage()* function but this function is not supported in later versions of Javascript for Java. I personally like to avoid using fully qualified names throughout javascript code which is why whenever I need to refer to a Bukkit Type I declare a short-named variable at the top of the module which refers to the longer fully-qualified name of the Bukkit Type. I also put a *bk* at the front of the variable name so I know I'm working with a Bukkit object and not a regular Javascript object. This is just a personal preference. I've found it helps me when I'm writing plugins in Javascript. It may be useful to you too.
+The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers call this the *fully qualified name*. In Java programmers will often save themselves the need to use fully qualified names by *importing* packages. The Javascript engine which runs inside Java has an *importPackage()* function but this function is not supported in later versions of Javascript for Java. I personally like to avoid using fully qualified names throughout Javascript code which is why whenever I need to refer to a Bukkit Type I declare a short-named variable at the top of the module which refers to the longer fully-qualified name of the Bukkit Type. I also put a *bk* at the front of the variable name so I know I'm working with a Bukkit object and not a regular Javascript object. This is just a personal preference. I've found it helps me when I'm writing plugins in Javascript. It may be useful to you too.
 
 ### Enchantments
 One way you can mark an item as having special powers is to add an enchantment to it. Enchanted items shimmer and glow in the game. An Ender Bow should shimmer so that the player knows they're not holding a regular bow. For most of the activities you can do in the game, there are equivalent classes and methods in the Bukkit API. For example: In the game players can *add enchantments* to *items*. If we browse the Bukki API reference we see there's an *inventory* package which has a couple of classes one of which is called *ItemStack*. An ItemStack is a collection of one or more *Items* which can be placed in one of the player's inventory slots or held in the player's hand. This *ItemStack* class has *addEnchantment()* and *addUnsafeEnchantment()* methods which we can use to add special powers to items in the game. I'll get into why I chose *addUnsafeEnchantment()* over *addEnchantment()* in a moment but first let's figure out what we want to do:
@@ -4045,7 +4062,7 @@ In Javascript we can create objects using *Object Literals* like this:
 
     var myNewObject = { name: 'Ender Bow' }
 
-... but there's another way to create objects we haven't mentioned yet. The *new* keyword in javascript can be used to create a new javascript Ojbect. For example Javascript has a Date function which when you call it like this returns the current date and time as a String (In Java 7 for Linux the following code throws an exception but the official Javascript Specification says you should be able to call Date() as follows) :
+... but there's another way to create objects we haven't mentioned yet. The *new* keyword in Javascript can be used to create a new Javascript Ojbect. For example Javascript has a Date function which when you call it like this returns the current date and time as a String (In Java 7 for Linux the following code throws an exception but the official Javascript Specification says you should be able to call Date() as follows) :
 
     var today = Date();
 
@@ -4060,7 +4077,7 @@ The *new* keyword in Javascript means the Date() function becomes a *constructor
 ... creates a new Java object of type *org.bukkit.inventory.ShapedRecipe* (remember: we declared the bkShapedRecipe variable as short-hand for *org.bukkit.inventory.ShapedRecipe*), passing the *enderBow* object as a parameter.
 
 #### The crafting Grid
-The Crafting Grid in Minecraft is what appears on screen when you right-click on a crafting table. It's essential for creating tools and weapons in the game. The Grid is 3 x 3. It consists of 3 rows each of which have 3 slots. We need to be able to define - in code - what combination of ingredients will result in a new Ender Bow. Fortunately this is relatively easy. The in-game grid can be mapped to an Array of JavaScript strings which substitute each letter for a material. The following diagram shows the crafting grid with letters superimposed on each cell. 
+The Crafting Grid in Minecraft is what appears on screen when you right-click on a crafting table. It's essential for creating tools and weapons in the game. The Grid is 3 x 3. It consists of 3 rows each of which have 3 slots. We need to be able to define - in code - what combination of ingredients will result in a new Ender Bow. Fortunately this is relatively easy. The in-game grid can be mapped to an Array of Javascript strings which substitute each letter for a material. The following diagram shows the crafting grid with letters superimposed on each cell. 
 
 ![Crafting Grid with material codes](images/chapter-16/gridwithletters.png)
 
@@ -4078,13 +4095,13 @@ This is how we define the layout of a new shaped recipe in code too. The ShapedR
       "ESW"
     ]);
 
-#### Calling Variable Argument Java Methods from JavaScript
+#### Calling Variable Argument Java Methods from Javascript
 In the *org.bukkit.inventory.ShapedRecipe* details page at http://jd.bukkit.org/rb/apidocs, the information about the *.shape()* method is presented as follows:
 
      ShapedRecipe   shape(String... shape) 
          Set the shape of this recipe to the specified rows.    
 
-The `String... shape` within the parameters section means that the *.shape()* method takes 1 *or more* Strings as parameters. In Java, this style of parameter passing is called *varargs* which is short for *a variable number of arguments*. When you see a Java method which uses this style of argument passing - the `...` tells us there can be one or more parameters of that type. When calling such methods from JavaScript we need to pass the parameters as an Array instead. That's why we call the *.shape()* method like this:
+The `String... shape` within the parameters section means that the *.shape()* method takes 1 *or more* Strings as parameters. In Java, this style of parameter passing is called *varargs* which is short for *a variable number of arguments*. When you see a Java method which uses this style of argument passing - the `...` tells us there can be one or more parameters of that type. When calling such methods from Javascript we need to pass the parameters as an Array instead. That's why we call the *.shape()* method like this:
 
     enderBowRecipe.shape([
       "ESW", 
@@ -4323,14 +4340,14 @@ Once we have the item the player is currently holding we pass it to a function w
 Finally, if the item held *is* an Ender Bow, we remove the projectile because we don't want the arrow left behind - it makes sense that an arrow which teleports you should disappear - then we teleport the shooter to the arrow's location.
 
 ### More on Types
-The *instanceof* operator is an operator common to both Java and JavaScript. It's used to test the *Type* of an object. It can be useful when calling the Bukkit API from JavaScript when we want to identify the exact type of an object. In listing 17.1 we use the operator to check if the projectile fired was an Arrow. It could be any type of projectile - an Egg, Fireball, Snowball etc - but we're only interested in handling the event if it was an Arrow. The *instanceof* operator will compare the expression on the left to the expression on the right and if they are of the same type will return true. You can test this at the command line:
+The *instanceof* operator is an operator common to both Java and Javascript. It's used to test the *Type* of an object. It can be useful when calling the Bukkit API from Javascript when we want to identify the exact type of an object. In listing 17.1 we use the operator to check if the projectile fired was an Arrow. It could be any type of projectile - an Egg, Fireball, Snowball etc - but we're only interested in handling the event if it was an Arrow. The *instanceof* operator will compare the expression on the left to the expression on the right and if they are of the same type will return true. You can test this at the command line:
 
     /js self instanceof org.bukkit.entity.Horse
     > "false"
     /js self instanceof org.bukkit.entity.Player
     > "true"
 
-The *instanceof* operator lets us test a generic type against a specific type. Note that because of the way Java inheritance works, it's possible for an object to be an instance of more than one type. For example, both of these javascript expressions will return true:
+The *instanceof* operator lets us test a generic type against a specific type. Note that because of the way Java inheritance works, it's possible for an object to be an instance of more than one type. For example, both of these Javascript expressions will return true:
 
     /js self instanceof org.bukkit.entity.AnimalTamer
     > "true"
@@ -4341,7 +4358,7 @@ Since a player is an instance of both types, AnimalTamer and LivingEntity. The *
 
     /js self instanceof org.bukkit.entity.Player
 
-The *org.bukkit.entity* package is where you'll find all of the entity types. The *instanceof* operator can be used for testing *any* type of object in Java or JavaScript.
+The *org.bukkit.entity* package is where you'll find all of the entity types. The *instanceof* operator can be used for testing *any* type of object in Java or Javascript.
 
 ### Java Beans
 The type of functions we used to get information about the event, projectile and shooter in listing 17.1 are called *getters*. They're called *getters* because they each *get* some property of the object they're called for; `event.getEntity()` gets the event's entity property, `projectile.getShooter()` gets the projectile's shooter property and so on. As you can probably guess there's also a family of functions called *setters* - that is - functions whose job is to *set* the property for an object. For example you can get your current food level using the *.getFoodLevel()* method:
@@ -4352,7 +4369,7 @@ The type of functions we used to get information about the event, projectile and
 
     /js self.setFoodLevel(20)
 
-Java classes which use the convention of having *getters* and *setters* methods to get and set properties are knows as **Java Beans**. Javascript enables you to treat getter and setter methods in JavaBeans as equivalent JavaScript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowecase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
+Java classes which use the convention of having *getters* and *setters* methods to get and set properties are knows as **Java Beans**. Javascript enables you to treat getter and setter methods in JavaBeans as equivalent Javascript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowecase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
 
     /js self.foodLevel
     > "17"
@@ -4491,7 +4508,7 @@ In listing 18.1 we declare a new function called *noTNT* which will be called wh
 
     var material = event.getBlockPlaced().getType();
 
-... but JavaScript lets us use the Java Bean properties without calling the getter methods:
+... but Javascript lets us use the Java Bean properties without calling the getter methods:
 
     var material = event.blockPlaced.type;
 
@@ -4500,7 +4517,7 @@ Next we check to see if the player who placed the block is an operator. The Java
     boolean isOp()
     void setOp(boolean value)
 
-The *isOp()* function returns true if the sub-type is an operator (A player with administrative privileges or the Console Operator). The *setOp()* function is used to turn on or off operator privileges for the sub-type. The *isOp()* and *setOp()* pair of functions both conform to the JavaBean standard for setting and getting properties. For boolean properties, there must be an *isX()* function where *X* is some property. So we can infer that because there's an *isOp()* and *setOp()* function, there must be an *op* property which we can access directly in JavaScript. The expression:
+The *isOp()* function returns true if the sub-type is an operator (A player with administrative privileges or the Console Operator). The *setOp()* function is used to turn on or off operator privileges for the sub-type. The *isOp()* and *setOp()* pair of functions both conform to the JavaBean standard for setting and getting properties. For boolean properties, there must be an *isX()* function where *X* is some property. So we can infer that because there's an *isOp()* and *setOp()* function, there must be an *op* property which we can access directly in Javascript. The expression:
 
     player.op
 
@@ -5088,8 +5105,8 @@ Next we must update our event-handling code related to protection. We want to al
 
 There's a new *playerIsTrusted()* function in this revision of the *events.js* file. This function returns true if the player is trusted to work on the plot. There's 2 interesting things to note in this function. The first is how we use the player's name to test if they are in the *sharedWith* list. 
 
-#### Java Strings and JavaScript Strings
-The String type in JavaScript and the String type in Java - they both share the same name - are slightly different so there are some things you can do with a javascript string which you can't do with a Java string and vice versa. When comparing two strings - one of them a JavaScript String and the other a Java String it's safest to convert the Java String to a Javascript string. The easiest way to convert a Java String to a JavaScript string is to prepend an empty Javascript string to the front of the Java String like this:
+#### Java Strings and Javascript Strings
+The String type in Javascript and the String type in Java - they both share the same name - are slightly different so there are some things you can do with a Javascript string which you can't do with a Java string and vice versa. When comparing two strings - one of them a Javascript String and the other a Java String it's safest to convert the Java String to a Javascript string. The easiest way to convert a Java String to a Javascript string is to prepend an empty Javascript string to the front of the Java String like this:
 
     var jsString = '' + javaString;
 
@@ -5097,7 +5114,7 @@ This is what we do in the first statement of the *playerIsTrusted()* function:
 
     var playerName = '' + player.name;
 
-... declares and assigns a new javascript variable the value of player.name. The *player* variable is a Java object so it follows that all of its String properties are *Java* Strings. Unfortunately, different versions of the Javascript engine provided with Java on different platforms each behave slightly differently when comparing Java Strings to JavaScript Strings so the only way to be sure is to convert a Java String to a JavaScript string if you want to compare it with another Javascript string using the `==` operator or if you want to use it with standard JavaScript string-based operations.
+... declares and assigns a new Javascript variable the value of player.name. The *player* variable is a Java object so it follows that all of its String properties are *Java* Strings. Unfortunately, different versions of the Javascript engine provided with Java on different platforms each behave slightly differently when comparing Java Strings to Javascript Strings so the only way to be sure is to convert a Java String to a Javascript string if you want to compare it with another Javascript string using the `==` operator or if you want to use it with standard Javascript string-based operations.
 
 #### Loops within Loops
 The second thing to note about about the *playerIsTrusted()* function is its use of nested loops. A nested loop is a loop within a loop. In this case we loop through all of the plots and for each plot we loop through all of the plot's trusted players:
@@ -5132,7 +5149,7 @@ In this chapter we're going to create a Player vs. Player mini-game called Snowb
 
 The game will be kept simple for the sake of providing example code which you might want to adapt and extend to create your own mini-game. 
 
-The game will be started using a javascript function and its duration and team structure will be passed as paramters. If no parameters are passed then the default game duration will be 60 seconds and the game will be in free-for-all mode - all players against each other.
+The game will be started using a Javascript function and its duration and team structure will be passed as paramters. If no parameters are passed then the default game duration will be 60 seconds and the game will be in free-for-all mode - all players against each other.
 
 First I'll present the game in a single Javascript module with a function which operators will use to start the game and later in this chapter we'll cover how players can start the game using in-game mechanisms. We'll also cover how to create an Arena for the game to be played in and a command for use by players to start the game.
 
@@ -5452,7 +5469,7 @@ The *updateScoreboard()* function is called twice at the start of the game becau
 The *end()* function is responsible for ending the game and ensuring that each player's game mode is restored. Any snowballs which were given to the player at game start are taken away. The event listener is unregistered and finally, after an interval of a few seconds the scoreboard disappears and the main scoreboard is restored for each player.
 
 ### Creating an Arena
-So far we've created a single javascript function for use by operators to start a new Snowball Fight game. The game works but could be made much more fun by constructing an arena to play in and making it fun and easy for players to join and start and game and choose a team. Let's use the Drone (again) to construct a simple 24 by 24 block arena of snow with some walls to make an interesting place to play the game. The Arena will have a glass wall so spectators can watch and will have 3 large colored waiting areas outside the walled arena where players can choose their team simply by waiting in one of the 3 colored zones. The entire arena and waiting areas will be protected from griefing using the *zonemaker()* and *region* functions we developed in chapter 18 so if you haven't already added the protection modules from that chapter, I recommend doing so now.
+So far we've created a single Javascript function for use by operators to start a new Snowball Fight game. The game works but could be made much more fun by constructing an arena to play in and making it fun and easy for players to join and start and game and choose a team. Let's use the Drone (again) to construct a simple 24 by 24 block arena of snow with some walls to make an interesting place to play the game. The Arena will have a glass wall so spectators can watch and will have 3 large colored waiting areas outside the walled arena where players can choose their team simply by waiting in one of the 3 colored zones. The entire arena and waiting areas will be protected from griefing using the *zonemaker()* and *region* functions we developed in chapter 18 so if you haven't already added the protection modules from that chapter, I recommend doing so now.
 
 Later on we'll add the ability for any player waiting in a colored zone can start the game using the `/jsp snowball` command which we'll develop later. First let's write the code to build an arena. In the *snowball* folder create a new file called *arena.js* and enter the following code:
 
@@ -5726,7 +5743,7 @@ ScriptCraft can be used to work with and control other Bukkit Plugins. There are
 2. By using the plugin's methods and classes.
 
 ### Issuing commands
-The *server.dispatchCommand()* method can be used to issue both built-in commands such as */time set* or commands provided by plugins. ScriptCraft can be used to *drive* commands provided by other plugins. For example, if you wanted to use the *Essentials* plugin's */eco give* command to give a player in-game money via JavaScript you'd write:
+The *server.dispatchCommand()* method can be used to issue both built-in commands such as */time set* or commands provided by plugins. ScriptCraft can be used to *drive* commands provided by other plugins. For example, if you wanted to use the *Essentials* plugin's */eco give* command to give a player in-game money via Javascript you'd write:
 
     server.dispatchCommmand( server.consoleSender, 'eco give walterh 5')
 

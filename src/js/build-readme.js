@@ -111,7 +111,7 @@ var xforms = {
     }
     return result.join('\n');
   },
-  '@@listref\{([a-zA-Z0-9_\.]+)\}': function(match, key){
+  '@@listref\{([a-zA-Z0-9_\.\-]+)\}': function(match, key){
     var cur = currentChap;
     return getListingNumber(key, cur);
   },

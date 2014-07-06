@@ -900,21 +900,22 @@ In the previous section we assembled all of the parts we needed to construct our
 
 ## @@nextChapter{chapter-05}: Your first minecraft plugin
 ### Introduction
-So let's dive in and create our first Minecraft plugin. A plugin is a program which is a small program which is loaded and executed by a larger program. The larger program we'll be using is of course Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first chapter and try to understand the code and the notes. We'll build on the knowledge learned here in later Chapters.
+So let's dive in and create our first Minecraft plugin. A plugin is a small program which is loaded and executed by a larger program. The larger program we'll be using is - of course - Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first chapter and try to understand the code and the notes. We'll build on the knowledge learned here when creating more sophisticated plugins in later chapters.
+
 ### Hello World
-Launch your Editor and open the helloWorld.js file you created in the @@chapter{chapter-04} of the previous section. Once opened, you can now remove the comment entered previously and type the following text:
+Launch your Editor and open the helloWorld.js file you created in chapter @@chapter{chapter-04}. Once opened, you can remove the comment entered previously and type the following text:
 
     console.log('Hello World');
 
-We haven't used the console.log() function before. It's a built-in function which will print out a message for display in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result:
+We haven't used the console.log() function before. It's a built-in function which will print out a message in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result:
 
     [scriptcraft] 11
 
-Whenever you use the *console.log()* function, the output will start with `[scriptcraft]` because *console.log()* writes to the server's log file which is used by the core server and all plugins. The server software prepends the plugin name to make it easy for server administrators to tell which plugin is responsible for messages in the log file. We'll use console.log() quite a lot in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
+Whenever you use the *console.log()* function, the output will start with `[scriptcraft]` because *console.log()* writes to the server's log file which is used by the core server and all plugins. The server software prepends the plugin name to make it easy for server administrators to tell which plugin is responsible for messages in the log file. We'll use console.log() in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
 
-You may be wondering what the `;` (semicolon) is doing at the end of the line. The semicolon is used to end each statement in Javascript. If you think of a statement as a sentence, then the semicolon ';' is to statements what the full stop '.' is to sentences. In Javascript the semicolon isn't strictly needed but you should use it anyway. 
+You may be wondering what the ';' (semicolon) is doing at the end of the line. The semicolon is used to end each statement in Javascript. If you think of a statement as a sentence, then the semicolon ';' is to statements what the full stop '.' is to sentences. In Javascript the semicolon isn't strictly needed but you should use it anyway. 
 
-Another thing you might notice is there is no `js ` command in the helloWorld.js file. The `js ` prefix (text which is placed in front of other text) is only needed when executing Javascript at the server console or in-game prompt. It's never used or needed inside Javascript files.
+Another thing you might notice is there is no `js ` command in the helloWorld.js file. The `js ` prefix (text which is placed in front of other text) is only needed when executing Javascript at the server console or in-game prompt. It should never be used inside Javascript files.
 
 After you've changed the helloWorld.js file, make sure to save it (choose Save from the File menu).
 
@@ -925,17 +926,17 @@ If your server isn't already started, then start it by running the script you cr
 
 Believe it or not, you've just written your first Minecraft Plugin!
 
-Well that was easy wasn't it? This might be a trivially simple plugin but it demonstrates essentially what a plugin is - some code which is 'embedded' in a larger program and is loaded every time the host program loads. The plugin code never runs on its own - it can only be run as part of some bigger 'host' program (Minecraft Server). You've just added new code to Minecraft Server! Now is a good time to do a happy dance or phone your pals to let them know you've joined the ranks of Minecraft Modders. :-)
+Well that was easy wasn't it? This might be a trivially simple plugin but it demonstrates essentially what a plugin is - some code which is 'embedded' in a larger program and is loaded every time the host program loads. The plugin code never runs on its own - it can only be run as part of some bigger 'host' program (Minecraft Server). You've just added new code to Minecraft Server! 
 
 ### Making your function reusable
 
-So far the plugin we've written works fine in that it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
+So far the plugin we've written works fine; it is loaded and executed when the Minecraft Server starts. Sometimes that's all you might want or need but what if you want to be able to execute the code later on? Let's start by putting the code inside a function.
    
 @@listing helloWorld_v1.js helloWorld() Function Declaration
    
 Now restart the server. 
    
-What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function but we haven't called the function yet! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
+What just happened? *The message no longer displays at startup!* That's because we've put the code inside a function *but we haven't called the function yet*! Declaring a new function and invoking the function are two different things. Just because you declare a function, it does not mean the function is automatically invoked when the file is loaded. Let's change the code once more, this time adding a call to the function we just created.
 
 @@listing helloWorld_v2.js helloWorld() Function Declaration and Execution
 
@@ -945,7 +946,7 @@ OK. So we've wrapped the original code inside a function of our own and we call 
    
     js helloWorld()
     
-This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now clim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
+This command fails with an error `ReferenceError: helloWorld is not defined`. That's odd - no? The function obviously exists and works because it successfully executed when the server started up. How can it now claim the function isn't there? That's because functions which are loaded from the plugins/scriptcraft/plugins directory aren't automatically made available for use by others. The helloWorld.js file loads and all code in the file is evaluated and executed at startup. However, once it's loaded and executed, the code is basically invisible to others and can't be run again. You can make your code visible to others using a special variable called 'exports'. The 'exports' variable (as its name implies) "exports" code for use by others. It's how we provide code for use outside of the plugin itself. Let's revisit the helloWorld.js file one more time...
 
 @@listing helloWorld_v3.js Making helloWorld() public
 
@@ -953,9 +954,9 @@ Restart the server again. Now the message appears in the server console. Let's l
 
     exports.helloWorld = helloWorld;
     
-What we are doing here is 'exporting' the helloWorld variable/function for use outside of the plugin. 
+What we are doing here is *exporting* the helloWorld function for use outside of the plugin. 
 
-The 'exports' variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module loading convention called 'CommonJS'. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt so have become very popular lately, especially with the rising popularity of a Javascript-based system called Node.js which is used by professional programmers for all sorts of things. 
+The *exports* variable isn't part of the Javascript core language. It's provided by ScriptCraft which uses a module system called *CommonJS*. CommonJS is a set of rules which say how modules (and other things not provided by Javascript itself) should work. The CommonJS rules for modules are easy to understand and adopt, so have become very popular lately, especially with the rising popularity of Node.js which is a Javascript environment used by professional programmers.
 
 ### Private and Public Variables
 When you create a new variable in a Javascript file, it is 'private'. That means that no other parts of the system can see it. Only code within the file itself can see variables declared in a file. That's why - earlier - we couldn't execute the helloWorld() function even though it was defined and used within the file itself. Having variables be private by default is a good thing. If every variable you created was visible everywhere in the system it would lead to confusion. Imagine you created a file called 'MySuperDooperPlugin.js' and another called 'MyExplodingZombiesPlugin.js' and in both these files you have a variable called 'livesRemaining' . If the livesRemaining variable wasn't private then both MySuperDooperPlugin and MyExplodingZombiesPlugin would end up using the same variable which may not be what was intended at all. 
@@ -969,7 +970,7 @@ The exports variable is a special type of variable - it is an 'object'. An objec
 
     exports.favoriteGame = 'Minecraft';
 
-... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called 'properties'. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have an *yield* property which says how wide the explosion will be. 
+... The difference is, because we're attaching a new variable `favoriteGame` to an existing object `exports` we don't need to use the `var` keyword. Variables which belong to objects are also called *properties*. For example, every player in Minecraft is essentially (from the game's point of view) an object with certain properties. Each player has a health-level, experience points, the ability to fly (or not) and so on. In fact everything in Minecraft is an Object, - Players, Blocks, Tools, Animals, Biomes, Worlds, Recipes and even the Server itself. Everything is an object because Minecraft is written in Java and Java is an Object-Oriented programming language. All of these objects in turn have properties. Each world has a *time* property which dictates what time it is in the game. Primed TNT blocks have a *yield* property which says how wide the TNT explosion would be. 
 
 Players have dozens of properties. For example to give yourself the ability to fly, issue the following command at the in-game prompt: 
 
@@ -982,7 +983,7 @@ To give yourself super-human speed issue this command:
 To reset your walkspeed to normal issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
 
 #### Term: Property
-A *property* is an attribute of an Object - for example in real life we (humans that is) all have properties: eye-color, date-of-birth, name and so on. Objects in Javascript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables (called objects).
+A *property* is an attribute of an Object - for example in real life we all have properties: eye-color, date-of-birth, name and so on. Objects in Javascript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables.
 
 ### Summary
 In this chapter you've written your very first plugin and have used the special `exports` variable to export your code so it can be reused elsewhere at the in-game or server console prompt.

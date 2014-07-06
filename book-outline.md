@@ -1762,7 +1762,7 @@ Save your file then issue the `js refresh()` or `reload` command to reload all J
 
     /js animalSounds( self );
 
-You will be prompted to type the name of your favorite animal. Press the *T* key to enter text then type in any of the following: cat, chicken, cow, horse, pig, sheep, wolf. When you hit enter you should hear an appropriate sound - a wolf bar, cow moo and so on. If you don't enter any of the above animals, then the program responds with a message saying it never heard of whatever it was you typed.
+You will be prompted to type the name of your favorite animal. Press the *T* key to enter text then type in any of the following: cat, chicken, cow, horse, pig, sheep, wolf. When you hit enter you should hear an appropriate sound - a wolf bark, cow moo, and so on. If you give any other answer, the program responds with a message saying it never heard of such an animal.
 
 The switch statement works much like the *if-else-if* construct we used in chapter @@chapter{chapter-09} . We could have written the *animalSounds.js* module using an if-else-if form:
 
@@ -1777,7 +1777,7 @@ The switch statement works much like the *if-else-if* construct we used in chapt
 But since every test is on the same *animal* variable it makes more sense to use a *switch* statement instead. Some things to note about the switch statement:
 
 * The switch statement is used for testing a single expression against many possible values. 
-* It has one or more *case* labels each of which must be followed by a value and the `:` (colon) .
+* It has one or more *case* labels each of which must be followed by a value and the `:` symbol (also known as a 'colon').
 * The block of code after the `:` is only executed if the value matches. All code up to the special `break` statement will be executed.
 * If none of the cases match then the `default` case is executed.
 
@@ -1797,7 +1797,7 @@ There are many sounds in Minecraft and the list of sounds available in the game 
 2. The volume at which you want to play the sound. This parameter is optional, if left out then it defaults to 1.0 (full volume). Volume is in the range 0 to 1 with 0 being no sound at all and 1 being maximum volume. For example, if you wanted to play a Cat's Meow at half volume you would write `sounds.catMeow( location, 0.5 );`
 3. The Pitch at which you want to play the sound. The parameter is also optional and if left out will default to 1.0 (moderate pitch). Pitch can vary between 0 and 4.
 
-This is a table of all of the possible sound functions available at the time of writing. This list may not be up to date because new sounds are being added on an ongoing basis while some sounds may also be removed.
+This is a table of all of the possible sound functions available at the time of writing. This list may not be up to date because new sounds are added on an ongoing basis while some sounds may also be removed.
 
 @@table all_sounds.org Sound Functions
 
@@ -1808,10 +1808,10 @@ The *sounds* module is not a built-in variable in ScriptCraft so you'll need to 
     /js sounds.burp( self.location );
     /js sounds.villagerNo( self.location );    
 
-In Minecraft Players, Blocks, Monsters, Animals and Villagers all have a location property which can be passed to any of the sounds module functions.
+In Minecraft, Players, Blocks, Monsters, Animals and Villagers all have a location property which can be passed to any of the sounds module functions.
 
 ### Improving the code
-When running the *animalSounds()* function what happens if you enter 'Cow' instead of 'cow'? Try it and see.
+When running the *animalSounds()* function, what happens if you enter 'Cow' instead of 'cow'? Try it and see.
 
 If you enter 'Cow', or 'COW', the function says it hasn't heard of a 'Cow' or 'COW'. To you and I, a Cow is a COW is a cow ,but to a computer they are 3 different strings. That's because computers are *case-sensitive* - they don't see the word 'Cow' and know that whether it's spelt with capital letters or lowercase letters, it means the same thing. The computer only sees a sequence (or list) of letters and as far as the computer is concerned, `C` and `c` are completely different. You can see this for yourself by issuing these commands at the in-game prompt:
 
@@ -1825,7 +1825,7 @@ How do we make the *animalSounds()* function understand that when a player types
     /js 'COW'.toLowerCase() == 'cow'
     > true
 
-The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test text values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
+The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test String values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
 @@listing animalSounds_v2.js Case-insenstive Animal Sounds.
 
@@ -1840,7 +1840,7 @@ All Strings in Javascript also have a *toUpperCase()* function which returns an 
 
     animal.toLowerCase();
     
-The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods remember that none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In chapter @@chapter{chapter-08} we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
+The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods, none of them change the original string. In Javascript any String is *immutable* - that is - none of its methods change it in any way. In chapter @@chapter{chapter-08} we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects - that is - the methods can change the object on which they're called. Let's see an example at the in-game prompt:
 
     /js var animals = ['cow','pig'];
     /js animals.push('sheep');

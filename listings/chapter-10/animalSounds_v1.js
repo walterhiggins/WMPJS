@@ -35,7 +35,7 @@ function onInput( animal, player ) {
       player.sendMessage("I never heard of a " + animal);
   }
 };
-
-exports.animalSounds = function( player ) {
+function animalSounds = function( player ){
   input(player, "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", onInput);
-};
+}
+exports.animalSounds = animalSounds;

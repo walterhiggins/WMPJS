@@ -1170,7 +1170,7 @@ In this chapter we created our first truly reusable module. We learned about Mod
 ### Introduction
 In this chapter we'll build on the code written in the previous chapter to let us roll a dice of any number of sides. Sometimes we want a random number that doesn't fit in the range 1 to 6. Ideally we'd like our virtual dice module to return a random number for any range we give it. We're going to take our 6-sided dice from the earlier chapter and enhance it so it can change shape to any number of sides like the multi-sided dice used in some table-top and role-playing games.
 ### Flexible Functions
-If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each dice...
+If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each type of dice...
 
     function rollSixSided(){ 
       ...
@@ -1186,7 +1186,7 @@ If we wanted to expand on what we've already done to support dices of 4, 6 and 8
     exports.rollEightSided = rollEightSided;
     ...
     
-... and so on. That would be time-consuming, repetitive and laborious, and the whole point of programming is to **make the computer do the work!**. The problem with this approach (apart from being time-consuming to type) is that every time we want to support a new type of dice - say 10, 12 and 20 sided dice - we have to write a new function. If we wanted to simulate the roll of a 24 sided dice, we'd have to write *yet another* function. Fortunately there's a better way. 
+... and so on. That would be time-consuming, repetitive and laborious, and the whole point of programming is to **make the computer do the work!** The problem with this approach - apart from being time-consuming to type - is that every time we want to support a new type of dice - say 10, 12 and 20 sided dice - we have to write a new function. If we then wanted to simulate the roll of a 24 sided dice, we'd have to write *yet another* function. Fortunately there's a better way. 
 
 What if, when we call the *roll()* function, we could tell the function how many sides the dice has and the *roll()* function behaved accordingly? If we could say 'Hey throw a 6-sided dice' or 'Hey throw a 20-sided dice' and *roll* would do the right thing (return a random number between 0 and 5 for the first call and return a random number between 0 and 19 for the second call). This is where *Parameters* come in. 
 
@@ -1201,17 +1201,17 @@ You should see the message 'Hello world' appear in your server window. 'Hello wo
 
     js console.log( 5 + 9 );
     
-You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to *console.log* and the *console.log* function just printed the resulting value. An important point: console.log did not do the math, that was done just before the function was called so the parameter which *console.log* received was 14. It had no knowledge of the math that was done before it was called - console.log only saw 14, it did not see `5 + 9`. The *console.log* function is commonly used for *logging*. Logging is the practice of printing output to screen usually for the purpose of debugging or better understanding your code's behaviour.
+You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to the *console.log()* function which just printed the resulting value. An important point: the *console.log()* function did not do the math, that was done just before the function was called so the parameter which *console.log()* received was 14. The *console.log()* function is commonly used for *logging*. Logging is the practice of printing output to screen; usually for the purpose of debugging or better understanding your code's behaviour.
 
 Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous chapter. You don't have to type this code, I just want to highlight some changes:
 
 @@listing dice_v2.js Rolling Dice - sides as a variable.
 
-The above code is similar to code from the previous chapter except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous chapter. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves absolutely the same as the previous chapter. But what if we could somehow change the value of the *sides* variable before each call to *roll* ? Let's change the code once more:
+The above code is similar to code from the previous chapter except I declare a new variable called *sides* and the number 6 is assigned to it. On the following line the math used is `result = result * sides` instead of `result = result * 6` as in the previous chapter. So all we've done is create a new variable called *sides* to store the number of sides. This function behaves the same as the function from the previous chapter. But what if we could somehow change the value of the *sides* variable before each call to *roll()* ? Let's change the code once more:
 
 @@listing dice_v3.js Rolling Dice - sides as a parameter.
 
-Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parmeter we can say what it should be each time we call the *roll* function. The following diagram illustrates the changes the function has just undergone.
+Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parameter, we can say what it should be each time we call the *roll()* function. The following diagram illustrates the changes the function has just undergone.
 
 ![](images/chapter-07/magicnumber-to-parameter.png)
 
@@ -1231,7 +1231,7 @@ What happens if you call dice.roll() *without* passing a parameter? You can see 
 
     /js dice.roll()
 
-You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascript and it means the computed value - the result of the math operations that is - was not a number. Do you know why? Our function always expects a number (how many sides the dice has) and if we don't give it one then the math won't work as expected. Wouldn't it be nice if, when no number is passed to `dice.roll()` it just assumes that we want the roll of a six-sided dice? Six-sided dice are after all the most common type of dice. Let's make another minor change to the *roll* function:
+You should see `NaN` as the result. *NaN* is short for *Not a Number* in Javascript and it means the computed value - the result of the math operations that is - was not a number. Do you know why? Our function always expects a number (how many sides the dice has) and if we don't give it one, the math won't work as expected. Wouldn't it be nice if, when no number is passed to `dice.roll()`, it just assumes that we want the roll of a six-sided dice? Six-sided dice are - after all - the most common type of dice. Let's make another minor change to the *roll* function:
 
 @@listing dice_v4.js Rolling Dice. Default Parameters
 
@@ -1257,11 +1257,7 @@ We'll look at the `if` statement in more detail in later chapters. All you need 
 You should see a random number output for each of the above calls. The *roll* function is now robust enough to handle parameters and use a sensible default value of 6 if no parameters are given when it's called.
 
 ### Assiging to the exports variable
-Since the only purpose of the roll variable inside of our modules is to be attached to the exports variable we can save ourselves a line of code by simply assigning the function expression directly to exports.roll without using the intermediate `roll` variable.
-
-@@listing dice_v5.js Exporting a function Expression.
-
-The above listing is one line shorter than listing @@listref{dice_v4.js}. If it isn't clear what has changed let me illustrate with another example. Let's say we want to create a new module that provides farm animals. We could write it like this:
+Let's say we want to create a new module that provides farm animals. We could write it like this:
 
     var cow = 'Cow';
     var sheep = 'Sheep';
@@ -1276,28 +1272,26 @@ But since the first 3 parameters aren't really used except to assign to exports,
     exports.sheep = 'Sheep';
     exports.pig = 'Pig';
     
-and save ourselves some typing. There may be times when this isn't suitable. If the *cow* variable is used inside the module then it makes sense to declare it and assign to the exports variable. If not then it's simpler to just assign the value directly to the exports variable rather than creating an extra variable which won't be used for any other purpose.
+...saving ourselves some typing. There may be times when this isn't suitable. If the *cow* variable is used inside the module then it makes sense to declare it and assign to the exports variable. If not then it's simpler to just assign the value directly to the exports variable rather than creating an extra variable which won't be used for any other purpose.
     
-Before we move on to the next chapter, I want to talk more about Comments. 
-
 ### More on comments
-In the very first Javascript file we created, we started with a single line:
+Before we move on to the next chapter, I want to talk more about Comments. In the very first Javascript file we created, we started with a single line:
 
     // TO DO : Add some code later
 
-This is called a comment. Comments are notes we write in our code to help us remember things. Source code can be difficult to understand even when you yourself have written it. In the heat of tackling a tricky problem or coding up a cool new plugin you might end up writing some very clever code but you'll often find that after you come back to it a couple of days or weeks later, you no longer understand what you've written. This is where comments come in. It's a good habit to write comments alongside your code, particularly if your code is particularly tricky. 
+This is called a comment. Comments are notes we write in our code to help us remember things. Source code can be difficult to understand even when you yourself have written it. In the heat of tackling a tricky problem or coding up a cool new plugin you might end up writing some very clever code but you'll often find that after you come back to it a couple of days or weeks later, you no longer understand what you've written. This is where comments come in. It's a good habit to write comments alongside your code, especially if your code is tricky. 
 
-Comments aren't read by the computer so you can write whatever you like in a comment. Comments should be helpful and provide sign-posts to yourself and others about what the code does. You can comment as much or as little as you like. When working with others on the same source code it's considered good practice to comment your code but again, how much you comment your code seems to be a matter of personal taste. Commenting can be really useful for *documenting* your code. For example, the ScriptCraft API reference documentation available at https://github.com/walterhiggins/ScriptCraft/blob/master/docs/API-Reference.md is created automatically from comments in the scriptcraft source code. 
+Comments aren't read by the computer so you can write whatever you like in a comment. Comments should be helpful and provide sign-posts to yourself and others about what the code does. You can comment as much or as little as you like. When working with others on the same source code it's considered good practice to comment your code. How much you comment your code, is a matter of personal taste. Commenting can be really useful for *documenting* your code. For example, the ScriptCraft API reference documentation available at http://scriptcraftjs.org/api is created automatically from comments in the scriptcraft source code. 
 
 #### Single-line comments
 You can make any line into a comment by starting it with two `/` (forward-slash) characters:
 
     // this is a Javascript comment
-    console.log('... while this is not a comment');
+    console.log('this is not a comment');
     
 If you were to run the above code you'd get the following output:
 
-    ...while this is not a comment
+    this is not a comment
     
 The first line is ignored and is only readable by programmers.
 
@@ -1330,7 +1324,7 @@ or if your comments span more than one line (like above) you can use opening and
        2. Copying and Pasting
     */
 
-Most programming editors will display comments in a different color so that they stand out from the rest of the code. Comments can be really helpful in reading and understanding code (both your own and others).
+Most programming editors will display comments in a different color so that they stand out from the rest of the code. Comments can be really helpful in reading and understanding source code.
 
 #### Commenting out code
 You can also use comments to *turn off* the execution of code. This can be useful if you want to temporarily change your code or if you have sections of code which you no longer need but do not want to remove just yet.
@@ -1361,6 +1355,7 @@ Make sure to save the file after you've changed it, run `/js refresh()` at the i
     /js dice.roll(20);
     
 ![](@@nextAchievement)
+
 Congratulations. You've taken another step towards becoming a responsible plugin developer. Your code is robust and well commented. Commenting code is really important if you want to share your work with others.
 
 ### Summary

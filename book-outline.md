@@ -995,7 +995,7 @@ Traditional board-games such as Ludo, Monopoly and Snake & Ladders all have an e
 In this chapter, I'll walk you through creating your very first *reusable* Javascript module.
 
 ### Randomness
-When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time what the number will be. The number which is thrown is said to be 'Random'. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this chapter we'll use this method to get a random number. 
+When you throw a 6-sided dice, there's no way of knowing what the throw will be, it can be any number between 1 and 6 but it's impossible to know ahead of time. The number which is thrown is said to be *random*. Computers can also provide random numbers. In the Javascript programming language there's a special method of getting a random number `Math.random()` . In this chapter we'll use this method to get a random number. 
 
 ### Think of a number between 0 and 1
 Before we begin writing the module, let's do some command-prompt exploration. At the in-game prompt type the following and hit ENTER...
@@ -1013,7 +1013,7 @@ Tip: You can quickly perform the previous command at the in-game prompt by press
 The numbers which Math.random() returns are called floating point numbers. You might not think there are any numbers between 0 and 1 but there are in fact many, many, numbers. It's this range of numbers which Javascript uses. The actual range of numbers is 0. 0000000000000000 to 0. 9999999999999999. That's 9 Quadrillion, 999 Trillion, 999 billion, 999 million, 999 thousand and 999 possible numbers. 
 
 ### A special 6-sided dice.
-A regular 6-sided dice has numbers from 1 through 6 printed or etched on each of the 6 sides. That's because we typically count up from 1. The number 1 is usually the starting point when we want to count up to something. Javascript (like many programming languages) is different. In Javascript counting begins at the number 0. So if you want to count 10 numbers, where normally you'd count from 1 to 10 ...
+A regular 6-sided dice has numbers from 1 through 6 printed or etched on each of the 6 sides. That's because we typically count from 1. The number 1 is usually the starting point when we want to count up to something. Javascript (like many programming languages) is different. In Javascript counting begins at the number 0. So if you want to count 10 numbers, where normally you'd count from 1 to 10 ...
 
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
@@ -1021,7 +1021,7 @@ In Javascript the count would look like this...
 
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 
-This can be confusing for beginning and experienced programmers and takes some getting used to. I'll explain why counting from 0 is important in the following chapters. Our virtual 6-sided dice will have the numbers 0, 1, 2, 3, 4, 5 rather than the usual 1, 2, 3, 4, 5, 6.
+This can be confusing for beginning and experienced programmers alike and takes some getting used to. I'll explain why counting from 0 is important in the following chapters. Our virtual 6-sided dice will have the numbers 0, 1, 2, 3, 4, 5 rather than the usual 1, 2, 3, 4, 5, 6.
 
 ### Playing with Numbers
 We have a problem to solve. Math.random() will give us a number between 0.0 and 0. 9999999999999999 which isn't useful for most everyday uses. We're only interested in 6 possible numbers so we need to do some Math to get the result we need. We'll explore some basic Math you can do in Javascript and some operations you can perform on floating point numbers but first let's think about what we want to be able to do once our first plugin is complete. 
@@ -1036,13 +1036,9 @@ Launch your editor and in the File/Disk Browser, select the **scriptcraft/module
 
 ![](images/chapter-05/screenshot-gedit-file-new-modules.png)
 
-Important: You must select the scriptcraft/modules folder not the scriptcraft/plugins folder!
+Important: You must select the **scriptcraft/modules** folder not the scriptcraft/plugins folder!
 
-Right-click and choose 'New File' from the menu. Call your new file 'dice.js' then double-click it to open it (a single click will do for TextWrangler).
-
-![](images/chapter-05/screenshot-gedit-file-dice.png)
-
-Type the following code into the newly created file...
+Right-click and choose 'New File' from the menu. Call your new file 'dice.js' then double-click it to open it (a single click will do for TextWrangler), then type the following code into the newly created file...
 
 @@listing dice_v1.js Rolling Dice
 
@@ -1062,32 +1058,38 @@ Once you've executed the /js refresh() function, you're ready to try out your ne
 
     /js dice.roll()
     
-You should see an error message like this: ReferenceError: "dice" is not defined. OK. Let's try calling roll() on it's own so:
+You should see an error message like this: *ReferenceError: "dice" is not defined.* OK. Let's try calling roll() on it's own so:
 
     /js roll()
     
-You'll see another error message: ReferenceError: "roll" is not defined. Why doesn't this work?
+You'll see another error message: *ReferenceError: "roll" is not defined.* Why doesn't this work?
 
-If you remember, the new file we just created, dice.js, was saved in the scriptcraft/modules folder not the scriptcraft/plugins folder. The scriptcraft/plugins folder is special for a couple of reasons:
+### ScriptCraft Folders
+If you remember, the new file we just created - dice.js - was saved in the **scriptcraft/modules** folder not the scriptcraft/plugins folder. ScriptCraft has 2 sub-folders we'll work in throughout this book.
+
+#### The scriptcraft/plugins Folder
+The **scriptcraft/plugins** folder is special for a couple of reasons:
 
 1. All Javascript files in the scriptcraft/plugins folder are automatically loaded and executed when the server starts.
 2. All variables 'exported' from files within the scriptcraft/plugins folder become what are called 'global' variables. That means they are public for all the rest of the system to see. 
 
-There are other folders in scriptcraft. The 'modules' folder is much like the plugins folder. It's a folder where you can create new Javascript files. It's similar to scriptcraft/plugins except:
+#### The scriptcraft/modules Folder
+There are other folders in scriptcraft. The *scriptcraft/modules* folder is much like the plugins folder. It's a folder where you can create new Javascript files. It's similar to scriptcraft/plugins except:
 
 1. Javascript files inside the scriptcraft/modules folder are *not* automatically loaded or executed when the server starts.
 2. Variables exported from files in the scriptcraft/modules folder are not automatically available everywhere - they are not 'global' variables.
 
-So this leaves us in a bit of a pickle. We've written some useful code, but how do we get to use it?
+We've written some useful code, but how do we get to use it?
 
 ### Modules
-What is a module? A module in ScriptCraft is simply a Javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a commonly used module system called CommonJS which is also used by NodeJS - an increasingly popular Javascript programming environment. In a nutshell, modules provide yet another way to make your code 'reusable'. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
+A module in ScriptCraft is simply a Javascript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a module system called CommonJS which is also used by NodeJS - an increasingly popular Javascript programming environment. Modules provide yet another way to make your code *reusable*. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
 
 ![Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg](images/chapter-05/nasa-apollo-modules.jpg)
 
-Modular systems are good when programming. They're good because modules (much like the command, lander and service module in the above diagram) can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in the diagram above the lunar lander module was only used to land on the moon. That was its only purpose. Similarly, when writing Javascript modules, it's considered good practice to have the module serve a single purpose. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
+Modular systems are good when programming. They're good because modules can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in the diagram above the lunar lander module was only used to land on the moon. That was its only purpose. Similarly, when writing Javascript modules, it's considered good practice to have the module serve a single purpose. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
 
-Getting back to our earlier problem - how do we use the new dice.js module we just created? Remember earlier we learned about the special 'exports' variable which is used to expose private variables for use by others? Well you may be wondering how we get at variables exposed in this way. Fortunately there's a special function called 'require()' which lets us do just that. The 'require()' function is the counterpart to the 'exports' variable. We use 'exports' to say "here's some of my code you can use" and we use require() to say "Hey I'd like to use the code in such-and-such module". 
+### Using Modules
+Getting back to our earlier problem - how do we use the new dice.js module we just created? Remember earlier we learned about the special 'exports' variable which is used to expose private variables for use by others? Well you may be wondering how we get at variables exposed in this way. Fortunately there's a special function called 'require()' which lets us do just that. The *require()* function is the counterpart to the *exports* variable. In the dice.js file  we use 'exports' to say "here's some of my code you can use", and we use require() to say "Hey I'd like to use the code in the 'dice' module". 
 
 So to use the code we just wrote inside the dice.js module we first need to 'require()' it. We do so using a statement like this:
 
@@ -1095,15 +1097,18 @@ So to use the code we just wrote inside the dice.js module we first need to 'req
 
 The above statement loads your newly created dice.js module into the computer's memory. The require() function is how ScriptCraft loads Javascript modules. You'll notice I didn't need to include the '.js' suffix (the last part of the filename). This is because the require() function is smart enough to know that it should only look for '.js' files anyway. It's also smart enough to know it should look in the modules folder so we didn't need to write `require('/modules/dice.js')`. After you load your module using the require() function you should almost always assign it to a variable. In this case the variable has the same name as the module but it doesn't have to be. I could have written `var steve = require('dice')` and it would work just as well. 
 
+### Calling Module Functions
 You'll notice that the above statement doesn't appear to have called `roll()` yet. Loading a module will execute any code in the module but remeber, our module just defines a function. **Defining a function and calling a function are not the same thing.** To call the roll function on the module we just loaded, issue the following command:
 
     /js dice.roll()
 
 A random number between 0 and 5 should be displayed. Try running the above command a couple of times. Each time you should see a different number returned. Remember, you can run the previous command quickly by typing / then pressing the UP Arrow key.
 
-Troubleshooting: If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing @@listref{dice_v1.js}.
+### Troubleshooting 
+If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing @@listref{dice_v1.js}.
 
-You may be wondering why we call the *roll* function the way we do, `dice.roll()` , why couldn't we just have used `roll()` ? We can't just call it like that would only work if the dice.js file was located in the *scriptcraft/plugins* folder. When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
+### Modules as Objects
+You may be wondering why we call the *roll* function the way we do: `dice.roll()`.  When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object - the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
 ![](@@nextAchievement)
 
@@ -1114,10 +1119,10 @@ Let's look at the code we've just added to Minecraft. The code is reprinted belo
 
 @@listing dice_v1.js Rolling Dice
 
-A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later chapters, for now let's look at the function body itself (lines 2 through 5). 
+A Javascript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later chapters. For now let's look at the function body itself (lines 2 through 5). 
 
 1. The first statement of the function, `var result = Math.random();` declares a new variable called 'result' and assigns a random number to it. Remember: Math.random() will return a random number between 0 and 1. 
-2. The next statement `result = result * 6` takes the number and multiplies it by 6. Remember; the `*` symbol is used in Javascript to multiply numbers. 
+2. The next statement `result = result * 6` takes the number and multiplies it by 6. The `*` symbol is used in Javascript to multiply numbers. 
 3. Next we convert the number to a integer by passing it to the `Math.floor()` function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
 4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the roll() function to return the `result` variable.
 
@@ -1126,7 +1131,7 @@ As in the previous plugin, the last line of the file makes the *roll* function a
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
 #### Rounding Numbers
-All numbers in Javascript are floating point numbers, that is they have an integer part (the part before the dot) and a fractional part (the part after the dot). The number 'two and a half' is represented in Javascript as:
+All numbers in Javascript are floating point numbers; they have an integer part (before the dot), and a fractional part (after the dot). The number 'two and a half' is represented in Javascript as:
 
     2.5
     
@@ -1141,8 +1146,8 @@ The built-in Math object has many other useful properties and functions, here ar
 
 * Math.PI - The number value for &pi;, the ratio of the circumference of a circle to its diameter, which is roughly 3.1415926535897932. This value is used for example when constructing spheres, cylinders and arcs in ScriptCraft. 
 * Math.abs(n) - The absolute value of a number is its value as a positive number. Math.abs() is used to convert negative numbers (numbers less than 0) to positive numbers so for example, `Math.abs(-3)` returns 3.
-* Math.max(n,m,...) - Math.max() will take any number of numbers and will return the largest number. So for example, `Math.max( 3, 9, 2, 5)` will return 9.
-* Math.min(n,m) - Math.min() will take any number of numbers and will return the *smallest* number. So for example, `Math.min( 3, 9, 2, 5)` will return 2.
+* Math.max(n,m,...) - Will take any number of numbers and will return the largest number. So for example, `Math.max( 3, 9, 2, 5)` returns 9.
+* Math.min(n,m) - Will take any number of numbers and will return the *smallest* number. So for example, `Math.min( 3, 9, 2, 5)` returns 2.
 * Math.sqrt(n) - will return the square root of a number. For example, `Math.sqrt(9)` returns 3, `Math.sqrt(4)` returns 2, `Math.sqrt(16)` returns 4 and so on.
 
 I encourage you to try out each of the above properties and functions at the in-game prompt. Remember that in interactive mode you must prefix each Javascript statement with `/js `.

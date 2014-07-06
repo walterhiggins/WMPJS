@@ -1557,7 +1557,7 @@ In this chapter you learned about how to create and manipulate lists of items us
 
 ## @@nextChapter{chapter-09}: A Guessing Game
 ### Introduction
-One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including Java and Javascript.
+One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including Javascript and Java.
 
 In this chapter we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
 
@@ -1568,7 +1568,7 @@ In this program the *guessTheNumber()* function rolls a 6-sided dice, then asks 
     js refresh();
     js guessTheNumber( self )
     
-The *guessTheNumber()* function needs a Player as a parameter. The special ScriptCraft variable `self` is a variable whose type is 'Player' and refers to you the person issuing the command. That's why we pass `self` as the parameter to *guessTheNumber()* . You can try running the *guessTheNumber()* function a couple of times and the number should be different.
+The *guessTheNumber()* function needs a Player as a parameter. The special ScriptCraft variable `self` is a variable whose type is 'Player' and refers to you the person issuing the command. That's why we pass `self` as the parameter to *guessTheNumber()* . You can try running the *guessTheNumber()* function a couple of times and the number should be different each time.
 
 Let's take a closer look at how this function works by first looking at how ScriptCraft asks questions of players.
 
@@ -1578,11 +1578,11 @@ Most programming languages provide a function which can be used to ask a questio
 
 ![](images/chapter-09/modal-dialog.png)
 
-The problem with modal dialogs is that they interrupt the program and the program can't resume until the user closes the dialog by clicking either OK or Cancel. This could be a problem in a fast-paced game like Minecraft where you wouldn't want such a question to appear while you were fighting off a horde of zombies. Unlike Javascript in the browser, Javascript in Minecraft does not have a *prompt()* function but in ScriptCraft you *can* ask players questions using the *input* module. The questions will not appear in a modal dialog instead appearing as a message on the player's screen. What's more, Players do not have to answer the question immediately. The *input()* function takes 3 parameters:
+The problem with modal dialogs is that they interrupt the program and the program can't resume until the user closes the dialog by clicking either OK or Cancel. This could be a problem in a fast-paced game like Minecraft where you wouldn't want such a question to appear while you were fighting off a horde of zombies. Unlike Javascript in the browser, Javascript in Minecraft does not have a *prompt()* function but you *can* ask players questions using the *input* module. The questions will not appear in a modal dialog, instead appearing as a message on the player's screen. What's more, Players do not have to answer the question immediately. The *input()* function takes 3 parameters:
 
 1. The player you want to ask a question of.
 2. The question you want to ask.
-3. The function you want to call when the player has answered the question. The function when called will have the answer and the player who answered as parameters.
+3. The function you want to call when the player has answered the question. This function when called, will have the answer, and the player who answered, as parameters.
 
 This is the second example we've encountered of functions which take other functions as parameters - we saw an example of this in chapter @@chapter{chapter-08} when we passed an event-handling function. You can try out the *input* module yourself at the server or in-game command prompt:
 
@@ -1590,12 +1590,12 @@ This is the second example we've encountered of functions which take other funct
     js function respond( answer, player ) { player.sendMessage("Wow. " + answer + " that's old!" ) };
     js input( self, 'How old are you?', respond )
 
-The important thing to keep in mind when writing code that depends on asking players questions is that you can't force players to answer questions right away or even answer at all, they could be busy fighting spiders, trading with villagers, climbing, building or simply ignoring the question altogether. In the commands above, the *respond()* function will be called by *input()* when the player has answered the question. There's a name often used for functions which are called by other functions - they're called *Callbacks*. The *input()* function when called will return immediately and it does not return any value. Instead, it waits in the background (remember, there's a lot going on in Minecraft so we can't stop the game in its tracks) until the player eventually answers the question and then calls the *Callback*. A *Callback* is literally a function which will be called back later on. *Callbacks* are also used when writing Javascript code for web browsers. For example, functions can be written which will only be called when a visitor clicks a button. *Callback* functions are super useful and part of what makes Javascript such a flexible language. 
+The important thing to keep in mind when writing code that depends on asking players questions is that you can't force players to answer questions right away or even answer at all, they could be busy fighting spiders, trading with villagers, climbing, building or simply ignoring the question altogether. In the commands above, the *respond()* function will be called by *input()* when the player has answered the question. There's a name often used for functions which are called by other functions - they're called *Callbacks*. The *input()* function when called will return immediately and it does not return any value. Instead, it waits in the background (remember, there's a lot going on in Minecraft so we can't stop the game in its tracks) until the player eventually answers the question and then calls the *Callback*. A *Callback* is literally a function which will be *called back* later. *Callbacks* are also used when writing Javascript code for web browsers. For example, functions can be written which will only be called when a visitor clicks a button. *Callback* functions are super useful and part of what makes Javascript such a flexible language. 
 
 So we've seen how to ask a player a question. Now let's take a look at how we check to see if the answer is correct.
 
 ### The if statement
-In @@chapter{chapter-03} we briefly looked at comparing numbers at the server console prompt. When we *compare* something to something else there can only be two possible answers: `true` or `false`. For example, if I issue the command `js 5 == 3` to ask the computer is 5 equal to 3 the answer will be `false`. If I ask the computer a different question `js 5 > 3` - is 5 greater than 3 - the answer will be `true`. When asking such questions there is no *I don't know* or *Sometimes* or *Maybe*. The answer will always be `true` or `false`. When we *compare* things we *test* for true or false. We can compare not only numbers but any variable. We can write code in such a way that it will only execute if some test passes. Try the following commands at the server console prompt:
+In chapter @@chapter{chapter-03} we briefly looked at comparing numbers at the server console prompt. When we *compare* something to something else there can only be two possible answers: `true` or `false`. For example, if I issue the command `js 5 == 3` to ask the computer is 5 equal to 3 the answer will be `false`. If I ask the computer a different question `js 5 > 3` - is 5 greater than 3? - the answer will be `true`. When asking such questions there is no *I don't know* or *Sometimes* or *Maybe*. The answer will always be `true` or `false`. When we *compare* things we *test* for true or false. We can compare not only numbers but any variable. We can write code in such a way that it will only execute if some test passes. Try the following commands at the server console prompt:
 
     js if ( 5 > 3 ) { console.log('test is true') }
     js if ( 5 > 13 ) { console.log('test is true') }
@@ -1611,12 +1611,12 @@ The message `test is true` should only be displayed for the first and last comma
 So in the number guessing game the code...
 
     if ( answer == randomNumber ) {
-      player.sendMessage('You guessed correct!');
+      guesser.sendMessage('You guessed correct!');
     }
 
-... compares two numbers - the number returned by the dice roll and the number guessed by the player - and if they are equal then the code between the `{` and `}` curly brackets is executed (the player is sent a message saying they guessed correctly). The code between the `{` and `}` will not be executed if the numbers are not the same. It's important in Javascript when asking the question is something equal to another, that you use `==` rather than a single `=`. The single `=` sign is used when you want to assign a value to a variable. We say `name = 'steve'` but we ask the question `name == 'steve'`?. This can be a source of bugs for for even experienced programmers.
+... compares two numbers - the number returned by the dice roll and the number guessed by the player - and if they are equal then the block of code between the `{ }` curly brackets is executed (the player is sent a message saying they guessed correctly). The code block will not be executed if the numbers are not the same. It's important in Javascript when asking the question is something equal to another, that you use `==` rather than a single `=`. The single `=` sign is used when you want to assign a value to a variable. We say `name = 'steve'` but we ask the question `name == 'steve'`?
 
-The test is always placed between the `(` and `)` round brackets. There are many other kinds of tests you can use other than comparisons. If you use just a single number it can be tested. Any single number except 0 will resolve to `true` when used inside an `if` test, while any non-empty text will resolve to true. Try issuing the following commands at the sever console prompt:
+The test is always placed between the `( )` round brackets. There are many other kinds of tests you can use other than comparisons. If you use just a single number it can be tested. Any single number except 0 will resolve to `true` when used inside an `if` test, while any non-empty text will resolve to true. Try issuing the following commands at the sever console prompt:
 
     js var gems = 5;
     js if ( gems ) { console.log("you have gems"); }
@@ -1650,7 +1650,7 @@ The `!` operator *negates* (that is - makes the opposite of) any boolean express
     > false
 
 ### The if-else construct
-Let"s say we want the program to output one message if the player guesses correctly and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
+Let"s say we want the program to output one message if the player guesses correctly, and a different message if the player guesses incorrectly. This is where the `else` statement comes in. You can see it in use in the following updated code for the number guessing game:
 
 @@listing guess_v2.js Guessing Wrong.
 
@@ -1659,14 +1659,14 @@ Change your existing numberGuess.js file to match the code above, save it then i
     js refresh()
     js guessTheNumber( self )
     
-Now when you guess incorrectly you should see a message `Better luck next time.` appear.
+Now when you guess incorrectly you should see a message `Better luck next time` appear.
 
 ### The if-else-if construct
 So far the guessing games gives players just one shot at guessing the number. In the following listing @@listref{guess_v3.js} the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if - else - if* form which is quite common in Javascript:
 
 @@listing guess_v3.js Too High, Too Low.
 
-In this revision of the number guessing game, we're using an extra parameter called *repeat* which is a parameter passed by the *input()* function to our input handler function *checkAnswer()*. We didn't use this parameter in the previous version of the game because we didn't need it. The *repeat* parameter is itself a function which when called will repeat the question. That's why we call it when the answer is too high or too low. The *repeat* function when called will ask the player the same question again and when the player answers, will call your *callback* function again. 
+In this revision of the number guessing game, we're using an extra parameter called *repeat* which is a parameter passed by the *input()* function to our input handler function *checkAnswer()*. We didn't use this parameter in the previous version of the game because we didn't need it. The *repeat* parameter is itself a function which when called will repeat the question. That's why we call it when the answer is too high or too low. The *repeat()* function when called will ask the player the same question again and when the player answers, will call your *callback* function again. 
 
 Another change in the above function is that we've given the player the option of simply quitting the game by typing `quit` as an answer to the question. You may be wondering why there's a check to see if the guess is too low but no equivalent check to see if the guess is too high. The resaon is, if the guess is not the same or less than the randomNumber, then it *must* be too high - there are no other options.
 
@@ -1675,7 +1675,7 @@ How a program behaves while running is often called its *flow*. *Flow Diagrams* 
 ![](images/chapter-09/flowchart.png)
 
 ### Nested blocks
-The `if` statement is one of several *block* statements in Javascript, that is, statements which have an accompanying block of text. Other example of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
+The `if` statement is one of several *block* statements in Javascript, that is, statements which have an accompanying block of text. Other examples of *block* statements in Javascript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
 
 @@listing guess_v4.js Fireworks for Winners.
 
@@ -1684,12 +1684,12 @@ Now jump into the game and at the in-game prompt issue the following commands:
     /js refresh() // to load the changes
     /js guessTheNumber( self ) 
 
-When prompted, press the T key to start typing your guess. You may need to re-run the guessTheNumber() function a couple of times before you guess the right answer but this time, when you do get it right, a firework will launch directly above your head. Pretty cool huh?
+When prompted, press the T key to start typing your guess. You may need to re-run the guessTheNumber() function a couple of times before you guess the right answer but this time, when you do get it right, a firework will launch directly above your head.
 
 Now the code checks to see if you guessed correctly and if so sends a message to the guesser. Then another *nested* if statement tests to see if the guesser is an actual player in the game (and not just the server console user) and launches a celebratory firework at the player's location. 
 
 ### Combining conditions
-If we want to check to see if it's night or day in minecraft we need to get the game world's time and test it. In Minecraft, time is measured differently and is on a completely different scale to time in real life. A day in Minecraft lasts only 20 minutes in real time. Minecraft measures time not in hours and minutes but in *ticks* and there are 24,000 ticks in a Minecraft day. 
+If we want to check to see if it's night or day in minecraft, we need to get the game world's time and test it. In Minecraft, time is measured differently and is on a different scale to time in real life. A day in Minecraft lasts only 20 minutes in real time. Minecraft measures time not in hours and minutes but in *ticks* and there are 24,000 ticks in a Minecraft day. 
 
 You can see a chart of the day-night cycle in Minecraft at <a href="http://minecraft.gamepedia.com/File:Day_Night_Clock_24h.png">http://minecraft.gamepedia.com/File:Day_Night_Clock_24h.png</a>.
 
@@ -1699,7 +1699,7 @@ To test to see whether it is night or day in the game issue the following comman
     /js if ( ( world.time > 13000 ) && ( world.time < 23000 ) ) { self.sendMessage('Night!') } 
     
 ### Logical AND
-You can combine one or more tests to perform more complex tests. In the statements above you check to see if the time is greater than 13000 *AND* less than 23000 and if the test passes we know it's Night. If you are combining tests like this, it's a good idea to enclose each test in its own `( )` round brackets pair. That's why we write:
+You can combine one or more tests to perform more complex tests. In the previous statements you check to see if the time is greater than 13000 *AND* less than 23000 and if both of these conditions are true we know it's Night. If you are combining tests like this, it's a good idea to enclose each test in its own `( )` round brackets pair. That's why we write:
     
     ( world.time > 13000 ) && ( world.time < 23000 )
     
@@ -1707,7 +1707,7 @@ rather than just:
 
     world.time > 13000 && world.time < 23000 
 
-The `&&` (two ampersand symbols side-by-side) operator combines the expressions on the left and right of it and if both are true then it evaluates to true. If either the left hand side or right hand side expressions evaluate to false then the whole test is false. When you combine tests using the `&&` (*AND*) operator, the test only passes when *all* of the expressions evaluate to true.
+The `&&` operator combines the expressions on the left and right of it and if both are true then it evaluates to true. If either the left hand side or right hand side expressions evaluate to false then the whole test is false. When you combine tests using the `&&` (*AND*) operator, the test only passes when *all* of the expressions evaluate to true.
 
 ### Logical OR
 There's more than one way to combine tests. You can use the `||` (*or* operator) to test if *any one* of 2 or more conditions are true. Let's say we want to add a new rule to the game. The rule is this:
@@ -1740,7 +1740,7 @@ To you and I that rule might look clear enough but the computer would be confuse
 
 ![](images/chapter-09/cookie-drop-rule.png)
 
-We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside of the if condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following Javascript code:
+We have to be careful when writing test conditions in Javascript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside the *if* condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following Javascript code:
 
 @@listing stealthCookies_v2.js If X and ( Y or Z )
 

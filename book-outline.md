@@ -61,7 +61,7 @@ Welcome to the exciting world of Minecraft Plugin Development. In this first sec
 
  * CraftBukkit - A freely-available open-source Minecraft Server.
  * ScriptCraft - A Plugin for CraftBukkit.
- * Gedit, TextWrangler, or any other text editor suitable for programming.
+ * gedit, TextWrangler, or any other text editor suitable for programming.
 
 The following chapters will show you how to install and setup each of the above.
 
@@ -738,9 +738,9 @@ In this chapter we learned about how to execute Javascript at the server console
  
 ## @@nextChapter{chapter-04}: Choosing and Using a Text Editor
 ### Introduction
-Up to now we've been typing Javascript into the server console window by putting a `js ` command before every Javascript statement and executing the code by hitting the ENTER key. This is a perfectly good way to try out Javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and to be able to load it and run it without having to type lots of Javascript at the server console window each time your server starts up. 
+Up to now we've been executing Javascript at the server console window using the `js ` command. This is a perfectly good way to try out Javascript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with Javascript, you'll want to be able to save your work and run it, without issuing many `js` commands at the server console window each time your server starts up. 
 
-ScriptCraft lets you load Javascript files you've saved and can either run them automatically when the server starts up or can run your code 'on-demand' (that is: depending on where you save your Javascript files, you can have your code execute automatically at startup or when you type certain commands in the server-console or in-game command prompt. I'll explain this in more detail later ). If you plan on saving your work, you'll need to write your code into a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
+ScriptCraft lets you load Javascript files you've saved and can either run them automatically when the server starts up or can run your code *on-demand*. If you plan on saving your work, you'll need to write your code using a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
 
 ![Javascript in a plain text editor ](images/chapter-04/screenshot-textedit-1.png "Javascript code in an editor with no Syntax Highlighting.")
 
@@ -753,26 +753,25 @@ There are many programming editors to choose from. Which editor you choose is ul
 
 * Notepad++ is a free editor for Windows you can download at http://notepad-plus-plus.org/ 
 * TextWrangler from BareBones Software is a free editor for Mac OS X you can download at http://www.barebones.com/products/textwrangler/ 
-* Sublime Text is a cross-platform ( it runs on Mac OS, Windows and Linux ) editor which you can evaluate for free for as long as you like.
-* Brackets is a cross-platorm Free, Open Source code editor for the web. You can download it at http://brackets.io/ .
+* Sublime Text is a cross-platform editor which you can evaluate for free for as long as you like.
 
 Let's get started installing gedit. You can skip this section if you've already installed and use a programing editor on your computer. Mac OS users can skip the following section and go straight to 'Installing TextWrangler on Mac OS'.
 
 ### gedit
 
-The editor I use for screenshots in this book is called gedit. I chose GEdit for use in this book because:
+The editor I use for screenshots in this book is called gedit. I chose gedit for use in this book because:
 
 * It is cross-platform - that is - it runs on Windows and Linux. gedit also runs on older versions of Mac OS (up to version 10.5) but I recommend using TextWrangler for Mac OS.
 * It is light-weight and easy to use. It installs quickly, doesn't take up much disk space and doesn't have a whole lot of features you'll need to learn. It's got just enough features to get started in programming.
-* It has a Sidebar (the area on the left in the earlier screenshot) which shows the folders with which you'll be working. This can be really handy when you want to quickly browse the folders for files to edit.
+* It has a Disk Explorer Pane which shows the folders with which you'll be working. This can be really handy when you want to quickly browse the folders for files to edit.
 * It is free to use. It won't cost you to download and it won't nag you to upgrade to a paid version. 
 
-You don't have to use gedit. Any programming editor will do. All Programming Editors have similar features, they let you create new files, open files and save files. 
+You don't have to use gedit. Any programming editor will do. All Programming Editors have similar features, they let you create new files, edit, and save files. 
 
 You can download gedit at https://wiki.gnome.org/Apps/Gedit/ . Follow the download instructions for your platform. 
 
 #### Installing gedit on Linux
-If you use Linux then gedit is probably already installed on your computer (Click the Dash Home button in the top left of your linux screen and type `GEdit` to find it). If not already installed you can install it by opening the Ubuntu Software Center application and searching for 'gedit' or by issuing the following command in a terminal window...
+If you use Linux then gedit is probably already installed on your computer (Click the Dash Home button in the top left of your linux screen and type `gedit` to find it). If not already installed you can install it by opening the Ubuntu Software Center application and searching for 'gedit' or by issuing the following command in a terminal window...
 
     sudo apt-get install gedit
 
@@ -790,16 +789,18 @@ Follow these steps to install gedit on Windows.
 
 Once installed, gedit should appear in your Start Menu. If it doesn't appear in your Start Menu, you can search for it by typing 'gedit' in the Start Menu's Search field. 
 
-#### gedit Preferences
+#### The File Browser
 
-The first thing you should do once you've installed gedit is set some preferences. Most modern programming editors provide a file Browsing view where you can see at a glance all of your folders and files. The disk browser is super useful when you want to quickly navigate around your Javascript folders and files. To enable the File browsing view in Gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will always be displayed the next time you launch because GEdit remembers your view settings.
+Most modern programming editors provide a file Browsing view where you can see - at a glance - all of your folders and files. The disk browser is super useful when you want to quickly navigate around your Javascript folders and files. To enable the File browsing view in gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will be displayed the next time you launch gedit.
 
-![File Browser in Gedit](images/chapter-04/screenshot-gedit-file-browser.png "gedit's File Browser")
+![File Browser in gedit](images/chapter-04/screenshot-gedit-file-browser.png "gedit's File Browser")
 
+#### The gedit File Browser on Microsoft Windows
 The first time you launch gedit for windows, you will need to change one of the default settings so that all files and folders appear in the File Browser window. By default only folders are shown in the Windows File Browser. This isn't very useful as we'll want to work with Folders and Javascript files. To ensure you can see all types of files do the following: In the File Browser window, right-click anywhere (click the right mouse button) and make sure that the *Show Binary* option is selected under the *Filter* menu. This will ensure all file types are visible.
 
 ![Ensuring all file types are visible in gedit for Windows](images/chapter-04/gedit-windows-show-binary.png "Ensuring all file types are visible in gedit for Windows")
 
+#### gedit Preferences
 The next step is to set some preferences for how the editor should behave. You do this by choosing Edit => Preferences to open the Preferences dialog. Let's look at each of the preferences sections in turn.
 
 #### View preferences
@@ -810,7 +811,7 @@ gedit will display a feint margin along the right side of the window in column 8
 
 The 'Enable text wrapping' setting should be turned off for programming. It's useful if you're writing a letter, essay or other non-programming text but it can be confusing if turned on while programming. 
 
-'Highlight current line' makes it easier to see where you currently are in the code. If looking at a large Javascript file, it can be difficult to see the cursor (the blinking block that appears next to letters as you type).
+'Highlight current line' makes it easier to see where you currently are in the code. When looking at a large Javascript file, it can be difficult to see the cursor (the blinking block that appears next to letters as you type).
 
 'Highlight matching brackets' is a super useful programming feature. As you move the cursor around your Javascript source, when the cursor is next to any of the following characters it will match the opening or closing character.
 
@@ -827,7 +828,7 @@ This can really help when writing or editing code. In the screenshot below, you 
 
 I recommend using either 2 or 4 spaces for tabs to make your code more readable. This is largely a matter of style and personal taste. When starting out, you should probably use 4 spaces. 
 
-Automatic Indentation is a handy feature which saves you having to type TAB and SPACE characters when you start a new line of code.
+Automatic Indentation is a handy feature which saves you having to type TAB and SPACE characters when you start writing a new line of code.
 
 gedit can create a backup of your your files before you save them. This is usually a good idea.
 
@@ -855,7 +856,7 @@ Whenever you Launch TextWrangler you should open a 'Disk Browser' window by choo
 
 ### First steps with your editor
 
-To get used to working with a programming editor, we're going to create a new folder and file in the ScriptCraft plugins folder and save the new file. You can skip this section if you've used a programming editor before.
+To get used to working with a programming editor, we're going to create a new folder and file in the ScriptCraft plugins folder and save the new file. 
 
 #### Create a new Folder
 
@@ -875,9 +876,9 @@ The file has just been created but hasn't been opened. If using TextWrangler cli
 
     // TO DO : Add some code later
 
-The above code isn't actually real code. It's just a note we've added to remind ourselves that we must add some proper code later. This 'note' isn't understandable to the computer so we can write whatever we like here, the computer will not try to interpret and execute it. Notes like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing - you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
+The above code is just a *comment* we've added to remind ourselves that we must add some proper code later. This 'comment' isn't understandable to the computer so we can write whatever we like on a line beginning with `//`, the computer will not try to interpret and execute it. Comments like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing - you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
 
-These notes are called 'comments' and most programming languages provide a way to add comments. In Javascript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
+Most programming languages provide a way to add comments. In Javascript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
 
 #### Saving your work.
 

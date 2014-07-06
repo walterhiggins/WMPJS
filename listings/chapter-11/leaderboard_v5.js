@@ -16,6 +16,6 @@ function jumps( sender ) {
 
   } // end of loop
 
-};
+}
 
 exports.jumps = jumps;

@@ -1363,10 +1363,10 @@ You've seen that functions can both return *and take* a value as a parameter. Pa
     
 ## @@nextChapter{chapter-08}: Greeting Players
 ### Introduction
-In this chapter we'll change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen for and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
+In this chapter we'll change the Minecraft game for all players. The best plugins enhance the Minecraft experience and at the same time feel like they are an intrinsic part of the game. In this plugin each player will be greeted with a new random message each time they join the server. This will be the first plugin that uses *event driven programming* which is a way to listen and react to happenings or events in the game. Along the way, we'll learn about Arrays, a special type in Javascript for storing lists of items.
 
-### Term: Event Driven Programming
-Back in the early days of programming there was no such thing as Event Driven Programming. Programs were started and ran to completion, then exited. If your program needed to ask the user a question, it did so using a command prompt and did not resume until the user had typed a response and hit enter. With the advent of Graphical User Interfaces in the 80s and 90s, the possibilities for what users could do exploded. Programs and user-interaction became more sophisticated. Programs had to be written differently to accomodate the new ways users could interact with programs (Menus, Buttons, Windows and so on). When you click a link or a button on a web page or other application, that click is an *event*. In Minecraft, when you fire an arrow, break a block, open a door, join the server or do pretty much anything, that's an *event*. Event driven programming lets programmers write functions which listen for and react to such events.
+### Event Driven Programming
+Back in the early days of programming there was no such thing as Event Driven Programming. Programs were started and ran to completion, then exited. If your program needed to ask the user a question, it did so using a command prompt and did not resume until the user had typed a response and hit enter. With the advent of Graphical User Interfaces in the 80s and 90s, programs and user-interaction became more sophisticated. Programs had to be written differently to accommodate new ways users could interact with programs using Menus, Buttons, Windows and so on. When you click a link or a button on a web page or other application, that click is an *event*. In Minecraft, when you fire an arrow, break a block, open a door, join the server or do pretty much anything, that's an *event*. Event driven programming lets programmers write functions which listen and react to such events.
 
 In the first part of this chapter we're going to write a module with a single function which will return a random greeting each time it's called. This new module will depend on the module we created in chapter @@chapter{chapter-07} to return a random number for us. Create a new file in the *scriptcraft/modules* folder and call it *greeting.js* then type in the following code and save your file:
 
@@ -1381,7 +1381,7 @@ So far we've used variables to store single items in memory. Those items have be
 
     var farmAnimals = [ 'Sheep', 'Cow', 'Pig', 'Chicken' ];
 
-An array starts with `[` (open square bracket) and ends with `]` (close square bracket) and each item in the list is separated with a `,` (comma). The last item in the list should not have a comma after it. Let's do some server console experimentation with arrays. Issue the following commands at the server console prompt:
+An array starts and ends with square brackets `[ ]`, and each item in the list is separated with a comma `,`. The last item in the list should not have a comma after it. Let's do some server console experimentation with arrays. Issue the following commands at the server console prompt:
 
     js var farmAnimals = [ 'Sheep', 'Cow', 'Pig', 'Chicken' ];
     js console.log(farmAnimals);
@@ -1404,7 +1404,7 @@ The `length` property tells us how many items are in the array and is very usefu
     
 Go ahead and issue that command now before reading any further. 
 
-Were you surprised by the result? If you're new to programming you should be. The result is `Cow` and not `Sheep` as most of us expect. That's because in Javascript (and many other programming languages too), indexes start at 0 not 1 so if I want to get the *first* item in the farmAnimals array I say `farmAnimals[0]`. If I want to get the second item I say `farmAnimals[1]` , for the third item I say `farmAnimals[2]` and so on. This can be a constant source of confusion for even experienced programmers. The reason why arrays start at 0 and not 1 harks back to the old days of computing when computer memory was not as abundant and cheap as it is today. Having arrays start at 0 rather than 1 was slightly more efficient. 
+Were you surprised by the result? If you're new to programming you should be. The result is `Cow` and not `Sheep`. That's because in Javascript (and many other programming languages too), indexes start at 0 not 1 so if I want to get the *first* item in the farmAnimals array I say `farmAnimals[0]`. If I want to get the second item I say `farmAnimals[1]` , for the third item I say `farmAnimals[2]` and so on. This can be a constant source of confusion for even experienced programmers. The reason why arrays start at 0 and not 1, harks back to the old days of computing when computer memory was not as abundant and cheap as it is today. Having arrays start at 0 rather than 1 was slightly more efficient. 
 
 Here's another question: How might I get the *last* item in an array? If we know the length of the array we could try this:
 
@@ -1414,7 +1414,7 @@ But that won't work. Remember, arrays begin at 0 not 1 so if we have 4 items in 
 
     js farmAnimals[ farmAnimals.length - 1 ]
 
-I told you arrays were tricky! Just remember the golden rule of arrays: *Arrays begin at 0 not 1*. This is what the list of farm animals might look like with the indexes listed beside each animal:
+I told you arrays were tricky! Just remember: *Arrays begin at 0 not 1*. This is what the list of farm animals might look like with the indexes listed beside each animal:
 
     [0] 'Sheep'
     [1] 'Cow'
@@ -1433,7 +1433,7 @@ You should definitely call `greetings.random()` a couple of times to verify it r
 
 So far we've only looked at constructing arrays and getting individual items from arrays. Arrays are very powerful and there are many things you can do with them. 
 
-Once you've constructed an array you can add new items to the end of the array using a function called *push*. The *push* function is used like this to add a new item:
+Once you've constructed an array you can add new items to the end of the array using a function called *push*. The *push()* function is used like this to add a new item:
 
     /js farmAnimals.push('Horse');
 
@@ -1443,11 +1443,11 @@ Once you've constructed an array you can add new items to the end of the array u
     [1] 'Cow'
     [2] 'Pig'
     [3] 'Chicken'
-    [4] 'Horse'   <=== New item appended
+    [4] 'Horse'   <--- New item appended
 
 The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push()* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that belongs to a particular object so it can only be called using the form *object.method()*, 'object' in this case being 'farmAnimals' and 'method()' being 'push()'. We'll explore Objects more in later chapters.
 
-The *push()* function always *appends* items to the end of the array. If you want to insert an item into the array at a position other than the end, you'll need to use the *splice()* function instead. Here's how you insert a new animal into the farmAnimals array at position 2:
+The *push()* method always *appends* items to the end of the array. If you want to insert an item into the array at a position other than the end, you'll need to use the *splice()* method instead. Here's how you insert a new animal into the farmAnimals array at position 2:
 
     /js farmAnimals.splice( 2, 0, "Cat" );
     
@@ -1455,27 +1455,27 @@ This is what the array will look like after you run the above command:
 
     [0] 'Sheep'
     [1] 'Cow'
-    [2] 'Cat'     <=== New item inserted
+    [2] 'Cat'     <--- New item inserted
     [3] 'Pig'
     [4] 'Chicken'
     [5] 'Horse'
 
-You can see that the new item is inserted at position 2 and that the indexes for all of the items after position 2 have changed. 'Pig' is bumped from index 2 to index 3, 'Chicken' from index 3 to index 4 and so on. The *splice()* function lets you insert items anywhere in an array. The first parameter is the position you want to insert the items, the second parameter is how many items you want to remove - if you're only inserting items then leave this as 0, and the third and subsequent parameters are the items you want to insert. You can insert one or more items at a time:
+You can see that the new item is inserted at position 2 and that the indexes for all of the items after position 2 have changed. 'Pig' is bumped from index 2 to index 3, 'Chicken' from index 3 to index 4 and so on. The *splice()* method lets you insert items anywhere in an array. The first parameter is the position you want to insert the items, the second parameter is how many items you want to remove - if you're only inserting items then leave this as 0, and the third and subsequent parameters are the items you want to insert. You can insert one or more items at a time:
 
     /js farmAnimals.splice( 1, 0, "Ocelot", "Wolf" );
     
 This is what the array would look like after running the above command: 
 
     [0] 'Sheep'
-    [1] 'Ocelot'  <=== New items inserted
-    [2] 'Wolf'    <=== New items inserted
+    [1] 'Ocelot'  <--- New items inserted
+    [2] 'Wolf'    <--- New items inserted
     [3] 'Cow'
     [4] 'Cat'     
     [5] 'Pig'
     [6] 'Chicken'
     [7] 'Horse'
 
-Now let's say we want to remove some items from an array. The list of farm animals we've constructed so far is starting to look crowded and there are definitely some animals in that list which shouldn't be there (Wolves and farm animals don't mix). As hinted at previously, the *splice()* function can also be used to *remove* items from the array. Let's start by removing the 'Cat' item from the array:
+Now let's say we want to remove some items from an array. The list of farm animals we've constructed so far is starting to look crowded and there are definitely some animals in that list which shouldn't be there (Wolves and farm animals don't mix). As hinted at previously, the *splice()* method can also be used to *remove* items from the array. Let's start by removing the 'Cat' item from the array:
 
     /js farmAnimals.splice( 4, 1 );
 
@@ -1483,7 +1483,7 @@ The output from the above command will be an array of items removed so in your d
 
     [ "Cat" ]
 
-That's because the *splice()* function does not return the array it spliced, instead it returns the items it removed from the array. Remember, the first parameter you pass to *splice()* is the index of the item, and the second parameter is always the number of items you want to remove. If no additional parameters are provided, then splice will only remove items and not insert new items. To see what your farmAnimals array looks like now run the `/js farmAnimals` statement. Your array will look something like this in memory:
+That's because the *splice()* method does not return the array it spliced, instead it returns the items it removed from the array. Remember, the first parameter you pass to *splice()* is the index of the item, and the second parameter is always the number of items you want to remove. If no additional parameters are provided, then splice will only remove items and not insert new items. To see what your farmAnimals array looks like now run the `/js farmAnimals` statement. Your array will look something like this in memory:
 
     [0] 'Sheep'
     [1] 'Ocelot'  
@@ -1505,22 +1505,18 @@ The above statement says 'starting at index 1, remove 2 items'. The array will n
     [5] 'Chicken'
     [6] 'Horse'
 
-There are a couple of other useful Array insertion and removal functions:
-
-* unshift() Is like the push() function except it is used to **add** items at the *start* of the array.
-* shift() Is used to **remove** the *first* item from the array.
-* pop() Is used to **remove** the *last* item from the array.
-
-You can learn more about the Array object and its functions and properties at https://developer.mozilla.org/en-US/docs/Web/Javascript/Reference/Global_Objects/Array. In later chapters we'll learn how to process all of the items in an array using Javascript's looping statements.
+There are a couple of other useful Array methods:
 
 @@table array_methods.org Array Methods
 
+You can learn more about the Array object and its methods and properties at https://developer.mozilla.org/en-US/docs/Web/Javascript/Reference/Global_Objects/Array. In later chapters we'll learn how to process all of the items in an array using Javascript's looping statements.
+
 ### First steps with Events
-So we have a new module *greetings.js* with a single function *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
+So we have a new module *greetings.js* with a single function: *random()* which returns a random greeting. What we want is for every player who joins the game to be greeted with a random greeting. Let's dive right in and create a new module called *greetPlayers.js* . Important: This new *greetPlayers.js* module should be saved in the **scriptcraft/plugins** folder, *not* the scriptcraft/modules folder because we'll want this module to load automatically when the server starts up. Type the following code into your new greetPlayers.js file:
 
 @@listing greetPlayers_v2.js Greeting Players as they join the Server.
 
-Make sure to save your file then run the Javascript `refresh()` function to reload ScriptCraft (`/js refresh()` from the in-game prompt or `js refresh()` from the server prompt). Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
+Make sure to save your file then run the Javascript `refresh()` function to reload ScriptCraft using `/js refresh()` from the in-game prompt or `js refresh()` from the server prompt. Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
 
     Konnichiwa walterh
 
@@ -1528,9 +1524,9 @@ The message will of course be different for you. The screenshot below shows wher
 
 ![](images/chapter-08/screenshot-greeting.png)
 
-ScriptCraft comes bundled with a built-in variable called *events*. The *events* variable is used to listen for and react to events in the game. There are approximately 200 different types of events that you can register for in Minecraft. When you *register* for an *event* in your code you are telling the server that you want to be notified when a particular type of activity occurs in the game. You register by giving the server a function which won't be called immediately but will only be called when the activity occurs. In the code above we are basically saying to Minecraft "Hey, whenever someone joins the game, I want you (the server) to call this 'greetPlayer' function" . 
+ScriptCraft comes bundled with a built-in variable called *events*. The *events* variable is used to listen and react to events in the game. There are approximately 200 different types of events that you can register for in Minecraft. When you *register* for an *event* in your code you are telling the server that you want to be notified when a particular type of activity occurs in the game. You register by giving the server a function which won't be called immediately but will only be called when the activity occurs. In the code above we are basically saying to Minecraft "Hey, whenever someone joins the game, I want you (the server) to call this 'greetPlayer' function" . 
 
-This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding - passing functions as parameters to other functions - is called *functional programming*. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because its purpose is to handle - that is: react - to events, specifically the event which is fired by the server whenever a player joins the game. 
+This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding - passing functions as parameters to other functions - is called *functional programming*. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because its purpose is to handle events, specifically the event which is fired by the server whenever a player joins the game. 
 
 We'll look more closely at events and event-handling functions in a later chapter.
 
@@ -1540,7 +1536,7 @@ From looking at the *greetPlayers* module you can see the first thing it does is
 
 ![](images/chapter-08/encapsulation.png)
 
-The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for - what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a Javascript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
+The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* - in turn - depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for - what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a Javascript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
 
 Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
 
@@ -1549,7 +1545,7 @@ As a final fluorish to this plugin let's add something a little more spectacular
 
 @@listing greetPlayers_v3.js Greeting Players with Fireworks
 
-We'll use and explore the ScriptCraft *fireworks* module again in a later chapter. Events and event-handling functions can be used to trigger all kinds of cool new game mechanics.
+We'll use the ScriptCraft *fireworks* module again in later chapters. Events and event-handling functions can be used to trigger all kinds of cool new game mechanics.
 
 ### Achievement Unlocked!
 ![](@@nextAchievement)
@@ -3657,7 +3653,7 @@ Now reload your plugins using the */reload* command and your players are now upw
 We're almost there. We have one last feature to add to this protection plugin. We'd like players to be able to choose collaborators who are allowed build on their plots. To do this we need to:
 
 1. Add a new */jsp share* command which will let players choose one or more trusted players.
-2. Adjust the event-handling rules for block breaking and block placement to accomodate players who don't own a plot but who are trusted.
+2. Adjust the event-handling rules for block breaking and block placement to accommodate players who don't own a plot but who are trusted.
 
 Let's start with the new */jsp share* comand. Open your *claim.js* file and update it adding the following code:
 
@@ -3672,7 +3668,7 @@ If you hit the TAB key after typing '/jsp share ' (that's share followed by a SP
 ### Dynamic command options
 We already covered the topic of the *command()* function, how it can be used to add new custom commands for players to use and how it can be provided a list of possible options for TAB completion. The *command()* function can take either a static list of options (as we saw previously with the *icecream* and *chatcolor* examples in chapter @@chapter{chapter-15}) or it can take another *function* as a parameter. If the *options* parameter is a list, then that list will be used for TAB completion. If the *options* parameter is a *function* then the function will be executed and should return a list of strings to be used for TAB completion. In listing @@listref{claim-share.js} we pass the *bukkit.playerNames* function as the 2nd parameter to *command()*. This means that the *bukkit.playerNames()* function will be invoked whenever a player issues the */jsp share* command and presses SPACE followed by TAB. If you don't know ahead of time what the possible options for your custom command will be then providing a function which will return a list of possible options when the player issues the command is the way to go. In the example above, we won't know what players are online at the time the command is issued so providing a static list of player names would not work. That's why we pass the *bukkit.playerNames* function as the 2nd parameter.
 
-### Updating event-handling to accomodate trusted players.
+### Updating event-handling to accommodate trusted players.
 Next we must update our event-handling code related to protection. We want to allow players to place or break blocks if they are within a plot and they are in the plot's *.sharedWith* list. Open the *events.js* file in the *plugins/scriptcraft/plugins/protection/* folder and update it as below:
 
 @@listing events_v3.js Event-handling for Trusted Players

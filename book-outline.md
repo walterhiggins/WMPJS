@@ -2161,10 +2161,10 @@ In this chapter we learned how to loop over each item in an array using *for* lo
 
 ## @@nextChapter{chapter-12}: Building a Skyscraper
 ### Introduction
-In this chapter we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. In this chapter we'll use *for* and *while* loops combined with ScriptCraft's *Drone* functions to build large structures in Minecraft. 
+In this chapter we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. We'll use *for* and *while* loops, and ScriptCraft's *Drone* functions to build large structures in Minecraft. 
 
 ### Building using Drones
-In Minecraft Building by hand is fun but can be tedious when you want to build big structures - Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using Javascript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a Javascript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using Javascript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
+In Minecraft, building by hand is fun but can be tedious when you want to build big structures - Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using Javascript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a Javascript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using Javascript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
 
 ![Targeting a block in Minecraft](images/chapter-12/drone_target.png)
 
@@ -2179,9 +2179,9 @@ The targeted block will disappear and a column of gold blocks 1 block wide and 3
 The *box()* function is used to place blocks in the game. It takes 4 parameters:
 
 1. Material - The type of material you want the blocks to be made from.
-2. Width - How wide you want the box to extend. The box will extend from the targeted block to the right.
-3. Height - How high you want the box to extend. The box will extend from the targeted block upwards.
-4. Length - How far away you want the box to extend. The box will extend from the targeted block away from you.
+2. Width - How wide you want the box to extend. The box will extend from the targeted block, to the right.
+3. Height - How high you want the box to extend. The box will extend from the targeted block, upwards.
+4. Length - How far away you want the box to extend. The box will extend from the targeted block, away from you.
 
 The *box()* function is used to create cubes and cuboids of any size. A cube is a 3 Dimensional shape whose sides are all the same length. A cuboid is a 3 Dimensional shape whose width, height and length can differ.
 
@@ -2207,15 +2207,15 @@ If you leave out any of the width, height and length parameters they will defaul
 A Drone which didn't move about and only built on one location wouldn't be very interesting. You can direct the Drone to move about and even turn and place blocks in any direction. There are a couple of functions which you can use to move the drown along any axis.
 
 ##### Term: Axis
-When drawing on paper you draw in two dimensions. The two dimensions are Width which is along what's called the *X Axis* and Height which is along the *Y Axis*. In real life there is a 3rd dimension, Length which along the *Z Axis*. The X axis, Y axis and Z axis make up the 3 dimensions.
+When drawing on paper you draw in two dimensions. The two dimensions are: Width which is along what's called the *X Axis*, and Height which is along the *Y Axis*. In real life there is a 3rd dimension, Length which is along the *Z Axis*. The X axis, Y axis and Z axis make up the 3 dimensions.
 
 Let's get familiar with some of the movement functions by using them first at the in-game prompt. To place a block of gold then move 2 places to the right and place another block of gold, target a block then issue the following command:
 
     /js box(blocks.gold).right(2).box(blocks.gold)
 
-The statement above might look odd but it's perfectly valid Javascript. This style of calling functions one after another is called *chaining* because each `.` forms a link in a chain of function calls. You can't call *all* functions in Javascript like this but can call all of the Drone's functions this way. Another term used by programmers to describe this style of function calling is *Fluency*. As we'll see later you can extend the abilities of the Drone by adding your own functions which can be called in the same *fluent* way.
+The statement above might look odd but it's perfectly valid Javascript. This style of calling functions one after another is called *chaining* because each '.' (full stop) forms a link in a chain of function calls. You can't call *all* functions in Javascript like this but you can call all of the Drone's functions this way. Another term used by programmers to describe this style of function calling is *Fluency*. As we'll see later, you can extend the abilities of the Drone by adding your own functions which can be called in the same *fluent* way.
 
-In the above statement there are 3 different function calls being made, the first call `box(blocks.gold)` creates a gold block. The `box()` function returns a Drone object which can be used to call other Drone functions. The next call `.right(2)` moves the Drone right 2 blocks and it too returns the same Drone object. The last call `.box(blocks.gold)` creates another gold block. If we were to plot this out on graph paper it would look like this:
+In the above statement there are 3 different function calls being made, the first call - `box(blocks.gold)` - creates a gold block. The `box()` function returns a Drone object which can be used to call other Drone functions. The next call - `.right(2)` - moves the Drone right 2 blocks and it too returns the same Drone object. The last call - `.box(blocks.gold)` - creates another gold block. If we were to plot this out on graph paper it would look like this:
 
 ![Moving the Drone, Graph Paper Plot](images/chapter-12/graph-paper-movement.png)
 
@@ -2228,7 +2228,7 @@ We could also write the above code as 3 distinct statements like this:
 I personally prefer to write it using a single statement `box(blocks.gold).right(2).box(blocks.gold)` as it fits on one line and is slightly shorter than the 3 separate statements. Be careful though when writing such statements because the in-game command prompt only accepts a maximum of 100 letters for each command. 
 
 ##### The Corner Stone
-If building just above ground level it's a good idea to always place a block where you would like to build, then target that block before issuing any Drone functions. Think of the targeted block as the *Corner Stone* of your building. If building on a flat world, you will first need to manually place a corner stone block or else your building will begin in the ground instead of just above ground level.
+If building just above ground level, it's a good idea to always place a block where you would like to build, then target that block before issuing any Drone functions. Think of the targeted block as the *Corner Stone* of your building. If building on a flat world, you will first need to manually place a corner stone block or else your building will begin in the ground instead of just above ground level.
 
 ![Corner Stone](images/chapter-12/cornerstone.png)
 
@@ -2245,7 +2245,7 @@ In the digram below you can see how the pillars are constructed and in the scree
 ![Parkour Platforms](images/chapter-12/jumping-pillars.png)
 
 #### Turning your Drone
-In addition to moving, you can make your Drone change direction too. To change direction use the *turn()* function. When turning you always turn right 90 degrees. To turn around so you're facing the opposite way turn twice `turn(2)`. To turn left you need to turn right 3 times `turn(3)`. You can combine turning and movement and building in a single chained statement like this:
+In addition to moving, you can make your Drone change direction too. To change direction use the *turn()* function. When turning, you always turn right 90 degrees. To turn around so you're facing the opposite way, turn twice `turn(2)`. To turn left you need to turn right 3 times `turn(3)`. You can combine turning, movement and building in a single chained statement like this:
 
     /js box(blocks.gold,1,1,4).fwd(4).turn().box(blocks.iron,1,1,3).fwd(3).turn().box(blocks.ice,1,1,2)
 
@@ -2257,14 +2257,12 @@ And here is the result in Minecraft:
 
 ![Turning and Movement while building](images/chapter-12/turning.png)
 
-All of the Drone's functions return the Drone itself so each function can chain directly onto another. Presented below is a table of Drone functions and brief descriptions of each. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference in the Appendices.
-
-@@table drone_functions.org Drone Methods
+All of the Drone's functions return the Drone itself so each function can chain directly onto another. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference online at http://scriptcraftjs.org/api#drone-plugin.
 
 ### Blueprints
 A *Blueprint* is a technical drawing of a building. Blueprints are created by Architects when designing buildings. They are visual instructions used by the construction team to make sure they build what the Architect designed. You can think of code you write as a blueprint for the computer to execute. You are the designer of your program and the computer must use those instructions to execute it. When we talk about building in Minecraft using a Drone, your code is a blueprint the Drone uses to build. How do we create a blueprint for a Drone? A Drone blueprint is just a Javascript module. Listed below is an example blueprint for a pyramid. You can see that it's not very different from the modules we've already been writing:
 
-@@listing pyramid2.js A Blueprint for a Pyramid.
+@@listing pyramid2.js A Blueprint for a Pyramid: plugins/scriptcraft/plugins/drone/contribs/pyramid.js
 
 The listing above will let you create pyramids by simply targeting a block in the game and issuing this command at the in-game prompt:
 
@@ -2277,9 +2275,9 @@ You can what the result looks like in the screenshot below:
 We'll dive deeper into Drone blueprints in the next exercise - Blueprint basics.
 
 ### Blueprint basics
-Before designing our skyscraper let's start with something a little smaller so we can better understand the basics of adding new blueprints for building in Minecraft. We'll start with a simple structure we'll call *monolith*. It will be a large black slab 4 blocks wide X 9 blocks high X 1 block long. The *monolith* is from an old movie called '2001: A Space Oddyssey'. In the movie, astronauts discover this large black slab of stone on the moon. I use it as an example here because it can be created using a single call to Drone's *box()* method. 
+Before designing our skyscraper let's start with something a little smaller so we can better understand the basics of adding new blueprints for building in Minecraft. We'll start with a simple structure we'll call *monolith*. It will be a large black slab 4 blocks wide by 9 blocks high by 1 block long. The *monolith* is from an old movie called '2001: A Space Oddyssey'. In the movie, astronauts discover this large black slab of stone on the moon. I use it as an example here because it can be created using a single call to Drone's *box()* method. 
 
-You've seen already that the Drone has many functions for building, moving and turning and that these functions can be chained together to perform complex building operations. What you haven't yet seen is that the Drone can be extended - that is - new functions can be added to the Drone and combined with existing functions. For example: wouldn't it be cool if, once you have created a blueprint for a monolith, you could build a couple of them side by side using a single command? Well the Drone API has a function called *extend()* which lets you do just that. Once we've created the Monolith blueprint we should be able to perform any of these commands (*don't try to execute these - we haven't yet defined the monolith() function*) :
+You've seen already that the Drone has many functions for building, moving and turning and that these functions can be chained together to perform complex building operations. What you haven't yet seen is that the Drone can be extended - that is - new functions can be added to the Drone and combined with existing functions. For example: wouldn't it be cool if, once you have created a blueprint for a monolith, you could build a couple of them side by side using a single command? Well the Drone API has a function called *extend()* which lets you do just that. Once we've created the Monolith blueprint we should be able to perform any of these commands (*don't try to execute these right now - we haven't yet defined the monolith() function*) :
 
     /js monolith()
     /js monolith().fwd(4).monolith().fwd(4).monolith().fwd(4).monolith()
@@ -2297,19 +2295,23 @@ Once you've saved the file issue the `js refresh()` command to reload your plugi
 In a very short time, an imposing black Monolith will appear. Now let's take a closer look at the *monolith.js* source code...
 
 #### Modules needed for Blueprints
-The first two lines of the *monolith.js* module load both the *Drone* and *blocks* modules. You may be wondering why I required `'../drone'` and not simply `'drone'`. The `../` part means look for the drone module in the folder above this one (also known as the *parent folder*). Remember - the *monolith.js* module is saved in the *scriptcraft/plugins/drone/contrib* folder. The Drone module is located in the *scriptcraft/plugins/drone* folder so `require('../drone')` effectively says 'load the drone.js module from the parent folder scriptcraft/plugins/drone'. The `../` part of the string means this is what programmers call a *relative path*. A *relative path* is how you say that one folder is *related* to another. In this instance we're saying we want to load a module from the parent folder. 
+The first two lines of the *monolith.js* module load both the *Drone* and *blocks* modules. You may be wondering why I required `'../drone'` and not simply `'drone'`. The `../` part means look for the drone module in the folder above this one (also known as the *parent folder*). Remember - the *monolith.js* module is saved in the *scriptcraft/plugins/drone/contrib* folder. The Drone module is located in the *scriptcraft/plugins/drone* folder so `require('../drone')` effectively says 'load the drone.js module from the parent folder scriptcraft/plugins/drone'. The `../` part of the string means this is a *relative path*. A *relative path* is a file path relative to where the module is located. In this instance we're saying we want to load a module from the parent folder. 
 
 The other thing to note about the first require statement is the trailing `.Drone` just after the call to *require()*. Every call to *require()* returns a module object with zero or more properties and methods. If we're only interested in 1 of the returned object's properties or methods then we can just grab that one property using the dot-notation (adding a `.` and getting the property or method by name). The statement:
 
     var Drone = require('../drone').Drone;
 
-... is how all blueprints usually begin and access the Drone API so if you're creating a blueprint of your own you'll want to do this too.
+... is how all blueprints usually begin and access the Drone API, so if you're creating a blueprint of your own you'll want to do this too.
 
 The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
 
-The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In Javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter @@chapter{chapter-14}. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and as such has privileged access to the Drone object. 
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In Javascript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter 14. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and has privileged access to the Drone object. 
+
+    this.box( blocks.wool.black, 4, 9, 1);
 
 Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
+
+    Drone.extend( monolith );
 
 Having declared the *monolith()* function we turn it into a Drone method using the *Drone.extend()* function which takes a function and turns it into a method effectively attaching that function to itself so it can form part of a chain of calls. The Drone is extensible - it is capable of taking on new blueprints and building using those blueprints. When you add a new function to the Drone using the *extend()* method it is as if the function were an integral part of the Drone. As if by magic, the function becomes global and chainable and can be chained with any other Drone methods:
 
@@ -2318,7 +2320,7 @@ Having declared the *monolith()* function we turn it into a Drone method using t
 So now you can see how easy it is to extend the Drone to build new interesting things in Minecraft. Let's build a skyscraper!
 
 ### A Blueprint for a Skyscraper
-In this chapter we're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single Javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
+We're going to create a blueprint for a skyscraper so that you can place skyscrapers anywhere in your world with just a single Javascript function call. Let's create a new module called *skyscraper.js* and save it to the *scriptcraft/plugins/drone/contribs* folder:
 
 @@listing skyscraper_v1.js A Blueprint for a Skyscraper.
 
@@ -2326,7 +2328,7 @@ Once you've saved the file issue the `js refresh()` command to reload your plugi
 
     /js skyscraper()
 
-In a very short time, a 10 story skyscraper will appear. Pretty impressive huh? You might already be thinking of new and wonderful buildings and structures to add to Minecraft but before you start coding, let's take a close look at the skyscraper code.
+In a very short time, a 10 story skyscraper will appear. Impressive - no? You might already be thinking of new and wonderful buildings and structures to add to Minecraft but before you start coding, let's take a closer look at the skyscraper code.
 
 #### The skyscraper method
 The first few lines of the *skyscraper()* method declare a variable *i* and check to see if the *floors* parameter is set, if it isn't then a default of 10 floors will be created. Next we see the first occurrence of the *this* keyword in this method. The *.chkpt()* method - which is short for 'checkpoint' - bookmarks the drone's current location so it can return there later. It's a good idea to bookmark the drone's current location at the start of any method and to return to that location at the end of your method because - ideally - your method should only be used for building and not moving or turning the drone. You can of course turn and move the drone within your method but you should return the drone to where it was before your method was called. The *.chkpt()* and *.move()* pair of functions will respectively save a drone's location before it goes on an excursion and return to the location when the excursion is done. 
@@ -2359,14 +2361,14 @@ At the in-game prompt we are limited to a single line for our code so when chain
       .box0(blocks.glass_pane, 20, 3, 20) 
       .up(3);
 
-This is actually a single statement - notice that there's only a semicolon after the last line above. The above code could also be written on a single line but breaking up the statement as above makes the code more readable. Another alternative way of writing the above code would be as a series of statements:
+This is actually a single statement - notice that there's only a semicolon after the last line above. The above code could also be written on a single line but breaking up the statement as above makes the code more readable. The above code can also be written using multiple statements:
 
     this.box( blocks.iron, 20, 1, 20);
     this.up();
     this.box0(blocks.glass_pane, 20, 3, 20);
     this.up(3);
 
-Since each of the Drone methods returns the drone object it's possible to chain methods using the `.` character so in the example above there's strictly no need to repeatedly use the *this.* prefix after the first line. I personally prefer the former approach but it's largely a matter of personal taste. What's important is that your code is readable and understandable.
+Since each of the Drone methods returns the drone object it's possible to chain methods using the '.' character. It's largely a matter of personal taste which style you use. What's important is that your code is readable and understandable.
 
 ##### The *box0()* Method.
 The *box0()* method is another method provided by the Drone, it's similar to *box()* except it only creates 4 walls and does not fill in the 4 walls. The *box0()* method is especially useful for construction dwellings. It takes the same parameters as the *box()* method.
@@ -2377,7 +2379,7 @@ The *box0()* method is another method provided by the Drone, it's similar to *bo
 Congratulations Master Builder, You've just discovered how to build massive structures using Javascript and some Object extension magic. 
 
 ### Summary
-In this chapter you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on objects and methods and Javascript's *this* keyword and what it means when used inside a method. 
+In this chapter you learned how to build large and complex buildings in Minecraft using ScriptCraft's Drone functions. We used Javascript's *for* statement to construct a skyscraper with many floors. We touched on the topic of objects and methods, and Javascript's *this* keyword and what it means when used inside a method. 
 
 ## @@nextChapter{chapter-13}: Create a Fireworks Show
 ### Introduction

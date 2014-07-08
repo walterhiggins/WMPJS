@@ -19,7 +19,7 @@ Before we begin I better explain some of the words I'll use throughout this book
 
 ## Why I wrote this book
 
-I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my 2 kids on a shared server at our kitchen table since 2011. I work in IBM as a software developer and have been developing software for over 20 years. I took my Kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and Javascript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?". When I first looked into developing Minecraft plugins I was bewildered by the number of options available. 
+I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my 2 kids on a shared server at home since 2011. I developed software as a hobby in my teens and have been developing software professionally for over 20 years. I took my Kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and Javascript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?". When I first looked into developing Minecraft plugins I was bewildered by the number of options available. 
 
 All of the options available required you to write code in Java. Java is the programming language which Minecraft is written in. It is a fine general purpose language especially suited to developing large complex business applications. However, it is not ideal as a first language to learn. Learning Java can take some time and you need to write a lot of Java code to get things done. Even for a seasoned Java developer, the options available for modding minecraft were bewildering. That's why I came up with the idea of making modding easier by letting plugin developers use Javascript instead. 
 
@@ -2497,7 +2497,7 @@ An object in Javascript is something which can hold both data and functions. We'
 Objects are very useful in programming. Java - the language Minecraft is written in - is an *Object Oriented* language which means that in Java *everything* is an object - Players, Worlds, Blocks, Tools, Recipes and so on. Objects let you group together related *properties* and *functions*. For Example a Player:
 
 * has a food level (how much food they have)
-* has a bed (or not)
+* can have a bed
 * has an experience level 
 * can perform commands
 * can fly
@@ -2552,7 +2552,7 @@ When we create an object like this:
 
     /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
 
-this form of creating an object is known as an *object literal*. There are other ways to create objects in Javascript but in this book we'll focus on obect literals only. We can add a new key to an existing Javascript object easily:
+...this is known as an *object literal*. There are other ways to create objects in Javascript but in this book we'll focus on obect literals only. We can add a new key to an existing Javascript object easily:
 
     /js myFirstObject.toolOfChoice = 'Axe'
 
@@ -2563,7 +2563,7 @@ and you can delete a key from an object using the *delete* keyword:
 There are no rules about what keys you can add or remove from a Javascript object because Javascript does not enforce strict rules about such things. Javascript is a *dynamically typed* language which means you can create new objects on the fly and add and remove keys from them and change the key's value types while your program is running. 
 
 #### Two kinds of Objects
-When programming plugins using ScriptCraft, we have 2 different types of objects available to us. ScriptCraft uses Javascript - a special version of Javascript which is available from within any Java program. That means that from within our Javascript plugins we can not only use Javascript objects but can also access and use all of the *Java* objects available via the *Bukkit* API. Unlike Javascript, Java *does* have strict rules about what you can and cannot do with Java objects. Java is said to by *strictly typed* because it does not let you add and remove keys from Java Objects and enforces strict rules about types. For example, the *self* object which we've used for some command-prompt examples in this book is a *Java* object so while we can access the object's keys like this:
+When programming plugins using ScriptCraft, we have 2 different types of objects available to us. ScriptCraft uses a special version of Javascript which is available from within any Java program. That means that from within our Javascript plugins we can not only use Javascript objects but can also access and use all of the *Java* objects available via the *Bukkit* API. Unlike Javascript, Java *does* have strict rules about what you can and cannot do with Java objects. Java is *strictly typed* - it does not let you add or remove properties from Java Objects, and it enforces strict rules about types and variables. For example, the *self* object which we've used for some command-prompt examples in this book is a *Java* object so while we can access the object's keys like this:
 
     /js self.flying
     > false
@@ -2585,7 +2585,7 @@ In the following chapter we're going to change the *animalSounds.js* module from
 
 @@listing animalSounds_v3.js A lookup table of Animal Sounds.
 
-In the above listing we've created a new object and called it *noises* :
+In the above listing we've created a new object called *noises* :
 
     var noises = {
       cat: sounds.catMeow,
@@ -2601,18 +2601,18 @@ In the above listing we've created a new object and called it *noises* :
 There are a couple of points to note about this statement:
 
 * The statement creates a single object. Like many statements in Javascript, it can span more than one line. Having the object definition span more than one line makes the code more readable.
-* The *noises* object has the following keys: cat, chicken, cow, horse, pig, sheep, wolf. Keys are always on the left hand side in an object literal. 
-* The keys do not need to have quote marks around them but if the key contains whitespace - for example 'ender dragon' (the space between 'ender' and 'dragon' is whitespace) - then it should be enclosed in either single or double quotes. 
+* The *noises* object has the following keys: cat, chicken, cow, ender dragon, horse, pig, sheep, wolf. Keys are always on the left hand side in an object literal. 
+* The keys do not need to have quote marks around them but if the key contains whitespace - for example 'ender dragon' - then it should be enclosed in either single or double quotes. 
 * You cannot use Javascript keywords as keys in an object so the literal values *true*, *false*, *default* etc can't be used. 
 * Keys must be of type number or string. You cannot have another object as a key in an object - you can however have another object as a value in an object.
 * Values in objects *can* be of any type - even functions and other objects! When an object contains another object as a value, that value is called a nested object. We'll see an example of a nested object later.
 * Every key-value pair must be separated with a single comma `,`. Try to avoid putting an extra comma at the end of the last key-value pair. There is no comma after the last key-value pair `wolf: sounds.wolfBark` because it is not needed and some versions of Javascript will report an error if they see an extra comma just before the closing curly bracket `}`.
 
-Having created the *noises* lookup table we use it in the *onInput()* function. The first use is to check to see if the animal the player typed in is in the *noises* object. The *if* statement below...
+Having created the *noises* lookup table, we use it in the *onInput()* function to see if the animal the player typed, is in the *noises* object. The *if* statement below...
 
     if ( animal in noises ) {
 
-... checks to see if the animal is in the noises table. This *key in object* construct will lookup the object and return true if *key* is in it. If the animal is not in the lookup table the function reports it hasn't heard of that animal. If it *is* in the lookup table it gets the appropriate noise function:
+... checks to see if the animal is in the noises table. This *key in object* construct will lookup the object and return true if *key* is in it. If the animal is not in the lookup table, the function reports it hasn't heard of that animal. If it *is* in the lookup table it gets the appropriate noise function:
 
     makeNoise = noises[ animal ];
 
@@ -2627,10 +2627,10 @@ There are a couple of reasons why we should do this:
 
 * Adding new sounds is easier if we only need to change the data in the lookup table, not the code in the *onInput* function. 
 * Changing code is error prone. Every time we have to change the *onInput* function because we want to support a new sound, we run the risk of introducing errors into the code.
-* There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, would could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table meaning the function is shorter and more maintainable.
+* There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, we could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table, making the function shorter and more maintainable.
 
 ### Objects and References
-One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute Javascript statements at the in-game or server prompt, there's a special variable available. The *self* variable refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
+One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute Javascript statements at the in-game or server prompt, there's a special variable: *self* which refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
 
     /js var me = self;
 
@@ -2676,7 +2676,7 @@ Now try to run this function (while flying) by issuing the following command:
 
 Did anything happen?
 
-The reason nothing happens when you call the *drop()* function is because in this first draft of the function, we only change the boolean value passed in as a parameter. Setting the *flying* parameter to *false* has no bearing on the object because we haven't passed the object as a reference. Instead we've passed the object's *flying* property. Let's revisit the *drop()* function this time changing it so that it takes an object instead:
+The reason nothing happens when you call the *drop()* function is because in this first draft of the function, we only change the boolean value passed in as a parameter. Setting the *flying* parameter to *false* has no effect on the object because we haven't passed the object as a reference. Instead we've passed the object's *flying* property. Let's revisit the *drop()* function this time changing it so that it takes an object instead:
 
 
     /js function drop( player ) { player.flying = false; }
@@ -2691,17 +2691,17 @@ Now the *drop()* function works because we've passed a reference to the object s
 Objects in Javascript can contain *any* kind of data. Even - as previously mentioned - other objects! If you recall the Russian Doll code from chapter @@chapter{chapter-13} when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
 
     var largeDoll = {
-       size: 'large',
-       inner: {
-          size: 'Medium',
-          inner: { 
-             size: 'Small',
-             inner: {  
-                size: 'Tiny',
-		inner: null
-             }
-          }
-       }       
+        size: 'large',
+        inner: {
+            size: 'Medium',
+            inner: { 
+                size: 'Small',
+                inner: {  
+                    size: 'Tiny',
+                    inner: null
+                }
+            }
+        }       
     };
 
 This is an example of an object which has objects *nested* within it, just as a Russian Doll has other dolls inside it. In this example we have a 'Large' doll housing a 'Medium' doll housing a 'Small' doll and so on. The innermost 'Tiny' doll has an *inner* property of null meaning there's nothing inside. The above code could also be written as a series of statements each creating a distinct object like this:
@@ -2726,7 +2726,7 @@ You should see the following output on your screen:
     > Small
     > Tiny
 
-Try changing the value passed to openRussianDoll from `largeDoll` to another value and see what the output looks like.
+Try changing the value passed to openRussianDoll from `largeDoll` to `mediumDoll`, `smallDoll` or `tinyDoll` and see what happens.
 
 ### JSON
 I can't talk about Objects in Javascript without mentioning JSON. JSON is short for *Javascript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
@@ -2750,17 +2750,17 @@ In this chapter you learned how to create objects and how to access and lookup o
 
 # Part III Advanced Modding
 ## Overview
-The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for multi-player servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. The API is vast. In the following chapters we'll learn how to explore the Bukkit API using the online documentation and how to better understand the types of data provided by Bukkit.
+The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for multi-player servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. In the following chapters we'll learn how to explore the extensive Bukkit API using the online documentation, and how to better understand the types of data provided by Bukkit.
 
 ## @@nextChapter{chapter-15}: Saving Player preferences.
 ### Introduction
-In this chapter we'll learn how to load and save player preferences. We'll create a new player command which lets them choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
+In this chapter we'll learn how to load and save player preferences. We'll create a new command which lets players choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
 
 ### A day in the life of a Minecraft Plugin
 Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behaviour and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
 
 ### Chat colors
-In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key a list of colors will be displayed. We've encountered the */jsp* command before in chapter @@chapter{chapter-11}. This commmand is a prefix (something which is added at the start) for new custom commands. 
+In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key, a list of colors will be displayed. We've encountered the */jsp* command before in chapter @@chapter{chapter-11}. This commmand is a prefix (something which is added at the start) for new custom commands. 
 
 ### TAB completion for custom commands
 One of the nice things about issuing commands at the in-game or server console prompt in Minecraft is TAB completion - the ability to have the program fill in the remaining parts of a command without you having to type the entire command yourself. You can create your own custom commands which support TAB completion quite easily in Javascript. Let's create an example command at the in-game prompt which avails of TAB completion. This custom command will be called *jsp icecream* and will prompt the player to enter a flavor when the TAB key is hit. The first thing we need to do is say what the possible flavors can be. We'll do this by creating an array called *flavors*:
@@ -2791,11 +2791,11 @@ Now press the SPACE key and then press the TAB key once more and you'll see a li
 In upcoming sections we're going to create a new command which provides a list of colors as possible options that will display when the player hits the TAB key.
 
 ### Choosing Chat Color
-The color of text messages in Minecraft can be changed by using a special § symbol known as the 'Section' symbol. This symbol can't be entered in Minecraft itself, it's only used internally by Minecraft and Plugin developers. There are 16 different colors you can use for chat messages, and each color must use a special *code*. For example to say "Hello" using Yellow text, you would need to put the special code `\xa7a` in front of the message. You can try this out by issuing the following command at the in-game prompt:
+The color of text messages in Minecraft can be changed by using a special &#167; symbol known as the 'Section' symbol. This symbol can't be entered in Minecraft itself, it's only used internally by Minecraft and Plugin developers. There are 16 different colors you can use for chat messages, and each color must use a special *code*. For example to say "Hello" using Yellow text, you would need to put the special code `\xa7a` in front of the message. You can try this out by issuing the following command at the in-game prompt:
 
     /js self.sendMessage('\xa7aHello');
 
-The text `\xa7` is just another way of writing the § symbol in Javascript. The first character following `\xa7` should be a number between 0 and 9 *or* a letter in the range a through f. 
+The text `\xa7` is just another way of writing the &#167; symbol in Javascript. The first character following `\xa7` should be a number between 0 and 9 *or* a letter in the range a through f. 
 
 #### How we count
 We typically count in what's called *Base 10* which means our numbers start at 0 and go all the way up to 9. If we want to write a number bigger than 9 then we add another digit on the left. So a number 475 is:
@@ -2821,7 +2821,7 @@ Another base that's more commonly used by programmers is Hexadecimal or Base 16.
 The characters displayed in Minecraft and in other programs on your computer each have a *code* or number which the computer uses internally. The letter 'A' has the character code 65, 'B' is 66 and so on. The lowercase alphabet starts at number 97 so 'a' is character code 97, 'b' is 98 and so on. You can see a full list of characters and their codes at http://en.wikipedia.org/wiki/ISO/IEC_8859-1 .
 
 #### Text colors in Minecraft.
-The special § symbol has the character code 167 and Minecraft uses this special character at the start of a String to mean the String should be displayed in a certain color. The exact color is one of 16 possible colors listed below:
+The special &#167; symbol has the character code 167 and Minecraft uses this special character at the start of a String to mean the String should be displayed in a certain color. The exact color is one of 16 possible colors listed below:
 
 @@table textcolors.org Text Colors and their Hexadecimal equivalent http://minecraft.gamepedia.com/Formatting_codes
 
@@ -2839,7 +2839,7 @@ Once you've saved this file and reloaded the plugin using `js refresh()`, test i
 
 The module in listing @@listref{textcolors.js} exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged - no color code will be added to the text.
 
-The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special § symbol which is written as `\xa7` combine to form the color code which is prepended to the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
+The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special &#167; symbol which is written as `\xa7` combine to form the color code which is prepended to the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
 
 The next steps in writing the Chat Color plugin are:
 

@@ -2996,9 +2996,9 @@ In this chapter we learned about providing TAB-completion hints for your own cus
 
 ## @@nextChapter{chapter-16}: Add new Crafting Recipes: The Ender Bow
 ### Introduction
-All fun Minecraft Plugins begin with a simple question: What if ... ? Minecraft has become such a popular game because the possibilities are endless. For Minecraft Plugin Developers it's even more fun because the programming API allows for endless creativity in customizing the game. In this chapter we're going to use the Bukkit API to create a new Crafting Recipe - one which will produce a new in-game item - the *Ender Bow*. What's an Ender Bow? It's a bow which shoots arrows which will teleport the shooter to where ever the arrow lands! This could be a handy tool to have if you're in a tight spot surrounded by monsters on all sides and need to make a quick getaway. With Ender Bow in hand, you just draw your bow, aim at where you want to teleport and shoot. As soon as the arrow hits, you'll be teleported. 
+All fun Minecraft Plugins begin with a simple question: What if ... ? Minecraft has become such a popular game because the possibilities are endless. For Minecraft Plugin Developers it's even more fun because the programming API allows for endless creativity in customizing the game. In this chapter we're going to use the Bukkit API to create a new Crafting Recipe - one which will produce a new in-game item - the *Ender Bow*. What's an Ender Bow? It's a bow which shoots arrows that teleport the player to where ever the arrow lands! This could be a handy tool to have if you're in a tight spot surrounded by monsters on all sides and need to make a quick getaway. With Ender Bow in hand, you just draw your bow, aim at where you want to teleport and shoot. As soon as the arrow hits, you'll be teleported. 
 
-In this chapter we're going to add a new crafting recipe which will construct an *Ender Bow* and we're going to start exploring the Bukkit API in more detail and I'll explain how to go about exploring and discovering features of the API which you can use in your own plugins. We'll learn more about Java *Classes* and *Inheritance* and how these ideas help us figure out the Bukkit API's capabilities. In the follow-up chapter we'll add teleporting behaviour to the bow.
+In this chapter we're going to add a new crafting recipe which will construct an *Ender Bow*, we'll explore the Bukkit API in more detail, and I'll explain how to go about exploring and discovering features of the API which you can use in your own plugins. We'll learn about Java *Classes* and *Inheritance* and how these ideas help us figure out the Bukkit API's capabilities. In the follow-up chapter we'll add teleporting behaviour to the bow.
 
 Before we get into the 'How' of adding the new Crafting Recipe to the game, let's first consider the 'What' - what ingredients will be required for the new recipe and how we go about choosing them.
 
@@ -3014,7 +3014,7 @@ It's a good idea to base a new Crafting Recipe on an existing Recipe. Server plu
 
 For the Ender Bow recipe, we're going to base our new recipe on the existing Bow recipe but add some ingredients to give the Bow its special powers. You'll notice that for a standard Bow recipe, there are 3 empty slots in the grid. We're going to use these slots adding a new ingredient to each of the 3 empty slots to craft an Ender Bow.
 
-The ingredient we're going to add is *Ender Pearls*. These are obtained from teleporting Endermen so it makes sense they should be ingredients for an Ender Bow. You could of course choose whatever material you like. You could for example decide that an extra block of grass in the middle is all that's needed to create an Ender Bow. For players that might not make the new Item very interesting. Any new item you add to the game should be interesting both in what it does *and* how it's constructed. New items should not be *too* easy to make - especially if they're powerful like the Ender Bow. Ender Pearls are difficult enough to obtain in survival mode that they make for good ingredients for the Ender Bow. So our Ender Bow will be constructed using the following recipe:
+The ingredient we're going to add is *Ender Pearl*. These are obtained from teleporting Endermen so it makes sense they should be ingredients for an Ender Bow. You could of course choose whatever material you like. You could for example decide that an extra block of grass in the middle is all that's needed to create an Ender Bow. For players that might not make the new Item very interesting. Any new item you add to the game should be interesting both in what it does *and* how it's constructed. New items should not be *too* easy to make - especially if they're powerful like the Ender Bow. Ender Pearls are difficult to obtain in survival mode so they make for good ingredients for the Ender Bow. So our Ender Bow will be constructed using the following recipe:
 
 ![Crafting Recipe for a Bow](images/chapter-16/ender-bow-recipe-not-yet.png)
 
@@ -3028,7 +3028,7 @@ So we've answered the question of *What* we want to do, now we must ask *How* ar
 
 We'll tackle the 2nd item in the next chapter so let's look at how we add a new crafting recipe to the game. 
 
-Bukkit has been around for a few years and has a large community of developers who have been using the API and posting questions and answers on the Bukkit forums. If there's something you want to do in Bukkit, a good place to start (apart from books like the one you're holding right now of course) is by searching online. A quick search online for 'bukkit add recipe' at the time of writing yields as the first result a link to the Bukkit forums where one poster asks a question about adding custom recipes:
+Bukkit has been around for a few years and has a large community of developers who have been using the API and posting questions and answers on the Bukkit forums. If there's something you want to do in Bukkit, a good place to start is by searching online. A quick search online for 'bukkit add recipe' at the time of writing yields as the first result a link to the Bukkit forums where one poster asks a question about adding custom recipes:
 
 https://forums.bukkit.org/threads/am-having-trouble-adding-custom-recipes.102722/
 
@@ -3060,11 +3060,11 @@ One of the key differences between Java and Javascript is that Java is 'strictly
 
     String myString = "Hello World";
 
-You'll notice when browsing the Bukkit API that many methods include both the types parameters they expect and the type of data they return. For example, the Bukkit Class found in the *org.bukkit* package has an *addRecipe()* method whose method summary looks like this:
+You'll notice when browsing the Bukkit API that many methods include both the types of parameters they expect and the type of data they return. For example, the *Bukkit* Class found in the *org.bukkit* package has an *addRecipe()* method whose method summary looks like this:
 
     static boolean addRecipe(Recipe recipe)
 
-Let's look at this piece by piece. The *static* keyword means the method is really a function. It can be called without first creating a Bukkit object. The *boolean* to the left of the method name is the type of data the method returns. The *Recipe recipe* inside the round brackets says that the method takes one parameter named *recipe* of type *Recipe*. This is the conventional way that Java parameter documentation is presented. The parameter type is shown along with the parameter name. 
+Let's look at this piece by piece. The *static* keyword means the method is really a function. It can be called without first creating a *Bukkit* object. The *boolean* to the left of the method name is the type of data the method returns. The *Recipe recipe* inside the round brackets says that the method takes one parameter named *recipe* of type *Recipe*. This is the conventional way that Java methods are defined: the parameter type is shown along with the parameter name. 
 
 Every Type name in the Java documenation page is a link to more information about the Type. So if I want to find out more information about the *Recipe* Java type, I just click on that link. 
 
@@ -3115,16 +3115,16 @@ On lines 2 and 3 of listing @@listref{recipe.js} we declare 2 variables:
     var bkEnchantment = org.bukkit.enchantments.Enchantment;
     var bkShapedRecipe = org.bukkit.inventory.ShapedRecipe;
 
-The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers call this the *fully qualified name*. In Java programmers will often save themselves the need to use fully qualified names by *importing* packages. The Javascript engine which runs inside Java has an *importPackage()* function but this function is not supported in later versions of Javascript for Java. I personally like to avoid using fully qualified names throughout Javascript code which is why whenever I need to refer to a Bukkit Type I declare a short-named variable at the top of the module which refers to the longer fully-qualified name of the Bukkit Type. I also put a *bk* at the front of the variable name so I know I'm working with a Bukkit object and not a regular Javascript object. This is just a personal preference. I've found it helps me when I'm writing plugins in Javascript. It may be useful to you too.
+The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers call this the *fully qualified name*. Java programmers will often save themselves the need to use fully qualified names by *importing* packages. The Javascript engine which runs inside Java has an *importPackage()* function but this function is not supported in later versions of Javascript for Java. I personally like to avoid using fully qualified names throughout Javascript code which is why whenever I need to refer to a Bukkit Type, I declare a short-named variable at the top of the module which refers to the longer fully-qualified name of the Bukkit Type. I also put a *bk* at the front of the variable name so I know I'm working with a Bukkit object and not a regular Javascript object. This is just a personal preference. I've found it helps me when I'm writing plugins in Javascript. It may be useful to you too.
 
 ### Enchantments
-One way you can mark an item as having special powers is to add an enchantment to it. Enchanted items shimmer and glow in the game. An Ender Bow should shimmer so that the player knows they're not holding a regular bow. For most of the activities you can do in the game, there are equivalent classes and methods in the Bukkit API. For example: In the game players can *add enchantments* to *items*. If we browse the Bukki API reference we see there's an *inventory* package which has a couple of classes one of which is called *ItemStack*. An ItemStack is a collection of one or more *Items* which can be placed in one of the player's inventory slots or held in the player's hand. This *ItemStack* class has *addEnchantment()* and *addUnsafeEnchantment()* methods which we can use to add special powers to items in the game. I'll get into why I chose *addUnsafeEnchantment()* over *addEnchantment()* in a moment but first let's figure out what we want to do:
+One way you can mark an item as having special powers is to add an enchantment to it. Enchanted items shimmer and glow in the game. An Ender Bow should shimmer so that the player knows they're not holding a regular bow. For most of the activities you can do in the game, there are equivalent classes and methods in the Bukkit API. For example: In the game players can *add enchantments* to *items*. If we browse the Bukki API reference we see there's an *inventory* package which has a couple of classes one of which is called *ItemStack*. An *ItemStack* is a collection of one or more *Items* which can be placed in one of the player's inventory slots or held in the player's hand. This *ItemStack* class has *addEnchantment()* and *addUnsafeEnchantment()* methods which we can use to add special powers to items in the game. I'll get into why I chose *addUnsafeEnchantment()* over *addEnchantment()* in a moment but first let's figure out what we want to do:
 
 1. We want to *enchant* the item created from the recipe so that it shimmers and is visually distinct from a regular Bow.
-2. We're going to use a ShapedRecipe object. The ShapedRecipe constructor - that is the function which will create a new Recipe() object, takes an *Item* as a parameter - this item will in turn be created each time a player uses the recipe in the in-game crafting table.
+2. We're going to use a ShapedRecipe object. The ShapedRecipe constructor - the function which will create a new Recipe() object - takes an *Item* as a parameter - this item will in turn be created each time a player uses the recipe in the in-game crafting table.
 3. We know (from browsing the API reference) that we can add a new recipe to the game using Bukkit.addRecipe() or Server.addRecipe()
 
-The first thing we do is load ScriptCraft's *items* module. This module simplifies the creation of Java ItemStack objects. If you want to create ItemStack of 1 Bow. You call *items.bow(1)* and it will return a Java ItemStack object to which enchantments can be added. The *items* module has roughly 350 different functions - 1 for each of the materials in Minecraft. You can call each of these functions in 3 different ways. Let's take the *items.bow()* function as an example:
+The first thing we do is load ScriptCraft's *items* module. This module simplifies the creation of Java *ItemStack* objects. If you want to create an *ItemStack* of 1 Bow. You call *items.bow(1)* and it will return a Java *ItemStack* object to which enchantments can be added. The *items* module has roughly 350 different functions - 1 for each of the materials in Minecraft. You can call each of these functions in 3 different ways. Let's take the *items.bow()* function as an example:
 
 * items.bow() when called without parameters will return the value *org.bukkit.Material.BOW*. This is a *Material* object which is used throughout the Bukkit API.
 * items.bow() when called with a number as a parameter e.g. *items.bow(2)* will return an *org.bukkit.inventory.ItemStack* object of 2 Bows. The *ItemStack* type is also used throughout the Bukkit API.
@@ -3142,7 +3142,7 @@ In Javascript we can create objects using *Object Literals* like this:
 
     var myNewObject = { name: 'Ender Bow' }
 
-... but there's another way to create objects we haven't mentioned yet. The *new* keyword in Javascript can be used to create a new Javascript Ojbect. For example Javascript has a Date function which when you call it like this returns the current date and time as a String (In Java 7 for Linux the following code throws an exception but the official Javascript Specification says you should be able to call Date() as follows) :
+... but there's another way to create objects we haven't mentioned yet. The *new* keyword in Javascript can be used to create a new Javascript Object. For example Javascript has a Date function which when called like this returns the current date and time as a String (In Java 7 for Linux the following code throws an exception but the official Javascript Specification says you should be able to call Date() as follows) :
 
     var today = Date();
 
@@ -3157,7 +3157,7 @@ The *new* keyword in Javascript means the Date() function becomes a *constructor
 ... creates a new Java object of type *org.bukkit.inventory.ShapedRecipe* (remember: we declared the bkShapedRecipe variable as short-hand for *org.bukkit.inventory.ShapedRecipe*), passing the *enderBow* object as a parameter.
 
 #### The crafting Grid
-The Crafting Grid in Minecraft is what appears on screen when you right-click on a crafting table. It's essential for creating tools and weapons in the game. The Grid is 3 x 3. It consists of 3 rows each of which have 3 slots. We need to be able to define - in code - what combination of ingredients will result in a new Ender Bow. Fortunately this is relatively easy. The in-game grid can be mapped to an Array of Javascript strings which substitute each letter for a material. The following diagram shows the crafting grid with letters superimposed on each cell. 
+The Crafting Grid in Minecraft is what appears on screen when you right-click on a crafting table. It's essential for creating tools and weapons in the game. The Grid consists of 3 rows each of which have 3 slots. We need to be able to define - in code - what combination of ingredients will result in a new Ender Bow. Fortunately this is relatively easy. The in-game grid can be mapped to an Array of Javascript strings which substitute each letter for a material. The following diagram shows the crafting grid with letters superimposed on each cell. 
 
 ![Crafting Grid with material codes](images/chapter-16/gridwithletters.png)
 
@@ -3209,7 +3209,7 @@ Now we've defined the shape of the recipe we need to say what each of the letter
 ### Inheritance
 Finally, having set up the rules for the new Recipe we add it to the game using the *server.addRecipe()* method. Let's look at this method again in the online documentation:
 
-1. Go to jd.bukkit.org/rb/apidocs
+1. Go to http://jd.bukkit.org/rb/apidocs
 2. Click the *org.bukkit* link in the top left pane.
 3. Click the *Server* link in the bottom left pane.
 4. Click the *addRecipe* link in the right (main) pane.
@@ -3246,7 +3246,7 @@ From this diagram we can see that *FurnaceRecipe*, *ShapedRecipe* and *Shapeless
 Ultimately the *server.addRecipe()* method *doesn't care* what type of *Recipe* is added, *FurnaceRecipe*, *ShapedRecipe* or *ShapelessRecipe*, it doesn't matter, all the *server* object cares is that it *is* a *Recipe* object so it can call the *Recipe.getResult()* method (which is common to all 3 subclasses) when someone uses the recipe in a crafting grid. We'll revist this topic in the following Chapter.
 
 ### Summary
-In this chapter we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. in the next chapter, we'll build upon what we've done here and add Teleporting behavior to the Ender Bow.
+In this chapter we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. In the next chapter, we'll build upon what we've done here to add Teleporting behavior to the Ender Bow.
 
 ## @@nextChapter{chapter-17}: Arrows that Teleport you.
 ### Introduction

@@ -600,6 +600,13 @@ The result of this expression will be `true` . Note that I used two equals symbo
 
 Note that I didn't need to use the `var` keyword here because the 'hungerBar' variable has *already* been declared. All I'm doing is assigning the variable a new value. You should only use the `var` keyword when declaring a variable. 
 
+#### The *null* keyword
+The *null* keyword in javascript is a special object which is used by programmers to mean that there is no value. When we declare a new variable we can explicitly assign it a *null* value to make it clearer that the variable is empty:
+
+    js var hungerBar = null
+
+... this is the conventional way to declare a variable and assign it a non-value.
+
 #### Declaring multiple variables 
 
 You can use the `var` keyword to declare just one variable or you can use it to declare any number of variables in a single statement. For example, to declare 2 variables 'gameMode' and 'allowFlight', we could use two separate statements like this...
@@ -3478,7 +3485,7 @@ Another type of Griefing is when players place blocks where they shouldn't - for
 If you run the above code then try to place any block, the block you try to place will disappear. This *cancel()* event handler isn't very practical but it does illustrate an important property of many types of events - they can be cancelled. 
 
 ### How to stop listening for events.
-You'll notice that I stored the return value from  *events.blockBreak()* and *events.blockPlace()* in variables in the previous examples. When you call any of the *events* module functions, an object is returned. This object can be used to *unregister* the events listener. If you want listen for events only for a short while and then stop or stop listening when a condition occurs you can do so in one of two ways. You can call the *unregister()* method on the object returned by any of the *events* functions:
+You'll notice that I stored the return value from  *events.blockBreak()* and *events.blockPlace()* in variables in the previous examples. When you call any of the *events* module functions, an object is returned. This object can be used to *unregister* the events listener. If you want listen for events only for a short while and then stop, you can do so in one of two ways. You can call the *unregister()* method on the object returned by any of the *events* functions:
 
     var dontBreak = events.blockBreak( cancel );
     ... 
@@ -3488,7 +3495,7 @@ You'll notice that I stored the return value from  *events.blockBreak()* and *ev
 
     var protectBlocks = 5;
     function cancel( event ) {
-       if (protecBlocks > 0) { 
+       if (protectBlocks > 0) { 
           protectBlocks = protectBlocks - 1;
           event.cancelled = true;
        } else {
@@ -3506,7 +3513,7 @@ Prohibiting the placement of all blocks in the game wouldn't make for a very fun
 
 You can test this code by reloading the plugins using the */reload* or */js refresh()* commands. You'll also need to use the */deop* command to temporarily remove your operator privileges so you can verify that trying to place TNT when you're not an operator is impossible. You can re-enable your operator privileges later by running the *op* command at the server console prompt. With TNT in hand, try to place a block of TNT anywhere and the TNT will appear very briefly before disappearing. 
 
-In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be gotten either via their Java-style *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{chapter-17}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/rb/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/rb/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
+In listing @@listref{no-tnt_v1.js} we declare a new function called *noTNT* which will be called whenever a player tries to place a block in the game. The first thing the *noTNT()* function does is get the material which was placed. It gets this via the event's *blockPlaced* property. Remember from the previous chapter that properties of Java objects can be read using *get* methods - in this case the *.getBlockPlaced()* method - or using the property's name. As we learned in chapter @@chapter{chapter-17}, we can infer by the Java Bean rules that if there's a *.getBlockPlaced()* method of the *org.bukkit.event.block.BlockPlaceEvent* class (see http://jd.bukkit.org/rb/apidocs/org/bukkit/event/block/BlockPlaceEvent.html ) then there must be a property called *blockPlaced* which is of type *org.bukkit.block.Block* (see http://jd.bukkit.org/rb/apidocs/org/bukkit/block/Block.html). We can follow the same rule for the *blockPlaced* object and infer that since there's a *.getType()* method, there must be a *type* property which is the Material the block is made from. We could have written:
 
     var material = event.getBlockPlaced().getType();
 
@@ -3519,25 +3526,25 @@ Next we check to see if the player who placed the block is an operator. The Java
     boolean isOp()
     void setOp(boolean value)
 
-The *isOp()* function returns true if the sub-type is an operator (A player with administrative privileges or the Console Operator). The *setOp()* function is used to turn on or off operator privileges for the sub-type. The *isOp()* and *setOp()* pair of functions both conform to the JavaBean standard for setting and getting properties. For boolean properties, there must be an *isX()* function where *X* is some property. So we can infer that because there's an *isOp()* and *setOp()* function, there must be an *op* property which we can access directly in Javascript. The expression:
+The *isOp()* function returns true if the sub-type is an operator (A player with administrative privileges or the Console Operator). The *setOp()* function is used to enable or disable operator privileges. The *isOp()* and *setOp()* pair of functions both conform to the JavaBean standard for setting and getting properties. For boolean properties, there must be an *isX()* function where *X* is some property. So we can infer, because there's an *isOp()* and *setOp()* function, there must be an *op* property which we can access directly in Javascript. The expression:
 
     player.op
 
 ...evaluates to `true` if the player is an operator or `false` if they are not. If the player *is* an operator then we don't want to interfere with the normal course of events for placing blocks - that is - we don't want to prohibit operators from placing blocks. 
 
-Finally We use the *items* module's *tnt()* function, passing the material as a parameter to test if the material is TNT. If it is then we cancel the event.
+Finally we use the *items.tnt()* function, passing the material as a parameter to test if the material is TNT. If it is then we cancel the event.
 
 ### Prohibiting Lava
-The procedure for prevent the placement of Lava is slightly different but the principle is the same. We cancel the event if the event involves emptying Lava into the world. Lava is not a material that can be held in a player's hand, instead it's carried in a bucket and emptied from the bucket. The event we want to listen for is not the placement of blocks but the emptying of buckets. In your editor create a new file called *no-lava.js* and place it in the *plugins/scriptcraft/plugins/protection* folder and type the following code:
+The procedure for prevent the placement of Lava is slightly different but the principle is the same. We cancel the event if the event involves emptying Lava into the world. Lava is not a material that can be held in a player's hand, instead it's carried and emptied from a bucket. The event we want to listen for is not block placement, it's the bucket emptying. In your editor create a new file called *no-lava.js* and place it in the *plugins/scriptcraft/plugins/protection* folder and type the following code:
 
 @@listing no-lava_v1.js Preventing placement of Lava
 
 The code is very similar to the TNT-prohibiting code. We just listen for the Bucket Empty event instead of the Block Place event. You'll find a table of *events* functions and their corresponding event types in the appendices at the back of the book.
 
 ### Player Plots
-Preventing the placement of TNT and Lava goes some way towards creating a safe server for players to create and collaborate. As the earlier examples demonstrated, in creating a safe environment where no griefing is possible, we can easily go too far and prevent any player from placing or removing blocks. What we want instead is to make it possible to create *Plots* where players can build and collaborate with other trusted players without fear of griefing by non-trusted players. 
+Preventing the placement of TNT and Lava goes some way towards creating a safe server for players to create and collaborate. As the earlier examples demonstrated, in creating a safe environment where no griefing is possible, we can easily go too far and prevent any player from placing or removing blocks. What we want instead is to make it possible to create *Plots* where players can build and collaborate with other trusted players without fear of griefing. 
 
-In the following sections of this chapter we'll develop a set of functions that will enable operators to construct a *Safe Zone* where no one except operators can place or break blocks. Within this *Safe Zone* there will be *Plots* - small tracts of land - which can be claimed by a player and once claimed can be built on. Each *Plot* will have a surrounding path so players can amble around and between plots. We'll also need to provide some way for players to *claim* a plot of land and we'll need to keep a *registry* of players and their plots. We'll make it so players can only claim one plot.
+In the following sections of this chapter we'll develop a set of functions that will enable operators to construct a *Safe Zone* where no one - except operators - can place or break blocks. Within this *Safe Zone* there will be *Plots* - small parcels of land - which can be claimed by a player and once claimed can be built on. We'll also need to provide some way for players to *claim* a plot of land and we'll need to keep a *registry* of players and their plots. We'll make it so players can only claim one plot.
 
 ### Safe Zones
 The first step in creating a safe server is adding the ability to create Safe Zones. Outside of these safe zones it should be possible for any player to place and break blocks but inside the safe zones, only operators should be able to do so. We'll define a Safe Zone as an area of width and length and which - for the sake of simplicity - extends indefinitely up and down along the Z axis. So a Zone can be defined using just 2 points in 3D space - the bottom left corner and the top right corner.
@@ -3550,7 +3557,7 @@ A Safe Zone starts at a location in the world and extends along the X axis and Y
 2. A way to easily create safe zones - We'll add a new extension to the Drone object discussed in chapter @@chapter{chapter-12} to let us create zones without needing to work directly with Locations.
 3. A few event listeners to prohibit block placement and breaking in safe zones.
 
-The first step is to create a shared module which will be used in steps 2 and 3 above. Open your editor and create a new folder called *protection* in the *plugins/scriptcraft/modules* folder. Create a new file called *zones.js* and enter the following code:
+The first step is to create a shared module which will be used in steps 2 and 3 above. Open your editor and - if not already present - create a new folder called *protection* in the *plugins/scriptcraft/modules* folder. Create a new file called *zones.js* and enter the following code:
 
 @@listing zones_v1.js Safe Zone Management Module
 
@@ -3572,34 +3579,22 @@ Right now you can still break and place blocks within the area. The next step to
 
 @@listing events_v1.js Event-handling for Protection
 
-In the above code we listen for two events and cancel the events if the block being placed or broken is within a safe zone. If the player is an operator we return immediately as operators should be able to place and break blocks. Save these files then reload your plugins using the */reload* command, then temporarily */deop* yourself and try to place or break blocks in the safe zone you created earlier. You should not be able to do so. Once you're satisfied you can't break blocks as a non-operator player, re-enable your operator privileges by issuing the */op* command at the server console command prompt.
+In the above code we listen for two events and cancel the events if the block being placed or broken, is within a safe zone. If the player is an operator we return immediately as operators should be able to place and break blocks. Save these files then reload your plugins using the */reload* command, then temporarily */deop* yourself and try to place or break blocks in the safe zone you created earlier. You should not be able to do so. Once you're satisfied you can't break blocks as a non-operator player, re-enable your operator privileges by issuing the */op* command at the server console prompt.
 
-So far we have a way to create *Safe Zones* where non-operators can't break or place blocks. What we need to do next is provide a way to create *Player Plots* within this *Safe Zone* where players - once they've claimed a plot - can build.
+So far, we have a way to create *Safe Zones* where non-operators can't break or place blocks. What we need to do next is provide a way to create *Player Plots* within this *Safe Zone* where players - once they've claimed a plot - can build.
 
 ### Refactoring
 Before we get into the mechanics of creating, claiming and sharing player plots let's think about what a Player Plot is and how it's similar to something we've already created - Safe Zones. A Zone and a Plot are both *Regions* within the world where certain rules apply. A Region has a starting point and extends in two directions (along the X axis and the Z axis). So Zones and Plots are really just parcels (or *Regions*) of land. For any block placed or broken we'll want to test to see if the block is within a given region. There's going to be much in common between Zones and Plots so let's *refactor* the code we've alread written. *Refactoring* is the process of changing code you've already written so that it can be made more reusable. The goal of refactoring is to improve the code so we don't write the same code over and over. What we're going to do is take some of the code from the *zones.js* module we created earlier and move it into a new more reusable module called *region.js*. In your editor create a new file called *region.js* in the *plugins/scriptcraft/modules/protection/* folder and edit the file so it resembles the code in the listing below. 
 
-You'll notice the *create()* function is *very* similar to the *addZone()* function from the *zones.js* module. That's because it is the same except the statement `store.push(result);` from the *addZones()* function is not present in the *create()* function. If you want to take a shortcut, I recommend copying and pasting the body of the *addZone()* function into the *copy()* function then removing the `store.push(result);` line from the *create()* function:
+You'll notice the *create()* function is *very* similar to the *addZone()* function from the *zones.js* module. That's because it is the same except the statement `store.push(result);` from the *addZones()* function is not present in the *create()* function. If you want to take a shortcut, I recommend copying and pasting the body of the *addZone()* function into the *copy()* function then removing the `store.push(result);` line from the *create()* function. The *contains()* function can be copied directly from the *zones.js* file into the *region.js* file and requires no changes:
 
 @@listing region.js Region Management Module
 
-The *contains()* function can be copied directly from the *zones.js* file into the *region.js* file and requires no changes. Once you've saved changes to the *region.js* file edit your *zones.js* file so it looks like the listing below:
+Once you've saved changes to the *region.js* file edit your *zones.js* file so it looks like the listing below:
 
 @@listing zones_v2.js Zones using Regions
 
-The *addZone()* function is greatly simplified and the *getBoundingZones()* function has changed slightly. The statement:
-
-    if ( contains(zone, location) ){
-      result.push(zone);
-    }
-
-... changes to ...
-
-    if ( region.contains(zone, location) ){
-      result.push(zone);
-    }
-
-...since the *contains()* function now lives in the *regions* module. Now that we've completed the refactoring we're ready to begin working on Player Plots. There are a couple of things we'll want to be able to do with Player Plots:
+The *addZone()* function is greatly simplified and the *getBoundingZones()* function now calls *region.getBoundingZones()*. Now that we've completed the refactoring we're ready to begin working on Player Plots. There are a couple of things we'll want to be able to do with Player Plots:
 
 * Operators will want to be able to *Create* Plots.
 * Players will want to be able to *Claim* Plots.
@@ -3610,7 +3605,7 @@ Before we look at *Creating* plots, we'll need to create a *plots* module which 
 
 @@listing plots_v1.js Plot Management Module
 
-So far the plots module looks very like the zones module. When we add a plot though there are 3 extra properties we want to store:
+So far the plots module looks very like the zones module. When we add a plot there are 3 extra properties we want to store:
 
 1. The plot's number ( the *.number* property ) The plot number is incremented (increased by 1) every time a new plot is added. The *.plotCounter* property of the store is persisted so that even across server restarts, each plot is guaranteed to have a unique number.
 2. The name of the player who has claimed the plot ( the *.claimedBy* property). 
@@ -3645,12 +3640,12 @@ When a player successfully claims a plot of land, they're sent a message of cong
 
 @@listing events_v2.js Event-handling for Plots
 
-Now we check to see if the block being placed or broken is in a player plot and if it the plot is owned by the player - if it is, then the event proceeds as normal. If the block is within a region and that region is not owned by the player then they cannot place or break and the event is cancelled.
+Now we check to see if the block being placed or broken is in a player plot and if the plot is owned by the player - if it is, then the event proceeds as normal. If the block is within a region, and that region is not owned by the player, then the event is cancelled.
 
-So now we have a basic working protected server where operators can create safe zones and within those zones (or even outside them) create safe plots of land for claiming by players. Players build uninhibited in unsafe zones or off-plot but must claim a plot of land if they want to build without worrying about griefing. 
+So now we have a basic working protected server where operators can create safe zones and within those zones (or even outside them) create plots of land for claiming by players. Players can build uninhibited in unsafe zones but must claim a plot of land if they want to build without worrying about griefing. 
 
 ### Abandoning Plots
-The next step is to provide a way for players to *abandon* their plots so they can claim new ones. We'll do this by providing yet another new command */jsp abandon* which will cause the player who issues the command to give up any claim they have on a plot so they are free to claim a new one. Open the *claim.js* file from earlier and add the following additional code:
+The next step is to provide a way for players to *abandon* their plots so they can claim new ones. We'll do this by providing yet another new command */jsp abandon* which will cause the player who issues the command to give up any claim they have on a plot so they are free to claim a new one. Open the *plugins/scriptcraft/plugins/protection/claim.js* file from earlier and *append* the following code:
 
 @@listing claim-abandon.js The /jsp abandon Command
 
@@ -3662,7 +3657,7 @@ We're almost there. We have one last feature to add to this protection plugin. W
 1. Add a new */jsp share* command which will let players choose one or more trusted players.
 2. Adjust the event-handling rules for block breaking and block placement to accommodate players who don't own a plot but who are trusted.
 
-Let's start with the new */jsp share* command. Open your *claim.js* file and update it adding the following code:
+Let's start with the new */jsp share* command. Open your *claim.js* file and again and append the following code:
 
 @@listing claim-share.js The /jsp share Command
 
@@ -3673,10 +3668,10 @@ Save the *claim.js* file and then reload your plugins and you can now share your
 If you hit the TAB key after typing '/jsp share ' (that's share followed by a SPACE), you'll notice that a list of player names will show up as possible completions for the command.
 
 ### Dynamic command options
-We already covered the topic of the *command()* function, how it can be used to add new custom commands for players to use and how it can be provided a list of possible options for TAB completion. The *command()* function can take either a static list of options (as we saw previously with the *icecream* and *chatcolor* examples in chapter @@chapter{chapter-15}) or it can take another *function* as a parameter. If the *options* parameter is a list, then that list will be used for TAB completion. If the *options* parameter is a *function* then the function will be executed and should return a list of strings to be used for TAB completion. In listing @@listref{claim-share.js} we pass the *bukkit.playerNames* function as the 2nd parameter to *command()*. This means that the *bukkit.playerNames()* function will be invoked whenever a player issues the */jsp share* command and presses SPACE followed by TAB. If you don't know ahead of time what the possible options for your custom command will be then providing a function which will return a list of possible options when the player issues the command is the way to go. In the example above, we won't know what players are online at the time the command is issued so providing a static list of player names would not work. That's why we pass the *bukkit.playerNames* function as the 2nd parameter.
+We already covered the topic of the *command()* function, how it can be used to add new custom commands for players to use and how it can be provided a list of possible options for TAB completion. The *command()* function can take either a static list of options (as we saw previously with the *icecream* and *chatcolor* examples in chapter @@chapter{chapter-15}) or it can take another *function* as a parameter. If the *options* parameter is a list, then that list will be used for TAB completion. If the *options* parameter is a *function* then the function will be executed and should return a list of strings to be used for TAB completion. In listing @@listref{claim-share.js} we pass the *bukkit.playerNames* function as the 2nd parameter to *command()*. This means that the *bukkit.playerNames()* function will be invoked whenever a player issues the */jsp share* command and presses SPACE followed by TAB. If you can't know ahead of time, the possible options for your custom command, then providing a function which returns a list of options when the player issues the command, is the way to go. In the example above, we won't know what players are online at the time the command is issued, so providing a static list of player names would not work. That's why we pass the *bukkit.playerNames* function as the 2nd parameter.
 
 ### Updating event-handling to accommodate trusted players.
-Next we must update our event-handling code related to protection. We want to allow players to place or break blocks if they are within a plot and they are in the plot's *.sharedWith* list. Open the *events.js* file in the *plugins/scriptcraft/plugins/protection/* folder and update it as below:
+Next we must update our event-handling code related to protection. We want to allow players to place or break blocks if they are within a plot and are in the plot's *.sharedWith* list. Open the *plugins/scriptcraft/plugins/protection/events.js* file adding the new *playerIsTrusted()* function and updating the *playerCanBuild()* function as below:
 
 @@listing events_v3.js Event-handling for Trusted Players
 
@@ -3691,7 +3686,7 @@ This is what we do in the first statement of the *playerIsTrusted()* function:
 
     var playerName = '' + player.name;
 
-... declares and assigns a new Javascript variable the value of player.name. The *player* variable is a Java object so it follows that all of its String properties are *Java* Strings. Unfortunately, different versions of the Javascript engine provided with Java on different platforms each behave slightly differently when comparing Java Strings to Javascript Strings so the only way to be sure is to convert a Java String to a Javascript string if you want to compare it with another Javascript string using the `==` operator or if you want to use it with standard Javascript string-based operations.
+... declares and assigns a new Javascript variable the value of player.name. The *player* variable is a Java object so it follows that all of its String properties are *Java* Strings. Unfortunately, different versions of the Javascript engine provided with Java on different platforms, each behave slightly differently when comparing Java Strings to Javascript Strings, so the only way to be sure is to convert a Java String to a Javascript string if you want to compare it with another Javascript string using the `==` operator or if you want to use it with standard Javascript string-based operations.
 
 #### Loops within Loops
 The second thing to note about about the *playerIsTrusted()* function is its use of nested loops. A nested loop is a loop within a loop. In this case we loop through all of the plots and for each plot we loop through all of the plot's trusted players:
@@ -3709,12 +3704,12 @@ The second thing to note about about the *playerIsTrusted()* function is its use
       }
     }
 
-In the inner-most loop we use a different looping variable to the outer-most loop. The outer-most loop uses the *i* variable as an index and counter while the inner-most loop uses the *j* variable. This is very important. When you have nested loops you must be very careful not to reuse the outermost loop's index variable in the innermost loop. This is a very common mistake and one which I made myself while writing this code.
+In the inner-most loop we use a different looping variable to the outer-most loop. The outer-most loop uses the *i* variable as an index and counter while the inner-most loop uses the *j* variable. This is very important. When you have nested loops you must be very careful not to reuse the outermost loop's index variable in the innermost loop. This is a very common mistake - one which I myself made while writing this code.
 
 It's possible to have any number of nested loops but if you find yourself writing a function which has many nested loops you should consider refactoring the function so it is easier to read and understand.
 
 ### Summary
-In this chapter we walked through step by step the process of adding protection to our server. You can see from the amount of code and number of files we used that protecting servers is no easy task! However if you tackle the problem by breaking it down into smaller problems and solving each of these in turn, it becomes easier. Programming is an iterative process - we write some code, test it, make changes as we go, and gradually improve the code adding new features piece by piece until it does what we want. Throughout this chapter we revisited code we had written earlier, making gradual improvements and additions each time. This is how programming is typically done. Even the best programmers in the world don't arrive at a perfect solution first time!
+In this chapter we walked through, step by step, the process of adding protection to our server. You can see from the amount of code and number of files we used that protecting servers is no easy task! However if you tackle the problem by breaking it down into smaller problems and solving each of these in turn, it becomes easier. Programming is an iterative process - we write some code, test it, make changes as we go, and gradually improve the code adding new features piece by piece until it does what we want. Throughout this chapter we revisited code we had written earlier, making gradual improvements and additions each time. This is how programming is typically done. Even the best programmers in the world don't arrive at a perfect solution first time!
 
 While not a comprehensive protection plugin, the code we created in this chapter provides a good basis for a more fully-functional protected server plugin. There are a couple of outstanding features we'd need to address to make this plugin better, like what should happen to plots once they're abandoned? Right now there's no way for a player to tell if a plot which has buildings has been abandoned or not. Ideally there should be a sign put in place 'This plot is available' when plots have been abandoned.  That's just one of many possible improvements, I'm sure you can think of more!
 

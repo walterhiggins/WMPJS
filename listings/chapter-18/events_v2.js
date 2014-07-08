@@ -1,12 +1,20 @@
 var zones = require('protection/zones');
 var plots = require('protection/plots');
-
-function playerOwnsPlot( player, location){
+/*
+ can a player build on a location?
+*/
+function playerCanBuild( player, location ) { 
+  // for now just check if player has a plot on this location
+  return playerOwnsPlot( player, location );
+}
+/*
+ does the player own a plot of land at location?
+*/
+function playerOwnsPlot( player, location ) {
   var boundingPlots = plots.getBoundingPlots( location );
   for (var i = 0;i < boundingPlots.length; i++){
     var plot = boundingPlots[i];
     if (plot.claimedBy == player.name){
-      console.log('plot ' + plot.number + ' is owned by ' + player.name);
       return true;
     }
   }
@@ -16,7 +24,7 @@ function onPlace( event ) {
   if (event.player.op){
     return;
   }
-  if (playerOwnsPlot( event.player, event.blockPlaced.location ) ){
+  if (playerCanBuild( event.player, event.blockPlaced.location ) ){
     return;
   } 
   
@@ -27,13 +35,11 @@ function onPlace( event ) {
   }
   event.cancelled = true;
 }
-function onBreak( event ){
+function onBreak( event ) {
   if (event.player.op){
-    console.log('player is op');
     return;
   }
-  if (playerOwnsPlot( event.player, event.block.location ) ){
-    console.log('player owns plot');
+  if (playerCanBuild( event.player, event.block.location ) ){
     return;
   }
   var boundingPlots = plots.getBoundingPlots(event.block.location);

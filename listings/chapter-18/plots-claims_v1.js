@@ -11,11 +11,11 @@ function claim( player, plotNumber) {
     if (plot.number == plotNumber){
       // is the plot already claimed by another?
       if (plot.claimedBy){
-	player.sendMessage('This plot is already claimed');
-	return null;
+        player.sendMessage('This plot is already claimed');
+        return null;
       } else { 
-	plot.claimedBy = player.name;
-	return plot;
+        plot.claimedBy = player.name;
+        return plot;
       }
     }
   }

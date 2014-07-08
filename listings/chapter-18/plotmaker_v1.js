@@ -1,11 +1,11 @@
 var Drone = require('../drone/drone').Drone;
 var plots = require('protection/plots');
 function plotmaker( material, width, length ) {
-  var sx = this.getLocation();
+  var startLoc = this.getLocation();
   this.chkpt('plotmaker');
   this.box0( material ,width, 1, length);
-  var ex = this.fwd(length - 1).right(width - 1).getLocation();
-  var plot = plots.add(sx,ex);
+  var endLoc = this.fwd(length - 1).right(width - 1).getLocation();
+  var plot = plots.add(startLoc,endLoc);
   this.move('plotmaker');
   var claimMesg = [
     '#' + plot.number + ' (' + width + ' X ' + length + ')',

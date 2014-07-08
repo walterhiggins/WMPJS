@@ -14,7 +14,7 @@ function claim( params, player ){
   for (var i = 0;i < boundingPlots.length;i++){
     var plot = boundingPlots[i];
     if (!plot.claimedBy){
-      plot.claimedBy = player.name;
+      plot.claimedBy = '' + player.name; // convert from Java to JavaScript string
       player.sendMessage('Congratulations! You now own plot ' + plot.number);
       fireworks.firework( player.location );
       return;

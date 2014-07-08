@@ -2408,15 +2408,15 @@ Move back a couple of steps so you can better see the firework. Did you notice t
 The *setTimeout()* function lets you delay calling of a function. It takes two parameters:
 
 1. A function which it should eventually call.
-2. A delay. The delay is measured in milliseconds - that's 1/1000th of a second. There are 1,000 milliseconds in a second so a delay of 2,000 is equal to 2 seconds.
+2. A delay. The delay is measured in milliseconds - that's 1/1000th of a second. There are 1,000 milliseconds in a second so a delay of 2000 is equal to 2 seconds.
 
 *setTimeout()* returns a value which can be used to stop the timed function from executing. To stop a function you've scheduled to execute you need to store the value returned by setTimeout() in a variable and pass this value to the *clearTimeout()* function like this:
 
     js function later(){ console.log('I ran!') };
-    js var scheduled = setTimeout( later, 1000 );
+    js var scheduled = setTimeout( later, 30000 );
     js clearTimeout( scheduled );
 
-The *later()* function above will never get to execute because the *scheduled* task for running that function is canceled when we call *clearTimeout( scheduled )*.
+The *later()* function above won't execute because the *scheduled* task for running that function is canceled when we call *clearTimeout( scheduled )*.
 
 Although setTimeout() is not part of the Javascript Language, it is provided with web browsers and Node.js and it's implemented in ScriptCraft too. A common mistake when using *setTimeout()* is to assume that the delay is in seconds rather than milliseconds.
 
@@ -2432,7 +2432,7 @@ Then issue the `/js refresh()` command and at the in-game command prompt issue t
 Move back a couple of steps and watch the show as 5 fireworks are launched one after another. The show should end after the 5th firewok has launched. You can change the number of fireworks launched by changing the second parameter. 
 
 #### Me, a name I call myself...
-A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all of files and folders on a hard drive or drawing pretty fractal diagrams. Recursion is beyond the scope of this book so I won't go into great detail. To get a taste for what recursion is about, imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
+A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all files and folders on a disk, or drawing pretty fractal diagrams. Recursion is beyond the scope of this book so I won't go into great detail. To get a taste for what recursion is about, imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
 
     function openRussianDoll( doll ){
       console.log( doll.size );
@@ -2469,7 +2469,7 @@ The message will keep printing out for as long as the server is running. Fortuna
 
     js clearInterval( scheduled )
 
-... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following listing:
+... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following:
 
 @@listing fwkshow_v3.js Using setInterval() and clearInterval() to create a Fireworks Show.
 
@@ -2481,10 +2481,10 @@ The above statements start a firework show in which there'll be 300 launches eac
 
     /js clearTimeout( show );
 
-And the fireworks will cease. If you ever schedule tasks using the *setInterval()* or *setTimeout()* functions it's always a good idea to keep the value returned by these functions so that you have the option of canceling the task using *clearInterval()* and *clearTimeout()* respectively.
+... and the fireworks will cease. If you ever schedule tasks using the *setInterval()* or *setTimeout()* functions it's always a good idea to keep the value returned by these functions so that you have the option of canceling the task using *clearInterval()* and *clearTimeout()* respectively.
 
 ### Summary
-In this chapter you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned about how to give functions names using function declarations and how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
+In this chapter you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
 
 ## @@nextChapter{chapter-14}: Animal Sounds Revisited
 ### Introduction

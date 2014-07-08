@@ -1,5 +1,5 @@
 var fireworks = require('fireworks');
-exports.fireworkshow = function ( location, count ) {
+function fireworkshow( location, count ) {
   
   function launch( ) {
     fireworks.firework( location );
@@ -10,4 +10,6 @@ exports.fireworkshow = function ( location, count ) {
   }
   var scheduled = setInterval( launch, 2000 );
   return scheduled;
-};
+}
+
+exports.fireworkshow = fireworkshow;

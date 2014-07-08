@@ -3286,12 +3286,12 @@ You can see a list of all *events* functions in the Appendices at the back of th
 * org.bukkit.event.weather
 * org.bukkit.event.world
 
-In each of these packages you'll find dozens of event types and each event type is different. So when we register for an event using one of the *events* module's functions we can be guaranteed that when that type of event occurs in the game, our callback will be executed and will be passed as a parameter, the event that was fired.
+In each of these packages you'll find dozens of event types and each event type is different. So when we register for an event using one of the *events* module's functions we can be guaranteed that when that type of event occurs in the game, our callback will invoked with the event as a parameter.
 
 ### The events module and event packages
 The *events* module has hundreds of functions - one for each event type - and was designed to make event registration discoverable at the server or in-game prompt. If you type `events.` then press TAB at the server prompt you will see all 150 plus event registration functions. Each function lets you register for one type of event.
 
-The *events.projectileHit()* function lets you register for events of type *org.bukkit.event.entity.ProjectileHitEvent*; the *events.playerJoin()* function lets you register for events of type *org.bukkit.event.player.PlayerJoinEvent* and so on. The *events.projectileHit()*, *events.playerJoin()* and most other *events* functions are short-hand functions. The function names are *deliberately* short to save typing and to make playing with events at the command prompt easier. There's another function you should know about if you ever need to register for events which are not part of the Bukkit Standard - e.g. events provided by other plugins.
+The *events.projectileHit()* function lets you register for events of type *org.bukkit.event.entity.ProjectileHitEvent*; the *events.playerJoin()* function lets you register for events of type *org.bukkit.event.player.PlayerJoinEvent* and so on. The *events.projectileHit()*, *events.playerJoin()* and most other *events* functions are short-hand functions. The function names are *deliberately* short to save typing and to make playing with events at the command prompt easier. There's another function you should know about if you ever need to register for events which are not part of the standard Bukkit API - for example: events provided by other plugins.
 
 ### The events.on() function
 The *events.on()* function lets you register for an event of *any* type. It takes 2 parameters:
@@ -3315,12 +3315,12 @@ The third way is to use the *events.on()* function passing part of the Event Typ
 
     events.on( 'entity.ProjectileHitEvent', onProjectileHit );
 
-It doesn't really matter which of the 3 approaches you use but in the rare case you find you need to listen for events which are not part of the Bukkit standard events, you should choose method number 2 and pass the event type's fully qualified name to *events.on()*. 
+It doesn't really matter which of the 3 approaches you use but in the rare case you find you need to listen for non-standard events, you should choose the second way and pass the event type's fully qualified name to *events.on()*. 
 
 Of the 3 ways to register for events, using one of the *events* module's short-hand functions is probably the easiest.
 
 ### Types of Events and Event properties
-Once we register for an event the callback we provide will be executed whenever that event type occurs in the game. The callback is passed a parameter - the event which was fired. Typically, in your callback function you'll want to do something with the event. The event your callback receives as a parameter will usually have valuable information inside it - information you'll want to look at and use in your callback. How do we know what information is inside a given event? It's time to revisit a topic we touched on in the previous chapter - *Inheritance*.
+Once we register for an event the callback we provide will be executed whenever that event type occurs in the game. The callback is passed a parameter - the event which was fired. Typically, in your callback function you'll want to do something with the event. The event your callback receives as a parameter will usually have information you'll want to look at and use in your callback. How do we know what information is inside a given event? It's time to revisit a topic we touched on in the previous chapter - *Inheritance*.
 
 ### Digging Deeper into Inheritance
 Every event callback function takes a single argument. You can call the parameter anything you like - *event* or you can shorten it to *evt* or even just *e*. We'll want to do something with the parameter in the function callback. In the case of the Ender Bow, we'll need to get some crucial information from the event so we can teleport the player. This is where - yet again - the Bukkit API Reference documentation and the ability to browse it, is essential. 
@@ -3348,11 +3348,11 @@ The pieces of information which are useful here are the *Superinterfaces* - that
 
 ![Projectile Inheritance](images/chapter-17/projectile-inheritance.png)
 
-The *Superinterfaces* and *Subinterfaces* are important when browsing the Bukkit API types because they tell us about the type's *Ancestry*. The *ancestry* of a type is important because anything a Type's parent Type can do, the Type can do too. The same goes for the Type's children , they *inherit* the properties and methods of the type. From this you can infer that because the *Projectile* type has a method called *getShooter()*, then the *Arrow*, *Egg* and other other sub-types also have this *getShooter()* method. 
+The *Superinterfaces* and *Subinterfaces* are important when browsing the Bukkit API types because they tell us about the type's *Ancestry*. The *ancestry* of a type is important because anything a Type's parent can do, the Type can do too. The same goes for the Type's children , they *inherit* the properties and methods of the type. From this you can infer that because the *Projectile* type has a method called *getShooter()*, then the *Arrow*, *Egg* and other other sub-types also have this *getShooter()* method. 
 
 If we look at the *Projectile* type's *parent type* - *Entity*, listed under *All Superinterfaces* - we'll find a treasure trove of useful properties and methods. For example, we can find out where the projectile  is by calling the parent type's *.getLocation()* method. We can also *remove* the projectile by calling the parent type's *.remove()* method. Note that neither the *.getLocation()* method nor the *.remove()* method appear on the information page for the *Projectile* type. You need to click on the Projectile Type's parent link *Entity* to see all these super useful methods. Remember, because Projectile is a *child* or sub-type of the *Entity* type, it *inherits* or has all of these properties and methods too! That's the power of Inheritance in Java and it's useful to keep this rule in mind when browsing the Bukkit API Reference. Anything the *Parent Type* can do, the *Type* can do too! So anything an Entity can do, the Projectile can do too! 
 
-If you browse around the Bukkit API and find a type (like *Projectile*) which only appears to have a handful of methods, look at the ancestry - visit the parent-type links under *extends* or *Superinterface*. If you don't find what you're looking for there, look at the parent type's parent type and so on. There are lots of useful properties and methods in the Bukkit API but it's often a matter of knowing where and how to look for them. Understanding *Inheritance* helps you dig deeper into the Bukkit API Documentation.
+If you browse around the Bukkit API and find a type (like *Projectile*) which only appears to have a handful of methods, look at the ancestry - visit the parent-type links under *extends* or *Superinterface*. If you don't find what you're looking for there, look at the parent's parent and so on. There are lots of useful properties and methods in the Bukkit API but it's often a matter of knowing where and how to look for them. Understanding *Inheritance* helps you dig deeper into the Bukkit API Documentation.
 
 ### The Code
 We're going to put what we learned about inheritance to use in the following code which will add teleporting behavior to arrows fired by the Ender Bow. Launch your programming editor and create a new file called *arrow.js* in the *enderbow* folder you created in the previous chapter, then enter the following code:
@@ -3370,7 +3370,7 @@ The *onArrowHit()* function is a callback which will be executed by the server w
 3. Get the shooter's item held - the thing the shooter is currently holding.
 4. Check if the item held is an Ender Bow and if it is teleport the player.
 
-Like all event-handling callback functions it takes a single parameter: *event*. We know that, because we'll register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/rb/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
+Like all event-handling callback functions, *onArrowHit()* takes a single parameter: *event*. Because we register using the *events.projectileHit()* function, this *event* will be of type *org.bukkit.event.entity.ProjectileHitEvent* and if we browse the online reference at http://jd.bukkit.org/rb/apidocs/ we'll see there's a *.getEntity()* method which returns the *Projectile* for this event. For the rest of this function every piece of information we need can be obtained via the *Projectile* object.
 
 We test to see if the *projectile* variable is of type bkArrow and if it is we return - this function is only concerned with Arrows, not Eggs or Snowballs. 
 
@@ -3401,14 +3401,14 @@ The *instanceof* operator lets us test a generic type against a specific type. N
     /js self instanceof org.bukkit.entity.LivingEntity
     > "true"
 
-Since a player is an instance of both types, AnimalTamer and LivingEntity. The *instanceof* operator is most commonly used to narrow down an object to a specific type so that we can be confident that we can call methods for that type without exceptions being thrown. If for example you wanted to be sure that a given object was an actual Player and not just any LivingEntity (all creatures and villagers are also of type LivingEntity) you would do so by testing like so:
+... because a player is an instance of both types, AnimalTamer and LivingEntity. The *instanceof* operator is most commonly used to narrow down an object to a specific type so we can be confident that we can call methods for that type without exceptions being thrown. For example: if you wanted to be sure that a given object was an actual Player and not just any LivingEntity (all creatures and villagers are also of type LivingEntity) you would do so by testing like so:
 
     /js self instanceof org.bukkit.entity.Player
 
 The *org.bukkit.entity* package is where you'll find all of the entity types. The *instanceof* operator can be used for testing *any* type of object in Java or Javascript.
 
 ### Java Beans
-The type of functions we used to get information about the event, projectile and shooter in listing @@listref{arrow_v1.js} are called *getters*. They're called *getters* because they each *get* some property of the object they're called for; `event.getEntity()` gets the event's entity property, `projectile.getShooter()` gets the projectile's shooter property and so on. As you can probably guess there's also a family of functions called *setters* - that is - functions whose job is to *set* the property for an object. For example you can get your current food level using the *.getFoodLevel()* method:
+The type of functions we used to get information about the event, projectile and shooter in listing @@listref{arrow_v1.js} are called *getters*. They're called *getters* because they each *get* some property of the object they're called for; `event.getEntity()` gets the event's entity property, `projectile.getShooter()` gets the projectile's shooter property and so on. As you can probably guess there's also a family of functions called *setters* - that is - functions whose job is to *set* the property for an object. For example you can *get* your current food level using the *.getFoodLevel()* method:
 
     /js self.getFoodLevel()
 
@@ -3416,7 +3416,7 @@ The type of functions we used to get information about the event, projectile and
 
     /js self.setFoodLevel(20)
 
-Java classes which use the convention of having *getters* and *setters* methods to get and set properties are knows as **Java Beans**. Javascript enables you to treat getter and setter methods in JavaBeans as equivalent Javascript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowecase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
+Java classes which use the convention of having *getters* and *setters* methods to get and set properties are known as **Java Beans**. Javascript enables you to treat getter and setter methods in JavaBeans as equivalent Javascript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowecase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
 
     /js self.foodLevel
     > "17"
@@ -3449,7 +3449,7 @@ I wrote it like this so I could create a short callback function at the in-game 
       shooter.sendMessage('ouch!');
     } 
 
-The one-line version of the code avoids the need to create new variables for the entity and the shooter but is probably more readable - especially for beginning programmers. Once again, whichever style you use is up to you. You should experiment with different styles as you become more adept and comfortable writing Javascript code.
+The one-line version of the code avoids the need to create new variables for the entity and the shooter but is probably less readable - especially for beginning programmers. Once again, whichever style you use is up to you. You should experiment with different styles as you become more adept and comfortable writing Javascript code.
 
 ### Summary
 In this chapter we completed all of the code needed to add a Teleporting Ender Bow to the game and learned more about Inheritance and how to use it when browsing the Bukkit API reference.

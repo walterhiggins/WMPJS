@@ -19,8 +19,8 @@ function snowball( params, sender ){
   for ( i = 0; i < arenas.length; i++ ) {
     arena = arenas[i];
     if ( region.contains( arena.redZone, sender.location) 
-	|| region.contains( arena.blueZone, sender.location) 
-	|| region.contains( arena.yellowZone, sender.location) ) {
+        || region.contains( arena.blueZone, sender.location) 
+        || region.contains( arena.yellowZone, sender.location) ) {
       // game on!
       gameOn = true;
       break;
@@ -46,9 +46,9 @@ function snowball( params, sender ){
     } 
     if ( inZone ) {
       spawns.push( {
-	participant: player,
-	oldLocation: player.location,
-	newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+        participant: player,
+        oldLocation: player.location,
+        newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
       } );
     }
   }

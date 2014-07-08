@@ -21,7 +21,10 @@ function SnowballFight( duration, teams ) {
     for ( i = 0; i < playerCount; i++ ) {
       var playerName = players[i].name;
       teamName = teamNames[ i % playerCount ];
-      teams[ teamName ] = [playerName];
+      if (teams[ teamName ] == undefined){
+	teams[ teamName ] = [];
+      }
+      teams[ teamName ].push(playerName);
     }
   }
   game = {

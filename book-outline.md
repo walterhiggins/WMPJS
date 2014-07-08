@@ -2552,7 +2552,7 @@ When we create an object like this:
 
     /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
 
-...this is known as an *object literal*. There are other ways to create objects in Javascript but in this book we'll focus on obect literals only. We can add a new key to an existing Javascript object easily:
+...this is known as an *object literal*. There are other ways to create objects in Javascript but in this book we'll focus on object literals only. We can add a new key to an existing Javascript object easily:
 
     /js myFirstObject.toolOfChoice = 'Axe'
 
@@ -2636,7 +2636,7 @@ One thing to note about objects and variables is that when we assign a new varia
 
 Does not create a clone of the player. It merely adds a new Javascript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
 
-![Obects and References: Player](images/chapter-14/objects_player.png)
+![Objects and References: Player](images/chapter-14/objects_player.png)
 
 If I have more than one variable that refers to the same object then I can control or change that object through any of the variables that refer to it (also known as references). What this means is that if I have 3 variables *self*, *me* and *walter* all of which refer to the same player, I can make that player shoot an arrow by using any of the following statements:
 
@@ -2661,7 +2661,7 @@ This is an important point to remember when passing around variables which refer
 
 When you change the *player* object or call any of its methods, the changes are reflected in all of the variables which refer to the object.
 
-### Obects as Parameters
+### Objects as Parameters
 In Javascript, when you pass an object as a parameter to a function, the object is passed *by reference*. This means a reference to the original object is passed, not a copy of the object. To illustrate this, let's imagine we have a function which will force a player to drop to the ground if they are currently flying. If a player is flying, we can disable flight by setting the player's *.flying* property to false. Try this yourself at the in-game prompt. Make your gamemode creative by issuing the `/gamemode creative` command then press the SPACE bar twice to start flying. While in mid-air issue the following command:
 
     /js self.flying = false;
@@ -2729,7 +2729,7 @@ You should see the following output on your screen:
 Try changing the value passed to openRussianDoll from `largeDoll` to `mediumDoll`, `smallDoll` or `tinyDoll` and see what happens.
 
 ### JSON
-I can't talk about Objects in Javascript without mentioning JSON. JSON is short for *Javascript Object Notation* and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
+I can't talk about Objects in Javascript without mentioning JSON. JSON is short for **J**ava**S**cript **O**bject **N**otation and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
 
     var steve = { "name": "steve", "occupation": "miner" }
 
@@ -2879,7 +2879,7 @@ The first section of listing @@listref{chatcolor_v1.js} up to and including the 
     }
     events.asyncPlayerChat( onChat );
 
-The *onChat()* function is another callback function. This function is invoked whenever a player chats in the game. The function gets the player who is chatting, checks to see if they have a prefered color and if they *do* have a prefered color, changes the event's message property (the .message property of the event is the text of the message which the player is about to send) by adding the player's chosen color using the super useful *textcolors.colorize()* function we wrote earlier.
+The *onChat()* function is another callback function. This function is invoked whenever a player chats in the game. The function gets the player who is chatting, checks to see if they have a prefered color and if they *do* have a prefered color, changes the event's message property (the .message property of the event is the text of the message which the player is about to send) by adding the player's chosen color using the *textcolors.colorize()* function we wrote earlier.
 
 Once you've saved the *chatcolor.js* file, reload the plugins using */js refresh()* or */reload* and at the in-game prompt type:
 
@@ -2894,7 +2894,7 @@ What happens if you issue the `/reload` command?
 Right now, our plugin does not save the chat color preferences so when the plugin is reloaded or the server shuts down, the color preferences for each player are lost. The player's chat colors will revert to the default color. It would be nice if it was possible to load and save preferences for our plugin so color preferences weren't lost when the server stops. Not only is it possible, it's super easy too!
 
 ### Plugin Data
-For any Minecraft Javascript Plugin we want to be able to load plugin data when the plugin code is loaded and automatically save plugin data when the plugin coded is unloaded. That way we can be sure that plugin-specific data is never lost when the server is shut down. Let's look first at loading data.
+For any Minecraft Javascript Plugin we want to be able to load plugin data when the plugin is loaded and automatically save plugin data when the plugin coded is unloaded. That way we can be sure that plugin-specific data is never lost when the server is shut down. Let's look first at loading data.
 
 #### Loading Plugin Data
 Scriptcraft provides a *persist()* function which handles saving and loading of data. Let's take a look at the *chatcolor.js* file again. The only data in that file we'd like to *persist* is the *preferences* object declared near the top of the file and assigned a value of `{ }` which means it is an empty object. 
@@ -2925,8 +2925,8 @@ The *persist()* function takes up to 3 parameters but only the first parameter i
 
 The *persist()* function returns an object which will be either of two things:
 
-1. The data loaded from the file if the file exists merged with the data provided in the 2nd parameter or... 
-2. The data in the second parameter if the file does not yet exist.
+1. If the file exists: data loaded from the file merged with the data provided in the 2nd parameter or... 
+2. If the file does not exist: The data in the 2nd parameter.
 
 The statement `var preferences = persist('chatcolor-prefs', { } )` in plain english says: Set the preferences variable to whatever's in the 'chatcolor_prefs' file or an empty object if there's no file.
 
@@ -2962,7 +2962,7 @@ ScriptCraft saves plugin data in the *plugins/scriptcraft/data* folder. If you o
       "walterh": "blue"
     }
 
-The *.json* at the end of the filename means this is a JSON file. JSON remember is short for Javascript Obect Notation and is just a way to load, store and send Javascript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for Javascript to store and load data. 
+The *.json* at the end of the filename means this is a JSON file. JSON is short for **J**ava**S**cript **O**bject **N**otation and is just a way to load, store and send Javascript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for Javascript to store and load data. 
 
 #### More on JSON
 When we create a new object in Javascript with name and value pairs we can do so like this:
@@ -2977,7 +2977,7 @@ That is; we can do so with or without quotes around the *name* property. However
 
     { "name": "steve" }
 	
-... adding double-quotes around each of the object's keys. This is just a standard JSON uses. The builti-in JSON module has 2 important functions which are used by ScriptCraft's *persist()* function:
+... adding double-quotes around each of the object's keys. The built-in JSON module has 2 important functions which are used by ScriptCraft's *persist()* function:
 
 1. JSON.parse(string) Takes a string and tries to convert it to a Javascript object. For example: `JSON.parse("[9,5,3]")` will take the string "[9,5,3]" and return an array with 3 items: 9, 5 and 3.
 2. JSON.stringify(object) Does the opposite of JSON.parse(). It takes a Javascript object and converts it to a string so for example: `JSON.stringify([ 9, 5, 3])` takes an array and returns a string "[9,5,3]".
@@ -2985,14 +2985,14 @@ That is; we can do so with or without quotes around the *name* property. However
 If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
 
 ### JSON, Persistence and Java Objects
-If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses the popular JSON module's *stringify()* and *parse()* functions to save and load data and these functions *only work with native Javascript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
+If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses JSON's *stringify()* and *parse()* functions to save and load data, and these functions *only work with native Javascript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
 
     var utils = require('utils');
     var locationAsJSON = utils.locationToJSON( player.location ); // convert from Java to JSON
     var locationObject = utils.locationFromJSON ( locationAsJSON ); // convert from JSON to Java
 
 ### Summary
-In this chapter you learned about providing TAB-completion hints for your own custom commands and you learned about persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
+In this chapter we learned about providing TAB-completion hints for your own custom commands, and persistence - saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
 
 ## @@nextChapter{chapter-16}: Add new Crafting Recipes: The Ender Bow
 ### Introduction

@@ -6,22 +6,22 @@ This book is for anyone who is curious about Programming and creating Minecraft 
 
 ## Introduction
 
-This book shows you how to create your own Minecraft Server Plugins using JavaScript. There's often confusion about the words 'Mod' and 'Plugin'. For the purpose of this book, they mean the same thing. Mojang - the makers of Minecraft - prefer to use the term 'Plugin API' rather than 'Modding API' when refering to their forthcoming official API which will make extending Minecraft easier.
+This book shows you how to create your own Minecraft Server Plugins using JavaScript. There's often confusion about the words 'Mod' and 'Plugin'. For the purpose of this book, they mean the same thing. Mojang - the makers of Minecraft - prefer to use the term 'Plugin API' rather than 'Modding API' when referring to their forthcoming official API which will make extending Minecraft easier.
 
 Before we begin I better explain some of the words I'll use throughout this book. 
 
  * Plugin - A modification you add to Minecraft which changes the game in some way. The plugin is usually in the form of one or more files.
- * Mod - Mod is short for Modification. In this book, Plugin and Mod are used interchangebly (they mean the same thing).
+ * Mod - Mod is short for Modification. In this book, Plugin and Mod are used interchangeably (they mean the same thing).
  * Modding - The practice of writing modifications or plugins for Minecraft. Modding requires some programming knowledge which we will learn in this book.
- * API - API is short for Application Programming Interface - an official way to write Minecraft Plugins using a guide. Players and regular users of software don't need to care about APIs but they are essential for programmers, because they make it easier to develop plugins. An API is like a list of Recipes - you probably crafted your first pick-axe by refering to an online guide - how much more difficult would it be to have tried creating one without knowing where all the materials should go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API we will use in this book is the Bukkit API. We'll learn more about this later.
- * Multiplayer - The mode of playing minecraft with other players all connected to the same server.
- * Server - A computer which is running the minecraft server software. In this book I will show you how to setup and run your own minecraft server.
+ * API - API is short for Application Programming Interface - an official way to write Minecraft Plugins using a guide. Players and regular users of software don't need to care about APIs but they are essential for programmers, because they make it easier to develop plugins. An API is like a list of Recipes - you probably crafted your first pick-axe by referring to an online guide - how much more difficult would it be to have tried creating one without knowing where all the materials should go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API we will use in this book is the Bukkit API. We'll learn more about this later.
+ * Multiplayer - The mode of playing Minecraft with other players all connected to the same server.
+ * Server - A computer which is running the Minecraft server software. In this book I will show you how to setup and run your own Minecraft server.
 
 ## Why I wrote this book
 
 I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my 2 kids on a shared server at home since 2011. I developed software as a hobby in my teens and have been developing software professionally for over 20 years. I took my Kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and JavaScript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?". When I first looked into developing Minecraft plugins I was bewildered by the number of options available. 
 
-All of the options available required you to write code in Java. Java is the programming language which Minecraft is written in. It is a fine general purpose language especially suited to developing large complex business applications. However, it is not ideal as a first language to learn. Learning Java can take some time and you need to write a lot of Java code to get things done. Even for a seasoned Java developer, the options available for modding minecraft were bewildering. That's why I came up with the idea of making modding easier by letting plugin developers use JavaScript instead. 
+All of the options available required you to write code in Java. Java is the programming language which Minecraft is written in. It is a fine general purpose language especially suited to developing large complex business applications. However, it is not ideal as a first language to learn. Learning Java can take some time and you need to write a lot of Java code to get things done. Even for a seasoned Java developer, the options available for modding Minecraft were bewildering. That's why I came up with the idea of making modding easier by letting plugin developers use JavaScript instead. 
 
 In late 2012 I launched ScriptCraft - a way of writing Minecraft plugins using JavaScript, a much simpler language than Java.  
 
@@ -57,7 +57,7 @@ When I created ScriptCraft in 2012 there was no one true way to write Minecraft 
 ![](images/Crafting_Table.png "")
 
 ## Overview
-Welcome to the exciting world of Minecraft Plugin Development. In this first section of the book I'll introduce you to the tools you'll need to start programming. In Minecraft, you need to first create a Workbench (also sometimes called a Crafting Table) before you can craft more sophisticated tools. So too in real life we'll need to first gather some resources and setup a work area where we can create sophisticated minecraft plugins. This first section describes the resources you'll need, how to get them and how to setup your 'modding workbench'. All of the resource you'll need are freely available online. The ingredients you'll need to construct your modding workbench are:
+Welcome to the exciting world of Minecraft Plugin Development. In this first section of the book I'll introduce you to the tools you'll need to start programming. In Minecraft, you need to first create a Workbench (also sometimes called a Crafting Table) before you can craft more sophisticated tools. So too in real life we'll need to first gather some resources and setup a work area where we can create sophisticated Minecraft plugins. This first section describes the resources you'll need, how to get them and how to setup your 'modding workbench'. All of the resource you'll need are freely available online. The ingredients you'll need to construct your modding workbench are:
 
  * CraftBukkit - A freely-available open-source Minecraft Server.
  * ScriptCraft - A Plugin for CraftBukkit.
@@ -69,12 +69,12 @@ The following chapters will show you how to install and setup each of the above.
 ### Introduction
 I began playing Minecraft in 2010 in Single Player mode. It was fun and a relaxing way to pass the time. Later I installed the Minecraft Server software on one of the computers on our kitchen table. My youngest son Sean had just finished his homework so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter Kate joined in and we began some serious building together. Building in Minecraft is much more fun with others. 
 
-![](images/chapter-01/Client_Server_Kids.png "multiplayer Minecraft")
+![](images/chapter-01/Client_Server_Kids.png "Multiplayer Minecraft")
 
-When You play Minecraft in multiplayer mode, chatting, building and mining with other players, you do so on a Minecraft *Server*. The Minecraft Server is just a computer program (like Minecraft Client, Microsoft Word or Internet Explorer) which provides a shared virtual place for minecraft players to connect, build and chat. You don't need to buy any special type of computer to run a Minecraft Server. You can run one on your laptop computer - assuming it's not too old. Minecraft server software won't run on an iPad, Android Tablet or phone. It only runs on Windows, Macintosh or Linux computers. 
+When You play Minecraft in Multiplayer mode, chatting, building and mining with other players, you do so on a Minecraft *Server*. The Minecraft Server is just a computer program (like Minecraft Client, Microsoft Word or Internet Explorer) which provides a shared virtual place for Minecraft players to connect, build and chat. You don't need to buy any special type of computer to run a Minecraft Server. You can run one on your laptop computer - assuming it's not too old. Minecraft server software won't run on an iPad, Android Tablet or phone. It only runs on Windows, Macintosh or Linux computers. 
 
 ### Client Server Networking
-Minecraft multiplayer is "Client-Server". That means that one or more "client" computers - computers running the minecraft game - can connect to a central "server" - a computer which is responsible for storing all of the Minecraft World information so that players can play together in the same world. The following diagram shows a simple Client/Server network with just one client (Player) connected to a Server.
+Minecraft Multiplayer is "Client-Server". That means that one or more "client" computers - computers running the Minecraft game - can connect to a central "server" - a computer which is responsible for storing all of the Minecraft World information so that players can play together in the same world. The following diagram shows a simple Client/Server network with just one client (Player) connected to a Server.
 
 ![A Simple client server network](images/chapter-01/Client_Server1.png "A simple client server network")
 
@@ -88,24 +88,24 @@ You'll notice that in the above diagrams, the server is shown as separate comput
 
 ![Client And Server](images/chapter-01/Client_Server_Combined.png "A computer which is both a client and a server")
 
-When you play Minecraft in multiplayer mode, before you can connect to a server you have to enter the Server details into the game. The Server details are a 'hostname' or an 'IP Address', either one of these provides a way for Minecraft Client (the game) to connect to a computer running the Minecraft Server. The 'hostname' or 'IP Adress' are how computers uniquely identify one another on the internet, much like how we identify each other by name and/or address. When you run Minecraft Server on your own computer, you will use a special hostname called `localhost` or IP address `127.0.0.1`. I'll talk more about these in the following sections.
+When you play Minecraft in Multiplayer mode, before you can connect to a server you have to enter the Server details into the game. The Server details are a 'hostname' or an 'IP Address', either one of these provides a way for Minecraft Client (the game) to connect to a computer running the Minecraft Server. The 'hostname' or 'IP Address' are how computers uniquely identify one another on the Internet, much like how we identify each other by name and/or address. When you run Minecraft Server on your own computer, you will use a special hostname called `localhost` or IP address `127.0.0.1`. I'll talk more about these in the following sections.
 
 Anyone can run a server. In the following sections I'll show you how to setup and run your own Minecraft server.
 
 ### Why run your own server?
 
-Why should you run your own server? Running your own server means you have total control over the Minecraft world you want to create and share with your friends. You can decide what type of server and world you and your friends will play in; what server plugins to install, what rules will govern the server and world, and who can and cannot join the server. As a server 'operator' you will have access to commands that normal players don't. You can control the weather using Minecraft commands, start and stop thunderstorms, even change the time of day. You can also install popular Minecraft Server mods like HungerGames and MobArena. The real power of running your own server comes when you add ScriptCraft which makes it easier to create your own Minecraft Server Plugins. If you have an idea for a new Minecraft mod or would like to do something which current Mods don't support, you can create your own mod and test it on your own server. 
+Why should you run your own server? Running your own server means you have total control over the Minecraft world you want to create and share with your friends. You can decide what type of server and world you and your friends will play in; what server plugins to install, what rules will govern the server and world, and who can and cannot join the server. As a server 'operator' you will have access to commands that normal players don't. You can control the weather using Minecraft commands, start and stop thunderstorms, even change the time of day. You can also install popular Minecraft Server mods like Hunger Games and MobArena. The real power of running your own server comes when you add ScriptCraft which makes it easier to create your own Minecraft Server Plugins. If you have an idea for a new Minecraft mod or would like to do something which current Mods don't support, you can create your own mod and test it on your own server. 
 
 Running your own server is essential for plugin development. Minecraft Server Plugin developers run their own servers because they need to be able to test their creations before releasing them into the wild for others to use. No serious Modder would consider releasing a plugin which they hadn't first tested on their own private servers. 
 
 ### Which Minecraft Server Software should I use?
 
-There are a couple of different flavors of Minecraft Server. Mojang provide their own server software which can be downloaded from the Minecraft.net website. This was the very first server software released for Minecraft. This is often refered to as 'Vanilla' Minecraft Server. At the time of writing it doesn't provide any way to add plugins although this will probably change once Mojang release an official Plugin API. The Minecraft Server provided by Mojang is fine if you want to run a server with no modifications. The problems with running such a server are that there's no reliable way to protect against 'griefing'. 
+There are a couple of different flavors of Minecraft Server. Mojang provide their own server software which can be downloaded from the Minecraft.net website. This was the very first server software released for Minecraft. This is often referred to as 'Vanilla' Minecraft Server. At the time of writing it doesn't provide any way to add plugins although this will probably change once Mojang release an official Plugin API. The Minecraft Server provided by Mojang is fine if you want to run a server with no modifications. The problems with running such a server are that there's no reliable way to protect against 'griefing'. 
 
 #### Term: Griefing 
-Griefing is when a player in a multiplayer video game deliberately irritates and harasses other players within the game, using aspects of the game in unintended ways. A griefer enjoys annoying other users by destroying other player's work, cursing and harrassing players and server administrators.
+Griefing is when a player in a Multiplayer video game deliberately irritates and harasses other players within the game, using aspects of the game in unintended ways. A griefer enjoys annoying other users by destroying other player's work, cursing and harassing players and server administrators.
 
-The standard (Vanilla) Minecraft Server has only limited ways to protect against griefing. Because of this other more popular Minecraft Server Software arose - Server software which allowed server administrators to more stricty control who could and could not join the server, and enforce penalties and bans on players who misbehaved. Popular alternatives such as CraftBukkit - which we'll use in this book - let administrators add any number of anti-griefing plugins to make the server as safe, secure and player-friendly as possible.
+The standard (Vanilla) Minecraft Server has only limited ways to protect against griefing. Because of this other more popular Minecraft Server Software arose - Server software which allowed server administrators to more strictly control who could and could not join the server, and enforce penalties and bans on players who misbehaved. Popular alternatives such as CraftBukkit - which we'll use in this book - let administrators add any number of anti-griefing plugins to make the server as safe, secure and player-friendly as possible.
 
 ### CraftBukkit
 
@@ -113,15 +113,15 @@ The standard (Vanilla) Minecraft Server has only limited ways to protect against
 >
 > [http://dl.bukkit.org/](http://dl.bukkit.org/)
 
-CraftBukkit has become the most popular Minecraft Server Software with a thriving community of Plugin developers. In 2012 Mojang hired the CraftBukkit team to work on Minecraft and the Minecraft API. In this book we'll use CraftBukkit as our Minecraft Server software. CraftBukkit is the Server software but it has an API ( a system which Plugin developers can use to exend the server ) which is called 'Bukkit'. We'll look at the Bukkit API in more detail later. For now, all you need to know is that CraftBukkit is the name of the server Software and Bukkit is the API on top which it's built.
+CraftBukkit has become the most popular Minecraft Server Software with a thriving community of Plugin developers. In 2012 Mojang hired the CraftBukkit team to work on Minecraft and the Minecraft API. In this book we'll use CraftBukkit as our Minecraft Server software. CraftBukkit is the Server software but it has an API ( a system which Plugin developers can use to extend the server ) which is called 'Bukkit'. We'll look at the Bukkit API in more detail later. For now, all you need to know is that CraftBukkit is the name of the server Software and Bukkit is the API on top which it's built.
 
 ![CraftBukkit and Bukkit](images/chapter-01/CraftBukkit_Bukkit.png "CraftBukkit is built on Bukkit")
 
-CraftBukkit has become so popular because of its underlying API (Bukkit) which makes it easy for Plugin Developers to extend the Minecraft multiplayer server. There are hundreds of plugins available for CraftBukkit including all of the popular mulit-player mini-games such as HungerGames and CaptureTheFlag. Chances are, if you've ever played Minecraft Multiplayer on one of the popular public servers, it's been running CraftBukkit. The CraftBukkit Wiki Website provides a wealth of information for both Administrators (the people who run CraftBukkit Servers) and Developers (the people who create plugins for CraftBukkit). I highly recommend checking it out [http://wiki.bukkit.org/](http://wiki.bukkit.org/) .
+CraftBukkit has become so popular because of its underlying API (Bukkit) which makes it easy for Plugin Developers to extend the Minecraft Multiplayer server. There are hundreds of plugins available for CraftBukkit including all of the popular Multiplayer mini-games such as HungerGames and CaptureTheFlag. Chances are, if you've ever played Minecraft Multiplayer on one of the popular public servers, it's been running CraftBukkit. The CraftBukkit Wiki Website provides a wealth of information for both Administrators (the people who run CraftBukkit Servers) and Developers (the people who create plugins for CraftBukkit). I highly recommend checking it out [http://wiki.bukkit.org/](http://wiki.bukkit.org/) .
 
 ### Installing CraftBukkit
 
-The first step in constructing your Modding Workbench is to install CraftBukkit. Unlike many games, Minecraft is in ongoing development. This means that new versions of Minecraft are released quite often. When you purchase and download the Minecraft Client you automatically get new versions of the game when they are released. This is great for players because you get the latest and greatest version for free, which often includes bug fixes and new features. If you've played Minecraft multiplayer before on one of the popular public servers, you'll know that there's a downside to Mojang's commitment to improving Minecraft - Server software upgrades do not happen as often as Client software upgrades. This can lead to Client software and Server software which are *incompatible*. When the Client and Server versions are incompatible they cannot communicate. 
+The first step in constructing your Modding Workbench is to install CraftBukkit. Unlike many games, Minecraft is in ongoing development. This means that new versions of Minecraft are released quite often. When you purchase and download the Minecraft Client you automatically get new versions of the game when they are released. This is great for players because you get the latest and greatest version for free, which often includes bug fixes and new features. If you've played Minecraft Multiplayer before on one of the popular public servers, you'll know that there's a downside to Mojang's commitment to improving Minecraft - Server software upgrades do not happen as often as Client software upgrades. This can lead to Client software and Server software which are *incompatible*. When the Client and Server versions are incompatible they cannot communicate. 
 
 #### Term: Bug
 "Bugs" in software are errors or mistakes in the software code which can cause problems. Nobody quite knows for sure why errors in software are called bugs but one story goes that a problem with an early mechanical computer in the 1940s was caused by a Moth which somehow found its way inside. The term "Bug" had been used to describe errors long before computers came along, so when the engineers captured the Moth they kept it with a note that said "First actual case of bug being found." 
@@ -134,9 +134,9 @@ At the time of writing, 1.7.8 is the most current version of Minecraft. This is 
 
 ![CraftBukkit Home Page](images/chapter-01/bukkit-homepage.png "CraftBukkit Home Page")
 
-The large Download button will download the CraftBukkit Recommended Build. The Recommended Build is the version of the Craftbukkit server software which is considered to be the most reliable version because it has undergone the most testing. However, the Recommended Build is not always the most current or up-to-date version of the software. Fortunately the developers of CraftBukkit also let you download up-to-date versions of the software with the warning that the most up-to-date version may not always be the most reliable version. 
+The large Download button will download the CraftBukkit Recommended Build. The Recommended Build is the version of the CraftBukkit server software which is considered to be the most reliable version because it has undergone the most testing. However, the Recommended Build is not always the most current or up-to-date version of the software. Fortunately the developers of CraftBukkit also let you download up-to-date versions of the software with the warning that the most up-to-date version may not always be the most reliable version. 
 
-![Craftbukkit download](images/chapter-01/bukkit-download1.png)
+![CraftBukkit download](images/chapter-01/bukkit-download1.png)
 
 Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete - that is - the developers have added all of the features they're going to add, but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two *Bugs*. If the "Beta Build" version does not match the current version of Minecraft then click on the "Alternate Versions" link beneath the "Beta Build" link. This will take you to the CraftBukkit Builds page where you will see a list of "Builds" or versions. The following screenshot shows what the download page looks like at the time of writing.
 
@@ -146,7 +146,7 @@ Along the right-hand side of the page are three big color-coded download buttons
 
 Choosing which version of the Server Software to use - Recommended, Beta or Development - is a big decision and one I unfortunately can't make for you. That decision is entirely up to you. However, If you feel safer using only the Recommended build of CraftBukkit, and that build version is not for the most up-to-date Client, then there's a way you can safely and temporarily *Downgrade* your Minecraft Client Software so that it will be compatible with your Server software. 
 
-Since version 1.6, the Minecraft Launcher (the software you run on your computer to start Minecraft Client and to upgrade to new versions when they become available) lets you choose which verison of the Client software to run. By default the Launcher is configured to always download and run the Latest Version but you can easily change this using the new "Profiles" feature. The following are step-by-step instructions for changing your Launcher profile to use a different version of Minecraft Client...
+Since version 1.6, the Minecraft Launcher (the software you run on your computer to start Minecraft Client and to upgrade to new versions when they become available) lets you choose which version of the Client software to run. By default the Launcher is configured to always download and run the Latest Version but you can easily change this using the new "Profiles" feature. The following are step-by-step instructions for changing your Launcher profile to use a different version of Minecraft Client...
 
 ![](images/chapter-01/mc-launcher2.png "Minecraft Launcher")
 
@@ -162,7 +162,7 @@ The newly created profile should now be automatically selected in the Profile dr
 
 ![](images/chapter-01/mc-launcher3.png)
 
-By using the profile editor to "Downgrade" your Minecraft Client Software, you can ensure that your Client and Server are compatible and that you can play multiplayer minecraft even when the Server Software is not as up-to-date as the current latest version of Minecraft Client. This means you can always use the most stable Recommended build of CraftBukkit. 
+By using the profile editor to "Downgrade" your Minecraft Client Software, you can ensure that your Client and Server are compatible and that you can play Multiplayer Minecraft even when the Server Software is not as up-to-date as the current latest version of Minecraft Client. This means you can always use the most stable Recommended build of CraftBukkit. 
 
 #### Term: JAR File
 ![](images/chapter-01/jar_icon.png)
@@ -174,7 +174,7 @@ Once You've chosen between the Recommended, Beta and Development versions of Cra
 
 1. Create a new folder on your computer called *CraftBukkit*.
 2. Choose either the *Recommended*, *Beta Build* or *Development Build* at http://dl.bukkit.org/downloads/craftbukkit/ to begin downloading CraftBukkit.
-3. Save the craftbukkit *.jar* file in the folder created in step 1. 
+3. Save the CraftBukkit *.jar* file in the folder created in step 1. 
 4. Rename the .jar file to *craftbukkit.jar*.
 
 Once downloaded, the next step is to install CraftBukkit on your computer. The instructions are slightly different for each operating system so skip directly to the instructions for your operating system.
@@ -243,7 +243,7 @@ If you run into trouble installing CraftBukkit you can find plenty of useful tip
 
 5. Launch the Terminal Application and type `~/craftbukkit/craftbukkit.sh` (assuming you created a folder called `craftbukkit` in your home folder).
 
-6. Once the Craftbukkit server console has launched, you can stop it by issuing the Craftbukkit `stop` command (type `stop` then hit ENTER).
+6. Once the CraftBukkit server console has launched, you can stop it by issuing the CraftBukkit `stop` command (type `stop` then hit ENTER).
 
 
 
@@ -269,7 +269,7 @@ When you first launch CraftBukkit, a couple of configuration files and folders w
 The first two lines - the lines which begin with a `#` character (also known as the Hash symbol) - are comments, they are ignored by the server. The configuration begins properly on line 3 `generator-settings=` which is used for generating worlds (this has a default value of blank - no value). The settings for the server are specified using *Name-Value* pairs. A *Name-Value* pair is programmer-speak for how settings are written. For example `allow-flight=false` is a Name-Value Pair where the name is `allow-flight` and the value is `false`. In property files the name and value are separated by the `=` (equals) symbol. Let's look at just some of the properties you might want to change.
 
 ##### World Type
-Later in the book I'll show you how to use JavaScript to create roads and skyscrapers. If you plan to eventually put your newfound programming prowess to use building large-scale places for others to visit, you'll probably want to change the `level-type` property from `DEFAULT` (Minecraft's standard setting where worlds are made of varied landscapes of hills, valleys, and oceans) to `FLAT`. In a `FLAT` world there are no hills, no valleys, just flat terrain for as far as you can see. While this might be considered boring, it does have the advantage of being easier to build upon. If you plan to build roads, houses and other large-scale constructions, a `FLAT` world might be the best place to start. It's not essential that the `level-type` is set to `FLAT`, you can always leave this setting at `DEFAULT` and just flatten the area you want to build on first. **If you later decide to change the level-type, the setting only applies when creating new worlds. Existing worlds will not be modified.**
+Later in the book I'll show you how to use JavaScript to create roads and skyscrapers. If you plan to eventually put your new-found programming prowess to use building large-scale places for others to visit, you'll probably want to change the `level-type` property from `DEFAULT` (Minecraft's standard setting where worlds are made of varied landscapes of hills, valleys, and oceans) to `FLAT`. In a `FLAT` world there are no hills, no valleys, just flat terrain for as far as you can see. While this might be considered boring, it does have the advantage of being easier to build upon. If you plan to build roads, houses and other large-scale constructions, a `FLAT` world might be the best place to start. It's not essential that the `level-type` is set to `FLAT`, you can always leave this setting at `DEFAULT` and just flatten the area you want to build on first. **If you later decide to change the level-type, the setting only applies when creating new worlds. Existing worlds will not be modified.**
 
 If you decide to create a new world and want to use a `level-type` other than `DEFAULT` you have two options:
 
@@ -287,15 +287,15 @@ For the same reason I suggest making your server a monster-free zone, I also sug
 
 The ops.json file is a configuration file listing all of the 'Operators' for the server. Operators are players who have special privileges on the server. Operators (also sometimes called 'Administrators' or 'Admins') are responsible for keeping the server running and ensuring that players play nice and don't grief. If players don't play nice, Operators have to power to ban or kick players off the server using special commands only available to them. 
 
-There may already be an ops.json file present in your CraftBukkit folder. If there isn't, then one will be created automatically when you run the `op` command from the server console. You will need to be an Operator to issue JavaScript commands in the game so one of the first things you should do once you've installed the Minecraft Server is 'op' yourself - that is - make yourself an operator by issuing the `op username` command replacing `username` with your own Minecraft user name. For example, I would issue the command `op walterh` because `walterh` is my minecraft user name. ScriptCraft - the plugin we'll install later - only allows operators to issue JavaScript commands.
+There may already be an ops.json file present in your CraftBukkit folder. If there isn't, then one will be created automatically when you run the `op` command from the server console. You will need to be an Operator to issue JavaScript commands in the game so one of the first things you should do once you've installed the Minecraft Server is 'op' yourself - that is - make yourself an operator by issuing the `op username` command replacing `username` with your own Minecraft user name. For example, I would issue the command `op walterh` because `walterh` is my Minecraft user name. ScriptCraft - the plugin we'll install later - only allows operators to issue JavaScript commands.
 
 We're done with all of the server configuration we'll need for now. If you want to delve deeper into server configuration, a good place to start is by reading the http://minecraft.gamepedia.com/Server.properties page.
 
 ### Basic Server administration commands
-CraftBukkit's usefulness as a minecraft server comes from its extensibility - that is - its ability to be extended and made more interesting by adding plugins. Many of the high-profile public minecraft servers actually run CraftBukkit because of the wide range of server plugins available for it. Popular Minecraft Mini-games like 'Hunger Games' and 'Spleef' are all CraftBukkit plugins. In this book we'll use just one plugin - ScriptCraft which lets operators extend the game using JavaScript. There are just a few things you'll need to know about server administrator to get the most from this book. 
+CraftBukkit's usefulness as a Minecraft server comes from its extensibility - that is - its ability to be extended and made more interesting by adding plugins. Many of the high-profile public Minecraft servers actually run CraftBukkit because of the wide range of server plugins available for it. Popular Minecraft Mini-games like 'Hunger Games' and 'Spleef' are all CraftBukkit plugins. In this book we'll use just one plugin - ScriptCraft which lets operators extend the game using JavaScript. There are just a few things you'll need to know about server administrator to get the most from this book. 
 
 #### Starting and stopping your server
-To start your minecraft server, double click on the startup script you created earlier in this chapter. This launches the minecraft server in a terminal window. The terminal window will look something like this:
+To start your Minecraft server, double click on the startup script you created earlier in this chapter. This launches the Minecraft server in a terminal window. The terminal window will look something like this:
 
 ![](images/chapter-01/server-console.png "The Minecraft Server Console Window")
 
@@ -303,15 +303,15 @@ Don't worry if your terminal window doesn't look exactly like this or has slight
 
 In the Server Console window, you don't need to put a `/` (forward slash symbol) in front of commands the way you do in the Minecraft Client. So you simply type the command name instead of `/` followed by the command name. So remember `help` instead of `/help`, `toggledownfall` instead of `/toggledownfall` and so on. 
 
-Another thing to note about the server console is that when you enter commands there, you do so as a special player called 'CONSOLE'. In Minecraft the `/me` command is used to send a message to other players in the form of 'Yourname Action'. For example, if *I* issue the command `/me sneezes` in the Minecraft client, all other players on the server will see `walterh sneezes`. However, if you issue the same command in the server console, you will see `* @ sneezes` instead of your own name. CONSOLE is not visible to other players and does not inhabit the minecraft world. Normally only the person who starts the server can issue commands as CONSOLE.
+Another thing to note about the server console is that when you enter commands there, you do so as a special player called 'CONSOLE'. In Minecraft the `/me` command is used to send a message to other players in the form of 'Yourname Action'. For example, if *I* issue the command `/me sneezes` in the Minecraft client, all other players on the server will see `walterh sneezes`. However, if you issue the same command in the server console, you will see `* @ sneezes` instead of your own name. CONSOLE is not visible to other players and does not inhabit the Minecraft world. Normally only the person who starts the server can issue commands as CONSOLE.
 
-To stop the server, you should issue the `stop` command at the server console. If you plan to administer a minecraft server for others to play, the `stop` command will come in handy whenever you want to shutdown the server for maintenance or troubleshooting.
+To stop the server, you should issue the `stop` command at the server console. If you plan to administer a Minecraft server for others to play, the `stop` command will come in handy whenever you want to shutdown the server for maintenance or troubleshooting.
 
 #### Reloading plugins
 
 Another useful command you should know about is the `reload` command. This command will unload all of the server's plugins and then load them up again. This is a faster and more convenient way of reloading plugins than shutting down the server and restarting it. If you manage a server with many players connected and want to install a new version of a plugin then the `reload` command lets you load the plugin without shutting down your server and disconnecting players.
 
-### Connnecting to your server
+### Connecting to your server
 To check that your server is running and accepting connections follow these steps:
 
 1. Launch the Minecraft game as you would normally. 
@@ -320,12 +320,12 @@ To check that your server is running and accepting connections follow these step
 4. Fill in the Server Name field. You can call the server any name you like. The default name, Minecraft Server, will do if you can't think of something imaginative right now.
 5. In the Server Address field you should type `localhost` . As mentioned earlier, `localhost` is a special server address meaning 'the same computer'. You could also type `127.0.0.1` which is the IP Address of localhost (servers usually have a name and/or address and it's usually possible to connect to them using either name or address). Type either `localhost` *or* `127.0.0.1` but not both; either one will do fine.
 6. Once you've entered the Server Address, click the 'Done' button. 
-7. The new server you just added should appear in the list of servers. If it's not visible, use the scroll bar to scroll down. If you have already added other servers it may not appear at the top of the list. Because you've added this server using the 'Add Server' button rather than the 'Direct Connect' button, it should appear in the list of multiplayer servers every time you launch Minecraft.
+7. The new server you just added should appear in the list of servers. If it's not visible, use the scroll bar to scroll down. If you have already added other servers it may not appear at the top of the list. Because you've added this server using the 'Add Server' button rather than the 'Direct Connect' button, it should appear in the list of Multiplayer servers every time you launch Minecraft.
 8. Select the server and click the 'Join Server' button. 
 
 If you get an error when trying to connect, ensure that your server is first running (See the earlier section on starting your server). If your server is not running you will see an error *Failed to connect to the server. java.net.ConnectException: Connection refused:'. If you see this error, click the 'Back to Title Screen' button then start your server and try again. 
 
-Once you've logged into your server take a look around. It's important that you have operator (Administrator) privileges on your own server. You can check that you have the right privileges by issuing the `/time set 4000` command. If you can run this command without error then you're all set up. If you see a warning message *You do not have permission to perform this command.* then you'll need to make yourself an operator at the server console window. Switch to the Server console window (ALT + TAB on windows, CMD + TAB on OS X) and type `op <player>` replacing <player> with your own username, then switch back to the Minecraft game and try issuing the `/time set 4000` command from the in-game prompt. Once you've verified you have operator permissions, kick back and relax or if you have a spare computer on your home network, invite a friend or family member to join you on your server. If this is the first time you've played Minecraft multiplayer with friends or family you'll have great fun.
+Once you've logged into your server take a look around. It's important that you have operator (Administrator) privileges on your own server. You can check that you have the right privileges by issuing the `/time set 4000` command. If you can run this command without error then you're all set up. If you see a warning message *You do not have permission to perform this command.* then you'll need to make yourself an operator at the server console window. Switch to the Server console window (ALT + TAB on windows, CMD + TAB on OS X) and type `op <player>` replacing <player> with your own username, then switch back to the Minecraft game and try issuing the `/time set 4000` command from the in-game prompt. Once you've verified you have operator permissions, kick back and relax or if you have a spare computer on your home network, invite a friend or family member to join you on your server. If this is the first time you've played Minecraft Multiplayer with friends or family you'll have great fun.
 
 ### Achievement Unlocked!
 ![](@@nextAchievement)
@@ -336,7 +336,7 @@ By now you should have your very own Minecraft server installed and running. **C
 There are other Minecraft Server options available, but installing and running your own server is the only sensible option if you want to start modding. 
 
 #### Commercial Minecraft Hosting
-Once you've mastered Server Administration and Modding you might eventually decide to use one of the many commercial minecraft hosting plans available online. These Minecraft hosting providers usually charge a monthly fee, so they are not free. For your money, they provide you with a Minecraft server you and your friends can connect to and play. They usually offer managed install of plugins through a web-based Administration portal (A web page where you can choose which plugins your server should use). Commercial Minecraft Hosting isn't cheap and it's not as flexible as running your own server. You certainly don't need to sign up to commercial minecraft hosting to get the most from this book. You can find a list of minecraft hosting providers by searching 'Minecraft Hosting' on Google.
+Once you've mastered Server Administration and Modding you might eventually decide to use one of the many commercial Minecraft hosting plans available online. These Minecraft hosting providers usually charge a monthly fee, so they are not free. For your money, they provide you with a Minecraft server you and your friends can connect to and play. They usually offer managed install of plugins through a web-based Administration portal (A web page where you can choose which plugins your server should use). Commercial Minecraft Hosting isn't cheap and it's not as flexible as running your own server. You certainly don't need to sign up to commercial Minecraft hosting to get the most from this book. You can find a list of Minecraft hosting providers by searching 'Minecraft Hosting' on Google.
 
 #### Minecraft Realms
 Mojang have rolled out their own Minecraft Hosting solution - Minecraft Realms - throughout the world. Minecraft Realms does not currently support plugins of any kind though that may change in the future. 
@@ -366,14 +366,14 @@ ScriptCraft is a Minecraft Server plugin which makes it possible to write your o
 To download and install ScriptCraft follow these steps...
 
 1. Visit http://scriptcraftjs.org/download/latest/
-2. Right-click on the scriptcraft.jar file and select 'Save Link As...' from the popup menu. 
+2. Right-click on the scriptcraft.jar file and select 'Save Link As...' from the pop-up menu. 
 3. Save the file to the CraftBukkit plugins folder. If there is no `plugins` folder in your craftbukkit folder it's probably because you haven't yet launched CraftBukkit. The first time CraftBukkit is launched it creates a couple of configuration files and a plugins folder so make sure you've launched CraftBukkit at least once before attempting to download ScriptCraft. 
 
 If there is already a scriptcraft.jar file in your CraftBukkit plugins folder (if this isn't the first time you've installed ScriptCraft) , make sure to remove it first before saving the new file.
 
 If CraftBukkit is running, stop it by issuing the `stop` command in the server console. 
 
-Launch Craftbukkit by double clicking the launch script you created in chapter 1. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
+Launch CraftBukkit by double clicking the launch script you created in chapter 1. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
 
     Enabling scriptcraft v2.0.6-2014-04-20
     Directory /home/walter/cb179/plugins/scriptcraft does not exist.
@@ -455,7 +455,7 @@ Right now JavaScript does not know what you mean by `hearts`. If you want to tel
 
     js hearts = 8;
     
-... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something JavaScript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in minecraft. You can put stuff in a variable, come back to it later and it will still be there.
+... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something JavaScript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in Minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
 ![Variables are like Chests. You can store stuff in them.](images/chapter-03/chest.png "Variables are like Chests. You can store stuff in them.")
 
@@ -513,7 +513,7 @@ In JavaScript, a piece of text is also called a *String*. In Minecraft a *String
     
 * `js "123"`
 
-That last one might surprise you. JavaScript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in JavaScript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming minecraft plugins when you want to display information to players. 
+That last one might surprise you. JavaScript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in JavaScript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming Minecraft plugins when you want to display information to players. 
 
 The letters, numbers and other symbols which form a string are known as *Characters*. A *Character* is any single letter, number or symbol. 'a','B','9', '-', '.', '/' and ':' are all examples of *Characters*.
 
@@ -601,7 +601,7 @@ The result of this expression will be `true` . Note that I used two equals symbo
 Note that I didn't need to use the `var` keyword here because the 'hungerBar' variable has *already* been declared. All I'm doing is assigning the variable a new value. You should only use the `var` keyword when declaring a variable. 
 
 #### The *null* keyword
-The *null* keyword in javascript is a special object which is used by programmers to mean that there is no value. When we declare a new variable we can explicitly assign it a *null* value to make it clearer that the variable is empty:
+The *null* keyword in JavaScript is a special object which is used by programmers to mean that there is no value. When we declare a new variable we can explicitly assign it a *null* value to make it clearer that the variable is empty:
 
     js var hungerBar = null
 
@@ -722,7 +722,7 @@ The result is 3. Try calling it with different values to test that the function 
     js add( 5, 6 )
     js add( 9, 1 )
 
-Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets - the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in definining the function is to say what the function should do. Everthing between the opening and closing curly brackets - the `{` and `}` symbols - is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
+Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets - the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in defining the function is to say what the function should do. Everything between the opening and closing curly brackets - the `{` and `}` symbols - is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
 
 ![Function Outline](images/chapter-03/function-outline.png)
 
@@ -903,9 +903,9 @@ This is where the fun begins.
 
 # Part II Basic Modding 
 ## Overview
-In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about JavaScript. In aach chapter in this section we'll develop a working plugin and learn about JavaScript along the way.
+In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about JavaScript. In each chapter in this section we'll develop a working plugin and learn about JavaScript along the way.
 
-## @@nextChapter{chapter-05}: Your first minecraft plugin
+## @@nextChapter{chapter-05}: Your first Minecraft plugin
 ### Introduction
 So let's dive in and create our first Minecraft plugin. A plugin is a small program which is loaded and executed by a larger program. The larger program we'll be using is - of course - Minecraft Server. This first plugin will be short - just a couple of lines of code - so you won't have to type too much but you should read through this first chapter and try to understand the code and the notes. We'll build on the knowledge learned here when creating more sophisticated plugins in later chapters.
 
@@ -918,7 +918,7 @@ We haven't used the console.log() function before. It's a built-in function whic
 
     [scriptcraft] 11
 
-Whenever you use the *console.log()* function, the output will start with `[scriptcraft]` because *console.log()* writes to the server's log file which is used by the core server and all plugins. The server software prepends the plugin name to make it easy for server administrators to tell which plugin is responsible for messages in the log file. We'll use console.log() in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
+Whenever you use the *console.log()* function, the output will start with `[scriptcraft]` because *console.log()* writes to the server's log file which is used by the core server and all plugins. The server software inserts the plugin name at the front of the message to make it easy for server administrators to tell which plugin is responsible for messages in the log file. We'll use console.log() in upcoming examples. This function is also super useful for debugging code - that is - putting statements in your code so you know it's being executed. 
 
 You may be wondering what the ';' (semicolon) is doing at the end of the line. The semicolon is used to end each statement in JavaScript. If you think of a statement as a sentence, then the semicolon ';' is to statements what the full stop '.' is to sentences. In JavaScript the semicolon isn't strictly needed but you should use it anyway. 
 
@@ -987,7 +987,7 @@ To give yourself super-human speed issue this command:
     
     js self.walkSpeed = 1 
 
-To reset your walkspeed to normal issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
+To reset your walkspeed to normal issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for Minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
 
 #### Term: Property
 A *property* is an attribute of an Object - for example in real life we all have properties: eye-color, date-of-birth, name and so on. Objects in JavaScript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables.
@@ -1105,7 +1105,7 @@ So to use the code we just wrote inside the dice.js module we first need to 'req
 The above statement loads your newly created dice.js module into the computer's memory. The require() function is how ScriptCraft loads JavaScript modules. You'll notice I didn't need to include the '.js' suffix (the last part of the filename). This is because the require() function is smart enough to know that it should only look for '.js' files anyway. It's also smart enough to know it should look in the modules folder so we didn't need to write `require('/modules/dice.js')`. After you load your module using the require() function you should almost always assign it to a variable. In this case the variable has the same name as the module but it doesn't have to be. I could have written `var steve = require('dice')` and it would work just as well. 
 
 ### Calling Module Functions
-You'll notice that the above statement doesn't appear to have called `roll()` yet. Loading a module will execute any code in the module but remeber, our module just defines a function. **Defining a function and calling a function are not the same thing.** To call the roll function on the module we just loaded, issue the following command:
+You'll notice that the above statement doesn't appear to have called `roll()` yet. Loading a module will execute any code in the module but remember, our module just defines a function. **Defining a function and calling a function are not the same thing.** To call the roll function on the module we just loaded, issue the following command:
 
     /js dice.roll()
 
@@ -1133,7 +1133,7 @@ A JavaScript module is a file with one or more related functions. In the above f
 3. Next we convert the number to a integer by passing it to the `Math.floor()` function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
 4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the roll() function to return the `result` variable.
 
-As in the previous plugin, the last line of the file makes the *roll* function avaiable for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
+As in the previous plugin, the last line of the file makes the *roll* function available for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
 
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
@@ -1198,7 +1198,7 @@ If we wanted to expand on what we've already done to support dices of 4, 6 and 8
 What if, when we call the *roll()* function, we could tell the function how many sides the dice has and the *roll()* function behaved accordingly? If we could say 'Hey throw a 6-sided dice' or 'Hey throw a 20-sided dice' and *roll* would do the right thing (return a random number between 0 and 5 for the first call and return a random number between 0 and 19 for the second call). This is where *Parameters* come in. 
 
 ### Term: Parameter
-*Parameters* provide a way to give some instructions to functions. We can pass values to a function and the function will treat them like variables. There's another word often used in programming which can mean the same thing: Arguments. We say that we pass arguments to functions and the function receives them as paramaters. The distinction isn't very important. You can use the words *arguments* or *parameters* when talking about passing values to functions.
+*Parameters* provide a way to give some instructions to functions. We can pass values to a function and the function will treat them like variables. There's another word often used in programming which can mean the same thing: Arguments. We say that we pass arguments to functions and the function receives them as parameters. The distinction isn't very important. You can use the words *arguments* or *parameters* when talking about passing values to functions.
 
 We've already been using parameters in earlier code examples. In an earlier chapter we used the *console.log* function and passed it a parameter. Try issuing the following statements at the server console window:
 
@@ -1248,7 +1248,7 @@ What I've done here is add 3 new lines of code near the top of the *roll* functi
       sides = 6;
     }
 
-The *if* statement is how decisions are made in JavaScript. It's used to test something (a condition) and if the test is true then the code inside the `{` and `}` curly braces (called the 'if block') is executed. In english, we'd write the above code like this.
+The *if* statement is how decisions are made in JavaScript. It's used to test something (a condition) and if the test is true then the code inside the `{` and `}` curly braces (called the 'if block') is executed. In English, we'd write the above code like this.
 
     if there is no 'sides' parameter then
        let sides be equal to 6
@@ -1263,7 +1263,7 @@ We'll look at the `if` statement in more detail in later chapters. All you need 
 
 You should see a random number output for each of the above calls. The *roll* function is now robust enough to handle parameters and use a sensible default value of 6 if no parameters are given when it's called.
 
-### Assiging to the exports variable
+### Assigning to the exports variable
 Let's say we want to create a new module that provides farm animals. We could write it like this:
 
     var cow = 'Cow';
@@ -1305,15 +1305,15 @@ The first line is ignored and is only readable by programmers.
 #### End-of-line comments
 You can also add comments to the end of lines like this:
 
-    console.log('The rain in spain'); // falls mainly in the plain
+    console.log('The rain in Spain'); // falls mainly in the plain
     
 If you run the above code you see:
 
-    The rain in spain
+    The rain in Spain
     
 Everything before the `//` is regular code, everything after the `//` is a comment.
 
-#### Multiline comments
+#### Multi-line comments
 Sometimes you will want to write a lot of comments in your code. You might have a section of code which requires some explaining. You can do so using multiple `//` comments like this:
 
     // ---------------------------
@@ -1450,7 +1450,7 @@ Once you've constructed an array you can add new items to the end of the array u
     [1] 'Cow'
     [2] 'Pig'
     [3] 'Chicken'
-    [4] 'Horse'   <--- New item appended
+    [4] 'Horse'   <-- New item appended
 
 The length of the array would change from 4 to 5. You can check this by issuing the command `/js farmAnimals.length`. The *push()* function cannot be called on its own. It's a special type of function called a *method* which means it's a function that belongs to a particular object so it can only be called using the form *object.method()*, 'object' in this case being 'farmAnimals' and 'method()' being 'push()'. We'll explore Objects more in later chapters.
 
@@ -1462,7 +1462,7 @@ This is what the array will look like after you run the above command:
 
     [0] 'Sheep'
     [1] 'Cow'
-    [2] 'Cat'     <--- New item inserted
+    [2] 'Cat'     <-- New item inserted
     [3] 'Pig'
     [4] 'Chicken'
     [5] 'Horse'
@@ -1474,8 +1474,8 @@ You can see that the new item is inserted at position 2 and that the indexes for
 This is what the array would look like after running the above command: 
 
     [0] 'Sheep'
-    [1] 'Ocelot'  <--- New items inserted
-    [2] 'Wolf'    <--- New items inserted
+    [1] 'Ocelot'  <-- New items inserted
+    [2] 'Wolf'    <-- New items inserted
     [3] 'Cow'
     [4] 'Cat'     
     [5] 'Pig'
@@ -1548,7 +1548,7 @@ The *greetPlayers* module depends on *greetings* but it does not know or care th
 Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
 
 ### Greeting Players in Style
-As a final fluorish to this plugin let's add something a little more spectacular than a simple text message. Let's greet each new player with a firework which launches when and where they join the server. 
+To make players feel welcome, let's add something a little more spectacular than a simple text message. Let's greet each new player with a firework which launches when and where they join the server. 
 
 @@listing greetPlayers_v3.js Greeting Players with Fireworks
 
@@ -1564,9 +1564,9 @@ In this chapter you learned about how to create and manipulate lists of items us
 
 ## @@nextChapter{chapter-09}: A Guessing Game
 ### Introduction
-One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including JavaScript and Java.
+One of the great things about computers is that they can make decisions and take different paths through a program based on those decisions. If computer programs did the exact same thing every time then they would be pretty boring. Can you imagine playing a computer game which always did the same thing? Computers make decisions all the time. When you're playing Minecraft, the server is constantly checking to see if any players have died or if their health or hunger levels are low. It's checking to see if a creeper is about to explode or if a villager will accept a trade offer. All of these decisions are made using the humbly named `if` statement. The `if` statement is such a useful statement that it's available in pretty much every programming language including JavaScript and Java.
 
-In this chapter we'll create a simple number-guessing game using the `if` statement to figure out if the player guesed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
+In this chapter we'll create a simple number-guessing game using the `if` statement to figure out if the player guessed correctly. Let's dive right in and write the code for the number guessing game. Type the following code into a new file called numberGuess.js and save it in the scriptcraft/plugins folder:
 
 @@listing guess_v1.js A Guessing Game
 
@@ -1641,7 +1641,7 @@ The last command will not output anything because a variable which is "" (empty 
 
     js if (name == "steve'){ console.log("Hey steve!"); }
     
-What if we want to test that something is *not* true? To test that something *isn"t* true you *enclose* the test in `()` round brackets and put a `!` (exclamation mark) in front ...
+What if we want to test that something is *not* true? To test that something *isn't* true you *enclose* the test in `()` round brackets and put a `!` (exclamation mark) in front ...
 
     js if (! (name == "steve') ) { console.log("Hey, you're not steve!"); }
     
@@ -1675,7 +1675,7 @@ So far the guessing games gives players just one shot at guessing the number. In
 
 In this revision of the number guessing game, we're using an extra parameter called *repeat* which is a parameter passed by the *input()* function to our input handler function *checkAnswer()*. We didn't use this parameter in the previous version of the game because we didn't need it. The *repeat* parameter is itself a function which when called will repeat the question. That's why we call it when the answer is too high or too low. The *repeat()* function when called will ask the player the same question again and when the player answers, will call your *callback* function again. 
 
-Another change in the above function is that we've given the player the option of simply quitting the game by typing `quit` as an answer to the question. You may be wondering why there's a check to see if the guess is too low but no equivalent check to see if the guess is too high. The resaon is, if the guess is not the same or less than the randomNumber, then it *must* be too high - there are no other options.
+Another change in the above function is that we've given the player the option of simply quitting the game by typing `quit` as an answer to the question. You may be wondering why there's a check to see if the guess is too low but no equivalent check to see if the guess is too high. The reason is, if the guess is not the same or less than the randomNumber, then it *must* be too high - there are no other options.
 
 How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how listing @@listref{guess_v3.js} behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
 
@@ -1696,7 +1696,7 @@ When prompted, press the T key to start typing your guess. You may need to re-ru
 Now the code checks to see if you guessed correctly and if so sends a message to the guesser. Then another *nested* if statement tests to see if the guesser is an actual player in the game (and not just the server console user) and launches a celebratory firework at the player's location. 
 
 ### Combining conditions
-If we want to check to see if it's night or day in minecraft, we need to get the game world's time and test it. In Minecraft, time is measured differently and is on a different scale to time in real life. A day in Minecraft lasts only 20 minutes in real time. Minecraft measures time not in hours and minutes but in *ticks* and there are 24,000 ticks in a Minecraft day. 
+If we want to check to see if it's night or day in Minecraft, we need to get the game world's time and test it. In Minecraft, time is measured differently and is on a different scale to time in real life. A day in Minecraft lasts only 20 minutes in real time. Minecraft measures time not in hours and minutes but in *ticks* and there are 24,000 ticks in a Minecraft day. 
 
 You can see a chart of the day-night cycle in Minecraft at <a href="http://minecraft.gamepedia.com/File:Day_Night_Clock_24h.png">http://minecraft.gamepedia.com/File:Day_Night_Clock_24h.png</a>.
 
@@ -1834,7 +1834,7 @@ How do we make the *animalSounds()* function understand that when a player types
 
 The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test String values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
 
-@@listing animalSounds_v2.js Case-insenstive Animal Sounds.
+@@listing animalSounds_v2.js Case-insensitive Animal Sounds.
 
 The only change to this module is a new statement just before the switch statement:
 
@@ -2048,11 +2048,11 @@ For a leaderboard display you'll want something a little more sophisticated. Let
 The *for* loop is usually used to process each item in an array. For example, if we have an array of animals `['cat','cow','pig','sheep','wolf']` we could print out each animal using the following code:
 
     js var animals = ['cat','cow','pig','sheep','wolf'];
-    js console.log( animals[0] ); //  < --- 'cat'
-    js console.log( aniamls[1] ); //  < --- 'cow'
-    js console.log( aniamls[2] ); //  < --- 'pig'
-    js console.log( aniamls[3] ); //  < --- 'sheep'
-    js console.log( aniamls[4] ); //  < --- 'wolf'
+    js console.log( animals[0] ); //  <-- 'cat'
+    js console.log( animals[1] ); //  <-- 'cow'
+    js console.log( animals[2] ); //  <-- 'pig'
+    js console.log( animals[3] ); //  <-- 'sheep'
+    js console.log( animals[4] ); //  <-- 'wolf'
 
 This would get really repetitive and tiring to type. Fortunately there's an easier way to print out each item in the array on its own line. The best way to see how the *for* statement works is with an example. Issue the following commands at the server prompt and see what happens:
 
@@ -2103,7 +2103,7 @@ There are times when you'll want to break out of a loop early. Let's say you onl
 
 @@listing leaderboard_v3.js Breaking out of loops.
 
-In the above code, the while loop will stop when it encouters the first player who has not jumped. 
+In the above code, the while loop will stop when it encounters the first player who has not jumped. 
 
 #### Skipping a turn in a loop.
 The *break* statement will break out of a loop effectively ending the loop so that the block of code in the loop won't be executed again. Sometimes you just want to skip an iteration (a turn) on the loop. Let's say we have an *unsorted* list of players and only want to display players who have jumped. The *continue* lets you skip on to the next iteration of the loop. In the following listing, only players who have jumped will be displayed. This isn't a leaderboard because players are displayed in no particular order:
@@ -2245,7 +2245,7 @@ Let's use more chaining to create a series of 3 parkour platforms each of which 
 
 This statement will create 3 platforms. The first platform will be 1 block high, the second platform 2 blocks high and the third, 3 blocks high. Since each platform is 2 blocks away they are perfect for in-game parkour practice.
 
-In the digram below you can see how the pillars are constructed and in the screenshot that follows, how the parkour platforms look in the game.
+In the diagram below you can see how the pillars are constructed and in the screenshot that follows, how the parkour platforms look in the game.
 
 ![Parkour Platforms on Graph Paper](images/chapter-12/graph-paper-parkour.png)
 
@@ -2282,7 +2282,7 @@ You can what the result looks like in the screenshot below:
 We'll dive deeper into Drone blueprints in the next exercise - Blueprint basics.
 
 ### Blueprint basics
-Before designing our skyscraper let's start with something a little smaller so we can better understand the basics of adding new blueprints for building in Minecraft. We'll start with a simple structure we'll call *monolith*. It will be a large black slab 4 blocks wide by 9 blocks high by 1 block long. The *monolith* is from an old movie called '2001: A Space Oddyssey'. In the movie, astronauts discover this large black slab of stone on the moon. I use it as an example here because it can be created using a single call to Drone's *box()* method. 
+Before designing our skyscraper let's start with something a little smaller so we can better understand the basics of adding new blueprints for building in Minecraft. We'll start with a simple structure we'll call *monolith*. It will be a large black slab 4 blocks wide by 9 blocks high by 1 block long. The *monolith* is from an old movie called '2001: A Space Odyssey'. In the movie, astronauts discover this large black slab of stone on the moon. I use it as an example here because it can be created using a single call to Drone's *box()* method. 
 
 You've seen already that the Drone has many functions for building, moving and turning and that these functions can be chained together to perform complex building operations. What you haven't yet seen is that the Drone can be extended - that is - new functions can be added to the Drone and combined with existing functions. For example: wouldn't it be cool if, once you have created a blueprint for a monolith, you could build a couple of them side by side using a single command? Well the Drone API has a function called *extend()* which lets you do just that. Once we've created the Monolith blueprint we should be able to perform any of these commands (*don't try to execute these right now - we haven't yet defined the monolith() function*) :
 
@@ -2310,9 +2310,9 @@ The other thing to note about the first require statement is the trailing `.Dron
 
 ... is how all blueprints usually begin and access the Drone API, so if you're creating a blueprint of your own you'll want to do this too.
 
-The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in minecraft. There *are* online resources on the Minecraft wiki but it's nice to be able to use memorable names in your code.
+The second *require()* call loads the *blocks* module which provides useful names for all of the possible materials used for building - without the blocks module you would need to memorize all of the data values for the building materials in Minecraft. There *are* online resources on the Minecraft Wiki but it's nice to be able to use memorable names in your code.
 
-The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In JavaScript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter 14. For now, all you need to remember is that when you create a new function for building stuff in minecraft, your function will in fact be a *method* and has privileged access to the Drone object. 
+The next section of the code is the monolith() *method*. I call it a *method* because this function is not going to be a standalone function, instead it will be attached to a Drone. A *method* is just a function that belongs to an object. How does a method *know* what it belongs to? In JavaScript there is a special keyword *this* which refers to the object a function belongs to. I've mentioned objects previously and we'll explore them in more detail in chapter 14. For now, all you need to remember is that when you create a new function for building stuff in Minecraft, your function will in fact be a *method* and has privileged access to the Drone object. 
 
     this.box( blocks.wool.black, 4, 9, 1);
 
@@ -2320,7 +2320,7 @@ Inside the body of the *monolith()* method we see the *this* keyword. Inside of 
 
     Drone.extend( monolith );
 
-Having declared the *monolith()* function we turn it into a Drone method using the *Drone.extend()* function which takes a function and turns it into a method effectively attaching that function to itself so it can form part of a chain of calls. The Drone is extensible - it is capable of taking on new blueprints and building using those blueprints. When you add a new function to the Drone using the *extend()* method it is as if the function were an integral part of the Drone. As if by magic, the function becomes global and chainable and can be chained with any other Drone methods:
+Having declared the *monolith()* function we turn it into a Drone method using the *Drone.extend()* function which takes a function and turns it into a method effectively attaching that function to itself so it can form part of a chain of calls. The Drone is extensible - it is capable of taking on new blueprints and building using those blueprints. When you add a new function to the Drone using the *extend()* method it is as if the function were an integral part of the Drone. As if by magic, the function becomes global and chain-able and can be chained with any other Drone methods:
 
     /js box(blocks.gold).fwd(2).monolith().fwd(4).turn().fwd(4).monolith()
 
@@ -2393,7 +2393,7 @@ In this chapter you learned how to build large and complex buildings in Minecraf
 In this chapter we're going to write code to create a spectacular fireworks show in Minecraft. We'll learn about ScriptCraft's built-in *fireworks* module, the *setTimeout()* function and use a powerful programming technique called *recursion*. We'll begin by writing code to launch a single firework after a delay of 2 seconds, then build on that code to launch many fireworks.
 
 ### The fireworks module
-ScriptCraft includes a *fireworks* module which can be used to launch a single firework at a given location. You can use the fireworks module directly at the in-game commmand prompt like this:
+ScriptCraft includes a *fireworks* module which can be used to launch a single firework at a given location. You can use the fireworks module directly at the in-game command prompt like this:
     
     /js var fireworks = require('fireworks')
     /js fireworks.firework( self.location )
@@ -2436,7 +2436,7 @@ Then issue the `/js refresh()` command and at the in-game command prompt issue t
 
     /js fireworkshow( self.location, 5 )
 
-Move back a couple of steps and watch the show as 5 fireworks are launched one after another. The show should end after the 5th firewok has launched. You can change the number of fireworks launched by changing the second parameter. 
+Move back a couple of steps and watch the show as 5 fireworks are launched one after another. The show should end after the 5th firework has launched. You can change the number of fireworks launched by changing the second parameter. 
 
 #### Me, a name I call myself...
 A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all files and folders on a disk, or drawing pretty fractal diagrams. Recursion is beyond the scope of this book so I won't go into great detail. To get a taste for what recursion is about, imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
@@ -2480,11 +2480,11 @@ The message will keep printing out for as long as the server is running. Fortuna
 
 @@listing fwkshow_v3.js Using setInterval() and clearInterval() to create a Fireworks Show.
 
-In listing @@listref{fwkshow_v3.js} we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
+In listing @@listref{fwkshow_v3.js} we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subtract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
 
     /js var show = fireworkshow( self.location, 300 );
 
-The above statements start a firework show in which there'll be 300 launches each 2 seconds apart. The show will go on for about 10 minutes if left alone but we're going to cancel the show early. Issue the following command to cancel the show:
+The above statements start a firework show in which there will be 300 launches each 2 seconds apart. The show will go on for about 10 minutes if left alone but we're going to cancel the show early. Issue the following command to cancel the show:
 
     /js clearTimeout( show );
 
@@ -2495,7 +2495,7 @@ In this chapter you learned about the *setTimeout()* function and how to use it 
 
 ## @@nextChapter{chapter-14}: Animal Sounds Revisited
 ### Introduction
-In this chapter we'll revisit the Animal Sounds plugin from earlier but this time, instead of using a switch statment we'll use a lookup table instead. 
+In this chapter we'll revisit the Animal Sounds plugin from earlier but this time, instead of using a switch statement we'll use a look-up table instead. 
 ### Objects
 I've mentioned objects a couple of times in this book. It's time to take  a closer look. 
 
@@ -2585,12 +2585,12 @@ When programming plugins using ScriptCraft, we have 2 different types of objects
 
 ... will fail silently. The key will *not* be deleted. 
 
-### Objects as Lookup tables
-In JavaScript it's easy for programmers to create objects and JavaScript can *lookup* object keys very quickly. A lookup table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
+### Objects as Look-up tables
+In JavaScript it's easy for programmers to create objects and JavaScript can *look-up* object keys very quickly. A look-up table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
 
 In the following chapter we're going to change the *animalSounds.js* module from chapter @@chapter{chapter-10} and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
 
-@@listing animalSounds_v3.js A lookup table of Animal Sounds.
+@@listing animalSounds_v3.js A look-up table of Animal Sounds.
 
 In the above listing we've created a new object called *noises* :
 
@@ -2609,32 +2609,32 @@ There are a couple of points to note about this statement:
 
 * The statement creates a single object. Like many statements in JavaScript, it can span more than one line. Having the object definition span more than one line makes the code more readable.
 * The *noises* object has the following keys: cat, chicken, cow, ender dragon, horse, pig, sheep, wolf. Keys are always on the left hand side in an object literal. 
-* The keys do not need to have quote marks around them but if the key contains whitespace - for example 'ender dragon' - then it should be enclosed in either single or double quotes. 
+* The keys do not need to have quote marks around them but if the key contains white-space - for example 'ender dragon' - then it should be enclosed in either single or double quotes. 
 * You cannot use JavaScript keywords as keys in an object so the literal values *true*, *false*, *default* etc can't be used. 
 * Keys must be of type number or string. You cannot have another object as a key in an object - you can however have another object as a value in an object.
 * Values in objects *can* be of any type - even functions and other objects! When an object contains another object as a value, that value is called a nested object. We'll see an example of a nested object later.
 * Every key-value pair must be separated with a single comma `,`. Try to avoid putting an extra comma at the end of the last key-value pair. There is no comma after the last key-value pair `wolf: sounds.wolfBark` because it is not needed and some versions of JavaScript will report an error if they see an extra comma just before the closing curly bracket `}`.
 
-Having created the *noises* lookup table, we use it in the *onInput()* function to see if the animal the player typed, is in the *noises* object. The *if* statement below...
+Having created the *noises* look-up table, we use it in the *onInput()* function to see if the animal the player typed, is in the *noises* object. The *if* statement below...
 
     if ( animal in noises ) {
 
-... checks to see if the animal is in the noises table. This *key in object* construct will lookup the object and return true if *key* is in it. If the animal is not in the lookup table, the function reports it hasn't heard of that animal. If it *is* in the lookup table it gets the appropriate noise function:
+... checks to see if the animal is in the noises table. This *key in object* construct will look-up the object and return true if *key* is in it. If the animal is not in the look-up table, the function reports it hasn't heard of that animal. If it *is* in the look-up table it gets the appropriate noise function:
 
     makeNoise = noises[ animal ];
 
-Each value in the *noises* table is a function so when we lookup an animal in the *noises* table what we get back is a function which when called will emit that animal's noise. So *makeNoise* is a variable which will point to a function which emits an animal noise. This is yet another example of the use of functions as data. In this case the functions are values in a lookup table. This is a very powerful idea in computer programming. In the next statement in the function:
+Each value in the *noises* table is a function so when we look-up an animal in the *noises* table what we get back is a function which when called will emit that animal's noise. So *makeNoise* is a variable which will point to a function which emits an animal noise. This is yet another example of the use of functions as data. In this case the functions are values in a look-up table. This is a very powerful idea in computer programming. In the next statement in the function:
 
     makeNoise( player.location );
 
-... we invoke the function we've just found in the lookup table, passing in the player's location as the place where we want the sound to play. The remaining parts of the module are unchanged from the previous version.
+... we invoke the function we've just found in the look-up table, passing in the player's location as the place where we want the sound to play. The remaining parts of the module are unchanged from the previous version.
 
-#### Why use a lookup table instead of *switch* statement?
+#### Why use a look-up table instead of *switch* statement?
 There are a couple of reasons why we should do this:
 
-* Adding new sounds is easier if we only need to change the data in the lookup table, not the code in the *onInput* function. 
+* Adding new sounds is easier if we only need to change the data in the look-up table, not the code in the *onInput* function. 
 * Changing code is error prone. Every time we have to change the *onInput* function because we want to support a new sound, we run the risk of introducing errors into the code.
-* There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the lookup table is comparatively easier. Because it's data, we could expose the lookup table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the lookup table, making the function shorter and more maintainable.
+* There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the look-up table is comparatively easier. Because it's data, we could expose the look-up table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the look-up table, making the function shorter and more maintainable.
 
 ### Objects and References
 One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute JavaScript statements at the in-game or server prompt, there's a special variable: *self* which refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
@@ -2750,24 +2750,24 @@ We'll learn more about JSON, and loading and saving data later in the book.
 ### Achievement Unlocked!
 ![](@@nextAchievement)
 
-Congratulations! You've discovered the power of Objects in JavaScript and how to create efficient lookups. Your plugin development apprenticeship is complete!
+Congratulations! You've discovered the power of Objects in JavaScript and how to create efficient look-ups. Your plugin development apprenticeship is complete!
 
 ### Summary
-In this chapter you learned how to create objects and how to access and lookup objects based on property names. You also learned about nested objects. This is the final chapter in the Basic Modding section of the book. Next, we move on to advanced modding.
+In this chapter you learned how to create objects and how to access and look-up objects based on property names. You also learned about nested objects. This is the final chapter in the Basic Modding section of the book. Next, we move on to advanced modding.
 
 # Part III Advanced Modding
 ## Overview
-The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for multi-player servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. In the following chapters we'll learn how to explore the extensive Bukkit API using the online documentation, and how to better understand the types of data provided by Bukkit.
+The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for Multiplayer servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. In the following chapters we'll learn how to explore the extensive Bukkit API using the online documentation, and how to better understand the types of data provided by Bukkit.
 
 ## @@nextChapter{chapter-15}: Saving Player preferences.
 ### Introduction
 In this chapter we'll learn how to load and save player preferences. We'll create a new command which lets players choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
 
 ### A day in the life of a Minecraft Plugin
-Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behaviour and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
+Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many Minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behaviour and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
 
 ### Chat colors
-In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key, a list of colors will be displayed. We've encountered the */jsp* command before in chapter @@chapter{chapter-11}. This commmand is a prefix (something which is added at the start) for new custom commands. 
+In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key, a list of colors will be displayed. We've encountered the */jsp* command before in chapter @@chapter{chapter-11}. This command is a prefix (something which is added at the start) for new custom commands. 
 
 ### TAB completion for custom commands
 One of the nice things about issuing commands at the in-game or server console prompt in Minecraft is TAB completion - the ability to have the program fill in the remaining parts of a command without you having to type the entire command yourself. You can create your own custom commands which support TAB completion quite easily in JavaScript. Let's create an example command at the in-game prompt which avails of TAB completion. This custom command will be called *jsp icecream* and will prompt the player to enter a flavor when the TAB key is hit. The first thing we need to do is say what the possible flavors can be. We'll do this by creating an array called *flavors*:
@@ -2820,7 +2820,7 @@ We count in base 10 because that's the numbering system the Romans used. Why did
 * 100 in binary is equal to 4 in decimal
 * 101 in binary is equal to 5 in decimal and so on.
 
-Another base that's more commonly used by programmers is Hexadecimal or Base 16. In hexadecimal (often shortened to just 'hex') the numbers 10 through 15 are substituted with the letters a through f so the a sequnce of numbers 0 through 32 looks like this:
+Another base that's more commonly used by programmers is Hexadecimal or Base 16. In hexadecimal (often shortened to just 'hex') the numbers 10 through 15 are substituted with the letters a through f so the a sequence of numbers 0 through 32 looks like this:
 
 @@table hex.org Hexadecimal Numbers and their Decimal Equivalents    
 
@@ -2846,7 +2846,7 @@ Once you've saved this file and reloaded the plugin using `js refresh()`, test i
 
 The module in listing @@listref{textcolors.js} exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged - no color code will be added to the text.
 
-The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special &#167; symbol which is written as `\xa7` combine to form the color code which is prepended to the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
+The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special &#167; symbol which is written as `\xa7` combine to form the color code which is inserted in front of the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
 
 The next steps in writing the Chat Color plugin are:
 
@@ -2857,7 +2857,7 @@ In your editor, create a new file called *chatcolor.js* in the *plugins/scriptcr
 
 @@listing chatcolor_v1.js Setting and Applying Player Chat Color Preferences
 
-In this plugin we use the *textcolors* module we created earlier, and we create a new *preferences* variable which is an empty object `{ }`. This *preferences* object will be used to store each player's prefered color. Let's say we have a server with 3 players who have chosen custom chat colors. In such a scenario the *preferences* object might look something like this:
+In this plugin we use the *textcolors* module we created earlier, and we create a new *preferences* variable which is an empty object `{ }`. This *preferences* object will be used to store each player's preferred color. Let's say we have a server with 3 players who have chosen custom chat colors. In such a scenario the *preferences* object might look something like this:
 
     {
        "steve1901": "blue",
@@ -2865,7 +2865,7 @@ In this plugin we use the *textcolors* module we created earlier, and we create 
        "john1911": "red"
     }
 
-... where "steve1901" is the name of a player and "blue" is his chosen chat color, "jane1908" is the name of another player and her chosen chat color is "gold" and so on. The *preferences* object is a lookup table of player names and their colors. If I wanted to find out what player jane1908's chosen color was, I'd do so using the expression `preferences["jane1908"]` which would return "gold".
+... where "steve1901" is the name of a player and "blue" is his chosen chat color, "jane1908" is the name of another player and her chosen chat color is "gold" and so on. The *preferences* object is a look-up table of player names and their colors. If I wanted to find out what player jane1908's chosen color was, I'd do so using the expression `preferences["jane1908"]` which would return "gold".
 
 The *chatcolor()* function is a *callback* which will be called when a player issues the `jsp chatcolor` command. The name of the player who issued the command and the color they chose are stored in the *preferences* object using the statement:
 
@@ -2875,7 +2875,7 @@ We can add any property we like to an object using the `[]` square brackets and 
 
 The *command()* function creates a new `/jsp chatcolor` command which will invoke the *chatcolor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
 
-The first section of listing @@listref{chatcolor_v1.js} up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in minecraft and ensures that player color preferences are applied to any chat messages:
+The first section of listing @@listref{chatcolor_v1.js} up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in Minecraft and ensures that player color preferences are applied to any chat messages:
 
     function onChat( event ) { 
       var player = event.player;
@@ -2886,7 +2886,7 @@ The first section of listing @@listref{chatcolor_v1.js} up to and including the 
     }
     events.asyncPlayerChat( onChat );
 
-The *onChat()* function is another callback function. This function is invoked whenever a player chats in the game. The function gets the player who is chatting, checks to see if they have a prefered color and if they *do* have a prefered color, changes the event's message property (the .message property of the event is the text of the message which the player is about to send) by adding the player's chosen color using the *textcolors.colorize()* function we wrote earlier.
+The *onChat()* function is another callback function. This function is invoked whenever a player chats in the game. The function gets the player who is chatting, checks to see if they have a preferred color and if they *do* have a preferred color, changes the event's message property (the .message property of the event is the text of the message which the player is about to send) by adding the player's chosen color using the *textcolors.colorize()* function we wrote earlier.
 
 Once you've saved the *chatcolor.js* file, reload the plugins using */js refresh()* or */reload* and at the in-game prompt type:
 
@@ -2894,7 +2894,7 @@ Once you've saved the *chatcolor.js* file, reload the plugins using */js refresh
 
 Press the SPACE key then the TAB key and you should see a list of possible colors to choose from. You can cycle through the list of colors by repeatedly pressing TAB. Choose a color, then press T to begin chatting. Type a message and the message should appear in the color you've chosen.
 
-Cool! You've just created a useful new command which a lot of players are going to like. Plugins like the one you've just created are very popular on multiplayer servers. Try changing the chosen color a few times using the `/jsp chatcolor` command to make sure all of the colors work.
+Cool! You've just created a useful new command which a lot of players are going to like. Plugins like the one you've just created are very popular on Multiplayer servers. Try changing the chosen color a few times using the `/jsp chatcolor` command to make sure all of the colors work.
 
 What happens if you issue the `/reload` command?
 
@@ -2935,7 +2935,7 @@ The *persist()* function returns an object which will be either of two things:
 1. If the file exists: data loaded from the file merged with the data provided in the 2nd parameter or... 
 2. If the file does not exist: The data in the 2nd parameter.
 
-The statement `var preferences = persist('chatcolor-prefs', { } )` in plain english says: Set the preferences variable to whatever's in the 'chatcolor_prefs' file or an empty object if there's no file.
+The statement `var preferences = persist('chatcolor-prefs', { } )` in plain English says: Set the preferences variable to whatever is in the 'chatcolor_prefs' file or an empty object if there's no file.
 
 Save the *chatcolor.js* file and reload your plugins using the `/reload` command. At this point you'll notice that the chat color preferences still have not been preserved. Change your color preferences at the in-game prompt using the following command:
 
@@ -3031,7 +3031,7 @@ You'll notice in the above screenshot that no item appears in the right hand sid
 So we've answered the question of *What* we want to do, now we must ask *How* are we going to do it? This is a list of what we want to do:
 
 1. Add a new Crafting Recipe to the game 
-2. Add new Teleoporting behavior for arrows fired from an Ender Bow.
+2. Add new Teleporting behavior for arrows fired from an Ender Bow.
 
 We'll tackle the 2nd item in the next chapter so let's look at how we add a new crafting recipe to the game. 
 
@@ -3041,9 +3041,9 @@ https://forums.bukkit.org/threads/am-having-trouble-adding-custom-recipes.102722
 
 Very often such results can be very useful when starting down the path of creating your own plugin.
 
-What's even more useful is the comprehensive API reference available at http://jd.bukkit.org/rb/apidocs/. This API reference is a set of interlinked web pages which are generated automatically from comments in the Bukkit source code. The reference lists all of the *Classes*, *Packages* and *Methods* in the Bukkit API. A Java *Class* is much like a JavaScript Module while a Java *Method* is much like a JavaScript Method or Function. A Java *Package* is a folder of Java *Classes*, it's just another way of organizing large numbers of source files. Java programs can be quite large, much larger than their JavaScript equivalents so the source files must be organized in folders and sub folders. Each folder and subfolder is known as a *Package* in Java terms. 
+What's even more useful is the comprehensive API reference available at http://jd.bukkit.org/rb/apidocs/. This API reference is a set of interlinked web pages which are generated automatically from comments in the Bukkit source code. The reference lists all of the *Classes*, *Packages* and *Methods* in the Bukkit API. A Java *Class* is much like a JavaScript Module while a Java *Method* is much like a JavaScript Method or Function. A Java *Package* is a folder of Java *Classes*, it's just another way of organizing large numbers of source files. Java programs can be quite large, much larger than their JavaScript equivalents so the source files must be organized in folders and sub folders. Each folder and sub-folder is known as a *Package* in Java terms. 
 
-For example, in Minecraft there are hundreds of different types of *events* which can occur in the game. It would be difficult for the Bukkit development team and for Plugin developers if all of the event source code was in a single folder called *events* so it makes sense to create subfolders for categories of events.
+For example, in Minecraft there are hundreds of different types of *events* which can occur in the game. It would be difficult for the Bukkit development team and for Plugin developers if all of the event source code was in a single folder called *events* so it makes sense to create sub-folders for categories of events.
 
 If you visit http://jd.bukkit.org/rb/apidocs You'll see a web page with 3 distinct areas.
 
@@ -3073,7 +3073,7 @@ You'll notice when browsing the Bukkit API that many methods include both the ty
 
 Let's look at this piece by piece. The *static* keyword means the method is really a function. It can be called without first creating a *Bukkit* object. The *boolean* to the left of the method name is the type of data the method returns. The *Recipe recipe* inside the round brackets says that the method takes one parameter named *recipe* of type *Recipe*. This is the conventional way that Java methods are defined: the parameter type is shown along with the parameter name. 
 
-Every Type name in the Java documenation page is a link to more information about the Type. So if I want to find out more information about the *Recipe* Java type, I just click on that link. 
+Every Type name in the Java documentation page is a link to more information about the Type. So if I want to find out more information about the *Recipe* Java type, I just click on that link. 
 
 #### Interfaces, Classes, Enums, Exceptions and Annotations
 Java has a couple of different Object types but you don't have to worry too much about the differences. Still, it's useful to know what the different terms mean.
@@ -3125,7 +3125,7 @@ On lines 2 and 3 of listing @@listref{recipe.js} we declare 2 variables:
 The names of classes in Java can be quite long-winded because you have to include the package name and the class name. Java programmers call this the *fully qualified name*. Java programmers will often save themselves the need to use fully qualified names by *importing* packages. The JavaScript engine which runs inside Java has an *importPackage()* function but this function is not supported in later versions of JavaScript for Java. I personally like to avoid using fully qualified names throughout JavaScript code which is why whenever I need to refer to a Bukkit Type, I declare a short-named variable at the top of the module which refers to the longer fully-qualified name of the Bukkit Type. I also put a *bk* at the front of the variable name so I know I'm working with a Bukkit object and not a regular JavaScript object. This is just a personal preference. I've found it helps me when I'm writing plugins in JavaScript. It may be useful to you too.
 
 ### Enchantments
-One way you can mark an item as having special powers is to add an enchantment to it. Enchanted items shimmer and glow in the game. An Ender Bow should shimmer so that the player knows they're not holding a regular bow. For most of the activities you can do in the game, there are equivalent classes and methods in the Bukkit API. For example: In the game players can *add enchantments* to *items*. If we browse the Bukki API reference we see there's an *inventory* package which has a couple of classes one of which is called *ItemStack*. An *ItemStack* is a collection of one or more *Items* which can be placed in one of the player's inventory slots or held in the player's hand. This *ItemStack* class has *addEnchantment()* and *addUnsafeEnchantment()* methods which we can use to add special powers to items in the game. I'll get into why I chose *addUnsafeEnchantment()* over *addEnchantment()* in a moment but first let's figure out what we want to do:
+One way you can mark an item as having special powers is to add an enchantment to it. Enchanted items shimmer and glow in the game. An Ender Bow should shimmer so that the player knows they're not holding a regular bow. For most of the activities you can do in the game, there are equivalent classes and methods in the Bukkit API. For example: In the game players can *add enchantments* to *items*. If we browse the Bukkit API reference we see there's an *inventory* package which has a couple of classes one of which is called *ItemStack*. An *ItemStack* is a collection of one or more *Items* which can be placed in one of the player's inventory slots or held in the player's hand. This *ItemStack* class has *addEnchantment()* and *addUnsafeEnchantment()* methods which we can use to add special powers to items in the game. I'll get into why I chose *addUnsafeEnchantment()* over *addEnchantment()* in a moment but first let's figure out what we want to do:
 
 1. We want to *enchant* the item created from the recipe so that it shimmers and is visually distinct from a regular Bow.
 2. We're going to use a ShapedRecipe object. The ShapedRecipe constructor - the function which will create a new Recipe() object - takes an *Item* as a parameter - this item will in turn be created each time a player uses the recipe in the in-game crafting table.
@@ -3250,7 +3250,7 @@ In programming, Inheritance diagrams like the one below are useful for understan
 
 From this diagram we can see that *FurnaceRecipe*, *ShapedRecipe* and *ShapelessRecipe* share a common ancestor.
 
-Ultimately the *server.addRecipe()* method *doesn't care* what type of *Recipe* is added, *FurnaceRecipe*, *ShapedRecipe* or *ShapelessRecipe*, it doesn't matter, all the *server* object cares is that it *is* a *Recipe* object so it can call the *Recipe.getResult()* method (which is common to all 3 subclasses) when someone uses the recipe in a crafting grid. We'll revist this topic in the following Chapter.
+Ultimately the *server.addRecipe()* method *doesn't care* what type of *Recipe* is added, *FurnaceRecipe*, *ShapedRecipe* or *ShapelessRecipe*, it doesn't matter, all the *server* object cares is that it *is* a *Recipe* object so it can call the *Recipe.getResult()* method (which is common to all 3 subclasses) when someone uses the recipe in a crafting grid. We'll revisit this topic in the following Chapter.
 
 ### Summary
 In this chapter we covered a lot of ground. We learned how to explore the Bukkit API Reference documentation, how to use the *new* keyword and learned about *inheritance* and how to use it when calling Java code. In the next chapter, we'll build upon what we've done here to add Teleporting behavior to the Ender Bow.
@@ -3383,7 +3383,7 @@ We test to see if the *projectile* variable is of type bkArrow and if it is we r
 
 Next we need to get the shooter - the person (or thing) which fired the arrow. The *.getShooter()* method returns an object of type *ProjectileSource* which is another abstract type - that is - there can be many possible sub-types. If we browse the online reference and look at *org.bukkit.projectiles.ProjectileSource* we see it has many *SubInterfaces* or Sub-types: Player, Animal, BlockProjectileSource etc. We test to see if the *shooter* is a *Player* which is a specific type of *ProjectileSource*. Again, we're only interested in teleporting players. 
 
-Then we get the item currently held by the player by calling the *.getItemInHand()* method. This is yet another example where we need to use Inheritance rules to find out what methods a Player object has. If you look at the online reference for the *org.bukkit.entity.Player* object you will see that the *Player* object itself does not have *.getItemInHand()* method **but** one of its ancestory types does. A *Player* is a sub-type of *HumanEntity* which has a *.getItemInHand()* method. Because there's a *HumanEntity.getItemInHand()* method and *Player* is a sub-type of *HumanEntity*, we can call the *.getItemInHand()* method on Player too! The Inheritance Diagram for the *Player* type below shows just *some* of the player's ancestry:
+Then we get the item currently held by the player by calling the *.getItemInHand()* method. This is yet another example where we need to use Inheritance rules to find out what methods a Player object has. If you look at the online reference for the *org.bukkit.entity.Player* object you will see that the *Player* object itself does not have *.getItemInHand()* method **but** one of its ancestry types does. A *Player* is a sub-type of *HumanEntity* which has a *.getItemInHand()* method. Because there's a *HumanEntity.getItemInHand()* method and *Player* is a sub-type of *HumanEntity*, we can call the *.getItemInHand()* method on Player too! The Inheritance Diagram for the *Player* type below shows just *some* of the player's ancestry:
 
 ![Player Ancestry](images/chapter-17/player-inheritance.png)
 
@@ -3423,7 +3423,7 @@ The type of functions we used to get information about the event, projectile and
 
     /js self.setFoodLevel(20)
 
-Java classes which use the convention of having *getters* and *setters* methods to get and set properties are known as **Java Beans**. JavaScript enables you to treat getter and setter methods in JavaBeans as equivalent JavaScript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowecase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
+Java classes which use the convention of having *getters* and *setters* methods to get and set properties are known as **Java Beans**. JavaScript enables you to treat getter and setter methods in JavaBeans as equivalent JavaScript properties. The name of the property is the name of the JavaBean method without the get or set suffix, and starts with a lowercase letter. For example you can call the getFoodLevel() and setFoodLevel() methods in an org.bukkit.entity.Player object using the foodLevel property as follows:
 
     /js self.foodLevel
     > "17"
@@ -3463,7 +3463,7 @@ In this chapter we completed all of the code needed to add a Teleporting Ender B
 
 ## @@nextChapter{chapter-18}: Protecting your Server against Griefing
 ### Introduction
-One of the great things about running a Bukkit Server instead of the standard Minecraft Server is its customizability and the ability to add plugins. On a public non-whitelisted server where anyone can connect and play, one of the first things a Server Administrator will want to do is protect against griefing or wanton destruction. In this chapter I'll show you how to prevent players from destroying property and how to prevent them from placing destructive blocks such as TNT and Lava. 
+One of the great things about running a Bukkit Server instead of the standard Minecraft Server is the ability to customize the game by adding plugins. On a public non-whitelisted server where anyone can connect and play, one of the first things a Server Administrator will want to do is protect against griefing or wanton destruction. In this chapter I'll show you how to prevent players from destroying property and how to prevent them from placing destructive blocks such as TNT and Lava. 
 
 ### Simple Protection
 The easiest way to prevent griefing is to prevent all players from breaking any blocks at all. This isn't very practical since breaking blocks and placing blocks is part of the process of building in Minecraft. The following code shows how to prevent any blocks from being broken:
@@ -3584,7 +3584,7 @@ In the above code we listen for two events and cancel the events if the block be
 So far, we have a way to create *Safe Zones* where non-operators can't break or place blocks. What we need to do next is provide a way to create *Player Plots* within this *Safe Zone* where players - once they've claimed a plot - can build.
 
 ### Refactoring
-Before we get into the mechanics of creating, claiming and sharing player plots let's think about what a Player Plot is and how it's similar to something we've already created - Safe Zones. A Zone and a Plot are both *Regions* within the world where certain rules apply. A Region has a starting point and extends in two directions (along the X axis and the Z axis). So Zones and Plots are really just parcels (or *Regions*) of land. For any block placed or broken we'll want to test to see if the block is within a given region. There's going to be much in common between Zones and Plots so let's *refactor* the code we've alread written. *Refactoring* is the process of changing code you've already written so that it can be made more reusable. The goal of refactoring is to improve the code so we don't write the same code over and over. What we're going to do is take some of the code from the *zones.js* module we created earlier and move it into a new more reusable module called *region.js*. In your editor create a new file called *region.js* in the *plugins/scriptcraft/modules/protection/* folder and edit the file so it resembles the code in the listing below. 
+Before we get into the mechanics of creating, claiming and sharing player plots let's think about what a Player Plot is and how it's similar to something we've already created - Safe Zones. A Zone and a Plot are both *Regions* within the world where certain rules apply. A Region has a starting point and extends in two directions (along the X axis and the Z axis). So Zones and Plots are really just parcels (or *Regions*) of land. For any block placed or broken we'll want to test to see if the block is within a given region. There's going to be much in common between Zones and Plots so let's *refactor* the code we've already written. *Refactoring* is the process of changing code you've already written so that it can be made more reusable. The goal of refactoring is to improve the code so we don't write the same code over and over. What we're going to do is take some of the code from the *zones.js* module we created earlier and move it into a new more reusable module called *region.js*. In your editor create a new file called *region.js* in the *plugins/scriptcraft/modules/protection/* folder and edit the file so it resembles the code in the listing below. 
 
 You'll notice the *create()* function is *very* similar to the *addZone()* function from the *zones.js* module. That's because it is the same except the statement `store.push(result);` from the *addZones()* function is not present in the *create()* function. If you want to take a shortcut, I recommend copying and pasting the body of the *addZone()* function into the *copy()* function then removing the `store.push(result);` line from the *create()* function. The *contains()* function can be copied directly from the *zones.js* file into the *region.js* file and requires no changes:
 
@@ -3678,7 +3678,7 @@ Next we must update our event-handling code related to protection. We want to al
 There's a new *playerIsTrusted()* function in this revision of the *events.js* file. This function returns true if the player is trusted to work on the plot. There's 2 interesting things to note in this function. The first is how we use the player's name to test if they are in the *sharedWith* list. 
 
 #### Java Strings and JavaScript Strings
-The String type in JavaScript and the String type in Java - they both share the same name - are slightly different so there are some things you can do with a JavaScript string which you can't do with a Java string and vice versa. When comparing two strings - one of them a JavaScript String and the other a Java String it's safest to convert the Java String to a JavaScript string. The easiest way to convert a Java String to a JavaScript string is to prepend an empty JavaScript string to the front of the Java String like this:
+The String type in JavaScript and the String type in Java - they both share the same name - are slightly different so there are some things you can do with a JavaScript string which you can't do with a Java string and vice versa. When comparing two strings - one of them a JavaScript String and the other a Java String it's safest to convert the Java String to a JavaScript string. The easiest way to convert a Java String to a JavaScript string is to insert an empty JavaScript string at the front of the Java String like this:
 
     var jsString = '' + javaString;
 
@@ -3721,7 +3721,7 @@ In this chapter we're going to create a Player vs. Player mini-game called *Snow
 
 The game will be kept simple for the sake of providing example code which you might want to adapt and extend to create your own mini-game. 
 
-The game will be started using a JavaScript function and its duration and team structure will be passed as paramters. If no parameters are passed then the default game duration will be 60 seconds and each player will be allocated to one of 3 teams.
+The game will be started using a JavaScript function and its duration and team structure will be passed as parameters. If no parameters are passed then the default game duration will be 60 seconds and each player will be allocated to one of 3 teams.
 
 First I'll present the game in a single JavaScript module with a function which operators will use to start the game and later in this chapter we'll cover how players can start the game using in-game mechanisms. We'll also cover how to create an Arena for the game to be played in, and a command for use by players to start the game.
 
@@ -3742,7 +3742,7 @@ Before we begin coding let's lay down some of the rules of the Snowball Fight mi
 For the game to work, players should be in close proximity to one another. Later in the chapter we'll construct a special arena for the game to make it more fun. Much of the fun of Minecraft mini-games comes from the anticipation of the game and the ceremony surrounding it. For example, many player vs. player mini-games have a holding area where players wait to jump into the mini-game or choose teams to participate in prior to the game starting. The mechanism for starting a game can vary from mini-game to mini-game. Initially we'll keep things simple - only the operator may start a Snowball Fight mini-game using the */js SnowballFight()* command. Later we'll improve the game so any player can start.
 
 ### Keeping Score
-In chapter @@chapter{chapter-11} we used a JavaScript array to create a simple leaderboard which sorted players by how many times they had jumped. Minecraft has some built-in commmands which let you easily create and display an in-game translucent side-bar with a leaderboard or *scoreboard* of players. 
+In chapter @@chapter{chapter-11} we used a JavaScript array to create a simple leaderboard which sorted players by how many times they had jumped. Minecraft has some built-in commands which let you easily create and display an in-game translucent side-bar with a leaderboard or *scoreboard* of players. 
 
 #### The /scoreboard command
 The */scoreboard* command provides a neat way to specify what should be displayed in the in-game list view , side-bar view and also what can be displayed above player's heads. For example, revisiting the leaderboard code from the earlier chapter, we could display the same leaderboard using the following built-in commands in Minecraft:
@@ -3814,7 +3814,7 @@ The mini-game is created using the *SnowballFight()* function which takes 2 para
 In this game there should ideally only be up to 3 teams where each team name is one of the following 3 colors: red, blue, yellow. Try to avoid having green and red teams because the colors can be difficult to tell apart for some players. Each player's name will appear in the color of their team to make it easier for players to tell who is an opponent and who is on the same team. Next we create a variable called *game* which will be used to store the state of the game and will be passed to other functions in the module.
 
 ### The game loop
-The *loop()* function is called once every second using the *setTimeout()* function and subtracts 1 from the game's duration counter, updates the scoreboard and schedules another call to itself in 1 second. If the game's duration counter is 0 it means that time has run out and the game is over, in which case the *end()* funciton is called. 
+The *loop()* function is called once every second using the *setTimeout()* function and subtracts 1 from the game's duration counter, updates the scoreboard and schedules another call to itself in 1 second. If the game's duration counter is 0 it means that time has run out and the game is over, in which case the *end()* function is called. 
 
 ### Scope and functions
 You might be wondering why the *loop()* function is declared inside of the *SnowballFight()* function. The *loop()* function must be declared inside of the *SnowballFight()* function because it needs to use the *game* variable. Because both the *game* variable and the *loop()* function are declared inside of the *SnowballFight()* function, the *loop()* function can *see* the *game* variable. If the *loop()* function was declared *outside* the *SnowballFight()* function, it would not be able to see the *game* variable because variables are *private* to the function in which they're declared. Normally we'd declare the function outside of the *SnowballFight()* function and pass the *game* variable as a parameter, except we schedule the call to *loop()* using a *setTimeout()* call. There are actually a couple of ways to handle scope and functions in JavaScript but I think declaring the *loop()* function inside the *SnowballFight()* function so it can see and work with the *game* variable is the simplest.
@@ -3835,7 +3835,7 @@ The main part of the *SnowBallFight()* function is at the end. The following 3 l
     game.eventListener = events.entityDamageByEntity( onSnowballHit );
     setTimeout(loop, 1000);
 
-The *start()* function is responsible for initializing the game's scoreboard and team scores, storing each player's current game mode so it can be restored after the game, setting the player's game mode to SURVIVAL, and giving each player snowballs to throw. At the time of writing there was a problem with Scoreboards which made it necessary to first set each team's score to -1, update the scoreboard, then set each team's score to 0 and update again to force the scoreboard to display all teams' scores at the start of the game. Withouth this workaround, team scores only appeared when the team scored a point.
+The *start()* function is responsible for initializing the game's scoreboard and team scores, storing each player's current game mode so it can be restored after the game, setting the player's game mode to SURVIVAL, and giving each player snowballs to throw. At the time of writing there was a problem with Scoreboards which made it necessary to first set each team's score to -1, update the scoreboard, then set each team's score to 0 and update again to force the scoreboard to display all teams' scores at the start of the game. Without this workaround, team scores only appeared when the team scored a point.
 
 ### Initializing and updating the Scoreboard
 The first group of statements in the *start()* function use Bukkit's Scoreboard API to initialize the mini-game's Scoreboard:
@@ -3854,7 +3854,7 @@ The next step in starting the game is to loop over all of the teams in the game 
     bkTeam = scoreboard.registerNewTeam( teamName );
     bkTeam.prefix = textcolors.colorize(teamName, '');
 
-... construct a new Team object and set the team's *prefix*. The *prefix* is a special string which is placed in front of each player's name in the game. In chapter @@chapter{chapter-15} we created a *textcolor* module for changing chat message colors and here we re-use that module to change the color of the player's name as it appears above their head. When we call *textcolors.colorize('gold','')* it returns a special string which is empty except for the color-code used by minecraft. If this special string is placed in front of a chat message or used as a team prefix it will change the color of the message or team member name.
+... construct a new Team object and set the team's *prefix*. The *prefix* is a special string which is placed in front of each player's name in the game. In chapter @@chapter{chapter-15} we created a *textcolor* module for changing chat message colors and here we re-use that module to change the color of the player's name as it appears above their head. When we call *textcolors.colorize('gold','')* it returns a special string which is empty except for the color-code used by Minecraft. If this special string is placed in front of a chat message or used as a team prefix it will change the color of the message or team member name.
 
 ### Displaying the Score
 The *updateScoreboard()* function is called twice at the start of the game because each score must first be set to -1 then 0 for the scoreboard to be refreshed. It's also called from within the *loop()* function every second of the game.

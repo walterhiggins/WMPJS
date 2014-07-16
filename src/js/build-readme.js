@@ -137,6 +137,9 @@ var xforms = {
   '@@chapter\{([a-zA-Z0-9\-]+)\}': function(match, key){
     return chapKeys[key];
   },
+  ' \-\- ': function (){
+    return '&mdash;';
+  },
   '@@include (.*)': function(match, file){
     var contents = readFile(file);
     return contents.join('\n');

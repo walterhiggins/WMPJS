@@ -69,24 +69,44 @@ The following chapters will show you how to install and setup each of the above.
 ### Introduction
 I began playing Minecraft in 2010 in Single Player mode. It was fun and a relaxing way to pass the time. Later I installed the Minecraft Server software on one of the computers on our kitchen table. My youngest son Sean had just finished his homework so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter Kate joined in and we began some serious building together. Building in Minecraft is much more fun with others. 
 
-![](images/chapter-01/Client_Server_Kids.png "Multiplayer Minecraft")
+[AUTHOR NOTE: images/chapter-01/Client\_Server\_Kids.png]
+
+![Multiplayer Minecraft](images/chapter-01/Client_Server_Kids.png "Multiplayer Minecraft")
+
+<caption>Figure 1.1:Multiplayer Minecraft</caption>
+
 
 When You play Minecraft in Multiplayer mode, chatting, building and mining with other players, you do so on a Minecraft *Server*. The Minecraft Server is just a computer program (like Minecraft Client, Microsoft Word or Internet Explorer) which provides a shared virtual place for Minecraft players to connect, build and chat. You don't need to buy any special type of computer to run a Minecraft Server. You can run one on your laptop computer&mdash;assuming it's not too old. Minecraft server software won't run on an iPad, Android Tablet or phone. It only runs on Windows, Macintosh or Linux computers. 
 
 ### Client Server Networking
 Minecraft Multiplayer is "Client-Server". That means that one or more "client" computers&mdash;computers running the Minecraft game&mdash;can connect to a central "server"&mdash;a computer which is responsible for storing all of the Minecraft World information so that players can play together in the same world. The following diagram shows a simple Client/Server network with just one client (Player) connected to a Server.
 
-![A Simple client server network](images/chapter-01/Client_Server1.png "A simple client server network")
+[AUTHOR NOTE: images/chapter-01/Client\_Server1.png]
+
+![A Simple Client-Server Network](images/chapter-01/Client_Server1.png "A Simple Client-Server Network")
+
+<caption>Figure 1.2:A Simple Client-Server Network</caption>
+
 
 The Client must be connected to the Server over some kind of Network. The line between the Client and the Server in the above diagram represents the network. A Server with just one Client computer isn't much fun though. Servers really become fun when many players are connected to the same server as in the following diagram:
 
-![A client server network with many clients (players)](images/chapter-01/Client_Server2.png "A client server network with many clients (players)")
+[AUTHOR NOTE: images/chapter-01/Client\_Server2.png]
+
+![A client server network with many clients](images/chapter-01/Client_Server2.png "A client server network with many clients")
+
+<caption>Figure 1.3:A client server network with many clients</caption>
+
 
 In the above diagram, the server must chat with all of the connected clients. For example, if it starts raining in the game, the server must send a message to each client that it's begun raining. In Minecraft Multiplayer, the server is responsible for many things. The server decides what the weather will be like in the in-game world, what time of day it is and so on. This is so that the time of day and weather *will be the same for all connected players*. 
 
 You'll notice that in the above diagrams, the server is shown as separate computer. This is just for illustration. While very often, Server software *does* run on a separate computers, *you won't need a separate computer to run Minecraft Server* or to follow the tutorials in this book. In fact, for learning how to create Minecraft Plugins and to get the best from this book, I recommend running Minecraft Server on the same computer you play Minecraft on. **This means your computer will act as both a Client and a Server**. This is by far the most convenient and cost-effective way to run a server and learn how to create Minecraft Server Plugins.
 
-![Client And Server](images/chapter-01/Client_Server_Combined.png "A computer which is both a client and a server")
+[AUTHOR NOTE: images/chapter-01/Client\_Server\_Combined.png]
+
+![A computer which is both Client and Server](images/chapter-01/Client_Server_Combined.png "A computer which is both Client and Server")
+
+<caption>Figure 1.4:A computer which is both Client and Server</caption>
+
 
 When you play Minecraft in Multiplayer mode, before you can connect to a server you have to enter the Server details into the game. The Server details are a 'hostname' or an 'IP Address', either one of these provides a way for Minecraft Client (the game) to connect to a computer running the Minecraft Server. The 'hostname' or 'IP Address' are how computers uniquely identify one another on the Internet, much like how we identify each other by name and/or address. When you run Minecraft Server on your own computer, you will use a special hostname called `localhost` or IP address `127.0.0.1`. I'll talk more about these in the following sections.
 
@@ -115,7 +135,12 @@ The standard (Vanilla) Minecraft Server has only limited ways to protect against
 
 CraftBukkit has become the most popular Minecraft Server Software with a thriving community of Plugin developers. In 2012 Mojang hired the CraftBukkit team to work on Minecraft and the Minecraft API. In this book we'll use CraftBukkit as our Minecraft Server software. CraftBukkit is the Server software but it has an API ( a system which Plugin developers can use to extend the server ) which is called 'Bukkit'. We'll look at the Bukkit API in more detail later. For now, all you need to know is that CraftBukkit is the name of the server Software and Bukkit is the API on top which it's built.
 
-![CraftBukkit and Bukkit](images/chapter-01/CraftBukkit_Bukkit.png "CraftBukkit is built on Bukkit")
+[AUTHOR NOTE: images/chapter-01/CraftBukkit\_Bukkit.png]
+
+![CraftBukkit is built on Bukkit](images/chapter-01/CraftBukkit_Bukkit.png "CraftBukkit is built on Bukkit")
+
+<caption>Figure 1.5:CraftBukkit is built on Bukkit</caption>
+
 
 CraftBukkit has become so popular because of its underlying API (Bukkit) which makes it easy for Plugin Developers to extend the Minecraft Multiplayer server. There are hundreds of plugins available for CraftBukkit including all of the popular Multiplayer mini-games such as HungerGames and CaptureTheFlag. Chances are, if you've ever played Minecraft Multiplayer on one of the popular public servers, it's been running CraftBukkit. The CraftBukkit Wiki Website provides a wealth of information for both Administrators (the people who run CraftBukkit Servers) and Developers (the people who create plugins for CraftBukkit). I highly recommend checking it out [http://wiki.bukkit.org/](http://wiki.bukkit.org/) .
 
@@ -126,21 +151,41 @@ The first step in constructing your Modding Workbench is to install CraftBukkit.
 #### Term: Bug
 "Bugs" in software are errors or mistakes in the software code which can cause problems. Nobody quite knows for sure why errors in software are called bugs but one story goes that a problem with an early mechanical computer in the 1940s was caused by a Moth which somehow found its way inside. The term "Bug" had been used to describe errors long before computers came along, so when the engineers captured the Moth they kept it with a note that said "First actual case of bug being found." 
 
+[AUTHOR NOTE: images/chapter-01/mc-server-client-incompat.png]
+
 ![Compatibility between Client and Server](images/chapter-01/mc-server-client-incompat.png "Compatibility between Client and Server")
+
+<caption>Figure 1.6:Compatibility between Client and Server</caption>
+
 
 Usually, a compatible version of the Minecraft Server software is released shortly after the Minecraft Client is upgraded. One thing to keep in mind is that CraftBukkit is an open-source and voluntary project&mdash;this means that the people who develop CraftBukkit don't get paid to do so. They do it for fun. Upgrading Server software takes a lot of work and the software needs to be tested (by volunteers) before it can be released. That's why sometimes it may take a while for a new version of the Minecraft Server Software to be released which is compatible with the latest and greatest client. Be patient and remember that the developers who work on CraftBukkit do it for fun and don't get paid so posting questions on the CraftBukkit forums asking when will the new version be ready won't speed things up :-)
 
 At the time of writing, 1.7.8 is the most current version of Minecraft. This is what the CraftBukkit website's Home page looks like at that time.
 
+[AUTHOR NOTE: images/chapter-01/bukkit-homepage.png]
+
 ![CraftBukkit Home Page](images/chapter-01/bukkit-homepage.png "CraftBukkit Home Page")
+
+<caption>Figure 1.7:CraftBukkit Home Page</caption>
+
 
 The large Download button will download the CraftBukkit Recommended Build. The Recommended Build is the version of the CraftBukkit server software which is considered to be the most reliable version because it has undergone the most testing. However, the Recommended Build is not always the most current or up-to-date version of the software. Fortunately the developers of CraftBukkit also let you download up-to-date versions of the software with the warning that the most up-to-date version may not always be the most reliable version. 
 
-![CraftBukkit download](images/chapter-01/bukkit-download1.png)
+[AUTHOR NOTE: images/chapter-01/bukkit-download1.png]
+
+![CraftBukkit download](images/chapter-01/bukkit-download1.png "CraftBukkit download")
+
+<caption>Figure 1.8:CraftBukkit download</caption>
+
 
 Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete, meaning the developers have added all of the features they're going to add, but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two *Bugs*. If the "Beta Build" version does not match the current version of Minecraft then click on the "Alternate Versions" link beneath the "Beta Build" link. This will take you to the CraftBukkit Builds page where you will see a list of "Builds" or versions. The following screenshot shows what the download page looks like at the time of writing.
 
-![CraftBukkit download 2](images/chapter-01/bukkit-download2.png)
+[AUTHOR NOTE: images/chapter-01/bukkit-download2.png]
+
+![CraftBukkit Builds Page](images/chapter-01/bukkit-download2.png "CraftBukkit Builds Page")
+
+<caption>Figure 1.9:CraftBukkit Builds Page</caption>
+
 
 Along the right-hand side of the page are three big color-coded download buttons. The Green button is for the most recent stable release. Note that though this is the most stable version, it may not be the most up-to-date version or a version which is compatible with the current Client. The Amber button is for the most recent Beta build. This is a version which is not as stable as the released version but will have undergone some testing and will most likely be in use already on some servers. The Red button is for the most recent development build. It's colored red because it is the least stable version. Development builds will not have undergone the same rigorous testing as Beta or Release software. On the other hand, development builds will be the most up-to-date and chances are, there will be a development build of the Server Software for the latest version of the Client software.
 
@@ -148,7 +193,12 @@ Choosing which version of the Server Software to use&mdash;Recommended, Beta or 
 
 Since version 1.6, the Minecraft Launcher (the software you run on your computer to start Minecraft Client and to upgrade to new versions when they become available) lets you choose which version of the Client software to run. By default the Launcher is configured to always download and run the Latest Version but you can easily change this using the new "Profiles" feature. The following are step-by-step instructions for changing your Launcher profile to use a different version of Minecraft Client...
 
-![](images/chapter-01/mc-launcher2.png "Minecraft Launcher")
+[AUTHOR NOTE: images/chapter-01/mc-launcher2.png]
+
+![Minecraft Launcher](images/chapter-01/mc-launcher2.png "Minecraft Launcher")
+
+<caption>Figure 1.10:Minecraft Launcher</caption>
+
 
 1. Launch Minecraft 
 2. Click on the 'New Profile' button in the bottom right of the Launch Screen.
@@ -156,11 +206,21 @@ Since version 1.6, the Minecraft Launcher (the software you run on your computer
 4. Choose the appropriate version from the 'Use Version' drop-down list.
 5. Click the Save Profile button.
 
-![](images/chapter-01/mc-profile-editor.png "Minecraft Profile Editor")
+[AUTHOR NOTE: images/chapter-01/mc-profile-editor.png]
+
+![Minecraft Profile Editor](images/chapter-01/mc-profile-editor.png "Minecraft Profile Editor")
+
+<caption>Figure 1.11:Minecraft Profile Editor</caption>
+
 
 The newly created profile should now be automatically selected in the Profile drop-down list on the main launcher page. Click the Play button to begin playing using the chosen version of Minecraft Client software.
 
-![](images/chapter-01/mc-launcher3.png)
+[AUTHOR NOTE: images/chapter-01/mc-launcher3.png]
+
+![Profile Selection](images/chapter-01/mc-launcher3.png "Profile Selection")
+
+<caption>Figure 1.12:Profile Selection</caption>
+
 
 By using the profile editor to "Downgrade" your Minecraft Client Software, you can ensure that your Client and Server are compatible and that you can play Multiplayer Minecraft even when the Server Software is not as up-to-date as the current latest version of Minecraft Client. This means you can always use the most stable Recommended build of CraftBukkit. 
 
@@ -297,7 +357,12 @@ CraftBukkit's usefulness as a Minecraft server comes from its ability to be exte
 #### Starting and stopping your server
 To start your Minecraft server, double click on the startup script you created earlier in this chapter. This launches the Minecraft server in a terminal window. The terminal window will look something like this:
 
-![](images/chapter-01/server-console.png "The Minecraft Server Console Window")
+[AUTHOR NOTE: images/chapter-01/server-console.png]
+
+![The Minecraft Server Console Window](images/chapter-01/server-console.png "The Minecraft Server Console Window")
+
+<caption>Figure 1.13:The Minecraft Server Console Window</caption>
+
 
 Don't worry if your terminal window doesn't look exactly like this or has slightly different content. The important thing is that after starting up, your server should display a server console prompt&mdash;`>` (right arrow symbol) in the bottom left of the screen along with a blinking cursor. This is called the server console and you can issue administration commands here even if you aren't an operator. Try it: issue the `help` command to see the full list of commands you can use as the Server Console user.
 
@@ -457,7 +522,12 @@ Right now JavaScript does not know what you mean by `hearts`. If you want to tel
     
 ... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something JavaScript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in Minecraft. You can put stuff in a variable, come back to it later and it will still be there.
 
+[AUTHOR NOTE: images/chapter-03/chest.png]
+
 ![Variables are like Chests. You can store stuff in them.](images/chapter-03/chest.png "Variables are like Chests. You can store stuff in them.")
+
+<caption>Figure 3.1:Variables are like Chests. You can store stuff in them.</caption>
+
 
 Now when you type `js hearts`, JavaScript understands what `hearts` is, remembers its value and prints it out. Try it:
 
@@ -724,7 +794,12 @@ The result is 3. Try calling it with different values to test that the function 
 
 Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets&mdash;the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in defining the function is to say what the function should do. Everything between the opening and closing curly brackets&mdash;the `{` and `}` symbols&mdash;is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
 
-![Function Outline](images/chapter-03/function-outline.png)
+[AUTHOR NOTE: images/chapter-03/function-outline.png]
+
+![Function Outline](images/chapter-03/function-outline.png "Function Outline")
+
+<caption>Figure 3.2:Function Outline</caption>
+
 
 When you create a new function of your own, you should give the function a meaningful and memorable name. You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber but you should give your parameters names which are memorable so you don't forget what the parameters are for. 
 
@@ -749,9 +824,19 @@ Up to now we've been executing JavaScript at the server console window using the
 
 ScriptCraft lets you load JavaScript files you've saved and can either run them automatically when the server starts up or can run your code *on-demand*. If you plan on saving your work, you'll need to write your code using a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
 
-![JavaScript in a plain text editor ](images/chapter-04/screenshot-textedit-1.png "JavaScript code in an editor with no Syntax Highlighting.")
+[AUTHOR NOTE: images/chapter-04/screenshot-textedit-1.png]
 
-![JavaScript in a programming editor ](images/chapter-04/screenshot-gedit-2.png "JavaScript code in an editor with Syntax Highlighting turned on.")
+![JavaScript code in an editor with no Syntax Highlighting](images/chapter-04/screenshot-textedit-1.png "JavaScript code in an editor with no Syntax Highlighting")
+
+<caption>Figure 4.1:JavaScript code in an editor with no Syntax Highlighting</caption>
+
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-2.png]
+
+![JavaScript code in an editor with Syntax Highlighting turned on](images/chapter-04/screenshot-gedit-2.png "JavaScript code in an editor with Syntax Highlighting turned on")
+
+<caption>Figure 4.2:JavaScript code in an editor with Syntax Highlighting turned on</caption>
+
 
 
 ### Choosing an editor
@@ -800,18 +885,34 @@ Once installed, gedit should appear in your Start Menu. If it doesn't appear in 
 
 Most modern programming editors provide a file Browsing view where you can see&mdash;at a glance&mdash;all of your folders and files. The disk browser is super useful when you want to quickly navigate around your JavaScript folders and files. To enable the File browsing view in gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will be displayed the next time you launch gedit.
 
-![File Browser in gedit](images/chapter-04/screenshot-gedit-file-browser.png "gedit's File Browser")
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-file-browser.png]
+
+![gedit's File Browser](images/chapter-04/screenshot-gedit-file-browser.png "gedit's File Browser")
+
+<caption>Figure 4.3:gedit's File Browser</caption>
+
 
 #### The gedit File Browser on Microsoft Windows
 The first time you launch gedit for windows, you will need to change one of the default settings so that all files and folders appear in the File Browser window. By default only folders are shown in the Windows File Browser. This isn't very useful as we'll want to work with Folders and JavaScript files. To ensure you can see all types of files do the following: In the File Browser window, right-click anywhere (click the right mouse button) and make sure that the *Show Binary* option is selected under the *Filter* menu. This will ensure all file types are visible.
 
+[AUTHOR NOTE: images/chapter-04/gedit-windows-show-binary.png]
+
 ![Ensuring all file types are visible in gedit for Windows](images/chapter-04/gedit-windows-show-binary.png "Ensuring all file types are visible in gedit for Windows")
+
+<caption>Figure 4.4:Ensuring all file types are visible in gedit for Windows</caption>
+
 
 #### gedit Preferences
 The next step is to set some preferences for how the editor should behave. You do this by choosing Edit => Preferences to open the Preferences dialog. Let's look at each of the preferences sections in turn.
 
 #### View preferences
-![View Preferences](images/chapter-04/screenshot-gedit-prefs-1.png)
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-1.png]
+
+![View Preferences](images/chapter-04/screenshot-gedit-prefs-1.png "View Preferences")
+
+<caption>Figure 4.5:View Preferences</caption>
+
 
 It's useful to have gedit display line numbers alongside your code. The line numbers appear in the left margin of the window and are not part of your actual code. 
 gedit will display a feint margin along the right side of the window in column 80. This margin is just a guide to indicate that perhaps your line of code is too long. It's only a guide though and can be safely ignored. It's generally considered good practice to keep lines of code shorter than 80 characters long to help readability, but there will always be exceptions to this rule.
@@ -828,10 +929,21 @@ The 'Enable text wrapping' setting should be turned off for programming. It's us
 
 This can really help when writing or editing code. In the screenshot below, you can see the cursor on line 1 next to the `{` character with both the opening and closing curly brackets highlighted in gray. 
 
-![bracket matching](images/chapter-04/screenshot-gedit-matching-brackets.png)
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-matching-brackets.png]
+
+![Bracket-matching](images/chapter-04/screenshot-gedit-matching-brackets.png "Bracket-matching")
+
+<caption>Figure 4.6:Bracket-matching</caption>
+
 
 #### Editor preferences
-![View Preferences](images/chapter-04/screenshot-gedit-prefs-2.png)
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-2.png]
+
+![Editor Preferences](images/chapter-04/screenshot-gedit-prefs-2.png "Editor Preferences")
+
+<caption>Figure 4.7:Editor Preferences</caption>
+
 
 I recommend using either 2 or 4 spaces for tabs to make your code more readable. This is largely a matter of style and personal taste. When starting out, you should probably use 4 spaces. 
 
@@ -840,12 +952,24 @@ Automatic Indentation is a handy feature which saves you having to type TAB and 
 gedit can create a backup of your your files before you save them. This is usually a good idea.
 
 #### Fonts & Colors
-![View Preferences](images/chapter-04/screenshot-gedit-prefs-3.png)
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-3.png]
+
+![Fonts and Colors Preferences](images/chapter-04/screenshot-gedit-prefs-3.png "Fonts and Colors Preferences")
+
+<caption>Figure 4.8:Fonts and Colors Preferences</caption>
+
 
 You can change the font and color scheme to suit your own tastes. Some people prefer dark text on a light background, some prefer light text on a dark background. Pick the color scheme you like. You can always change it later.
 
 #### Plugins
-![View Preferences](images/chapter-04/screenshot-gedit-prefs-4.png)
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-4.png]
+
+![Plugins Preferences](images/chapter-04/screenshot-gedit-prefs-4.png "Plugins Preferences")
+
+<caption>Figure 4.9:Plugins Preferences</caption>
+
 
 gedit comes with a couple of editing plugins. You should make sure that the 'File Browser Panel' plugin is selected.
 
@@ -859,7 +983,12 @@ Once installed, you can launch TextWrangler by typing 'textw' in the Spotlight s
 
 Whenever you Launch TextWrangler you should open a 'Disk Browser' window by choosing File => New => Disk Browser. The Disk Browser in TextWrangler lets you quickly navigate around different files in the ScriptCraft folder and sub-folders. 
 
-![TextWrangler Disk Browser](images/chapter-04/textwrangler-disk-browser.png "TextWrangler's Disk Browser")
+[AUTHOR NOTE: images/chapter-04/textwrangler-disk-browser.png]
+
+![TextWrangler's Disk Browser](images/chapter-04/textwrangler-disk-browser.png "TextWrangler's Disk Browser")
+
+<caption>Figure 4.10:TextWrangler's Disk Browser</caption>
+
 
 ### First steps with your editor
 
@@ -869,7 +998,12 @@ To get used to working with a programming editor, we're going to create a new fo
 
 In the File Browser Pane ( the Disk Browser in TextWrangler on Mac OS ) locate and select the folder where you installed CraftBukkit earlier. Then navigate to the plugins/scriptcraft/plugins sub-folder. Once selected, right-click on the folder and choose 'New Folder' from the menu. Call your new folder 'learning' for now. You can call it something else as long as it's memorable&mdash;we'll come back to this folder later.
 
-![create a new folder](images/chapter-04/screenshot-edit-new-folder.png)
+[AUTHOR NOTE: images/chapter-04/screenshot-edit-new-folder.png]
+
+![Creating a New Folder](images/chapter-04/screenshot-edit-new-folder.png "Creating a New Folder")
+
+<caption>Figure 4.11:Creating a New Folder</caption>
+
 
 Your new folder will now appear in the File/Disk Browser Pane. 
 
@@ -877,7 +1011,12 @@ Your new folder will now appear in the File/Disk Browser Pane.
 
 The next step is to create a new JavaScript file in the sub-folder we just created. The file won't do much just yet but we'll work some more on it soon. Right-click on the Folder you just created and choose 'New File' from the menu. Call the new file 'helloWorld.js'.
 
-![create a new file](images/chapter-04/screenshot-edit-new-file.png)
+[AUTHOR NOTE: images/chapter-04/screenshot-edit-new-file.png]
+
+![Creating a New File](images/chapter-04/screenshot-edit-new-file.png "Creating a New File")
+
+<caption>Figure 4.12:Creating a New File</caption>
+
 
 The file has just been created but hasn't been opened. If using TextWrangler click the file to open it. If using gedit double-click the file to open it. The file contents now appear in the editing pane on the right. The file is, as you'd expect, empty. Type in the following code exactly as you see it.
 
@@ -1056,7 +1195,12 @@ That is; calling dice.roll() should return a random number between 0 and 5 behav
 
 Launch your editor and in the File/Disk Browser, select the **scriptcraft/modules** folder.
 
-![](images/chapter-05/screenshot-gedit-file-new-modules.png)
+[AUTHOR NOTE: images/chapter-05/screenshot-gedit-file-new-modules.png]
+
+![Creating a new File in the Modules Folder](images/chapter-05/screenshot-gedit-file-new-modules.png "Creating a new File in the Modules Folder")
+
+<caption>Figure 6.1:Creating a new File in the Modules Folder</caption>
+
 
 Important: You must select the **scriptcraft/modules** folder not the scriptcraft/plugins folder!
 
@@ -1114,7 +1258,14 @@ We've written some useful code, but how do we get to use it?
 ### Modules
 A module in ScriptCraft is simply a JavaScript file. Throughout this book I will use the words module and file interchangeably because in ScriptCraft they mean the same thing. ScriptCraft uses a module system called CommonJS which is also used by NodeJS&mdash;an increasingly popular JavaScript programming environment. Modules provide yet another way to make your code *reusable*. We've already used functions to package up statements that we want to call over and over. Well, modules provide a way to package up functions. So far we've only written one function in our file but in later chapters we'll create modules which have many functions.
 
-![Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg](images/chapter-05/nasa-apollo-modules.jpg)
+[AUTHOR NOTE: Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg]
+
+[AUTHOR NOTE: images/chapter-05/nasa-apollo-modules.jpg]
+
+![Appollo 13 Modules. Image Courtesy of NASA.](images/chapter-05/nasa-apollo-modules.jpg "Appollo 13 Modules. Image Courtesy of NASA.")
+
+<caption>Figure 6.2:Appollo 13 Modules. Image Courtesy of NASA.</caption>
+
 
 Modular systems are good when programming. They're good because modules can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in the diagram above the lunar lander module was only used to land on the moon. That was its only purpose. Similarly, when writing JavaScript modules, it's considered good practice to have the module serve a single purpose. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
 
@@ -1207,7 +1358,12 @@ In this chapter we created our first truly reusable module. We learned about Mod
 ### Introduction
 In this chapter we'll build on the code written in the previous chapter to let us roll a dice of any number of sides. Sometimes we want a random number that doesn't fit in the range 1 to 6. Ideally we'd like our virtual dice module to return a random number for any range we give it. We're going to take our 6-sided dice from the earlier chapter and enhance it so it can change shape to any number of sides like the multi-sided dice used in some table-top and role-playing games.
 
-![](images/chapter-07/mydice.jpg)
+[AUTHOR NOTE: images/chapter-07/mydice.jpg]
+
+![Multi-Sided Dice](images/chapter-07/mydice.jpg "Multi-Sided Dice")
+
+<caption>Figure 7.1:Multi-Sided Dice</caption>
+
 
 ### Flexible Functions
 If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each type of dice...
@@ -1270,7 +1426,12 @@ The above code is similar to code from the previous chapter except I declare a n
 
 Can you spot the difference? I removed the `var sides = 6;` statement and put a new name `sides` between the function's curly brackets. The `sides` variable is no longer a private variable and is instead a parameter. Because it's a parameter, we can say what it should be each time we call the *roll()* function. The following diagram illustrates the changes the function has just undergone.
 
-![](images/chapter-07/magicnumber-to-parameter.png)
+[AUTHOR NOTE: images/chapter-07/magicnumber-to-parameter.png]
+
+![Using Parameters](images/chapter-07/magicnumber-to-parameter.png "Using Parameters")
+
+<caption>Figure 7.2:Using Parameters</caption>
+
 
 The first change was to make the number 6 used in the computation a variable. The next change was to make the variable a parameter. Parameters are like variables. In the first version of this program (on the left hand side) the number 6 is 'hard-coded'. 'Hard-coding' is when you have a specific number or text or other data in your function which at the time seemed like it might never need to change (this would be true if we assumed we'd only ever need a number between 0 and 5). It's usually a good idea to instead turn these values into parameters so you don't have to change your code every time the data changes. Once you've edited your dice.js file to match the version on the right, save it and then type `/js refresh()` at the in-game prompt and try each of the following commands in turn:
 
@@ -1640,7 +1801,12 @@ Make sure to save your file then run the JavaScript `refresh()` function to relo
 
 The message will of course be different for you. The screenshot below shows where you should expect the greeting to appear when you join the server:
 
-![](images/chapter-08/screenshot-greeting.png)
+[AUTHOR NOTE: images/chapter-08/screenshot-greeting.png]
+
+![Greeting Players](images/chapter-08/screenshot-greeting.png "Greeting Players")
+
+<caption>Figure 8.1:Greeting Players</caption>
+
 
 ScriptCraft comes bundled with a built-in variable called *events*. The *events* variable is used to listen and react to events in the game. There are approximately 200 different types of events that you can register for in Minecraft. When you *register* for an *event* in your code you are telling the server that you want to be notified when a particular type of activity occurs in the game. You register by giving the server a function which won't be called immediately but will only be called when the activity occurs. In the code above we are basically saying to Minecraft "Hey, whenever someone joins the game, I want you (the server) to call this 'greetPlayer' function" . 
 
@@ -1652,7 +1818,12 @@ We'll look more closely at events and event-handling functions in a later chapte
 
 From looking at the *greetPlayers* module you can see the first thing it does is load another module: *greetings* which we created earlier in this chapter. If you remember, the *greetings* module in turn loads yet another module&mdash;the *dice* module we worked on in the previous chapters. This is a classic example of how programming is typically done. We start with small dedicated modules and then work on bigger and bigger modules piecing them together to solve a problem. In programming, a big part of problem-solving is breaking problems down into smaller and smaller problems and solving each of these smaller problems then piecing together the solutions. Programming can often feel like playing with toy building bricks except *you* get to design the bricks and put them together. When a program module relies on another module we say it *depends* on the module. A module which loads another module *depends* on that module and that module in turn will *depend* on other modules. All of the modules which are required&mdash;either directly or indirectly&mdash;by a program are called *dependencies*. You can see in the diagram below the relationship between the *greetPlayers*, *greetings* and *dice* modules. 
 
-![](images/chapter-08/encapsulation.png)
+[AUTHOR NOTE: images/chapter-08/encapsulation.png]
+
+![Encapsulation and Modules](images/chapter-08/encapsulation.png "Encapsulation and Modules")
+
+<caption>Figure 8.2:Encapsulation and Modules</caption>
+
 
 The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings*&mdash;in turn&mdash;depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for&mdash;what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a JavaScript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
 
@@ -1722,7 +1893,12 @@ Let's take a closer look at how this function works by first looking at how Scri
 
 Most programming languages provide a function which can be used to ask a question. JavaScript runs in many different environments. The most common way to run JavaScript is in Web Browsers where JavaScript comes with a special *prompt()* function which can be used to ask website visitors questions by displaying a small window (known as a *dialog box*) with a question, an *input field* where you type the answer and OK and Cancel buttons. This style of user interaction is called *modal* because the user cannot do anything else until they close the *dialog* window. You can see an example of what a modal dialog looks like below:
 
-![](images/chapter-09/modal-dialog.png)
+[AUTHOR NOTE: images/chapter-09/modal-dialog.png]
+
+![A Modal Dialog](images/chapter-09/modal-dialog.png "A Modal Dialog")
+
+<caption>Figure 9.1:A Modal Dialog</caption>
+
 
 The problem with modal dialogs is that they interrupt the program and the program can't resume until the user closes the dialog by clicking either OK or Cancel. This could be a problem in a fast-paced game like Minecraft where you wouldn't want such a question to appear while you were fighting off a horde of zombies. Unlike JavaScript in the browser, JavaScript in Minecraft does not have a *prompt()* function but you *can* ask players questions using the *input* module. The questions will not appear in a modal dialog, instead appearing as a message on the player's screen. What's more, Players do not have to answer the question immediately. The *input()* function takes 3 parameters:
 
@@ -1860,7 +2036,12 @@ Another change in the above function is that we've given the player the option o
 
 How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how listing 9.3 behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
 
-![](images/chapter-09/flowchart.png)
+[AUTHOR NOTE: images/chapter-09/flowchart.png]
+
+![A Flow Diagram](images/chapter-09/flowchart.png "A Flow Diagram")
+
+<caption>Figure 9.2:A Flow Diagram</caption>
+
 
 ### Nested blocks
 The `if` statement is one of several *block* statements in JavaScript, that is, statements which have an accompanying block of text. Other examples of *block* statements in JavaScript are the `for`, and `while` statements which we'll explore later. Any *block* statement can have within its block, other block statements. When you have one or more blocks inside another block it's called *nesting*. The updated `numberGuess.js` file below adds a cool enhancement for players who play the game at the in-game prompt rather than at the server console window. Update your code to match the code below:
@@ -1966,7 +2147,12 @@ So we've seen the use of the `&&` (logical AND) operator and the `||` (logical O
 
 To you and I that rule might look clear enough but the computer would be confused. There are actually two possible ways to interpret the above rule:
 
-![](images/chapter-09/cookie-drop-rule.png)
+[AUTHOR NOTE: images/chapter-09/cookie-drop-rule.png]
+
+![Combining conditions](images/chapter-09/cookie-drop-rule.png "Combining conditions")
+
+<caption>Figure 9.3:Combining conditions</caption>
+
 
 We have to be careful when writing test conditions in JavaScript. It's very easy to write a test condition which seems clear to us but results in unexpected behavior when executed. We need to use `( )` round brackets inside the *if* condition to tell the computer exactly how the rule should be interpreted. So we would need to write the following JavaScript code:
 
@@ -2704,7 +2890,12 @@ In this chapter we'll build a 10-story Skyscraper using just a couple of lines o
 ### Building using Drones
 In Minecraft, building by hand is fun but can be tedious when you want to build big structures&mdash;Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using JavaScript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a JavaScript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using JavaScript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
 
-![Targeting a block in Minecraft](images/chapter-12/drone_target.png)
+[AUTHOR NOTE: images/chapter-12/drone\_target.png]
+
+![Targeting a block in Minecraft](images/chapter-12/drone_target.png "Targeting a block in Minecraft")
+
+<caption>Figure 12.1:Targeting a block in Minecraft</caption>
+
 
 Once you've targeted a block&mdash;pick any block you like but preferably one just above ground level&mdash;issue the following command at the in-game prompt:
 
@@ -2712,7 +2903,12 @@ Once you've targeted a block&mdash;pick any block you like but preferably one ju
 
 The targeted block will disappear and a column of gold blocks 1 block wide and 3 blocks high will instantly appear in its place. 
 
-![gold column](images/chapter-12/1x3gold.png)
+[AUTHOR NOTE: images/chapter-12/1x3gold.png]
+
+![A Gold Column](images/chapter-12/1x3gold.png "A Gold Column")
+
+<caption>Figure 12.2:A Gold Column</caption>
+
 
 The *box()* function is used to place blocks in the game. It takes 4 parameters:
 
@@ -2723,7 +2919,12 @@ The *box()* function is used to place blocks in the game. It takes 4 parameters:
 
 The *box()* function is used to create cubes and cuboids of any size. A cube is a 3 Dimensional shape whose sides are all the same length. A cuboid is a 3 Dimensional shape whose width, height and length can differ.
 
-![Box Parameters](images/chapter-12/box-params.png)
+[AUTHOR NOTE: images/chapter-12/box-params.png]
+
+![Box Function Parameters](images/chapter-12/box-params.png "Box Function Parameters")
+
+<caption>Figure 12.3:Box Function Parameters</caption>
+
 
 Let's try a couple of more examples. While targeting the original block (it's gold now) issue the following command to turn the column from Gold to Iron.
 
@@ -2735,7 +2936,12 @@ If you are unsure which material to use, you can use *TAB completion* to fill in
 
 This will create a stony path that extends 10 blocks away from you. 
 
-![Stone path 2 x 1 x 10](images/chapter-12/stone_path.png)
+[AUTHOR NOTE: images/chapter-12/stone\_path.png]
+
+![A Stone path 2 x 1 x 10](images/chapter-12/stone_path.png "A Stone path 2 x 1 x 10")
+
+<caption>Figure 12.4:A Stone path 2 x 1 x 10</caption>
+
 
 If you leave out any of the width, height and length parameters they will default to 1. So `box( blocks.gold, 5, 3)` will create a box 5 blocks wide, 3 blocks high and 1 block long, `box( blocks.gold, 5)` will create a box 5 blocks wide, 1 block high and 1 block long, and `box( blocks.gold )` will create a gold box 1 block wide, high and long. For the first parameter&mdash;the Material&mdash;you can use any of the values in the special *blocks* variable. The table below lists all of the possible block materials which can be used for building.
 
@@ -2838,7 +3044,12 @@ The statement above might look odd but it's perfectly valid JavaScript. This sty
 
 In the above statement there are 3 different function calls being made, the first call&mdash;`box(blocks.gold)`&mdash;creates a gold block. The `box()` function returns a Drone object which can be used to call other Drone functions. The next call&mdash;`.right(2)`&mdash;moves the Drone right 2 blocks and it too returns the same Drone object. The last call&mdash;`.box(blocks.gold)`&mdash;creates another gold block. If we were to plot this out on graph paper it would look like this:
 
-![Moving the Drone, Graph Paper Plot](images/chapter-12/graph-paper-movement.png)
+[AUTHOR NOTE: images/chapter-12/graph-paper-movement.png]
+
+![Moving the Drone, Graph Paper Plot](images/chapter-12/graph-paper-movement.png "Moving the Drone, Graph Paper Plot")
+
+<caption>Figure 12.5:Moving the Drone, Graph Paper Plot</caption>
+
 
 We could also write the above code as 3 distinct statements like this:
 
@@ -2851,7 +3062,12 @@ I personally prefer to write it using a single statement `box(blocks.gold).right
 ##### The Corner Stone
 If building just above ground level, it's a good idea to always place a block where you would like to build, then target that block before issuing any Drone functions. Think of the targeted block as the *Corner Stone* of your building. If building on a flat world, you will first need to manually place a corner stone block or else your building will begin in the ground instead of just above ground level.
 
-![Corner Stone](images/chapter-12/cornerstone.png)
+[AUTHOR NOTE: images/chapter-12/cornerstone.png]
+
+![A Corner Stone](images/chapter-12/cornerstone.png "A Corner Stone")
+
+<caption>Figure 12.6:A Corner Stone</caption>
+
 
 Let's use more chaining to create a series of 3 parkour platforms each of which are 2 blocks apart. Target a block then issue the following command:
 
@@ -2861,9 +3077,19 @@ This statement will create 3 platforms. The first platform will be 1 block high,
 
 In the diagram below you can see how the pillars are constructed and in the screenshot that follows, how the parkour platforms look in the game.
 
-![Parkour Platforms on Graph Paper](images/chapter-12/graph-paper-parkour.png)
+[AUTHOR NOTE: images/chapter-12/graph-paper-parkour.png]
 
-![Parkour Platforms](images/chapter-12/jumping-pillars.png)
+![Parkour Platforms on Graph Paper](images/chapter-12/graph-paper-parkour.png "Parkour Platforms on Graph Paper")
+
+<caption>Figure 12.7:Parkour Platforms on Graph Paper</caption>
+
+
+[AUTHOR NOTE: images/chapter-12/jumping-pillars.png]
+
+![Parkour Platforms](images/chapter-12/jumping-pillars.png "Parkour Platforms")
+
+<caption>Figure 12.8:Parkour Platforms</caption>
+
 
 #### Turning your Drone
 In addition to moving, you can make your Drone change direction too. To change direction use the *turn()* function. When turning, you always turn right 90 degrees. To turn around so you're facing the opposite way, turn twice `turn(2)`. To turn left you need to turn right 3 times `turn(3)`. You can combine turning, movement and building in a single chained statement like this:
@@ -2872,11 +3098,21 @@ In addition to moving, you can make your Drone change direction too. To change d
 
 This command creates 3 small walls of gold, iron and ice. In the diagram below you can see how the walls are constructed using a combination of *box()*, *turn()* and *fwd()* function calls:
 
-![3 Walls on Graph Paper](images/chapter-12/graph-paper-3walls.png)
+[AUTHOR NOTE: images/chapter-12/graph-paper-3walls.png]
+
+![3 Walls on Graph Paper](images/chapter-12/graph-paper-3walls.png "3 Walls on Graph Paper")
+
+<caption>Figure 12.9:3 Walls on Graph Paper</caption>
+
 
 And here is the result in Minecraft:
 
-![Turning and Movement while building](images/chapter-12/turning.png)
+[AUTHOR NOTE: images/chapter-12/turning.png]
+
+![Turning and Movement while building](images/chapter-12/turning.png "Turning and Movement while building")
+
+<caption>Figure 12.10:Turning and Movement while building</caption>
+
 
 All of the Drone's functions return the Drone itself so each function can chain directly onto another. If you want to find out more about the Drone object and its functions you can refer to the Drone API Reference online at http://scriptcraftjs.org/api#drone-plugin.
 
@@ -2914,7 +3150,12 @@ The listing above will let you create pyramids by simply targeting a block in th
 
 You can what the result looks like in the screenshot below:
 
-![A Pyramid](images/chapter-12/pyramid.png)
+[AUTHOR NOTE: images/chapter-12/pyramid.png]
+
+![A Pyramid](images/chapter-12/pyramid.png "A Pyramid")
+
+<caption>Figure 12.11:A Pyramid</caption>
+
 
 We'll dive deeper into Drone blueprints in the next exercise&mdash;Blueprint basics.
 
@@ -2942,7 +3183,12 @@ Once you've saved the file issue the `js refresh()` command to reload your plugi
 
     /js monolith()
 
-![An imposing black Monolith](images/chapter-12/monolith.png)
+[AUTHOR NOTE: images/chapter-12/monolith.png]
+
+![An imposing black Monolith](images/chapter-12/monolith.png "An imposing black Monolith")
+
+<caption>Figure 12.12:An imposing black Monolith</caption>
+
 
 In a very short time, an imposing black Monolith will appear. Now let's take a closer look at the *monolith.js* source code...
 
@@ -3015,11 +3261,21 @@ The next section of the method is a *for* loop which repeatedly (for each floor)
 
 The above 4 steps are repeated for each floor so that when the *for* loop is done an entire skyscraper has been constructed. You can see what just one floor of the skyscraper (one pass through the *for* loop) looks like in the screenshot below:
 
-![](images/chapter-12/skyscraper_floor.png)
+[AUTHOR NOTE: images/chapter-12/skyscraper\_floor.png]
+
+![A single floor of the Skyscraper](images/chapter-12/skyscraper_floor.png "A single floor of the Skyscraper")
+
+<caption>Figure 12.13:A single floor of the Skyscraper</caption>
+
 
 At the end of the method, an entire skyscraper is constructed. This is what the result looks like in the game:
 
-![](images/chapter-12/skyscraper.png)
+[AUTHOR NOTE: images/chapter-12/skyscraper.png]
+
+![The Complete Skyscraper](images/chapter-12/skyscraper.png "The Complete Skyscraper")
+
+<caption>Figure 12.14:The Complete Skyscraper</caption>
+
 
 ##### Chaining in source files.
 At the in-game prompt we are limited to a single line for our code so when chaining together a couple of Drone method calls we need to write code like this:
@@ -3140,13 +3396,14 @@ A function which calls itself is called a *recursive* function. Recursive functi
       }
     }
 
-The *openRussianDoll()* function wouldn't be called just once or twice but would be called every time a new doll was uncovered. This is the power of recursion. 
+The *openRussianDoll()* function wouldn't be called just once or twice but would be called every time a new doll was uncovered. This is the power of recursion. If you're curious about recursion, a few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations below:
 
-![](images/chapter-13/russiandoll.png)
+[AUTHOR NOTE: images/chapter-13/malinchristersson\_fractals.png]
 
-If you're curious about recursion, a few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations below:
+![Malin Christersson's Fractal Cube Stars](images/chapter-13/malinchristersson_fractals.png "Malin Christersson's Fractal Cube Stars")
 
-![Malin Christersson's Fractal Cube Stars](images/chapter-13/malinchristersson_fractals.png)
+<caption>Figure 13.1:Malin Christersson's Fractal Cube Stars</caption>
+
 
 ### Cancelling the Fireworks show
 Let's say you kicked off a long running fireworks show and after a while you get bored and want to *cancel* the show. There are two ways to schedule a repeating task in JavaScript, one way is to use *setTimeout()* and have a function which calls itself. We've already seen this in the earlier example. Another way is to use the *setInterval()* function which is like *setTimeout()* except it will keep on executing the task after each delay instead of only executing once after the delay. Let's take a look at an example of using *setInterval()* at the server console prompt:
@@ -3386,7 +3643,12 @@ One thing to note about objects and variables is that when we assign a new varia
 
 Does not create a clone of the player. It merely adds a new JavaScript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
 
-![Objects and References: Player](images/chapter-14/objects_player.png)
+[AUTHOR NOTE: images/chapter-14/objects\_player.png]
+
+![Objects and References: Player](images/chapter-14/objects_player.png "Objects and References: Player")
+
+<caption>Figure 14.1:Objects and References: Player</caption>
+
 
 If I have more than one variable that refers to the same object then I can control or change that object through any of the variables that refer to it (also known as references). What this means is that if I have 3 variables *self*, *me* and *walter* all of which refer to the same player, I can make that player shoot an arrow by using any of the following statements:
 
@@ -3690,7 +3952,12 @@ Once you've saved this file and reloaded the plugin using `js refresh()`, test i
     /js var goldText = textcolors.colorize( 'gold', 'I am gold!' );
     /js self.sendMessage(goldText);
 
-![Gold Text](images/chapter-15/gold.png)
+[AUTHOR NOTE: images/chapter-15/gold.png]
+
+![Gold Text](images/chapter-15/gold.png "Gold Text")
+
+<caption>Figure 15.1:Gold Text</caption>
+
 
 The module in listing 15.1 exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged&mdash;no color code will be added to the text.
 
@@ -3878,7 +4145,12 @@ Before we get into the 'How' of adding the new Crafting Recipe to the game, let'
 ### Crafting an Ender Bow
 A regular bow in Minecraft is crafted using 3 bits of stick and 3 bits of string. By arranging each piece in a certain formation in the Crafting Grid, a Bow is crafted. The Ender Bow we'll add to the game is special though. It will require some extra ingredients to add teleporting magic to the bow. I call this new item the 'Ender Bow' after the 'EnderMan' monster type in Minecraft. An EnderMan can teleport from one location to another at random which is what makes him such a terrifying and unpredictable opponent. If you're lucky enough to defeat an EnderMan in battle, they drop *Ender Pearls* which can be thrown by hand to teleport a short distance. The range of the Ender Bow will obviously be longer than throwing by hand and&mdash;unlike throwing Ender Pearls&mdash;it won't deal any damage to the shooter when they are teleported. This is what the Crafting Grid for a regular Bow looks like in Minecraft:
 
-![Crafting Recipe for a Bow](images/chapter-16/bow-recipe.png)
+[AUTHOR NOTE: images/chapter-16/bow-recipe.png]
+
+![Crafting Recipe for a Bow](images/chapter-16/bow-recipe.png "Crafting Recipe for a Bow")
+
+<caption>Figure 16.1:Crafting Recipe for a Bow</caption>
+
 
 In the next section we'll look at how we can use this information to craft a new type of Bow.
 
@@ -3889,7 +4161,12 @@ For the Ender Bow recipe, we're going to base our new recipe on the existing Bow
 
 The ingredient we're going to add is *Ender Pearl*. These are obtained from teleporting Endermen so it makes sense they should be ingredients for an Ender Bow. You could of course choose whatever material you like. You could for example decide that an extra block of grass in the middle is all that's needed to create an Ender Bow. For players that might not make the new Item very interesting. Any new item you add to the game should be interesting both in what it does *and* how it's constructed. New items should not be *too* easy to make&mdash;especially if they're powerful like the Ender Bow. Ender Pearls are difficult to obtain in survival mode so they make for good ingredients for the Ender Bow. So our Ender Bow will be constructed using the following recipe:
 
-![Crafting Recipe for a Bow](images/chapter-16/ender-bow-recipe-not-yet.png)
+[AUTHOR NOTE: images/chapter-16/ender-bow-recipe-not-yet.png]
+
+![Crafting Recipe for a Bow](images/chapter-16/ender-bow-recipe-not-yet.png "Crafting Recipe for a Bow")
+
+<caption>Figure 16.2:Crafting Recipe for a Bow</caption>
+
 
 You'll notice in the above screenshot that no item appears in the right hand side. That's because we haven't yet instructed the server to recognize that recipe. Now that we've figured out what we want our new Crafting Recipe to look like from a Player's point of view, let's dive in to how we'll program this new behavior into the game.
 
@@ -3913,13 +4190,23 @@ For example, in Minecraft there are hundreds of different types of *events* whic
 
 If you visit http://jd.bukkit.org/rb/apidocs You'll see a web page with 3 distinct areas.
 
-![Bukkit API Docs](images/chapter-16/apidocs.png)
+[AUTHOR NOTE: images/chapter-16/apidocs.png]
+
+![Bukkit API Docs](images/chapter-16/apidocs.png "Bukkit API Docs")
+
+<caption>Figure 16.3:Bukkit API Docs</caption>
+
 
 The area on the top left is the list of packages. This area provides a high-level overview of the entire API. You can quickly move from one package to another by clicking any of the packages listed in this area.
 
 The area on the bottom left is the list of classes in the current package (the package selected in the top left pane). Clicking on any of the items in this area will display more details about the chosen item in the main display pane on the right.
 
-![Bukkit API Doc Areas](images/chapter-16/apidocs-bukkit-class.png)
+[AUTHOR NOTE: images/images/chapter-16/apidocs-bukkit-class.png]
+
+![Bukkit API Doc Layout](images/images/chapter-16/apidocs-bukkit-class.png "Bukkit API Doc Layout")
+
+<caption>Figure 16.4:Bukkit API Doc Layout</caption>
+
 
 Clicking on any of the method links in the right hand side of the page will take you to more information about the method. 
 
@@ -4004,7 +4291,12 @@ That's just enough Java for now. Before we explore the Bukkit API further let's 
 
 Save the file, reload using the `/reload` command and then bring up the crafting grid by right-clicking on a crafting table. When you place Ender Pearls, String and Sticks in the Grid you should see an shimmering bow appear in the right hand side. See the screenshot below:
 
-![Crafting Recipe for a Bow](images/chapter-16/ender-bow-recipe.png)
+[AUTHOR NOTE: images/chapter-16/ender-bow-recipe.png]
+
+![Crafting Recipe for a Bow](images/chapter-16/ender-bow-recipe.png "Crafting Recipe for a Bow")
+
+<caption>Figure 16.5:Crafting Recipe for a Bow</caption>
+
 
 Put the crafted Ender Bow in your inventory but don't try using it just yet. It will still behave just like a regular bow. We'll add the teleportation magic in the next chapter.
 ### Using Bukkit Classes and Enums in JavaScript
@@ -4057,7 +4349,12 @@ The *new* keyword in JavaScript means the Date() function becomes a *constructor
 #### The crafting Grid
 The Crafting Grid in Minecraft is what appears on screen when you right-click on a crafting table. It's essential for creating tools and weapons in the game. The Grid consists of 3 rows each of which have 3 slots. We need to be able to define&mdash;in code&mdash;what combination of ingredients will result in a new Ender Bow. Fortunately this is relatively easy. The in-game grid can be mapped to an Array of JavaScript strings which substitute each letter for a material. The following diagram shows the crafting grid with letters superimposed on each cell. 
 
-![Crafting Grid with material codes](images/chapter-16/gridwithletters.png)
+[AUTHOR NOTE: images/chapter-16/gridwithletters.png]
+
+![Crafting Grid with material codes](images/chapter-16/gridwithletters.png "Crafting Grid with material codes")
+
+<caption>Figure 16.6:Crafting Grid with material codes</caption>
+
 
 Each letter corresponds to a material: E is for Ender Pearl, S is for Stick and W is for String (Web). If we were to imagine the recipe using just the letters E, S and W as shorthand for each material, the recipe might look like this:
 
@@ -4137,7 +4434,12 @@ Under *All Known Implementing Classes:* are a list of *Subclasses* or specialize
 
 In programming, Inheritance diagrams like the one below are useful for understanding inheritance:
 
-![Recipe Inheritance](images/chapter-16/recipe-inheritance.png)
+[AUTHOR NOTE: images/chapter-16/recipe-inheritance.png]
+
+![Recipe Inheritance Diagram](images/chapter-16/recipe-inheritance.png "Recipe Inheritance Diagram")
+
+<caption>Figure 16.7:Recipe Inheritance Diagram</caption>
+
 
 From this diagram we can see that *FurnaceRecipe*, *ShapedRecipe* and *ShapelessRecipe* share a common ancestor.
 
@@ -4232,7 +4534,12 @@ In this particular instance we're interested in exploring the properties and met
 
 The *getEntity()* method returns an object of type *Projectile*. If we click on the *Projectile* link we're taken to the information page for this type where we find the following:
 
-![Projectile API Hierarchy](images/chapter-17/projectile-api.png)
+[AUTHOR NOTE: images/chapter-17/projectile-api.png]
+
+![Projectile API Hierarchy](images/chapter-17/projectile-api.png "Projectile API Hierarchy")
+
+<caption>Figure 17.1:Projectile API Hierarchy</caption>
+
 
     package: org.bukkit.entity 
     Interface Projectile
@@ -4244,7 +4551,12 @@ The *getEntity()* method returns an object of type *Projectile*. If we click on 
 
 The pieces of information which are useful here are the *Superinterfaces*&mdash;that is, the parents of this type, and the *Subinterfaces* or children of this type. The following inheritance diagram shows us the relationship better. In this diagram only some of the *Projectile* sub-types are shown for sake of clarity:
 
-![Projectile Inheritance](images/chapter-17/projectile-inheritance.png)
+[AUTHOR NOTE: images/chapter-17/projectile-inheritance.png]
+
+![Projectile Inheritance Diagram](images/chapter-17/projectile-inheritance.png "Projectile Inheritance Diagram")
+
+<caption>Figure 17.2:Projectile Inheritance Diagram</caption>
+
 
 The *Superinterfaces* and *Subinterfaces* are important when browsing the Bukkit API types because they tell us about the type's *Ancestry*. The *ancestry* of a type is important because anything a Type's parent can do, the Type can do too. The same goes for the Type's children , they *inherit* the properties and methods of the type. From this you can infer that because the *Projectile* type has a method called *getShooter()*, then the *Arrow*, *Egg* and other other sub-types also have this *getShooter()* method. 
 
@@ -4309,7 +4621,12 @@ Next we need to get the shooter&mdash;the person (or thing) which fired the arro
 
 Then we get the item currently held by the player by calling the *.getItemInHand()* method. This is yet another example where we need to use Inheritance rules to find out what methods a Player object has. If you look at the online reference for the *org.bukkit.entity.Player* object you will see that the *Player* object itself does not have *.getItemInHand()* method **but** one of its ancestry types does. A *Player* is a sub-type of *HumanEntity* which has a *.getItemInHand()* method. Because there's a *HumanEntity.getItemInHand()* method and *Player* is a sub-type of *HumanEntity*, we can call the *.getItemInHand()* method on Player too! The Inheritance Diagram for the *Player* type below shows just *some* of the player's ancestry:
 
-![Player Ancestry](images/chapter-17/player-inheritance.png)
+[AUTHOR NOTE: images/chapter-17/player-inheritance.png]
+
+![Player Ancestry](images/chapter-17/player-inheritance.png "Player Ancestry")
+
+<caption>Figure 17.3:Player Ancestry</caption>
+
 
 As you can see in the diagram above, each type in Java can have more than one direct ancestor. Every type inherits all of the properties and methods of its ancestry. So a *Player* object can for example use any of the *InventoryHolder* or *Entity* methods. The *Player* type in Minecraft is one of the most versatile object types because of its rich ancestry. 
 
@@ -4532,7 +4849,12 @@ In the following sections of this chapter we'll develop a set of functions that 
 ### Safe Zones
 The first step in creating a safe server is adding the ability to create Safe Zones. Outside of these safe zones it should be possible for any player to place and break blocks but inside the safe zones, only operators should be able to do so. We'll define a Safe Zone as an area of width and length and which&mdash;for the sake of simplicity&mdash;extends indefinitely up and down along the Z axis. So a Zone can be defined using just 2 points in 3D space&mdash;the bottom left corner and the top right corner.
 
-![Safe Zones](images/chapter-18/safe-zone.png)
+[AUTHOR NOTE: images/chapter-18/safe-zone.png]
+
+![Safe Zones](images/chapter-18/safe-zone.png "Safe Zones")
+
+<caption>Figure 18.1:Safe Zones</caption>
+
 
 A Safe Zone starts at a location in the world and extends along the X axis and Y axis so a Zone will have a start location and an extent&mdash;how far away it extends. We'll need to use this information when testing if a broken or placed block is within the Zone. We need 3 different components to manage safe zones:
 
@@ -4621,7 +4943,12 @@ As we saw in chapter 12 it's possible to extend the Drone object to build whatev
 
 A bounding box similar to that shown in the screenshot below should appear.
 
-![](images/chapter-18/zonemaker.png)
+[AUTHOR NOTE: images/chapter-18/zonemaker.png]
+
+![A Safe Zone (bordered)](images/chapter-18/zonemaker.png "A Safe Zone (bordered)")
+
+<caption>Figure 18.2:A Safe Zone (bordered)</caption>
+
 
 Right now you can still break and place blocks within the area. The next step to 'securing' the Safe Zone is to add event handlers which will prohibit placement and breaking of blocks. In your editor create a new file called *events.js* in the *plugins/scriptcraft/plugins/protection/* folder and enter the following code:
 
@@ -4846,7 +5173,12 @@ Once you've saved this file and reloaded your plugins using the */reload* comman
 
 A new plot outline will be created and a sign will appear with instructions for players. 
 
-![Player Plot](images/chapter-18/player-plot.png)
+[AUTHOR NOTE: images/chapter-18/player-plot.png]
+
+![A Player Plot](images/chapter-18/player-plot.png "A Player Plot")
+
+<caption>Figure 18.3:A Player Plot</caption>
+
 
 ### Claiming Plots
 Right now the instructions which appear on the sign (move inside the plot area and issue the */jsp claim* command) don't work. The next step is to provide a */jsp claim* command for players to claim plots in which they are standing. In your editor, create a new file called *claim.js* in the *plugins/scriptcraft/plugins/protection/* folder and enter the following code:
@@ -5070,7 +5402,12 @@ While not a comprehensive protection plugin, the code we created in this chapter
 ### Introduction
 In this chapter we're going to create a Player vs. Player mini-game called *Snowball Fight*. The aim of the game is to hit your opponents with snowballs as many times as possible while avoiding being hit yourself or hitting players on your own team. In the game players can form opposing teams.
 
-![Snowball Fight](images/chapter-19/snowball-fight.png)
+[AUTHOR NOTE: images/chapter-19/snowball-fight.png]
+
+![Snowball Fight](images/chapter-19/snowball-fight.png "Snowball Fight")
+
+<caption>Figure 19.1:Snowball Fight</caption>
+
 
 The game will be kept simple for the sake of providing example code which you might want to adapt and extend to create your own mini-game. 
 
@@ -5480,7 +5817,12 @@ The *snowballArena()* function is a new Drone extension and is meant for use by 
 
 An arena should appear shortly. The arena looks like this from above (plan view):
 
-![Snowball Arena](images/chapter-19/arena-plan.png)
+[AUTHOR NOTE: images/chapter-19/arena-plan.png]
+
+![Snowball Arena](images/chapter-19/arena-plan.png "Snowball Arena")
+
+<caption>Figure 19.2:Snowball Arena</caption>
+
 
 Unlike other Drone functions we've created, we want to save some information about the newly-created arena for later (so when we develop the */jsp snowball* command we can tell which players are on each team using the player's starting zone). We used the *persist()* function we first learnt about in chapter 15 to load and automatically save the arena data. I recommend issuing the */js refresh()* statement after you create each snowball arena so that the arena data is saved immediately.
 
@@ -5623,7 +5965,12 @@ If the player *is* in one of the waiting areas we keep a reference to the waitin
 
 The *spawns* array is a list of players and their locations just before the game begins. We need to keep a list of such locations because we'll teleport the players inside the arena when the game begins and would like to return each player to their original location when the game ends. Each arena also has 3 spawn points where players will be teleported when the game begins. 
 
-![Snowball Fight Waiting Area](images/chapter-19/waiting-area.png)
+[AUTHOR NOTE: images/chapter-19/waiting-area.png]
+
+![Snowball Fight Waiting Area](images/chapter-19/waiting-area.png "Snowball Fight Waiting Area")
+
+<caption>Figure 19.3:Snowball Fight Waiting Area</caption>
+
 
 #### How many teams?
 Next the *snowball* command function checks how many teams have players. If there's only one team then the game won't begin:

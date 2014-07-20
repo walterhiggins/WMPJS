@@ -67,7 +67,17 @@ function readFile ( filename ) {
   return contents;
 
 };
-
+function getFigureNumber( source, chapter) {
+  var result = figureKeys[source], recipeNum;
+  
+  if (!result){
+    recipeNum = chapKeys[ chapter ];
+    result = (recipeNum) + '.' + figureCounts[ chapter ];
+    figureCounts[ chapter ] = figureCounts[ chapter ] + 1;
+    figureKeys[ source ] = result;
+  }
+  return result;
+}
 function getListingNumber( source, chapter){
   var result = listingKeys[source],
     recipeNum;
@@ -94,10 +104,23 @@ var chapKeys = {};
 var nextListing = 0;
 var listingKeys = {};
 var listingCounts = {};
+
+var figureKeys = {};
+var figureCounts = {};
+
 var xforms = {
   '@@nextAchievement': function(match,matchIndex,line){
     return 'images/achievement-plugin-dev-' + (nextAchieve++) + '.png';
   },
+
+  '@@figure ([a-zA-Z0-9\-\_\.\/]+) (.*)': function(match, file, caption){
+    var result = '[AUTHOR NOTE: images/' + file.replace(/_/g,'\\_') + ']\n\n';
+    result = result + '![' + caption + '](images/' + file + ' "' + caption + '")';
+    var figNum = getFigureNumber(file, currentChap);
+    result = result + '\n\n<caption>Figure ' + figNum + ':' + caption + '</caption>\n';
+    return result;
+  },
+
   '@@listing ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
     var result = [];
     var cur = currentChap;
@@ -128,6 +151,7 @@ var xforms = {
   '@@nextChapter\{([a-zA-Z0-9\-]+)\}': function(match, key, matchIndex, line){
     chapKeys[key] = nextChap++;
     listingCounts[key] = 1;
+    figureCounts[key] = 1;
     currentChap = key;
     return 'Chapter ' + chapKeys[key];
   },

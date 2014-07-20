@@ -1204,9 +1204,11 @@ The `return` statement can only be used inside a function. It's possible to have
 In this chapter we created our first truly reusable module. We learned about Modules, Random numbers and the Math object. In the next chapter we'll enhance this module further and in the chapter after we'll use the module to create custom greetings for players joining the server.
 
 ## Chapter 7: Multi-sided dice
-![](images/chapter-07/BluePlatonicDice.png)
 ### Introduction
 In this chapter we'll build on the code written in the previous chapter to let us roll a dice of any number of sides. Sometimes we want a random number that doesn't fit in the range 1 to 6. Ideally we'd like our virtual dice module to return a random number for any range we give it. We're going to take our 6-sided dice from the earlier chapter and enhance it so it can change shape to any number of sides like the multi-sided dice used in some table-top and role-playing games.
+
+![](images/chapter-07/mydice.jpg)
+
 ### Flexible Functions
 If we wanted to expand on what we've already done to support dices of 4, 6 and 8 sides we might write new functions for each type of dice...
 

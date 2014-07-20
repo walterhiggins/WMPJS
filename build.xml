@@ -66,6 +66,9 @@
       <arg value="${delivery}"/>
       <arg value="enclose"/> <!-- omit if you don't want to enclose each chapter in html/body -->
     </java>
+    <exec dir="./" executable="/usr/bin/perl">
+      <arg line="src/perl/convert-all.pl"/>
+    </exec>
   </target>
 
   <target name="build-readme.md" depends="build-drone-ref, build-events-ref, build-items-ref, compile">

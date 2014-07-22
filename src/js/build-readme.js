@@ -114,8 +114,8 @@ var xforms = {
   },
 
   '@@figure ([a-zA-Z0-9\-\_\.\/]+) (.*)': function(match, file, caption){
-    var result = '[AUTHOR NOTE: images/' + file.replace(/_/g,'\\_') + ']\n\n';
-    result = result + '![' + caption + '](images/' + file + ' "' + caption + '")';
+    var result = '[AUTHOR NOTE: images/' + currentChap + '/' + file.replace(/_/g,'\\_') + ']\n\n';
+    result = result + '![' + caption + '](images/' + currentChap + '/' + file + ' "' + caption + '")';
     var figNum = getFigureNumber(file, currentChap);
     result = result + '\n\n<caption>Figure ' + figNum + ':' + caption + '</caption>\n';
     return result;

@@ -115,12 +115,14 @@ var xforms = {
 
   '@@figure ([a-zA-Z0-9\-\_\.\/]+) (.*)': function(match, file, caption){
     var result = '[AUTHOR NOTE: images/' + currentChap + '/' + file.replace(/_/g,'\\_') + ']\n\n';
-    result = result + '![' + caption + '](images/' + currentChap + '/' + file + ' "' + caption + '")';
+    result = result + '![](images/' + currentChap + '/' + file + ')';
     var figNum = getFigureNumber(file, currentChap);
-    result = result + '\n\n<caption>Figure ' + figNum + ':' + caption + '</caption>\n';
+    result = result + '\n\n<caption>Figure ' + figNum + ': ' + caption + '</caption>\n';
     return result;
   },
-
+  '@@figref\{([a-zA-Z0-9_\.\-]+)\}': function(match, key){
+    return getFigureNumber(key, currentChap);
+  },
   '@@listing ([a-zA-Z0-9\._\-]+) (.*)': function(match, file, caption){
     var result = [];
     var cur = currentChap;

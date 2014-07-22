@@ -52,7 +52,7 @@ The JavaScript programming Language is a simple language to get started with but
 When I created ScriptCraft in 2012 there was no one true way to write Minecraft Plugins because there was no official API provided by Mojang. At the time of writing (April 2014) Mojang announced an upcoming official way to write Minecraft Plugins using the Plugin API. The Plugin API will provide a standard way for Plugin Developers to extend the Minecraft game. There is still no official release date for the Plugin API but I'll be watching closely and will make any necessary changes to ScriptCraft when the API is released.
  
 
-# Part I A modding workbench
+# Part I A Modding Workbench
 
 ![](images/Crafting_Table.png "")
 
@@ -78,13 +78,13 @@ Minecraft Multiplayer is "Client-Server". That means that one or more "client" c
 
 @@figure Client_Server1.png A Simple Client-Server Network
 
-The Client must be connected to the Server over some kind of Network. The line between the Client and the Server in the above diagram represents the network. A Server with just one Client computer isn't much fun though. Servers really become fun when many players are connected to the same server as in the following diagram:
+The Client must be connected to the Server over some kind of Network. The line between the Client and the Server in Figure @@figref{Client_Server1.png} represents the network. A Server with just one Client computer isn't much fun though. Servers really become fun when many players are connected to the same server as in the following diagram:
 
 @@figure Client_Server2.png A client server network with many clients
 
-In the above diagram, the server must chat with all of the connected clients. For example, if it starts raining in the game, the server must send a message to each client that it's begun raining. In Minecraft Multiplayer, the server is responsible for many things. The server decides what the weather will be like in the in-game world, what time of day it is and so on. This is so that the time of day and weather *will be the same for all connected players*. 
+In Figure @@figref{Client_Server2.png}, the server must chat with all of the connected clients. For example, if it starts raining in the game, the server must send a message to each client that it's begun raining. In Minecraft Multiplayer, the server is responsible for many things. The server decides what the weather will be like in the in-game world, what time of day it is and so on. This is so that the time of day and weather *will be the same for all connected players*. 
 
-You'll notice that in the above diagrams, the server is shown as separate computer. This is just for illustration. While very often, Server software *does* run on a separate computers, *you won't need a separate computer to run Minecraft Server* or to follow the tutorials in this book. In fact, for learning how to create Minecraft Plugins and to get the best from this book, I recommend running Minecraft Server on the same computer you play Minecraft on. **This means your computer will act as both a Client and a Server**. This is by far the most convenient and cost-effective way to run a server and learn how to create Minecraft Server Plugins.
+You'll notice that in Figure @@figref{Client_Server2.png}, the server is shown as separate computer. This is just for illustration. While very often, Server software *does* run on a separate computers, *you won't need a separate computer to run Minecraft Server* or to follow the tutorials in this book. In fact, for learning how to create Minecraft Plugins and to get the best from this book, I recommend running Minecraft Server on the same computer you play Minecraft on. **This means your computer will act as both a Client and a Server**. This is by far the most convenient and cost-effective way to run a server and learn how to create Minecraft Server Plugins.
 
 @@figure Client_Server_Combined.png A computer which is both Client and Server
 
@@ -138,7 +138,7 @@ The large Download button will download the CraftBukkit Recommended Build. The R
 
 @@figure bukkit-download1.png CraftBukkit download
 
-Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete, meaning the developers have added all of the features they're going to add, but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two *Bugs*. If the "Beta Build" version does not match the current version of Minecraft then click on the "Alternate Versions" link beneath the "Beta Build" link. This will take you to the CraftBukkit Builds page where you will see a list of "Builds" or versions. The following screenshot shows what the download page looks like at the time of writing.
+Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete, meaning the developers have added all of the features they're going to add, but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two *Bugs*. If the "Beta Build" version does not match the current version of Minecraft then click on the "Alternate Versions" link beneath the "Beta Build" link. This will take you to the CraftBukkit Builds page where you will see a list of "Builds" or versions. Figure @@figref{bukkit-download2.png} shows what the download page looks like at the time of writing.
 
 @@figure bukkit-download2.png CraftBukkit Builds Page
 
@@ -722,7 +722,7 @@ The result is 3. Try calling it with different values to test that the function 
     js add( 5, 6 )
     js add( 9, 1 )
 
-Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets -- the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in defining the function is to say what the function should do. Everything between the opening and closing curly brackets -- the `{` and `}` symbols -- is code which will be executed whenever the function is called. The diagram below illustrates the different parts of the function definition statement:
+Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets -- the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in defining the function is to say what the function should do. Everything between the opening and closing curly brackets -- the `{` and `}` symbols -- is code which will be executed whenever the function is called. Figure @@figref{function-outline.png} illustrates the different parts of the function definition statement:
 
 @@figure function-outline.png Function Outline
 
@@ -747,12 +747,13 @@ In this chapter we learned about how to execute JavaScript at the server console
 ### Introduction
 Up to now we've been executing JavaScript at the server console window using the `js ` command. This is a perfectly good way to try out JavaScript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with JavaScript, you'll want to be able to save your work and run it, without issuing many `js` commands at the server console window each time your server starts up. 
 
-ScriptCraft lets you load JavaScript files you've saved and can either run them automatically when the server starts up or can run your code *on-demand*. If you plan on saving your work, you'll need to write your code using a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a plain text editor and a programming editor ( gedit ). I think you'll agree syntax highlighting in the second example makes the code more pleasant to read. 
+ScriptCraft lets you load JavaScript files you've saved and can either run them automatically when the server starts up or can run your code *on-demand*. If you plan on saving your work, you'll need to write your code using a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a regular text editor and a programming editor: 
 
 @@figure screenshot-textedit-1.png JavaScript code in an editor with no Syntax Highlighting
 
 @@figure screenshot-gedit-2.png JavaScript code in an editor with Syntax Highlighting turned on
 
+I think you'll agree that the syntax highlighting in Figure @@figref{screenshot-gedit-2.png} makes the code more pleasant to read. 
 
 ### Choosing an editor
 
@@ -827,7 +828,7 @@ The 'Enable text wrapping' setting should be turned off for programming. It's us
 * Curly brackets : {  }
 * Square brackets : [  ]
 
-This can really help when writing or editing code. In the screenshot below, you can see the cursor on line 1 next to the `{` character with both the opening and closing curly brackets highlighted in gray. 
+This can really help when writing or editing code. In Figure @@figref{screenshot-gedit-matching-brackets.png}, you can see the cursor on line 1 next to the `{` character with both the opening and closing curly brackets highlighted in gray. 
 
 @@figure screenshot-gedit-matching-brackets.png Bracket-matching
 
@@ -1097,9 +1098,9 @@ A module in ScriptCraft is simply a JavaScript file. Throughout this book I will
 
 [AUTHOR NOTE: Image Source and Licensing http://commons.wikimedia.org/wiki/File:2010-06-11_CSM%26LM.jpg]
 
-@@figure nasa-apollo-modules.jpg Appollo 13 Modules. Image Courtesy of NASA.
+@@figure nasa-apollo-modules.jpg Apollo Spacecraft Modules. Image Courtesy of NASA.
 
-Modular systems are good when programming. They're good because modules can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in the diagram above the lunar lander module was only used to land on the moon. That was its only purpose. Similarly, when writing JavaScript modules, it's considered good practice to have the module serve a single purpose. If you're interested in learning more about modules check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. We'll learn some more about modules throughout this book.
+Modular systems are good when programming. They're good because modules can be combined together to form larger systems. Modules usually perform a set of related functions to serve a single purpose. So for example, in Figure @@figref{nasa-apollo-modules.jpg} the Lunar Lander module was only used to land on the moon. That was its only purpose. Similarly, when writing JavaScript modules, it's considered good practice to have each module serve a single purpose. We'll learn more about modules throughout this book. If you're interested in exploring the CommonJS modules specification, check out the CommonJS website http://www.commonjs.org/specs/modules/1.0/ for more information. 
 
 ### Using Modules
 Getting back to our earlier problem -- how do we use the new dice.js module we just created? Remember earlier we learned about the special 'exports' variable which is used to expose private variables for use by others? Well you may be wondering how we get at variables exposed in this way. Fortunately there's a special function called 'require()' which lets us do just that. The *require()* function is the counterpart to the *exports* variable. In the dice.js file  we use 'exports' to say "here's some of my code you can use", and we use require() to say "Hey I'd like to use the code in the 'dice' module". 
@@ -1535,7 +1536,7 @@ Make sure to save your file then run the JavaScript *refresh()* function to relo
 
     Konnichiwa walterh
 
-The message will of course be different for you. The screenshot below shows where you should expect the greeting to appear when you join the server:
+The message will of course be different for you. Figure @@figref{screenshot-greeting.png} shows where you should expect the greeting to appear when you join the server:
 
 @@figure screenshot-greeting.png Greeting Players
 
@@ -1547,7 +1548,7 @@ We'll look more closely at events and event-handling functions in a later chapte
 
 ### More on Modules
 
-From looking at the *greetPlayers* module you can see the first thing it does is load another module: *greetings* which we created earlier in this chapter. If you remember, the *greetings* module in turn loads yet another module -- the *dice* module we worked on in the previous chapters. This is a classic example of how programming is typically done. We start with small dedicated modules and then work on bigger and bigger modules piecing them together to solve a problem. In programming, a big part of problem-solving is breaking problems down into smaller and smaller problems and solving each of these smaller problems then piecing together the solutions. Programming can often feel like playing with toy building bricks except *you* get to design the bricks and put them together. When a program module relies on another module we say it *depends* on the module. A module which loads another module *depends* on that module and that module in turn will *depend* on other modules. All of the modules which are required -- either directly or indirectly -- by a program are called *dependencies*. You can see in the diagram below the relationship between the *greetPlayers*, *greetings* and *dice* modules. 
+From looking at the *greetPlayers* module you can see the first thing it does is load another module: *greetings* which we created earlier in this chapter. If you remember, the *greetings* module in turn loads yet another module -- the *dice* module we worked on in the previous chapters. This is a classic example of how programming is typically done. We start with small dedicated modules and then work on bigger and bigger modules piecing them together to solve a problem. In programming, a big part of problem-solving is breaking problems down into smaller and smaller problems and solving each of these smaller problems then piecing together the solutions. Programming can often feel like playing with toy building bricks except *you* get to design the bricks and put them together. When a program module relies on another module we say it *depends* on the module. A module which loads another module *depends* on that module and that module in turn will *depend* on other modules. All of the modules which are required -- either directly or indirectly -- by a program are called *dependencies*. You can see in Figure @@figref{encapsulation.png} the relationship between the *greetPlayers*, *greetings* and *dice* modules. 
 
 @@figure encapsulation.png Encapsulation and Modules
 
@@ -1589,7 +1590,7 @@ Let's take a closer look at how this function works by first looking at how Scri
 
 ### Asking questions
 
-Most programming languages provide a function which can be used to ask a question. JavaScript runs in many different environments. The most common way to run JavaScript is in Web Browsers where JavaScript comes with a special *prompt()* function which can be used to ask website visitors questions by displaying a small window (known as a *dialog box*) with a question, an *input field* where you type the answer and OK and Cancel buttons. This style of user interaction is called *modal* because the user cannot do anything else until they close the *dialog* window. You can see an example of what a modal dialog looks like below:
+Most programming languages provide a function which can be used to ask a question. JavaScript runs in many different environments. The most common way to run JavaScript is in Web Browsers where JavaScript comes with a special *prompt()* function which can be used to ask website visitors questions by displaying a small window (known as a *dialog box*) with a question, an *input field* where you type the answer and OK and Cancel buttons. This style of user interaction is called *modal* because the user cannot do anything else until they close the *dialog* window. You can see an example of what a modal dialog looks like in Figure @@figref{modal-dialog.png}:
 
 @@figure modal-dialog.png A Modal Dialog
 
@@ -1677,7 +1678,7 @@ Change your existing numberGuess.js file to match the code above, save it then i
 Now when you guess incorrectly you should see a message `Better luck next time` appear.
 
 ### The if-else-if construct
-So far the guessing games gives players just one shot at guessing the number. In the following listing @@listref{guess_v3.js} the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if -- else -- if* form which is quite common in JavaScript:
+So far the guessing games gives players just one shot at guessing the number. In listing @@listref{guess_v3.js} the code is changed further so that players get to make a couple of guesses and are told when they've guessed too high or too low. The following code uses the *if -- else -- if* form which is quite common in JavaScript:
 
 @@listing guess_v3.js Too High, Too Low.
 
@@ -1685,7 +1686,7 @@ In this revision of the number guessing game, we're using an extra parameter cal
 
 Another change in the above function is that we've given the player the option of simply quitting the game by typing `quit` as an answer to the question. You may be wondering why there's a check to see if the guess is too low but no equivalent check to see if the guess is too high. The reason is, if the guess is not the same or less than the randomNumber, then it *must* be too high -- there are no other options.
 
-How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. The diagram below is a flow chart of how listing @@listref{guess_v3.js} behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
+How a program behaves while running is often called its *flow*. *Flow Diagrams* help programmers sketch out how they want or expect a program to behave when it's running. In a *Flow Diagram* the start and end of the program are represented by boxes which look like capsules at the top and bottom of the diagram. Decisions which need to be made in the program are represented by Diamonds and usually have 2 or more lines leading to other parts of the diagram. Processes are represented by plain boxes. Figure @@figref{flowchart.png} is a flow chart of how listing @@listref{guess_v3.js} behaves while running. Flow charts can be useful in helping to understand a program or in designing a new program.
 
 @@figure flowchart.png A Flow Diagram
 
@@ -1862,7 +1863,7 @@ The switch cases would still fail for 'COW'    because the value of *animal* doe
     /js animals[2]
     > sheep
     
-The above `animals.push('sheep');` statement actually *changes* the animals value. With Strings, this never happens. None of the String methods (and there are quite a few) change the value for which they are called. For example there is a *String.concat()* function which adds another string:
+The above statement -- `animals.push('sheep');` -- actually *changes* the animals value. With Strings, this never happens. None of the String methods (and there are quite a few) change the value for which they are called. For example there is a *String.concat()* function which adds another string:
 
     /js var name = "steve ";
     /js name.concat("crafter");
@@ -2179,7 +2180,7 @@ In this chapter we learned how to loop over each item in an array using *for* lo
 In this chapter we'll build a 10-story Skyscraper using just a couple of lines of code and *loop* statements. We'll use *for* and *while* loops, and ScriptCraft's *Drone* functions to build large structures in Minecraft. 
 
 ### Building using Drones
-In Minecraft, building by hand is fun but can be tedious when you want to build big structures -- Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using JavaScript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a JavaScript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using JavaScript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In the screenshot below, the targeted block is outlined in a slightly darker color than the surrounding blocks.
+In Minecraft, building by hand is fun but can be tedious when you want to build big structures -- Towers, Castles and Fortresses.  ScriptCraft includes a module for building large structures in Minecraft using JavaScript. The *Drone* module has many functions for use in building. You can use the *Drone* module at the in-game prompt to build right within the game or you can create a *blueprint* for a more complex structure by using the Drone functions in a JavaScript file. It's useful to think of the drone as an invisible remote control plane which can place blocks anywhere and that you control using JavaScript. Let's start by creating a simple structure at the in-game prompt. The first thing you should do when building using the *Drone* module is look at (also known as *target*) a block. In Figure @@figref{drone_target.png}, the targeted block is outlined in a slightly darker color than the surrounding blocks.
 
 @@figure drone_target.png Targeting a block in Minecraft
 
@@ -2253,7 +2254,7 @@ Let's use more chaining to create a series of 3 parkour platforms each of which 
 
 This statement will create 3 platforms. The first platform will be 1 block high, the second platform 2 blocks high and the third, 3 blocks high. Since each platform is 2 blocks away they are perfect for in-game parkour practice.
 
-In the diagram below you can see how the pillars are constructed and in the screenshot that follows, how the parkour platforms look in the game.
+In Figure @@figref{graph-paper-parkour.png} you can see how the pillars are constructed and in Figure @@figref{jumping-pillars.png}, how the parkour platforms look in the game.
 
 @@figure graph-paper-parkour.png Parkour Platforms on Graph Paper
 
@@ -2264,11 +2265,11 @@ In addition to moving, you can make your Drone change direction too. To change d
 
     /js box(blocks.gold,1,1,4).fwd(4).turn().box(blocks.iron,1,1,3).fwd(3).turn().box(blocks.ice,1,1,2)
 
-This command creates 3 small walls of gold, iron and ice. In the diagram below you can see how the walls are constructed using a combination of *box()*, *turn()* and *fwd()* function calls:
+This command creates 3 small walls of gold, iron and ice. In Figure @@figref{graph-paper-3walls.png} you can see how the walls are constructed using a combination of *box()*, *turn()* and *fwd()* function calls:
 
 @@figure graph-paper-3walls.png 3 Walls on Graph Paper
 
-And here is the result in Minecraft:
+... And Figure @@figref{turning.png} shows the result in Minecraft:
 
 @@figure turning.png Turning and Movement while building
 
@@ -2283,7 +2284,7 @@ The listing above will let you create pyramids by simply targeting a block in th
 
     /js pyramid()
 
-You can what the result looks like in the screenshot below:
+You can what the result looks like in Figure @@figref{pyramid.png}:
 
 @@figure pyramid.png A Pyramid
 
@@ -2355,11 +2356,11 @@ The next section of the method is a *for* loop which repeatedly (for each floor)
 3. Builds a glass pane wall 3 blocks high on all 4 sides.
 4. Moves up another 3 blocks
 
-The above 4 steps are repeated for each floor so that when the *for* loop is done an entire skyscraper has been constructed. You can see what just one floor of the skyscraper (one pass through the *for* loop) looks like in the screenshot below:
+The above 4 steps are repeated for each floor so that when the *for* loop is done an entire skyscraper has been constructed. You can see what just one floor of the skyscraper (one pass through the *for* loop) looks like in Figure @@figref{skyscraper_floor.png}:
 
 @@figure skyscraper_floor.png A single floor of the Skyscraper
 
-At the end of the method, an entire skyscraper is constructed. This is what the result looks like in the game:
+At the end of the method, an entire skyscraper is constructed. Figure @@figref{skyscraper.png} shows what the result looks like in the game:
 
 @@figure skyscraper.png The Complete Skyscraper
 
@@ -2456,7 +2457,7 @@ A function which calls itself is called a *recursive* function. Recursive functi
       }
     }
 
-The *openRussianDoll()* function wouldn't be called just once or twice but would be called every time a new doll was uncovered. This is the power of recursion. If you're curious about recursion, a few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations below:
+The *openRussianDoll()* function wouldn't be called just once or twice but would be called every time a new doll was uncovered. This is the power of recursion. If you're curious about recursion, a few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations in Figure @@figref{malinchristersson_fractals.png}:
 
 @@figure malinchristersson_fractals.png Malin Christersson's Fractal Cube Stars
 
@@ -3029,7 +3030,7 @@ The ingredient we're going to add is *Ender Pearl*. These are obtained from tele
 
 @@figure ender-bow-recipe-not-yet.png Crafting Recipe for a Bow
 
-You'll notice in the above screenshot that no item appears in the right hand side. That's because we haven't yet instructed the server to recognize that recipe. Now that we've figured out what we want our new Crafting Recipe to look like from a Player's point of view, let's dive in to how we'll program this new behavior into the game.
+You'll notice in Figure @@figref{ender-bow-recipe-not-yet.png} that no item appears in the right hand side. That's because we haven't yet instructed the server to recognize that recipe. Now that we've figured out what we want our new Crafting Recipe to look like from a Player's point of view, let's dive in to how we'll program this new behavior into the game.
 
 ### Exploring the Bukkit API.
 So we've answered the question of *What* we want to do, now we must ask *How* are we going to do it? This is a list of what we want to do:
@@ -3115,7 +3116,7 @@ That's just enough Java for now. Before we explore the Bukkit API further let's 
 
 @@listing recipe.js The Ender Bow Recipe
 
-Save the file, reload using the `/reload` command and then bring up the crafting grid by right-clicking on a crafting table. When you place Ender Pearls, String and Sticks in the Grid you should see an shimmering bow appear in the right hand side. See the screenshot below:
+Save the file, reload using the `/reload` command and then bring up the crafting grid by right-clicking on a crafting table. When you place Ender Pearls, String and Sticks in the Grid you should see an shimmering bow appear in the right hand side. See Figure @@figref{ender-bow-recipe.png}:
 
 @@figure ender-bow-recipe.png Crafting Recipe for a Bow
 
@@ -3248,7 +3249,7 @@ Inheritance is an important principle in programming and it's useful to understa
 
 Under *All Known Implementing Classes:* are a list of *Subclasses* or specialized types of *Recipe*. You can think of these classes as *children* of *Recipe*. Each of the classes *FurnaceRecipe*, *ShapedRecipe* and *ShapelessRecipe* are also *Recipe* objects and they *inherit* all of the parent Class's methods and properties, much like people inherit some of the characteristics of their parents: Eye color, Hair color and so on. Since the parent class *Recipe* only has one single method *.getResult()*, you can infer that there's a *FurnaceRecipe.getResult()* method and a *ShapedRecipe.getResult()* method and so on. You can click on the *ShapedRecipe* link to verify this. *ShapedRecipe* does indeed have a *.getResult()* method along with many other of its own methods. 
 
-In programming, Inheritance diagrams like the one below are useful for understanding inheritance:
+In programming, Inheritance diagrams like the one shown in Figure @@figref{recipe-inheritance.png} are useful for understanding inheritance:
 
 @@figure recipe-inheritance.png Recipe Inheritance Diagram
 
@@ -3387,11 +3388,11 @@ We test to see if the *projectile* variable is of type bkArrow and if it is we r
 
 Next we need to get the shooter -- the person (or thing) which fired the arrow. The *.getShooter()* method returns an object of type *ProjectileSource* which is another abstract type -- that is -- there can be many possible sub-types. If we browse the online reference and look at *org.bukkit.projectiles.ProjectileSource* we see it has many *SubInterfaces* or Sub-types: Player, Animal, BlockProjectileSource etc. We test to see if the *shooter* is a *Player* which is a specific type of *ProjectileSource*. Again, we're only interested in teleporting players. 
 
-Then we get the item currently held by the player by calling the *.getItemInHand()* method. This is yet another example where we need to use Inheritance rules to find out what methods a Player object has. If you look at the online reference for the *org.bukkit.entity.Player* object you will see that the *Player* object itself does not have *.getItemInHand()* method **but** one of its ancestry types does. A *Player* is a sub-type of *HumanEntity* which has a *.getItemInHand()* method. Because there's a *HumanEntity.getItemInHand()* method and *Player* is a sub-type of *HumanEntity*, we can call the *.getItemInHand()* method on Player too! The Inheritance Diagram for the *Player* type below shows just *some* of the player's ancestry:
+Then we get the item currently held by the player by calling the *.getItemInHand()* method. This is yet another example where we need to use Inheritance rules to find out what methods a Player object has. If you look at the online reference for the *org.bukkit.entity.Player* object you will see that the *Player* object itself does not have *.getItemInHand()* method **but** one of its ancestry types does. A *Player* is a sub-type of *HumanEntity* which has a *.getItemInHand()* method. Because there's a *HumanEntity.getItemInHand()* method and *Player* is a sub-type of *HumanEntity*, we can call the *.getItemInHand()* method on Player too! The Inheritance Diagram for the *Player* type show in Figure @@figref{player-inheritance.png} shows just *some* of the player's ancestry:
 
 @@figure player-inheritance.png Player Ancestry
 
-As you can see in the diagram above, each type in Java can have more than one direct ancestor. Every type inherits all of the properties and methods of its ancestry. So a *Player* object can for example use any of the *InventoryHolder* or *Entity* methods. The *Player* type in Minecraft is one of the most versatile object types because of its rich ancestry. 
+As you can see in Figure @@figref{player-inheritance.png}, each type in Java can have more than one direct ancestor. Every type inherits all of the properties and methods of its ancestry. So a *Player* object can for example use any of the *InventoryHolder* or *Entity* methods. The *Player* type in Minecraft is one of the most versatile object types because of its rich ancestry. 
 
 Once we have the item the player is currently holding we pass it to a function we define called *isEnderBow()* . This function checks to see if the item is of type Bow and if it has a level 3 LUCK enchantment.
 
@@ -3575,7 +3576,7 @@ As we saw in chapter @@chapter{chapter-12} it's possible to extend the Drone obj
 
     /js zonemaker( blocks.brick.chiseled, 20 , 20 )
 
-A bounding box similar to that shown in the screenshot below should appear.
+A bounding box similar to that shown in Figure @@figref{zonemaker.png} should appear.
 
 @@figure zonemaker.png A Safe Zone (bordered)
 
@@ -3588,7 +3589,7 @@ In the above code we listen for two events and cancel the events if the block be
 So far, we have a way to create *Safe Zones* where non-operators can't break or place blocks. What we need to do next is provide a way to create *Player Plots* within this *Safe Zone* where players -- once they've claimed a plot -- can build.
 
 ### Refactoring
-Before we get into the mechanics of creating, claiming and sharing player plots let's think about what a Player Plot is and how it's similar to something we've already created -- Safe Zones. A Zone and a Plot are both *Regions* within the world where certain rules apply. A Region has a starting point and extends in two directions (along the X axis and the Z axis). So Zones and Plots are really just parcels (or *Regions*) of land. For any block placed or broken we'll want to test to see if the block is within a given region. There's going to be much in common between Zones and Plots so let's *refactor* the code we've already written. *Refactoring* is the process of changing code you've already written so that it can be made more reusable. The goal of refactoring is to improve the code so we don't write the same code over and over. What we're going to do is take some of the code from the *zones.js* module we created earlier and move it into a new more reusable module called *region.js*. In your editor create a new file called *region.js* in the *plugins/scriptcraft/modules/protection/* folder and edit the file so it resembles the code in the listing below. 
+Before we get into the mechanics of creating, claiming and sharing player plots let's think about what a Player Plot is and how it's similar to something we've already created -- Safe Zones. A Zone and a Plot are both *Regions* within the world where certain rules apply. A Region has a starting point and extends in two directions (along the X axis and the Z axis). So Zones and Plots are really just parcels (or *Regions*) of land. For any block placed or broken we'll want to test to see if the block is within a given region. There's going to be much in common between Zones and Plots so let's *refactor* the code we've already written. *Refactoring* is the process of changing code you've already written so that it can be made more reusable. The goal of refactoring is to improve the code so we don't write the same code over and over. What we're going to do is take some of the code from the *zones.js* module we created earlier and move it into a new more reusable module called *region.js*. In your editor create a new file called *region.js* in the *plugins/scriptcraft/modules/protection/* folder and edit the file so it matches the code in listing @@listref{region.js}. 
 
 You'll notice the *create()* function is *very* similar to the *addZone()* function from the *zones.js* module. That's because it is the same except the statement `store.push(result);` from the *addZones()* function is not present in the *create()* function. If you want to take a shortcut, I recommend copying and pasting the body of the *addZone()* function into the *copy()* function then removing the `store.push(result);` line from the *create()* function. The *contains()* function can be copied directly from the *zones.js* file into the *region.js* file and requires no changes:
 

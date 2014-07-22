@@ -567,7 +567,7 @@ Don't worry about making mistakes. Making mistakes is an essential part of learn
 As you learn to program, you will encounter errors. One misplaced comma, quote or full-stop and the Computer will complain by 'throwing an Exception'. Just remember to be patient, Computers aren't as smart as us so we have to be extra careful when typing code. 
 
 #### Term: Exception
-An Exception is something the computer did not expect -- that's what makes it 'exceptional'. In JavaScript, 'throwing an exception' is JavaScript's way of saying something unexpected happened. An exception will often include a 'Stack Trace'. The 'Stack Trace' is a breadcrumb trail of where the computer was when the exception occurred.
+An Exception is something the computer did not expect -- that's what makes it 'exceptional'. In JavaScript, 'throwing an exception' is JavaScript's way of saying something unexpected happened. An exception will often include a 'Stack Trace'. The 'Stack Trace' is a bread-crumb trail of where the computer was when the exception occurred.
 
 #### The *var* keyword
 
@@ -696,13 +696,13 @@ The type of a variable is very important because it determines what you can do w
 Functions in JavaScript are very powerful because they are containers for code which can be called any number of times. You can write your own functions or use any of the *built-in* functions provided by the language. A *built-in* function is simply a function which comes bundled with JavaScript. Let's look at one of the built-in functions -- the *parseInt()* function.
 
 ##### Using functions
-The *parseInt()* function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the parseInt() function, it will try to figure out what number is in the text. Let's try it out:
+The *parseInt()* function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the *parseInt()* function, it will try to figure out what number is in the text. Let's try it out:
 
     js parseInt('4 hours until sunset')
 
-The result should be 4. What we did here was 'pass' the '4 hours until sunset' text to the parseInt function which processed the text and returned a value: 4.
+The result should be 4. What we did here was 'pass' the '4 hours until sunset' text to the *parseInt()* function which processed the text and returned a value: 4.
 
-We are effectively saying to parseInt "here's some text -- give me the number (and only the number) from it". We pass the text to the parseInt() function by putting it between the round brackets -- the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *Parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+We are effectively saying to parseInt "here's some text -- give me the number (and only the number) from it". We pass the text to the *parseInt()* function by putting it between the round brackets -- the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *Parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
 
     js parseInt('5 hearts left');
     js parseInt('This is not a number');
@@ -918,7 +918,7 @@ Launch your Editor and open the helloWorld.js file you created in chapter @@chap
 
     console.log('Hello World');
 
-We haven't used the console.log() function before. It's a built-in function which will print out a message in the server console window. You can also use the 'console.log()' function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result:
+We haven't used the *console.log()* function before. It's a built-in function which will print out a message in the server console window. You can also use the *console.log()* function in interactive mode at the server console window. Issue `js console.log( 8 + 3 )` and you'll see it prints the result:
 
     [scriptcraft] 11
 
@@ -951,9 +951,9 @@ What just happened? *The message no longer displays at startup!* That's because 
 
 @@listing helloWorld_v2.js helloWorld() Function Declaration and Execution
 
-Now restart the server again. Once again, the message will appear every time the server starts up. The helloWorld() function you wrote will be loaded and executed by the Minecraft Server every time it starts.
+Now restart the server again. Once again, the message will appear every time the server starts up. The *helloWorld()* function you wrote will be loaded and executed by the Minecraft Server every time it starts.
    
-OK. So we've wrapped the original code inside a function of our own and we call that function. So far so good. Sometimes you'll want to write functions to use at the in-game or server console prompt. Try running the helloWorld function at the in-game or server console prompt.
+OK. So we've wrapped the original code inside a function of our own and we call that function. So far so good. Sometimes you'll want to write functions to use at the in-game or server console prompt. Try running the *helloWorld()* function at the in-game or server console prompt.
    
     js helloWorld()
     
@@ -970,7 +970,7 @@ What we are doing here is *exporting* the helloWorld function for use outside of
 The *exports* variable isn't part of the JavaScript core language. It's provided by ScriptCraft which uses a module system called *CommonJS*. CommonJS is a set of rules which say how modules (and other things not provided by JavaScript itself) should work. The CommonJS rules for modules are easy to understand and adopt, so have become very popular lately, especially with the rising popularity of Node.js which is a JavaScript environment used by professional programmers.
 
 ### Private and Public Variables
-When you create a new variable in a JavaScript file, it is 'private'. That means that no other parts of the system can see it. Only code within the file itself can see variables declared in a file. That's why, earlier, we couldn't execute the helloWorld() function even though it was defined and used within the file itself. Having variables be private by default is a good thing. If every variable you created was visible everywhere in the system it would lead to confusion. Imagine you created a file called 'MySuperDooperPlugin.js' and another called 'MyExplodingZombiesPlugin.js' and in both these files you have a variable called 'livesRemaining' . If the livesRemaining variable wasn't private then both MySuperDooperPlugin and MyExplodingZombiesPlugin would end up using the same variable which may not be what was intended at all. 
+When you create a new variable in a JavaScript file, it is 'private'. That means that no other parts of the system can see it. Only code within the file itself can see variables declared in a file. That's why, earlier, we couldn't execute the *helloWorld()* function even though it was defined and used within the file itself. Having variables be private by default is a good thing. If every variable you created was visible everywhere in the system it would lead to confusion. Imagine you created a file called 'MySuperDooperPlugin.js' and another called 'MyExplodingZombiesPlugin.js' and in both these files you have a variable called 'livesRemaining' . If the livesRemaining variable wasn't private then both MySuperDooperPlugin and MyExplodingZombiesPlugin would end up using the same variable which may not be what was intended at all. 
 
 Making variables private by default means that 2 or more plugins don't have to worry about stepping on each others toes when updating or reading variables. In short, private variables are good. 
 
@@ -991,7 +991,7 @@ To give yourself super-human speed issue this command:
     
     js self.walkSpeed = 1 
 
-To reset your walkspeed to normal issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for Minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
+To reset your walking speed to normal, issue the command `js self.walkSpeed = 0`. The *self* variable is one of the built-in variables provided by ScriptCraft. When used at the command-prompt it refers to the player or console sender who issues the */js* command. The *self* variable should not be used anywhere except at the in-game or server console prompt. Everything in Minecraft is an object and every object has properties. Knowing how to use these objects and properties is the key to creating cool plugins for Minecraft. I'll talk more about objects in later chapters where we'll learn how to explore the Bukkit API documentation. 
 
 #### Term: Property
 A *property* is an attribute of an Object -- for example in real life we all have properties: eye-color, date-of-birth, name and so on. Objects in JavaScript also have properties and so too do in-game objects, The server object has *motd* (message of the day) and *port* properties. Each player has food level, experience and name properties. You can think of properties as variables that belong to or are attached to other variables.
@@ -1059,13 +1059,13 @@ Once you've saved your work go back to Minecraft and at the in-game command prom
 
     /js refresh()
 
-The refresh() function is a ScriptCraft function which reloads all of the JavaScript code. The server has a built-in */reload* command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our JavaScript. /js refresh() is like reload but it only reloads ScriptCraft and JavaScript code.
+The *refresh()* function is a ScriptCraft function which reloads all of the JavaScript code. The server has a built-in */reload* command which will reload **all of the server plugins** but for our purposes we only need to reload ScriptCraft to reload our JavaScript. /js refresh() is like reload but it only reloads ScriptCraft and JavaScript code.
 
-The refresh() function is important, you should execute it every time you change your JavaScript code because changes to your code won't be activated in the game until you do so.
+The *refresh()* function is important, you should execute it every time you change your JavaScript code because changes to your code won't be activated in the game until you do so.
 
-Tip: While working on a Minecraft plugin, if the plugin isn't working as you expect, make sure you've run the /js refresh() function first.
+Tip: While working on a Minecraft plugin, if the plugin isn't working as you expect, make sure you've run the *refresh()* function first.
 
-Once you've executed the /js refresh() function, you're ready to try out your new function. Try issuing the following command:
+Once you've executed the *refresh()* function, you're ready to try out your new function. Try issuing the following command:
 
     /js dice.roll()
     
@@ -1108,7 +1108,7 @@ So to use the code we just wrote inside the dice.js module we first need to 'req
 
     /js var dice = require('dice')
 
-The above statement loads your newly created dice.js module into the computer's memory. The require() function is how ScriptCraft loads JavaScript modules. You'll notice I didn't need to include the '.js' suffix (the last part of the filename). This is because the require() function is smart enough to know that it should only look for '.js' files anyway. It's also smart enough to know it should look in the modules folder so we didn't need to write `require('/modules/dice.js')`. After you load your module using the require() function you should almost always assign it to a variable. In this case the variable has the same name as the module but it doesn't have to be. I could have written `var steve = require('dice')` and it would work just as well. 
+The above statement loads your newly created dice.js module into the computer's memory. The *require()* function is how ScriptCraft loads JavaScript modules. You'll notice I didn't need to include the '.js' suffix (the last part of the filename). This is because the *require()* function is smart enough to know that it should only look for '.js' files anyway. It's also smart enough to know it should look in the modules folder so we didn't need to write `require('/modules/dice.js')`. After you load your module using the *require()* function you should almost always assign it to a variable. In this case the variable has the same name as the module but it doesn't have to be. I could have written `var steve = require('dice')` and it would work just as well. 
 
 ### Calling Module Functions
 You'll notice that the above statement doesn't appear to have called `roll()` yet. Loading a module will execute any code in the module but remember, our module just defines a function. **Defining a function and calling a function are not the same thing.** To call the roll function on the module we just loaded, issue the following command:
@@ -1121,7 +1121,7 @@ A random number between 0 and 5 should be displayed. Try running the above comma
 If you don't see a number or if the /js var dice = require('dice') command didn't work (you saw an error), take a look at the Server console window to see what kind of error occurred. More than likely there was a typing error when entering the code. Double-check the code to make sure it's exactly the same as the code in listing @@listref{dice_v1.js}.
 
 ### Modules as Objects
-You may be wondering why we call the *roll* function the way we do: `dice.roll()`.  When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object -- the `exports` object that we used inside the module itself to make public the *roll* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
+You may be wondering why we call the *roll()* function the way we do: `dice.roll()`.  When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object -- the `exports` object that we used inside the module itself to make public the *roll()* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
 ![](@@nextAchievement)
 
@@ -1136,10 +1136,10 @@ A JavaScript module is a file with one or more related functions. In the above f
 
 1. The first statement of the function, `var result = Math.random();` declares a new variable called 'result' and assigns a random number to it. Remember: Math.random() will return a random number between 0 and 1. 
 2. The next statement `result = result * 6` takes the number and multiplies it by 6. The `*` symbol is used in JavaScript to multiply numbers. 
-3. Next we convert the number to a integer by passing it to the `Math.floor()` function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
-4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the roll() function to return the `result` variable.
+3. Next we convert the number to a integer by passing it to the *Math.floor()* function and storing the result. Math.floor() is used to round down a number. Math.floor() will chop off the fraction from any number so for example, 3.5 becomes 3.0, 4.9 becomes 4.0 , 1.1 becomes 1.0 and so on. The Math object is a built-in object and comes with many functions for performing math operations. 
+4. Finally the last statement in the function uses the special `return` statement to return a value from the function. The function stops executing when it hits the `return` statement and either returns an expression if one is provided or returns no value (undefined) if no expression is given. In this example, we want the *roll()* function to return the `result` variable.
 
-As in the previous plugin, the last line of the file makes the *roll* function available for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
+As in the previous plugin, the last line of the file makes the *roll()* function available for use outside of this file by *exporting* it. Note that we don't *invoke* the function in this last line ( to *invoke* a function means to *call* it or to *run* it), we just attach it to the special `exports` variable whose sole purpose is to reveal what your file can do. `exports.roll = roll` effectively says, this file has a *public* function called *roll* (exports.roll) which is actually the same as the *private* function of the same name (the function declaration which begins on line 1 of the file).
 
 Don't worry if this seems confusing at first. We'll use the `exports` variable throughout this book and its purpose should become clearer with repetition. 
 
@@ -1216,7 +1216,7 @@ You should see the message 'Hello world' appear in your server window. 'Hello wo
 
     js console.log( 5 + 9 );
     
-You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to the *console.log()* function which just printed the resulting value. An important point: the *console.log()* function did not do the math, that was done just before the function was called so the parameter which *console.log()* received was 14. The *console.log()* function is commonly used for *logging*. Logging is the practice of printing output to screen; usually for the purpose of debugging or better understanding your code's behaviour.
+You should see '14' appear in your server window. The expression `5 + 9` is the parameter you gave to the *console.log()* function which just printed the resulting value. An important point: the *console.log()* function did not do the math, that was done just before the function was called so the parameter which *console.log()* received was 14. The *console.log()* function is commonly used for *logging*. Logging is the practice of printing output to screen; usually for the purpose of debugging or better understanding your code's behavior.
 
 Just as *console.log* and many other functions can take parameters, we can write our own functions so that they take parameters when they are called. Let's take a look at a slightly modified version of the code from the previous chapter. You don't have to type this code, I just want to highlight some changes:
 
@@ -1531,7 +1531,7 @@ So we have a new module *greetings.js* with a single function: *random()* which 
 
 @@listing greetPlayers_v2.js Greeting Players as they join the Server.
 
-Make sure to save your file then run the JavaScript `refresh()` function to reload ScriptCraft using `/js refresh()` from the in-game prompt or `js refresh()` from the server prompt. Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
+Make sure to save your file then run the JavaScript *refresh()* function to reload ScriptCraft using `/js refresh()` from the in-game prompt or `js refresh()` from the server prompt. Now disconnect from your server and rejoin the server. You should see something like this in your screen when you join the server:
 
     Konnichiwa walterh
 
@@ -1541,7 +1541,7 @@ The message will of course be different for you. The screenshot below shows wher
 
 ScriptCraft comes bundled with a built-in variable called *events*. The *events* variable is used to listen and react to events in the game. There are approximately 200 different types of events that you can register for in Minecraft. When you *register* for an *event* in your code you are telling the server that you want to be notified when a particular type of activity occurs in the game. You register by giving the server a function which won't be called immediately but will only be called when the activity occurs. In the code above we are basically saying to Minecraft "Hey, whenever someone joins the game, I want you (the server) to call this 'greetPlayer' function" . 
 
-This is the first time we've seen functions used as parameters to another function call. We call the `events.playerJoin()` function passing it another function as a parameter. This style of coding -- passing functions as parameters to other functions -- is called *functional programming*. The important thing to note here is that at no point in this module is the *greetPlayer* function actually called. All we do is register it using the `events.playerJoin()` function so that it will be called later each time a player joins. The `greetPlayer` function is called an *event-handling* function because its purpose is to handle events, specifically the event which is fired by the server whenever a player joins the game. 
+This is the first time we've seen functions used as parameters to another function call. We call the *events.playerJoin()* function passing it another function as a parameter. This style of coding -- passing functions as parameters to other functions -- is called *functional programming*. The important thing to note here is that at no point in this module is the *greetPlayer()* function actually called. All we do is register it using the *events.playerJoin()* function so that it will be called later each time a player joins. The *greetPlayer()* function is called an *event-handling* function because its purpose is to handle events, specifically the event which is fired by the server whenever a player joins the game. 
 
 We'll look more closely at events and event-handling functions in a later chapter.
 
@@ -1551,7 +1551,7 @@ From looking at the *greetPlayers* module you can see the first thing it does is
 
 @@figure chapter-08/encapsulation.png Encapsulation and Modules
 
-The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* -- in turn -- depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single `random()` function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for -- what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a JavaScript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
+The *greetPlayers* module depends on *greetings* but it does not know or care that *greetings* -- in turn -- depends on the *dice* module. This is an important principle in programming. The *greetings* module, by exporting just a single *random()* function, is defining what programmers call an *Interface*. The *Interface* is the contract or agreement a module has with other modules. It's a way of declaring what your module is to be used for -- what its purpose is. When defining an Interface, a module should hide the details of *how* it works and just say *what* it does. Modular systems work because parts can be swapped out and changed without affecting the entire program. You can think of an individual module (a JavaScript file) as working like an individual Lego brick. Modules can be pieced together to form larger modules and programs, eventually creating something truly awesome.
 
 Minecraft is often described as 'Virtual Lego', Programming is similar and offers the same rewards, It is enormously creative and can be great fun.
 
@@ -2230,7 +2230,7 @@ Let's get familiar with some of the movement functions by using them first at th
 
 The statement above might look odd but it's perfectly valid JavaScript. This style of calling functions one after another is called *chaining* because each '.' (full stop) forms a link in a chain of function calls. You can't call *all* functions in JavaScript like this but you can call all of the Drone's functions this way. Another term used by programmers to describe this style of function calling is *Fluency*. As we'll see later, you can extend the abilities of the Drone by adding your own functions which can be called in the same *fluent* way.
 
-In the above statement there are 3 different function calls being made, the first call -- `box(blocks.gold)` -- creates a gold block. The `box()` function returns a Drone object which can be used to call other Drone functions. The next call -- `.right(2)` -- moves the Drone right 2 blocks and it too returns the same Drone object. The last call -- `.box(blocks.gold)` -- creates another gold block. If we were to plot this out on graph paper it would look like this:
+In the above statement there are 3 different function calls being made, the first call -- `box(blocks.gold)` -- creates a gold block. The *box()* function returns a Drone object which can be used to call other Drone functions. The next call -- `.right(2)` -- moves the Drone right 2 blocks and it too returns the same Drone object. The last call -- `.box(blocks.gold)` -- creates another gold block. If we were to plot this out on graph paper it would look like this:
 
 @@figure chapter-12/graph-paper-movement.png Moving the Drone, Graph Paper Plot
 
@@ -2324,7 +2324,7 @@ The next section of the code is the monolith() *method*. I call it a *method* be
 
     this.box( blocks.wool.black, 4, 9, 1);
 
-Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global `box()` function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
+Inside the body of the *monolith()* method we see the *this* keyword. Inside of a Drone method, the *this* keyword always refers to a Drone object. In order to build a monolith we need to be able to manipulate and control an existing Drone object just as we've already done in the command-prompt examples earlier. The difference is, within a method we must use the *this* keyword at the start of each Drone function call. It's very important that inside the method we don't simply use `box()` but instead use `this.box()`. A call to the global *box()* function will actually return a brand new Drone object. When inside of a Drone method you work under the assumption that a Drone object is already present and you access it using the *this* keyword. When you use any of the Drone methods at the in-game prompt you are controlling the Drone from outside whereas when you use the Drone inside your method, you are effectively in the cockpit piloting the Drone from within. That's why you need to use the *this* keyword.
 
     Drone.extend( monolith );
 
@@ -2768,7 +2768,7 @@ The latter half of the book will focus on Event-Driven Programming and using Buk
 In this chapter we'll learn how to load and save player preferences. We'll create a new command which lets players choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
 
 ### A day in the life of a Minecraft Plugin
-Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many Minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behaviour and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
+Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many Minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behavior and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
 
 ### Chat colors
 In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key, a list of colors will be displayed. We've encountered the */jsp* command before in chapter @@chapter{chapter-11}. This command is a prefix (something which is added at the start) for new custom commands. 
@@ -3009,7 +3009,7 @@ In this chapter we learned about providing TAB-completion hints for your own cus
 ### Introduction
 All fun Minecraft Plugins begin with a simple question: What if ... ? Minecraft has become such a popular game because the possibilities are endless. For Minecraft Plugin Developers it's even more fun because the programming API allows for endless creativity in customizing the game. In this chapter we're going to use the Bukkit API to create a new Crafting Recipe -- one which will produce a new in-game item -- the *Ender Bow*. What's an Ender Bow? It's a bow which shoots arrows that teleport the player to where ever the arrow lands! This could be a handy tool to have if you're in a tight spot surrounded by monsters on all sides and need to make a quick getaway. With Ender Bow in hand, you just draw your bow, aim at where you want to teleport and shoot. As soon as the arrow hits, you'll be teleported. 
 
-In this chapter we're going to add a new crafting recipe which will construct an *Ender Bow*, we'll explore the Bukkit API in more detail, and I'll explain how to go about exploring and discovering features of the API which you can use in your own plugins. We'll learn about Java *Classes* and *Inheritance* and how these ideas help us figure out the Bukkit API's capabilities. In the follow-up chapter we'll add teleporting behaviour to the bow.
+In this chapter we're going to add a new crafting recipe which will construct an *Ender Bow*, we'll explore the Bukkit API in more detail, and I'll explain how to go about exploring and discovering features of the API which you can use in your own plugins. We'll learn about Java *Classes* and *Inheritance* and how these ideas help us figure out the Bukkit API's capabilities. In the follow-up chapter we'll add teleporting behavior to the bow.
 
 Before we get into the 'How' of adding the new Crafting Recipe to the game, let's first consider the 'What' -- what ingredients will be required for the new recipe and how we go about choosing them.
 
@@ -3111,7 +3111,7 @@ Exceptions are error types in Java. They work much like errors in JavaScript. In
 You don't need to worry about Annotation types when calling Java code from JavaScript.
 
 ### The Code
-That's just enough Java for now. Before we explore the Bukkit API further let's fire up the programming editor and write some code. Create a new folder in the *plugins/scripcraft/plugins* folder and call the new folder *enderbow*. Then inside the *enderbow* folder create a new file called *recipe.js* and add the following code:
+That's just enough Java for now. Before we explore the Bukkit API further let's fire up the programming editor and write some code. Create a new folder in the *plugins/scriptcraft/plugins* folder and call the new folder *enderbow*. Then inside the *enderbow* folder create a new file called *recipe.js* and add the following code:
 
 @@listing recipe.js The Ender Bow Recipe
 
@@ -3833,7 +3833,7 @@ Next we declare a new Event-handling function called *onSnowballHit()* which wil
     }
 
 ### Starting the game
-The main part of the *SnowBallFight()* function is at the end. The following 3 lines of code are responsible for starting the game, listening for events and starting the game's loop.
+The main part of the *SnowballFight()* function is at the end of the module. The following 3 lines of code are responsible for starting the game, listening for events and starting the game's loop.
 
     start( game );
     game.eventListener = events.entityDamageByEntity( onSnowballHit );
@@ -3964,7 +3964,7 @@ In this chapter we built a player vs. player mini-game from scratch. We *re-used
 Playing games is fun but writing your own games can be hugely rewarding, especially when you get to see your friends play a game you created!
 
 ### Conclusion
-While this brings us to the end of the book, we have only just begun to explore the world of Minecraft Plugin Development. My aim with this book was to provide a solid foundation from which to begin developing your own Minecraft Plugins. I've tried to cover all of the basics and some advanced topics, and provide examples along the way. There's still lots to learn about Minecraft Plugin development but I hope this book gives you the confidence to begin creating your own Plugins.
+While this brings us to the end of the book, we have only just begun to explore the world of Minecraft Plugin Development. My aim with this book was to provide a solid foundation from which to begin developing your own Minecraft Plugins. I've tried to cover all of the basics and some advanced topics, and provide examples along the way. There's still much to learn about Minecraft Plugin development but I hope this book gives you the confidence to begin creating your own Plugins.
 
 It's been a lot of fun writing this book and I hope you've enjoyed reading it and have learned something about Programming along the way. 
 
@@ -4009,12 +4009,12 @@ Another way to access and use another plugin is via the Java methods and classes
 
     var playerName = 'walterh';
     var pexPlugin = server.pluginManager.getPlugin('PermissionsEx');
-    var pexUser = pex.getUser(playerName)
+    var pexUser = pexPlugin.getUser(playerName)
     if (! pexUser.inGroup('moderator') ) {
        pexUser.player.sendMessage("You can't do that!");
     }
 
-In the above example, we call the *server.pluginManager.getPlugin()* method to get a particular plugin object. Once we have the plugin object we can call any of its methods to work with the plugin.
+In the above example, we call the *server.pluginManager.getPlugin()* method to get a particular plugin object. Once we have the plugin object we can call any of its methods to work with the plugin. For any given plugin, you'll need to refer to that plugin's API reference to see what methods are available for that plugin.
 
 ## Appendix C: Events Reference
 The following tables list all of the *events* module's functions which can be used to register event listeners. Alongside each function, the equivalent Java Event type is shown. You should refer to the Bukkit API Reference documentation at http://jd.bukkit.org/rb/apidocs/ for details about each Java Event type. Event types fall into a number of categories each of which are listed below.

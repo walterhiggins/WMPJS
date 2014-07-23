@@ -3981,7 +3981,7 @@ It's been a lot of fun writing this book and I hope you've enjoyed reading it an
 The *server* variable is a global variable provided by ScriptCraft. It refers to the *org.bukkit.Server* object which is a Java object representing the Minecraft Server. Refer to http://jd.bukkit.org/rb/apidocs/org/bukkit/Server.html for full details of all of the methods available for this object.
 
 ### The *bukkit* variable
-The *bukkit* variable is a global variable with just a handful of methods to make life easier for JavaScript programmers. You can see the full list of methods at http://scriptcraftjs.org/docs/API-Reference.html#bukkit
+The *bukkit* variable is a global variable with just a handful of methods to make life easier for JavaScript programmers. You can see the full list of methods at http://scriptcraftjs.org/api#bukkit
 
 ### The ____plugin variable
 This global variable is a reference to the ScriptCraft plugin. Some Bukkit API methods require an *org.bukkit.plugin.Plugin* object as a parameter. If you need to call such methods from JavaScript you should provide the ____plugin variable where an object of type *org.bukkit.plugin.Plugin* is required.

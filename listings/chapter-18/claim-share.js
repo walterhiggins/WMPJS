@@ -1,5 +1,7 @@
-function share( params, player){
-  var trustedPlayer = '' + params[0]; // convert from Java to JavaScript string
+function share( params, player ) {
+  // convert from Java to JavaScript string
+  var trustedPlayer = '' + params[0]; 
+
   var existingClaim = plots.getClaim( player );
   if (existingClaim){
     if (typeof existingClaim.sharedWith == 'undefined'){

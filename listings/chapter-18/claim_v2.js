@@ -4,7 +4,8 @@ function claim( params, player ){
   var existingClaim = plots.getClaim( player );
   var boundingPlots = plots.getBoundingPlots( player.location );
   if ( existingClaim ) {
-    player.sendMessage('You already have plot number ' + existingClaim.number);
+    player.sendMessage('You already have plot number ' + 
+                       existingClaim.number);
     return;
   }
   if (boundingPlots.length == 0){
@@ -14,7 +15,9 @@ function claim( params, player ){
   for (var i = 0;i < boundingPlots.length;i++){
     var plot = boundingPlots[i];
     if (!plot.claimedBy){
-      plot.claimedBy = '' + player.name; // convert from Java to JavaScript string
+      // convert from Java to JavaScript string
+      plot.claimedBy = '' + player.name; 
+
       player.sendMessage('Congratulations! You now own plot ' + plot.number);
       fireworks.firework( player.location );
       return;
@@ -28,7 +31,8 @@ function abandon(params, player){
   var existingClaim = plots.getClaim( player );
   if (existingClaim){
     existingClaim.claimedBy = null;
-    player.sendMessage('You have given up your claim on plot ' + existingClaim.number);
+    player.sendMessage('You have given up your claim on plot ' + 
+                       existingClaim.number);
   } else {
     player.sendMessage('You do not have any plots to abandon!');
   }

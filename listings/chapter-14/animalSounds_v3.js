@@ -29,6 +29,7 @@ function onInput( animal, player ) {
 
 exports.animalSounds = function( player ) {
   input( player, 
-	 "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", 
-	 onInput );
+         "What's your favorite animal" + 
+         " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+         onInput );
 };

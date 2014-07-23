@@ -54,7 +54,7 @@ When I created ScriptCraft in 2012 there was no one true way to write Minecraft 
 
 # Part I A Modding Workbench
 
-<p><img src="images/Crafting_Table.png" align="middle"/></p>
+![](images/Crafting_Table.png "")
 
 ## Overview
 Welcome to the exciting world of Minecraft Plugin Development. In this first section of the book I'll introduce you to the tools you'll need to start programming. In Minecraft, you need to first create a Workbench (also sometimes called a Crafting Table) before you can craft more sophisticated tools. So too in real life we'll need to first gather some resources and setup a work area where we can create sophisticated Minecraft plugins. This first section describes the resources you'll need, how to get them and how to setup your 'modding workbench'. All of the resource you'll need are freely available online. The ingredients you'll need to construct your modding workbench are:
@@ -2223,7 +2223,10 @@ In chapter 9 you learned how to get input from players and how to test the input
       }
     };
     function animalSounds = function( player ){
-      input(player, "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", onInput);
+      input( player, 
+        "What's your favorite animal" + 
+        " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+        onInput );
     }
     exports.animalSounds = animalSounds;
 
@@ -2404,7 +2407,10 @@ The *String.toLowerCase()* function will convert any string to its lowercase equ
       }
     }
     function animalSounds( player ) {
-      input(player, "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", onInput);
+      input( player, 
+             "What's your favorite animal" + 
+             " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+             onInput);
     }
     exports.animalSounds = animalSounds;
     
@@ -3589,8 +3595,9 @@ In the following chapter we're going to change the *animalSounds.js* module from
     
     exports.animalSounds = function( player ) {
       input( player, 
-    	 "What's your favorite animal - cat, chicken, cow, horse, pig, sheep or wolf?", 
-    	 onInput );
+             "What's your favorite animal" + 
+             " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+             onInput );
     };
 
 In the above listing we've created a new object called *noises* :
@@ -4895,8 +4902,14 @@ The first step is to create a shared module which will be used in steps 2 and 3 
       return result;
     }
     function contains( zone, location){
-      if ( (location.x >= zone.startX && location.x <= (zone.startX + zone.extentX) ) &&
-           (location.z >= zone.startZ && location.z <= (zone.startZ + zone.extentZ) ) ) { 
+      if ( ( location.x >= zone.startX && 
+             location.x <= (zone.startX + zone.extentX) 
+           ) 
+           &&
+           ( location.z >= zone.startZ && 
+             location.z <= (zone.startZ + zone.extentZ) 
+           ) 
+         ) { 
         return true;
       }
       return false;
@@ -5018,8 +5031,14 @@ You'll notice the *create()* function is *very* similar to the *addZone()* funct
       
     }
     function contains(region, location){
-      if ( (location.x >= region.startX && location.x <= (region.startX + region.extentX) ) &&
-           (location.z >= region.startZ && location.z <= (region.startZ + region.extentZ) ) ) { 
+      if ( ( location.x >= region.startX && 
+             location.x <= (region.startX + region.extentX) 
+           ) 
+           &&
+           ( location.z >= region.startZ && 
+             location.z <= (region.startZ + region.extentZ) 
+           ) 
+         ) { 
         return true;
       }
       return false;
@@ -5192,7 +5211,8 @@ Right now the instructions which appear on the sign (move inside the plot area a
       var existingClaim = plots.getClaim( player );
       var boundingPlots = plots.getBoundingPlots( player.location );
       if ( existingClaim ) {
-        player.sendMessage('You already have plot number ' + existingClaim.number);
+        player.sendMessage('You already have plot number ' + 
+                           existingClaim.number);
         return;
       }
       if (boundingPlots.length == 0){
@@ -5202,7 +5222,9 @@ Right now the instructions which appear on the sign (move inside the plot area a
       for (var i = 0;i < boundingPlots.length;i++){
         var plot = boundingPlots[i];
         if (!plot.claimedBy){
-          plot.claimedBy = '' + player.name; // convert from Java to JavaScript string
+          // convert from Java to JavaScript string
+          plot.claimedBy = '' + player.name; 
+    
           player.sendMessage('Congratulations! You now own plot ' + plot.number);
           fireworks.firework( player.location );
           return;
@@ -5286,7 +5308,8 @@ The next step is to provide a way for players to *abandon* their plots so they c
       var existingClaim = plots.getClaim( player );
       if (existingClaim){
         existingClaim.claimedBy = null;
-        player.sendMessage('You have given up your claim on plot ' + existingClaim.number);
+        player.sendMessage('You have given up your claim on plot ' + 
+                           existingClaim.number);
       } else {
         player.sendMessage('You do not have any plots to abandon!');
       }
@@ -5305,8 +5328,10 @@ Let's start with the new */jsp share* command. Open your *claim.js* file and aga
 
 <caption>Listing 18.14: The /jsp share Command</caption>
 
-    function share( params, player){
-      var trustedPlayer = '' + params[0]; // convert from Java to JavaScript string
+    function share( params, player ) {
+      // convert from Java to JavaScript string
+      var trustedPlayer = '' + params[0]; 
+    
       var existingClaim = plots.getClaim( player );
       if (existingClaim){
         if (typeof existingClaim.sharedWith == 'undefined'){
@@ -5339,7 +5364,9 @@ Next we must update our event-handling code related to protection. We want to al
     */
     function playerCanBuild( player, location ) { 
       // check if player has a plot on this location or is trusted
-      return playerOwnsPlot( player, location ) || playerIsTrusted( player, location );
+      var result = playerOwnsPlot( player, location ) || 
+        playerIsTrusted( player, location );
+      return result;
     }
     
     function playerIsTrusted( player, location) {
@@ -5354,7 +5381,7 @@ Next we must update our event-handling code related to protection. We want to al
         }
         for (var j = 0; j < sharedWith.length; j++){
           if (sharedWith[j] == playerName){
-    	return true;
+            return true;
           }
         }
       }
@@ -5493,7 +5520,7 @@ We have a lot of ground to cover so let's dive right in and write the core game 
           var playerName = players[i].name;
           teamName = teamNames[ i % playerCount ];
           if (teams[ teamName ] == undefined){
-    	teams[ teamName ] = [];
+            teams[ teamName ] = [];
           }
           teams[ teamName ].push(playerName);
         }
@@ -5585,7 +5612,8 @@ We have a lot of ground to cover so let's dive right in and write the core game 
       }
       updateScoreboard(game);
       /*
-       due to a bug in Scoreboard, we need to force it to refresh by changing the score from -1 to 0
+       due to a bug in Scoreboard, we need to force a refresh 
+       by changing the score from -1 to 0
        */
       for ( teamName in game.teams ) {
         game.teamScores[ teamName ] = 0;
@@ -5672,7 +5700,7 @@ The mini-game is created using the *SnowballFight()* function which takes 2 para
         var playerName = players[i].name;
         teamName = teamNames[ i % playerCount ];
         if (teams[ teamName ] == undefined){
-	  teams[ teamName ] = [];
+          teams[ teamName ] = [];
         }
         teams[ teamName ].push(playerName);
       }
@@ -5775,7 +5803,8 @@ Later we'll add the ability for any player waiting in a colored zone to start th
       // construct glass wall around arena
       this.up().fwd(8).box0(blocks.glass_pane,24, 3, 24);
       this.move('sbarena');
-      this.up().sign(instructions,63).right(8).sign(instructions,63).right(8).sign(instructions,63);
+      this.up().sign(instructions,63).right(8);
+      this.sign(instructions,63).right(8).sign(instructions,63);
       // make whole area protected
       this.move('sbarena');
       this.zonemaker( null, 24, 32 );
@@ -5900,10 +5929,14 @@ Let's complete the game by writing the code which will handle this command. In t
           inZone = arena.yellowSpawn;
         } 
         if ( inZone ) {
+          var spawnLoc = new bkLocation( player.location.world, 
+                                         inZone.x, 
+                                         inZone.y, 
+                                         inZone.z);
           spawns.push( {
             participant: player,
             oldLocation: player.location,
-            newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+            newLocation: spawnLoc 
           } );
         }
       }
@@ -5911,7 +5944,8 @@ Let's complete the game by writing the code which will handle this command. In t
           || (teams.red.length == 0 && teams.yellow.length == 0)
           || (teams.blue.length == 0 && teams.yellow.length == 0))
       {
-        sender.sendMessage('Need more than one team to play. Someone choose a different color.');
+        sender.sendMessage('Need more than one team to play. ' + 
+                           'Someone needs to choose a different color.');
         return;
       }
       function returnPlayers() {
@@ -5956,10 +5990,14 @@ If the player *is* in one of the waiting areas we keep a reference to the waitin
         inZone = arena.yellowSpawn;
       } 
       if ( inZone ) {
+        var spawnLoc = new bkLocation( player.location.world, 
+                                       inZone.x, 
+                                       inZone.y, 
+                                       inZone.z);
         spawns.push( {
           participant: player,
           oldLocation: player.location,
-          newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+          newLocation: spawnLoc 
         } );
       }
     }
@@ -5980,7 +6018,8 @@ Next the *snowball* command function checks how many teams have players. If ther
       || (teams.red.length == 0 && teams.yellow.length == 0)
       || (teams.blue.length == 0 && teams.yellow.length == 0))
     {
-      player.sendMessage('Need more than one team to play. Someone choose a different color.');
+      player.sendMessage('Need more than one team to play. ' + 
+                         'Someone needs to choose a different color.');
       return;
     }
 

@@ -3,7 +3,9 @@
 */
 function playerCanBuild( player, location ) { 
   // check if player has a plot on this location or is trusted
-  return playerOwnsPlot( player, location ) || playerIsTrusted( player, location );
+  var result = playerOwnsPlot( player, location ) || 
+    playerIsTrusted( player, location );
+  return result;
 }
 
 function playerIsTrusted( player, location) {
@@ -18,7 +20,7 @@ function playerIsTrusted( player, location) {
     }
     for (var j = 0; j < sharedWith.length; j++){
       if (sharedWith[j] == playerName){
-	return true;
+        return true;
       }
     }
   }

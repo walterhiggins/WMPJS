@@ -29,7 +29,8 @@ function snowballArena() {
   // construct glass wall around arena
   this.up().fwd(8).box0(blocks.glass_pane,24, 3, 24);
   this.move('sbarena');
-  this.up().sign(instructions,63).right(8).sign(instructions,63).right(8).sign(instructions,63);
+  this.up().sign(instructions,63).right(8);
+  this.sign(instructions,63).right(8).sign(instructions,63);
   // make whole area protected
   this.move('sbarena');
   this.zonemaker( null, 24, 32 );

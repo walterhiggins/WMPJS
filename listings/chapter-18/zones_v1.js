@@ -26,8 +26,14 @@ function addZone( a, b ){
   return result;
 }
 function contains( zone, location){
-  if ( (location.x >= zone.startX && location.x <= (zone.startX + zone.extentX) ) &&
-       (location.z >= zone.startZ && location.z <= (zone.startZ + zone.extentZ) ) ) { 
+  if ( ( location.x >= zone.startX && 
+         location.x <= (zone.startX + zone.extentX) 
+       ) 
+       &&
+       ( location.z >= zone.startZ && 
+         location.z <= (zone.startZ + zone.extentZ) 
+       ) 
+     ) { 
     return true;
   }
   return false;

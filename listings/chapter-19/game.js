@@ -22,7 +22,7 @@ function SnowballFight( duration, teams ) {
       var playerName = players[i].name;
       teamName = teamNames[ i % playerCount ];
       if (teams[ teamName ] == undefined){
-	teams[ teamName ] = [];
+        teams[ teamName ] = [];
       }
       teams[ teamName ].push(playerName);
     }
@@ -114,7 +114,8 @@ function start( game ) {
   }
   updateScoreboard(game);
   /*
-   due to a bug in Scoreboard, we need to force it to refresh by changing the score from -1 to 0
+   due to a bug in Scoreboard, we need to force a refresh 
+   by changing the score from -1 to 0
    */
   for ( teamName in game.teams ) {
     game.teamScores[ teamName ] = 0;

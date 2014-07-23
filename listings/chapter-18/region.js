@@ -25,8 +25,14 @@ function create( a, b ){
   
 }
 function contains(region, location){
-  if ( (location.x >= region.startX && location.x <= (region.startX + region.extentX) ) &&
-       (location.z >= region.startZ && location.z <= (region.startZ + region.extentZ) ) ) { 
+  if ( ( location.x >= region.startX && 
+         location.x <= (region.startX + region.extentX) 
+       ) 
+       &&
+       ( location.z >= region.startZ && 
+         location.z <= (region.startZ + region.extentZ) 
+       ) 
+     ) { 
     return true;
   }
   return false;

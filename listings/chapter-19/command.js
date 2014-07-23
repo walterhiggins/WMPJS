@@ -45,10 +45,14 @@ function snowball( params, sender ){
       inZone = arena.yellowSpawn;
     } 
     if ( inZone ) {
+      var spawnLoc = new bkLocation( player.location.world, 
+                                     inZone.x, 
+                                     inZone.y, 
+                                     inZone.z);
       spawns.push( {
         participant: player,
         oldLocation: player.location,
-        newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+        newLocation: spawnLoc 
       } );
     }
   }
@@ -56,7 +60,8 @@ function snowball( params, sender ){
       || (teams.red.length == 0 && teams.yellow.length == 0)
       || (teams.blue.length == 0 && teams.yellow.length == 0))
   {
-    sender.sendMessage('Need more than one team to play. Someone choose a different color.');
+    sender.sendMessage('Need more than one team to play. ' + 
+                       'Someone needs to choose a different color.');
     return;
   }
   function returnPlayers() {

@@ -3802,7 +3802,7 @@ The mini-game is created using the *SnowballFight()* function which takes 2 para
         var playerName = players[i].name;
         teamName = teamNames[ i % playerCount ];
         if (teams[ teamName ] == undefined){
-	  teams[ teamName ] = [];
+          teams[ teamName ] = [];
         }
         teams[ teamName ].push(playerName);
       }
@@ -3932,10 +3932,14 @@ If the player *is* in one of the waiting areas we keep a reference to the waitin
         inZone = arena.yellowSpawn;
       } 
       if ( inZone ) {
+        var spawnLoc = new bkLocation( player.location.world, 
+                                       inZone.x, 
+                                       inZone.y, 
+                                       inZone.z);
         spawns.push( {
           participant: player,
           oldLocation: player.location,
-          newLocation: new bkLocation( player.location.world, inZone.x, inZone.y, inZone.z)
+          newLocation: spawnLoc 
         } );
       }
     }
@@ -3951,7 +3955,8 @@ Next the *snowball* command function checks how many teams have players. If ther
       || (teams.red.length == 0 && teams.yellow.length == 0)
       || (teams.blue.length == 0 && teams.yellow.length == 0))
     {
-      player.sendMessage('Need more than one team to play. Someone choose a different color.');
+      player.sendMessage('Need more than one team to play. ' + 
+                         'Someone needs to choose a different color.');
       return;
     }
 

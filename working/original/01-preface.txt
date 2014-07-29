@@ -1,34 +1,36 @@
 <html><body>
 # Preface
 
-## Who is this book for?
+## Who Is This Book For?
 
-This book is for anyone who is curious about Programming and creating Minecraft Plugins. It teaches how to create Minecraft Server Plugins and assumes the reader has no previous programming experience. This book is for beginners of all ages. 
+This book is for anyone who is curious about programming and creating Minecraft plugins. It teaches how to create Minecraft server plugins and assumes the reader has no previous programming experience. This book is for beginners of all ages. 
+
+[AUTHOR: You mention "of all ages" above, but do you want to specifically say something like "I've targeted kids and teenagers..." or "Kids in my classes do these exercises..."?]
 
 ## Introduction
 
-This book shows you how to create your own Minecraft Server Plugins using JavaScript. There's often confusion about the words 'Mod' and 'Plugin'. For the purpose of this book, they mean the same thing. Mojang&mdash;the makers of Minecraft&mdash;prefer to use the term 'Plugin API' rather than 'Modding API' when referring to their forthcoming official API which will make extending Minecraft easier.
+This book shows you how to create your own Minecraft server plugins using JavaScript. There's often confusion about the words *mod* and *plugin*. For the purpose of this book, they mean the same thing. Mojang&mdash;the makers of Minecraft&mdash;prefers to use the term *plugin API* rather than *modding API* when referring to its forthcoming official API that will make extending Minecraft easier.
 
-Before we begin I better explain some of the words I'll use throughout this book. 
+Before I begin, I will explain some of the words I'll use throughout this book. 
 
- * Plugin : A modification you add to Minecraft which changes the game in some way. The plugin is usually in the form of one or more files.
- * Mod : Mod is short for Modification. In this book, Plugin and Mod are used interchangeably (they mean the same thing).
- * Modding : The practice of writing modifications or plugins for Minecraft. Modding requires some programming knowledge which we will learn in this book.
- * API : API is short for Application Programming Interface&mdash;an official way to write Minecraft Plugins using a guide. Players and regular users of software don't need to care about APIs but they are essential for programmers, because they make it easier to develop plugins. An API is like a list of Recipes&mdash;you probably crafted your first pick-axe by referring to an online guide&mdash;how much more difficult would it be to have tried creating one without knowing where all the materials should go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API we will use in this book is the Bukkit API. We'll learn more about this later.
- * Multiplayer : The mode of playing Minecraft with other players all connected to the same server.
- * Server : A computer which is running the Minecraft server software. In this book I will show you how to setup and run your own Minecraft server.
+ * Plugin: A modification you add to Minecraft that changes the game in some way. The plugin is usually in the form of one or more files.
+ * Mod: Mod is short for "modification." In this book, *mod* and *plugin* are used interchangeably (they mean the same thing).
+ * Modding: The practice of writing modifications or plugins for Minecraft. Modding requires some programming knowledge, which you will learn in this book.
+ * API: API is short for "application programming interface," which is an official way to write Minecraft plugins using a guide. Players and regular users of software don't need to care about APIs, but they are essential for programmers because they make it easier to develop plugins. An API is like a list of recipes; you probably crafted your first pick-axe by referring to an online guide&mdash;how much more difficult would it be to have tried creating one without knowing where all the materials should go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API you will use in this book is the Bukkit API. 
+ * Multiplayer: The mode of playing Minecraft with other players all connected to the same server.
+ * Server: A computer that is running the Minecraft server software. In this book I will show you how to set up and run your own Minecraft server.
 
-## Why I wrote this book
+## Why I Wrote This Book
 
-I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my 2 kids on a shared server at home since 2011. I developed software as a hobby in my teens and have been developing software professionally for over 20 years. I took my Kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and JavaScript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?". When I first looked into developing Minecraft plugins I was bewildered by the number of options available. 
+I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my two kids on a shared server at home since 2011. I developed software as a hobby in my teens and have been developing software professionally for more than 20 years. I took my kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and JavaScript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?" When I first looked into developing Minecraft plugins, I was bewildered by the number of options available. 
 
-All of the options available required you to write code in Java. Java is the programming language which Minecraft is written in. It is a fine general purpose language especially suited to developing large complex business applications. However, it is not ideal as a first language to learn. Learning Java can take some time and you need to write a lot of Java code to get things done. Even for a seasoned Java developer, the options available for modding Minecraft were bewildering. That's why I came up with the idea of making modding easier by letting plugin developers use JavaScript instead. 
+All of the options available required you to write code in Java. Java is the programming language that Minecraft is written in. It is a fine general-purpose language especially suited to developing large, complex business applications. However, it is not ideal as a first language to learn. Learning Java can take some time, and you need to write a lot of Java code to get things done. Even for a seasoned Java developer, the options available for modding Minecraft were bewildering. That's why I came up with the idea of making modding easier by letting plugin developers use JavaScript instead. 
 
-In late 2012 I launched ScriptCraft&mdash;a way of writing Minecraft plugins using JavaScript, a much simpler language than Java.  
+In late 2012 I launched ScriptCraft&mdash;a way of writing Minecraft plugins using JavaScript, which is a much simpler language than Java.  
 
-I wrote this book to make learning to program, fun and easy. I believe that learning even a little about software&mdash;how it's made and how it works&mdash;is good. Developing Minecraft Plugins is a great way to learn programming and create something fun for yourself and your friends. Maybe you want to create your own Minecraft mini-game or you can't find a Plugin that does exactly what you want. This book will teach you how to create your own plugins and mini-games. Playing Minecraft is fun. Creating Minecraft Plugins is a whole different level of fun.
+I wrote this book to make learning to program fun and easy. I believe that learning even a little about software&mdash;how it's made and how it works&mdash;is good. Developing Minecraft plugins is a great way to learn programming and create something fun for yourself and your friends. Maybe you want to create your own Minecraft mini-game or you can't find a plugin that does exactly what you want. This book will teach you how to create your own plugins and mini-games. Playing Minecraft is fun. Creating Minecraft plugins is a whole different level of fun.
 
-I hope you'll enjoy reading and exploring the world of programming and Minecraft Plugin Development. 
+I hope you'll enjoy reading and exploring the world of programming and Minecraft plugin development. 
 
 Walter Higgins
 
@@ -36,21 +38,21 @@ April 2014
 
 ## Why JavaScript?
 
-In this book I will teach you how to program using the JavaScript programming language. JavaScript is just one of many programming languages. When I set out with the goal of making Minecraft Plugin development easier, I chose JavaScript for a few reasons:
+In this book I will teach you how to program using the JavaScript programming language. JavaScript is just one of many programming languages. When I set out with the goal of making Minecraft plugin development easier, I chose JavaScript for a few reasons.
 
  * JavaScript is an easy language to learn. 
  * I like JavaScript. I enjoy writing code in JavaScript and hope you will too.
  * JavaScript is expressive. You can do more with less. A little bit of JavaScript code can do quite a lot compared to other programming languages such as Java. The shorter your programs are, the easier they are to understand. 
  * JavaScript is bundled with Java. The latest versions of Java include JavaScript. This means you won't need to install any additional software to use ScriptCraft. 
- * Anything you can do using Java, you can do using JavaScript. In this book we'll learn about the Bukkit API&mdash;a set of guidelines for creating Minecraft Plugins. The Bukkit API is Java-based but we can use JavaScript too!
- * JavaScript isn't a toy. JavaScript is a proper programming language used professionally by thousands of programmers around the world. Although originally only used for adding simple extensions to web pages, it's now used for developing all kinds of software and has become one of the most popular programming languages. 
- * JavaScript is cross-platform. What this means is JavaScript is available on Macintosh, Windows and Linux.
+ * Anything you can do using Java, you can do using JavaScript. In this book you'll learn about the Bukkit API&mdash;a set of guidelines for creating Minecraft plugins. The Bukkit API is Java-based, but you can use JavaScript too!
+ * JavaScript isn't a toy. JavaScript is a proper programming language used professionally by thousands of programmers around the world. Although originally used only for adding simple extensions to web pages, it's now used for developing all kinds of software and has become one of the most popular programming languages. 
+ * JavaScript is cross-platform. This means JavaScript is available on Macintosh, Windows, and Linux.
 
-The JavaScript programming Language is a simple language to get started with but it can be quite flexible in how you do things. In JavaScript there's usually more than one way to do it. This book is not intended as a comprehensive tour of all of JavaScript's features. Its aim is to focus on the fun parts of JavaScript and to help those who are curious about programming get a taste for what programming in JavaScript is like.
+The JavaScript programming Language is a simple language to get started with, but it can be quite flexible in how you do things. In JavaScript there's usually more than one way to do it. This book is not intended as a comprehensive tour of all of JavaScript's features. Its aim is to focus on the fun parts of JavaScript and to help those who are curious about programming get a taste for what programming in JavaScript is like.
 
 ### About the Upcoming Minecraft API
 
-When I created ScriptCraft in 2012 there was no one true way to write Minecraft Plugins because there was no official API provided by Mojang. At the time of writing (April 2014) Mojang announced an upcoming official way to write Minecraft Plugins using the Plugin API. The Plugin API will provide a standard way for Plugin Developers to extend the Minecraft game. There is still no official release date for the Plugin API but I'll be watching closely and will make any necessary changes to ScriptCraft when the API is released.
+When I created ScriptCraft in 2012, there was no one true way to write Minecraft plugins because there was no official API provided by Mojang. At the time of writing (April 2014), Mojang has announced an upcoming official way to write Minecraft plugins using the Plugin API. The Plugin API will provide a standard way for plugin developers to extend the Minecraft game. There is still no official release date for the Plugin API, but I'll be watching closely and will make any necessary changes to ScriptCraft when the API is released.
  
 
 </body></html>

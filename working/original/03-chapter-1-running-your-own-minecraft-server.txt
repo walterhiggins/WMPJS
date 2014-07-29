@@ -3,8 +3,6 @@
 
 I began playing Minecraft in 2010 in single-player mode. It was a fun and relaxing way to pass the time. Later I installed the Minecraft server software on one of the computers on our kitchen table. My youngest son, Sean, had just finished his homework, so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter, Kate, joined in, and we began some serious building together (Figure 1.1). Building in Minecraft is much more fun with others. 
 
-[AU: we'll need in-text references to all figures with captions. I've inserted them where I thought best, but please feel free to change them.]
-
 [AUTHOR NOTE: images/chapter-01/Client\_Server\_Kids.png]
 
 ![](images/chapter-01/Client_Server_Kids.png)
@@ -61,6 +59,8 @@ There are a couple of different flavors of Minecraft server. Mojang provides its
 
 [AU: if there are a lot of these "term" sections, we could set them as notes so that they are set off, perhaps by some color, from the main text. but we didn't design these, so I'd have to ask that they be added...if you're interested. that element would make it helpful if, for instance, if they needed to appear in the middle of a section, where the previous section continues after the term section ends, as opposed to the next heading coming after.]
 
+[WALTER: There are 9 TERM sections throughout the book. It's probably best that these paragraphs are offset with a different color so they stand out from the surrounding text]
+
 ### Term: Griefing 
 Griefing is when a player in a multiplayer video game deliberately irritates and harasses other players within the game, using aspects of the game in unintended ways. A griefer enjoys annoying other users by destroying other players' work, cursing and harassing players and server administrators.
 
@@ -68,11 +68,8 @@ The standard (vanilla) Minecraft server has only limited ways to protect against
 
 ## CraftBukkit
 
-> Your server, your way. More for less. The possibilities are endless...
->
-> [http://dl.bukkit.org/](http://dl.bukkit.org/)
-
 [AU: how did you want the above to appear? there's no real design element for it other than a regular paragraph and then the URL...?]
+[WALTER: I've removed the pull-quote which this comment refered to. The pull-quote didn't really add anything to the book]
 
 CraftBukkit has become the most popular Minecraft server software with a thriving community of plugin developers. In 2012 Mojang hired the CraftBukkit team to work on Minecraft and the Minecraft API. In this book, you'll use CraftBukkit as your Minecraft server software. CraftBukkit is the server software, but it has an API (a system that plugin developers can use to extend the server), which is called Bukkit. You'll look at the Bukkit API in more detail later. For now, all you need to know is that CraftBukkit is the name of the server software, and Bukkit is the API on top of which it's built (see Figure 1.5).
 
@@ -84,7 +81,7 @@ CraftBukkit has become the most popular Minecraft server software with a thrivin
 [PRODUCTION: please have an artist render this image]
 
 
-CraftBukkit has become so popular because of its underlying API (Bukkit), which makes it easy for plugin developers to extend the Minecraft Multiplayer server. hundreds of plugins are available for CraftBukkit, including all of the popular multiplayer mini-games such as HungerGames and CaptureTheFlag. Chances are, if you've ever played Minecraft Multiplayer on one of the popular public servers, it's been running CraftBukkit. The CraftBukkit wiki provides a wealth of information for both administrators (the people who run CraftBukkit servers) and developers (the people who create plugins for CraftBukkit). I highly recommend checking it out (*http://wiki.bukkit.org/*).
+CraftBukkit has become so popular because of its underlying API (Bukkit), which makes it easy for plugin developers to extend the Minecraft Multiplayer server. Hundreds of plugins are available for CraftBukkit, including all of the popular multiplayer mini-games such as HungerGames and CaptureTheFlag. Chances are, if you've ever played Minecraft Multiplayer on one of the popular public servers, it's been running CraftBukkit. The CraftBukkit wiki provides a wealth of information for both administrators (the people who run CraftBukkit servers) and developers (the people who create plugins for CraftBukkit). I highly recommend checking it out (*http://wiki.bukkit.org/*).
 
 ## Installing CraftBukkit
 
@@ -101,6 +98,7 @@ The first step in constructing your modding workbench is to install CraftBukkit.
 [PRODUCTION: please have artist render this image]
 
 [AUTHOR: here's an example of where it's not going to be clear where the "Term: Bug" section ends if it's just styled as a head 3. I am going to request a note or sidebar element be designed for this, with some background shading, so that it set these sections off from the text. No need to style them differently at all.]
+[WALTER: SOUNDS GOOD]
 
 Usually, a compatible version of the Minecraft server software is released shortly after the Minecraft client is upgraded. One thing to keep in mind is that CraftBukkit is an open source and voluntary project&mdash;this means that the people who develop CraftBukkit don't get paid to do so. They do it for fun. Upgrading server software takes a lot of work, and the software needs to be tested (by volunteers) before it can be released. That's why sometimes it may take a while for a new version of the Minecraft server software to be released that is compatible with the latest and greatest client. Be patient and remember that the developers who work on CraftBukkit do it for fun and don't get paid, so posting questions on the CraftBukkit forums asking when will the new version be ready won't speed things up.
 
@@ -255,9 +253,10 @@ If you run into trouble installing CraftBukkit, you can find plenty of useful ti
 
 
 ## Configuring Your Server
-Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be player vs. player, and so on? While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone; just bear in mind you will need to restart your server if you change the configuration. I'll show you how to do that later.
+Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be player vs. player, and so on? While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone; just bear in mind you will need to restart your server if you change the configuration. 
 
 [AU: can you clarify later when? by naming the section or chapter?]
+[WALTER: I've removed this sentence: I'll show you how to do that later. I show how a couple of paragraphs on]
 
 ### The server.properties File
 When you first launch CraftBukkit, a couple of configuration files and folders will be created in the CraftBukkit folder (the folder where you store the craftbukkit JAR file and startup script). When configuring your server, the most important file is `server.properties`. This is a plain-text file (meaning it can be edited using any text editor) containing all of the configuration for your server. The first few lines of my own `server.properties` look like this:
@@ -282,10 +281,11 @@ Later in the book I'll show you how to use JavaScript to create roads and skyscr
 If you decide to create a new world and want to use a  level type other than `DEFAULT`, you have two options.
 
 [AU: the following should be a bullet list instead since it's either/or]
+[WALTER: I changed it to a bullet list]
 
-1. Change both the `level-name` and `level-type` properties to create a new world while keeping the old world. (The old world will not be wiped out&mdash;it will still be on your computer stored in the `world` folder.) This is the best option if you want to keep your existing world data. You need to change the `level-name` setting to something other than `world` (the default value). Call your new world something memorable like `flat-world`. 
+* Change both the `level-name` and `level-type` properties to create a new world while keeping the old world. (The old world will not be wiped out&mdash;it will still be on your computer stored in the `world` folder.) This is the best option if you want to keep your existing world data. You need to change the `level-name` setting to something other than `world` (the default value). Call your new world something memorable like `flat-world`. 
 
-2. If you don't care about keeping the existing world, delete the `world` folder from the CraftBukkit folder and change the `level-type` property. The next time the server starts, a new world and a new `world` folder will be created.
+* If you don't care about keeping the existing world, delete the `world` folder from the CraftBukkit folder and change the `level-type` property. The next time the server starts, a new world and a new `world` folder will be created.
 
 #### Monsters
 The next setting you'll probably want to change is the `spawn-monsters` setting. This determines whether monsters will be spawned. By default it's set to `true`, which means monsters will appear at night. I recommend changing this setting from `true` to `false` because the last thing you need while learning to program is to be attacked by giant spiders. You can change this setting any time you like. The setting won't take effect until you restart the server. I'll talk about starting and stopping the server shortly.

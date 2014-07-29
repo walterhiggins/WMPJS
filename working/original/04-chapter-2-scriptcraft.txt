@@ -1,38 +1,40 @@
 <html><body>
 # Chapter 2: ScriptCraft
-## Introduction
-In the previous chapter we downloaded and installed CraftBukkit; a customizable Minecraft Server. In this chapter we'll install ScriptCraft&mdash;a server plugin which lets you write your own plugins using the JavaScript programming language. 
+[AU: can we make this chapter title include a verb to match Ch1, like Using ScriptCraft or Setting Up ScriptCraft or something like that?]
+
+In the previous chapter you downloaded and installed CraftBukkit, a customizable Minecraft server. In this chapter, you'll install ScriptCraft&mdash;a server plugin that lets you write your own plugins using the JavaScript programming language. 
 
 ## What is ScriptCraft?
 
-ScriptCraft is a plugin for Minecraft which lets you create plugins using JavaScript instead of Java. It is a server plugin which means it is installed on a server (CraftBukkit) but once installed can be used by all players connected to that server. I created ScriptCraft for a couple of reasons:
+ScriptCraft is a plugin for Minecraft that lets you create plugins using JavaScript instead of Java. It is a server plugin, which means it is installed on a server (CraftBukkit) but once installed can be used by all players connected to that server. I created ScriptCraft for several reasons.
+[AU: the following should be a bulleted list]
+1. To make it easier for myself to create Minecraft mods
+2. To make it easier for my kids (and others) to create Minecraft mods
+3. To make it easier to teach programming to kids using JavaScript and Minecraft as tools
 
-1. To make it easier for myself to create Minecraft mods.
-2. To make it easier for my kids (and others) to create Minecraft mods.
-3. To make it easier to teach programming to kids using JavaScript and Minecraft as tools.
+Most Minecraft plugins are written in a language called Java. Java was invented in the 1990s as a simpler way to program. Before Java, programmers used languages such as C and C++, which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it. Otherwise, the computer would quickly run out of memory, and the program would crash. Java solved this problem by having automatic *garbage collection* (yes, that's what programmers actually call it), which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself. Java is *cross-platform*, which mean it runs on Windows, Linux, and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
 
-Most Minecraft Plugins are written in a language called 'Java'. Java was invented back in the 1990s as a simpler way to program. Before Java, programmers used languages like C and C++ which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it, otherwise the computer would quickly run out of memory and the program would crash. Java solved this problem by having automatic `Garbage Collection` (yes&mdash;that's what programmers actually call it) which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself. Java is `cross-platform` which mean it runs on Windows, Linux and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
+Java is a fine language and is widely used. However, it can be a little difficult to learn, especially if you are completely new to programming. Java can be verbose, meaning you need to write a lot of Java code to do even simple things. Java code can't be executed right away either. You need to first *compile* it. Compiling is the process of converting Java source code into a form the computer can understand. 
 
-Java is a fine language and is widely used. However, it can be a little difficult to learn&mdash;especially if you are completely new to programming. Java can be verbose&mdash;meaning you need to write a lot of Java code to do even simple things. Java code can't be executed right away either. You need to first "compile" it. Compiling is the process of converting Java source code into a form the computer can understand. 
+JavaScript came along shortly after Java. It was invented in the mid-1990s just when the Internet was becoming really popular. Although their names sound alike, they are very different languages. JavaScript is simpler than Java in many ways. In recent years, it has become popular as a language not just for web programming but for all kinds of uses. 
 
-JavaScript came along shortly after Java. It was invented in the mid 1990s just when the Internet was becoming really popular. Although their names sound alike they are very different languages. JavaScript is simpler than Java in many ways. In recent years it has become popular as a language not just for web programming but for all kinds of uses. 
-
-ScriptCraft is a Minecraft Server plugin which makes it possible to write your own plugins using JavaScript. You can also use ScriptCraft to build large-scale structures (Skyscrapers, Temples, Roads, Castles and Forts) in the game.
+ScriptCraft is a Minecraft server plugin that makes it possible to write your own plugins using JavaScript. You can also use ScriptCraft to build large-scale structures (skyscrapers, temples, roads, castles, and forts) in the game.
+[AU: it seems like the first sentence of the above paragraph was stated earlier -- as the first sentence of the section? perhaps delete or rewrite?]
 
 ## Installing ScriptCraft
 
-To download and install ScriptCraft follow these steps...
+To download and install ScriptCraft, follow these steps.
 
-1. Visit http://scriptcraftjs.org/download/latest/
-2. Right-click on the scriptcraft.jar file and select 'Save Link As...' from the pop-up menu. 
-3. Save the file to the CraftBukkit plugins folder. If there is no `plugins` folder in your craftbukkit folder it's probably because you haven't yet launched CraftBukkit. The first time CraftBukkit is launched it creates a couple of configuration files and a plugins folder so make sure you've launched CraftBukkit at least once before attempting to download ScriptCraft. 
+1. Visit *http://scriptcraftjs.org/download/latest/*.
+2. Right-click the `scriptcraft.jar` file and select Save Link As from the pop-up menu. 
+3. Save the file to the CraftBukkit `plugins` folder. If there is no `plugins` folder in your `craftbukkit` folder, it's probably because you haven't yet launched CraftBukkit. The first time CraftBukkit is launched, it creates a couple of configuration files and a `plugins` folder, so make sure you've launched CraftBukkit at least once before attempting to download ScriptCraft. 
 
-If there is already a scriptcraft.jar file in your CraftBukkit plugins folder (if this isn't the first time you've installed ScriptCraft) , make sure to remove it first before saving the new file.
+If there is already a `scriptcraft.jar` file in your CraftBukkit `plugins` folder (if this isn't the first time you've installed ScriptCraft), make sure to remove it first before saving the new file.
 
 If CraftBukkit is running, stop it by issuing the `stop` command in the server console. 
 
-Launch CraftBukkit by double clicking the launch script you created in chapter 1. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
-
+Launch CraftBukkit by double-clicking the launch script you created in Chapter 1. When CraftBukkit starts up, you should see an "Enabling scriptcraft" message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this:
+[KIM: code block]
     Enabling scriptcraft v2.0.6-2014-04-20
     Directory /home/walter/cb179/plugins/scriptcraft does not exist.
     Initializing /home/walter/cb179/plugins/scriptcraft directory with contents from plugin archive.
@@ -40,23 +42,23 @@ Launch CraftBukkit by double clicking the launch script you created in chapter 1
     Unzipping /home/walter/cb179/plugins/scriptcraft/lib/console.js (NE)
     Unzipping /home/walter/cb179/plugins/scriptcraft/lib/events.js (NE)
 
-... There will be many more entries as there are many files bundled with ScriptCraft. 
+There will be many more entries because there are many files bundled with ScriptCraft. 
 
-The *plugins* sub-folder in CraftBukkit is important. It's where all Minecraft Server plugins should be stored. This is true not just for ScriptCraft.jar but for all server plugins. If you save a Server plugin jar file to any other location except the plugins folder, then it will not be loaded when CraftBukkit starts. CraftBukkit only looks in the *plugins* folder for plugins to load at startup.
+The `plugins` subfolder in CraftBukkit is important. It's where all Minecraft server plugins should be stored. This is true not just for ScriptCraft.jar but for all server plugins. If you save a Server plugin JAR file to any other location except the plugins folder, then it will not be loaded when CraftBukkit starts. CraftBukkit looks only in the `plugins` folder for plugins to load at startup.
 
-## Verifying ScriptCraft is installed.
+## Verifying ScriptCraft Is Installed
 
 You can verify that ScriptCraft has been successfully installed by issuing the following command at the server console:
+[KIM: code block]
+    js 2 ` 3
 
-    js 2 + 3
-
-Make sure to type the above text exactly as you see it and then hit the ENTER key. The response you get from the server console should of course be `5` . 
+Make sure to type this text exactly as you see it and then hit the Enter key. The response you get from the server console should of course be `5`. 
 
 ### Achievement Unlocked!
 ![](images/achievement-plugin-dev-2.png)
 
 Congratulations! You've just installed ScriptCraft and executed your first line of JavaScript code. 
 
-ScriptCraft adds just 2 new server commands to the Minecraft server `js` and `jsp`&mdash;we'll talk about `jsp` later in the book. The `js` command is short for `JavaScript` and it lets you execute JavaScript code right away. More on this in the next chapter...
+ScriptCraft adds just two new server commands to the Minecraft server: `js` and `jsp`. I'll talk about `jsp` later in the book. The `js` command is short for "JavaScript," and it lets you execute JavaScript code right away. You'll learn more about this in the next chapter.
 
 </body></html>

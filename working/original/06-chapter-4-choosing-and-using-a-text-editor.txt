@@ -27,10 +27,11 @@ I think you'll agree that the syntax highlighting in Figure 4.2 makes the code m
 There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs&mdash;an open source editor&mdash;for many years, but I don't recommend it to beginning programmers because while powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. In this chapter, I'll talk about gedit, but you can use any of the following programming editors to get started programming:
 
 * Notepad++ is a free editor for Windows you can download at *http://notepad-plus-plus.org/*.
-* TextWrangler from BareBones Software is a free editor for Mac OS X you can download at *www.barebones.com/products/textwrangler/*.
-* Sublime Text is a cross-platform editor that you can evaluate for free for as long as you like.
+* TextWrangler from BareBones Software is a free editor for Mac OS X you can download at *http://www.barebones.com/products/textwrangler/*.
+* Sublime Text is a cross-platform editor that you can evaluate for free for as long as you like. You can download Sublime at *http://www.sublimetext.com/*.
 
 [AU: where do they get Sublime?]
+[WALTER: updated bullet point above]
 
 Let's get started installing gedit. You can skip this section if you've already installed and use a programming editor on your computer. Mac OS users can skip the following section and go straight to "Installing TextWrangler on Mac OS."
 

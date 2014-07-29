@@ -66,9 +66,9 @@ Welcome to the exciting world of Minecraft plugin development. In this first sec
 
 The following chapters will show you how to install and set up each of these.
 
-## @@nextChapter{chapter-01}: Running your own Minecraft server
-### Introduction
-I began playing Minecraft in 2010 in Single Player mode. It was fun and a relaxing way to pass the time. Later I installed the Minecraft Server software on one of the computers on our kitchen table. My youngest son Sean had just finished his homework so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter Kate joined in and we began some serious building together. Building in Minecraft is much more fun with others. 
+# Chapter 1: Running Your Own Minecraft Server
+
+I began playing Minecraft in 2010 in single-player mode. It was a fun and relaxing way to pass the time. Later I installed the Minecraft server software on one of the computers on our kitchen table. My youngest son, Sean, had just finished his homework, so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter, Kate, joined in, and we began some serious building together (Figure 1.1). Building in Minecraft is much more fun with others. 
 
 @@figure Client_Server_Kids.png Multiplayer Minecraft
 

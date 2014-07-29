@@ -2,9 +2,7 @@
 
 ## Who Is This Book For?
 
-This book is for anyone who is curious about programming and creating Minecraft plugins. It teaches how to create Minecraft server plugins and assumes the reader has no previous programming experience. This book is for beginners of all ages. 
-
-[AUTHOR: You mention "of all ages" above, but do you want to specifically say something like "I've targeted kids and teenagers..." or "Kids in my classes do these exercises..."?]
+This book is for anyone who is curious about programming and creating Minecraft plugins. It teaches how to create Minecraft server plugins and assumes the reader has no previous programming experience. This book is for beginning programmers aged 10 and older.
 
 ## Introduction
 
@@ -13,7 +11,7 @@ This book shows you how to create your own Minecraft server plugins using JavaSc
 Before I begin, I will explain some of the words I'll use throughout this book. 
 
  * Plugin: A modification you add to Minecraft that changes the game in some way. The plugin is usually in the form of one or more files.
- * Mod: Mod is short for "modification". In this book, *mod* and *plugin* are used interchangeably (they mean the same thing).
+ * Mod: Mod is short for "modification." In this book, *mod* and *plugin* are used interchangeably (they mean the same thing).
  * Modding: The practice of writing modifications or plugins for Minecraft. Modding requires some programming knowledge, which you will learn in this book.
  * API: API is short for "application programming interface," which is an official way to write Minecraft plugins using a guide. Players and regular users of software don't need to care about APIs, but they are essential for programmers because they make it easier to develop plugins. An API is like a list of recipes; you probably crafted your first pick-axe by referring to an online guide -- how much more difficult would it be to have tried creating one without knowing where all the materials should go in the crafting grid? Similarly, programmers need APIs to provide help and guidance in building plugins. The API you will use in this book is the Bukkit API. 
  * Multiplayer: The mode of playing Minecraft with other players all connected to the same server.
@@ -21,7 +19,7 @@ Before I begin, I will explain some of the words I'll use throughout this book.
 
 ## Why I Wrote This Book
 
-I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my two kids on a shared server at home since 2011. I developed software as a hobby in my teens and have been developing software professionally for more than 20 years. I took my kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and JavaScript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?". When I first looked into developing Minecraft plugins, I was bewildered by the number of options available. 
+I've been playing Minecraft since 2010 and have been playing Multiplayer Minecraft with my two kids on a shared server at home since 2011. I developed software as a hobby in my teens and have been developing software professionally for more than 20 years. I took my kids to local CoderDojo sessions where they learned to use Scratch and create simple web pages using HTML and JavaScript. I thought "Wouldn't it be cool if kids could learn to program using Minecraft?" When I first looked into developing Minecraft plugins, I was bewildered by the number of options available. 
 
 All of the options available required you to write code in Java. Java is the programming language that Minecraft is written in. It is a fine general-purpose language especially suited to developing large, complex business applications. However, it is not ideal as a first language to learn. Learning Java can take some time, and you need to write a lot of Java code to get things done. Even for a seasoned Java developer, the options available for modding Minecraft were bewildering. That's why I came up with the idea of making modding easier by letting plugin developers use JavaScript instead. 
 

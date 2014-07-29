@@ -1,6 +1,7 @@
 <html><body>
-# Chapter 2: ScriptCraft
+# Chapter 2: Setting Up ScriptCraft
 [AU: can we make this chapter title include a verb to match Ch1, like Using ScriptCraft or Setting Up ScriptCraft or something like that?]
+[WALTER: Updated chapter title to Setting Up ScriptCraft]
 
 In the previous chapter you downloaded and installed CraftBukkit, a customizable Minecraft server. In this chapter, you'll install ScriptCraft&mdash;a server plugin that lets you write your own plugins using the JavaScript programming language. 
 
@@ -8,9 +9,11 @@ In the previous chapter you downloaded and installed CraftBukkit, a customizable
 
 ScriptCraft is a plugin for Minecraft that lets you create plugins using JavaScript instead of Java. It is a server plugin, which means it is installed on a server (CraftBukkit) but once installed can be used by all players connected to that server. I created ScriptCraft for several reasons.
 [AU: the following should be a bulleted list]
-1. To make it easier for myself to create Minecraft mods
-2. To make it easier for my kids (and others) to create Minecraft mods
-3. To make it easier to teach programming to kids using JavaScript and Minecraft as tools
+[WALTER: Changed to bullet list]
+
+* To make it easier for myself to create Minecraft mods
+* To make it easier for my kids (and others) to create Minecraft mods
+* To make it easier to teach programming to kids using JavaScript and Minecraft as tools
 
 Most Minecraft plugins are written in a language called Java. Java was invented in the 1990s as a simpler way to program. Before Java, programmers used languages such as C and C++, which were difficult to learn and use. C and C++ were difficult because if you wrote a program that wanted to grab some space in the computer's memory, you had to remember to free up that space when you no longer needed it. Otherwise, the computer would quickly run out of memory, and the program would crash. Java solved this problem by having automatic *garbage collection* (yes, that's what programmers actually call it), which automatically frees up memory when it was no longer needed. Java has many other advantages too. It has a large library of functions to do common tasks so you don't have to write those functions yourself. Java is *cross-platform*, which mean it runs on Windows, Linux, and Mac OS. Minecraft is written in Java and so too are Minecraft servers. 
 
@@ -18,8 +21,8 @@ Java is a fine language and is widely used. However, it can be a little difficul
 
 JavaScript came along shortly after Java. It was invented in the mid-1990s just when the Internet was becoming really popular. Although their names sound alike, they are very different languages. JavaScript is simpler than Java in many ways. In recent years, it has become popular as a language not just for web programming but for all kinds of uses. 
 
-ScriptCraft is a Minecraft server plugin that makes it possible to write your own plugins using JavaScript. You can also use ScriptCraft to build large-scale structures (skyscrapers, temples, roads, castles, and forts) in the game.
 [AU: it seems like the first sentence of the above paragraph was stated earlier -- as the first sentence of the section? perhaps delete or rewrite?]
+[WALTER: Removed entire paragraph]
 
 ## Installing ScriptCraft
 

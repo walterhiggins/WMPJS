@@ -1,0 +1,35 @@
+<html><body>
+# Appendix B: Using ScriptCraft with other Plugins
+ScriptCraft can be used to work with and control other Bukkit Plugins. There are two ways ScriptCraft can interact with other Plugins:
+
+1. By issuing plugin commands
+2. By using the plugin's methods and classes.
+
+## Issuing commands
+The *server.dispatchCommand()* method can be used to issue both built-in commands such as */time set* or commands provided by plugins. ScriptCraft can be used to *drive* commands provided by other plugins. For example, if you wanted to use the *Essentials* plugin's */eco give* command to give a player in-game money via JavaScript you'd write:
+
+    server.dispatchCommmand( server.consoleSender, 'eco give walterh 5')
+
+You could create an event listener function which listens for certain types of events and rewards or subtracts in-game currency from players who trigger those events. For example, you could reward players for crafting items like so:
+
+    events.craftItem( event ){
+      var crafter = event.whoClicked.name;
+      var command = 'eco give ' + crafter + ' 5';
+      server.dispatchCommand( server.consoleSender, command);
+    }    
+
+Many plugins provide their own set of commands all of which can be issued by the server console operator ( *server.consoleSender* ).
+
+## Using plugin methods and classes
+Another way to access and use another plugin is via the Java methods and classes provided by the plugin you want to control. In the following example, we're using the popular *PermissionsEx* plugin: a Bukkit plugin which provides fine-grained access control and permissions. You can explore the *PermissionsEx* API reference at http://ci.nixium.com/job/PermissionsEx/javadoc/.
+
+    var playerName = 'walterh';
+    var pexPlugin = server.pluginManager.getPlugin('PermissionsEx');
+    var pexUser = pexPlugin.getUser(playerName)
+    if (! pexUser.inGroup('moderator') ) {
+       pexUser.player.sendMessage("You can't do that!");
+    }
+
+In the above example, we call the *server.pluginManager.getPlugin()* method to get a particular plugin object. Once we have the plugin object we can call any of its methods to work with the plugin. For any given plugin, you'll need to refer to that plugin's API reference to see what methods are available for that plugin.
+
+</body></html>

@@ -1,0 +1,150 @@
+<html><body>
+# Chapter 13: Create a Fireworks Show
+## Introduction
+In this chapter we're going to write code to create a spectacular fireworks show in Minecraft. We'll learn about ScriptCraft's built-in *fireworks* module, the *setTimeout()* function and use a powerful programming technique called *recursion*. We'll begin by writing code to launch a single firework after a delay of 2 seconds, then build on that code to launch many fireworks.
+
+## The fireworks module
+ScriptCraft includes a *fireworks* module which can be used to launch a single firework at a given location. You can use the fireworks module directly at the in-game command prompt like this:
+    
+    /js var fireworks = require('fireworks')
+    /js fireworks.firework( self.location )
+    
+The fireworks module's *firework()* function takes a single parameter&mdash;a Location&mdash;and launches a firework at that location. A Location in Minecraft is any place in the game. Most objects&mdash;players, animals, blocks etc&mdash;have a location. When I pass the parameter `self.location` I am passing my own location meaning the firework will launch from where I am in the game. I urge you to run the above commands and then look directly up to see the firework explode. 
+
+## Deferred Execution
+In the commands you just executed at the in-game prompt, the firework launches immediately. What we'd like to do is delay the launch by a couple of seconds so that we can move to a safe position with a better view. Fortunately there's a way to delay the execution of a function. Create a new file called scriptcraft/plugins/fireworkshow.js and type in the following code:
+
+<caption>Listing 13.1: A Short Fireworks Show.</caption>
+
+    var fireworks = require('fireworks');
+    function fireworkshow (location){
+      function launch(){
+        fireworks.firework(location);
+      }
+      setTimeout(launch, 2000);
+    }
+    
+    exports.fireworkshow = fireworkshow;
+
+Save the file then issue the `js refresh()` command to reload your JavaScript plugins. Now issue this command to launch a firework:
+
+    /js fireworkshow( self.location )
+    
+Move back a couple of steps so you can better see the firework. Did you notice the firework did not launch immediately? There was a delay of 2 seconds.     
+
+### The setTimeout() function
+The *setTimeout()* function lets you delay calling of a function. It takes two parameters:
+
+1. A function which it should eventually call.
+2. A delay. The delay is measured in milliseconds&mdash;that's 1/1000th of a second. There are 1,000 milliseconds in a second so a delay of 2000 is equal to 2 seconds.
+
+*setTimeout()* returns a value which can be used to stop the timed function from executing. To stop a function you've scheduled to execute you need to store the value returned by setTimeout() in a variable and pass this value to the *clearTimeout()* function like this:
+
+    js function later(){ console.log('I ran!') };
+    js var scheduled = setTimeout( later, 30000 );
+    js clearTimeout( scheduled );
+
+The *later()* function above won't execute because the *scheduled* task for running that function is canceled when we call *clearTimeout( scheduled )*.
+
+Although setTimeout() is not part of the JavaScript Language, it is provided with web browsers and Node.js and it's implemented in ScriptCraft too. A common mistake when using *setTimeout()* is to assume that the delay is in seconds rather than milliseconds.
+
+## A fireworks show
+I promised you a fireworks show at the start of this chapter. A single firework which launches isn't much of a show is it? Let's fix that. The next step is to change our code so that it launches many fireworks with a 2 second gap between each launch. Change your fireworkshow.js so it matches the following listing: 
+
+<caption>Listing 13.2: A Longer Fireworks Show.</caption>
+
+    var fireworks = require('fireworks');
+    function fireworkshow( location, count ) {
+      
+      function launch( ){
+        fireworks.firework( location );
+        count = count - 1;
+        if ( count > 0 ) {
+          setTimeout( launch, 2000 );
+        }
+      }
+    
+      setTimeout( launch, 2000 );
+    }
+    
+    exports.fireworkshow = fireworkshow;
+
+Then issue the `/js refresh()` command and at the in-game command prompt issue the following command:
+
+    /js fireworkshow( self.location, 5 )
+
+Move back a couple of steps and watch the show as 5 fireworks are launched one after another. The show should end after the 5th firework has launched. You can change the number of fireworks launched by changing the second parameter. 
+
+### Me, a name I call myself...
+A function which calls itself is called a *recursive* function. Recursive functions can be very powerful. They can be used for visiting all files and folders on a disk, or drawing pretty fractal diagrams. Recursion is beyond the scope of this book so I won't go into great detail. To get a taste for what recursion is about, imagine a computer program which controls a robot arm that opens a Russian Doll and keeps opening any Russian Dolls inside that until there are no more Russian Dolls inside. The code for such a program might read like this:
+
+    function openRussianDoll( doll ){
+      console.log( doll.size );
+      if ( doll.inner ) {
+        openRussianDoll( doll.inner );
+      }
+    }
+
+The *openRussianDoll()* function wouldn't be called just once or twice but would be called every time a new doll was uncovered. This is the power of recursion. If you're curious about recursion, a few people have created some very cool Fractals in Minecraft using recursion. Malin Christersson has some example code at https://github.com/malinc/MinecraftFractals . You can see an example of one of Malin's fractal creations in Figure 13.1:
+
+[AUTHOR NOTE: images/chapter-13/malinchristersson\_fractals.png]
+
+![](images/chapter-13/malinchristersson_fractals.png)
+
+<caption>Figure 13.1: Malin Christersson's Fractal Cube Stars</caption>
+
+
+## Cancelling the Fireworks show
+Let's say you kicked off a long running fireworks show and after a while you get bored and want to *cancel* the show. There are two ways to schedule a repeating task in JavaScript, one way is to use *setTimeout()* and have a function which calls itself. We've already seen this in the earlier example. Another way is to use the *setInterval()* function which is like *setTimeout()* except it will keep on executing the task after each delay instead of only executing once after the delay. Let's take a look at an example of using *setInterval()* at the server console prompt:
+
+    js function askQuestion(){ console.log('Are we there yet?') }
+    js var scheduled = setInterval( askQuestion, 1000 )
+
+Run the above commands and you will see an 'Are we there yet?' message appear every second. 
+
+    [19:24:00 INFO]: [scriptcraft] Are we there yet?
+    [19:24:01 INFO]: [scriptcraft] Are we there yet?
+    [19:24:02 INFO]: [scriptcraft] Are we there yet?
+    [19:24:03 INFO]: [scriptcraft] Are we there yet?
+    [19:24:04 INFO]: [scriptcraft] Are we there yet?
+    [19:24:05 INFO]: [scriptcraft] Are we there yet?
+    [19:24:06 INFO]: [scriptcraft] Are we there yet?
+
+The message will keep printing out for as long as the server is running. Fortunately there's a way to cancel this scheduled function. At the server console prompt issue the following command:
+
+    js clearInterval( scheduled )
+
+... and the messages will stop appearing. Phew! The *setInterval()* function is useful for scheduling tasks that you want the computer to do every so often. Let's update the *fireworkshow.js* module so that it looks like the following:
+
+<caption>Listing 13.3: Using setInterval() and clearInterval() to create a Fireworks Show.</caption>
+
+    var fireworks = require('fireworks');
+    function fireworkshow( location, count ) {
+      
+      function launch( ) {
+        fireworks.firework( location );
+        count = count - 1;
+        if ( count == 0 ) {
+          clearInterval(scheduled);
+        }
+      }
+      var scheduled = setInterval( launch, 2000 );
+      return scheduled;
+    }
+    
+    exports.fireworkshow = fireworkshow;
+
+In listing 13.3 we no longer rely on recursion to repeatedly launch fireworks. Instead we use the *setInterval()* function to repeatedly call *launch()*. Inside the *launch()* function we subtract 1 from the count and if count is zero then we cancel the show using the *clearTimeout()* function. The difference between this version of the *fireworkshow* module and the previous version is that now we can cancel the show earlier than planned because the *fireworkshow()* function returns the scheduled task which we can cancel at any time. Save the above file and issue the `/js refresh()` command to reload your plugins. Then at the in-game prompt issue the following command to launch an extended firework show:
+
+    /js var show = fireworkshow( self.location, 300 );
+
+The above statements start a firework show in which there will be 300 launches each 2 seconds apart. The show will go on for about 10 minutes if left alone but we're going to cancel the show early. Issue the following command to cancel the show:
+
+    /js clearTimeout( show );
+
+... and the fireworks will cease. If you ever schedule tasks using the *setInterval()* or *setTimeout()* functions it's always a good idea to keep the value returned by these functions so that you have the option of canceling the task using *clearInterval()* and *clearTimeout()* respectively.
+
+## Summary
+In this chapter you learned about the *setTimeout()* function and how to use it to delay or "defer" execution of your code. You also learned how to make a function call itself, and how to schedule repeating tasks using the *setInterval()* function.
+
+</body></html>

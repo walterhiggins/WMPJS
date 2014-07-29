@@ -1,0 +1,343 @@
+<html><body>
+# Chapter 1: Running your own Minecraft server
+## Introduction
+I began playing Minecraft in 2010 in Single Player mode. It was fun and a relaxing way to pass the time. Later I installed the Minecraft Server software on one of the computers on our kitchen table. My youngest son Sean had just finished his homework so I asked him if he wanted to join the home server. Seeing each other in the game was quite a novelty. Soon my eldest daughter Kate joined in and we began some serious building together. Building in Minecraft is much more fun with others. 
+
+[AUTHOR NOTE: images/chapter-01/Client\_Server\_Kids.png]
+
+![](images/chapter-01/Client_Server_Kids.png)
+
+<caption>Figure 1.1: Multiplayer Minecraft</caption>
+
+
+When You play Minecraft in Multiplayer mode, chatting, building and mining with other players, you do so on a Minecraft *Server*. The Minecraft Server is just a computer program (like Minecraft Client, Microsoft Word or Internet Explorer) which provides a shared virtual place for Minecraft players to connect, build and chat. You don't need to buy any special type of computer to run a Minecraft Server. You can run one on your laptop computer&mdash;assuming it's not too old. Minecraft server software won't run on an iPad, Android Tablet or phone. It only runs on Windows, Macintosh or Linux computers. 
+
+## Client Server Networking
+Minecraft Multiplayer is "Client-Server". That means that one or more "client" computers&mdash;computers running the Minecraft game&mdash;can connect to a central "server"&mdash;a computer which is responsible for storing all of the Minecraft World information so that players can play together in the same world. The following diagram shows a simple Client/Server network with just one client (Player) connected to a Server.
+
+[AUTHOR NOTE: images/chapter-01/Client\_Server1.png]
+
+![](images/chapter-01/Client_Server1.png)
+
+<caption>Figure 1.2: A Simple Client-Server Network</caption>
+
+
+The Client must be connected to the Server over some kind of Network. The line between the Client and the Server in Figure 1.2 represents the network. A Server with just one Client computer isn't much fun though. Servers really become fun when many players are connected to the same server as in the following diagram:
+
+[AUTHOR NOTE: images/chapter-01/Client\_Server2.png]
+
+![](images/chapter-01/Client_Server2.png)
+
+<caption>Figure 1.3: A client server network with many clients</caption>
+
+
+In Figure 1.3, the server must chat with all of the connected clients. For example, if it starts raining in the game, the server must send a message to each client that it's begun raining. In Minecraft Multiplayer, the server is responsible for many things. The server decides what the weather will be like in the in-game world, what time of day it is and so on. This is so that the time of day and weather *will be the same for all connected players*. 
+
+You'll notice that in Figure 1.3, the server is shown as separate computer. This is just for illustration. While very often, Server software *does* run on a separate computers, *you won't need a separate computer to run Minecraft Server* or to follow the tutorials in this book. In fact, for learning how to create Minecraft Plugins and to get the best from this book, I recommend running Minecraft Server on the same computer you play Minecraft on. **This means your computer will act as both a Client and a Server**. This is by far the most convenient and cost-effective way to run a server and learn how to create Minecraft Server Plugins.
+
+[AUTHOR NOTE: images/chapter-01/Client\_Server\_Combined.png]
+
+![](images/chapter-01/Client_Server_Combined.png)
+
+<caption>Figure 1.4: A computer which is both Client and Server</caption>
+
+
+When you play Minecraft in Multiplayer mode, before you can connect to a server you have to enter the Server details into the game. The Server details are a 'hostname' or an 'IP Address', either one of these provides a way for Minecraft Client (the game) to connect to a computer running the Minecraft Server. The 'hostname' or 'IP Address' are how computers uniquely identify one another on the Internet, much like how we identify each other by name and/or address. When you run Minecraft Server on your own computer, you will use a special hostname called `localhost` or IP address `127.0.0.1`. I'll talk more about these in the following sections.
+
+Anyone can run a server. In the following sections I'll show you how to setup and run your own Minecraft server.
+
+## Why run your own server?
+
+Why should you run your own server? Running your own server means you have total control over the Minecraft world you want to create and share with your friends. You can decide what type of server and world you and your friends will play in; what server plugins to install, what rules will govern the server and world, and who can and cannot join the server. As a server 'operator' you will have access to commands that normal players don't. You can control the weather using Minecraft commands, start and stop thunderstorms, even change the time of day. You can also install popular Minecraft Server mods like Hunger Games and MobArena. The real power of running your own server comes when you add ScriptCraft which makes it easier to create your own Minecraft Server Plugins. If you have an idea for a new Minecraft mod or would like to do something which current Mods don't support, you can create your own mod and test it on your own server. 
+
+Running your own server is essential for plugin development. Minecraft Server Plugin developers run their own servers because they need to be able to test their creations before releasing them into the wild for others to use. No serious Modder would consider releasing a plugin which they hadn't first tested on their own private servers. 
+
+## Which Minecraft Server Software should I use?
+
+There are a couple of different flavors of Minecraft Server. Mojang provide their own server software which can be downloaded from the Minecraft.net website. This was the very first server software released for Minecraft. This is often referred to as 'Vanilla' Minecraft Server. At the time of writing it doesn't provide any way to add plugins although this will probably change once Mojang release an official Plugin API. The Minecraft Server provided by Mojang is fine if you want to run a server with no modifications. The problems with running such a server are that there's no reliable way to protect against 'griefing'. 
+
+### Term: Griefing 
+Griefing is when a player in a Multiplayer video game deliberately irritates and harasses other players within the game, using aspects of the game in unintended ways. A griefer enjoys annoying other users by destroying other player's work, cursing and harassing players and server administrators.
+
+The standard (Vanilla) Minecraft Server has only limited ways to protect against griefing. Because of this other more popular Minecraft Server Software arose&mdash;Server software which allowed server administrators to more strictly control who could and could not join the server, and enforce penalties and bans on players who misbehaved. Popular alternatives such as CraftBukkit&mdash;which we'll use in this book&mdash;let administrators add any number of anti-griefing plugins to make the server as safe, secure and player-friendly as possible.
+
+## CraftBukkit
+
+> Your server, your way. More for less. The possibilities are endless...
+>
+> [http://dl.bukkit.org/](http://dl.bukkit.org/)
+
+CraftBukkit has become the most popular Minecraft Server Software with a thriving community of Plugin developers. In 2012 Mojang hired the CraftBukkit team to work on Minecraft and the Minecraft API. In this book we'll use CraftBukkit as our Minecraft Server software. CraftBukkit is the Server software but it has an API ( a system which Plugin developers can use to extend the server ) which is called 'Bukkit'. We'll look at the Bukkit API in more detail later. For now, all you need to know is that CraftBukkit is the name of the server Software and Bukkit is the API on top which it's built.
+
+[AUTHOR NOTE: images/chapter-01/CraftBukkit\_Bukkit.png]
+
+![](images/chapter-01/CraftBukkit_Bukkit.png)
+
+<caption>Figure 1.5: CraftBukkit is built on Bukkit</caption>
+
+
+CraftBukkit has become so popular because of its underlying API (Bukkit) which makes it easy for Plugin Developers to extend the Minecraft Multiplayer server. There are hundreds of plugins available for CraftBukkit including all of the popular Multiplayer mini-games such as HungerGames and CaptureTheFlag. Chances are, if you've ever played Minecraft Multiplayer on one of the popular public servers, it's been running CraftBukkit. The CraftBukkit Wiki Website provides a wealth of information for both Administrators (the people who run CraftBukkit Servers) and Developers (the people who create plugins for CraftBukkit). I highly recommend checking it out [http://wiki.bukkit.org/](http://wiki.bukkit.org/) .
+
+## Installing CraftBukkit
+
+The first step in constructing your Modding Workbench is to install CraftBukkit. Unlike many games, Minecraft is in ongoing development. This means that new versions of Minecraft are released quite often. When you purchase and download the Minecraft Client you automatically get new versions of the game when they are released. This is great for players because you get the latest and greatest version for free, which often includes bug fixes and new features. If you've played Minecraft Multiplayer before on one of the popular public servers, you'll know that there's a downside to Mojang's commitment to improving Minecraft&mdash;Server software upgrades do not happen as often as Client software upgrades. This can lead to Client software and Server software which are *incompatible*. When the Client and Server versions are incompatible they cannot communicate. 
+
+### Term: Bug
+"Bugs" in software are errors or mistakes in the software code which can cause problems. Nobody quite knows for sure why errors in software are called bugs but one story goes that a problem with an early mechanical computer in the 1940s was caused by a Moth which somehow found its way inside. The term "Bug" had been used to describe errors long before computers came along, so when the engineers captured the Moth they kept it with a note that said "First actual case of bug being found." 
+
+[AUTHOR NOTE: images/chapter-01/mc-server-client-incompat.png]
+
+![](images/chapter-01/mc-server-client-incompat.png)
+
+<caption>Figure 1.6: Compatibility between Client and Server</caption>
+
+
+Usually, a compatible version of the Minecraft Server software is released shortly after the Minecraft Client is upgraded. One thing to keep in mind is that CraftBukkit is an open-source and voluntary project&mdash;this means that the people who develop CraftBukkit don't get paid to do so. They do it for fun. Upgrading Server software takes a lot of work and the software needs to be tested (by volunteers) before it can be released. That's why sometimes it may take a while for a new version of the Minecraft Server Software to be released which is compatible with the latest and greatest client. Be patient and remember that the developers who work on CraftBukkit do it for fun and don't get paid so posting questions on the CraftBukkit forums asking when will the new version be ready won't speed things up :-)
+
+At the time of writing, 1.7.8 is the most current version of Minecraft. This is what the CraftBukkit website's Home page looks like at that time.
+
+[AUTHOR NOTE: images/chapter-01/bukkit-homepage.png]
+
+![](images/chapter-01/bukkit-homepage.png)
+
+<caption>Figure 1.7: CraftBukkit Home Page</caption>
+
+
+The large Download button will download the CraftBukkit Recommended Build. The Recommended Build is the version of the CraftBukkit server software which is considered to be the most reliable version because it has undergone the most testing. However, the Recommended Build is not always the most current or up-to-date version of the software. Fortunately the developers of CraftBukkit also let you download up-to-date versions of the software with the warning that the most up-to-date version may not always be the most reliable version. 
+
+[AUTHOR NOTE: images/chapter-01/bukkit-download1.png]
+
+![](images/chapter-01/bukkit-download1.png)
+
+<caption>Figure 1.8: CraftBukkit download</caption>
+
+
+Just beneath the prominent "Recommended Build" Button, you'll see "Beta Build" link. "Beta" software is software which is "nearly" ready for release. It's software which is functionally complete, meaning the developers have added all of the features they're going to add, but the software still needs to be tested for quality assurance. It's usually OK to run Beta software but you may come across one or two *Bugs*. If the "Beta Build" version does not match the current version of Minecraft then click on the "Alternate Versions" link beneath the "Beta Build" link. This will take you to the CraftBukkit Builds page where you will see a list of "Builds" or versions. Figure 1.9 shows what the download page looks like at the time of writing.
+
+[AUTHOR NOTE: images/chapter-01/bukkit-download2.png]
+
+![](images/chapter-01/bukkit-download2.png)
+
+<caption>Figure 1.9: CraftBukkit Builds Page</caption>
+
+
+Along the right-hand side of the page are three big color-coded download buttons. The Green button is for the most recent stable release. Note that though this is the most stable version, it may not be the most up-to-date version or a version which is compatible with the current Client. The Amber button is for the most recent Beta build. This is a version which is not as stable as the released version but will have undergone some testing and will most likely be in use already on some servers. The Red button is for the most recent development build. It's colored red because it is the least stable version. Development builds will not have undergone the same rigorous testing as Beta or Release software. On the other hand, development builds will be the most up-to-date and chances are, there will be a development build of the Server Software for the latest version of the Client software.
+
+Choosing which version of the Server Software to use&mdash;Recommended, Beta or Development&mdash;is a big decision and one I unfortunately can't make for you. That decision is entirely up to you. However, If you feel safer using only the Recommended build of CraftBukkit, and that build version is not for the most up-to-date Client, then there's a way you can safely and temporarily *Downgrade* your Minecraft Client Software so that it will be compatible with your Server software. 
+
+Since version 1.6, the Minecraft Launcher (the software you run on your computer to start Minecraft Client and to upgrade to new versions when they become available) lets you choose which version of the Client software to run. By default the Launcher is configured to always download and run the Latest Version but you can easily change this using the new "Profiles" feature. The following are step-by-step instructions for changing your Launcher profile to use a different version of Minecraft Client...
+
+[AUTHOR NOTE: images/chapter-01/mc-launcher2.png]
+
+![](images/chapter-01/mc-launcher2.png)
+
+<caption>Figure 1.10: Minecraft Launcher</caption>
+
+
+1. Launch Minecraft 
+2. Click on the 'New Profile' button in the bottom right of the Launch Screen.
+3. Fill in the Profile Name field. For example you should call it something like 'Version 1.7.8' (replacing 1.7.8 with the version you've chosen). I find it helpful to include the version name in a new Profile so I can see at-a-glance which Client version the profile will use.
+4. Choose the appropriate version from the 'Use Version' drop-down list.
+5. Click the Save Profile button.
+
+[AUTHOR NOTE: images/chapter-01/mc-profile-editor.png]
+
+![](images/chapter-01/mc-profile-editor.png)
+
+<caption>Figure 1.11: Minecraft Profile Editor</caption>
+
+
+The newly created profile should now be automatically selected in the Profile drop-down list on the main launcher page. Click the Play button to begin playing using the chosen version of Minecraft Client software.
+
+[AUTHOR NOTE: images/chapter-01/mc-launcher3.png]
+
+![](images/chapter-01/mc-launcher3.png)
+
+<caption>Figure 1.12: Profile Selection</caption>
+
+
+By using the profile editor to "Downgrade" your Minecraft Client Software, you can ensure that your Client and Server are compatible and that you can play Multiplayer Minecraft even when the Server Software is not as up-to-date as the current latest version of Minecraft Client. This means you can always use the most stable Recommended build of CraftBukkit. 
+
+### Term: JAR File
+![](images/chapter-01/jar_icon.png)
+The CraftBukkit software is downloadable as a `.jar` file. Programs which are created using the Java Programming Language are often distributed as JAR files and will have a name which ends with `.jar`. JAR is short for **J**ava **AR**chive file. It's an archive of all of the code and resources needed by Java to run the software. CraftBukkit is distributed as a JAR file. So too are all of the plugins for CraftBukkit.
+
+Once You've chosen between the Recommended, Beta and Development versions of CraftBukkit (If you're unsure, choose the Recommended Version), click on the appropriate color-coded button to begin downloading the software. Depending on which Browser software you use (Chrome, Safari, Internet Explorer or Firefox) the instructions for downloading will differ. Please read the instructions for the Browser you use. 
+
+### Download Instructions
+
+1. Create a new folder on your computer called *CraftBukkit*.
+2. Choose either the *Recommended*, *Beta Build* or *Development Build* at http://dl.bukkit.org/downloads/craftbukkit/ to begin downloading CraftBukkit.
+3. Save the CraftBukkit *.jar* file in the folder created in step 1. 
+4. Rename the .jar file to *craftbukkit.jar*.
+
+Once downloaded, the next step is to install CraftBukkit on your computer. The instructions are slightly different for each operating system so skip directly to the instructions for your operating system.
+
+### Installing Bukkit on Windows
+
+1. Open Notepad (You can find it by clicking the 'Start' or Windows button in the bottom left of the screen then typing 'Notepad' in the search box.
+2. Type the following into Notepad...
+
+         java -Xmx1024M -jar craftbukkit.jar -o true
+         PAUSE
+
+   ... depending on the name of the file you downloaded earlier, you may need to change `craftbukkit.jar` to match the exact name of the file.
+   
+3. Save the document as run.bat in the Folder you created earlier (the same Folder where you copied the craftbukkit jar file). It's important that you change the 'Save as type:' option from `Text Documents` to `All Files` otherwise Notepad will try to save the document as run.bat.txt and it will not be executable.
+
+4. Double click the run.bat file you saved in the previous step and CraftBukkit should start running. If you see an error message: "Java is not recognized as an internal or external command, operable program or batch file" then you need to reinstall Java. Java is the programming language Minecraft is written in. It's also the programming language the CraftBukkit Minecraft Server is written in. You can download Java by visiting `http://www.java.com/` and following the instructions. If after installing Java you still get the same error then follow the instructions at `http://www.java.com/en/download/help/path.xml`.
+
+5. Assuming the server has started (you didn't see any errors), you can shut down the server by issuing the `stop` command at the server console (type `stop` then hit ENTER).
+
+### Installing Bukkit on Mac OS
+
+1. The first thing you'll need to do is install Java. Since OS X 10.7 Java no longer comes bundled with OS X so you will need to install Java from Apple's Java Install page `http://support.apple.com/kb/DL1421` .
+
+2. Open TextEdit (you can find it by typing `TextEdit` in the Spotlight field in the top right of the screen. Click the Magnifying Glass Icon to bring up Spotlight)
+
+3. Under the `Format` menu, choose `Make Plain Text` then type the following...
+
+        #!/bin/bash
+        cd "$( dirname "$0" )"
+        java -Xmx1024M -jar craftbukkit.jar -o true    
+
+   ... depending on the name of the file you downloaded earlier, you may need to change `craftbukkit.jar` to match the exact name of the file.
+
+4. Save the file in your CraftBukkit folder as start_server.command
+
+5. You will need to be able to run this newly created file so...
+
+    1. Open the Terminal Application (to find it, click the Magnifying Glass icon and type `Terminal` in the Spotlight field)
+    2. Type `chmod a+x` (don't hit enter yet)
+    3. Find the file you just created in the Finder and drag and drop it into the Terminal window.
+	4. The name of the file you just dropped into the terminal window will be appended to the `chmod a+x` command so you can now hit ENTER.
+    
+6. Start the server by double clicking the start_server.command file. 
+
+7. To stop the server issue the `stop` command in the terminal window (type `stop` then hit ENTER).
+
+If you run into trouble installing CraftBukkit you can find plenty of useful tips and troubleshooting on the CraftBukkit Wiki website `http://wiki.bukkit.org/Setting_up_a_server`. 
+    
+### Installing Bukkit on Linux (Ubuntu)
+
+1. Open `Text Editor` by clicking the `Dash Home` button in the top left corner of the screen, then type `Edit` to see a list of editors (you can choose `Text Editor` or another editor of your choice)
+
+2. Type the following into the editor...
+
+        #!/bin/sh
+        BINDIR=$(dirname "$(readlink -fn "$0")")
+        cd "$BINDIR"
+        java -Xmx1024M -jar craftbukkit.jar -o true
+
+   ... depending on the name of the file you downloaded earlier, you may need to change `craftbukkit.jar` to match the exact name of the file.
+
+3. Save the file as `craftbukkit.sh` in the folder you created earlier (the same Folder where you copied the craftbukkit jar file).
+
+4. You will need to make this new file executable. In Nautilus (Linux's File browser) right-click on the file and select properties. In the properties dialog, click the 'Permissions' tab then ensure that the 'Execute' checkbox is ticked. (You can also make the file executable by issuing the unix command `chmod +x craftbukkit.sh` from the folder where you saved the file.
+
+5. Launch the Terminal Application and type `~/craftbukkit/craftbukkit.sh` (assuming you created a folder called `craftbukkit` in your home folder).
+
+6. Once the CraftBukkit server console has launched, you can stop it by issuing the CraftBukkit `stop` command (type `stop` then hit ENTER).
+
+
+
+
+## Configuring your server
+Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft Server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be Player vs. Player, and so on. While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone, just bear in mind you will need to restart your server if you change the configuration. I'll show you how to do that later.
+
+### The server.properties file
+When you first launch CraftBukkit, a couple of configuration files and folders will be created in the CraftBukkit folder (the folder where you store the craftbukkit jar file and startup script). When configuring your server, the most important file is `server.properties`. This is a plain-text file (meaning it can be edited using any text editor) containing all of the configuration for your server. The first few lines of my own `server.properties` look like this:
+
+    #Minecraft server properties
+    #Sun Apr 20 11:11:20 IST 2014
+    generator-settings=
+    op-permission-level=4
+    allow-nether=false
+    level-name=world
+    enable-query=false
+    allow-flight=false
+    announce-player-achievements=true
+    server-port=25565
+    level-type=FLAT
+
+The first two lines&mdash;the lines which begin with a `#` character (also known as the Hash symbol)&mdash;are comments, they are ignored by the server. The configuration begins properly on line 3 `generator-settings=` which is used for generating worlds (this has a default value of blank&mdash;no value). The settings for the server are specified using *Name-Value* pairs. A *Name-Value* pair is programmer-speak for how settings are written. For example `allow-flight=false` is a Name-Value Pair where the name is `allow-flight` and the value is `false`. In property files the name and value are separated by the `=` (equals) symbol. Let's look at just some of the properties you might want to change.
+
+#### World Type
+Later in the book I'll show you how to use JavaScript to create roads and skyscrapers. If you plan to eventually put your new-found programming prowess to use building large-scale places for others to visit, you'll probably want to change the `level-type` property from `DEFAULT` (Minecraft's standard setting where worlds are made of varied landscapes of hills, valleys, and oceans) to `FLAT`. In a `FLAT` world there are no hills, no valleys, just flat terrain for as far as you can see. While this might be considered boring, it does have the advantage of being easier to build upon. If you plan to build roads, houses and other large-scale constructions, a `FLAT` world might be the best place to start. It's not essential that the `level-type` is set to `FLAT`, you can always leave this setting at `DEFAULT` and just flatten the area you want to build on first. **If you later decide to change the level-type, the setting only applies when creating new worlds. Existing worlds will not be modified.**
+
+If you decide to create a new world and want to use a `level-type` other than `DEFAULT` you have two options:
+
+1. Change both the `level-name` and `level-type` properties to create a brand new world while keeping the old world (The old world will not be wiped out&mdash;it will still be on your computer stored in the `world` folder). This is the best option if you want to keep your existing world data. You need to change the `level-name` setting to something other than `world` (the default value). Call your new world something memorable like `flat-world`. 
+
+2. If you don't care about keeping the existing world, delete the `world` Folder from the CraftBukkit Folder and change the `level-type` property. The next time the server starts, a brand new world and a new `world` folder will be created.
+
+#### Monsters
+The next setting you'll probably want to change is the `spawn-monsters` setting. This determines if monsters will be spawned. By default it's set to `true` which means monsters will appear at night. I recommend changing this setting from `true` to `false` because the last thing you need while learning to program is to be attacked by giant spiders. You can change this setting any time you like. The setting won't take effect until you restart the server. I'll talk about starting and stopping the server very shortly.
+
+#### Game Mode
+For the same reason I suggest making your server a monster-free zone, I also suggest changing your server's `gamemode` property from 0 (Survival) to 1 (Creative). In Survival mode, you will need to constantly seek food and be careful not to fall. In Creative mode you can give your full attention to learning to program.
+
+### The ops.json file
+
+The ops.json file is a configuration file listing all of the 'Operators' for the server. Operators are players who have special privileges on the server. Operators (also sometimes called 'Administrators' or 'Admins') are responsible for keeping the server running and ensuring that players play nice and don't grief. If players don't play nice, Operators have to power to ban or kick players off the server using special commands only available to them. 
+
+There may already be an ops.json file present in your CraftBukkit folder. If there isn't, then one will be created automatically when you run the `op` command from the server console. You will need to be an Operator to issue JavaScript commands in the game, so one of the first things you should do once you've installed the Minecraft Server is make yourself an operator by issuing the `op username` command, replacing `username` with your own Minecraft user name. For example, I would issue the command `op walterh` because `walterh` is my Minecraft user name. ScriptCraft&mdash;the plugin we'll install later&mdash;only allows operators to issue JavaScript commands.
+
+We're done with all of the server configuration we'll need for now. If you want to delve deeper into server configuration, a good place to start is by reading the http://minecraft.gamepedia.com/Server.properties page.
+
+## Basic Server administration commands
+CraftBukkit's usefulness as a Minecraft server comes from its ability to be extended and made more interesting by adding plugins. Many of the high-profile public Minecraft servers actually run CraftBukkit because of the wide range of server plugins available for it. Popular Minecraft Mini-games like 'Hunger Games' and 'Spleef' are all CraftBukkit plugins. In this book we'll use just one plugin&mdash;ScriptCraft which lets operators extend the game using JavaScript. There are just a few things you'll need to know about server administrator to get the most from this book. 
+
+### Starting and stopping your server
+To start your Minecraft server, double click on the startup script you created earlier in this chapter. This launches the Minecraft server in a terminal window. The terminal window will look something like this:
+
+[AUTHOR NOTE: images/chapter-01/server-console.png]
+
+![](images/chapter-01/server-console.png)
+
+<caption>Figure 1.13: The Minecraft Server Console Window</caption>
+
+
+Don't worry if your terminal window doesn't look exactly like this or has slightly different content. The important thing is that after starting up, your server should display a server console prompt&mdash;`>` (right arrow symbol) in the bottom left of the screen along with a blinking cursor. This is called the server console and you can issue administration commands here even if you aren't an operator. Try it: issue the `help` command to see the full list of commands you can use as the Server Console user.
+
+In the Server Console window, you don't need to put a `/` (forward slash symbol) in front of commands the way you do in the Minecraft Client. So you simply type the command name instead of `/` followed by the command name. So remember `help` instead of `/help`, `toggledownfall` instead of `/toggledownfall` and so on. 
+
+Another thing to note about the server console is that when you enter commands there, you do so as a special player called 'CONSOLE'. In Minecraft the `/me` command is used to send a message to other players in the form of 'Yourname Action'. For example, if *I* issue the command `/me sneezes` in the Minecraft client, all other players on the server will see `walterh sneezes`. However, if you issue the same command in the server console, you will see `* @ sneezes` instead of your own name. CONSOLE is not visible to other players and does not inhabit the Minecraft world. Normally only the person who starts the server can issue commands as CONSOLE.
+
+To stop the server, you should issue the `stop` command at the server console. If you plan to administer a Minecraft server for others to play, the `stop` command will come in handy whenever you want to shutdown the server for maintenance or troubleshooting.
+
+### Reloading plugins
+
+Another useful command you should know about is the `reload` command. This command will unload all of the server's plugins and then load them up again. This is a faster and more convenient way of reloading plugins than shutting down the server and restarting it. If you manage a server with many players connected and want to install a new version of a plugin then the `reload` command lets you load the plugin without shutting down your server and disconnecting players.
+
+## Connecting to your server
+To check that your server is running and accepting connections follow these steps:
+
+1. Launch the Minecraft game as you would normally. 
+2. Once Minecraft has launched and you have logged in, click on the 'Multiplayer' button.
+3. If this is the first time you're connecting to your own server click the 'Add Server' button. If it's not the first time you've connected to your own server skip to step 8.
+4. Fill in the Server Name field. You can call the server any name you like. The default name, Minecraft Server, will do if you can't think of something imaginative right now.
+5. In the Server Address field you should type `localhost` . As mentioned earlier, `localhost` is a special server address meaning 'the same computer'. You could also type `127.0.0.1` which is the IP Address of localhost (servers usually have a name and/or address and it's usually possible to connect to them using either name or address). Type either `localhost` *or* `127.0.0.1` but not both; either one will do fine.
+6. Once you've entered the Server Address, click the 'Done' button. 
+7. The new server you just added should appear in the list of servers. If it's not visible, use the scroll bar to scroll down. If you have already added other servers it may not appear at the top of the list. Because you've added this server using the 'Add Server' button rather than the 'Direct Connect' button, it should appear in the list of Multiplayer servers every time you launch Minecraft.
+8. Select the server and click the 'Join Server' button. 
+
+If you get an error when trying to connect, ensure that your server is first running (See the earlier section on starting your server). If your server is not running you will see an error *Failed to connect to the server. java.net.ConnectException: Connection refused:'. If you see this error, click the 'Back to Title Screen' button then start your server and try again. 
+
+Once you've logged into your server take a look around. It's important that you have operator (Administrator) privileges on your own server. You can check that you have the right privileges by issuing the `/time set 4000` command. If you can run this command without error then you're all set up. If you see a warning message *You do not have permission to perform this command.* then you'll need to make yourself an operator at the server console window. Switch to the Server console window (ALT + TAB on windows, CMD + TAB on OS X) and type `op <player>` replacing <player> with your own username, then switch back to the Minecraft game and try issuing the `/time set 4000` command from the in-game prompt. Once you've verified you have operator permissions, kick back and relax or if you have a spare computer on your home network, invite a friend or family member to join you on your server. If this is the first time you've played Minecraft Multiplayer with friends or family you'll have great fun.
+
+## Achievement Unlocked!
+![](images/achievement-plugin-dev-1.png)
+
+By now you should have your very own Minecraft server installed and running. **Congratulations, you're well on your way to becoming a Minecraft Modder!**
+
+## Other Server Options
+There are other Minecraft Server options available, but installing and running your own server is the only sensible option if you want to start modding. 
+
+### Commercial Minecraft Hosting
+Once you've mastered Server Administration and Modding you might eventually decide to use one of the many commercial Minecraft hosting plans available online. These Minecraft hosting providers usually charge a monthly fee, so they are not free. For your money, they provide you with a Minecraft server you and your friends can connect to and play. They usually offer managed install of plugins through a web-based Administration portal (A web page where you can choose which plugins your server should use). Commercial Minecraft Hosting isn't cheap and it's not as flexible as running your own server. You certainly don't need to sign up to commercial Minecraft hosting to get the most from this book. You can find a list of Minecraft hosting providers by searching 'Minecraft Hosting' on Google.
+
+### Minecraft Realms
+Mojang have rolled out their own Minecraft Hosting solution&mdash;Minecraft Realms&mdash;throughout the world. Minecraft Realms does not currently support plugins of any kind though that may change in the future. 
+
+</body></html>

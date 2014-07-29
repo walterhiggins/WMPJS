@@ -1,0 +1,20 @@
+<html><body>
+# Appendix E: Function Declarations vs Function Expressions
+In JavaScript the two most common ways to define functions are by using *function declarations* and *function expressions*. A function declaration looks like this:
+
+    function myFunction(){
+    }
+
+...while a function expression looks like this:
+
+    var myFunction = function(){
+    };
+
+Throughout this book I have defined functions using *function declarations* rather than *function expressions*. I've done so because:
+
+1. This is a book for beginners. Wherever there are  2 or more possible approaches to doing something in JavaScript, I've endeavored to present only the simplest approach so that beginners are not overwhelmed by JavaScript's flexible syntax.
+2. Function declarations *require* the function to have a name whereas function expressions do not. A named function&mdash;that is&mdash;a function which was given a name as part of its definition rather than merely assigned to a named variable&mdash;can call itself since its name is guaranteed to be in scope within the function's body. It's considered best practice to name functions whether they are defined as expressions or declarations.
+3. A function declaration is slightly shorter to type than its function expression equivalent.
+4. Named functions are useful when covering the topic of recursion and are also used throughout ScriptCraft. 
+
+Even if you decide to use function expressions as you become more adept at JavaScript programming, it's a good idea to give your function a name.

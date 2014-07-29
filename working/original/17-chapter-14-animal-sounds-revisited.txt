@@ -1,0 +1,323 @@
+<html><body>
+# Chapter 14: Animal Sounds Revisited
+## Introduction
+In this chapter we'll revisit the Animal Sounds plugin from earlier but this time, instead of using a switch statement we'll use a look-up table instead. 
+## Objects
+I've mentioned objects a couple of times in this book. It's time to take  a closer look. 
+
+An object in JavaScript is something which can hold both data and functions. We've already been using objects throughout this book. We've used the *console* object to *log()* messages to the Minecraft server log and console window. We've use the *exports* object to provide new properties and functions for others to use. We've used array objects to *sort()* arrays. Last but not least we've used some of Minecraft's built-in objects such as Player and Event to respond to events that happen in the game. 
+
+Objects are very useful in programming. Java&mdash;the language Minecraft is written in&mdash;is an *Object Oriented* language which means that in Java *everything* is an object&mdash;Players, Worlds, Blocks, Tools, Recipes and so on. Objects let you group together related *properties* and *functions*. For Example a Player:
+
+* has a food level (how much food they have)
+* can have a bed
+* has an experience level 
+* can perform commands
+* can fly
+* can sneak
+* can shoot arrows
+
+... and so on. In programming terms, something which the player *has* is called a *property* while something which the player *does* is called a *method*. Methods are just functions which belong to an object.
+
+### How to make an Object
+In JavaScript creating a new object is easy. Here's an example you can try at the in-game prompt:
+
+    /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
+
+To create an object in JavaScript you start with the curly bracket `{` followed by a *key* , a colon `:`and then a value. You can separate each key-value pair using the comma `,`. You finish the object definition with a closing curly bracket `}`. The object example above has 2 key-value pairs. It has a *name* and a *job*. You can find out what's inside an object if you know its keys:
+
+    /js myFirstObject.name
+    > "steve"
+    
+    /js myFirstObject.job
+    > "minecrafter"
+
+JavaScript is quite a flexible language. We've already seen how you can use square brackets `[]` to access items in an array. You can use the same square bracket notation to get object values:
+
+    /js myFirstObject["name"]
+    > "steve"
+    
+    /js myFirstObject["job"]
+    > "minecrafter"
+
+... which means you can also access object keys using variables rather than string literals...
+
+    /js var key = "name";
+    /js myFirstObject[key]
+    > "steve"
+
+Even if you don't already know what keys an object has, you can find out using a special form of *for* loop:
+
+    /js for (var key in myFirstObject){ self.sendMessage( key ) }
+
+... you can even use this form of *for* loop to process all of the keys *and values* of an object:
+
+    function displayObject ( object ) {
+      var value = null;
+      var key = null;
+      for ( key in object ) { 
+        value = object[ key ]; 
+        console.log( key + ' = ' + value );
+      }
+    }
+
+When we create an object like this:
+
+    /js var myFirstObject = { name: 'steve', job: 'minecrafter' }
+
+...this is known as an *object literal*. There are other ways to create objects in JavaScript but in this book we'll focus on object literals only. We can add a new key to an existing JavaScript object easily:
+
+    /js myFirstObject.toolOfChoice = 'Axe'
+
+and you can delete a key from an object using the *delete* keyword:
+
+    /js delete myFirstObject.toolOfChoice
+
+There are no rules about what keys you can add or remove from a JavaScript object because JavaScript does not enforce strict rules about such things. JavaScript is a *dynamically typed* language which means you can create new objects on the fly and add and remove keys from them and change the key's value types while your program is running. 
+
+### Two kinds of Objects
+When programming plugins using ScriptCraft, we have 2 different types of objects available to us. ScriptCraft uses a special version of JavaScript which is available from within any Java program. That means that from within our JavaScript plugins we can not only use JavaScript objects but can also access and use all of the *Java* objects available via the *Bukkit* API. Unlike JavaScript, Java *does* have strict rules about what you can and cannot do with Java objects. Java is *strictly typed*&mdash;it does not let you add or remove properties from Java Objects, and it enforces strict rules about types and variables. For example, the *self* object which we've used for some command-prompt examples in this book is a *Java* object so while we can access the object's keys like this:
+
+    /js self.flying
+    > false
+
+... we could not *add* new keys to the object like this:
+
+    /js self.favoriteFood = 'Pizza'
+
+... this would display a Java error, while attempting to delete a key from a Java object:
+
+    /js delete self.flying
+
+... will fail silently. The key will *not* be deleted. 
+
+## Objects as Look-up tables
+In JavaScript it's easy for programmers to create objects and JavaScript can *look-up* object keys very quickly. A look-up table is anything you *look up* to find information. For example you look up a word in a dictionary to find out what the word means or you look up a name in a phone book to find out that person's phone number. 
+
+In the following chapter we're going to change the *animalSounds.js* module from chapter 10 and use an object instead of a *switch* statement. Open up the *animalSounds.js* file located in the *scriptcraft/plugins* folder and edit it so it matches the following:
+
+<caption>Listing 14.1: A look-up table of Animal Sounds.</caption>
+
+    var sounds = require('sounds');
+    var input = require('input');
+    
+    var noises = {
+      cat: sounds.catMeow,
+      chicken: sounds.chickIdle,
+      cow: sounds.cowIdle,
+      'ender dragon': sounds.enderDragonGrowl,
+      horse: sounds.horseIdle,
+      pig: sounds.pigIdle,
+      sheep: sounds.sheepIdle,
+      wolf: sounds.wolfBark
+    };
+    function onInput( animal, player ) {
+      var makeNoise = null;
+      animal = animal.toLowerCase();
+    
+      if ( animal in noises ) {
+    
+        makeNoise = noises[ animal ];
+        makeNoise( player.location );
+    
+      } else {
+    
+        player.sendMessage("I never heard of a " + animal);
+    
+      }
+    };
+    
+    exports.animalSounds = function( player ) {
+      input( player, 
+             "What's your favorite animal" + 
+             " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+             onInput );
+    };
+
+In the above listing we've created a new object called *noises* :
+
+    var noises = {
+      cat: sounds.catMeow,
+      chicken: sounds.chickIdle,
+      cow: sounds.cowIdle,
+      'ender dragon': sounds.enderDragonGrowl,
+      horse: sounds.horseIdle,
+      pig: sounds.pigIdle,
+      sheep: sounds.sheepIdle,
+      wolf: sounds.wolfBark
+    };
+
+There are a couple of points to note about this statement:
+
+* The statement creates a single object. Like many statements in JavaScript, it can span more than one line. Having the object definition span more than one line makes the code more readable.
+* The *noises* object has the following keys: cat, chicken, cow, ender dragon, horse, pig, sheep, wolf. Keys are always on the left hand side in an object literal. 
+* The keys do not need to have quote marks around them but if the key contains white-space&mdash;for example 'ender dragon'&mdash;then it should be enclosed in either single or double quotes. 
+* You cannot use JavaScript keywords as keys in an object so the literal values *true*, *false*, *default* etc can't be used. 
+* Keys must be of type number or string. You cannot have another object as a key in an object&mdash;you can however have another object as a value in an object.
+* Values in objects *can* be of any type&mdash;even functions and other objects! When an object contains another object as a value, that value is called a nested object. We'll see an example of a nested object later.
+* Every key-value pair must be separated with a single comma `,`. Try to avoid putting an extra comma at the end of the last key-value pair. There is no comma after the last key-value pair `wolf: sounds.wolfBark` because it is not needed and some versions of JavaScript will report an error if they see an extra comma just before the closing curly bracket `}`.
+
+Having created the *noises* look-up table, we use it in the *onInput()* function to see if the animal the player typed, is in the *noises* object. The *if* statement below...
+
+    if ( animal in noises ) {
+
+... checks to see if the animal is in the noises table. This *key in object* construct will look-up the object and return true if *key* is in it. If the animal is not in the look-up table, the function reports it hasn't heard of that animal. If it *is* in the look-up table it gets the appropriate noise function:
+
+    makeNoise = noises[ animal ];
+
+Each value in the *noises* table is a function so when we look-up an animal in the *noises* table what we get back is a function which when called will emit that animal's noise. So *makeNoise* is a variable which will point to a function which emits an animal noise. This is yet another example of the use of functions as data. In this case the functions are values in a look-up table. This is a very powerful idea in computer programming. In the next statement in the function:
+
+    makeNoise( player.location );
+
+... we invoke the function we've just found in the look-up table, passing in the player's location as the place where we want the sound to play. The remaining parts of the module are unchanged from the previous version.
+
+### Why use a look-up table instead of *switch* statement?
+There are a couple of reasons why we should do this:
+
+* Adding new sounds is easier if we only need to change the data in the look-up table, not the code in the *onInput* function. 
+* Changing code is error prone. Every time we have to change the *onInput* function because we want to support a new sound, we run the risk of introducing errors into the code.
+* There are many sounds in Minecraft, if we were to support each sound using a *switch* statement, we'd need to add a case for every sound. The switch statement would grow quite large. On the other hand, adding a single key-value pair to the look-up table is comparatively easier. Because it's data, we could expose the look-up table for use outside of this module and allow other modules or parts of the program to add and remove sounds. The *onInput()* function no longer needs to concern itself with what's in the look-up table, making the function shorter and more maintainable.
+
+## Objects and References
+One thing to note about objects and variables is that when we assign a new variable to an existing object, we don't make a copy of the object. For example, in ScriptCraft, when you execute JavaScript statements at the in-game or server prompt, there's a special variable: *self* which refers to the player (or console operator) who is currently executing the statement. If we assign a new variable to be the same as *self* then we are really only adding a new name for the same thing. We're not making a copy. So for example:
+
+    /js var me = self;
+
+Does not create a clone of the player. It merely adds a new JavaScript name for the player object. We are adding a new *reference* to the player. The variables *me* and *self* both point to the same thing. The same is true no matter how many variables we add.
+
+[AUTHOR NOTE: images/chapter-14/objects\_player.png]
+
+![](images/chapter-14/objects_player.png)
+
+<caption>Figure 14.1: Objects and References: Player</caption>
+
+
+If I have more than one variable that refers to the same object then I can control or change that object through any of the variables that refer to it (also known as references). What this means is that if I have 3 variables *self*, *me* and *walter* all of which refer to the same player, I can make that player shoot an arrow by using any of the following statements:
+
+    /js me.shootArrow();
+
+or 
+    
+    /js self.shootArrow();
+
+or 
+   
+    /js walter.shootArrow();
+    
+This is an important point to remember when passing around variables which refer to objects. When you change the *.flying* property for *any* of the *self*, *me* and *walter* variables, you effectively change it for *all* of them because they all refer to the same object. Try the following as an exercise. Execute each of the following commands and make a note of the results:
+
+    /js var player = self;
+    /js player.customName;
+    /js self.customName;
+    /js player.customName = 'steeeeve';
+    /js player.customName
+    /js self.customName
+
+When you change the *player* object or call any of its methods, the changes are reflected in all of the variables which refer to the object.
+
+## Objects as Parameters
+In JavaScript, when you pass an object as a parameter to a function, the object is passed *by reference*. This means a reference to the original object is passed, not a copy of the object. To illustrate this, let's imagine we have a function which will force a player to drop to the ground if they are currently flying. If a player is flying, we can disable flight by setting the player's *.flying* property to false. Try this yourself at the in-game prompt. Make your gamemode creative by issuing the `/gamemode creative` command then press the SPACE bar twice to start flying. While in mid-air issue the following command:
+
+    /js self.flying = false;
+
+... and you will drop to the ground. Now let's create a function called drop which we can use to drop a player. The first draft of the function will look like this:
+
+    /js function drop( flying ) { flying = false; }
+
+Now try to run this function (while flying) by issuing the following command:
+
+    /js drop( self.flying );
+
+Did anything happen?
+
+The reason nothing happens when you call the *drop()* function is because in this first draft of the function, we only change the boolean value passed in as a parameter. Setting the *flying* parameter to *false* has no effect on the object because we haven't passed the object as a reference. Instead we've passed the object's *flying* property. Let's revisit the *drop()* function this time changing it so that it takes an object instead:
+
+
+    /js function drop( player ) { player.flying = false; }
+
+We're also going to change how we call the *drop()* function. This time we'll pass the *self* variable instead.
+
+    /js drop(self);
+
+Now the *drop()* function works because we've passed a reference to the object so any changes to the object inside of the function act upon the object. This is an important point to remember, if you want to change an object within a function, you must accept the object as a parameter not just the object's property you want to change.
+	
+## Nested Objects
+Objects in JavaScript can contain *any* kind of data. Even&mdash;as previously mentioned&mdash;other objects! If you recall the Russian Doll code from chapter 13 when we talked about Recursion. If we were to *model* the data for a Russian Doll, it might look something like this:
+
+    var largeDoll = {
+        size: 'large',
+        inner: {
+            size: 'Medium',
+            inner: { 
+                size: 'Small',
+                inner: {  
+                    size: 'Tiny',
+                    inner: null
+                }
+            }
+        }       
+    };
+
+This is an example of an object which has objects *nested* within it, just as a Russian Doll has other dolls inside it. In this example we have a 'Large' doll housing a 'Medium' doll housing a 'Small' doll and so on. The innermost 'Tiny' doll has an *inner* property of null meaning there's nothing inside. The above code could also be written as a series of statements each creating a distinct object like this:
+
+    var tinyDoll = { size: 'Tiny', inner: null };
+    var smallDoll = { size: 'Small', inner: tinyDoll };
+    var mediumDoll = { size: 'Medium', inner: smallDoll };
+    var largeDoll = { size: 'Large', inner: mediumDoll };
+
+Regardless of how the *largeDoll* object is created, its structure will be the same in both cases. We could use this *largeDoll* object as a parameter to the *openRussianDoll()* recursive function we defined earlier in chapter 13. To put this to the test, create a new file *russiandoll.js* in the *plugins/scriptcraft/plugins* folder and type the following:
+
+<caption>Listing 14.2: A Russian Doll</caption>
+
+    
+    var tinyDoll = { size: 'Tiny', inner: null };
+    var smallDoll = { size: 'Small', inner: tinyDoll };
+    var mediumDoll = { size: 'Medium', inner: smallDoll };
+    var largeDoll = { size: 'Large', inner: mediumDoll };
+    
+    function openRussianDoll( doll ){
+      console.log( doll.size );
+      if ( doll.inner ) {
+        openRussianDoll( doll.inner );
+      }
+    }
+    
+    function openDoll(){
+      openRussianDoll( largeDoll );
+    }
+    exports.openDoll = openDoll;
+
+Save the file and issue the `js refresh()` command to reload your plugins, then at the server console issue the command:
+    
+    js openDoll()
+
+You should see the following output on your screen:
+
+    > Large
+    > Medium
+    > Small
+    > Tiny
+
+Try changing the value passed to openRussianDoll from `largeDoll` to `mediumDoll`, `smallDoll` or `tinyDoll` and see what happens.
+
+## JSON
+I can't talk about Objects in JavaScript without mentioning JSON. JSON is short for **J**ava**S**cript **O**bject **N**otation and refers to how objects are constructed using the object literal style we've already seen. JSON has become very popular among web programmers because it is an efficient way to send data back and forth between a web browser and a web server. Any time you see an object literal like this, you're looking at JSON:
+
+    var steve = { "name": "steve", "occupation": "miner" }
+
+There is also a built-in *JSON* module which provides methods to:
+
+1. Let programmers print out an object in a way which is *somewhat* readable by humans.
+2. Read a string of JSON output and convert it from a string back into an object.
+
+We'll learn more about JSON, and loading and saving data later in the book.
+
+## Achievement Unlocked!
+![](images/achievement-plugin-dev-10.png)
+
+Congratulations! You've discovered the power of Objects in JavaScript and how to create efficient look-ups. Your plugin development apprenticeship is complete!
+
+## Summary
+In this chapter you learned how to create objects and how to access and look-up objects based on property names. You also learned about nested objects. This is the final chapter in the Basic Modding section of the book. Next, we move on to advanced modding.
+
+</body></html>

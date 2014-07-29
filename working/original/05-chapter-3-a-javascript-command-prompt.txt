@@ -1,0 +1,354 @@
+<html><body>
+# Chapter 3: A JavaScript command prompt
+## Introduction
+Once you've installed ScriptCraft, you can use the `js` command to evaluate JavaScript code. The `js` command will try to evaluate any of the text which follows it, as JavaScript. You must type a `SPACE` between the `js` and the JavaScript you want to evaluate. The `js` command will evaluate the JavaScript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, try to evaluate it, and if it can, will print the result. Let's practice with a few simple JavaScript expressions.
+
+## Basic Math operations
+
+The expressions we've used so far are simple addition operations. JavaScript has a number of mathematical operations. I want you to type each of the following expressions into the server console as you read them. It will be good practice for you. As a general rule you should try executing the code yourself. The best way to learn programming is to try stuff out rather than just reading. Try executing each of the following mathematical operations.
+
+Addition uses the `+` operator:
+
+    js 2 + 2
+    
+Division uses the `/` symbol (there's no &divide; key on your keyboard so `/` is used instead):
+
+    js 2 / 3
+	
+To Subtract numbers:
+
+    js 2 - 3
+    
+Multiplication uses the `*` symbol (this is called the asterisk symbol&mdash;it's usually typed by holding down the SHIFT key and 8):
+
+    js 2 * 3
+    
+## Comparing numbers
+
+JavaScript can also be used to compare numbers so you can ask *Is 3 greater than 5?* like this...
+
+    js 3 > 5 
+
+The answer to the above is `false` (3 is not greater than 5). I can ask *Is 3 less than 5?* like this...
+
+    js 3 < 5
+    
+... and the answer of course is `true`. I can also ask *Is 3 equal to 5?* like this...
+
+    js 3 == 5 
+    
+... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is a section of code which asks '*Does the player have any health points left?*' and if the answer to that question is `true` then the player can continue playing.
+
+## Variables
+### Creating Variables
+![](images/chapter-03/hearts.png)
+
+You can't type just anything after the `js` command and expect an answer. You have to use expressions that JavaScript understands. For example if I type:
+
+    js hearts
+    
+The server responds with an error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined`, which is JavaScript's way of saying "I don't understand what you mean by 'hearts' ".
+
+Right now JavaScript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is, you do so like this:
+
+    js hearts = 8;
+    
+... which basically says that hearts is equal to 8. There's a couple of things worth noting about the above expression. Firstly `hearts` is now a variable. A variable is just something JavaScript uses to store things in. Variables are used in all programming languages to store information. When we want the computer to remember something and to keep track of it we use a variable. You can think of a variable as a named storage location. It's like a storage chest in Minecraft. You can put stuff in a variable, come back to it later and it will still be there.
+
+[AUTHOR NOTE: images/chapter-03/chest.png]
+
+![](images/chapter-03/chest.png)
+
+<caption>Figure 3.1: Variables are like Chests. You can store stuff in them.</caption>
+
+
+Now when you type `js hearts`, JavaScript understands what `hearts` is, remembers its value and prints it out. Try it:
+
+    js hearts
+    
+It should print out `8`. Secondly what I've done in the `js hearts = 8` expression is made an *assignment*. I've *assigned* the value 8 to the variable *hearts* using a *single* `=` sign. I can reassign the variable *hearts* a different value like this:
+
+    js hearts = 9
+    
+That's why variables are called 'variables'&mdash;they can vary (or change) . Now when I issue the command:
+
+    js hearts
+    
+It prints out `9`. Just as you can do math with numbers in JavaScript, you can also do math with variables. Try this command:
+
+    js hearts + 1
+    
+... should print out `10` as the result. That's because the computer now knows that 'hearts' is equal to 9 and that 9 + 1 is 10. Try each of the following commands yourself:
+
+* `js hearts + 5`
+* `js hearts - 2`
+* `js hearts * 2`
+* `js hearts / 3`
+
+After executing all of the above commands issue the command:
+
+    js hearts
+    
+You'll notice that the value of the 'hearts' variable is unchanged. It's still `9`. If you want to change the value of `hearts` by some amount you need to reassign it the new value. You can do so like this:
+
+    js hearts = hearts + 1
+    
+What we've done here is combine a math operation and an assignment in a single statement. Now issue the command `js hearts` and you'll see that hearts is now `10`.
+
+### String variables
+Let's create another variable called 'healthMessage' and assign it a value:
+
+    js healthMessage = 'You have ' + hearts + ' health remaining'
+    
+What I've done here is create a new variable, and assigned it a value. The value is the text 'You have', plus the value of the 'hearts' variable, plus the text ' health remaining'. Everything between `' '` (single quote symbols) or `" "` (double quote symbols) in JavaScript is treated as text. The result of this expression is:
+
+    You have 10 health remaining
+	
+JavaScript creates a new variable called `healthMessage`, then joins together the 3 values `'You have '` (which is text) , `hearts` (which is a number) and `' health remaining'` (more text) and constructs a new value `'You have 10 health remaining'` and assigns it to the `healthMessage` variable.
+
+In JavaScript, a piece of text is also called a *String*. In Minecraft a *String* is the material Spiders sometimes drop when slain. A String is also the word Programmers use when talking about text. Here are some examples of Strings (text) in JavaScript:
+
+* `js "Hello"`
+    
+* `js 'Goodbye'`
+    
+* `js "Minecraft 1.7.9"`
+    
+* `js "123"`
+
+That last one might surprise you. JavaScript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'` I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in JavaScript is also called 'Concatenation'. We concatenate 2 or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming Minecraft plugins when you want to display information to players. 
+
+The letters, numbers and other symbols which form a string are known as *Characters*. A *Character* is any single letter, number or symbol. 'a','B','9', '-', '.', '/' and ':' are all examples of *Characters*.
+
+### Escaping Quotes
+In JavaScript you can enclose a String in either single quotes ('') or double quotes ("") but what if your string needs to include these characters? In JavaScript there are a couple of ways to do this. 
+
+1. If your string contains only single quotes you can enclose the string in double quotes:
+
+   `js "I'm a String!"`
+
+2. If your string contains only double quotes you can enclose the string in single quotes:
+
+   `js 'He said "No"'`
+
+3. You can escape each single or double quote character by putting a back-slash character `\` in front of it:
+ 
+   `js 'He said "I\'m a String!".'`
+
+   `js "He said \"No\""` 
+
+### Naming variables
+You can create as many variables as you like in JavaScript. There's no limit on the number of variables you can create. You'll notice that both the 'hearts' and 'healthMessage' variables use one-word names. I could not call the 'healthMessage' variable 'health message' because variable names cannot have space characters. There are a few other rules about what JavaScript will accept as a valid variable name. It doesn't like variable names that begin with numbers so `2player` is not a valid variable name but `player2` is. 
+
+JavaScript programmers&mdash;as a habit&mdash;generally use lowercase letters for variable names and if the variable name is made of two words joined together (as in `healthMessage`) then the first letter of the second word is usually uppercase. This style of variable naming is called Camel-Case and is considered 'Good Practice' among JavaScript programmers. What this means is that using this naming convention makes it easier for programmers to read and understand each others (and their own) code.
+
+You can read more about CamelCase on WikiPedia http://en.wikipedia.org/wiki/CamelCase
+
+### Making mistakes
+Feel free to experiment at this point. Create your own variables using your own numbers, strings and operators. If you make a mistake you'll see a long-winded error message in your console window. These error messages are called stack traces and they're the computers way of telling you something went wrong. Stack traces can be very useful for Java programmers but not so useful for JavaScript. Remember&mdash;the Minecraft Server software is written in Java not JavaScript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the JavaScript code you type into Java code so that the server can understand it. If the JavaScript code doesn't make sense then the translation won't work. 
+
+Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even when there's background noise. Computers on the other hand are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake you learn something new. Each of the following statements will cause an error:
+
+ * `js help`
+
+   `ReferenceError: "help" is not defined`
+   
+   This is JavaScript's way of saying I don't know what 'help' is.
+   
+ * `js 'steve`
+ 
+   `EvaluatorException: unterminated string literal`
+   
+   This means JavaScript encountered a string `'steve` which didn't have a closing quote symbol. Strings must begin and end with either a single-quote (') or a double-quote (") character. What's more, you can't mix them; you can't start a string with a single quote and end it with a double quote. The Strings `'this is good'` and `"so is this"` are both valid, but the Strings `'this is bad"` and `"another bad one'` are not.  
+
+ * `js :-)` 
+ 
+   `EvaluatorException: syntax error` 
+   
+   JavaScript will respond with a `syntax error` if it simply doesn't understand what your code. It's clear from this example JavaScript doesn't know what a smiley is :-)
+   
+As you learn to program, you will encounter errors. One misplaced comma, quote or full-stop and the Computer will complain by 'throwing an Exception'. Just remember to be patient, Computers aren't as smart as us so we have to be extra careful when typing code. 
+
+### Term: Exception
+An Exception is something the computer did not expect&mdash;that's what makes it 'exceptional'. In JavaScript, 'throwing an exception' is JavaScript's way of saying something unexpected happened. An exception will often include a 'Stack Trace'. The 'Stack Trace' is a bread-crumb trail of where the computer was when the exception occurred.
+
+### The *var* keyword
+
+I said earlier that we can create a new variable by typing a name and assigning it a value. In the earlier example...
+
+    js hearts = 8
+
+... two things happen with this statement. 
+
+1. A new variable called 'hearts' is *declared*. To declare a variable is to create a variable.
+2. The variable is also 'assigned' a new value (8). 'Assigning' a value to a variable means storing the value in the variable. 
+
+So in the above statement we both 'declare' and 'assign' a new variable. It's considered good practice to declare variables using the `var` keyword. `var` as you can probably guess is short for 'variable'. So a better way to declare the variable is like this:
+
+    js var hearts = 8
+
+We should always declare variables using the `var` keyword. If variables aren't declared using the `var` keyword, they become what are called 'global' variables. That is; variables which can be seen everywhere in the program. Global variables can lead to confusion because different parts of your program can access and change the variable which can lead to unexpected results. Global variables often end up becoming a source of bugs in the program. Using the `var` keyword to create a new variable is another good habit you should adopt when writing JavaScript code. 
+
+Another thing to note is that we don't always have to both declare and assign a variable in the same statement. We can create a variable just by issuing this command:
+
+    js var hungerBar
+
+Notice that hungerBar doesn't yet have a value. We haven't assigned it one, we've just created the variable. Right now the 'hungerBar' variable has a special value called `undefined`. 'undefined' is another keyword in JavaScript&mdash;it means there's nothing there. We can test this using the following code:
+
+    js hungerBar == undefined
+
+The result of this expression will be `true` . Note that I used two equals symbols which means I'm comparing. I want to see if hungerBar is equal to the special value 'undefined'. Now that I know that I know 'hungerBar' is undefined, I can assign it a value:
+
+    js hungerBar = 10
+
+Note that I didn't need to use the `var` keyword here because the 'hungerBar' variable has *already* been declared. All I'm doing is assigning the variable a new value. You should only use the `var` keyword when declaring a variable. 
+
+### The *null* keyword
+The *null* keyword in JavaScript is a special object which is used by programmers to mean that there is no value. When we declare a new variable we can explicitly assign it a *null* value to make it clearer that the variable is empty:
+
+    js var hungerBar = null
+
+... this is the conventional way to declare a variable and assign it a non-value.
+
+### Declaring multiple variables 
+
+You can use the `var` keyword to declare just one variable or you can use it to declare any number of variables in a single statement. For example, to declare 2 variables 'gameMode' and 'allowFlight', we could use two separate statements like this...
+
+    js var gameMode = 1
+
+    js var allowFlight = true
+
+... or we could declare both in a single statement like this:
+
+    js var gameMode = 1, allowFlight = true
+
+It has become commonplace to declare many variables using a single statement. 
+
+### Adding and Subtracting
+
+We're going to play with the 'hungerBar' variable while exploring some more JavaScript math operations. In Minecraft your hunger bar is the bar along the bottom of the screen next to your health bar which tells you how hungry you are. The hunger bar drains as you become exhausted and is replenished when you eat. This is done using simple Math; Addition and Subtraction. In JavaScript there's more than one way to do addition with variables. We can 'increment' (increment means add 1) using the following operation:
+
+    js hungerBar = hungerBar + 1
+
+This increases the hungerBar variable by 1. The result (assuming the hungerBar's previous value was 10) will be 11. In most programming languages, this kind of operation is so common that the language designers provide shorthand ways to do it...
+
+    js hungerBar += 1
+
+Which does the same thing using fewer characters. This statement can be made shorter again and can be written as:
+
+    js ++hungerBar
+
+The `++` (2 '+' signs next to each other) is a convention used in many programming languages&mdash;including JavaScript&mdash;to 'increment' values. Similarly, the same rules apply for subtracting values from a variable. All 3 of the following statements do the same thing&mdash;they each subtract 1.
+
+    js hungerBar = hungerBar - 1
+
+    js hungerBar -= 1
+
+    js --hungerBar
+
+Which statement you use is a matter of personal taste and style. While `--hungerBar` is easier to type, I personally prefer `hungerBar = hungerBar - 1` because I think it reads better.
+
+### Data types
+
+Variables are used to store values. Those values can be numbers, text or one of the many other data types available in JavaScript. You can ask what 'type of' data a variable has using the `typeof` operator. For example to find out what type of data the hungerBar variable holds:
+
+    js typeof hungerBar
+
+The result is 'number'. The typeof operator doesn't tell us what the value is, only its type. These are the different data types in JavaScript:
+
+* number
+* string
+* boolean
+* object
+* undefined
+* function
+
+To get some practice using the `typeof` operator, try each of the following examples in your server console window:
+
+    js typeof false
+    
+    js typeof true
+   
+    js typeof 5
+  
+    js typeof 9.99
+
+    js typeof 'Hello'
+  
+    js typeof "Goodbye"
+
+    js typeof "5"
+
+    js typeof console
+
+    js typeof Herobrine
+
+    js typeof parseInt
+
+The values `true` and `false` are both *boolean* values. A boolean type can only ever have the values `true` or `false`. Boolean values are really important in programming because as we'll learn later, they are the values the computer uses when making decisions. When deciding what to do, the computer uses only these two values&mdash;there's no gray area or 'maybe' when it comes to boolean logic. 
+
+The result of the expression `typeof "5"` might surprise you. Even though 5 is a number, because it is inside quote characters, JavaScript thinks of it as a string. Everything inside of quote characters is considered a string&mdash;even if there is a number inside the quotes.
+
+The 'console' variable is one of the built-in variables in ScriptCraft and its type is 'object'&mdash;We'll talk about objects later. The `typeof Herobrine` returns `undefined` because there is no variable or value called 'Herobrine' in the system. We can safely use the `typeof` operator to test for the existence of variables in the system. If the variable doesn't exist then `typeof` will return `false`. If we were to try to access the undefined 'Herobrine' variable we'd get a *ReferenceError* exception. Try it to see for yourself:
+
+    js Herobrine
+
+The type of a variable is very important because it determines what you can do with it and how it behaves. Finally the `typeof parseInt` expression returns `function`. We'll dive into functions next.
+
+## Functions
+Functions in JavaScript are very powerful because they are containers for code which can be called any number of times. You can write your own functions or use any of the *built-in* functions provided by the language. A *built-in* function is simply a function which comes bundled with JavaScript. Let's look at one of the built-in functions&mdash;the *parseInt()* function.
+
+#### Using functions
+The *parseInt()* function is a useful function which will take any piece of text and try to extract (or 'parse') a number from it. Say you have some text '4 hours until sunset'. If you pass this text to the *parseInt()* function, it will try to figure out what number is in the text. Let's try it out:
+
+    js parseInt('4 hours until sunset')
+
+The result should be 4. What we did here was 'pass' the '4 hours until sunset' text to the *parseInt()* function which processed the text and returned a value: 4.
+
+We are effectively saying to parseInt "here's some text&mdash;give me the number (and only the number) from it". We pass the text to the *parseInt()* function by putting it between the round brackets&mdash;the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *Parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+
+    js parseInt('5 hearts left');
+    js parseInt('This is not a number');
+    js parseInt('3 blind mice');
+
+### Writing your own functions
+One of the really cool things about programming is that you're not limited to using only the built-in functions provided by the language. You can create your own functions. In this book we're going to create a lot of functions to do cool things you wouldn't normally be able to do in Minecraft. For now let's create a simple new function that adds two numbers together. 
+
+    js function add( firstNumber, secondNumber ) { return firstNumber + secondNumber }
+
+When you enter this command nothing happens. That's because what we've just done is declared a new function called *add*. The function won't do anything until we call it. Let's do that:
+
+    js add( 1, 2 )
+
+The result is 3. Try calling it with different values to test that the function works. 
+
+    js add( 5, 6 )
+    js add( 9, 1 )
+
+Now let's look at the earlier function declaration in more detail. A function is a way to package up code so that it can be reused over and over. When you create a new function you must say what *parameters* the function will expect. We do that by putting names between the round brackets&mdash;the `(` and `)` symbols. A function can take one or more parameters. If it takes more than one parameter then each parameter must be separated with the comma character ( , ). So the first part of the function declaration `function add( firstNumber, secondNumber )` gives the function a name (*add*) and says what the function should expect. The next step in defining the function is to say what the function should do. Everything between the opening and closing curly brackets&mdash;the `{` and `}` symbols&mdash;is code which will be executed whenever the function is called. Figure 3.2 illustrates the different parts of the function definition statement:
+
+[AUTHOR NOTE: images/chapter-03/function-outline.png]
+
+![](images/chapter-03/function-outline.png)
+
+<caption>Figure 3.2: Function Outline</caption>
+
+
+When you create a new function of your own, you should give the function a meaningful and memorable name. You can name the function parameters however you like. They don't have to be called firstNumber and secondNumber but you should give your parameters names which are memorable so you don't forget what the parameters are for. 
+
+## Term: Reuse
+Reuse is important in programming. While programming, you'll often find that a problem you're working on is similar to a problem you already solved some time ago. In that case, it's always good to be able to use code you've already written to solve new problems. There are two ways to do this: You can copy and paste the code you've already written, but a better way is to change the code you wrote earlier so that it works in both the earlier program and the new program you're currently working on. There are a couple of ways to write reusable code&mdash;packaging up code in functions is just one of them. We'll explore more ways to create reusable code throughout this book. 
+
+In the example function above, there's just one statement: `return firstNumber + secondNumber` which will be executed every time this function is called. The `return` keyword is another special work in JavaScript. It's used inside of functions to return something back to the caller. In this case we return the sum of the 2 numbers passed in. The `return` keyword should only ever be used inside functions.
+
+## Achievement Unlocked!
+![](images/achievement-plugin-dev-3.png)
+
+You've created and invoked your very first function. Functions are an important part of JavaScript and you'll create many more functions in the course of this book.
+
+We've only scratched the surface of functions in JavaScript. We'll explore them more in later chapters.
+
+## Summary
+In this chapter we learned about how to execute JavaScript at the server console prompt. We learned about math operations, variables and strings and the kinds of errors you'll encounter when learning JavaScript. We also touched on functions&mdash;how to call them and how to create them. In the next chapter we'll learn about programming editors&mdash;the last piece of the puzzle in constructing your modding workbench.
+ 
+</body></html>

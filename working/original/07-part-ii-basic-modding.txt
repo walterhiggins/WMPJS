@@ -1,0 +1,6 @@
+<html><body>
+# Part II Basic Modding 
+## Overview
+In the previous section we assembled all of the parts we needed to construct our modding workbench. Now we're ready to begin developing Minecraft plugins. In this section of the book you'll learn about how to create plugins and you'll also learn more about JavaScript. In each chapter in this section we'll develop a working plugin and learn about JavaScript along the way.
+
+</body></html>

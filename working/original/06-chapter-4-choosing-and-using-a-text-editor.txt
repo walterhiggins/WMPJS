@@ -1,0 +1,225 @@
+<html><body>
+# Chapter 4: Choosing and Using a Text Editor
+## Introduction
+Up to now we've been executing JavaScript at the server console window using the `js ` command. This is a perfectly good way to try out JavaScript. It's nice to have a command-line interpreter when trying things out and exploring a new language. However, once you want to start doing some real work with JavaScript, you'll want to be able to save your work and run it, without issuing many `js` commands at the server console window each time your server starts up. 
+
+ScriptCraft lets you load JavaScript files you've saved and can either run them automatically when the server starts up or can run your code *on-demand*. If you plan on saving your work, you'll need to write your code using a text editor. Any text editor could do but I strongly recommend using a text editor dedicated to programming. A programming text editor will have a few extra bells and whistles to make writing code easier than it would be in a plain old text editor like Notepad. Most programming editors have what's called 'Syntax Highlighting' which colors different parts of your code to make it easier to read. Compare the following screenshots from a regular text editor and a programming editor: 
+
+[AUTHOR NOTE: images/chapter-04/screenshot-textedit-1.png]
+
+![](images/chapter-04/screenshot-textedit-1.png)
+
+<caption>Figure 4.1: JavaScript code in an editor with no Syntax Highlighting</caption>
+
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-2.png]
+
+![](images/chapter-04/screenshot-gedit-2.png)
+
+<caption>Figure 4.2: JavaScript code in an editor with Syntax Highlighting turned on</caption>
+
+
+I think you'll agree that the syntax highlighting in Figure 4.2 makes the code more pleasant to read. 
+
+## Choosing an editor
+
+There are many programming editors to choose from. Which editor you choose is ultimately up to you. I've been using Emacs&mdash;an Open Source editor&mdash;for many years but I don't recommend it to beginning programmers because while very powerful, it takes some time to learn. Programmers get very attached to their programming editors after time. You should start with an editor that's easy to use and learn. In this chapter I'll talk about gedit but you can use any of the following Programming Editors to get started programming.
+
+* Notepad++ is a free editor for Windows you can download at http://notepad-plus-plus.org/ 
+* TextWrangler from BareBones Software is a free editor for Mac OS X you can download at http://www.barebones.com/products/textwrangler/ 
+* Sublime Text is a cross-platform editor which you can evaluate for free for as long as you like.
+
+Let's get started installing gedit. You can skip this section if you've already installed and use a programing editor on your computer. Mac OS users can skip the following section and go straight to 'Installing TextWrangler on Mac OS'.
+
+## gedit
+
+The editor I use for screenshots in this book is called gedit. I chose gedit for use in this book because:
+
+* It is cross-platform: it runs on Windows and Linux. gedit also runs on older versions of Mac OS (up to version 10.5) but I recommend using TextWrangler for Mac OS.
+* It is light-weight and easy to use. It installs quickly, doesn't take up much disk space and doesn't have a whole lot of features you'll need to learn. It's got just enough features to get started in programming.
+* It has a Disk Explorer Pane which shows the folders with which you'll be working. This can be really handy when you want to quickly browse the folders for files to edit.
+* It is free to use. It won't cost you to download and it won't nag you to upgrade to a paid version. 
+
+You don't have to use gedit. Any programming editor will do. All Programming Editors have similar features, they let you create new files, edit, and save files. 
+
+You can download gedit at https://wiki.gnome.org/Apps/Gedit/ . Follow the download instructions for your platform. 
+
+### Installing gedit on Linux
+If you use Linux then gedit is probably already installed on your computer (Click the Dash Home button in the top left of your linux screen and type `gedit` to find it). If not already installed you can install it by opening the Ubuntu Software Center application and searching for 'gedit' or by issuing the following command in a terminal window...
+
+    sudo apt-get install gedit
+
+Once installed, you can launch gedit by typing gedit into the Dash Home search window (Click the Dash Home button).
+
+### Installing gedit on Windows
+Follow these steps to install gedit on Windows.
+
+1. Open your browser and go to https://wiki.gnome.rog/Apps/Gedit
+2. Go to the Download section of the page and click the 'Windows Binaries' link.
+3. Click on the link for the latest version ( at the time of writing this was 2.30 ).
+4. Click the gedit-setup.exe link (it might be called a slightly different name).
+5. Once it's downloaded, open the gedit-setup.exe file to begin the install.
+6. Follow all of the install wizard steps. You can use the default values.
+
+Once installed, gedit should appear in your Start Menu. If it doesn't appear in your Start Menu, you can search for it by typing 'gedit' in the Start Menu's Search field. 
+
+### The File Browser
+
+Most modern programming editors provide a file Browsing view where you can see&mdash;at a glance&mdash;all of your folders and files. The disk browser is super useful when you want to quickly navigate around your JavaScript folders and files. To enable the File browsing view in gedit, choose View => Side Panel to open the Side Panel view. In the bottom of the Side Panel view there is a File Browser tab which you should click to switch to the File Browser. From the File Browser (Disk Browser in TextWrangler on Mac OS) you can quickly open files, view folder contents, and create new files and sub-folders. Once you enable the Side Panel view it will be displayed the next time you launch gedit.
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-file-browser.png]
+
+![](images/chapter-04/screenshot-gedit-file-browser.png)
+
+<caption>Figure 4.3: gedit's File Browser</caption>
+
+
+### The gedit File Browser on Microsoft Windows
+The first time you launch gedit for windows, you will need to change one of the default settings so that all files and folders appear in the File Browser window. By default only folders are shown in the Windows File Browser. This isn't very useful as we'll want to work with Folders and JavaScript files. To ensure you can see all types of files do the following: In the File Browser window, right-click anywhere (click the right mouse button) and make sure that the *Show Binary* option is selected under the *Filter* menu. This will ensure all file types are visible.
+
+[AUTHOR NOTE: images/chapter-04/gedit-windows-show-binary.png]
+
+![](images/chapter-04/gedit-windows-show-binary.png)
+
+<caption>Figure 4.4: Ensuring all file types are visible in gedit for Windows</caption>
+
+
+### gedit Preferences
+The next step is to set some preferences for how the editor should behave. You do this by choosing Edit => Preferences to open the Preferences dialog. Let's look at each of the preferences sections in turn.
+
+### View preferences
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-1.png]
+
+![](images/chapter-04/screenshot-gedit-prefs-1.png)
+
+<caption>Figure 4.5: View Preferences</caption>
+
+
+It's useful to have gedit display line numbers alongside your code. The line numbers appear in the left margin of the window and are not part of your actual code. 
+gedit will display a feint margin along the right side of the window in column 80. This margin is just a guide to indicate that perhaps your line of code is too long. It's only a guide though and can be safely ignored. It's generally considered good practice to keep lines of code shorter than 80 characters long to help readability, but there will always be exceptions to this rule.
+
+The 'Enable text wrapping' setting should be turned off for programming. It's useful if you're writing a letter, essay or other non-programming text but it can be confusing if turned on while programming. 
+
+'Highlight current line' makes it easier to see where you currently are in the code. When looking at a large JavaScript file, it can be difficult to see the cursor (the blinking block that appears next to letters as you type).
+
+'Highlight matching brackets' is a super useful programming feature. As you move the cursor around your JavaScript source, when the cursor is next to any of the following characters it will match the opening or closing character.
+
+* Round brackets : (  )
+* Curly brackets : {  }
+* Square brackets : [  ]
+
+This can really help when writing or editing code. In Figure 4.6, you can see the cursor on line 1 next to the `{` character with both the opening and closing curly brackets highlighted in gray. 
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-matching-brackets.png]
+
+![](images/chapter-04/screenshot-gedit-matching-brackets.png)
+
+<caption>Figure 4.6: Bracket-matching</caption>
+
+
+### Editor preferences
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-2.png]
+
+![](images/chapter-04/screenshot-gedit-prefs-2.png)
+
+<caption>Figure 4.7: Editor Preferences</caption>
+
+
+I recommend using either 2 or 4 spaces for tabs to make your code more readable. This is largely a matter of style and personal taste. When starting out, you should probably use 4 spaces. 
+
+Automatic Indentation is a handy feature which saves you having to type TAB and SPACE characters when you start writing a new line of code.
+
+gedit can create a backup of your your files before you save them. This is usually a good idea.
+
+### Fonts & Colors
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-3.png]
+
+![](images/chapter-04/screenshot-gedit-prefs-3.png)
+
+<caption>Figure 4.8: Fonts and Colors Preferences</caption>
+
+
+You can change the font and color scheme to suit your own tastes. Some people prefer dark text on a light background, some prefer light text on a dark background. Pick the color scheme you like. You can always change it later.
+
+### Plugins
+
+[AUTHOR NOTE: images/chapter-04/screenshot-gedit-prefs-4.png]
+
+![](images/chapter-04/screenshot-gedit-prefs-4.png)
+
+<caption>Figure 4.9: Plugins Preferences</caption>
+
+
+gedit comes with a couple of editing plugins. You should make sure that the 'File Browser Panel' plugin is selected.
+
+## Installing TextWrangler on Mac OS
+Follow these steps to install TextWrangler on Mac OS.
+
+1. Open the App Store application and search for 'TextWrangler' in the search box in the top right.
+2. Click the Free/Install App button to begin installing.
+
+Once installed, you can launch TextWrangler by typing 'textw' in the Spotlight search field in the top right of the screen and clicking the TextWrangler result.
+
+Whenever you Launch TextWrangler you should open a 'Disk Browser' window by choosing File => New => Disk Browser. The Disk Browser in TextWrangler lets you quickly navigate around different files in the ScriptCraft folder and sub-folders. 
+
+[AUTHOR NOTE: images/chapter-04/textwrangler-disk-browser.png]
+
+![](images/chapter-04/textwrangler-disk-browser.png)
+
+<caption>Figure 4.10: TextWrangler's Disk Browser</caption>
+
+
+## First steps with your editor
+
+To get used to working with a programming editor, we're going to create a new folder and file in the ScriptCraft plugins folder and save the new file. 
+
+### Create a new Folder
+
+In the File Browser Pane ( the Disk Browser in TextWrangler on Mac OS ) locate and select the folder where you installed CraftBukkit earlier. Then navigate to the plugins/scriptcraft/plugins sub-folder. Once selected, right-click on the folder and choose 'New Folder' from the menu. Call your new folder 'learning' for now. You can call it something else as long as it's memorable&mdash;we'll come back to this folder later.
+
+[AUTHOR NOTE: images/chapter-04/screenshot-edit-new-folder.png]
+
+![](images/chapter-04/screenshot-edit-new-folder.png)
+
+<caption>Figure 4.11: Creating a New Folder</caption>
+
+
+Your new folder will now appear in the File/Disk Browser Pane. 
+
+### Create a new JavaScript file
+
+The next step is to create a new JavaScript file in the sub-folder we just created. The file won't do much just yet but we'll work some more on it soon. Right-click on the Folder you just created and choose 'New File' from the menu. Call the new file 'helloWorld.js'.
+
+[AUTHOR NOTE: images/chapter-04/screenshot-edit-new-file.png]
+
+![](images/chapter-04/screenshot-edit-new-file.png)
+
+<caption>Figure 4.12: Creating a New File</caption>
+
+
+The file has just been created but hasn't been opened. If using TextWrangler click the file to open it. If using gedit double-click the file to open it. The file contents now appear in the editing pane on the right. The file is, as you'd expect, empty. Type in the following code exactly as you see it.
+
+    // TO DO : Add some code later
+
+The above code is just a *comment* we've added to remind ourselves that we must add some proper code later. This 'comment' isn't understandable to the computer so we can write whatever we like on a line beginning with `//`, the computer will not try to interpret and execute it. Comments like this can be very useful for programmers because they make understanding code easier. Writing code is like any kind of writing&mdash;you should try to make your code readable by yourself and others so if you look at your code later you can figure out what you did. 
+
+Most programming languages provide a way to add comments. In JavaScript there are different ways you can add comments. You can add a single-line comment like the one above by inserting 2 forward-slash ( / ) characters and then any text after is a comment and will be ignored by the computer until the next line. We'll talk more about comments later. 
+
+### Saving your work.
+
+Save the file by choosing 'Save' from the File menu or by pressing CTRL + S ( CMD + S on Mac OS ). The file is now saved. You can verify this by closing the file and opening it once more. To close the file choose 'Close' from the File menu or press the close icon next to the file name at the top of the editor pane.
+
+Reopen the file by double-clicking it in the File/Disk Browser pane. The text you entered previously should still be present. Saving your work is really important because code you edit will not take effect unless you first save it. You'd be surprised how often even experienced programmers forget this simple rule and are left wondering why their code isn't working as expected.
+
+When using scriptcraft, the folder where you save your work is important. You can't just save your files anywhere and hope they'll be executed by scriptcraft. For now we've saved the newly created 'helloWorld.js' file in the plugins/scriptcraft/plugins sub-folder. Just as the Minecraft Server looks for .jar files in its plugins sub-folder to load Java-based plugins, ScriptCraft too looks for .js files in its own scriptcraft/plugins folder to load JavaScript-based plugins.
+
+## Summary
+
+We've installed a programming editor and have taken our first steps creating and editing a new JavaScript file. In the next section of the book we'll dive into creating working JavaScript plugins for Minecraft. 
+
+This is where the fun begins.
+
+</body></html>

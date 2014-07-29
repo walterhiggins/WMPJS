@@ -1,0 +1,6 @@
+<html><body>
+# Part III Advanced Modding
+## Overview
+The latter half of the book will focus on Event-Driven Programming and using Bukkit's API. The Minecraft game is very customizable because Bukkit provides so many ways to change the game. This flexibility is what makes Bukkit such a popular choice for Multiplayer servers. The Bukkit API is a collection of functions and data types that let Plugin developers create exciting new additions to Minecraft. In the following chapters we'll learn how to explore the extensive Bukkit API using the online documentation, and how to better understand the types of data provided by Bukkit.
+
+</body></html>

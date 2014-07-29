@@ -1,0 +1,15 @@
+<html><body>
+# Appendix A: ScriptCraft variables
+## The *server* variable
+The *server* variable is a global variable provided by ScriptCraft. It refers to the *org.bukkit.Server* object which is a Java object representing the Minecraft Server. Refer to http://jd.bukkit.org/rb/apidocs/org/bukkit/Server.html for full details of all of the methods available for this object.
+
+## The *bukkit* variable
+The *bukkit* variable is a global variable with just a handful of methods to make life easier for JavaScript programmers. You can see the full list of methods at http://scriptcraftjs.org/docs/API-Reference.html#bukkit
+
+## The ____plugin variable
+This global variable is a reference to the ScriptCraft plugin. Some Bukkit API methods require an *org.bukkit.plugin.Plugin* object as a parameter. If you need to call such methods from JavaScript you should provide the ____plugin variable where an object of type *org.bukkit.plugin.Plugin* is required.
+
+## The *self* variable
+The *self* variable is a *short-lived* variable which only exists briefly during the execution of a */js* command. The *self* variable refers to the *sender*; the player or console operator who is issuing the */js* command. You should never use the *self* variable in your modules&mdash;*especially in multi-player mode*! It should not be used in any function which is deferred as it does not exist outside the scope of the in-game or server prompts.
+
+</body></html>

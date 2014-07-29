@@ -1,0 +1,297 @@
+<html><body>
+# Chapter 10: Animal Sounds
+## Introduction
+In this chapter we'll create a simple program to ask players a question and play back sounds based on the answer given. You'll learn about JavaScript's *switch* statement and ScriptCraft's *sounds* module. The new program will ask players what their favorite animal is and play back that animal's sound.
+
+## The switch statement
+In chapter 9 you learned how to get input from players and how to test the input using JavaScript's *if* statement. JavaScript provides an additional statement for testing values: the *switch* statement. The switch statement is useful when you want to make decisions by testing a single value. The switch statement is best explained by example. Create a new file called *animalSounds.js* in the *scriptcraft/plugins/* folder and type the following code:
+
+<caption>Listing 10.1: Animal Sounds</caption>
+
+    var sounds = require('sounds');
+    var input = require('input');
+    function onInput( animal, player ) {
+    
+      switch (animal) { 
+        case 'cat': 
+          player.sendMessage("A cat says 'meow'");
+          sounds.catMeow(player.location);
+          break;
+        case 'chicken':
+          player.sendMessage("A chicken says 'cluck'");
+          sounds.chickenIdle(player.location);
+          break;
+        case 'cow':
+          player.sendMessage("A cow says 'moo'");
+          sounds.cowIdle(player.location);
+          break;
+        case 'horse':
+          player.sendMessage("A horse says 'neigh'");
+          sounds.horseIdle(player.location);
+          break;
+        case 'pig':
+          player.sendMessage("A pig says 'oink'");
+          sounds.pigIdle(player.location);
+          break;
+        case 'sheep':
+          player.sendMessage("A sheep says 'baa'");
+          sounds.sheepIdle(player.location);
+          break;
+        case 'wolf':
+          player.sendMessage("A wolf says 'woof'");
+          sounds.wolfBark(player.location);
+          break;
+        default: 
+          player.sendMessage("I never heard of a " + animal);
+      }
+    };
+    function animalSounds = function( player ){
+      input( player, 
+        "What's your favorite animal" + 
+        " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+        onInput );
+    }
+    exports.animalSounds = animalSounds;
+
+Save your file then issue the `js refresh()` or `reload` command to reload all JavaScript code. Then at the in-game prompt issue the following command:
+
+    /js animalSounds( self );
+
+You will be prompted to type the name of your favorite animal. Press the *T* key to enter text then type in any of the following: cat, chicken, cow, horse, pig, sheep, wolf. When you hit enter you should hear an appropriate sound&mdash;a wolf bark, cow moo, and so on. If you give any other answer, the program responds with a message saying it never heard of such an animal.
+
+The switch statement works much like the *if-else-if* construct we used in chapter 9 . We could have written the *animalSounds.js* module using an if-else-if form:
+
+    if (animal == 'cat') { 
+        sounds.catMeow(player.location);
+    } else if (animal == 'chicken') { 
+        sounds.chickenIdle(player.location);
+    } else if (animal == 'cow') { 
+        sounds.cowIdle(player.location);
+    ...
+
+But since every test is on the same *animal* variable it makes more sense to use a *switch* statement instead. Some things to note about the switch statement:
+
+* The switch statement is used for testing a single expression against many possible values. 
+* It has one or more *case* labels each of which must be followed by a value and the `:` symbol (also known as a 'colon').
+* The block of code after the `:` is only executed if the value matches. All code up to the special `break` statement will be executed.
+* If none of the cases match then the `default` case is executed.
+
+The `default` case is executed when you enter an animal that isn't one of cat, chicken, cow, horse, pig, sheep or wolf.
+
+A common pitfall when using the switch statement is forgetting to include the `break` statement at the end of each case. As an exercise try commenting out the `break` statement inside of the block for 'sheep'. Remember: to *comment out* a line of code, just put `//` at the start of the line. Save and reload then run the program again `/js animalSounds( self );` and this time enter 'sheep' as your favorite animal. What happens? The following output will appear in your screen:
+
+    A sheep says 'baa'
+    A wolf says 'woof'
+
+And you will hear both a sheep bleat *and* a wolf bark! That's because in a case block, the code will keep executing until it hits a `break` statement and if it doesn't hit one it carries right on through to the next case statement. 
+
+## The sounds module 
+There are many sounds in Minecraft and the list of sounds available in the game changes with each new release. ScriptCraft provides a *sounds* module which makes it easy to play any of the in-game sounds. At the time of writing there are approximately 200 different sounds in Minecraft and the *sounds* module provides a function for each one. Each of the functions in the *sounds* module takes up to 3 parameters:
+
+1. The location where you want to play the sound. This parameter is optional; if omitted, the sound will be played for all online players to hear.
+2. The volume at which you want to play the sound. This parameter is optional; if omitted, it defaults to 1.0 (full volume). Volume is in the range 0 to 1 with 0 being no sound at all and 1 being maximum volume. For example, if you wanted to play a Cat's Meow at half volume you would write `sounds.catMeow( location, 0.5 );`
+3. The Pitch at which you want to play the sound. The parameter is also optional and if left out will default to 1.0 (moderate pitch). Pitch can vary between 0 and 4.
+
+This is a table of all of the possible sound functions available at the time of writing. This list may not be up to date because new sounds are added on an ongoing basis while some sounds may also be removed.
+
+<table>
+<caption><h4> Table 2: Sound Functions</h4></caption><tr><td>sounds.ambienceCave()</td><td>sounds.ambienceRain()</td><td>sounds.ambienceThunder()</td></tr>
+<tr><td>sounds.anvilLand()</td><td>sounds.anvilUse()</td><td>sounds.arrowHit()</td></tr>
+<tr><td>sounds.batDeath()</td><td>sounds.batHurt()</td><td>sounds.batIdle()</td></tr>
+<tr><td>sounds.batLoop()</td><td>sounds.batTakeoff()</td><td>sounds.blazeBreath()</td></tr>
+<tr><td>sounds.blazeDeath()</td><td>sounds.blazeHit()</td><td>sounds.burp()</td></tr>
+<tr><td>sounds.catHiss()</td><td>sounds.catHit()</td><td>sounds.catMeow()</td></tr>
+<tr><td>sounds.catPurr()</td><td>sounds.catPurreow()</td><td>sounds.chestClose()</td></tr>
+<tr><td>sounds.chestOpen()</td><td>sounds.chickenEggPop()</td><td>sounds.chickenHurt()</td></tr>
+<tr><td>sounds.chickenIdle()</td><td>sounds.chickenWalk()</td><td>sounds.click()</td></tr>
+<tr><td>sounds.cowHurt()</td><td>sounds.cowIdle()</td><td>sounds.cowWalk()</td></tr>
+<tr><td>sounds.creeperDeath()</td><td>sounds.creeperHiss()</td><td>sounds.digGrass()</td></tr>
+<tr><td>sounds.digGravel()</td><td>sounds.digSand()</td><td>sounds.digSnow()</td></tr>
+<tr><td>sounds.digStone()</td><td>sounds.digWood()</td><td>sounds.digWool()</td></tr>
+<tr><td>sounds.donkeyAngry()</td><td>sounds.donkeyDeath()</td><td>sounds.donkeyHit()</td></tr>
+<tr><td>sounds.donkeyIdle()</td><td>sounds.doorClose()</td><td>sounds.doorOpen()</td></tr>
+<tr><td>sounds.drink()</td><td>sounds.eat()</td><td>sounds.enderdragonDeath()</td></tr>
+<tr><td>sounds.enderdragonGrowl()</td><td>sounds.enderdragonHit()</td><td>sounds.enderdragonWings()</td></tr>
+<tr><td>sounds.endermanDeath()</td><td>sounds.endermanHit()</td><td>sounds.endermanIdle()</td></tr>
+<tr><td>sounds.endermanScream()</td><td>sounds.endermanStare()</td><td>sounds.endermanTeleport()</td></tr>
+<tr><td>sounds.explode()</td><td>sounds.fallBig()</td><td>sounds.fallSmall()</td></tr>
+<tr><td>sounds.fire()</td><td>sounds.fireIgnite()</td><td>sounds.fireworkBlast()</td></tr>
+<tr><td>sounds.fireworkBlast2()</td><td>sounds.fireworkLargeBlast()</td><td>sounds.fireworkLargeBlast2()</td></tr>
+<tr><td>sounds.fireworkLaunch()</td><td>sounds.fireworkTwinkle()</td><td>sounds.fireworkTwinkle2()</td></tr>
+<tr><td>sounds.fizz()</td><td>sounds.fuse()</td><td>sounds.ghastCharge()</td></tr>
+<tr><td>sounds.ghastDeath()</td><td>sounds.ghastFireball()</td><td>sounds.ghastMoan()</td></tr>
+<tr><td>sounds.ghastScream()</td><td>sounds.ghastScream2()</td><td>sounds.glass()</td></tr>
+<tr><td>sounds.horseAngry()</td><td>sounds.horseArmor()</td><td>sounds.horseBreathe()</td></tr>
+<tr><td>sounds.horseDeath()</td><td>sounds.horseGallop()</td><td>sounds.horseHit()</td></tr>
+<tr><td>sounds.horseIdle()</td><td>sounds.horseJump()</td><td>sounds.horseLand()</td></tr>
+<tr><td>sounds.horseSaddle()</td><td>sounds.horseSkeletonDeath()</td><td>sounds.horseSkeletonHit()</td></tr>
+<tr><td>sounds.horseSkeletonIdle()</td><td>sounds.horseSoft()</td><td>sounds.horseWood()</td></tr>
+<tr><td>sounds.horseZombieDeath()</td><td>sounds.horseZombieHit()</td><td>sounds.horseZombieIdle()</td></tr>
+<tr><td>sounds.hurtFlesh()</td><td>sounds.irongolemDeath()</td><td>sounds.irongolemHit()</td></tr>
+<tr><td>sounds.irongolemThrow()</td><td>sounds.irongolemWalk()</td><td>sounds.itemBreak()</td></tr>
+<tr><td>sounds.itemPickup()</td><td>sounds.lava()</td><td>sounds.lavaPop()</td></tr>
+<tr><td>sounds.levelUp()</td><td>sounds.magmacubeJump()</td><td>sounds.magmacubeWalk()</td></tr>
+<tr><td>sounds.magmacubeWalk2()</td><td>sounds.minecartBase()</td><td>sounds.minecartInside()</td></tr>
+<tr><td>sounds.noteBass()</td><td>sounds.noteBassDrum()</td><td>sounds.noteBassGuitar()</td></tr>
+<tr><td>sounds.notePiano()</td><td>sounds.notePling()</td><td>sounds.noteSnareDrum()</td></tr>
+<tr><td>sounds.noteSticks()</td><td>sounds.orbPickup()</td><td>sounds.pigDeath()</td></tr>
+<tr><td>sounds.pigIdle()</td><td>sounds.pigWalk()</td><td>sounds.pistonExtend()</td></tr>
+<tr><td>sounds.pistonRetract()</td><td>sounds.portal()</td><td>sounds.portalTravel()</td></tr>
+<tr><td>sounds.portalTrigger()</td><td>sounds.sheepIdle()</td><td>sounds.sheepShear()</td></tr>
+<tr><td>sounds.sheepWalk()</td><td>sounds.shootArrow()</td><td>sounds.silverfishHit()</td></tr>
+<tr><td>sounds.silverfishIdle()</td><td>sounds.silverfishKill()</td><td>sounds.silverfishWalk()</td></tr>
+<tr><td>sounds.skeletonDeath()</td><td>sounds.skeletonHurt()</td><td>sounds.skeletonIdle()</td></tr>
+<tr><td>sounds.skeletonWalk()</td><td>sounds.slimeAttack()</td><td>sounds.slimeWalk()</td></tr>
+<tr><td>sounds.slimeWalk2()</td><td>sounds.spiderDeath()</td><td>sounds.spiderIdle()</td></tr>
+<tr><td>sounds.spiderWalk()</td><td>sounds.splash()</td><td>sounds.splash2()</td></tr>
+<tr><td>sounds.stepGrass()</td><td>sounds.stepGravel()</td><td>sounds.stepLadder()</td></tr>
+<tr><td>sounds.stepSand()</td><td>sounds.stepSnow()</td><td>sounds.stepStone()</td></tr>
+<tr><td>sounds.stepWood()</td><td>sounds.stepWool()</td><td>sounds.successfulHit()</td></tr>
+<tr><td>sounds.swim()</td><td>sounds.villagerDeath()</td><td>sounds.villagerHaggle()</td></tr>
+<tr><td>sounds.villagerHit()</td><td>sounds.villagerIdle()</td><td>sounds.villagerNo()</td></tr>
+<tr><td>sounds.villagerYes()</td><td>sounds.water()</td><td>sounds.witherDeath()</td></tr>
+<tr><td>sounds.witherHurt()</td><td>sounds.witherIdle()</td><td>sounds.witherShoot()</td></tr>
+<tr><td>sounds.witherSpawn()</td><td>sounds.wolfBark()</td><td>sounds.wolfDeath()</td></tr>
+<tr><td>sounds.wolfGrowl()</td><td>sounds.wolfHowl()</td><td>sounds.wolfHurt()</td></tr>
+<tr><td>sounds.wolfPant()</td><td>sounds.wolfShake()</td><td>sounds.wolfWalk()</td></tr>
+<tr><td>sounds.wolfWhine()</td><td>sounds.woodClick()</td><td>sounds.zombieDeath()</td></tr>
+<tr><td>sounds.zombieHurt()</td><td>sounds.zombieIdle()</td><td>sounds.zombieInfect()</td></tr>
+<tr><td>sounds.zombieMetal()</td><td>sounds.zombiePigAngry()</td><td>sounds.zombiePigDeath()</td></tr>
+<tr><td>sounds.zombiePigHurt()</td><td>sounds.zombiePigIdle()</td><td>sounds.zombieRemedy()</td></tr>
+<tr><td>sounds.zombieUnfect()</td><td>sounds.zombieWalk()</td><td>sounds.zombieWood()</td></tr>
+<tr><td>sounds.zombieWoodbreak()</td></tr>
+<tr></tr>
+
+</table>
+
+The *sounds* module is not a built-in variable in ScriptCraft so you'll need to load the module first so you can use it. At the in-game prompt you play various sounds like this:
+
+    /js var sounds = require('sounds');
+    /js sounds.catMeow( self.location );
+    /js sounds.burp( self.location );
+    /js sounds.villagerNo( self.location );    
+
+In Minecraft, Players, Blocks, Monsters, Animals and Villagers all have a location property which can be passed to any of the sounds module functions.
+
+## Improving the code
+When running the *animalSounds()* function, what happens if you enter 'Cow' instead of 'cow'? Try it and see.
+
+If you enter 'Cow', or 'COW', the function says it hasn't heard of a 'Cow' or 'COW'. To you and I, a Cow is a COW is a cow ,but to a computer they are 3 different strings. That's because computers are *case-sensitive*&mdash;they don't see the word 'Cow' and know that whether it's spelt with capital letters or lowercase letters, it means the same thing. The computer only sees a sequence (or list) of letters and as far as the computer is concerned, `C` and `c` are completely different. You can see this for yourself by issuing these commands at the in-game prompt:
+
+    /js 'COW' == 'cow'
+    > false
+    /js 'Cow' == 'cow'
+    > false
+
+How do we make the *animalSounds()* function understand that when a player types 'COW' it should be treated the same as 'cow'? Fortunately there's a String function that helps solve this problem. Issue the following command at the in-game prompt:
+
+    /js 'COW'.toLowerCase() == 'cow'
+    > true
+
+The *String.toLowerCase()* function will convert any string to its lowercase equivalent so 'COW' becomes 'cow' and 'Cow' also becomes 'cow'. This can be really useful when we want to test String values but don't care whether they're uppercase or lowercase. Let's look at the improved *animalSounds* module:
+
+<caption>Listing 10.2: Case-insensitive Animal Sounds.</caption>
+
+    var sounds = require('sounds');
+    var input = require('input');
+    function onInput( animal, player ) {
+      animal = animal.toLowerCase();
+      switch (animal) { 
+        case 'cat': 
+          player.sendMessage("A cat says 'meow'");
+          sounds.catMeow(player.location);
+          break;
+        case 'chicken':
+          player.sendMessage("A chicken says 'cluck'");
+          sounds.chickenIdle(player.location);
+          break;
+        case 'cow':
+          player.sendMessage("A cow says 'moo'");
+          sounds.cowIdle(player.location);
+          break;
+        case 'horse':
+          player.sendMessage("A horse says 'neigh'");
+          sounds.horseIdle(player.location);
+          break;
+        case 'pig':
+          player.sendMessage("A pig says 'oink'");
+          sounds.pigIdle(player.location);
+          break;
+        case 'sheep':
+          player.sendMessage("A sheep says 'baa'");
+          sounds.sheepIdle(player.location);
+          break;
+        case 'wolf':
+          player.sendMessage("A wolf says 'woof'");
+          sounds.wolfBark(player.location);
+          break;
+        default: 
+          player.sendMessage("I never heard of a " + animal);
+      }
+    }
+    function animalSounds( player ) {
+      input( player, 
+             "What's your favorite animal" + 
+             " - cat, chicken, cow, horse, pig, sheep or wolf?", 
+             onInput);
+    }
+    exports.animalSounds = animalSounds;
+    
+
+The only change to this module is a new statement just before the switch statement:
+
+    animal = animal.toLowerCase();
+
+This statement ensures that the *animal* parameter is converted to lowercase first so the program won't report silly messages about not knowing what a 'Cow' or 'HORSE' is. 
+
+## More on Strings
+All Strings in JavaScript also have a *toUpperCase()* function which returns an UPPERCASE version of the string. Note that neither the *toLowerCase()* nor *toUpperCase()* functions change the original string, they just return a new string which is why I need to assign the *animal* variable to the returned value. If I simply used:
+
+    animal.toLowerCase();
+    
+The switch cases would still fail for 'COW'    because the value of *animal* does not change when you call its *toLowerCase()* function. If you use the *toLowerCase()*, *toUpperCase()* or *any of the String* methods, none of them change the original string. In JavaScript any String is *immutable*, meaning none of its methods change it in any way. In chapter 8 we saw that you could add a new item to an array by calling its *push()* method. Arrays are *mutable* objects: the methods can change the object on which they're called. Let's see an example at the in-game prompt:
+
+    /js var animals = ['cow','pig'];
+    /js animals.push('sheep');
+    /js animals[2]
+    > sheep
+    
+The above statement&mdash;`animals.push('sheep');`&mdash;actually *changes* the animals value. With Strings, this never happens. None of the String methods (and there are quite a few) change the value for which they are called. For example there is a *String.concat()* function which adds another string:
+
+    /js var name = "steve ";
+    /js name.concat("crafter");
+    > steve crafter
+    /js name
+    > steve
+
+You can see that while `name.concat("crafter");` returns a value `steve crafter`, the original *name* variable remains unchanged. If we wanted to change the name variable we'd have to do it like this:
+
+    /js var name = "steve ";
+    /js name = name.concat("crafter");
+    > steve crafter
+    /js name
+    > steve crafter
+
+Listed below is a table of the most common String methods.
+
+<table>
+<caption><h4> Table 3: Commonly used String Methods</h4></caption><tr><th>Method Name</th><th>Description</th></tr>
+<tr><td>.charAt(index)</td><td>Returns the character at index from the string.</td></tr>
+<tr><td>.concat(text1, text2)</td><td>Combines the text from one or more strings and returns a new string.</td></tr>
+<tr><td>.indexOf(text)</td><td>Returns the first position where text was found or -1 if the text is not in the string. For example "Ice Cream".indexOf("Cream") returns 4.</td></tr>
+<tr><td>.lastIndexOf(text)</td><td>Returns the last position where text was found.</td></tr>
+<tr><td>.replace(regex, replacement)</td><td>Returns a new string with with some or all mathces of a patter replaced by a replacement. For example "I hate Creepers".replace(/Creepers/,"Spiders")</td></tr>
+<tr><td>.split(separator)</td><td>Splits a string into an array of strings. For example: "I hate creepers".split(" ") returns ["I", "hate", "creepers"]</td></tr>
+<tr><td>.substring(indexA,[indexB])</td><td>Extracts characters starting at indexA and continuing to indexB (or end of string if indexB is not provided). For example: "I hate creepers".substring(7) returns "creepers"</td></tr>
+<tr><td>.toLowerCase()</td><td>Returns a new string with all characters in lowercase.</td></tr>
+<tr><td>.toUpperCase()</td><td>Returns a new string with all characters in uppercase.</td></tr>
+<tr><td>.trim()</td><td>Returns a new string with whitespace removed from both ends of the string. For example "  I hate Creepers ".trim() returns "I hate creepers".</td></tr>
+
+</table>
+
+A full reference of all String methods is available online at https://developer.mozilla.org/en-US/docs/Web/Javascript/Reference/Global_Objects/String .
+
+## Summary
+In this chapter you learned how to use the *switch* statements to make decisions. You also learned how to play sounds using ScriptCraft's *sounds* module. In an upcoming chapter we'll learn how to simplify this module even further using Objects.
+
+</body></html>

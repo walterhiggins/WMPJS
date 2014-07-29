@@ -1,0 +1,613 @@
+<html><body>
+# Chapter 19: Snowball Fight!
+## Introduction
+In this chapter we're going to create a Player vs. Player mini-game called *Snowball Fight*. The aim of the game is to hit your opponents with snowballs as many times as possible while avoiding being hit yourself or hitting players on your own team. In the game players can form opposing teams.
+
+[AUTHOR NOTE: images/chapter-19/snowball-fight.png]
+
+![](images/chapter-19/snowball-fight.png)
+
+<caption>Figure 19.1: Snowball Fight</caption>
+
+
+The game will be kept simple for the sake of providing example code which you might want to adapt and extend to create your own mini-game. 
+
+The game will be started using a JavaScript function and its duration and team structure will be passed as parameters. If no parameters are passed then the default game duration will be 60 seconds and each player will be allocated to one of 3 teams.
+
+First I'll present the game in a single JavaScript module with a function which operators will use to start the game and later in this chapter we'll cover how players can start the game using in-game mechanisms. We'll also cover how to create an Arena for the game to be played in, and a command for use by players to start the game.
+
+## Game Rules
+Before we begin coding let's lay down some of the rules of the Snowball Fight mini-game.
+
+1. Players will each be allocated a number of snowballs when the game begins.
+2. Each player will be a member of a team. There can be up to 3 teams: red, blue and yellow. Each player's name appears in the color of their team. 
+3. Players gain a point if they hit an opponent.
+4. Players lose a point if they hit a member of their own team.
+5. When the game starts, players will enter Survival Mode. This is crucial to how the game works. When a player is hit by a snowball we need to be able to update the score. In creative mode, there's no way to listen for this event. 
+6. When the game ends, players will return to the Game Mode they were in before the game started.
+7. A scoreboard of players and their scores will be displayed during the game.
+8. A count-down timer (in seconds) will be displayed at the top of the scoreboard.
+9. At the end of the game, the scoreboard will remain on-screen for a few seconds so players can see the final score for each team.
+
+## Logistics
+For the game to work, players should be in close proximity to one another. Later in the chapter we'll construct a special arena for the game to make it more fun. Much of the fun of Minecraft mini-games comes from the anticipation of the game and the ceremony surrounding it. For example, many player vs. player mini-games have a holding area where players wait to jump into the mini-game or choose teams to participate in prior to the game starting. The mechanism for starting a game can vary from mini-game to mini-game. Initially we'll keep things simple&mdash;only the operator may start a Snowball Fight mini-game using the */js SnowballFight()* command. Later we'll improve the game so any player can start.
+
+## Keeping Score
+In chapter 11 we used a JavaScript array to create a simple leaderboard which sorted players by how many times they had jumped. Minecraft has some built-in commands which let you easily create and display an in-game translucent side-bar with a leaderboard or *scoreboard* of players. 
+
+### The /scoreboard command
+The */scoreboard* command provides a neat way to specify what should be displayed in the in-game list view , side-bar view and also what can be displayed above player's heads. For example, revisiting the leaderboard code from the earlier chapter, we could display the same leaderboard using the following built-in commands in Minecraft:
+
+    /scoreboard objectives add Jumping stat.jump
+    /scoreboard objectives setdisplay sidebar Jumping
+
+Notice that once you've run these commands, whenever you or any other player on the server jumps, the scoreboard is updated. 
+
+This is a really nice feature and one we'll definitely want to use in our Snowball game. 
+
+### Executing commands from JavaScript
+It's possible to execute any built-in command from JavaScript using the *server.dispatchCommand()* method. To execute the scoreboard commands already mentioned you'd use the following code:
+
+    server.dispatchCommand(server.consoleSender, 'scoreboard objectives add Jumping stat.jump');
+    server.dispatchCommand(server.consoleSender, 'scoreboard objectives setdisplay sidebar Jumping');
+
+The *server.dispatchCommand()* method is really useful when you want to call built-in commands or commands provided by other plugins from JavaScript. The appendices include more information on using other plugins via JavaScript.
+
+### The main scoreboard
+The problem with using the */scoreboard* command is that it updates Minecraft's *main* scoreboard which means the scoreboard is changed for *all* players connected to the server. In a mini-game where only some of the players may be playing, we don't want to update the scoreboard for *all* players, only those who are playing the mini-game. 
+
+### The Scoreboard API
+Fortunately Bukkit includes a set of Java classes for working with Scoreboards. As well as using Minecraft's *main* scoreboard, you can construct completely new scoreboards for use by only a select few players. This is what we'll do in the Snowball Fight mini-game since only those players who are in the mini-game will be interested in the leaderboard. The Bukkit *org.bukkit.scoreboard.ScoreboardManager* class has 2 methods:
+
+    Scoreboard getMainScoreboard() Gets the primary Scoreboard controlled by the server.
+    Scoreboard getNewScoreboard() Gets a new Scoreboard to be tracked by the server.
+
+We'll use the *getNewScoreboard()* method to obtain a new scoreboard which will be used exclusively by the mini-game. 
+
+## The game source code
+We have a lot of ground to cover so let's dive right in and write the core game code. In your editor create a new folder called *snowball* in the *plugins/scriptcraft/plugins/* folder. Inside the *snowball* folder, create a new file called *game.js* and enter the following code:
+
+<caption>Listing 19.1: Snowball Fight core game source</caption>
+
+    var items = require('items');
+    var textcolors = require('textcolors');
+    var bkGameMode = org.bukkit.GameMode;
+    var bkSnowball = org.bukkit.entity.Snowball;
+    var bkDisplaySlot = org.bukkit.scoreboard.DisplaySlot;
+    
+    function SnowballFight( duration, teams ) {
+      var players;
+      var i;
+      var game;
+      var teamName;
+    
+      if ( typeof duration == 'undefined' ) {
+        duration = 60;
+      }
+      if ( typeof teams == 'undefined' ) {
+        teams =  {};
+        players = server.onlinePlayers;
+        var teamNames = ['red','blue','yellow'];
+        var playerCount = players.length;
+        for ( i = 0; i < playerCount; i++ ) {
+          var playerName = players[i].name;
+          teamName = teamNames[ i % playerCount ];
+          if (teams[ teamName ] == undefined){
+            teams[ teamName ] = [];
+          }
+          teams[ teamName ].push(playerName);
+        }
+      }
+      game = {
+        teams: teams,
+        duration: duration,
+        teamScores: {},
+        eventListener: null,
+        savedModes: {},
+        snowballs: [ items.snowBall( 64 ) ]
+      };
+    
+      function loop(){
+        if ( game.duration-- ){
+          game.objective.displayName = 'Snowball ' + game.duration;
+          updateScoreboard( game );
+          setTimeout( loop, 1000 );
+        } else {
+          end( game );
+        }
+      }
+      function onSnowballHit( event ) {
+        var snowball = event.damager;
+        if ( !snowball || !( snowball instanceof bkSnowball ) ) {
+          return;
+        }
+        var thrower = snowball.shooter;
+        var damaged = event.entity;
+        var throwerTeam = getPlayerTeam( thrower, game.teams );
+        var damagedTeam = getPlayerTeam( damaged, game.teams );
+    
+        if ( !throwerTeam || !damagedTeam ) {
+          return; // thrower/damagee wasn't in game
+        }
+        if ( throwerTeam != damagedTeam ) {
+          game.teamScores[ throwerTeam ]++;
+        } else {
+          game.teamScores[ throwerTeam ]--;
+        }
+      }
+    
+      start( game );
+      game.eventListener = events.entityDamageByEntity( onSnowballHit );
+      setTimeout(loop, 1000);
+    }
+    
+    function start( game ) {
+      var i;
+      var teamName;
+      var team;
+      var player;
+    
+      /*
+       Initialize the scoreboard
+       */
+      var scoreboard = server.scoreboardManager.getNewScoreboard();
+      var objective = scoreboard.registerNewObjective('win','dummy');
+      objective.displayName = ('Snowball ' + game.duration).underline().bold();
+      objective.displaySlot = bkDisplaySlot.SIDEBAR;
+      game.objective = objective;
+    
+      /*
+       put all players in survival mode and give them each 64 snowballs 
+       for every 20 seconds of play
+       */
+      for ( i = 0; i < game.duration; i += 20 ) {
+        game.snowballs.push( game.snowballs[ 0 ] );
+      }
+      
+      for ( teamName in game.teams ) {
+    
+        game.teamScores[ teamName ] = -1;
+        team = game.teams[ teamName ];
+    
+        var sbTeam = scoreboard.registerNewTeam( teamName );
+        sbTeam.prefix = textcolors.colorize(teamName, '');
+        for ( i = 0; i < team.length; i++ ) {
+    
+          player = server.getPlayer( team[i] );
+          game.savedModes[ player.name ] = player.gameMode;
+          player.gameMode = bkGameMode.SURVIVAL;
+          player.inventory.addItem( game.snowballs );
+          player.scoreboard = scoreboard;
+    
+          sbTeam.addPlayer( player );
+        }
+    
+      }
+      updateScoreboard(game);
+      /*
+       due to a bug in Scoreboard, we need to force a refresh 
+       by changing the score from -1 to 0
+       */
+      for ( teamName in game.teams ) {
+        game.teamScores[ teamName ] = 0;
+      }
+      updateScoreboard(game);
+    }
+    
+    function updateScoreboard( game ) {
+      var team;
+      var teamScore;
+      for (team in game.teamScores){
+        teamScore = game.objective.getScore( team );
+        teamScore.score = game.teamScores[ team ];
+      }
+    }
+    
+    function end( game ) {
+      var scores = [];
+      var i;
+      var teamName;
+      var team;
+      var player;
+      var scoreboard = server.scoreboardManager.getMainScoreboard();
+      var players = [];
+    
+      function resetScoreboard(){
+        var i;
+        for ( i = 0; i < players.length; i++ ) {
+          players[i].scoreboard = scoreboard;
+        }
+        game.objective.unregister();
+      }
+      for ( teamName in game.teams ) {
+        team = game.teams[teamName];
+        for ( i = 0; i < team.length; i++ ) {
+          // restore player's previous game mode and take back snowballs
+          player = server.getPlayer( team[i] );
+          player.gameMode = game.savedModes[ player.name ];
+          player.inventory.removeItem( game.snowballs );
+          players.push(player);
+        }
+      }
+      game.eventListener.unregister();
+      game.objective.displayName = 'GAME OVER';
+      /*
+       display scoreboard for 5 seconds after game ends
+       */
+      setTimeout(resetScoreboard, 5000);
+    }
+    
+    function getPlayerTeam( player, teams ) {
+      var teamName;
+      var team;
+      var i;
+      for ( teamName in teams ) {
+        team = teams[ teamName ];
+        for ( i = 0; i < team.length; i++ ) {
+          if ( team[i] == player.name ) {
+            return teamName;
+          }
+        }
+      }
+      return null;
+    }
+    
+    exports.SnowballFight = SnowballFight;
+
+## Running the game
+Once you've saved the file, reload your plugins using the */reload* or */js refresh()* command and then with 2 or more Players connected to the server issue the following command:
+
+    /js SnowballFight()
+
+The game should begin. Each player is allocated a number of snowballs and as soon any player strikes another with a snowball, the scoreboard is updated. Every participant in the mini-game can see the scoreboard. The game will continue for 60 seconds. At the end of the game, the scoreboard remains for a couple of seconds so the victors can savour the moment. 
+
+## Allocating Teams
+The mini-game is created using the *SnowballFight()* function which takes 2 parameters: duration and teams. If neither a duration nor teams parameter is provided then the default values are 60 seconds for the duration and a set of teams comprised of all of the players on the server. The following section of code in the *SnowballFight()* function:
+
+    if ( typeof teams == 'undefined' ) {
+      teams =  {};
+      players = server.onlinePlayers;
+      var teamNames = ['red','blue','yellow'];
+      var playerCount = players.length;
+      for ( i = 0; i < playerCount; i++ ) {
+        var playerName = players[i].name;
+        teamName = teamNames[ i % playerCount ];
+        if (teams[ teamName ] == undefined){
+          teams[ teamName ] = [];
+        }
+        teams[ teamName ].push(playerName);
+      }
+    }
+
+...creates a set of up to 3 teams and each player is allocated to a team in turn. If you had 8 players online when the game started, the *teams* object might look something like this:
+
+    { 
+       red: ['sean', 'moe', 'curly'],
+       blue: ['walter', 'larry', 'oliver'],
+       yellow: ['john', 'paul']
+    }
+
+In this game there should ideally only be up to 3 teams where each team name is one of the following 3 colors: red, blue, yellow. Try to avoid having green and red teams because the colors can be difficult to tell apart for some players. Each player's name will appear in the color of their team to make it easier for players to tell who is an opponent and who is on the same team. Next we create a variable called *game* which will be used to store the state of the game and will be passed to other functions in the module.
+
+## The game loop
+The *loop()* function is called once every second using the *setTimeout()* function and subtracts 1 from the game's duration counter, updates the scoreboard and schedules another call to itself in 1 second. If the game's duration counter is 0 it means that time has run out and the game is over, in which case the *end()* function is called. 
+
+## Scope and functions
+You might be wondering why the *loop()* function is declared inside of the *SnowballFight()* function. The *loop()* function must be declared inside of the *SnowballFight()* function because it needs to use the *game* variable. Because both the *game* variable and the *loop()* function are declared inside of the *SnowballFight()* function, the *loop()* function can *see* the *game* variable. If the *loop()* function was declared *outside* the *SnowballFight()* function, it would not be able to see the *game* variable because variables are *private* to the function in which they're declared. Normally we'd declare the function outside of the *SnowballFight()* function and pass the *game* variable as a parameter, except we schedule the call to *loop()* using a *setTimeout()* call. There are actually a couple of ways to handle scope and functions in JavaScript but I think declaring the *loop()* function inside the *SnowballFight()* function so it can see and work with the *game* variable is the simplest.
+
+## Listening for snowball hits
+Next we declare a new Event-handling function called *onSnowballHit()* which will be called every time an entity damages another entity. The peculiarly-named *events.entityDamageByEntity()* function can be used to listen for damage caused to living things in the game. In our case, we're only concerned with damage caused by snowballs thrown by mini-game participants. The *getPlayerTeam()* function will return the team a player belongs to. If the thrower and damaged player are on different teams then the thrower's team score is increased, otherwise it's decreased.
+
+    if ( throwerTeam != damagedTeam ) {
+      game.teamScores[ throwerTeam ]++;
+    } else {
+      game.teamScores[ throwerTeam ]--;
+    }
+
+## Starting the game
+The main part of the *SnowballFight()* function is at the end of the module. The following 3 lines of code are responsible for starting the game, listening for events and starting the game's loop.
+
+    start( game );
+    game.eventListener = events.entityDamageByEntity( onSnowballHit );
+    setTimeout(loop, 1000);
+
+The *start()* function is responsible for initializing the game's scoreboard and team scores, storing each player's current game mode so it can be restored after the game, setting the player's game mode to SURVIVAL, and giving each player snowballs to throw. At the time of writing there was a problem with Scoreboards which made it necessary to first set each team's score to -1, update the scoreboard, then set each team's score to 0 and update again to force the scoreboard to display all teams' scores at the start of the game. Without this workaround, team scores only appeared when the team scored a point.
+
+## Initializing and updating the Scoreboard
+The first group of statements in the *start()* function use Bukkit's Scoreboard API to initialize the mini-game's Scoreboard:
+
+    var bkScoreboard = server.scoreboardManager.getNewScoreboard();
+    var bkObjective = bkScoreboard.registerNewObjective('win','dummy');
+    bkObjective.displayName = ('Snowball ' + game.duration).underline().bold();
+    bkObjective.displaySlot = bkDisplaySlot.SIDEBAR;
+    game.objective = bkObjective;
+
+Each Scoreboard object can have one or more objectives and each objective can be linked to a different *Display Slot*. There are 3 different display slots: BELOW\_NAME, SIDEBAR, and PLAYER\_LIST. In our game we use the SIDEBAR slot as it provides a nice leaderboard view which is always visible at the side of the screen. 
+
+## Who's playing?
+The next step in starting the game is to loop over all of the teams in the game and for each team, create a *org.bukkit.scoreboard.Team* object which is used to display each player's name in their team colors, then for each player in each team, save the player's game mode, and add the player to the *Team* object. The following lines of code:
+
+    bkTeam = scoreboard.registerNewTeam( teamName );
+    bkTeam.prefix = textcolors.colorize(teamName, '');
+
+... construct a new Team object and set the team's *prefix*. The *prefix* is a special string which is placed in front of each player's name in the game. In chapter 15 we created a *textcolor* module for changing chat message colors and here we re-use that module to change the color of the player's name as it appears above their head. When we call *textcolors.colorize('gold','')* it returns a special string which is empty except for the color-code used by Minecraft. If this special string is placed in front of a chat message or used as a team prefix it will change the color of the message or team member name.
+
+## Displaying the Score
+The *updateScoreboard()* function is called twice at the start of the game because each score must first be set to -1 then 0 for the scoreboard to be refreshed. It's also called from within the *loop()* function every second of the game.
+
+## Ending the game
+The *end()* function is responsible for ending the game and ensuring that each player's game mode is restored. Any snowballs which were given to the player at game start are taken away. The event listener is unregistered and finally, after an interval of a few seconds the scoreboard disappears and the main scoreboard is restored for each player.
+
+## Creating an Arena
+So far we've created a single JavaScript function for use by operators to start a new Snowball Fight game. The game works but could be made much more fun by constructing an arena to play in and making it fun and easy for players to join and start and game and choose a team. Let's use the Drone (again) to construct a simple 24 by 24 block arena of snow with some walls to make an interesting place to play the game. The Arena will have a glass wall so spectators can watch and will have 3 large colored waiting areas outside the walled arena where players can choose their team simply by waiting in one of the 3 colored zones. The entire arena and waiting areas will be protected from griefing using the *zonemaker* and *region* modules we developed in chapter 18 so if you haven't already added the protection modules from that chapter, I recommend doing so now.
+
+Later we'll add the ability for any player waiting in a colored zone to start the game using the `/jsp snowball` command. First let's write the code to build an arena. Create a new *plugins/scriptcraft/plugins/snowball/arena.js* file and enter the following code:
+
+<caption>Listing 19.2: plugins/snowball/arena.js Constructing an Snowball Fight Arena</caption>
+
+    var region = require('protection/region');  
+    var Drone = require('../drone/drone').Drone;
+    var blocks = require('blocks');
+    var arenas = persist('snowball-arenas', []);
+    var instructions = [
+      'Snowball Fight',
+      'In color area:',
+      '/jsp snowball'
+    ];
+    
+    function snowballArena() {
+      var arena = {};
+      
+      this.chkpt('sbarena');
+      // construct team waiting areas
+      this.box( blocks.wool.red, 8, 1, 8);
+      this.right(8).box( blocks.wool.blue, 8, 1, 8);
+      this.right(8).box( blocks.wool.yellow, 8, 1, 8);
+      this.move('sbarena');
+      // construct arena
+      this.fwd(8);
+      this.box( blocks.snow, 24, 1, 24);
+      // construct some walls to make it interesting
+      this.fwd( 6 ).right(3).box(blocks.snow, 10, 4, 1);
+      this.right(2).up(2).box(blocks.air, 6, 1, 1);
+      this.down(2).right(1).fwd(6).box(blocks.snow, 10, 4, 1);
+      this.right(2).up(2).box(blocks.air, 6, 1, 1);
+      this.move('sbarena');
+      // construct glass wall around arena
+      this.up().fwd(8).box0(blocks.glass_pane,24, 3, 24);
+      this.move('sbarena');
+      this.up().sign(instructions,63).right(8);
+      this.sign(instructions,63).right(8).sign(instructions,63);
+      // make whole area protected
+      this.move('sbarena');
+      this.zonemaker( null, 24, 32 );
+      // store the coordinates of the blue, red and yellow waiting areas
+      // these will be used to determine who's on each team
+      var loc = this.getLocation();
+      var loc2 = this.fwd(8).right(8).getLocation();
+      arena.redZone = region.create(loc, loc2);
+    
+      loc = this.back(8).getLocation();
+      loc2 = this.fwd(8).right(8).getLocation();
+      arena.blueZone = region.create(loc, loc2);
+    
+      loc = this.back(8).getLocation();
+      loc2 = this.fwd(8).right(8).getLocation();
+      arena.yellowZone = region.create(loc, loc2);
+    
+      // store the locations of the red, blue and yellow spawn points
+      this.move('sbarena');
+      loc = this.fwd(10).right(1).getLocation();
+      arena.redSpawn = { x: loc.x, z: loc.z, y: loc.y+1};
+    
+      loc = this.right(8).getLocation();
+      arena.blueSpawn = { x: loc.x, z: loc.z, y: loc.y+1};
+    
+      loc = this.right(8).getLocation();
+      arena.yellowSpawn = { x: loc.x, z: loc.z, y: loc.y+1};
+    
+      this.move('sbarena');
+      arenas.push(arena);
+    }
+    
+    Drone.extend( snowballArena );
+    
+    
+
+The *snowballArena()* function is a new Drone extension and is meant for use by operators to create an arena for play. Operators can use this function as they would use any Drone function. In the game (with operator privileges) target a block at ground level and issue the following command:
+
+    /js snowballArena();
+
+An arena should appear shortly. The arena looks like this from above (plan view):
+
+[AUTHOR NOTE: images/chapter-19/arena-plan.png]
+
+![](images/chapter-19/arena-plan.png)
+
+<caption>Figure 19.2: Snowball Arena</caption>
+
+
+Unlike other Drone functions we've created, we want to save some information about the newly-created arena for later (so when we develop the */jsp snowball* command we can tell which players are on each team using the player's starting zone). We used the *persist()* function we first learnt about in chapter 15 to load and automatically save the arena data. I recommend issuing the */js refresh()* statement after you create each snowball arena so that the arena data is saved immediately.
+
+In each of the colored zones is a sign with instructions for players who want to play. The instructions read:
+
+    Snowball Fight
+    In color area:
+    /jsp snowball
+
+These signs are created using the Drone's *sign()* function which makes it easy to produce sign posts or hanging signs with messages. 
+
+### Protecting the arena
+The arena is protected using the *zonemaker()* function which takes 3 parameters: A material, width and length. If no material is provided then the zone will be protected but no border blocks are laid down. For this arena, we only want to protect it, and don't need to lay down a border so we call it like this:
+
+    this.zonemaker( null, 24, 32 );
+
+When null is passed instead of a material, no border is built but the area is protected from block-break and block-place events by non-operators.
+
+## Making it easy for players to start the game
+Having created the core game code and an arena in which to play the game, the next step is to add some simple mechanics for starting and stopping the game, and choosing teams. The Drone's *snowballArena()* function creates not just the arena in which the game is played but a waiting zone outside the arena which is divided into 3 colored areas&mdash;one for each team. Players who wish to play the game simply move into one of the 3 colored areas&mdash;the area they choose is important because this will be the team they belong to once the game begins. 
+
+Any one of the players in a waiting area can choose to start the game when other players are on at least one other color area by issuing the following command:
+
+    /jsp snowball
+
+Let's complete the game by writing the code which will handle this command. In the *snowball* folder, create a new file called *command.js* and enter the following code:
+
+<caption>Listing 19.3: command.js A New Command /jsp snowball</caption>
+
+    var region = require('protection/region');  
+    var fireworks = require('fireworks');
+    var bkTeleportCause = org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+    var bkLocation = org.bukkit.Location;
+    var game = require('./game');
+    var arenas = persist('snowball-arenas', []);
+    
+    function snowball( params, sender ){
+      var i;
+      var arena = null;
+      var gameOn = false;
+    
+      var allPlayers = bukkit.players();
+      var player;
+      var teams = {red: [], blue:[], yellow:[]};
+      var spawns = [];
+      var spawn = null;
+    
+      for ( i = 0; i < arenas.length; i++ ) {
+        arena = arenas[i];
+        if ( region.contains( arena.redZone, sender.location) 
+            || region.contains( arena.blueZone, sender.location) 
+            || region.contains( arena.yellowZone, sender.location) ) {
+          // game on!
+          gameOn = true;
+          break;
+        } 
+      }
+      if (!gameOn){
+        sender.sendMessage('You must issue this command while in a colored zone');
+        return;
+      }
+    
+      for (i = 0;i < allPlayers.length; i++) {
+        player = allPlayers[i];
+        inZone = false;
+        if (region.contains( arena.redZone, player.location) ){
+          teams.red.push( player.name );
+          inZone = arena.redSpawn;
+        } else if (region.contains( arena.blueZone, player.location) ) {
+          teams.blue.push( player.name );
+          inZone = arena.blueSpawn;
+        } else if (region.contains( arena.yellowZone, player.location) ){
+          teams.yellow.push( player.name );
+          inZone = arena.yellowSpawn;
+        } 
+        if ( inZone ) {
+          var spawnLoc = new bkLocation( player.location.world, 
+                                         inZone.x, 
+                                         inZone.y, 
+                                         inZone.z);
+          spawns.push( {
+            participant: player,
+            oldLocation: player.location,
+            newLocation: spawnLoc 
+          } );
+        }
+      }
+      if ( (teams.red.length == 0 && teams.blue.length == 0)
+          || (teams.red.length == 0 && teams.yellow.length == 0)
+          || (teams.blue.length == 0 && teams.yellow.length == 0))
+      {
+        sender.sendMessage('Need more than one team to play. ' + 
+                           'Someone needs to choose a different color.');
+        return;
+      }
+      function returnPlayers() {
+        var spawn;
+        for (var i = 0;i < spawns.length; i++) { 
+          spawn = spawns[i];
+          spawn.participant.teleport(spawn.oldLocation, bkTeleportCause.PLUGIN);
+          fireworks.firework( spawn.oldLocation );
+        }
+      }
+    
+      for (i = 0;i < spawns.length; i++) { 
+        spawn = spawns[i];
+        spawn.participant.teleport(spawn.newLocation, bkTeleportCause.PLUGIN);
+      }
+      setTimeout(returnPlayers, 65000);
+      
+      game.SnowballFight(60, teams);
+    }
+    
+    command( snowball );
+
+This module also uses the *protection/region* module we developed in chapter 18 as well as the *game* module we developed earlier in this chapter.
+
+### Where is the player?
+The first thing the *snowball* command does is check the location of the player who invoked the command. If the player who issues the */jsp snowball* command isn't on one of the 3 colored waiting areas then the game won't begin (we don't want just anyone starting a game&mdash;only those who want to play the game should be able to start it). We use the *region.contains()* function from chapter 18 to see if the player is located in one of the 3 color waiting areas. 
+
+### Who wants to play?
+If the player *is* in one of the waiting areas we keep a reference to the waiting area's *arena*. We then loop over *all* of the players on the server and if any player is in one of the *arenas* color zones we add them to the appropriate team:
+
+    for (i = 0;i < allPlayers.length; i++) {
+      player = allPlayers[i];
+      inZone = false;
+      if (region.contains( arena.redZone, player.location) ){
+        teams.red.push( player.name );
+        inZone = arena.redSpawn;
+      } else if (region.contains( arena.blueZone, player.location) ) {
+        teams.blue.push( player.name );
+        inZone = arena.blueSpawn;
+      } else if (region.contains( arena.yellowZone, player.location) ){
+        teams.yellow.push( player.name );
+        inZone = arena.yellowSpawn;
+      } 
+      if ( inZone ) {
+        var spawnLoc = new bkLocation( player.location.world, 
+                                       inZone.x, 
+                                       inZone.y, 
+                                       inZone.z);
+        spawns.push( {
+          participant: player,
+          oldLocation: player.location,
+          newLocation: spawnLoc 
+        } );
+      }
+    }
+
+The *spawns* array is a list of players and their locations just before the game begins. We need to keep a list of such locations because we'll teleport the players inside the arena when the game begins and would like to return each player to their original location when the game ends. Each arena also has 3 spawn points where players will be teleported when the game begins. 
+
+[AUTHOR NOTE: images/chapter-19/waiting-area.png]
+
+![](images/chapter-19/waiting-area.png)
+
+<caption>Figure 19.3: Snowball Fight Waiting Area</caption>
+
+
+### How many teams?
+Next the *snowball* command function checks how many teams have players. If there's only one team then the game won't begin:
+
+    if ( (teams.red.length == 0 && teams.blue.length == 0)
+      || (teams.red.length == 0 && teams.yellow.length == 0)
+      || (teams.blue.length == 0 && teams.yellow.length == 0))
+    {
+      player.sendMessage('Need more than one team to play. ' + 
+                         'Someone needs to choose a different color.');
+      return;
+    }
+
+### Starting and Stopping the game
+Finally&mdash;assuming the player who issued the command wants to play and there are enough teams/players to play&mdash;we teleport the players into the arena and begin the game using the *SnowballFight()* function defined earlier in this chapter. 
+We also schedule a deferred function call using the *setTimeout()* function. The *returnPlayers()* function will be invoked 5 seconds after the game has ended and will return each player to the waiting area they were in before the game started. A firework will launch above each player of the winning team so everyone&mdash;players and spectators&mdash;will know which team won the game. 
+
+## Summary
+In this chapter we built a player vs. player mini-game from scratch. We *re-used* many of the functions we wrote in earlier chapters and made good use of the Drone object to create an arena in which to play the game. This has been the most complex of the new features we've added to Minecraft over the course of this book, but it's also one which is fun to play with your friends. 
+
+Playing games is fun but writing your own games can be hugely rewarding, especially when you get to see your friends play a game you created!
+
+## Conclusion
+While this brings us to the end of the book, we have only just begun to explore the world of Minecraft Plugin Development. My aim with this book was to provide a solid foundation from which to begin developing your own Minecraft Plugins. I've tried to cover all of the basics and some advanced topics, and provide examples along the way. There's still much to learn about Minecraft Plugin development but I hope this book gives you the confidence to begin creating your own Plugins.
+
+It's been a lot of fun writing this book and I hope you've enjoyed reading it and have learned something about Programming along the way. 
+
+</body></html>

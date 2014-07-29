@@ -1,0 +1,354 @@
+<html><body>
+# Chapter 15: Saving Player preferences.
+## Introduction
+In this chapter we'll learn how to load and save player preferences. We'll create a new command which lets players choose which color they would like to use for in-game chat. The color they choose will be saved so that when the player disconnects or the server is restarted, the player's choice of text color is restored. 
+
+## A day in the life of a Minecraft Plugin
+Minecraft Plugins lead a busy life behind the scenes. A typical large public server might have many Minecraft plugins installed and some or all of those plugins might be turned on or off while the server is running. All Plugins are *loaded* automatically when the server starts up and all plugins are *unloaded* automatically just before the server shuts down. During the server session, the administrator might *reload* plugins using the *reload* command which will cause all plugins to be unloaded and then loaded again, while the server is running. This is usually the best way for an administrator to add new plugins as it means the server does not have to be taken down. Plugins are executable code which add behavior and settings to the game. Plugins often have to manage *data*, player preferences, settings and so on. What happens to that data when the plugin is loaded and unloaded? This is the question we'll answer in the coming sections. 
+
+## Chat colors
+In this chapter we're going to add a new command to the game so that players can choose the color they'd like to use in chat messages. Players will be able to choose from among over a dozen colors. We want the player's choice of color to be saved so that when the server shuts down and is started up again, the same color is chosen for that player. The new command will be called */jsp chatcolor* and will support TAB-completion so that when the player hits the TAB key, a list of colors will be displayed. We've encountered the */jsp* command before in chapter 11. This command is a prefix (something which is added at the start) for new custom commands. 
+
+## TAB completion for custom commands
+One of the nice things about issuing commands at the in-game or server console prompt in Minecraft is TAB completion&mdash;the ability to have the program fill in the remaining parts of a command without you having to type the entire command yourself. You can create your own custom commands which support TAB completion quite easily in JavaScript. Let's create an example command at the in-game prompt which avails of TAB completion. This custom command will be called *jsp icecream* and will prompt the player to enter a flavor when the TAB key is hit. The first thing we need to do is say what the possible flavors can be. We'll do this by creating an array called *flavors*:
+
+    /js var flavors = ['chocolate','strawberry','vanilla'];
+
+Next we create a new function which will be executed when a player issues the command:
+  
+    /js function icecream( args, player ){ player.sendMessage('Yum ! ' + args[0] ) }
+
+And finally we create a new custom command which will allow players to issue an *icecream* command that prompts them to choose flavors:
+
+    /js command( icecream, flavors );
+
+Now try it and see what happens when you type the following and hit the TAB key:
+
+    /jsp ice
+
+Hitting the TAB key should complete the first part of the command so now your command prompt input looks like this:
+
+    /jsp icecream
+
+Now press the SPACE key and then press the TAB key once more and you'll see a list of possible flavors to choose from. You can cycle through the list of flavors by repeatedly pressing the TAB key. How did we do this? The secret is in how we created the new */jsp icecream* command using the *command()* function. The command function takes 2 parameters:
+
+1. The function which will be executed when a player issues the command. This function in turn takes 2 parameters, *args* which is an array of strings, and *player* which is the player who issued the command. The function *must* have a name as the function's name is used by the *command()* function to present a new command name for players with a prefix of 'jsp '. So while the name of the command we define is *icecream*, players must use *jsp icecream* when issuing the command.
+2. A list of possible options for the command. This is the list of strings used by Minecraft's TAB completion feature.
+
+In upcoming sections we're going to create a new command which provides a list of colors as possible options that will display when the player hits the TAB key.
+
+## Choosing Chat Color
+The color of text messages in Minecraft can be changed by using a special &#167; symbol known as the 'Section' symbol. This symbol can't be entered in Minecraft itself, it's only used internally by Minecraft and Plugin developers. There are 16 different colors you can use for chat messages, and each color must use a special *code*. For example to say "Hello" using Yellow text, you would need to put the special code `\xa7a` in front of the message. You can try this out by issuing the following command at the in-game prompt:
+
+    /js self.sendMessage('\xa7aHello');
+
+The text `\xa7` is just another way of writing the &#167; symbol in JavaScript. The first character following `\xa7` should be a number between 0 and 9 *or* a letter in the range a through f. 
+
+### How we count
+We typically count in what's called *Base 10* which means our numbers start at 0 and go all the way up to 9. If we want to write a number bigger than 9 then we add another digit on the left. So a number 475 is:
+
+* 4 times 100 +
+* 7 times 10 +
+* 5 times 1
+
+We count in base 10 because that's the numbering system the Romans used. Why did they use base 10? It might be because of how many digits we have on our hands but I don't know for sure. There are other ways to count. Base 2&mdash;also known as binary&mdash;has just two numbers 0 and 1. How would you count to 5 with just two numbers? When we reach 1 we can add a digit on the left so:
+
+*   0 in binary is equal to 0 in decimal
+*   1 in binary is equal to 1 in decimal
+*  10 in binary is equal to 2 in decimal
+*  11 in binary is equal to 3 in decimal
+* 100 in binary is equal to 4 in decimal
+* 101 in binary is equal to 5 in decimal and so on.
+
+Another base that's more commonly used by programmers is Hexadecimal or Base 16. In hexadecimal (often shortened to just 'hex') the numbers 10 through 15 are substituted with the letters a through f so the a sequence of numbers 0 through 32 looks like this:
+
+<table>
+<caption><h4> Table 5: Hexadecimal Numbers and their Decimal Equivalents    </h4></caption><tr><th>Hexadecimal</th><th>Decimal</th></tr>
+<tr><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>2</td></tr>
+<tr><td>3</td><td>3</td></tr>
+<tr><td>4</td><td>4</td></tr>
+<tr><td>5</td><td>5</td></tr>
+<tr><td>6</td><td>6</td></tr>
+<tr><td>7</td><td>7</td></tr>
+<tr><td>8</td><td>8</td></tr>
+<tr><td>9</td><td>9</td></tr>
+<tr><td>a</td><td>10</td></tr>
+<tr><td>b</td><td>11</td></tr>
+<tr><td>c</td><td>12</td></tr>
+<tr><td>d</td><td>13</td></tr>
+<tr><td>e</td><td>14</td></tr>
+<tr><td>f</td><td>15</td></tr>
+<tr><td>10</td><td>16</td></tr>
+<tr><td>11</td><td>17</td></tr>
+<tr><td>12</td><td>18</td></tr>
+<tr><td>13</td><td>19</td></tr>
+<tr><td>14</td><td>20</td></tr>
+<tr><td>15</td><td>21</td></tr>
+<tr><td>16</td><td>22</td></tr>
+<tr><td>17</td><td>23</td></tr>
+<tr><td>18</td><td>24</td></tr>
+<tr><td>19</td><td>25</td></tr>
+<tr><td>1a</td><td>26</td></tr>
+<tr><td>1b</td><td>27</td></tr>
+<tr><td>1c</td><td>28</td></tr>
+<tr><td>1d</td><td>29</td></tr>
+<tr><td>1e</td><td>30</td></tr>
+<tr><td>1f</td><td>31</td></tr>
+<tr><td>20</td><td>32</td></tr>
+<tr></tr>
+
+</table>
+
+### Character Codes
+The characters displayed in Minecraft and in other programs on your computer each have a *code* or number which the computer uses internally. The letter 'A' has the character code 65, 'B' is 66 and so on. The lowercase alphabet starts at number 97 so 'a' is character code 97, 'b' is 98 and so on. You can see a full list of characters and their codes at http://en.wikipedia.org/wiki/ISO/IEC_8859-1 .
+
+### Text colors in Minecraft.
+The special &#167; symbol has the character code 167 and Minecraft uses this special character at the start of a String to mean the String should be displayed in a certain color. The exact color is one of 16 possible colors listed below:
+
+<table>
+<caption><h4> Table 6: Text Colors and their Hexadecimal equivalent http://minecraft.gamepedia.com/Formatting_codes</h4></caption><tr><th>Color</th><th>Hex Code</th></tr>
+<tr><td>Black</td><td>0</td></tr>
+<tr><td>Dark Blue</td><td>1</td></tr>
+<tr><td>Dark Green</td><td>2</td></tr>
+<tr><td>Dark Aqua</td><td>3</td></tr>
+<tr><td>Dark Red</td><td>4</td></tr>
+<tr><td>Dark Purple</td><td>5</td></tr>
+<tr><td>Gold</td><td>6</td></tr>
+<tr><td>Gray</td><td>7</td></tr>
+<tr><td>Dark Gray</td><td>8</td></tr>
+<tr><td>Blue</td><td>9</td></tr>
+<tr><td>Green</td><td>a</td></tr>
+<tr><td>Aqua</td><td>b</td></tr>
+<tr><td>Red</td><td>c</td></tr>
+<tr><td>Light Purple</td><td>d</td></tr>
+<tr><td>Yellow</td><td>e</td></tr>
+<tr><td>White</td><td>f</td></tr>
+
+</table>
+
+In the first part of this chapter we'll create a module which will be used to provide a list of color names and a *colorize()* function which will add color to any chat message. In your editor, create a new file called *textcolors.js* in the *plugins/scriptcraft/modules* folder and type in the following code:
+
+<caption>Listing 15.1: Text Colors Module</caption>
+
+    var names = [
+      'black',
+      'darkblue',
+      'darkgreen', 
+      'darkaqua', 
+      'darkred',
+      'darkpurple', 
+      'gold', 
+      'gray', 
+      'darkgray', 
+      'blue',
+      'green', 
+      'aqua', 
+      'red', 
+      'lightpurple', 
+      'yellow' , 
+      'white'
+    ];
+    
+    function colorize( color, text ) {
+      var index = names.indexOf( color );
+      if (index >= 0){
+        return '\xa7' + index.toString(16) + text;
+      } else {
+        return text;
+      }
+    }
+    
+    exports.names = names;
+    exports.colorize = colorize;
+
+Once you've saved this file and reloaded the plugin using `js refresh()`, test it by issuing the following commands at the in-game prompt to display a message in gold:
+
+    /js var textcolors = require('textcolors');
+    /js var goldText = textcolors.colorize( 'gold', 'I am gold!' );
+    /js self.sendMessage(goldText);
+
+[AUTHOR NOTE: images/chapter-15/gold.png]
+
+![](images/chapter-15/gold.png)
+
+<caption>Figure 15.1: Gold Text</caption>
+
+
+The module in listing 15.1 exports the *names* array and the *colorize()* function for use by others. The *names* array will be used later to provide hints to players who want to change their chat color using TAB completion. The *colorize()* function will take a color name and text and add the necessary color codes to the start of the text so that it will be displayed in color in the chat window. It does this by searching for the color in the *names* array using the *Array.indexOf()* method which will return the position of the matching color in the array. For example, names.indexOf('darkgreen') would return 2. Remember: Arrays begin at index 0 not 1, so 'black' is at index 0, 'darkblue' is at index 1 and so on. The *Array.indexOf()* method will return -1 if the item is not found in the array. If the *colorize()* function is passed a color which does not exist in the *names* array, then the text is unchanged&mdash;no color code will be added to the text.
+
+The index of the color is important because that number is converted to a hexadecimal value using the *Number.toString(16)* method. This value along with the special &#167; symbol which is written as `\xa7` combine to form the color code which is inserted in front of the original text. The *colorize()* function is a perfect example of how functions can be used to package up tricky code which you don't want to have to write more than once. It's much easier to simply write `colorize('gold','I am gold!')` than to write `\xa76I am gold!'`. Having to memorize all 16 color codes and the special `\xa7` prefix code every time you wanted to write colored text would be difficult. That's why we wrap up this code inside an easy to use function and *export* it so other modules and plugins can use it. 
+
+The next steps in writing the Chat Color plugin are:
+
+1. Provide a new command so players can choose their color and ...
+2. Add an event handler so that chat messages are colored according to a player's preferences.
+
+In your editor, create a new file called *chatcolor.js* in the *plugins/scriptcraft/plugins* folder and type the following:
+
+<caption>Listing 15.2: Setting and Applying Player Chat Color Preferences</caption>
+
+    var textcolors = require('textcolors');
+    var preferences = { };
+    
+    function chatcolor ( args, player ) {
+      var color = args[0];
+      preferences[ player.name ] = color;
+    }
+    command( chatcolor, textcolors.names );
+    
+    function onChat( event ) { 
+      var player = event.player;
+      var playerChatColor = preferences[ player.name ];
+      if ( playerChatColor ) {
+        event.message = textcolors.colorize( playerChatColor, event.message );
+      }
+    }
+    events.asyncPlayerChat( onChat );
+
+In this plugin we use the *textcolors* module we created earlier, and we create a new *preferences* variable which is an empty object `{ }`. This *preferences* object will be used to store each player's preferred color. Let's say we have a server with 3 players who have chosen custom chat colors. In such a scenario the *preferences* object might look something like this:
+
+    {
+       "steve1901": "blue",
+       "jane1908": "gold",
+       "john1911": "red"
+    }
+
+... where "steve1901" is the name of a player and "blue" is his chosen chat color, "jane1908" is the name of another player and her chosen chat color is "gold" and so on. The *preferences* object is a look-up table of player names and their colors. If I wanted to find out what player jane1908's chosen color was, I'd do so using the expression `preferences["jane1908"]` which would return "gold".
+
+The *chatcolor()* function is a *callback* which will be called when a player issues the `jsp chatcolor` command. The name of the player who issued the command and the color they chose are stored in the *preferences* object using the statement:
+
+    preferences[ player.name ] = color;
+
+We can add any property we like to an object using the `[]` square brackets and putting the property name inside the square brackets. The property name does not have to be an object literal like `'age'` or `'address'`, it can be any JavaScript expression which evaluates to a string. So in this case, whatever the player's name is becomes a new property of the preferences object&mdash;a key by which the preferences can be looked up. 
+
+The *command()* function creates a new `/jsp chatcolor` command which will invoke the *chatcolor()* function and which will provide the *textcolors.names* array as a list of color names as hints when the player hits the TAB key. 
+
+The first section of listing 15.2 up to and including the call to *command()* sets up the preferences and a command to set color preferences. The next section of the module is concerned with what happens when a player chats in Minecraft and ensures that player color preferences are applied to any chat messages:
+
+    function onChat( event ) { 
+      var player = event.player;
+      var playerChatColor = preferences[ player.name ];
+      if ( playerChatColor ) {
+        event.message = textcolors.colorize( playerChatColor, event.message );
+      }
+    }
+    events.asyncPlayerChat( onChat );
+
+The *onChat()* function is another callback function. This function is invoked whenever a player chats in the game. The function gets the player who is chatting, checks to see if they have a preferred color and if they *do* have a preferred color, changes the event's message property (the .message property of the event is the text of the message which the player is about to send) by adding the player's chosen color using the *textcolors.colorize()* function we wrote earlier.
+
+Once you've saved the *chatcolor.js* file, reload the plugins using */js refresh()* or */reload* and at the in-game prompt type:
+
+    /jsp chatcolor
+
+Press the SPACE key then the TAB key and you should see a list of possible colors to choose from. You can cycle through the list of colors by repeatedly pressing TAB. Choose a color, then press T to begin chatting. Type a message and the message should appear in the color you've chosen.
+
+Cool! You've just created a useful new command which a lot of players are going to like. Plugins like the one you've just created are very popular on Multiplayer servers. Try changing the chosen color a few times using the `/jsp chatcolor` command to make sure all of the colors work.
+
+What happens if you issue the `/reload` command?
+
+Right now, our plugin does not save the chat color preferences so when the plugin is reloaded or the server shuts down, the color preferences for each player are lost. The player's chat colors will revert to the default color. It would be nice if it was possible to load and save preferences for our plugin so color preferences weren't lost when the server stops. Not only is it possible, it's super easy too!
+
+## Plugin Data
+For any Minecraft JavaScript Plugin we want to be able to load plugin data when the plugin is loaded and automatically save plugin data when the plugin coded is unloaded. That way we can be sure that plugin-specific data is never lost when the server is shut down. Let's look first at loading data.
+
+### Loading Plugin Data
+Scriptcraft provides a *persist()* function which handles saving and loading of data. Let's take a look at the *chatcolor.js* file again. The only data in that file we'd like to *persist* is the *preferences* object declared near the top of the file and assigned a value of `{ }` which means it is an empty object. 
+
+    var preferences = { };
+
+The above code *initializes* the plugin's data to an empty object. What we'd like to do instead is:
+
+* Check to see if there is saved data in a file.
+* Load the data from the file if a save file is present or...
+* Initialize the data to a default value defined by the plugin.
+
+This is where the *persist()* function helps&mdash;it performs all of the above functions (and more). To understand how to call the *persist()* function, let's look at an example. Open up the *chatcolor.js* function in your editor and change the following line:
+
+    var preferences = { };
+
+... to ...
+
+    var preferences = persist('chatcolor-prefs', { } );
+	
+The *persist()* function takes up to 3 parameters but only the first parameter is required. The parameters are:
+
+1. A unique filename to use when loading or saving data. The filename should be unique so avoid using generic names like 'data' or 'preferences'. In the example above we use the name 'chatcolor-prefs'. 
+
+2. An object which will be used as the initial value for the data. If no object is provided then the default value is `{ }` (empty object). 
+
+3. A write flag. The write flag indicates whether or not the data should be written to the file right now. The write flag should be *true* or *false*. If no write flag parameter is provided then the default is *false*, meaning data will be read not written.
+
+The *persist()* function returns an object which will be either of two things:
+
+1. If the file exists: data loaded from the file merged with the data provided in the 2nd parameter or... 
+2. If the file does not exist: The data in the 2nd parameter.
+
+The statement `var preferences = persist('chatcolor-prefs', { } )` in plain English says: Set the preferences variable to whatever is in the 'chatcolor_prefs' file or an empty object if there's no file.
+
+Save the *chatcolor.js* file and reload your plugins using the `/reload` command. At this point you'll notice that the chat color preferences still have not been preserved. Change your color preferences at the in-game prompt using the following command:
+
+    /jsp chatcolor yellow
+	
+Type a message or two to verify the chat messages appear in the chosen color then issue the */reload* command and type another message. You'll notice that the chat color preferences have been preserved. 
+
+### Saving Plugin Data
+At this point you might be wondering how chat color preferences were preserved after the server plugins were unloaded and reloaded. The *persist()* function in addition to loading data, marks data for saving when the plugin is unloaded. This means that any data returned by the *persist()* function is *automatically* saved when the plugin is unloaded. As a JavaScript plugin developer you don't need to worry about saving your plugin's data because it will be saved automatically once you load it using the *persist()* function. Any changes you make to the object returned by *persist()* will be saved. You can verify this at the in-game prompt by trying the following commands:
+
+    /js var test = persist('testpers', {});
+    /js test.name = 'Your name here';
+    /js refresh();
+
+The *refresh()* function will cause ScriptCraft to reload. Now issue the following commands:
+
+    /js var test = persist('testpers', {});
+    /js test.name
+
+The name you entered earlier should display. It's important to note that only changes to the object returned by *persist()* will be saved. In the above example, if you were to later reassign the *test* variable to another object and make changes then those changes would not be saved. The following code *would not work*:
+
+    /js var test = persist('testpers', {});
+    /js test = { name: 'Your name here' }; // WARNING: changes to test will not be saved.
+
+You may be wondering 'Where is the plugin data saved to?'. Let's take a look...
+
+## Saved Data
+ScriptCraft saves plugin data in the *plugins/scriptcraft/data* folder. If you open the folder in your editor you'll notice there's now a *chatcolor-prefs-store.json* file already present. Open this file in your editor and you'll see something like this:
+
+    {
+      "walterh": "blue"
+    }
+
+The *.json* at the end of the filename means this is a JSON file. JSON is short for **J**ava**S**cript **O**bject **N**otation and is just a way to load, store and send JavaScript data. When you call *persist()* it takes the filename parameter (for example: 'chatcolor-prefs') and appends '-store.json' to the filename and saves the file. The data is saved in JSON format because that's the easiest way for JavaScript to store and load data. 
+
+### More on JSON
+When we create a new object in JavaScript with name and value pairs we can do so like this:
+
+    var player = { name: "steve" }
+	
+... or like this:
+
+    var player = { "name": "steve" }
+
+That is; we can do so with or without quotes around the *name* property. However, when saving data, the built-in JSON module will write out *player* like this:
+
+    { "name": "steve" }
+	
+... adding double-quotes around each of the object's keys. The built-in JSON module has 2 important functions which are used by ScriptCraft's *persist()* function:
+
+1. JSON.parse(string) Takes a string and tries to convert it to a JavaScript object. For example: `JSON.parse("[9,5,3]")` will take the string "[9,5,3]" and return an array with 3 items: 9, 5 and 3.
+2. JSON.stringify(object) Does the opposite of JSON.parse(). It takes a JavaScript object and converts it to a string so for example: `JSON.stringify([ 9, 5, 3])` takes an array and returns a string "[9,5,3]".
+
+If the *JSON.parse()* function encounters an object key without surrounding quotes it complains and refuses to try to convert the string to an object.
+
+## JSON, Persistence and Java Objects
+If the data you want to save includes references to Java objects then saving and loading of data will not work using the standard *persist()* function which is provided by ScriptCraft. The *persist()* function uses JSON's *stringify()* and *parse()* functions to save and load data, and these functions *only work with native JavaScript objects*. If you want to save Java objects, consider instead saving a unique identifier for that object. For example, instead of storing the *org.bukkit.entity.Player* object, store only the player's name. If you want to save a *Location* object then consider using the *utils* module's *locationToJSON()* and *locationFromJSON()* pair of functions for converting the *Location* Java object to and from JSON:
+
+    var utils = require('utils');
+    var locationAsJSON = utils.locationToJSON( player.location ); // convert from Java to JSON
+    var locationObject = utils.locationFromJSON ( locationAsJSON ); // convert from JSON to Java
+
+## Summary
+In this chapter we learned about providing TAB-completion hints for your own custom commands, and persistence&mdash;saving and restoring state. Persistence is a useful feature to have in your own plugins. Many plugins allow players to set preferences and it's useful to be able to save and restore player preferences and other settings when your plugin is loaded and unloaded.
+
+</body></html>

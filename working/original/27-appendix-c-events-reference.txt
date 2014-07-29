@@ -1,0 +1,207 @@
+<html><body>
+# Appendix C: Events Reference
+The following tables list all of the *events* module's functions which can be used to register event listeners. Alongside each function, the equivalent Java Event type is shown. You should refer to the Bukkit API Reference documentation at http://jd.bukkit.org/rb/apidocs/ for details about each Java Event type. Event types fall into a number of categories each of which are listed below.
+
+<h3>Block Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.blockBreak()</td><td>org.bukkit.event.block.BlockBreakEvent</td>
+<tr><td>events.blockBurn()</td><td>org.bukkit.event.block.BlockBurnEvent</td>
+<tr><td>events.blockCanBuild()</td><td>org.bukkit.event.block.BlockCanBuildEvent</td>
+<tr><td>events.blockDamage()</td><td>org.bukkit.event.block.BlockDamageEvent</td>
+<tr><td>events.blockDispense()</td><td>org.bukkit.event.block.BlockDispenseEvent</td>
+<tr><td>events.blockExp()</td><td>org.bukkit.event.block.BlockExpEvent</td>
+<tr><td>events.blockFade()</td><td>org.bukkit.event.block.BlockFadeEvent</td>
+<tr><td>events.blockForm()</td><td>org.bukkit.event.block.BlockFormEvent</td>
+<tr><td>events.blockFromTo()</td><td>org.bukkit.event.block.BlockFromToEvent</td>
+<tr><td>events.blockGrow()</td><td>org.bukkit.event.block.BlockGrowEvent</td>
+<tr><td>events.blockIgnite()</td><td>org.bukkit.event.block.BlockIgniteEvent</td>
+<tr><td>events.blockMultiPlace()</td><td>org.bukkit.event.block.BlockMultiPlaceEvent</td>
+<tr><td>events.blockPhysics()</td><td>org.bukkit.event.block.BlockPhysicsEvent</td>
+<tr><td>events.blockPistonExtend()</td><td>org.bukkit.event.block.BlockPistonExtendEvent</td>
+<tr><td>events.blockPistonRetract()</td><td>org.bukkit.event.block.BlockPistonRetractEvent</td>
+<tr><td>events.blockPlace()</td><td>org.bukkit.event.block.BlockPlaceEvent</td>
+<tr><td>events.blockRedstone()</td><td>org.bukkit.event.block.BlockRedstoneEvent</td>
+<tr><td>events.blockSpread()</td><td>org.bukkit.event.block.BlockSpreadEvent</td>
+<tr><td>events.entityBlockForm()</td><td>org.bukkit.event.block.EntityBlockFormEvent</td>
+<tr><td>events.leavesDecay()</td><td>org.bukkit.event.block.LeavesDecayEvent</td>
+<tr><td>events.notePlay()</td><td>org.bukkit.event.block.NotePlayEvent</td>
+<tr><td>events.signChange()</td><td>org.bukkit.event.block.SignChangeEvent</td>
+</table>
+<h3>Enchantment Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.enchantItem()</td><td>org.bukkit.event.enchantment.EnchantItemEvent</td>
+<tr><td>events.prepareItemEnchant()</td><td>org.bukkit.event.enchantment.PrepareItemEnchantEvent</td>
+</table>
+<h3>Entity Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.creatureSpawn()</td><td>org.bukkit.event.entity.CreatureSpawnEvent</td>
+<tr><td>events.creeperPower()</td><td>org.bukkit.event.entity.CreeperPowerEvent</td>
+<tr><td>events.entityBreakDoor()</td><td>org.bukkit.event.entity.EntityBreakDoorEvent</td>
+<tr><td>events.entityChangeBlock()</td><td>org.bukkit.event.entity.EntityChangeBlockEvent</td>
+<tr><td>events.entityCombustByBlock()</td><td>org.bukkit.event.entity.EntityCombustByBlockEvent</td>
+<tr><td>events.entityCombustByEntity()</td><td>org.bukkit.event.entity.EntityCombustByEntityEvent</td>
+<tr><td>events.entityCombust()</td><td>org.bukkit.event.entity.EntityCombustEvent</td>
+<tr><td>events.entityCreatePortal()</td><td>org.bukkit.event.entity.EntityCreatePortalEvent</td>
+<tr><td>events.entityDamageByBlock()</td><td>org.bukkit.event.entity.EntityDamageByBlockEvent</td>
+<tr><td>events.entityDamageByEntity()</td><td>org.bukkit.event.entity.EntityDamageByEntityEvent</td>
+<tr><td>events.entityDamage()</td><td>org.bukkit.event.entity.EntityDamageEvent</td>
+<tr><td>events.entityDeath()</td><td>org.bukkit.event.entity.EntityDeathEvent</td>
+<tr><td>events.entityExplode()</td><td>org.bukkit.event.entity.EntityExplodeEvent</td>
+<tr><td>events.entityInteract()</td><td>org.bukkit.event.entity.EntityInteractEvent</td>
+<tr><td>events.entityPortalEnter()</td><td>org.bukkit.event.entity.EntityPortalEnterEvent</td>
+<tr><td>events.entityPortal()</td><td>org.bukkit.event.entity.EntityPortalEvent</td>
+<tr><td>events.entityPortalExit()</td><td>org.bukkit.event.entity.EntityPortalExitEvent</td>
+<tr><td>events.entityRegainHealth()</td><td>org.bukkit.event.entity.EntityRegainHealthEvent</td>
+<tr><td>events.entityShootBow()</td><td>org.bukkit.event.entity.EntityShootBowEvent</td>
+<tr><td>events.entityTame()</td><td>org.bukkit.event.entity.EntityTameEvent</td>
+<tr><td>events.entityTarget()</td><td>org.bukkit.event.entity.EntityTargetEvent</td>
+<tr><td>events.entityTargetLivingEntity()</td><td>org.bukkit.event.entity.EntityTargetLivingEntityEvent</td>
+<tr><td>events.entityTeleport()</td><td>org.bukkit.event.entity.EntityTeleportEvent</td>
+<tr><td>events.entityUnleash()</td><td>org.bukkit.event.entity.EntityUnleashEvent</td>
+<tr><td>events.expBottle()</td><td>org.bukkit.event.entity.ExpBottleEvent</td>
+<tr><td>events.explosionPrime()</td><td>org.bukkit.event.entity.ExplosionPrimeEvent</td>
+<tr><td>events.foodLevelChange()</td><td>org.bukkit.event.entity.FoodLevelChangeEvent</td>
+<tr><td>events.horseJump()</td><td>org.bukkit.event.entity.HorseJumpEvent</td>
+<tr><td>events.itemDespawn()</td><td>org.bukkit.event.entity.ItemDespawnEvent</td>
+<tr><td>events.itemSpawn()</td><td>org.bukkit.event.entity.ItemSpawnEvent</td>
+<tr><td>events.pigZap()</td><td>org.bukkit.event.entity.PigZapEvent</td>
+<tr><td>events.playerDeath()</td><td>org.bukkit.event.entity.PlayerDeathEvent</td>
+<tr><td>events.playerLeashEntity()</td><td>org.bukkit.event.entity.PlayerLeashEntityEvent</td>
+<tr><td>events.potionSplash()</td><td>org.bukkit.event.entity.PotionSplashEvent</td>
+<tr><td>events.projectileHit()</td><td>org.bukkit.event.entity.ProjectileHitEvent</td>
+<tr><td>events.projectileLaunch()</td><td>org.bukkit.event.entity.ProjectileLaunchEvent</td>
+<tr><td>events.sheepDyeWool()</td><td>org.bukkit.event.entity.SheepDyeWoolEvent</td>
+<tr><td>events.sheepRegrowWool()</td><td>org.bukkit.event.entity.SheepRegrowWoolEvent</td>
+<tr><td>events.slimeSplit()</td><td>org.bukkit.event.entity.SlimeSplitEvent</td>
+</table>
+<h3>Hanging Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.hangingBreakByEntity()</td><td>org.bukkit.event.hanging.HangingBreakByEntityEvent</td>
+<tr><td>events.hangingBreak()</td><td>org.bukkit.event.hanging.HangingBreakEvent</td>
+<tr><td>events.hangingPlace()</td><td>org.bukkit.event.hanging.HangingPlaceEvent</td>
+</table>
+<h3>Inventory Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.brew()</td><td>org.bukkit.event.inventory.BrewEvent</td>
+<tr><td>events.craftItem()</td><td>org.bukkit.event.inventory.CraftItemEvent</td>
+<tr><td>events.furnaceBurn()</td><td>org.bukkit.event.inventory.FurnaceBurnEvent</td>
+<tr><td>events.furnaceExtract()</td><td>org.bukkit.event.inventory.FurnaceExtractEvent</td>
+<tr><td>events.furnaceSmelt()</td><td>org.bukkit.event.inventory.FurnaceSmeltEvent</td>
+<tr><td>events.inventoryClick()</td><td>org.bukkit.event.inventory.InventoryClickEvent</td>
+<tr><td>events.inventoryClose()</td><td>org.bukkit.event.inventory.InventoryCloseEvent</td>
+<tr><td>events.inventoryCreative()</td><td>org.bukkit.event.inventory.InventoryCreativeEvent</td>
+<tr><td>events.inventoryDrag()</td><td>org.bukkit.event.inventory.InventoryDragEvent</td>
+<tr><td>events.inventory()</td><td>org.bukkit.event.inventory.InventoryEvent</td>
+<tr><td>events.inventoryMoveItem()</td><td>org.bukkit.event.inventory.InventoryMoveItemEvent</td>
+<tr><td>events.inventoryOpen()</td><td>org.bukkit.event.inventory.InventoryOpenEvent</td>
+<tr><td>events.inventoryPickupItem()</td><td>org.bukkit.event.inventory.InventoryPickupItemEvent</td>
+<tr><td>events.prepareItemCraft()</td><td>org.bukkit.event.inventory.PrepareItemCraftEvent</td>
+</table>
+<h3>Painting Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.paintingBreakByEntity()</td><td>org.bukkit.event.painting.PaintingBreakByEntityEvent</td>
+<tr><td>events.paintingBreak()</td><td>org.bukkit.event.painting.PaintingBreakEvent</td>
+<tr><td>events.paintingPlace()</td><td>org.bukkit.event.painting.PaintingPlaceEvent</td>
+</table>
+<h3>Player Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.asyncPlayerChat()</td><td>org.bukkit.event.player.AsyncPlayerChatEvent</td>
+<tr><td>events.asyncPlayerPreLogin()</td><td>org.bukkit.event.player.AsyncPlayerPreLoginEvent</td>
+<tr><td>events.playerAchievementAwarded()</td><td>org.bukkit.event.player.PlayerAchievementAwardedEvent</td>
+<tr><td>events.playerAnimation()</td><td>org.bukkit.event.player.PlayerAnimationEvent</td>
+<tr><td>events.playerBedEnter()</td><td>org.bukkit.event.player.PlayerBedEnterEvent</td>
+<tr><td>events.playerBedLeave()</td><td>org.bukkit.event.player.PlayerBedLeaveEvent</td>
+<tr><td>events.playerBucketEmpty()</td><td>org.bukkit.event.player.PlayerBucketEmptyEvent</td>
+<tr><td>events.playerBucketFill()</td><td>org.bukkit.event.player.PlayerBucketFillEvent</td>
+<tr><td>events.playerChangedWorld()</td><td>org.bukkit.event.player.PlayerChangedWorldEvent</td>
+<tr><td>events.playerChat()</td><td>org.bukkit.event.player.PlayerChatEvent</td>
+<tr><td>events.playerChatTabComplete()</td><td>org.bukkit.event.player.PlayerChatTabCompleteEvent</td>
+<tr><td>events.playerCommandPreprocess()</td><td>org.bukkit.event.player.PlayerCommandPreprocessEvent</td>
+<tr><td>events.playerDropItem()</td><td>org.bukkit.event.player.PlayerDropItemEvent</td>
+<tr><td>events.playerEditBook()</td><td>org.bukkit.event.player.PlayerEditBookEvent</td>
+<tr><td>events.playerEggThrow()</td><td>org.bukkit.event.player.PlayerEggThrowEvent</td>
+<tr><td>events.playerExpChange()</td><td>org.bukkit.event.player.PlayerExpChangeEvent</td>
+<tr><td>events.playerFish()</td><td>org.bukkit.event.player.PlayerFishEvent</td>
+<tr><td>events.playerGameModeChange()</td><td>org.bukkit.event.player.PlayerGameModeChangeEvent</td>
+<tr><td>events.playerInteractEntity()</td><td>org.bukkit.event.player.PlayerInteractEntityEvent</td>
+<tr><td>events.playerInteract()</td><td>org.bukkit.event.player.PlayerInteractEvent</td>
+<tr><td>events.playerInventory()</td><td>org.bukkit.event.player.PlayerInventoryEvent</td>
+<tr><td>events.playerItemBreak()</td><td>org.bukkit.event.player.PlayerItemBreakEvent</td>
+<tr><td>events.playerItemConsume()</td><td>org.bukkit.event.player.PlayerItemConsumeEvent</td>
+<tr><td>events.playerItemHeld()</td><td>org.bukkit.event.player.PlayerItemHeldEvent</td>
+<tr><td>events.playerJoin()</td><td>org.bukkit.event.player.PlayerJoinEvent</td>
+<tr><td>events.playerKick()</td><td>org.bukkit.event.player.PlayerKickEvent</td>
+<tr><td>events.playerLevelChange()</td><td>org.bukkit.event.player.PlayerLevelChangeEvent</td>
+<tr><td>events.playerLogin()</td><td>org.bukkit.event.player.PlayerLoginEvent</td>
+<tr><td>events.playerMove()</td><td>org.bukkit.event.player.PlayerMoveEvent</td>
+<tr><td>events.playerPickupItem()</td><td>org.bukkit.event.player.PlayerPickupItemEvent</td>
+<tr><td>events.playerPortal()</td><td>org.bukkit.event.player.PlayerPortalEvent</td>
+<tr><td>events.playerPreLogin()</td><td>org.bukkit.event.player.PlayerPreLoginEvent</td>
+<tr><td>events.playerQuit()</td><td>org.bukkit.event.player.PlayerQuitEvent</td>
+<tr><td>events.playerRegisterChannel()</td><td>org.bukkit.event.player.PlayerRegisterChannelEvent</td>
+<tr><td>events.playerRespawn()</td><td>org.bukkit.event.player.PlayerRespawnEvent</td>
+<tr><td>events.playerShearEntity()</td><td>org.bukkit.event.player.PlayerShearEntityEvent</td>
+<tr><td>events.playerStatisticIncrement()</td><td>org.bukkit.event.player.PlayerStatisticIncrementEvent</td>
+<tr><td>events.playerTeleport()</td><td>org.bukkit.event.player.PlayerTeleportEvent</td>
+<tr><td>events.playerToggleFlight()</td><td>org.bukkit.event.player.PlayerToggleFlightEvent</td>
+<tr><td>events.playerToggleSneak()</td><td>org.bukkit.event.player.PlayerToggleSneakEvent</td>
+<tr><td>events.playerToggleSprint()</td><td>org.bukkit.event.player.PlayerToggleSprintEvent</td>
+<tr><td>events.playerUnleashEntity()</td><td>org.bukkit.event.player.PlayerUnleashEntityEvent</td>
+<tr><td>events.playerUnregisterChannel()</td><td>org.bukkit.event.player.PlayerUnregisterChannelEvent</td>
+<tr><td>events.playerVelocity()</td><td>org.bukkit.event.player.PlayerVelocityEvent</td>
+</table>
+<h3>Server Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.mapInitialize()</td><td>org.bukkit.event.server.MapInitializeEvent</td>
+<tr><td>events.pluginDisable()</td><td>org.bukkit.event.server.PluginDisableEvent</td>
+<tr><td>events.pluginEnable()</td><td>org.bukkit.event.server.PluginEnableEvent</td>
+<tr><td>events.remoteServerCommand()</td><td>org.bukkit.event.server.RemoteServerCommandEvent</td>
+<tr><td>events.serverCommand()</td><td>org.bukkit.event.server.ServerCommandEvent</td>
+<tr><td>events.serverListPing()</td><td>org.bukkit.event.server.ServerListPingEvent</td>
+<tr><td>events.serviceRegister()</td><td>org.bukkit.event.server.ServiceRegisterEvent</td>
+<tr><td>events.serviceUnregister()</td><td>org.bukkit.event.server.ServiceUnregisterEvent</td>
+</table>
+<h3>Vehicle Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.vehicleBlockCollision()</td><td>org.bukkit.event.vehicle.VehicleBlockCollisionEvent</td>
+<tr><td>events.vehicleCreate()</td><td>org.bukkit.event.vehicle.VehicleCreateEvent</td>
+<tr><td>events.vehicleDamage()</td><td>org.bukkit.event.vehicle.VehicleDamageEvent</td>
+<tr><td>events.vehicleDestroy()</td><td>org.bukkit.event.vehicle.VehicleDestroyEvent</td>
+<tr><td>events.vehicleEnter()</td><td>org.bukkit.event.vehicle.VehicleEnterEvent</td>
+<tr><td>events.vehicleEntityCollision()</td><td>org.bukkit.event.vehicle.VehicleEntityCollisionEvent</td>
+<tr><td>events.vehicleExit()</td><td>org.bukkit.event.vehicle.VehicleExitEvent</td>
+<tr><td>events.vehicleMove()</td><td>org.bukkit.event.vehicle.VehicleMoveEvent</td>
+<tr><td>events.vehicleUpdate()</td><td>org.bukkit.event.vehicle.VehicleUpdateEvent</td>
+</table>
+<h3>Weather Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.lightningStrike()</td><td>org.bukkit.event.weather.LightningStrikeEvent</td>
+<tr><td>events.thunderChange()</td><td>org.bukkit.event.weather.ThunderChangeEvent</td>
+<tr><td>events.weatherChange()</td><td>org.bukkit.event.weather.WeatherChangeEvent</td>
+</table>
+<h3>World Events</h3>
+<table>
+<tr><th>Function</th><th>Event type</th></tr>
+<tr><td>events.chunkLoad()</td><td>org.bukkit.event.world.ChunkLoadEvent</td>
+<tr><td>events.chunkPopulate()</td><td>org.bukkit.event.world.ChunkPopulateEvent</td>
+<tr><td>events.chunkUnload()</td><td>org.bukkit.event.world.ChunkUnloadEvent</td>
+<tr><td>events.portalCreate()</td><td>org.bukkit.event.world.PortalCreateEvent</td>
+<tr><td>events.spawnChange()</td><td>org.bukkit.event.world.SpawnChangeEvent</td>
+<tr><td>events.structureGrow()</td><td>org.bukkit.event.world.StructureGrowEvent</td>
+<tr><td>events.worldInit()</td><td>org.bukkit.event.world.WorldInitEvent</td>
+<tr><td>events.worldLoad()</td><td>org.bukkit.event.world.WorldLoadEvent</td>
+<tr><td>events.worldSave()</td><td>org.bukkit.event.world.WorldSaveEvent</td>
+<tr><td>events.worldUnload()</td><td>org.bukkit.event.world.WorldUnloadEvent</td>
+</table>
+
+</body></html>

@@ -52,18 +52,19 @@ The JavaScript programming Language is a simple language to get started with, bu
 When I created ScriptCraft in 2012, there was no one true way to write Minecraft plugins because there was no official API provided by Mojang. At the time of writing (April 2014), Mojang has announced an upcoming official way to write Minecraft plugins using the Plugin API. The Plugin API will provide a standard way for plugin developers to extend the Minecraft game. There is still no official release date for the Plugin API, but I'll be watching closely and will make any necessary changes to ScriptCraft when the API is released.
  
 
-# Part I A Modding Workbench
+# Part I Building a Modding Workbench
 
 ![](images/Crafting_Table.png "")
 
+
 ## Overview
-Welcome to the exciting world of Minecraft Plugin Development. In this first section of the book I'll introduce you to the tools you'll need to start programming. In Minecraft, you need to first create a Workbench (also sometimes called a Crafting Table) before you can craft more sophisticated tools. So too in real life we'll need to first gather some resources and setup a work area where we can create sophisticated Minecraft plugins. This first section describes the resources you'll need, how to get them and how to setup your 'modding workbench'. All of the resource you'll need are freely available online. The ingredients you'll need to construct your modding workbench are:
+Welcome to the exciting world of Minecraft plugin development. In this first section of the book, I'll introduce you to the tools you'll need to start programming. In Minecraft, you need to first create a *workbench* (also sometimes called a *crafting table*) before you can craft more sophisticated tools. So too in real life you'll need to first gather some resources and setup a work area where you can create sophisticated Minecraft plugins. This part of the book describes the resources you'll need, how to get them, and how to set up your "modding workbench." All of the resource you'll need are freely available online. The ingredients you'll need to construct your modding workbench are as follows:
 
- * CraftBukkit : A freely-available open-source Minecraft Server.
- * ScriptCraft : A Plugin for CraftBukkit.
- * gedit, TextWrangler, or any other text editor suitable for programming.
+ * CraftBukkit: A freely available open source Minecraft server
+ * ScriptCraft: A plugin for CraftBukkit
+ * A text editor: gedit, TextWrangler, or any other text editor suitable for programming
 
-The following chapters will show you how to install and setup each of the above.
+The following chapters will show you how to install and set up each of these.
 
 ## @@nextChapter{chapter-01}: Running your own Minecraft server
 ### Introduction

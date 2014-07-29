@@ -1,6 +1,7 @@
 <html><body>
-# Chapter 3: A JavaScript Command Prompt
+# Chapter 3: Exploring JavaScript In Minecraft
 [AU: again, can we add a verb to the title to make this more active and to tell what we're doing? Developing, Creating, Using, Installing, etc?] 
+[WALTER: Changed chapter title]
 
 Once you've installed ScriptCraft, you can use the `js` command to evaluate JavaScript code. The `js` command will try to evaluate any of the text that follows it as JavaScript. You must enter a space between the `js` and the JavaScript you want to evaluate. The `js` command will evaluate the JavaScript and print out the result of the expression. So if you type `js 2 + 7`, the `js` command will take `2 + 7`, will try to evaluate it, and, if it can, will print the result. Let's practice with a few simple JavaScript expressions.
 
@@ -42,6 +43,8 @@ Notice that I use *two* `=` symbols, not just a single one, and that's very impo
 
 ## Variables
 [AU: all headings need to be followed by text. can you introduce this main Variables section with a sentence or two here?]
+[WALTER: See below]
+Variables in JavaScript provide a way to give names to numbers and other types of Data so that they can be easily remembered, retrieved and worked with.
 
 ### Creating Variables
 ![](images/chapter-03/hearts.png)
@@ -120,20 +123,21 @@ In JavaScript, a piece of text is also called a *String*. In Minecraft a *String
     
 * `js "123"`
 
-AU: above you capitalize String and in the next paragraph you start to lowercase it. which do you prefer to treat it as?
+[AU: above you capitalize String and in the next paragraph you start to lowercase it. which do you prefer to treat it as?]
+[WALTER: Keep it uppercase]
 
-That last one might surprise you. JavaScript treats anything between quotes as a string even if it's a number! In our first string example `js healthMessage = 'You have ' + hearts + ' health remaining'`, I used the `+` operator to add strings together. The `+` operator can be used to add numbers or strings. When used to add strings, the `+` operator behaves differently. Adding Strings in JavaScript is also called *Concatenation*. You concatenate two or more strings together to form bigger, longer strings. This is a technique you will use quite often in programming Minecraft plugins when you want to display information to players. 
+That last one might surprise you. JavaScript treats anything between quotes as a String even if it's a number! In our first String example `js healthMessage = 'You have ' + hearts + ' health remaining'`, I used the `+` operator to add Strings together. The `+` operator can be used to add numbers or Strings. When used to add Strings, the `+` operator behaves differently. Adding Strings in JavaScript is also called *Concatenation*. You concatenate two or more Strings together to form bigger, longer Strings. This is a technique you will use quite often in programming Minecraft plugins when you want to display information to players. 
 
-The letters, numbers, and other symbols that form a string are known as *characters*. A *character* is any single letter, number, or symbol. 'a','B','9', '-', '.', '/', and ':' are all examples of characters.
+The letters, numbers, and other symbols that form a String are known as *characters*. A *character* is any single letter, number, or symbol. 'a','B','9', '-', '.', '/', and ':' are all examples of characters.
 
 ### Escaping Quotes
-In JavaScript you can enclose a String in either single quotes ('') or double quotes (""), but what if your string needs to include these characters? In JavaScript there are a couple of ways to do this. 
+In JavaScript you can enclose a String in either single quotes ('') or double quotes (""), but what if your String needs to include these characters? In JavaScript there are a couple of ways to do this. 
 AU: the following should be a bullet list instead.
-1. If your string contains only single quotes, you can enclose the string in double quotes.
+1. If your String contains only single quotes, you can enclose the String in double quotes.
 
    `js "I'm a String!"`
 
-2. If your string contains only double quotes, you can enclose the string in single quotes.
+2. If your String contains only double quotes, you can enclose the String in single quotes.
 
    `js 'He said "No"'`
 
@@ -151,7 +155,7 @@ JavaScript programmers, as a habit, generally use lowercase letters for variable
 You can read more about camelCase on Wikipedia (*http://en.wikipedia.org/wiki/CamelCase*).
 
 ### Making Mistakes
-Feel free to experiment at this point. Create your own variables using your own numbers, strings, and operators. If you make a mistake, you'll see a long-winded error message in your console window. These error messages are called *stack traces*, and they're the computer's way of telling you something went wrong. Stack traces can be useful for Java programmers but not so useful for JavaScript. Remember, the Minecraft server software is written in Java, not JavaScript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the JavaScript code you type into Java code so that the server can understand it. If the JavaScript code doesn't make sense, then the translation won't work. 
+Feel free to experiment at this point. Create your own variables using your own numbers, Strings, and operators. If you make a mistake, you'll see a long-winded error message in your console window. These error messages are called *stack traces*, and they're the computer's way of telling you something went wrong. Stack traces can be useful for Java programmers but not so useful for JavaScript. Remember, the Minecraft server software is written in Java, not JavaScript. You can think of ScriptCraft (the plugin you use when you type the `js` command in the server console) as a translator. It translates the JavaScript code you type into Java code so that the server can understand it. If the JavaScript code doesn't make sense, then the translation won't work. 
 
 Don't worry about making mistakes. Making mistakes is an essential part of learning something new. Computers are finicky about code and will point-blank refuse to execute code that isn't correct. We humans are good at conversation because we allow for errors and can make pretty good guesses at what someone else means even when there's background noise. Computers, on the other hand, are pretty dumb and aren't able to guess at what you really meant if your code isn't correct. The good news is every time you make a mistake, you learn something new. Each of the following statements will cause an error:
 
@@ -163,9 +167,9 @@ Don't worry about making mistakes. Making mistakes is an essential part of learn
    
  * `js 'steve`
  
-   `EvaluatorException: unterminated string literal`
+   `EvaluatorException: unterminated String literal`
    
-   This means JavaScript encountered a string `'steve` that didn't have a closing quote symbol. Strings must begin and end with either a single quote (') or a double quote ("). What's more, you can't mix them; you can't start a string with a single quote and end it with a double quote. The Strings `'this is good'` and `"so is this"` are both valid, but the Strings `'this is bad"` and `"another bad one'` are not.  
+   This means JavaScript encountered a String `'steve` that didn't have a closing quote symbol. Strings must begin and end with either a single quote (') or a double quote ("). What's more, you can't mix them; you can't start a String with a single quote and end it with a double quote. The Strings `'this is good'` and `"so is this"` are both valid, but the Strings `'this is bad"` and `"another bad one'` are not.  
 
  * `js :-)` 
  
@@ -179,6 +183,7 @@ As you learn to program, you will encounter errors. One misplaced comma, quote, 
 An Exception is something the computer did not expect&mdash;that's what makes it "exceptional." In JavaScript, *throwing an exception* is JavaScript's way of saying something unexpected happened. An exception will often include a stack trace, which is a breadcrumb trail of where the computer was when the exception occurred.
 
 [AU: do you want to go with Exception or exception lowercase? it appears both ways.]
+[WALTER: Exception uppercase]
 
 ### The *var* Keyword
 
@@ -296,9 +301,9 @@ To get some practice using the `typeof` operator, try each of the following exam
 
 The values `true` and `false` are both *boolean* values. A boolean type can only ever have the value `true` or `false`. Boolean values are really important in programming because, as you'll learn later, they are the values the computer uses when making decisions. When deciding what to do, the computer uses only these two values&mdash;there's no gray area or "maybe" when it comes to boolean logic. 
 
-The result of the expression `typeof "5"` might surprise you. Even though 5 is a number, because it is inside quote characters, JavaScript thinks of it as a string. Everything inside quote characters is considered a string&mdash;even if there is a number inside the quotes.
+The result of the expression `typeof "5"` might surprise you. Even though 5 is a number, because it is inside quote characters, JavaScript thinks of it as a String. Everything inside quote characters is considered a String&mdash;even if there is a number inside the quotes.
 
-The `console` variable is one of the built-in variables in ScriptCraft, and its type is object. I'll talk about objects later. The `typeof Herobrine` returns `undefined` because there is no variable or value called `Herobrine` in the system. You can safely use the `typeof` operator to test for the existence of variables in the system. If the variable doesn't exist, then `typeof` will return `false`. If you were to try to access the undefined `Herobrine` variable, you'd get a ReferenceError exception. Try it to see for yourself:
+The `console` variable is one of the built-in variables in ScriptCraft, and its type is object. I'll talk about objects later. The `typeof Herobrine` returns `undefined` because there is no variable or value called `Herobrine` in the system. You can safely use the `typeof` operator to test for the existence of variables in the system. If the variable doesn't exist, then `typeof` will return `false`. If you were to try to access the undefined `Herobrine` variable, you'd get a ReferenceError Exception. Try it to see for yourself:
 
     js Herobrine
 
@@ -315,8 +320,9 @@ The `parseInt()` function is a useful function that will take any piece of text 
 The result should be 4. What you did here was *pass* the `'4 hours until sunset'` text to the `parseInt()` function, which processed the text and returned a value: 4.
 
 [AU: can you rewrite the following sentence to avoid using "parseInt" as a verb?]
+[WALTER: OK]
 
-You are effectively saying to `parseInt` `"here's some text&mdash;give me the number (and only the number) from it"`. You pass the text to the `parseInt()` function by putting it between the round brackets&mdash;the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+You are effectively saying `"here's some text&mdash;give me the number (and only the number) from it"`. You pass the text to the `parseInt()` function by putting it between the round brackets&mdash;the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
 
     js parseInt('5 hearts left');
     js parseInt('This is not a number');
@@ -340,6 +346,7 @@ Now let's look at the earlier function declaration in more detail. A function is
 
 [AUTHOR NOTE: images/chapter-03/function-outline.png]
 [AU: I see a .gliffy file in the diagram subfolder. is that just a native file that you need?]
+[WALTER: I sent you the .gliffy files just in case you wanted to tweak the diagrams using gliffy. They're not strictly needed.]
 
 ![](images/chapter-03/function-outline.png)
 
@@ -362,6 +369,6 @@ You've created and invoked your first function. Functions are an important part 
 We've only scratched the surface of functions in JavaScript. You'll explore them more in later chapters.
 
 ## Summary
-In this chapter, you learned about how to execute JavaScript at the server console prompt. You learned about math operations, variables, and strings and the kinds of errors you'll encounter when learning JavaScript. I also touched on functions&mdash;how to call them and how to create them. In the next chapter, you'll learn about programming editors&mdash;the last piece of the puzzle in constructing your modding workbench.
+In this chapter, you learned about how to execute JavaScript at the server console prompt. You learned about math operations, variables, and Strings and the kinds of errors you'll encounter when learning JavaScript. I also touched on functions&mdash;how to call them and how to create them. In the next chapter, you'll learn about programming editors&mdash;the last piece of the puzzle in constructing your modding workbench.
  
 </body></html>

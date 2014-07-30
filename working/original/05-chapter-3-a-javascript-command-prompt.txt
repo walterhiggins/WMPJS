@@ -132,16 +132,17 @@ The letters, numbers, and other symbols that form a String are known as *charact
 
 ### Escaping Quotes
 In JavaScript you can enclose a String in either single quotes ('') or double quotes (""), but what if your String needs to include these characters? In JavaScript there are a couple of ways to do this. 
-AU: the following should be a bullet list instead.
-1. If your String contains only single quotes, you can enclose the String in double quotes.
+[AU: the following should be a bullet list instead.]
+
+* If your String contains only single quotes, you can enclose the String in double quotes.
 
    `js "I'm a String!"`
 
-2. If your String contains only double quotes, you can enclose the String in single quotes.
+* If your String contains only double quotes, you can enclose the String in single quotes.
 
    `js 'He said "No"'`
 
-3. You can escape each single or double quote character by putting a backslash character `\` in front of it.
+* You can escape each single or double quote character by putting a backslash character `\` in front of it.
  
    `js 'He said "I\'m a String!".'`
 
@@ -322,7 +323,7 @@ The result should be 4. What you did here was *pass* the `'4 hours until sunset'
 [AU: can you rewrite the following sentence to avoid using "parseInt" as a verb?]
 [WALTER: OK]
 
-You are effectively saying `"here's some text&mdash;give me the number (and only the number) from it"`. You pass the text to the `parseInt()` function by putting it between the round brackets&mdash;the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+You are effectively saying `"here's some text; give me the number (and only the number) from it"`. You pass the text to the `parseInt()` function by putting it between the round brackets&mdash;the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
 
     js parseInt('5 hearts left');
     js parseInt('This is not a number');

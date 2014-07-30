@@ -207,6 +207,7 @@ Once downloaded, the next step is to install CraftBukkit on your computer. The i
 
 3. Under the Format menu, choose Make Plain Text and then type the following:
 [KIM: code block here]
+
         #!/bin/bash
         cd "$( dirname "$0" )"
         java -Xmx1024M -jar craftbukkit.jar -o true    
@@ -234,6 +235,7 @@ If you run into trouble installing CraftBukkit, you can find plenty of useful ti
 
 2. Type the following into the editor:
 [KIM: code block here]
+
         #!/bin/sh
         BINDIR=$(dirname "$(readlink -fn "$0")")
         cd "$BINDIR"
@@ -261,6 +263,7 @@ Once you've installed CraftBukkit, the next step is configuration. This is where
 ### The server.properties File
 When you first launch CraftBukkit, a couple of configuration files and folders will be created in the CraftBukkit folder (the folder where you store the craftbukkit JAR file and startup script). When configuring your server, the most important file is `server.properties`. This is a plain-text file (meaning it can be edited using any text editor) containing all of the configuration for your server. The first few lines of my own `server.properties` look like this:
 [KIM: code block here]
+
     #Minecraft server properties
     #Sun Apr 20 11:11:20 IST 2014
     generator-settings=

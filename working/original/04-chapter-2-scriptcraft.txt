@@ -37,7 +37,7 @@ If there is already a `scriptcraft.jar` file in your CraftBukkit `plugins` folde
 If CraftBukkit is running, stop it by issuing the `stop` command in the server console. 
 
 Launch CraftBukkit by double-clicking the launch script you created in Chapter 1. When CraftBukkit starts up, you should see an "Enabling scriptcraft" message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this:
-[KIM: code block]
+
     Enabling scriptcraft v2.0.6-2014-04-20
     Directory /home/walter/cb179/plugins/scriptcraft does not exist.
     Initializing /home/walter/cb179/plugins/scriptcraft directory with contents from plugin archive.
@@ -52,7 +52,7 @@ The `plugins` subfolder in CraftBukkit is important. It's where all Minecraft se
 ## Verifying ScriptCraft Is Installed
 
 You can verify that ScriptCraft has been successfully installed by issuing the following command at the server console:
-[KIM: code block]
+
     js 2 ` 3
 
 Make sure to type this text exactly as you see it and then hit the Enter key. The response you get from the server console should of course be `5`. 

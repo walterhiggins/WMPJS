@@ -5,5 +5,5 @@ foreach (@files){
     $woSuffix =~ s/\.txt//;
     print $woSuffix;
     `perl src/perl/Markdown.pl $_ > $_.html` ;
-    `pandoc $_ -o $woSuffix.docx` ;
+    #`pandoc $_ -o $woSuffix.docx` ;
 }

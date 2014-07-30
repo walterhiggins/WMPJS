@@ -186,8 +186,6 @@ Once downloaded, the next step is to install CraftBukkit on your computer. The i
 1. Open Notepad (you can find it by clicking the Start or Windows button in the bottom left of the screen and then typing Notepad in the search box.
 2. Type the following into Notepad:
 
-[KIM: code block here]
-
          java -Xmx1024M -jar craftbukkit.jar -o true
          PAUSE
 
@@ -206,7 +204,6 @@ Once downloaded, the next step is to install CraftBukkit on your computer. The i
 2. Open TextEdit. (You can find it by typing TextEdit in the Spotlight field in the top right of the screen. Click the magnifying glass icon to bring up Spotlight.)
 
 3. Under the Format menu, choose Make Plain Text and then type the following:
-[KIM: code block here]
 
         #!/bin/bash
         cd "$( dirname "$0" )"
@@ -234,7 +231,6 @@ If you run into trouble installing CraftBukkit, you can find plenty of useful ti
 1. Open Text Editor by clicking the Dash Home button in the top-left corner of the screen; then type `Edit` to see a list of editors (you can choose Text Editor or another editor of your choice).
 
 2. Type the following into the editor:
-[KIM: code block here]
 
         #!/bin/sh
         BINDIR=$(dirname "$(readlink -fn "$0")")
@@ -252,8 +248,6 @@ If you run into trouble installing CraftBukkit, you can find plenty of useful ti
 6. Once the CraftBukkit server console has launched, you can stop it by issuing the CraftBukkit `stop` command (type `stop` and then hit Enter).
 
 
-
-
 ## Configuring Your Server
 Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be player vs. player, and so on? While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone; just bear in mind you will need to restart your server if you change the configuration. 
 
@@ -262,7 +256,6 @@ Once you've installed CraftBukkit, the next step is configuration. This is where
 
 ### The server.properties File
 When you first launch CraftBukkit, a couple of configuration files and folders will be created in the CraftBukkit folder (the folder where you store the craftbukkit JAR file and startup script). When configuring your server, the most important file is `server.properties`. This is a plain-text file (meaning it can be edited using any text editor) containing all of the configuration for your server. The first few lines of my own `server.properties` look like this:
-[KIM: code block here]
 
     #Minecraft server properties
     #Sun Apr 20 11:11:20 IST 2014

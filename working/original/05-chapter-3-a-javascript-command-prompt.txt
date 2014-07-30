@@ -42,9 +42,7 @@ The answer of course is `true`. You can also ask "Is 3 equal to 5?" like this:
 Notice that I use *two* `=` symbols, not just a single one, and that's very important. The result of the previous expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is a section of code that asks "Does the player have any health points left?" and if the answer to that question is `true`, then the player can continue playing.
 
 ## Variables
-[AU: all headings need to be followed by text. can you introduce this main Variables section with a sentence or two here?]
-[WALTER: See below]
-Variables in JavaScript provide a way to give names to numbers and other types of Data so that they can be easily remembered, retrieved and worked with.
+Variables provide a way to give names to numbers and other types of Data, so that they can be easily remembered, retrieved, and worked with.
 
 ### Creating Variables
 ![](images/chapter-03/hearts.png)

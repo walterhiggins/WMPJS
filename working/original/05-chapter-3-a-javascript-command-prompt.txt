@@ -52,7 +52,7 @@ You can't type just anything after the `js` command and expect an answer. You ha
 
     js hearts
     
-then the server responds with the error message "javax.script.ScriptException: ReferenceError: "hearts" is not defined`, which is JavaScript's way of saying "I don't understand what you mean by 'hearts'."
+then the server responds with the error message `javax.script.ScriptException: ReferenceError: "hearts" is not defined`, which is JavaScript's way of saying "I don't understand what you mean by 'hearts'."
 
 Right now JavaScript does not know what you mean by `hearts`. If you want to tell the computer what `hearts` is, you do so like this:
 
@@ -79,7 +79,7 @@ That's why variables are called *variables*&mdash;they can vary (or change). Now
 
     js hearts
     
-you prints out `9`. Just as you can do math with numbers in JavaScript, you can also do math with variables. Try this command:
+the result is `9`. Just as you can do math with numbers in JavaScript, you can also do math with variables. Try this command:
 
     js hearts + 1
     

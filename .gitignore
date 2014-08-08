@@ -226,4 +226,15 @@ pip-log.txt
 /listings/recipe3/.#greetPlayers_v1.js
 /listings/recipe3/#greetPlayers_v1.js#
 *target/*
-*.#*
+*.#*/working/kim/01-preface.txt
+/working/kim/02-part-i-a-modding-workbench.txt
+/working/kim/03-chapter-1-running-your-own-minecraft-server.txt
+/working/kim/04-chapter-2-scriptcraft.txt
+/working/kim/05-chapter-3-a-javascript-command-prompt.txt
+/working/kim/06-chapter-4-choosing-and-using-a-text-editor.txt
+/working/kim-lines/01-preface.txt
+/working/kim-lines/02-part-i-a-modding-workbench.txt
+/working/kim-lines/03-chapter-1-running-your-own-minecraft-server.txt
+/working/kim-lines/04-chapter-2-scriptcraft.txt
+/working/kim-lines/05-chapter-3-a-javascript-command-prompt.txt
+/working/kim-lines/06-chapter-4-choosing-and-using-a-text-editor.txt

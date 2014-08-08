@@ -53,7 +53,7 @@ The `plugins` subfolder in CraftBukkit is important. It's where all Minecraft se
 
 You can verify that ScriptCraft has been successfully installed by issuing the following command at the server console:
 
-    js 2 ` 3
+    js 2 + 3
 
 Make sure to type this text exactly as you see it and then hit the Enter key. The response you get from the server console should of course be `5`. 
 

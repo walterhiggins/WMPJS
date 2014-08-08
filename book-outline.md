@@ -326,7 +326,7 @@ To check that your server is running and accepting connections follow these step
 
 If you get an error when trying to connect, ensure that your server is first running (See the earlier section on starting your server). If your server is not running you will see an error *Failed to connect to the server. java.net.ConnectException: Connection refused:'. If you see this error, click the 'Back to Title Screen' button then start your server and try again. 
 
-Once you've logged into your server take a look around. It's important that you have operator (Administrator) privileges on your own server. You can check that you have the right privileges by issuing the `/time set 4000` command. If you can run this command without error then you're all set up. If you see a warning message *You do not have permission to perform this command.* then you'll need to make yourself an operator at the server console window. Switch to the Server console window (ALT + TAB on windows, CMD + TAB on OS X) and type `op <player>` replacing <player> with your own username, then switch back to the Minecraft game and try issuing the `/time set 4000` command from the in-game prompt. Once you've verified you have operator permissions, kick back and relax or if you have a spare computer on your home network, invite a friend or family member to join you on your server. If this is the first time you've played Minecraft Multiplayer with friends or family you'll have great fun.
+Once you've logged into your server take a look around. It's important that you have operator (Administrator) privileges on your own server. You can check that you have the right privileges by issuing the `/time set 4000` command. If you can run this command without error then you're all set up. If you see a warning message *You do not have permission to perform this command.* then you'll need to make yourself an operator at the server console window. Switch to the Server console window (ALT+TAB on windows, CMD+TAB on OS X) and type `op username` replacing `username` with your own username, then switch back to the Minecraft game and try issuing the `/time set 4000` command from the in-game prompt. Once you've verified you have operator permissions, kick back and relax or if you have a spare computer on your home network, invite a friend or family member to join you on your server. If this is the first time you've played Minecraft Multiplayer with friends or family you'll have great fun.
 
 ### Achievement Unlocked!
 ![](@@nextAchievement)
@@ -443,6 +443,8 @@ The answer to the above is `false` (3 is not greater than 5). I can ask *Is 3 le
 ... notice that I use *two* `=` symbols not just a single one and that's very important. The result of the above expression should of course be `false`. I'll talk about what a single `=` symbol means shortly. The `true` and `false` values are really important because they are used in computer programming to make the computer behave differently in different circumstances. For instance, in the Minecraft game, there is a section of code which asks '*Does the player have any health points left?*' and if the answer to that question is `true` then the player can continue playing.
 
 ### Variables
+Variables provide a way to give names to numbers and other types of Data, so that they can be easily remembered, retrieved, and worked with.
+
 #### Creating Variables
 ![](images/chapter-03/hearts.png)
 
@@ -703,7 +705,7 @@ The *parseInt()* function is a useful function which will take any piece of text
 
 The result should be 4. What we did here was 'pass' the '4 hours until sunset' text to the *parseInt()* function which processed the text and returned a value: 4.
 
-We are effectively saying to parseInt "here's some text -- give me the number (and only the number) from it". We pass the text to the *parseInt()* function by putting it between the round brackets -- the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *Parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
+We are effectively saying "here's some text; give me the number (and only the number) from it". We pass the text to the *parseInt()* function by putting it between the round brackets -- the `(` and `)` symbols. Any values between the `(` and `)` symbols are passed into the function and are called *Parameters*. Functions typically process (or do something) with the parameters and return a value. The great thing about functions is they can be called over and over again with different parameters. Try the following examples yourself:
 
     js parseInt('5 hearts left');
     js parseInt('This is not a number');
@@ -762,7 +764,7 @@ There are many programming editors to choose from. Which editor you choose is ul
 
 * Notepad++ is a free editor for Windows you can download at http://notepad-plus-plus.org/ 
 * TextWrangler from BareBones Software is a free editor for Mac OS X you can download at http://www.barebones.com/products/textwrangler/ 
-* Sublime Text is a cross-platform editor which you can evaluate for free for as long as you like.
+* Sublime Text is a cross-platform editor which you can evaluate for free for as long as you like. You can download Sublime at http://www.sublimetext.com/
 
 Let's get started installing gedit. You can skip this section if you've already installed and use a programing editor on your computer. Mac OS users can skip the following section and go straight to 'Installing TextWrangler on Mac OS'.
 
@@ -1023,10 +1025,10 @@ The number you see will be different but it will be a number between 0 and 1. Tr
 
 Tip: You can quickly perform the previous command at the in-game prompt by pressing the / key and then pressing the UP Arrow key.
 
-The numbers which Math.random() returns are called floating point numbers. You might not think there are any numbers between 0 and 1 but there are in fact many, many, numbers. It's this range of numbers which JavaScript uses. The actual range of numbers is 0. 0000000000000000 to 0. 9999999999999999. That's 9 Quadrillion, 999 Trillion, 999 billion, 999 million, 999 thousand and 999 possible numbers. 
+The numbers which Math.random() returns are called floating point numbers. You might not think there are any numbers between 0 and 1 but there are in fact many, many, numbers. The actual range of numbers is 0. 0000000000000000 to 0. 9999999999999999. That's 9 Quadrillion, 999 Trillion, 999 billion, 999 million, 999 thousand and 999 possible numbers. JavaScript uses this range of numbers when picking a random number. 
 
 ### A special 6-sided dice.
-A regular 6-sided dice has numbers from 1 through 6 printed or etched on each of the 6 sides. That's because we typically count from 1. The number 1 is usually the starting point when we want to count up to something. JavaScript (like many programming languages) is different. In JavaScript counting begins at the number 0. So if you want to count 10 numbers, where normally you'd count from 1 to 10 ...
+A regular 6-sided dice has numbers from 1 through 6 printed or etched on each of the 6 sides. That's because we typically count from 1. The number 1 is usually the starting point when we want to count up to something. JavaScript (like many programming languages) is different. In JavaScript counting begins at the number 0. So if you want to count 10 numbers, where normally you'd count ...
 
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
@@ -1125,16 +1127,17 @@ If you don't see a number or if the /js var dice = require('dice') command didn'
 ### Modules as Objects
 You may be wondering why we call the *roll()* function the way we do: `dice.roll()`.  When we *require* a module, what we get back is an *Object*. An object remember is a special type of variable that can hold more than one value in what are called properties. So `require('dice')` actually returns an object -- the `exports` object that we used inside the module itself to make public the *roll()* function. When you call a function that's attached to an object you have to call it by putting the object name in front, then a full-stop, then the function name. So we say `console.log()` because `console` is an object, and `log()` is a function attached to the object. Similarly we say `dice.roll()` because `dice` is an object and `roll()` is the function attached to it. This can take a little getting used to but becomes second nature over time.
 
+### Achievement Unlocked!
 ![](@@nextAchievement)
 
-Major Kudos! You've create created your first JavaScript module, loaded it and used it! You've taken your second giant step to creating reusable code. 
+Major Kudos! You've created created your first JavaScript module, loaded it and used it! You've taken your second giant step to creating reusable code. 
 
 ### Digging Deeper
 Let's look at the code we've just added to Minecraft. The code is reprinted below...
 
 @@listing dice_v1.js Rolling Dice
 
-A JavaScript module is a file with one or more related functions. In the above file we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later chapters. For now let's look at the function body itself (lines 2 through 5). 
+A JavaScript module is a file with one or more related functions. In Listing @@listref{dice_v1.js} we have one single function called roll. We let others use functions by exporting them. We'll dive deeper into the exports object and modules in later chapters. For now let's look at the function body itself (lines 2 through 5). 
 
 1. The first statement of the function, `var result = Math.random();` declares a new variable called 'result' and assigns a random number to it. Remember: Math.random() will return a random number between 0 and 1. 
 2. The next statement `result = result * 6` takes the number and multiplies it by 6. The `*` symbol is used in JavaScript to multiply numbers. 
@@ -1154,7 +1157,7 @@ This number is a floating point number. The integer part is 2. In JavaScript if 
 
 * Math.floor(n) : Takes a number and chops off the fractional part. It rounds down the number. For example, 2.5 becomes 2.0.
 * Math.ceil(n) : Rounds up a number to the nearest integer. For example 2.5 becomes 3.0, 2.1 becomes 3.0  and so on.
-* Math.round(n) : Will round up or round down a number to the nearest integer. It will round up any fraction part greater than .5 so for example, 2.5 is rounded up to 3.0 but 2.4 is rounded down to 2.0.
+* Math.round(n) : rounds up or rounds down a number to the nearest integer. It will round up any fraction part greater than .5 so for example, 2.5 is rounded up to 3.0 but 2.4 is rounded down to 2.0.
 
 #### Math 
 The built-in Math object has many other useful properties and functions, here are just some...
@@ -1170,12 +1173,12 @@ I encourage you to try out each of the above properties and functions at the in-
 For more information about the Math object visit http://www.ecma-international.org/ecma-262/5.1/#sec-15.8
 
 #### The return statement
-The return statement is used inside functions to:
+The return statement is used inside functions to do the following:
 
 1. Stop execution of the function. 
 2. Return a value to the caller of the function.
 
-The `return` statement can only be used inside a function. It's possible to have functions which don't have a return statement at all in which case the function stops executing when it runs the last statement in the function. Functions don't *have* to return a value, in fact, many of the functions we'll write later won't. 
+The `return` statement can be used only inside a function. It's possible to have functions which don't have a return statement at all in which case the function stops executing when it runs the last statement in the function. Functions don't *have* to return a value, in fact, many of the functions we'll write later won't. 
 
 ### Summary
 In this chapter we created our first truly reusable module. We learned about Modules, Random numbers and the Math object. In the next chapter we'll enhance this module further and in the chapter after we'll use the module to create custom greetings for players joining the server.
@@ -1371,6 +1374,7 @@ Make sure to save the file after you've changed it, run `/js refresh()` at the i
     /js dice.roll();
     /js dice.roll(20);
     
+### Achievement Unlocked!
 ![](@@nextAchievement)
 
 Congratulations. You've taken another step towards becoming a responsible plugin developer. Your code is robust and well commented. Commenting code is really important if you want to share your work with others.

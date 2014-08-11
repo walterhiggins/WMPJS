@@ -2,7 +2,8 @@
  can a player build on a location?
 */
 function playerCanBuild( player, location ) { 
-  // check if player has a plot on this location or is trusted
+  // check if player has a plot on this 
+  // location or is trusted
   var result = playerOwnsPlot( player, location ) || 
     playerIsTrusted( player, location );
   return result;

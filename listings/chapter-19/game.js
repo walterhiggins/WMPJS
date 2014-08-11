@@ -38,7 +38,7 @@ function SnowballFight( duration, teams ) {
 
   function loop(){
     if ( game.duration-- ){
-      game.objective.displayName = 'Snowball ' + game.duration;
+      game.objective.displayName = 'Snowball '+game.duration;
       updateScoreboard( game );
       setTimeout( loop, 1000 );
     } else {
@@ -66,7 +66,9 @@ function SnowballFight( duration, teams ) {
   }
 
   start( game );
-  game.eventListener = events.entityDamageByEntity( onSnowballHit );
+  game.eventListener = events.entityDamageByEntity( 
+    onSnowballHit 
+  );
   setTimeout(loop, 1000);
 }
 
@@ -79,15 +81,18 @@ function start( game ) {
   /*
    Initialize the scoreboard
    */
-  var scoreboard = server.scoreboardManager.getNewScoreboard();
-  var objective = scoreboard.registerNewObjective('win','dummy');
-  objective.displayName = ('Snowball ' + game.duration).underline().bold();
+  var scoreboard = server.scoreboardManager
+    .getNewScoreboard();
+  var objective = scoreboard
+    .registerNewObjective('win','dummy');
+  objective.displayName = ('Snowball ' + game.duration)
+    .underline().bold();
   objective.displaySlot = bkDisplaySlot.SIDEBAR;
   game.objective = objective;
 
   /*
-   put all players in survival mode and give them each 64 snowballs 
-   for every 20 seconds of play
+   put all players in survival mode and give them each 64 
+   snowballs for every 20 seconds of play
    */
   for ( i = 0; i < game.duration; i += 20 ) {
     game.snowballs.push( game.snowballs[ 0 ] );
@@ -138,7 +143,8 @@ function end( game ) {
   var teamName;
   var team;
   var player;
-  var scoreboard = server.scoreboardManager.getMainScoreboard();
+  var scoreboard = server.scoreboardManager
+    .getMainScoreboard();
   var players = [];
 
   function resetScoreboard(){
@@ -151,7 +157,10 @@ function end( game ) {
   for ( teamName in game.teams ) {
     team = game.teams[teamName];
     for ( i = 0; i < team.length; i++ ) {
-      // restore player's previous game mode and take back snowballs
+      /* 
+       restore player's previous game mode 
+       and take back snowballs
+       */
       player = server.getPlayer( team[i] );
       player.gameMode = game.savedModes[ player.name ];
       player.inventory.removeItem( game.snowballs );

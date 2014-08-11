@@ -2,7 +2,9 @@ var plots = require('protection/plots');
 var fireworks = require('fireworks');
 function claim( params, player ){
   var existingClaim = plots.getClaim( player );
-  var boundingPlots = plots.getBoundingPlots( player.location );
+  var boundingPlots = plots.getBoundingPlots(
+    player.location
+  );
   if ( existingClaim ) {
     player.sendMessage('You already have plot number ' + 
                        existingClaim.number);
@@ -18,7 +20,10 @@ function claim( params, player ){
       // convert from Java to JavaScript string
       plot.claimedBy = '' + player.name; 
 
-      player.sendMessage('Congratulations! You now own plot ' + plot.number);
+      player.sendMessage(
+        'Congratulations! You now own plot ' 
+        + plot.number
+      );
       fireworks.firework( player.location );
       return;
     }

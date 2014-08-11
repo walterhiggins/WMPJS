@@ -5,7 +5,7 @@ function dropCookiesIfSneakingOrFlying( event ){
   var broken = event.block;
   var isSand = items.sand(broken.material);
   if ( isSand && ( breaker.sneaking || breaker.flying ) ) {
-    broken.world.dropItem( broken.location, items.cookie(2) );
+    broken.world.dropItem(broken.location,items.cookie(2));
   }
 }
 events.blockBreak( dropCookiesIfSneakingOrFlying );

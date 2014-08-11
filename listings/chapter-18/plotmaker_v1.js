@@ -4,7 +4,11 @@ function plotmaker( material, width, length ) {
   var startLoc = this.getLocation();
   this.chkpt('plotmaker');
   this.box0( material ,width, 1, length);
-  var endLoc = this.fwd(length - 1).right(width - 1).getLocation();
+  var endLoc = this
+    .fwd(length - 1)
+    .right(width - 1)
+    .getLocation();
+
   var plot = plots.add(startLoc,endLoc);
   this.move('plotmaker');
   var claimMesg = [

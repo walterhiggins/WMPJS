@@ -34,8 +34,9 @@ function snowballArena() {
   // make whole area protected
   this.move('sbarena');
   this.zonemaker( null, 24, 32 );
-  // store the coordinates of the blue, red and yellow waiting areas
-  // these will be used to determine who's on each team
+  // store the coordinates of the blue, red and yellow 
+  // waiting areas. These will be used to determine 
+  // who's on each team
   var loc = this.getLocation();
   var loc2 = this.fwd(8).right(8).getLocation();
   arena.redZone = region.create(loc, loc2);
@@ -48,7 +49,8 @@ function snowballArena() {
   loc2 = this.fwd(8).right(8).getLocation();
   arena.yellowZone = region.create(loc, loc2);
 
-  // store the locations of the red, blue and yellow spawn points
+  // store the locations of the red, blue and 
+  // yellow spawn points
   this.move('sbarena');
   loc = this.fwd(10).right(1).getLocation();
   arena.redSpawn = { x: loc.x, z: loc.z, y: loc.y+1};

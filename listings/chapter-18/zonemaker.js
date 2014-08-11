@@ -6,7 +6,10 @@ function zonemaker( material, width, length ) {
   if (material != null){
     this.box0( material ,width, 1, length);
   }
-  var endLoc = this.fwd(length - 1).right(width - 1).getLocation();
+  var endLoc = this
+    .fwd(length - 1)
+    .right(width - 1)
+    .getLocation();
   zones.add(startLoc,endLoc);
   this.move('zonemaker');
 }

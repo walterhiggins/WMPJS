@@ -24,13 +24,19 @@ function onPlace( event ) {
   if (event.player.op){
     return;
   }
-  if (playerCanBuild( event.player, event.blockPlaced.location ) ){
+  if (playerCanBuild(event.player,
+                     event.blockPlaced.location)){
     return;
   } 
   
-  var boundingPlots = plots.getBoundingPlots(event.blockPlaced.location);
-  var boundingZones = zones.getBoundingZones(event.blockPlaced.location);
-  if (boundingPlots.length == 0 && boundingZones.length == 0){
+  var boundingPlots = plots.getBoundingPlots(
+    event.blockPlaced.location
+  );
+  var boundingZones = zones.getBoundingZones(
+    event.blockPlaced.location
+  );
+  if (boundingPlots.length == 0 
+      && boundingZones.length == 0){
     return;
   }
   event.cancelled = true;
@@ -42,9 +48,14 @@ function onBreak( event ) {
   if (playerCanBuild( event.player, event.block.location ) ){
     return;
   }
-  var boundingPlots = plots.getBoundingPlots(event.block.location);
-  var boundingZones = zones.getBoundingZones(event.block.location);
-  if (boundingPlots.length == 0 && boundingZones.length == 0){
+  var boundingPlots = plots.getBoundingPlots(
+    event.block.location
+  );
+  var boundingZones = zones.getBoundingZones(
+    event.block.location
+  );
+  if (boundingPlots.length == 0 
+      && boundingZones.length == 0){
     return;
   }
   event.cancelled = true;

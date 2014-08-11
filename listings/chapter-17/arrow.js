@@ -1,6 +1,7 @@
 var items = require('items');
 var bkEnchantment = org.bukkit.enchantments.Enchantment;
-var bkTeleportCause = org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+var bkTeleportCause = org.bukkit.event.player
+      .PlayerTeleportEvent.TeleportCause;
 function isEnderBow( item ){
   if (item && 
       (item.type == items.bow()) &&
@@ -16,7 +17,7 @@ function onArrowHit( event ) {
   var itemInHand = shooter.itemInHand;
   if ( isEnderBow( itemInHand ) ) {
     arrow.remove();
-    shooter.teleport( arrow.location, bkTeleportCause.PLUGIN );
+    shooter.teleport(arrow.location, bkTeleportCause.PLUGIN);
   }
 }
 events.projectileHit( onArrowHit );

@@ -2,7 +2,9 @@ var plots = require('protection/plots');
 var fireworks = require('fireworks');
 function claim( params, player ){
   var existingClaim = plots.getClaim( player );
-  var boundingPlots = plots.getBoundingPlots( player.location );
+  var boundingPlots = plots.getBoundingPlots(
+    player.location
+  );
   if ( existingClaim ) {
     player.sendMessage('You already have plot number ' + 
                        existingClaim.number);
@@ -18,7 +20,10 @@ function claim( params, player ){
       // convert from Java to JavaScript string
       plot.claimedBy = '' + player.name; 
 
-      player.sendMessage('Congratulations! You now own plot ' + plot.number);
+      player.sendMessage(
+	'Congratulations! You now own plot ' 
+	+ plot.number
+      );
       fireworks.firework( player.location );
       return;
     }
@@ -31,10 +36,13 @@ function abandon(params, player){
   var existingClaim = plots.getClaim( player );
   if (existingClaim){
     existingClaim.claimedBy = null;
-    player.sendMessage('You have given up your claim on plot ' + 
-                       existingClaim.number);
+    player.sendMessage(
+      'You have given up your claim on plot ' 
+      + existingClaim.number
+    );
   } else {
-    player.sendMessage('You do not have any plots to abandon!');
+    player.sendMessage(
+      'You do not have any plots to abandon!');
   }
 }
 command(abandon);
@@ -47,9 +55,11 @@ function share( params, player){
       existingClaim.sharedWith = [];
     }
     existingClaim.sharedWith.push('' + trustedPlayer);
-    player.sendMessage('You have shared with ' + trustedPlayer);
+    player.sendMessage(
+      'You have shared with ' + trustedPlayer);
   } else {
-    player.sendMessage('You do not have any plots to share!');
+    player.sendMessage(
+      'You do not have any plots to share!');
   }
 }
 command(share, bukkit.playerNames);

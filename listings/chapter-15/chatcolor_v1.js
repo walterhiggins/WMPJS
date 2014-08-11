@@ -11,7 +11,8 @@ function onChat( event ) {
   var player = event.player;
   var playerChatColor = preferences[ player.name ];
   if ( playerChatColor ) {
-    event.message = textcolors.colorize( playerChatColor, event.message );
+    event.message = textcolors.colorize( playerChatColor, 
+                                         event.message );
   }
 }
 events.asyncPlayerChat( onChat );

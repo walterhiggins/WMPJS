@@ -1,5 +1,6 @@
 /*
- this module provides a roll() function which returns a random number.
+ this module provides a roll() function which returns 
+ a random number.
  the range of numbers is set using the sides parameter.
  if no sides parameter is provided, the default is 6.
  Usage: 

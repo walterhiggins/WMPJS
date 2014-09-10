@@ -246,7 +246,8 @@ If you run into trouble installing CraftBukkit you can find plenty of useful tip
 Later versions of CraftBukkit require you to agree to Mojang's *End User License Agreement* before the server will run. The first time you run CraftBukkit, the server will issuing the following error message before stopping:
 
     Failed to load eula.txt
-    You need to agree to the EULA in order to run the server. Go to eula.txt for more info.
+    You need to agree to the EULA in order to run the server.
+    Go to eula.txt for more info.
 
 To agree to the EULA, open the eula.txt file in the same folder and change it so it reads as follows:
 

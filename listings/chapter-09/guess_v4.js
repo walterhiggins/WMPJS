@@ -21,6 +21,6 @@ function guessTheNumber( player ){
     } 
   };
 
-  input( player, 'Pick a number between 0 and 5', checkAnswer);
+  input( player,'Pick a number between 0 and 5',checkAnswer);
 }
 exports.guessTheNumber = guessTheNumber;

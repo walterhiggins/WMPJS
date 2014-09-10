@@ -110,10 +110,6 @@ The standard (Vanilla) Minecraft Server has only limited ways to protect against
 
 ### CraftBukkit
 
-> Your server, your way. More for less. The possibilities are endless...
->
-> [http://dl.bukkit.org/](http://dl.bukkit.org/)
-
 CraftBukkit has become the most popular Minecraft Server Software with a thriving community of Plugin developers. In 2012 Mojang hired the CraftBukkit team to work on Minecraft and the Minecraft API. In this book we'll use CraftBukkit as our Minecraft Server software. CraftBukkit is the Server software but it has an API ( a system which Plugin developers can use to extend the server ) which is called 'Bukkit'. We'll look at the Bukkit API in more detail later. For now, all you need to know is that CraftBukkit is the name of the server Software and Bukkit is the API on top which it's built.
 
 @@figure CraftBukkit_Bukkit.png CraftBukkit is built on Bukkit
@@ -246,8 +242,17 @@ If you run into trouble installing CraftBukkit you can find plenty of useful tip
 
 6. Once the CraftBukkit server console has launched, you can stop it by issuing the CraftBukkit `stop` command (type `stop` then hit ENTER).
 
+### Agreeing to the End User License Agreement
+Later versions of CraftBukkit require you to agree to Mojang's *End User License Agreement* before the server will run. The first time you run CraftBukkit, the server will issuing the following error message before stopping:
 
+    Failed to load eula.txt
+    You need to agree to the EULA in order to run the server. Go to eula.txt for more info.
 
+To agree to the EULA, open the eula.txt file in the same folder and change it so it reads as follows:
+
+    eula=true
+
+Save the eula.txt file and then start CraftBukkit again. This time it should run without error.
 
 ### Configuring your server
 Once you've installed CraftBukkit, the next step is configuration. This is where you decide what kind of Minecraft Server you want to run. Will it have Monsters? Will it be Survival mode or Creative mode? Will it be Player vs. Player, and so on. While configuration is something you'll probably only do once, you can later change the server configuration at any time you like. The server configuration isn't set in stone, just bear in mind you will need to restart your server if you change the configuration. I'll show you how to do that later.

@@ -447,12 +447,12 @@ If CraftBukkit is running, stop it by issuing the `stop` command in the server c
 
 Launch CraftBukkit by double clicking the launch script you created in chapter 1. When CraftBukkit starts up you should see an `Enabling scriptcraft` message appear in the server console. The first time it's loaded, the ScriptCraft plugin will unzip a lot of files into a new `plugins/scriptcraft` folder inside your CraftBukkit folder. Your server console output might look something like this...
 
-    Enabling scriptcraft v2.0.6-2014-04-20
-    Directory /home/walter/cb179/plugins/scriptcraft does not exist.
-    Initializing /home/walter/cb179/plugins/scriptcraft directory with contents from plugin archive.
-    Unzipping /home/walter/cb179/plugins/scriptcraft/lib/command.js (NE)
-    Unzipping /home/walter/cb179/plugins/scriptcraft/lib/console.js (NE)
-    Unzipping /home/walter/cb179/plugins/scriptcraft/lib/events.js (NE)
+    Enabling scriptcraft v3.0.0-2014-10-14
+    Directory /home/walter/mcserver/plugins/scriptcraft does not exist.
+    Initializing /home/walter/mcserver/scriptcraft directory with contents from plugin archive.
+    Unzipping /home/walter/mcserver/scriptcraft/lib/command.js (NE)
+    Unzipping /home/walter/mcserver/scriptcraft/lib/console.js (NE)
+    Unzipping /home/walter/mcserver/scriptcraft/lib/events.js (NE)
 
 ... There will be many more entries as there are many files bundled with ScriptCraft. 
 
